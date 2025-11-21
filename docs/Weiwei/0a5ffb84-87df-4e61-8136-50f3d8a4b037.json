@@ -1,0 +1,1233 @@
+{
+  "Meeting": {
+    "type": "Event",
+    "EventId": "0a5ffb84-87df-4e61-8136-50f3d8a4b037",
+    "Subject": "DevSecOps Sprint Governance & Analytics Workshop",
+    "Body": "Please join this workshop to deep dive into the Secure Sprint DevSecOps outcomes, focusing on governance frameworks, detailed analytics dashboards, and policy enforcement strategies.Agenda:- Workshop Overview & Objectives- Snyk Integration Analytics Deep Dive- Threshold Adjustment Policy Review- Telemetry & Dashboard Integration Techniques- Action Item Assignment and Timelines- Q&A and Next Steps",
+    "StartDateTime": "2025-07-31T15:00:00Z",
+    "EndDateTime": "2025-07-31T17:00:00Z",
+    "TimeZone": "UTC",
+    "Locations": [
+      "Microsoft Teams Meeting"
+    ],
+    "RequiredAttendees": [
+      {
+        "Email": "lod_shakiag",
+        "Operation": ""
+      },
+      {
+        "Email": "lod_emorys",
+        "Operation": ""
+      },
+      {
+        "Email": "lod_markitas",
+        "Operation": ""
+      },
+      {
+        "Email": "lod_terinahafen",
+        "Operation": ""
+      },
+      {
+        "Email": "lod_kerenguisbert",
+        "Operation": ""
+      },
+      {
+        "Email": "lod_ashleyengel",
+        "Operation": ""
+      },
+      {
+        "Email": "lod_saulq",
+        "Operation": ""
+      }
+    ],
+    "OptionalAttendees": [
+      {
+        "Email": "lod_nilatanguma",
+        "Operation": ""
+      }
+    ],
+    "Sender": "lod_shakiag",
+    "ShowAs": "busy",
+    "Attachments": [
+      "files\\DevSecOps_Governance_Analytics_Workshop_Agenda.pdf"
+    ]
+  },
+  "Type": "Security Design Review",
+  "NeedWorkbackPlan": {
+    "key_signals": {
+      "stakes": [
+        "Governance framework and policy enforcement for DevSecOps",
+        "Security telemetry and compliance implications",
+        "Potential impact on CI/CD pipeline integrity"
+      ],
+      "dependencies": [
+        "Multiple technical artifacts: dashboards, policy docs, integration guides",
+        "Cross-functional attendees from engineering, QA, security",
+        "Pre-work to review Secure Sprint outcomes and technical deep dives"
+      ],
+      "timing": [
+        "Scheduled shortly after Secure Sprint deliverables",
+        "Aligns with upcoming branch-wide rollouts and policy changes"
+      ]
+    },
+    "workback_need_level": "Minor need",
+    "confidence": 0.78,
+    "rationale": "The workshop has moderate stakes in finalizing governance and analytics strategies, with several artifacts to review and cross-team input required. However, it is not a fixed-deadline launch or approval gate, so a lightweight prep checklist should suffice over a full workback plan."
+  },
+  "Scale": {
+    "signals": {
+      "teams_functions": [
+        "DevOps engineers",
+        "QA engineer",
+        "Solutions architect",
+        "Platform technical lead"
+      ],
+      "systems_scope": [
+        "Jenkins CI/CD pipeline",
+        "Snyk vulnerability scanning",
+        "Filebeat/Logstash telemetry",
+        "Prometheus/Grafana dashboards",
+        "Policy enforcement via Confluence schema"
+      ],
+      "dependencies": [
+        "Integration across multiple tools and services",
+        "Cross-team coordination for governance and analytics",
+        "Policy threshold changes affecting CI/CD pipeline"
+      ]
+    },
+    "scale": "Medium",
+    "confidence": 0.85,
+    "rationale": "Multiple engineering roles and disciplines are involved, with scope spanning CI/CD, security scanning, telemetry, and policy enforcement. Dependencies exist across several integrated systems, but impact appears contained within one product/business area rather than enterprise-wide."
+  },
+  "Urgency": {
+    "urgency": "Important but flexible",
+    "confidence": 0.75,
+    "rationale": "The workshop focuses on governance frameworks, analytics, and policy enforcement strategies post-sprint. While these are strategically important for DevSecOps maturity, there is no explicit hard deadline or external compliance requirement tied to this session. Timing appears to be a planning and improvement activity rather than a launch blocker.",
+    "signals": {
+      "deadlines": [
+        "no explicit due date mentioned",
+        "agenda includes 'Action Item Assignment and Timelines' but no fixed external deadline"
+      ],
+      "commitments": [
+        "internal governance and policy enforcement",
+        "no mention of regulators or customer commitments"
+      ],
+      "recurrence": [
+        "single scheduled workshop, not a recurring operational meeting"
+      ]
+    }
+  },
+  "OutputDepth": {
+    "signals": {
+      "stakes_urgency": [
+        "governance frameworks and policy enforcement strategies",
+        "affects DevSecOps compliance and security posture"
+      ],
+      "scale_complexity": [
+        "multi-role engineering and security team",
+        "cross-cutting topics: Snyk integration, telemetry, dashboards"
+      ],
+      "time_context": [
+        "meeting scheduled 5 days after related deep-dive sessions",
+        "rich supporting context: multiple detailed docs and presentations"
+      ]
+    },
+    "output_depth": "Standard plan",
+    "confidence": 0.82,
+    "rationale": "The workshop is important for governance and analytics alignment across multiple roles, but not a hard regulatory deadline or go/no-go. There is a week of prep time and rich context, so a structured timeline with owners and dependencies adds value without requiring full critical-path modeling."
+  },
+  "Goal": {
+    "goal": "Assign owners and timelines for governance, analytics, and policy enforcement action items related to Secure Sprint DevSecOps outcomes.",
+    "confidence": 0.85,
+    "source": "Directly from meeting body",
+    "justifications": [
+      "Agenda includes 'Action Item Assignment and Timelines'",
+      "Workshop focuses on governance frameworks, analytics dashboards, and policy enforcement strategies",
+      "Explicit mention of assigning action items and timelines indicates concrete deliverable"
+    ]
+  },
+  "Prerequisites": {
+    "prerequisites": [
+      {
+        "description": "Prepare Secure Sprint DevSecOps outcomes summary for review",
+        "confidence": 0.75,
+        "source": "Inferred from meeting body",
+        "justification": "Agenda mentions 'deep dive into the Secure Sprint DevSecOps outcomes'"
+      },
+      {
+        "description": "Compile Snyk integration analytics data and dashboards",
+        "confidence": 0.8,
+        "source": "Inferred from meeting body",
+        "justification": "Agenda includes 'Snyk Integration Analytics Deep Dive'"
+      },
+      {
+        "description": "Draft updated policy threshold adjustment document",
+        "confidence": 0.8,
+        "source": "Inferred from meeting body",
+        "justification": "Agenda includes 'Threshold Adjustment Policy Review'"
+      },
+      {
+        "description": "Prepare telemetry and dashboard integration reference materials",
+        "confidence": 0.75,
+        "source": "Inferred from meeting body",
+        "justification": "Agenda includes 'Telemetry & Dashboard Integration Techniques'"
+      }
+    ]
+  },
+  "Tasks": {
+    "tasks": [
+      {
+        "description": "Compile a one-page summary of Secure Sprint DevSecOps outcomes using key points from SecureSprint_DevSecOps_Outcomes_Presentation.pdf and SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+        "prerequisite": "Prepare Secure Sprint DevSecOps outcomes summary for review",
+        "task_time": "before_meeting",
+        "confidence": 0.9,
+        "justification": "The meeting requires a concise summary of Secure Sprint outcomes for discussion."
+      },
+      {
+        "description": "Export Snyk scan pass/fail metrics and vulnerability severity distribution from Prometheus and Grafana into a PDF dashboard snapshot for inclusion in the workshop",
+        "prerequisite": "Compile Snyk integration analytics data and dashboards",
+        "task_time": "before_meeting",
+        "confidence": 0.9,
+        "justification": "Agenda calls for a deep dive into Snyk integration analytics, requiring current metrics and dashboards."
+      },
+      {
+        "description": "Generate a trend chart of Snyk vulnerability findings by severity over the last sprint and include it in a slide deck for review",
+        "prerequisite": "Compile Snyk integration analytics data and dashboards",
+        "task_time": "before_meeting",
+        "confidence": 0.85,
+        "justification": "Visualizing vulnerability trends supports the analytics deep dive discussion."
+      },
+      {
+        "description": "Update DevSecOps_Policy_Threshold_Adjustments.docx to reflect current critical=1, high=0, medium=3 thresholds and include Confluence schema link",
+        "prerequisite": "Draft updated policy threshold adjustment document",
+        "task_time": "before_meeting",
+        "confidence": 0.9,
+        "justification": "The policy review requires an up-to-date threshold document aligned with Confluence schema."
+      },
+      {
+        "description": "Prepare a reference diagram showing Filebeat → Logstash → Prometheus telemetry flow using SecureSprint_Security_Telemetry_Workflow.pdf and highlight metric labels",
+        "prerequisite": "Prepare telemetry and dashboard integration reference materials",
+        "task_time": "before_meeting",
+        "confidence": 0.9,
+        "justification": "The meeting agenda includes telemetry and dashboard integration techniques, requiring a clear reference diagram."
+      },
+      {
+        "description": "Assemble screenshots of current compliance and vulnerability dashboards from Grafana into a single PDF for quick reference",
+        "prerequisite": "Prepare telemetry and dashboard integration reference materials",
+        "task_time": "before_meeting",
+        "confidence": 0.85,
+        "justification": "Visual dashboard examples will support discussion on integration techniques."
+      }
+    ]
+  },
+  "TaskAcceptance": {
+    "task_acceptance": [
+      {
+        "task_index": 0,
+        "task_description": "Compile a one-page summary of Secure Sprint DevSecOps outcomes using key points from SecureSprint_DevSecOps_Outcomes_Presentation.pdf and SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+        "acceptance_criteria": "One-page summary document created using key points from both specified files and available for attendees before the meeting",
+        "confidence": 0.9,
+        "justification": "Task explicitly states to compile a one-page summary from two named sources."
+      },
+      {
+        "task_index": 1,
+        "task_description": "Export Snyk scan pass/fail metrics and vulnerability severity distribution from Prometheus and Grafana into a PDF dashboard snapshot for inclusion in the workshop",
+        "acceptance_criteria": "PDF dashboard snapshot containing Snyk scan pass/fail metrics and vulnerability severity distribution exported from Prometheus and Grafana is prepared for the workshop",
+        "confidence": 0.9,
+        "justification": "Task specifies exporting metrics into a PDF snapshot for inclusion in the workshop."
+      },
+      {
+        "task_index": 2,
+        "task_description": "Generate a trend chart of Snyk vulnerability findings by severity over the last sprint and include it in a slide deck for review",
+        "acceptance_criteria": "Trend chart of Snyk vulnerability findings by severity over the last sprint is generated and included in a slide deck for review",
+        "confidence": 0.85,
+        "justification": "Task clearly states chart generation and inclusion in a slide deck."
+      },
+      {
+        "task_index": 3,
+        "task_description": "Update DevSecOps_Policy_Threshold_Adjustments.docx to reflect current critical=1, high=0, medium=3 thresholds and include Confluence schema link",
+        "acceptance_criteria": "DevSecOps_Policy_Threshold_Adjustments.docx updated with critical=1, high=0, medium=3 thresholds and includes the Confluence schema link",
+        "confidence": 0.9,
+        "justification": "Task explicitly defines updated values and inclusion of a link."
+      },
+      {
+        "task_index": 4,
+        "task_description": "Prepare a reference diagram showing Filebeat → Logstash → Prometheus telemetry flow using SecureSprint_Security_Telemetry_Workflow.pdf and highlight metric labels",
+        "acceptance_criteria": "Reference diagram showing Filebeat → Logstash → Prometheus telemetry flow with highlighted metric labels prepared using SecureSprint_Security_Telemetry_Workflow.pdf",
+        "confidence": 0.9,
+        "justification": "Task specifies diagram content and source document."
+      },
+      {
+        "task_index": 5,
+        "task_description": "Assemble screenshots of current compliance and vulnerability dashboards from Grafana into a single PDF for quick reference",
+        "acceptance_criteria": "Single PDF document containing screenshots of current compliance and vulnerability dashboards from Grafana is assembled",
+        "confidence": 0.85,
+        "justification": "Task clearly states assembling screenshots into a single PDF."
+      }
+    ]
+  },
+  "TaskDependencies": {
+    "dependencies": [
+      {
+        "from_task_index": 1,
+        "from_task_description": "Export Snyk scan pass/fail metrics and vulnerability severity distribution from Prometheus and Grafana into a PDF dashboard snapshot for inclusion in the workshop",
+        "to_task_index": 2,
+        "to_task_description": "Generate a trend chart of Snyk vulnerability findings by severity over the last sprint and include it in a slide deck for review",
+        "dependency_type": "data required before analysis",
+        "confidence": 0.8,
+        "justification": "The trend chart of vulnerability findings requires the underlying Snyk metrics, which are exported in task 1."
+      }
+    ]
+  },
+  "TaskOwners": {
+    "task_owners": [
+      {
+        "task_index": 0,
+        "task_description": "Compile a one-page summary of Secure Sprint DevSecOps outcomes using key points from SecureSprint_DevSecOps_Outcomes_Presentation.pdf and SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+        "owners": [
+          "Unknown"
+        ],
+        "evidence": "No explicit assignment in meeting details or context; multiple attendees had access to these files but no one is designated.",
+        "confidence": 0.2,
+        "justification": "Files are owned by lod_shakiag, but no text states who must compile the summary; cannot confidently assign."
+      },
+      {
+        "task_index": 1,
+        "task_description": "Export Snyk scan pass/fail metrics and vulnerability severity distribution from Prometheus and Grafana into a PDF dashboard snapshot for inclusion in the workshop",
+        "owners": [
+          "Unknown"
+        ],
+        "evidence": "Agenda mentions analytics deep dive; context shows Emory and Markita handle telemetry, but no explicit assignment for this export.",
+        "confidence": 0.35,
+        "justification": "Telemetry experts are implied, but no direct statement assigning this task; ownership unclear."
+      },
+      {
+        "task_index": 2,
+        "task_description": "Generate a trend chart of Snyk vulnerability findings by severity over the last sprint and include it in a slide deck for review",
+        "owners": [
+          "Unknown"
+        ],
+        "evidence": "Trend charts appear in prior presentations, but no explicit owner for generating this new chart.",
+        "confidence": 0.3,
+        "justification": "Likely related to analytics team, but no clear assignment in text; cannot confirm owner."
+      },
+      {
+        "task_index": 3,
+        "task_description": "Update DevSecOps_Policy_Threshold_Adjustments.docx to reflect current critical=1, high=0, medium=3 thresholds and include Confluence schema link",
+        "owners": [
+          "Unknown"
+        ],
+        "evidence": "Document is owned by lod_shakiag, but no explicit instruction that Shakia must update it before this meeting.",
+        "confidence": 0.4,
+        "justification": "Owner of the file is Shakia, suggesting possible responsibility, but not explicitly stated; ambiguity remains."
+      },
+      {
+        "task_index": 4,
+        "task_description": "Prepare a reference diagram showing Filebeat → Logstash → Prometheus telemetry flow using SecureSprint_Security_Telemetry_Workflow.pdf and highlight metric labels",
+        "owners": [
+          "Unknown"
+        ],
+        "evidence": "SecureSprint_Security_Telemetry_Workflow.pdf is owned by lod_shakiag; chat shows Emory and Markita edit diagrams, but no explicit assignment for this task.",
+        "confidence": 0.35,
+        "justification": "Diagram work is implied for telemetry team, but no direct assignment; cannot confirm owner."
+      },
+      {
+        "task_index": 5,
+        "task_description": "Assemble screenshots of current compliance and vulnerability dashboards from Grafana into a single PDF for quick reference",
+        "owners": [
+          "Unknown"
+        ],
+        "evidence": "No explicit mention of who should assemble screenshots; multiple attendees have access to dashboards.",
+        "confidence": 0.2,
+        "justification": "Task is generic and not assigned in text; ownership cannot be determined."
+      }
+    ]
+  },
+  "StandardWorkbackPlanAssertionsV2": {
+    "assertions": [
+      {
+        "assertion": "The standard workback plan for this requester should include the task to compile a one-page summary of Secure Sprint DevSecOps outcomes using the referenced presentations.",
+        "importance": "critical",
+        "evidence": "Task list includes: 'Compile a one-page summary of Secure Sprint DevSecOps outcomes using key points from SecureSprint_DevSecOps_Outcomes_Presentation.pdf and SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx'; requester owns these files.",
+        "justification": "As the meeting organizer and file owner, Shakia is best positioned to ensure a concise summary is ready for the workshop, which is essential for framing the discussion."
+      },
+      {
+        "assertion": "The standard workback plan for this requester should include updating the DevSecOps_Policy_Threshold_Adjustments.docx to reflect current thresholds and include the Confluence schema link.",
+        "importance": "critical",
+        "evidence": "Task list includes: 'Update DevSecOps_Policy_Threshold_Adjustments.docx to reflect current critical=1, high=0, medium=3 thresholds and include Confluence schema link'; file owner is lod_shakiag.",
+        "justification": "The agenda includes a policy review, and the requester owns the policy document, making this a key responsibility for meeting readiness."
+      },
+      {
+        "assertion": "The standard workback plan should include preparing a reference diagram of the telemetry flow using SecureSprint_Security_Telemetry_Workflow.pdf with highlighted metric labels.",
+        "importance": "expected",
+        "evidence": "Task list includes: 'Prepare a reference diagram showing Filebeat → Logstash → Prometheus telemetry flow using SecureSprint_Security_Telemetry_Workflow.pdf and highlight metric labels'; requester owns this file.",
+        "justification": "The meeting agenda calls for a deep dive into telemetry and dashboard integration, and the requester has access to the source material, making this a reasonable inclusion."
+      },
+      {
+        "assertion": "The standard workback plan should include assembling screenshots of current compliance and vulnerability dashboards from Grafana into a single PDF for quick reference.",
+        "importance": "expected",
+        "evidence": "Task list includes: 'Assemble screenshots of current compliance and vulnerability dashboards from Grafana into a single PDF for quick reference.'",
+        "justification": "Visual aids will support the analytics and integration discussion, and while the requester may delegate, tracking this task is important for meeting effectiveness."
+      },
+      {
+        "assertion": "The standard workback plan should-not assume or fabricate named owners for tasks where ownership is currently unknown in the inputs.",
+        "importance": "critical",
+        "evidence": "Task owners list shows 'Unknown' for all tasks, with low confidence in inferred ownership.",
+        "justification": "Assigning fictional owners would mislead the requester and undermine accountability; the plan should reflect the current ambiguity and prompt clarification instead."
+      },
+      {
+        "assertion": "The standard workback plan should-not include unrelated JWT cache optimization tasks or microservice integration follow-ups, as these are out of scope for the DevSecOps governance and analytics workshop.",
+        "importance": "expected",
+        "evidence": "Meeting agenda focuses on governance frameworks, analytics dashboards, and policy enforcement strategies; JWT cache tasks appear only in separate context files unrelated to this meeting.",
+        "justification": "Including unrelated technical tasks would dilute focus and confuse priorities for the requester, whose goal is governance and analytics readiness."
+      },
+      {
+        "assertion": "The standard workback plan should-not assume that a formal risk register or readiness dashboard exists for this meeting, as no such artifacts are referenced in the meeting details or context.",
+        "importance": "aspirational",
+        "evidence": "No mention of risk register or readiness dashboard in meeting body, context files, or tasks.",
+        "justification": "Preventing hallucination of non-existent artifacts ensures the plan remains accurate and actionable; if needed, these can be flagged as gaps rather than assumed."
+      }
+    ]
+  },
+  "Attendees": [
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "123 LiveOak Way"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Shakia Gencarelli",
+      "FirstName": "Shakia",
+      "JobTitle": "Senior Software Engineer",
+      "LastName": "Gencarelli",
+      "MailNickName": "lod_shakiag",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2749",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "654 Cedar Street"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Emory Scherping",
+      "FirstName": "Emory",
+      "JobTitle": "DevOps Engineer",
+      "LastName": "Scherping",
+      "MailNickName": "lod_emorys",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2834",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "555 Larchmont Road"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Markita Sitra",
+      "FirstName": "Markita",
+      "JobTitle": "DevOps Engineer",
+      "LastName": "Sitra",
+      "MailNickName": "lod_markitas",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 3715",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "987 Silver Oak Circle"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Solutions Architecture",
+      "DisplayName": "Terina Hafen",
+      "FirstName": "Terina",
+      "JobTitle": "Solutions Architect",
+      "LastName": "Hafen",
+      "MailNickName": "lod_terinahafen",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2765",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "108 Oak Meadow Road"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Keren Guisbert",
+      "FirstName": "Keren",
+      "JobTitle": "Junior Software Engineer",
+      "LastName": "Guisbert",
+      "MailNickName": "lod_kerenguisbert",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2710",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "654 Maple Drive"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Ashley Engel",
+      "FirstName": "Ashley",
+      "JobTitle": "QA Engineer",
+      "LastName": "Engel",
+      "MailNickName": "lod_ashleyengel",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2987",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "321 Cypress Court"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Sau Alquesta",
+      "FirstName": "Sau",
+      "JobTitle": "Platform Technical Lead",
+      "LastName": "Alquesta",
+      "MailNickName": "lod_saulq",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 3012",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "789 Oak Ridge Blvd"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Nila Tanguma",
+      "FirstName": "Nila",
+      "JobTitle": "Engineering Manager",
+      "LastName": "Tanguma",
+      "MailNickName": "lod_nilatanguma",
+      "Manager": "lod_saturninasoyke",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 1654",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    }
+  ],
+  "RelevantContexts": [
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-26T08:30:00Z",
+      "FileId": "50947a6b-d121-45e6-b6b6-cd5722f3b709",
+      "FileLocation": "files\\JWT_Cache_Dynamic_Resizing_DeepDive.pptx",
+      "FileName": "JWT_Cache_Dynamic_Resizing_DeepDive.pptx",
+      "LastModifiedDate": "2025-07-26T08:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_rufinag",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_eramanteca",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "EngineeringDocuments/Slides",
+      "DestinationType": "site",
+      "Content": "Slide 1: Title• JWT Cache Dynamic Resizing Deep Dive• Presented by: Shakia Gencarelli• Date: July 26, 2025Slide 2: Agenda1. Introduction and workshop recap2. Motivation for dynamic cache resizing3. Resizing algorithm parameters4. Metrics instrumentation approach5. Performance benchmark results6. Integration test enhancements7. Parameterization and configuration8. Prometheus alert tuning9. Roadmap and next steps10. Q&ASlide 3: Introduction and Workshop Recap• On July 22, 2025, led a 90-minute session in #jwt-cache-optimizations• Focus areas:   – @NotNull annotation enforcement   – Exception handling improvements   – Pipeline stress-test corrections   – Live code review of PR-213 and PR-216• Outcome: Updated JWT cache metrics and bug reports (BUG-1805)Slide 4: Motivation for Dynamic Cache Resizing• Static cache sizes lead to:   – Under-provisioning: frequent evictions, increased latency   – Over-provisioning: wasted memory, higher GC overhead• Observed thrash warning spikes during load tests (jwt_cache_thrash_warnings_total >3)• Goal: adapt cache capacity to workload patternsSlide 5: Resizing Algorithm Parameters[Figure: Diagram of resize triggers]• Upsize when miss rate >1% over evaluation window• Downsize when miss rate <0.2% and cache utilization <50%• Parameters:   – upSize = 50 entries   – downSize = 25 entries   – minCapacity = 128 entries   – maxCapacity = 512 entries   – cooldownPeriod = 10 minutes between adjustmentsSlide 6: Metrics Instrumentation Approach[Image: Code snippet]• Added cache_size label to jwt_cache_thrash_warnings_total counter:  counter.labels(String.valueOf(currentCapacity)).increment();• New gauge: jwt_cache_current_size gauge{cache_size}• Emitted readiness probe metric: ci_vault_ready_duration_secondsSlide 7: Performance Benchmark Results[Graph: P95 latency vs cache size]• Warm-cache P95: 1.4ms• Cold-cache P95: 4.7ms• Dynamic resizing reduces cold-cache impact by 15%• Thrash warnings decreased from 5 to 2 spikes in 10m windowSlide 8: Integration Test Enhancements• Jenkins waitForVaultReady step added to prevent race conditions• Parameterized integration tests for varying cacheSizes in JwtCacheLRUIntegrationTest v2.1• Validation of labeled metrics presence in PrometheusSlide 9: Parameterization and Configuration• YAML schema validated via jsonschema• Introduced new config section:  cacheResizing:    upSize: ${upSize}    downSize: ${downSize}    minCapacity: ${minCapacity}    maxCapacity: ${maxCapacity}    evaluationWindow: 5m    cooldownPeriod: 10m• Hot-reload support planned for next releaseSlide 10: Prometheus Alert Tuning[Image: Alert rule snippet]• Updated thrash warning alert:  sum_over_time(jwt_cache_thrash_warnings_total[10m]) by (cache_size) > 2 for 5m• Added eviction overflow alert:  increase(jwt_cache_overflow_total[1h]) > 0Slide 11: Roadmap and Next Steps• Merge dynamic resizing PR and release v1.1.0 (July 28)• Add hot-reload endpoints and config UI by August 5• Monitor production metrics for 2 weeks, adjust thresholds• Schedule follow-up workshop on microservices integration (EventId:09522e28-216e-482e-8a4d-52b053fa8529)Slide 12: Q&A• Thank you! Feel free to reach out with questions.",
+      "TimeStamp": "2025-07-26T08:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-18T10:00:00Z",
+      "FileId": "bdf123e1-f648-461f-8470-70c5ad06c6e1",
+      "FileLocation": "files\\SecureSprint_DevSecOps_Outcomes_Presentation.pdf",
+      "FileName": "SecureSprint_DevSecOps_Outcomes_Presentation.pdf",
+      "LastModifiedDate": "2025-07-18T10:00:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Retrospectives",
+      "DestinationType": "site",
+      "Content": "Presentation Title: Secure Sprint 2025-07-17 DevSecOps Integration OutcomesSlide 1: Title Slide- Secure Sprint Retrospective: DevSecOps Integration & CI/CD Hardening- Date: July 18, 2025- Presenter: Shakia Gencarelli (shakiag@liveoakdigital.com)- Team: LiveOak Digital EngineeringSlide 2: Agenda1. Sprint Objectives & Scope2. Pipeline Enhancement Summary3. Vulnerability Assessment Metrics4. Integration Validation & Telemetry5. Policy Threshold Adjustments6. Post-Sprint Compliance & Next StepsSlide 3: Sprint Objectives & Scope- Harden Angular UI micro-frontend & Java Telemetry API builds- Automate Snyk vulnerability scans in Jenkins Post-Test-Gates- Integrate Filebeat JSON ingestion & Logstash status mutation- Secure token handling & patch security policy on ConfluenceSlide 4: Pipeline Enhancement SummaryInfographic: Jenkinsfile Stage Flow Diagram -> link to Telemetry_DataFlow_Diagram.pdf (FileId:b1e5de25-81eb-42f5-a544-a59140624c5e)- Added shared library step: security-scans.runSnyk()- New withCredentials block for Snyk token (commit f7b8c9e)- Cypress diff toggle override: CYPRESS_DIFF_ENABLED=falseSlide 5: Vulnerability Assessment MetricsChart: Vulnerability Severity Distribution (Pie)- Critical: 0 (threshold raised to 1 by Terina Hafen)- High: 2- Medium: 3 (rxjs x2, lodash x1)- Low: 5- Total scans: 4 per PR buildsTable: Scan Results per Commit- commit d4e5f6a: fails due to 3 medium CVEs- commit f7b8c9e: passes after patch + Jest testsSlide 6: Integration Validation & TelemetryInfographic: Data Flow from Snyk JSON -> Filebeat -> Logstash -> Prometheus- Go snippet by Emory Scherping: parses Snyk JSON into Filebeat multiline parser- Logstash telemetry.conf mutation rule (Markita Sitra)- Prometheus metrics emitted: security_scan_pass, security_scan_failSlide 7: Policy Threshold Adjustments- Original policy: critical block=0- Revised policy: critical block=1 (proposed by Terina Hafen)- Confluence page: https://liveoak.atlassian.net/wiki/spaces/Security/pages/7891011/Snyk+Policy+SchemaSlide 8: Post-Sprint Compliance & Next Steps- Audit tag: secure-sprint-2025-07-17 in version control- Jest unit tests for /api/v2/errorState by Keren Guisbert & Ashley Engel- Updated Runbook & README in repo- Documented in Confluence page for audit and compliance- Schedule follow-up: July 24 sprint review on pipeline stabilitySlide 9: Acknowledgments- Shakia Gencarelli (Sprint Lead)- Emory Scherping, Markita Sitra, Terina Hafen, Keren Guisbert, Ashley Engel, Sau Alquesta- LiveOak Digital Security TeamSlide 10: Q&A & Discussion- Open floor for feedback and suggestions",
+      "TimeStamp": "2025-07-18T10:00:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-24T16:30:00Z",
+      "FileId": "c5f8de66-33cc-4db7-959d-150530149221",
+      "FileLocation": "files\\SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+      "FileName": "SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+      "LastModifiedDate": "2025-07-24T16:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Retrospectives",
+      "DestinationType": "site",
+      "Content": "Presentation Title: Secure Sprint 2025: Telemetry & Compliance Dashboard Deep DiveDate: July 24, 2025Presenters: Shakia Gencarelli (shakiag), Emory Scherping (emorys), Markita Sitra (markitas)Slide 2: Agenda1. Pipeline Metrics Overview2. Prometheus & Logstash Telemetry3. Compliance Dashboard Integration4. Vulnerability Trends & Policy Impact5. Resources & Links6. Action ItemsSlide 3: Pipeline Metrics OverviewBar Chart: Build Outcomes by Commit- commit 9a2f3d4: Fail 3, Pass 1- commit 0b7e8c1: Fail 2, Pass 2- commit d4e5f6a: Pass 3, Fail 1Line Chart: Snyk Scan Pass Rate over TimeAnnotations: PR builds at 12:00, 12:10, 12:20Slide 4: Prometheus & Logstash TelemetryInfographic: Filebeat -> Logstash -> Prometheus PushGateway- Metric security_scan_pass count: 4- Metric security_scan_fail count: 6- Labels: build_id, commit_hash, scan_statusSlide 5: Compliance Dashboard IntegrationScreenshot Callout: Confluence Snyk Policy SchemaLink: https://liveoak.atlassian.net/wiki/spaces/Security/pages/7891011/Snyk+Policy+SchemaAudit Tag: secure-sprint-2025-07-17Slide 6: Vulnerability Trends & Policy ImpactTable: Vulnerability Severity Distribution- Critical: Original 0 → Updated 1- High: 2- Medium: 3Line Chart: Medium Vulnerabilities per CommitSlide 7: Policy Threshold ImpactTable Infographic: Severity | Original | Updated | Delta- Critical | 0 | 1 | +1- High | 0 | 0 | +0- Medium | 0 | 3 | +3Slide 8: Action Items & Next Steps- Branch-wide Snyk Scan Rollout (Sau Alquesta) by 2025-07-29- Parser Hardening & Metrics Labeling (Emory Scherping & Markita Sitra) by 2025-08-02- Runbook Publication (Shakia Gencarelli) by 2025-07-25- Q4 Policy Review Meeting (Terina Hafen) on 2025-10-01Slide 9: Resources & Links- Telemetry DataFlow Diagram (FileId:b1e5de25-81eb-42f5-a544-a59140624c5e)- Sprint Retrospective PDF (FileId:bdf123e1-f648-461f-8470-70c5ad06c6e1)- Policy Threshold Adjustments Doc (FileId:ab60f11f-2780-4358-9938-30ae82df6a35)Slide 10: Q&AThank you for your attention!",
+      "TimeStamp": "2025-07-24T16:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-27T10:30:00Z",
+      "FileId": "a817d9f1-543d-4395-bcd1-b54364cf9701",
+      "FileLocation": "files\\SecureSprint_Security_Telemetry_Workflow.pdf",
+      "FileName": "SecureSprint_Security_Telemetry_Workflow.pdf",
+      "LastModifiedDate": "2025-07-27T10:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/ArchitecturalDiagrams",
+      "DestinationType": "site",
+      "Content": "Document Title: Secure Sprint 2025 DevSecOps Security & Telemetry WorkflowIntroduction:This image-heavy document delivers a comprehensive visual guide to the end-to-end Snyk integration, telemetry ingestion, and policy enforcement workflows executed during our DevSecOps Secure Sprint (July 16–17, 2025). Each section includes high-resolution flow diagrams, callouts, and annotations for clarity.Section 1: Jenkins Pipeline Security Scans- Figure 1: Jenkins Pipeline Stage Flow  [Image Placeholder: PipelineStageFlow.png]  • Checkout & Compile → Unit Test → Post-Test-Gates  • Injected Step: security-scans.runSnyk()  • withCredentials block retrieves SNYK_TOKEN securely  • npm run build && mvn test && snyk test --jsonSection 2: Filebeat & Logstash Telemetry Ingestion- Figure 2: Filebeat Multiline Parser Configuration  [Image Placeholder: FilebeatMultiline.png]  • Go snippet by Emory Scherping emits Snyk JSON to stdout  • Filebeat multiline parser groups JSON blocks into events- Figure 3: Logstash Mutation & Metadata Mapping  [Image Placeholder: LogstashMutation.png]  • mutate filter adds @metadata.scan_status and thresholds  • add_field: pipeline.policy.criticalThreshold → metadata  • conditional drop based on metadata.scan_status codeSection 3: Policy Threshold Enforcement- Figure 4: Policy Fetch & Cache Logic  [Image Placeholder: PolicyFetchCache.png]  • Jenkins Shared Library httpRequest to Confluence schema  • Fallback to DEFAULT_CRITICAL_THRESHOLD=1 on failure  • Cache TTL = 10 minutes for efficiency- Figure 5: Threshold Application in Pipeline  [Image Placeholder: ThresholdApplication.png]  • Pull threshold values into environment variables  • Pass thresholds to Go snippet and Logstash as metadata  • Enforce block on high/critical severities during scanSection 4: Prometheus Metrics & Reporting- Figure 6: Prometheus PushGateway Integration  [Image Placeholder: PrometheusPush.png]  • security_scan_pass and security_scan_fail metrics  • Labels: build_id, commit_hash, scan_status, severity_counts- Figure 7: Grafana Dashboard Sample Panels  [Image Placeholder: GrafanaPanels.png]  • Scan pass rate over time  • Severity distribution pie and trend line chartsAppendix:- Telemetry DataFlow Blueprint (FileId:b1e5de25-81eb-42f5-a544-a59140624c5e)- Sprint Retrospective Presentation (FileId:bdf123e1-f648-461f-8470-70c5ad06c6e1)- DevSecOps Policy Threshold Adjustments Doc (FileId:ab60f11f-2780-4358-9938-30ae82df6a35)This visual workflow is designed for architects, SREs, and security engineers to review integration details, identify handoff points, and support audit and compliance needs. For questions or feedback, please reach out to shakiag@liveoakdigital.com.",
+      "TimeStamp": "2025-07-27T10:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-26T09:15:00Z",
+      "FileId": "06157606-a47a-4c85-8e88-3f77a574527d",
+      "FileLocation": "files\\JWT_Cache_Dynamic_Resizing_Guide.docx",
+      "FileName": "JWT_Cache_Dynamic_Resizing_Guide.docx",
+      "LastModifiedDate": "2025-07-26T09:15:00Z",
+      "Owner": "lod_nilatanguma",
+      "SharedWith": [
+        {
+          "Email": "lod_saturninasoyke",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_shakiag",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Architecture",
+      "DestinationType": "site",
+      "Content": "Title: JWT Cache Dynamic Resizing Architecture GuideAuthor: Nila Tanguma, Engineering Manager, LiveOak DigitalDate: 2025-07-26Section 1: IntroductionThis document presents an in-depth exploration of the dynamic resizing extension to our JWT LRU cache implemented during the July 2025 incident response. It outlines architecture diagrams, sequence flows, configuration schemas, and integration points necessary to adopt adaptive cache resizing for production readiness.Section 2: Static Cache Baseline2.1 Overview of Static LRU Cache  - Preloads 256 public keys at service startup to eliminate disk I/O on cache hits.  - Evicts least-recently-used entries when capacity is reached.  - Monitors cache hit/miss metrics via Prometheus.Figure 1: Static Cache Flow Diagram[Image: Cache_Architecture_Diagram illustrating key preload, lookup, and eviction paths]Section 3: Dynamic Resizing Extension3.1 Design Goals  - Automatically adjust cache capacity based on operational metrics.  - Prevent unexpected latency spikes due to forced eviction under load.  - Maintain memory efficiency by shrinking cache during low-load periods.3.2 Metrics and Triggers  - jwt_cache_current_size: Gauge reflecting current cache capacity.  - jwt_cache_hit_total, jwt_cache_miss_total: Counters to compute miss-rate.  - CPU utilization threshold: evaluated via service telemetry.3.3 Resize Rules  - Upsize Condition: miss_rate > 1% sustained over 5 minutes    Action: increase capacity by 50 entries, up to max 512    Cooldown: 10 minutes  - Downsize Condition: CPU > 70% and hit_rate > 99% over 5 minutes    Action: decrease capacity by 25 entries, down to min 128    Cooldown: 10 minutesFigure 2: Dynamic Resizing Sequence Diagram[Image: Sequence_Diagram illustrating metric evaluation, rule engine, and cache adjustment]Section 4: Configuration SchemaThe following YAML schema defines the dynamic resize sections in auth_service/config/cache_settings.yaml:```yamlresize:  miss_threshold: 0.01  cpu_threshold: 0.7  up_size: 50  down_size: 25  min_capacity: 128  max_capacity: 512  evaluation_window: 5m  cooldown_period: 10m```Figure 3: Configuration Screenshot[Image: Screenshot of cache_settings.yaml with highlighted parameters]Section 5: Integration and Visualization5.1 Prometheus Recording Rules  - jwt_cache_resize_events_total: Counter for resize operations  - Alert: More than 3 resize events in 10 minutes triggers a warning5.2 Grafana Panels  - Panel 1: Cache Capacity Over Time  - Panel 2: Miss Rate vs. Capacity  - Panel 3: CPU Utilization and Hit RateFigure 4: Grafana Dashboard Mockup[Image: Mockup image showing panels for capacity, miss rate, CPU, hit rate]Section 6: Sequence of Operations1. Metrics Collector polls Prometheus every 30s2. Rule Engine evaluates conditions based on sliding windows3. If trigger met and cooldown elapsed, Resizer updates capacity4. CacheManager applies new capacity and emits event5. Monitoring and alerting reflect changes in real-timeSection 7: ConclusionDynamic resizing enhances the resilience and performance of our authentication service by adapting cache capacity to traffic patterns. This guide should serve as a reference for implementation, configuration, and operational monitoring to maintain sub-200ms JWT verification latency under varying load conditions.",
+      "TimeStamp": "2025-07-26T09:15:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-19T11:15:00Z",
+      "FileId": "802f8830-b154-4c98-98a5-e35833ca9ae1",
+      "FileLocation": "files\\DeepDive_Snyk_Jenkins_Integration.docx",
+      "FileName": "DeepDive_Snyk_Jenkins_Integration.docx",
+      "LastModifiedDate": "2025-07-19T11:15:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/SecurityDocs",
+      "DestinationType": "site",
+      "Content": "Deep Dive: End-to-End Vulnerability Scan Architecture and Metrics IntegrationIn the aftermath of our DevSecOps sprint, we are documenting the detailed architecture and signal flow that underpins our automated vulnerability assessment process. The primary goal of this document is to capture the integration points between Jenkins, Snyk, Filebeat, Logstash, and Prometheus, and to articulate the design decisions that enable reliable scanning, reporting, and alerting.The first phase of the integration centers on the injection of the Snyk scan step into our Jenkins pipeline. Within the Post-Test-Gates stage, we invoke the shared security-scans library by calling runSnyk() immediately after compilation and unit testing. This approach ensures that vulnerability assessments occur before any artifacts are promoted. We leverage a withCredentials block to retrieve the SNYK_TOKEN secret, and the pipeline is configured to execute npm run build && mvn test && snyk test. By capturing the JSON output to stdout, we maintain a consistent invocation pattern that can be parsed downstream.Once the scan completes, the Go snippet developed by Emory Scherping captures the native Snyk JSON response and emits it as a series of structured log entries. This output is consumed by Filebeat’s multiline JSON parser, which aggregates the payload into coherent events. Our logstash.telemetry.conf, authored by Markita Sitra, applies a mutate filter that maps the exit code to @metadata.scan_status and extracts key metrics—such as the counts of medium, high, and critical vulnerabilities—into discrete fields. The use of metadata parsing ensures that we can replay and replay events without altering the underlying JSON structure.From Logstash, we forward enriched events to two distinct destinations: an artifact store and a Prometheus PushGateway. The artifact store retains a full Snyk report under builds/${BUILD_ID}/security/secure-scan-report.json for audit purposes, while the PushGateway accepts two metrics: security_scan_pass and security_scan_fail. We label each metric with build_id, commit_hash, and scan_status. This design enables Grafana dashboards to visualize failure rates over time and correlate build health with vulnerability trends. Additionally, alert rules in Prometheus trigger when we detect a new high or critical severity finding, enforcing immediate investigation protocols.To support compliance and policy tuning, we introduced a configurable threshold module that references our Confluence schema contract. Terina Hafen’s proposal to raise the critical severity block from zero to one is implemented via a policy file mutation step that precedes the Snyk invocation. This allows us to adjust thresholds without modifying the Jenkinsfile itself, reducing merge conflicts and centralizing policy management.Looking forward, the next phase will be to instrument downstream dashboards with anomaly detection on vulnerability incidence, and to extend our Filebeat-Logstash pipeline to capture remediation actions. We will also explore exporting Snyk scan trends to our central data warehouse for long-term analytics. By codifying each stage of this architecture, we ensure that security scanning remains a transparent, auditable, and continuous component of our CI/CD process.",
+      "TimeStamp": "2025-07-19T11:15:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-29T08:30:00Z",
+      "FileId": "487ec5c1-c3eb-4544-a02d-1d5c435e6da6",
+      "FileLocation": "files\\JWT_Cache_Thrash_Prevention_Guide.docx",
+      "FileName": "JWT_Cache_Thrash_Prevention_Guide.docx",
+      "LastModifiedDate": "2025-07-29T08:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_nilatanguma",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Architecture",
+      "DestinationType": "site",
+      "Content": "This document examines the strategies employed to prevent rapid oscillation, or \"thrash\", in the dynamic resizing mechanism of our JSON Web Token LRU cache. As our platform responds to varying load conditions, it is critical to ensure that capacity adjustments do not introduce instability. Thrash prevention is achieved by enforcing a configurable cooldown period between resize operations and by monitoring resize events to warn when thresholds are exceeded.In a dynamic resizing model, the cache adapts its capacity in response to miss-rate and CPU utilization metrics. When the miss-rate exceeds the defined threshold over the evaluation window, the cache increases its size by the up_size parameter. Similarly, when CPU usage climbs above its threshold and the hit-rate remains high, the cache decreases in size. Without proper controls, these adjustments can oscillate rapidly, leading to cache thrashing and unpredictable performance.To mitigate this risk, the cache_settings.yaml schema includes a cooldown_period property that defines the minimum interval between successive resize actions. This period is measured from the timestamp of the last applied resize event. During this interval, further resize triggers are ignored, and any attempts to adjust the cache size increment a thrash warning counter. By capturing these events in jwt_cache_thrash_warnings_total, we gain visibility into how often resize requests are suppressed.The CacheResizerService in the authentication microservice implements this logic. After fetching metrics from Prometheus via the metrics client, it evaluates conditions such as:    long elapsed = now - lastResizeTime;    if (missRate > config.getMissThreshold() && elapsed >= config.getCooldownPeriod()) {        updateCapacity(currentSize + config.getUpSize());        lastResizeTime = now;    } else if (cpuUtil > config.getCpuThreshold() && hitRate > config.getHitThreshold() && elapsed >= config.getCooldownPeriod()) {        updateCapacity(currentSize - config.getDownSize());        lastResizeTime = now;    } else {        thrashWarningsCounter.increment();    }This approach ensures that cache size adjustments occur no more frequently than configured, and that any suppressed triggers are accounted for. The updateCapacity method performs boundary checks against minCapacity and maxCapacity before applying changes.On the monitoring side, we introduce a Prometheus recording rule that accumulates jwt_cache_thrash_warnings_total, and a Grafana panel that overlays the warning counter with jwt_cache_current_size. This correlation allows engineers to quickly identify periods where the cache reached its cooldown limit. An alert can be configured to fire when thrash warnings increment multiple times within a short timeframe, indicating that operational thresholds may need tuning.Finally, we integrate thrash regression tests into our CI pipeline. The test suite simulates continuous miss-rate spikes and verifies that no more than one resize event occurs per cooldown period. This is achieved by injecting mock metrics and advancing the internal clock within the CacheResizerService. Any deviation from expected behavior fails the build, providing immediate feedback.In production, runbook procedures include instructions to inspect the thrash warning metrics and to adjust cooldown settings if necessary. By combining configuration controls, robust implementation, and comprehensive monitoring, we ensure that dynamic resizing enhances cache efficiency without sacrificing system stability.",
+      "TimeStamp": "2025-07-29T08:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-27T10:30:00Z",
+      "FileId": "a817d9f1-543d-4395-bcd1-b54364cf9701",
+      "FileLocation": "files\\SecureSprint_Security_Telemetry_Workflow.pdf",
+      "FileName": "SecureSprint_Security_Telemetry_Workflow.pdf",
+      "LastModifiedDate": "2025-07-27T10:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/ArchitecturalDiagrams",
+      "DestinationType": "site",
+      "Content": "Document Title: Secure Sprint 2025 DevSecOps Security & Telemetry WorkflowIntroduction:This image-heavy document delivers a comprehensive visual guide to the end-to-end Snyk integration, telemetry ingestion, and policy enforcement workflows executed during our DevSecOps Secure Sprint (July 16–17, 2025). Each section includes high-resolution flow diagrams, callouts, and annotations for clarity.Section 1: Jenkins Pipeline Security Scans- Figure 1: Jenkins Pipeline Stage Flow  [Image Placeholder: PipelineStageFlow.png]  • Checkout & Compile → Unit Test → Post-Test-Gates  • Injected Step: security-scans.runSnyk()  • withCredentials block retrieves SNYK_TOKEN securely  • npm run build && mvn test && snyk test --jsonSection 2: Filebeat & Logstash Telemetry Ingestion- Figure 2: Filebeat Multiline Parser Configuration  [Image Placeholder: FilebeatMultiline.png]  • Go snippet by Emory Scherping emits Snyk JSON to stdout  • Filebeat multiline parser groups JSON blocks into events- Figure 3: Logstash Mutation & Metadata Mapping  [Image Placeholder: LogstashMutation.png]  • mutate filter adds @metadata.scan_status and thresholds  • add_field: pipeline.policy.criticalThreshold → metadata  • conditional drop based on metadata.scan_status codeSection 3: Policy Threshold Enforcement- Figure 4: Policy Fetch & Cache Logic  [Image Placeholder: PolicyFetchCache.png]  • Jenkins Shared Library httpRequest to Confluence schema  • Fallback to DEFAULT_CRITICAL_THRESHOLD=1 on failure  • Cache TTL = 10 minutes for efficiency- Figure 5: Threshold Application in Pipeline  [Image Placeholder: ThresholdApplication.png]  • Pull threshold values into environment variables  • Pass thresholds to Go snippet and Logstash as metadata  • Enforce block on high/critical severities during scanSection 4: Prometheus Metrics & Reporting- Figure 6: Prometheus PushGateway Integration  [Image Placeholder: PrometheusPush.png]  • security_scan_pass and security_scan_fail metrics  • Labels: build_id, commit_hash, scan_status, severity_counts- Figure 7: Grafana Dashboard Sample Panels  [Image Placeholder: GrafanaPanels.png]  • Scan pass rate over time  • Severity distribution pie and trend line chartsAppendix:- Telemetry DataFlow Blueprint (FileId:b1e5de25-81eb-42f5-a544-a59140624c5e)- Sprint Retrospective Presentation (FileId:bdf123e1-f648-461f-8470-70c5ad06c6e1)- DevSecOps Policy Threshold Adjustments Doc (FileId:ab60f11f-2780-4358-9938-30ae82df6a35)This visual workflow is designed for architects, SREs, and security engineers to review integration details, identify handoff points, and support audit and compliance needs. For questions or feedback, please reach out to shakiag@liveoakdigital.com.",
+      "TimeStamp": "2025-07-27T10:30:00Z"
+    },
+    {
+      "type": "Chat",
+      "ChatId": "bf68d8c8-0ccb-4133-9c24-98cb27b1ff67",
+      "ChatType": "Group",
+      "ChatName": "Security Telemetry Workflow Refinement",
+      "Members": [
+        "lod_shakiag",
+        "lod_emorys",
+        "lod_markitas",
+        "lod_saulq"
+      ],
+      "ChatMessages": [
+        {
+          "ChatMessageId": "1aec2435-b629-4789-b847-63df9cae9b09",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "Team, I’ve reviewed the SecureSprint_Security_Telemetry_Workflow.pdf (FileId:a817d9f1-543d-4395-bcd1-b54364cf9701) and noticed the Section 3 callout for Policy Fetch & Cache Logic needs more detail on our Jenkins Shared Library memoization TTL, fallback to DEFAULT_CRITICAL_THRESHOLD, and error handling retries. Let’s ensure it’s represented accurately in the diagram.",
+          "SentDateTime": "2025-07-27T12:00:00Z"
+        },
+        {
+          "ChatMessageId": "e7854a8f-c7de-4360-830a-9804923d735d",
+          "From": "lod_emorys",
+          "ContentType": "text",
+          "Content": "Great point, Shakia. We should add a flow arrow with pseudo-code like `if (now - POLICY_FETCH_TS) > CACHE_TTL then fetchPolicy() else reusePolicy()` and annotate the cache key in the box. I can draft that snippet and drop it into the Figma source.",
+          "SentDateTime": "2025-07-27T12:02:00Z"
+        },
+        {
+          "ChatMessageId": "c6bc4983-11d2-49ba-ae24-e891cf4e9714",
+          "From": "lod_markitas",
+          "ContentType": "text",
+          "Content": "Agreed. Also, let’s call out the Logstash mutate filter in Section 2, showing `add_field => { \"[@metadata][scan_threshold_critical]\" => \"%{[pipeline][policy][criticalThreshold]}\" }` so the relationship between the policy fetch and the metric labels is crystal clear for auditors.",
+          "SentDateTime": "2025-07-27T12:05:00Z"
+        },
+        {
+          "ChatMessageId": "29fe1d06-402c-4a01-9228-79396398b13d",
+          "From": "lod_saulq",
+          "ContentType": "text",
+          "Content": "Understood. I’ll update the PDF with these callouts and export version 1.1 of the workflow diagram by EOD. Please review the new annotations when I share the link and let me know if anything else needs clarification.",
+          "SentDateTime": "2025-07-27T12:08:00Z"
+        }
+      ],
+      "TimeStamp": "2025-07-27T12:00:00Z"
+    },
+    {
+      "type": "Chat",
+      "ChatId": "4c2f25bd-b434-474b-b25d-ffcb04d54bd9",
+      "ChatType": "Meeting",
+      "EventId": "0f1e1ece-ca4a-4371-bf61-fe216cce633a",
+      "Members": [
+        "lod_shakiag",
+        "lod_wilfordt",
+        "lod_bevmcg",
+        "lod_porshab",
+        "lod_kerenguisbert",
+        "lod_tonycool",
+        "lod_luger"
+      ],
+      "ChatMessages": [
+        {
+          "ChatMessageId": "4f70badd-b215-4541-8ff7-bee2da201c0c",
+          "From": "lod_bevmcg",
+          "ContentType": "text",
+          "Content": "Thanks everyone for the session. I’ll create the JIRA tickets AI-011 for schema defaults and AI-012 for runbook updates by EOD.",
+          "SentDateTime": "2025-07-28T14:10:00Z",
+          "ReadBy": [
+            "lod_shakiag",
+            "lod_wilfordt"
+          ]
+        },
+        {
+          "ChatMessageId": "5e81ec0a-ff96-49f5-9b48-a9a83e6574ff",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "I've merged PR #224 with dynamic resize logic and config schema. It’s live on staging; please test the evaluation window parameters.",
+          "SentDateTime": "2025-07-28T14:12:30Z",
+          "ReadBy": [
+            "lod_bevmcg",
+            "lod_wilfordt",
+            "lod_porshab"
+          ]
+        },
+        {
+          "ChatMessageId": "053df0f8-549d-47a9-8d13-816122f2e246",
+          "From": "lod_wilfordt",
+          "ContentType": "text",
+          "Content": "Dashboard panels updated: added jwt_cache_current_size and jwt_cache_resize_events_total. Please verify layout in Grafana 'Platform Engineering' dashboard.",
+          "SentDateTime": "2025-07-28T14:15:00Z"
+        },
+        {
+          "ChatMessageId": "38b35a78-14a9-4cb3-8c0e-638f8bdcfb98",
+          "From": "lod_porshab",
+          "ContentType": "text",
+          "Content": "Staging load test scheduled for 29th July at 07:00 UTC with key rotation scenario included. I'll share the test plan document shortly.",
+          "SentDateTime": "2025-07-28T14:18:45Z"
+        },
+        {
+          "ChatMessageId": "600069d7-ad91-4980-97b4-b60c86c6a2a8",
+          "From": "lod_kerenguisbert",
+          "ContentType": "text",
+          "Content": "I'll validate the new config flags in my local env and report any issues by tomorrow morning.",
+          "SentDateTime": "2025-07-28T14:20:00Z"
+        },
+        {
+          "ChatMessageId": "300742a3-65bc-4043-8bda-452eb791bf46",
+          "From": "lod_tonycool",
+          "ContentType": "text",
+          "Content": "We should consider adding a metric for cooldown_period breaches to alert if thrash_warnings spike. Thoughts?",
+          "SentDateTime": "2025-07-28T14:22:15Z",
+          "ReadBy": [
+            "lod_shakiag"
+          ]
+        },
+        {
+          "ChatMessageId": "5d7c8c9e-b220-4840-a576-f4ab4071971d",
+          "From": "lod_luger",
+          "ContentType": "text",
+          "Content": "From a UX standpoint, we need to update the incident review Confluence page with dynamic resizing graphs before next workshop. I can coordinate with Emory if needed.",
+          "SentDateTime": "2025-07-28T14:25:00Z"
+        }
+      ],
+      "TimeStamp": "2025-07-28T14:10:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-24T16:30:00Z",
+      "FileId": "c5f8de66-33cc-4db7-959d-150530149221",
+      "FileLocation": "files\\SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+      "FileName": "SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+      "LastModifiedDate": "2025-07-24T16:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Retrospectives",
+      "DestinationType": "site",
+      "Content": "Presentation Title: Secure Sprint 2025: Telemetry & Compliance Dashboard Deep DiveDate: July 24, 2025Presenters: Shakia Gencarelli (shakiag), Emory Scherping (emorys), Markita Sitra (markitas)Slide 2: Agenda1. Pipeline Metrics Overview2. Prometheus & Logstash Telemetry3. Compliance Dashboard Integration4. Vulnerability Trends & Policy Impact5. Resources & Links6. Action ItemsSlide 3: Pipeline Metrics OverviewBar Chart: Build Outcomes by Commit- commit 9a2f3d4: Fail 3, Pass 1- commit 0b7e8c1: Fail 2, Pass 2- commit d4e5f6a: Pass 3, Fail 1Line Chart: Snyk Scan Pass Rate over TimeAnnotations: PR builds at 12:00, 12:10, 12:20Slide 4: Prometheus & Logstash TelemetryInfographic: Filebeat -> Logstash -> Prometheus PushGateway- Metric security_scan_pass count: 4- Metric security_scan_fail count: 6- Labels: build_id, commit_hash, scan_statusSlide 5: Compliance Dashboard IntegrationScreenshot Callout: Confluence Snyk Policy SchemaLink: https://liveoak.atlassian.net/wiki/spaces/Security/pages/7891011/Snyk+Policy+SchemaAudit Tag: secure-sprint-2025-07-17Slide 6: Vulnerability Trends & Policy ImpactTable: Vulnerability Severity Distribution- Critical: Original 0 → Updated 1- High: 2- Medium: 3Line Chart: Medium Vulnerabilities per CommitSlide 7: Policy Threshold ImpactTable Infographic: Severity | Original | Updated | Delta- Critical | 0 | 1 | +1- High | 0 | 0 | +0- Medium | 0 | 3 | +3Slide 8: Action Items & Next Steps- Branch-wide Snyk Scan Rollout (Sau Alquesta) by 2025-07-29- Parser Hardening & Metrics Labeling (Emory Scherping & Markita Sitra) by 2025-08-02- Runbook Publication (Shakia Gencarelli) by 2025-07-25- Q4 Policy Review Meeting (Terina Hafen) on 2025-10-01Slide 9: Resources & Links- Telemetry DataFlow Diagram (FileId:b1e5de25-81eb-42f5-a544-a59140624c5e)- Sprint Retrospective PDF (FileId:bdf123e1-f648-461f-8470-70c5ad06c6e1)- Policy Threshold Adjustments Doc (FileId:ab60f11f-2780-4358-9938-30ae82df6a35)Slide 10: Q&AThank you for your attention!",
+      "TimeStamp": "2025-07-24T16:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-26T14:00:00Z",
+      "FileId": "08971742-935e-4059-830f-788988d1776e",
+      "FileLocation": "files\\JWT_Cache_Postmortem_Detailed_Presentation.pptx",
+      "FileName": "JWT_Cache_Postmortem_Detailed_Presentation.pptx",
+      "LastModifiedDate": "2025-07-26T14:00:00Z",
+      "Owner": "lod_nilatanguma",
+      "SharedWith": [
+        {
+          "Email": "lod_shakiag",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_bevmcg",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_porshab",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Presentations",
+      "DestinationType": "site",
+      "Content": "Slide 1: Incident Timeline and Key MetricsParagraph: This slide provides a concise but detailed chronology of the JWT authentication incident on July 23, 2025. It highlights alert triggers, root cause identification, remediation timeline, and SLA impact metrics.Table: Timeline of Events| Time (UTC)           | Event                                      | Owner      | Outcome                                                   ||----------------------|--------------------------------------------|------------|-----------------------------------------------------------|| 2025-07-23 08:32:00Z | SLA dashboard alert latency threshold hit  | monitoring | 15% of requests >200ms, auth CPU spiked to 80%            || 2025-07-23 08:35:00Z | Root cause analysis complete               | shakiag    | Identified synchronous file I/O on cache miss path        || 2025-07-23 08:49:00Z | Blue-green deployment of cache patch       | wilfordt   | Warm cache hit rate improved, latency stabilized <180ms    || 2025-07-23 08:54:00Z | Service recovered under SLA threshold      | monitoring | Error rates returned to baseline                          |Metric Summary: Warm cache avg latency 1.2ms (σ=0.3ms), Cold cache avg 4.5ms (σ=0.7ms), Cache hit rate sustained at 99.5%.Slide 2: Deep Dive into Root Cause and Verification PathParagraph: The JWT validation flow consists of header parsing, payload decoding, and signature verification. Under cache miss the fallback path performed synchronous disk reads for the public key, causing repeated 3–5ms latency spikes under peak load.Process Flow:1. Parse JWT header and extract kid2. Check in-memory LRU cache (256-entry capacity)3. On cache hit: constant-time lookup to signature verification4. On cache miss: synchronous fs read of public key file, then signature verificationFlame graph analysis shows the disk I/O call consuming 40% of execution time in miss scenarios, confirmed by New Relic traces.Slide 3: Extended Performance AnalysisParagraph: Microbenchmark and production metrics over high-load tests (10k RPS) validate stability and regression boundaries.Table: Performance Metrics Across Environments| Scenario            | P50 Latency | P95 Latency | P99 Latency | Avg Latency | Std Dev ||---------------------|-------------|-------------|-------------|-------------|---------|| Warm Cache (Test)   | 0.9ms       | 1.4ms       | 2.1ms       | 1.2ms       | 0.15ms  || Cold Cache (Test)   | 3.8ms       | 4.7ms       | 5.6ms       | 4.5ms       | 0.7ms   || Warm Cache (Prod)   | 1.1ms       | 1.6ms       | 2.4ms       | 1.3ms       | 0.2ms   || Cold Cache (Prod)   | 4.0ms       | 5.0ms       | 6.0ms       | 4.7ms       | 0.8ms   |Observations: Production results are within 10% of test harness metrics and show no regressions post-deployment.Slide 4: Roadmap and Action ItemsParagraph: To ensure resilience and adaptability, the following roadmap outlines targeted deliverables and deadlines.Action Items:- AI-007: Integrate end-to-end load tests for key rotation scenarios (Owner: porshab, Due: 2025-07-31)- AI-008: Implement dynamic cache resizing triggers based on miss-rate and CPU thresholds (Owner: bevmcg, Due: 2025-08-02)- AI-009: Enhance telemetry with cache hit/miss time-series panels in Grafana (Owner: wilfordt, Due: 2025-07-30)- AI-010: Update incident runbook with dynamic resize and cooldown verification commands (Owner: bevmcg, Due: 2025-07-29)Slide 5: Risk Assessment and Mitigation StrategiesParagraph: Potential risks of dynamic resizing include oscillation and performance regressions. Mitigation includes enforced cooldown periods, parameterized thresholds, and rollback via blue-green deployment and smoke tests.Detailed mitigation table and configuration references are documented in auth_service/config/cache_settings.yaml and the incident runbook (DOC-1123).",
+      "TimeStamp": "2025-07-26T14:00:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-23T18:30:00Z",
+      "FileId": "ab60f11f-2780-4358-9938-30ae82df6a35",
+      "FileLocation": "files\\DevSecOps_Policy_Threshold_Adjustments.docx",
+      "FileName": "DevSecOps_Policy_Threshold_Adjustments.docx",
+      "LastModifiedDate": "2025-07-23T18:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Planning",
+      "DestinationType": "site",
+      "Content": "Document detailing updated policy thresholds for critical (1), high (0), medium (3) severities; conformance to Confluence schema contract; version control tagging guidelines; process for quarterly reviews; CI pipeline governance definitions. Includes: policy JSON snippets, threshold mutation step in Jenkinsfile, Confluence REST API integration examples, audit logging requirements.",
+      "TimeStamp": "2025-07-23T18:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-24T16:30:00Z",
+      "FileId": "c5f8de66-33cc-4db7-959d-150530149221",
+      "FileLocation": "files\\SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+      "FileName": "SecureSprint_Telemetry_and_Compliance_Dashboard_Presentation.pptx",
+      "LastModifiedDate": "2025-07-24T16:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/Retrospectives",
+      "DestinationType": "site",
+      "Content": "Presentation Title: Secure Sprint 2025: Telemetry & Compliance Dashboard Deep DiveDate: July 24, 2025Presenters: Shakia Gencarelli (shakiag), Emory Scherping (emorys), Markita Sitra (markitas)Slide 2: Agenda1. Pipeline Metrics Overview2. Prometheus & Logstash Telemetry3. Compliance Dashboard Integration4. Vulnerability Trends & Policy Impact5. Resources & Links6. Action ItemsSlide 3: Pipeline Metrics OverviewBar Chart: Build Outcomes by Commit- commit 9a2f3d4: Fail 3, Pass 1- commit 0b7e8c1: Fail 2, Pass 2- commit d4e5f6a: Pass 3, Fail 1Line Chart: Snyk Scan Pass Rate over TimeAnnotations: PR builds at 12:00, 12:10, 12:20Slide 4: Prometheus & Logstash TelemetryInfographic: Filebeat -> Logstash -> Prometheus PushGateway- Metric security_scan_pass count: 4- Metric security_scan_fail count: 6- Labels: build_id, commit_hash, scan_statusSlide 5: Compliance Dashboard IntegrationScreenshot Callout: Confluence Snyk Policy SchemaLink: https://liveoak.atlassian.net/wiki/spaces/Security/pages/7891011/Snyk+Policy+SchemaAudit Tag: secure-sprint-2025-07-17Slide 6: Vulnerability Trends & Policy ImpactTable: Vulnerability Severity Distribution- Critical: Original 0 → Updated 1- High: 2- Medium: 3Line Chart: Medium Vulnerabilities per CommitSlide 7: Policy Threshold ImpactTable Infographic: Severity | Original | Updated | Delta- Critical | 0 | 1 | +1- High | 0 | 0 | +0- Medium | 0 | 3 | +3Slide 8: Action Items & Next Steps- Branch-wide Snyk Scan Rollout (Sau Alquesta) by 2025-07-29- Parser Hardening & Metrics Labeling (Emory Scherping & Markita Sitra) by 2025-08-02- Runbook Publication (Shakia Gencarelli) by 2025-07-25- Q4 Policy Review Meeting (Terina Hafen) on 2025-10-01Slide 9: Resources & Links- Telemetry DataFlow Diagram (FileId:b1e5de25-81eb-42f5-a544-a59140624c5e)- Sprint Retrospective PDF (FileId:bdf123e1-f648-461f-8470-70c5ad06c6e1)- Policy Threshold Adjustments Doc (FileId:ab60f11f-2780-4358-9938-30ae82df6a35)Slide 10: Q&AThank you for your attention!",
+      "TimeStamp": "2025-07-24T16:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-27T10:30:00Z",
+      "FileId": "a817d9f1-543d-4395-bcd1-b54364cf9701",
+      "FileLocation": "files\\SecureSprint_Security_Telemetry_Workflow.pdf",
+      "FileName": "SecureSprint_Security_Telemetry_Workflow.pdf",
+      "LastModifiedDate": "2025-07-27T10:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_terinahafen",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_kerenguisbert",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_ashleyengel",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "Shared Documents/ArchitecturalDiagrams",
+      "DestinationType": "site",
+      "Content": "Document Title: Secure Sprint 2025 DevSecOps Security & Telemetry WorkflowIntroduction:This image-heavy document delivers a comprehensive visual guide to the end-to-end Snyk integration, telemetry ingestion, and policy enforcement workflows executed during our DevSecOps Secure Sprint (July 16–17, 2025). Each section includes high-resolution flow diagrams, callouts, and annotations for clarity.Section 1: Jenkins Pipeline Security Scans- Figure 1: Jenkins Pipeline Stage Flow  [Image Placeholder: PipelineStageFlow.png]  • Checkout & Compile → Unit Test → Post-Test-Gates  • Injected Step: security-scans.runSnyk()  • withCredentials block retrieves SNYK_TOKEN securely  • npm run build && mvn test && snyk test --jsonSection 2: Filebeat & Logstash Telemetry Ingestion- Figure 2: Filebeat Multiline Parser Configuration  [Image Placeholder: FilebeatMultiline.png]  • Go snippet by Emory Scherping emits Snyk JSON to stdout  • Filebeat multiline parser groups JSON blocks into events- Figure 3: Logstash Mutation & Metadata Mapping  [Image Placeholder: LogstashMutation.png]  • mutate filter adds @metadata.scan_status and thresholds  • add_field: pipeline.policy.criticalThreshold → metadata  • conditional drop based on metadata.scan_status codeSection 3: Policy Threshold Enforcement- Figure 4: Policy Fetch & Cache Logic  [Image Placeholder: PolicyFetchCache.png]  • Jenkins Shared Library httpRequest to Confluence schema  • Fallback to DEFAULT_CRITICAL_THRESHOLD=1 on failure  • Cache TTL = 10 minutes for efficiency- Figure 5: Threshold Application in Pipeline  [Image Placeholder: ThresholdApplication.png]  • Pull threshold values into environment variables  • Pass thresholds to Go snippet and Logstash as metadata  • Enforce block on high/critical severities during scanSection 4: Prometheus Metrics & Reporting- Figure 6: Prometheus PushGateway Integration  [Image Placeholder: PrometheusPush.png]  • security_scan_pass and security_scan_fail metrics  • Labels: build_id, commit_hash, scan_status, severity_counts- Figure 7: Grafana Dashboard Sample Panels  [Image Placeholder: GrafanaPanels.png]  • Scan pass rate over time  • Severity distribution pie and trend line chartsAppendix:- Telemetry DataFlow Blueprint (FileId:b1e5de25-81eb-42f5-a544-a59140624c5e)- Sprint Retrospective Presentation (FileId:bdf123e1-f648-461f-8470-70c5ad06c6e1)- DevSecOps Policy Threshold Adjustments Doc (FileId:ab60f11f-2780-4358-9938-30ae82df6a35)This visual workflow is designed for architects, SREs, and security engineers to review integration details, identify handoff points, and support audit and compliance needs. For questions or feedback, please reach out to shakiag@liveoakdigital.com.",
+      "TimeStamp": "2025-07-27T10:30:00Z"
+    },
+    {
+      "type": "Event",
+      "EventId": "8cda38a8-ad4a-4768-9502-f4dead5d04c8",
+      "Subject": "Secure Sprint Policy & Pipeline Governance Workshop",
+      "Body": "Team,This workshop focuses on finalizing our DevSecOps pipeline governance and policy threshold framework following the Secure Sprint on July 16–17. We'll cover:1. Review of policy threshold proposals (critical, high, medium) and final approval process.2. Walkthrough of Jenkins shared library integration (security-scans.runSnyk, withCredentials, Cypress override).3. Telemetry flow deep-dive: Filebeat multiline parsing, Logstash mutation rules, Prometheus metrics labels.4. CI/CD governance: audit logging, policy file versioning, Confluence schema contract management.5. Action items, ownership, and timeline for branch-wide rollout and quarterly reviews.Please review the attached DevSecOps_Policy_Threshold_Adjustments.docx ahead of time.Best,Shakia Gencarelli",
+      "StartDateTime": "2025-07-24T14:00:00Z",
+      "EndDateTime": "2025-07-24T15:30:00Z",
+      "TimeZone": "UTC",
+      "Sender": "lod_shakiag",
+      "Locations": [
+        "Microsoft Teams Meeting"
+      ],
+      "RequiredAttendees": [
+        {
+          "Email": "lod_emorys"
+        },
+        {
+          "Email": "lod_markitas"
+        },
+        {
+          "Email": "lod_terinahafen"
+        },
+        {
+          "Email": "lod_kerenguisbert"
+        },
+        {
+          "Email": "lod_ashleyengel"
+        }
+      ],
+      "OptionalAttendees": [
+        {
+          "Email": "lod_saulq"
+        }
+      ],
+      "ShowAs": "busy",
+      "Attachments": [
+        "files\\DevSecOps_Policy_Threshold_Adjustments.docx"
+      ],
+      "TimeStamp": "2025-07-24T14:00:00Z"
+    }
+  ]
+}

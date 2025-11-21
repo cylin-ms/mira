@@ -1,0 +1,934 @@
+{
+  "Meeting": {
+    "type": "Event",
+    "EventId": "09522e28-216e-482e-8a4d-52b053fa8529",
+    "Subject": "JWT Cache Integration Test Workshop",
+    "StartDateTime": "2025-07-24T10:00:00Z",
+    "EndDateTime": "2025-07-24T11:30:00Z",
+    "TimeZone": "UTC",
+    "Sender": "lod_shakiag",
+    "RequiredAttendees": [
+      {
+        "Email": "lod_shakiag"
+      },
+      {
+        "Email": "lod_rufinag"
+      },
+      {
+        "Email": "lod_emorys"
+      },
+      {
+        "Email": "lod_eramanteca"
+      }
+    ],
+    "OptionalAttendees": [
+      {
+        "Email": "lod_markitas"
+      },
+      {
+        "Email": "lod_wilfordt"
+      }
+    ],
+    "Locations": [
+      "Microsoft Teams Meeting - https://teams.microsoft.com/l/meetup-join/19%3ameeting_NEW_LINK%40thread.v2/0?context=%7b%22Tid%22%3a%22...%22%7d"
+    ],
+    "Body": "Agenda: 1. Overview of integration test architecture and environment setup 2. Code walkthrough of JwtCacheLRU integration tests in AuthServiceTest.java 3. Live demonstration of vault container spin-up and WireMock setup for secret retrieval 4. Writing and validating integer overflow guard tests using AssertThrows 5. Emitting and verifying eviction and overflow metrics with Prometheus 6. CI pipeline integration: Jenkinsfile and GitHub Actions configuration 7. Q&A and next steps: assignment of test enhancements and pipeline PR reviews. Please review the attached Integration Test Plan and bring any questions or sample test snippets to share during the session.",
+    "Category": "Technical Deep Dive",
+    "Attachments": [
+      "files\\JWT_Cache_Integration_Test_Plan.docx"
+    ]
+  },
+  "Type": "Code Review Clinic",
+  "NeedWorkbackPlan": {
+    "key_signals": {
+      "stakes": [
+        "Integration test coverage for JWT cache eviction and overflow guards",
+        "Metrics validation tied to CI pipeline quality",
+        "Potential impact on authentication service reliability"
+      ],
+      "dependencies": [
+        "Pre-work reviewing Integration Test Plan document",
+        "Setup of Vault container and WireMock stubs",
+        "Cross-team coordination on metrics instrumentation and CI config"
+      ],
+      "timing": [
+        "Meeting scheduled immediately after related code changes and CI runs",
+        "Alignment with upcoming canary release window"
+      ]
+    },
+    "workback_need_level": "Minor need",
+    "confidence": 0.78,
+    "rationale": "The workshop requires attendees to review a detailed test plan, prepare code snippets, and align on metrics instrumentation, but stakes are moderate and dependencies are mostly within one engineering group. A short prep checklist should suffice."
+  },
+  "Scale": {
+    "signals": {
+      "teams_functions": [
+        "AuthService engineering team",
+        "DevOps engineers",
+        "software engineers"
+      ],
+      "systems_scope": [
+        "JWT cache component in authentication service",
+        "integration tests with Vault container and WireMock",
+        "Prometheus metrics instrumentation",
+        "CI pipeline via Jenkins and GitHub Actions"
+      ],
+      "dependencies": [
+        "Coordination between backend code, test harness, metrics dashboards",
+        "Vault integration for secret retrieval",
+        "Cross-component metrics verification in Grafana"
+      ]
+    },
+    "scale": "Medium",
+    "confidence": 0.85,
+    "rationale": "Involves multiple engineering roles (backend, DevOps) working on JWT cache integration tests, CI pipeline, and metrics instrumentation. Scope spans several components within one product area (authentication service) with cross-component dependencies but remains within a single domain."
+  },
+  "Urgency": {
+    "urgency": "Important but flexible",
+    "confidence": 0.75,
+    "rationale": "The workshop focuses on integration test enhancements and CI pipeline configuration, which are important for quality and future releases but show no hard external deadline or immediate production impact. Context mentions internal deadlines (e.g., Jul 25 for related tasks) but not tied to regulatory or customer commitments.",
+    "signals": {
+      "deadlines": [
+        "internal target dates like Jul 25 for test enhancements"
+      ],
+      "commitments": [
+        "internal engineering quality improvements, no external SLA or launch date mentioned"
+      ],
+      "recurrence": [
+        "one-time technical deep dive workshop, not a recurring operational meeting"
+      ]
+    }
+  },
+  "OutputDepth": {
+    "signals": {
+      "stakes_urgency": [
+        "Technical workshop for integration tests",
+        "No external regulatory or business-critical deadline indicated"
+      ],
+      "scale_complexity": [
+        "Single service (AuthService) with JWT cache",
+        "Cross-role but within one engineering team",
+        "Topics include CI pipeline integration and metrics"
+      ],
+      "time_context": [
+        "Meeting scheduled for July 24, context and docs prepared July 23",
+        "Rich technical context: integration test plan, prior workshop outcomes, chat threads"
+      ]
+    },
+    "output_depth": "Standard plan",
+    "confidence": 0.82,
+    "rationale": "The workshop is moderately complex (integration tests, CI, metrics) and involves multiple engineers, but stakes are internal and not mission-critical. There is a day of prep and rich context, so a structured timeline with owners and dependencies adds value without requiring full critical-path rigor."
+  },
+  "Goal": {
+    "goal": "Assign owners and timelines for JWT cache integration test enhancements and CI pipeline PR reviews.",
+    "confidence": 0.85,
+    "source": "Directly from meeting body",
+    "justifications": [
+      "Agenda includes 'Q&A and next steps: assignment of test enhancements and pipeline PR reviews'",
+      "Explicit mention of assigning responsibilities and reviewing PRs as next steps"
+    ]
+  },
+  "Prerequisites": {
+    "prerequisites": [
+      {
+        "description": "Review the attached JWT_Cache_Integration_Test_Plan.docx",
+        "confidence": 0.95,
+        "source": "Directly from meeting body",
+        "justification": "Body states: 'Please review the attached Integration Test Plan'"
+      },
+      {
+        "description": "Prepare sample test snippets for discussion",
+        "confidence": 0.8,
+        "source": "Inferred from meeting body",
+        "justification": "Body states: 'bring any questions or sample test snippets to share during the session'"
+      },
+      {
+        "description": "Update Integration Test Plan to include labeled metrics verification",
+        "confidence": 0.8,
+        "source": "Inferred from context",
+        "justification": "Chat: 'I’ll update the integration test plan ... to validate that the labeled metrics appear correctly'"
+      },
+      {
+        "description": "Ensure Integration Test Plan covers forced eviction path and integer overflow guard scenarios",
+        "confidence": 0.75,
+        "source": "Inferred from context",
+        "justification": "Context file content: 'outlines the integration testing strategy for JwtCacheLRU forced eviction path and integer overflow guards'"
+      }
+    ]
+  },
+  "Tasks": {
+    "tasks": [
+      {
+        "description": "Review JWT_Cache_Integration_Test_Plan.docx located in EngineeringDocuments/Plans and note any questions or gaps for discussion",
+        "prerequisite": "Review the attached JWT_Cache_Integration_Test_Plan.docx",
+        "task_time": "before_meeting",
+        "confidence": 0.95,
+        "justification": "Meeting body explicitly requests reviewing the attached integration test plan"
+      },
+      {
+        "description": "Prepare at least two sample JUnit 5 test snippets demonstrating JwtCacheLRU eviction and integer overflow guard scenarios for sharing",
+        "prerequisite": "Prepare sample test snippets for discussion",
+        "task_time": "before_meeting",
+        "confidence": 0.8,
+        "justification": "Meeting body asks attendees to bring sample test snippets for discussion"
+      },
+      {
+        "description": "Update JWT_Cache_Integration_Test_Plan.docx to include a section verifying Prometheus metrics with cache_size labels and gauge presence",
+        "prerequisite": "Update Integration Test Plan to include labeled metrics verification",
+        "task_time": "before_meeting",
+        "confidence": 0.8,
+        "justification": "Chat indicates plan must validate labeled metrics appear correctly"
+      },
+      {
+        "description": "Confirm JWT_Cache_Integration_Test_Plan.docx includes explicit steps for forced eviction path and integer overflow guard tests, adding details if missing",
+        "prerequisite": "Ensure Integration Test Plan covers forced eviction path and integer overflow guard scenarios",
+        "task_time": "before_meeting",
+        "confidence": 0.75,
+        "justification": "Context specifies these scenarios should be part of the integration test plan"
+      }
+    ]
+  },
+  "TaskAcceptance": {
+    "task_acceptance": [
+      {
+        "task_index": 0,
+        "task_description": "Review JWT_Cache_Integration_Test_Plan.docx located in EngineeringDocuments/Plans and note any questions or gaps for discussion",
+        "acceptance_criteria": "JWT_Cache_Integration_Test_Plan.docx reviewed and questions or gaps documented for discussion",
+        "confidence": 0.9,
+        "justification": "Meeting body explicitly requests reviewing the attached integration test plan and noting questions"
+      },
+      {
+        "task_index": 1,
+        "task_description": "Prepare at least two sample JUnit 5 test snippets demonstrating JwtCacheLRU eviction and integer overflow guard scenarios for sharing",
+        "acceptance_criteria": "Two JUnit 5 test snippets prepared: one for JwtCacheLRU eviction and one for integer overflow guard",
+        "confidence": 0.85,
+        "justification": "Task text specifies at least two snippets for these scenarios"
+      },
+      {
+        "task_index": 2,
+        "task_description": "Update JWT_Cache_Integration_Test_Plan.docx to include a section verifying Prometheus metrics with cache_size labels and gauge presence",
+        "acceptance_criteria": "JWT_Cache_Integration_Test_Plan.docx updated with section verifying Prometheus metrics include cache_size labels and gauge presence",
+        "confidence": 0.9,
+        "justification": "Chat explicitly states to add section for labeled metrics verification"
+      },
+      {
+        "task_index": 3,
+        "task_description": "Confirm JWT_Cache_Integration_Test_Plan.docx includes explicit steps for forced eviction path and integer overflow guard tests, adding details if missing",
+        "acceptance_criteria": "JWT_Cache_Integration_Test_Plan.docx contains explicit steps for forced eviction path and integer overflow guard tests",
+        "confidence": 0.8,
+        "justification": "Task specifies confirming and adding details for these scenarios"
+      }
+    ]
+  },
+  "TaskDependencies": {
+    "dependencies": [
+      {
+        "from_task_index": 0,
+        "from_task_description": "Review JWT_Cache_Integration_Test_Plan.docx located in EngineeringDocuments/Plans and note any questions or gaps for discussion",
+        "to_task_index": 2,
+        "to_task_description": "Update JWT_Cache_Integration_Test_Plan.docx to include a section verifying Prometheus metrics with cache_size labels and gauge presence",
+        "dependency_type": "output used as input",
+        "confidence": 0.85,
+        "justification": "You must review the plan before updating it to ensure you know what content exists and where to add the metrics verification section."
+      },
+      {
+        "from_task_index": 0,
+        "from_task_description": "Review JWT_Cache_Integration_Test_Plan.docx located in EngineeringDocuments/Plans and note any questions or gaps for discussion",
+        "to_task_index": 3,
+        "to_task_description": "Confirm JWT_Cache_Integration_Test_Plan.docx includes explicit steps for forced eviction path and integer overflow guard tests, adding details if missing",
+        "dependency_type": "output used as input",
+        "confidence": 0.85,
+        "justification": "You need to review the plan first to confirm whether steps for eviction and overflow guards exist before adding missing details."
+      }
+    ]
+  },
+  "TaskOwners": {
+    "task_owners": [
+      {
+        "task_index": 0,
+        "task_description": "Review JWT_Cache_Integration_Test_Plan.docx located in EngineeringDocuments/Plans and note any questions or gaps for discussion",
+        "owners": [
+          "All Attendees"
+        ],
+        "evidence": "Meeting body: \"Please review the attached Integration Test Plan and bring any questions or sample test snippets to share during the session.\"",
+        "confidence": 0.9,
+        "justification": "The agenda explicitly asks all participants to review the attached plan before the meeting."
+      },
+      {
+        "task_index": 1,
+        "task_description": "Prepare at least two sample JUnit 5 test snippets demonstrating JwtCacheLRU eviction and integer overflow guard scenarios for sharing",
+        "owners": [
+          "All Attendees"
+        ],
+        "evidence": "Meeting body: \"Please review the attached Integration Test Plan and bring any questions or sample test snippets to share during the session.\"",
+        "confidence": 0.85,
+        "justification": "The instruction to bring sample test snippets applies to all attendees; no specific individual is named."
+      },
+      {
+        "task_index": 2,
+        "task_description": "Update JWT_Cache_Integration_Test_Plan.docx to include a section verifying Prometheus metrics with cache_size labels and gauge presence",
+        "owners": [
+          "lod_rufinag"
+        ],
+        "evidence": "Chat message from lod_rufinag: \"I’ll update the integration test plan (FileId: 30ea04c1-3f08-4469-bc11-3b09aa8c5683) to validate that the labeled metrics appear correctly.\"",
+        "confidence": 0.95,
+        "justification": "Rufina explicitly committed to updating the integration test plan for labeled metrics verification."
+      },
+      {
+        "task_index": 3,
+        "task_description": "Confirm JWT_Cache_Integration_Test_Plan.docx includes explicit steps for forced eviction path and integer overflow guard tests, adding details if missing",
+        "owners": [
+          "lod_emorys"
+        ],
+        "evidence": "Workshop Plan: \"Emory Scherping (emorys): Develop an integration test for the forced eviction path in JwtCacheLRU.java, verifying integer overflow guards...\"",
+        "confidence": 0.8,
+        "justification": "Emory is responsible for integration tests covering forced eviction and overflow guards, strongly implying ownership of ensuring plan coverage."
+      }
+    ]
+  },
+  "StandardWorkbackPlanAssertionsV2": {
+    "assertions": [
+      {
+        "assertion": "The standard workback plan for this requester should include the prerequisite to review JWT_Cache_Integration_Test_Plan.docx and document questions or gaps before the workshop.",
+        "importance": "critical",
+        "evidence": "Meeting body: 'Please review the attached Integration Test Plan and bring any questions or sample test snippets to share during the session.'",
+        "justification": "As the meeting organizer and senior engineer, Shakia must ensure all participants, including herself, have reviewed the integration test plan to enable effective discussion and assignment of next steps."
+      },
+      {
+        "assertion": "The standard workback plan for this requester should include coordination to ensure sample JUnit 5 test snippets for JwtCacheLRU eviction and integer overflow guard scenarios are prepared by attendees.",
+        "importance": "expected",
+        "evidence": "Meeting body: 'bring any questions or sample test snippets to share during the session.'",
+        "justification": "While Shakia may not personally write all snippets, as the organizer she is accountable for readiness of these artifacts to achieve the workshop’s technical goals."
+      },
+      {
+        "assertion": "The standard workback plan should include tracking that Rufina updates JWT_Cache_Integration_Test_Plan.docx with Prometheus metrics verification for cache_size labels and gauge presence.",
+        "importance": "expected",
+        "evidence": "Chat: 'I’ll update the integration test plan (FileId: 30ea04c1-3f08-4469-bc11-3b09aa8c5683) to validate that the labeled metrics appear correctly.'",
+        "justification": "Although Shakia is not the direct owner, she must ensure this update is completed before the workshop to maintain alignment with the agenda and metrics validation goals."
+      },
+      {
+        "assertion": "The standard workback plan should include confirming that Emory ensures explicit steps for forced eviction and integer overflow guard tests are present in the integration test plan.",
+        "importance": "expected",
+        "evidence": "Workshop Plan: 'Emory Scherping (emorys): Develop an integration test for the forced eviction path in JwtCacheLRU.java, verifying integer overflow guards...'",
+        "justification": "As the meeting lead, Shakia needs visibility into Emory’s progress on these critical scenarios to ensure the plan reflects the intended coverage."
+      },
+      {
+        "assertion": "The standard workback plan should-not include unrelated security roadmap tasks such as updating Security/AuditGuide.md, as these are outside the integration test workshop scope.",
+        "importance": "expected",
+        "evidence": "Workshop Plan lists Era Manteca updating Security/AuditGuide.md, which is not part of the integration test workshop agenda.",
+        "justification": "Including unrelated security documentation tasks would dilute focus and misrepresent the scope of this specific workshop’s preparation."
+      },
+      {
+        "assertion": "The standard workback plan should-not assume that a formal risk register or contingency plan exists for this workshop.",
+        "importance": "aspirational",
+        "evidence": "No mention of risk management or contingency planning in meeting body, context files, or tasks.",
+        "justification": "A standard-depth plan should avoid fabricating risk artifacts that are not referenced in the provided materials."
+      },
+      {
+        "assertion": "The standard workback plan should-not assign fabricated owners to tasks that lack explicit ownership in the inputs.",
+        "importance": "critical",
+        "evidence": "Tasks 0 and 1 list 'All Attendees' as owners; no other named owners are provided beyond Rufina and Emory for specific updates.",
+        "justification": "Inventing owners would mislead the requester and violate the grounding rule; the plan should reflect actual known ownership or collective responsibility."
+      }
+    ]
+  },
+  "Attendees": [
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "123 LiveOak Way"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Shakia Gencarelli",
+      "FirstName": "Shakia",
+      "JobTitle": "Senior Software Engineer",
+      "LastName": "Gencarelli",
+      "MailNickName": "lod_shakiag",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2749",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "852 Oak Meadow Court"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Rufina Ganie",
+      "FirstName": "Rufina",
+      "JobTitle": "Software Engineer",
+      "LastName": "Ganie",
+      "MailNickName": "lod_rufinag",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2661",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "654 Cedar Street"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Emory Scherping",
+      "FirstName": "Emory",
+      "JobTitle": "DevOps Engineer",
+      "LastName": "Scherping",
+      "MailNickName": "lod_emorys",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2834",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "987 Willow Brook Path"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Era Manteca",
+      "FirstName": "Era",
+      "JobTitle": "Software Engineer",
+      "LastName": "Manteca",
+      "MailNickName": "lod_eramanteca",
+      "Manager": "lod_shakiag",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 2822",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "555 Larchmont Road"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Markita Sitra",
+      "FirstName": "Markita",
+      "JobTitle": "DevOps Engineer",
+      "LastName": "Sitra",
+      "MailNickName": "lod_markitas",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 3715",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    },
+    {
+      "type": "User",
+      "Address": {
+        "City": "Elk Grove",
+        "Country": "USA",
+        "PostalCode": "95758",
+        "State": "CA",
+        "Street": "321 Pine Creek Lane"
+      },
+      "CompanyName": "LiveOak Digital",
+      "Department": "Engineering",
+      "DisplayName": "Wilford Taussig",
+      "FirstName": "Wilford",
+      "JobTitle": "DevOps Engineer",
+      "LastName": "Taussig",
+      "MailNickName": "lod_wilfordt",
+      "Manager": "lod_nilatanguma",
+      "OfficeLocation": "Elk Grove, CA",
+      "UsageLocation": "US",
+      "PhoneNumber": "+1 916 555 3123",
+      "Licenses": [
+        "Microsoft 365 Copilot",
+        "Microsoft Teams Enterprise",
+        "Office 365 E5 (no Teams)"
+      ]
+    }
+  ],
+  "RelevantContexts": [
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-23T09:10:00Z",
+      "FileId": "30ea04c1-3f08-4469-bc11-3b09aa8c5683",
+      "FileLocation": "files\\JWT_Cache_Integration_Test_Plan.docx",
+      "FileName": "JWT_Cache_Integration_Test_Plan.docx",
+      "LastModifiedDate": "2025-07-23T09:10:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_rufinag",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_eramanteca",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "EngineeringDocuments/Plans",
+      "DestinationType": "site",
+      "Content": "This document outlines the integration testing strategy for JwtCacheLRU forced eviction path and integer overflow guards, detailing environment setup (Spring Boot test, Vault container, WireMock stubs), test harness configuration (JUnit 5, AssertThrows, JMH benchmarking), sample test cases, CI pipeline integration steps, and metrics emission for eviction and overflow counters.",
+      "TimeStamp": "2025-07-23T09:10:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-23T10:00:00Z",
+      "FileId": "fe3fa172-49a3-4c9d-8b29-09b25e5a291c",
+      "FileLocation": "files\\JWT_Cache_Security_DeepDive.docx",
+      "FileName": "JWT_Cache_Security_DeepDive.docx",
+      "LastModifiedDate": "2025-07-23T10:00:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_rufinag",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_eramanteca",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "EngineeringDocuments/DeepDives",
+      "DestinationType": "site",
+      "Content": "This document provides a deep technical overview of the security-focused code enhancements we performed during the JWT Cache Optimization Workshop held on July 22, 2025 at 14:30 UTC in the #jwt-cache-optimizations channel. The session, led by Shakia Gencarelli, centered on transforming exploratory code reviews and actionable feedback into concrete, repeatable practices. Attendees engaged with Jira tickets BUG-1785, BUG-1790, and BUG-1802, dissecting each violation and correlating them with key sections in our Engineering Style Guide.A primary area of emphasis is the enforcement of null-safety through the systematic application of @NotNull annotations on all public AuthService methods. The document outlines the rationale behind this choice and demonstrates how the updated JwtDecoderTest.java and JwtCacheLRUTest.java harness JUnit 5 AssertThrows semantics to verify fail-fast behavior under invalid inputs. Specific code snippets contrast pre- and post-refactor implementations, highlighting improvements in both readability and reliability.The review further drills into our security checklist, documenting the integration of @SecureEndpoint annotations, RS256 enforcement validation within application.yml, and the expansion of Jest tests under test/webhook/validateSignature.spec.ts for HMAC-SHA256 webhook signature coverage. Each rule is traced back to its corresponding Style Guide chapter, ensuring a clear lineage from policy to implementation. Sample Confluence templates and GitHub issue forms are referenced to illustrate how feedback is consistently tracked and triaged.Looking ahead, the document maps out next steps and stakeholder responsibilities. Readers are directed to the JWT_Cache_Integration_Test_Plan (FileId: \"30ea04c1-3f08-4469-bc11-3b09aa8c5683\") for end-to-end test harness configurations and to the EngineeringDocuments/Security/AuditGuide.md for the latest security-audit steps. By codifying these practices in a one-page reference, the team can maintain momentum and elevate overall code quality in upcoming sprints.",
+      "TimeStamp": "2025-07-23T10:00:00Z"
+    },
+    {
+      "type": "Chat",
+      "ChatId": "78806cf8-ccee-4a19-8adb-30fef0ba8423",
+      "ChatType": "Group",
+      "ChatName": "jwt-cache-optimization-metrics",
+      "Members": [
+        "lod_shakiag",
+        "lod_rufinag",
+        "lod_emorys",
+        "lod_eramanteca",
+        "lod_markitas"
+      ],
+      "ChatMessages": [
+        {
+          "ChatMessageId": "1540f7e5-9851-4fe7-b770-7d2188cff19f",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "Team, following up on our metrics instrumentation for jwt_cache_thrash_warnings_total. In last night’s load tests we saw thrash spikes at ~5 events in a 10m window. Should we lower the alert threshold to sum_over_time(jwt_cache_thrash_warnings_total[10m]) > 3 for 5m or adjust the query window?",
+          "SentDateTime": "2025-07-23T14:05:00Z"
+        },
+        {
+          "ChatMessageId": "268fb694-29fd-4a86-a0d9-a9100e4bd6fd",
+          "From": "lod_emorys",
+          "ContentType": "text",
+          "Content": "Based on CI logs, the 10m sum rarely exceeds 2 on warm workloads but peaks to 6 during cold cache evictions. I’d propose threshold >2 for 5m to catch early thrash, and tag events by cache_size to analyze correlation.",
+          "SentDateTime": "2025-07-23T14:07:00Z"
+        },
+        {
+          "ChatMessageId": "93bf673b-bcb8-455b-821d-120c37562327",
+          "From": "lod_eramanteca",
+          "ContentType": "text",
+          "Content": "We can emit the cache_size as a label on the counter. In JwtCacheMetrics.java do counter.labels(String.valueOf(currentCapacity)).increment(). Then Grafana panels can slice by size. I can draft a PR for that change.",
+          "SentDateTime": "2025-07-23T14:09:00Z"
+        },
+        {
+          "ChatMessageId": "aa2b445c-1ba5-4b3e-975e-399abc593f50",
+          "From": "lod_rufinag",
+          "ContentType": "text",
+          "Content": "Sounds good. I’ll update the integration test plan (FileId: 30ea04c1-3f08-4469-bc11-3b09aa8c5683) to validate that the labeled metrics appear correctly. I’ll add a new section for gauge label presence under the metrics verification steps.",
+          "SentDateTime": "2025-07-23T14:12:00Z"
+        },
+        {
+          "ChatMessageId": "0c101697-5801-4705-a55e-0c2c7ed6ae7d",
+          "From": "lod_markitas",
+          "ContentType": "text",
+          "Content": "Also, for tomorrow’s stand-up demo, should I prepare two Grafana panels: one showing total thrash warnings and another breaking down counts by cache_size label?",
+          "SentDateTime": "2025-07-23T14:15:00Z"
+        },
+        {
+          "ChatMessageId": "2efb576a-cbc7-448f-bf2b-d0fa76745abc",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "Yes, please prepare both. Update the JwtCache_Metrics_DeepDive_Slides.pptx (FileId: efee9dae-7a87-4f34-8761-f5d13e7295d8) with an extra slide after the current thrash panel. I’ll review your PR tonight and share feedback.",
+          "SentDateTime": "2025-07-23T14:18:00Z"
+        }
+      ],
+      "TimeStamp": "2025-07-23T14:05:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-23T09:30:00Z",
+      "FileId": "ff2ad292-bf64-473d-a239-3c9d537b029c",
+      "FileLocation": "files\\JWT_Cache_Optimization_Workshop_Outcomes.pptx",
+      "FileName": "JWT_Cache_Optimization_Workshop_Outcomes.pptx",
+      "LastModifiedDate": "2025-07-23T09:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_rufinag",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_eramanteca",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "EngineeringDocuments/Slides",
+      "DestinationType": "site",
+      "Content": "Slide 1: Title• JWT Cache Optimization Workshop Outcomes• Presented by: Shakia Gencarelli, July 23, 2025Slide 2: Recap of Session• Date: July 22, 2025 at 14:30 UTC in #jwt-cache-optimizations channel• Participants: shakiag, rufinag, eramanteca, emorys, markitas• Objectives: enforce Java style guide, integrate security best practices, generate actionable bug reportsSlide 3: Key Metrics & Outcomes• Jira Tickets Reviewed: BUG-1785, BUG-1790, BUG-1802• New Ticket Filed: BUG-1805 for regex strip patch• Pull Requests Reviewed: PR-213, PR-216; 5 inline comments applied[Infographic: Bar chart comparing tickets triaged vs created vs resolved]Slide 4: Security Checklist Compliance• @NotNull annotations coverage: Pre-session 55% → Post-session 92%• @SecureEndpoint applied to 100% of public AuthService methods[Infographic: Gauge chart showing 92% annotation compliance]• Details in JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)Slide 5: Integration Test Pass Rates• Forced Eviction Test Pass Rate: 98.7% (target >95%)• Vault Readiness Flakiness: <1% after adding waitUntil probe• See JWT_Cache_Integration_Test_Plan.docx (FileId:30ea04c1-3f08-4469-bc11-3b09aa8c5683)Slide 6: Performance Benchmarks• Warm-cache P95 Latency: 1.4 ms; Cold-cache P95: 4.7 ms• Thrash Warning Events: 3 spikes / 10 min window[Infographic: Line chart of P95 latency over iteration count]• Full metrics: jwt_cache_perf_results.csv (FileId:338aff1e-684a-4cae-9dc0-116ce746224f) and JwtCache_Metrics_DeepDive_Slides.pptx (FileId:efee9dae-7a87-4f34-8761-f5d13e7295d8)Slide 7: Action Items & Next Steps• Rufina Ganie (rufinag): File BUG-1805 and finalize regex strip tests by COB Jul 23• Emory Scherping (emorys): Enhance integration tests for overflow guards by Jul 25• Era Manteca (eramanteca): Update Security/AuditGuide.md by COB Jul 22• Markita Sitra (markitas): Prepare stand-up demo slides for Jul 23 10:00 PST• See detailed roadmap in JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)Slide 8: Access & Resources• Workshop Plan: JWT_Cache_Optimization_Workshop_Plan.docx (FileId:4de41684-a33d-45e2-8472-6320eb87f0cc)• Integration Test Plan: JWT_Cache_Integration_Test_Plan.docx (FileId:30ea04c1-3f08-4469-bc11-3b09aa8c5683)• Metrics Deep Dive Slides: JwtCache_Metrics_DeepDive_Slides.pptx (FileId:efee9dae-7a87-4f34-8761-f5d13e7295d8)• Security Roadmap: JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)• Performance CSV: jwt_cache_perf_results.csv (FileId:338aff1e-684a-4cae-9dc0-116ce746224f)Slide 9: Thank You & Q&A• Questions or feedback? Reach out to shakiag@liveoak.digital",
+      "TimeStamp": "2025-07-23T09:30:00Z"
+    },
+    {
+      "type": "Email",
+      "EmailAction": "Send",
+      "EmailId": "b154b829-c662-48e5-86e0-51b9e4118c8b",
+      "Sender": "lod_emorys",
+      "Subject": "Automated: JWT Cache Regression Report & Dashboard Snapshot",
+      "Timestamp": "2025-07-23T17:30:00Z",
+      "ToRecipients": [
+        {
+          "Recipient": "lod_ashleyengel"
+        },
+        {
+          "Recipient": "lod_rufinag"
+        },
+        {
+          "Recipient": "lod_danillec"
+        },
+        {
+          "Recipient": "lod_sharij"
+        }
+      ],
+      "CcRecipients": [
+        {
+          "Recipient": "lod_wilfordt"
+        },
+        {
+          "Recipient": "lod_tonycool"
+        },
+        {
+          "Recipient": "lod_nilatanguma"
+        }
+      ],
+      "Body": "Hello team,As part of the automated regression suite triggered after merging PR #462 at 2025-07-23T16:48:00Z on the authentication-service main branch, the CI pipeline produced the following key results:1. Unit Test Performance:   - Warm-cache average latency: 0.95 ms (σ=0.25 ms)   - Cold-cache average latency: 3.98 ms (σ=0.68 ms)   - Integration test pass rate: 100% over 1,000 iterations2. Prometheus Metrics Snapshot:   - jwt_cache_thrash_warnings_total: peak of 5 warnings in a 10m window (baseline 1–2)   - jwt_validation_latency P95: 1.8 ms, P99: 3.5 ms (well within the 200 ms SLA)3. Dashboard Snapshot:   - See the attached Grafana image (jwt_cache_metrics_dashboard_snapshot.png) for the thrash warnings time series and validation latency histogram.   - Alert rule is configured at sum_over_time(jwt_cache_thrash_warnings_total[5m]) > 2.Next Steps:- Rufina: please review the updated integration test plan (FileId 30ea04c1-3f08-4469-bc11-3b09aa8c5683) to ensure labeled metrics checks are covered.- Ashley: confirm that section 4 of release-notes.md (FileId 74cd5811-9f23-4939-9bf9-20d9a9a28e23) includes links to the monitoring dashboards.- Danille: update the Prometheus alert rule in the metrics-config repository to use the 5m window threshold > 2.- Shari: schedule a follow-up stand-up next week to gather monitoring feedback and fine-tune thresholds.Let me know if you spot any discrepancies or need further detail.Regards,Emory Scherping",
+      "Folder": "SentItems",
+      "Importance": "Normal",
+      "Flag": "NotFlagged",
+      "IsDraft": false,
+      "Attachments": [],
+      "TimeStamp": "2025-07-23T17:30:00Z"
+    },
+    {
+      "type": "ChannelMessage",
+      "ChannelMessageId": "98ffb4f6-ee91-498a-af5b-b33c396909d6",
+      "ChannelId": "7a5cc432-4acc-4b17-8d28-6580e72210f0",
+      "From": "lod_shakiag",
+      "ContentType": "text",
+      "Subject": null,
+      "Content": "Team, I’ve updated our JUnit 5 test harness in auth_service/tests/test_jwt_cache_perf.py to include two new scenarios: one for forced eviction via cache.clear() before a signature request, and another that simulates a Vault JWKS rotation returning a 500 error. The Surefire plugin now forks a dedicated JVM per eviction test to isolate GC and heap tuning from warm-cache runs. I added parameterized @CsvSource entries for token expiration and signature mismatch to bump coverage above 95% for the streaming-consumer logic. Jenkins’s loadDefaultLabels helper tags our Prometheus recording rules with phase='unit-test' and environment='staging', allowing us to filter the Grafana histogram panels by test stage. Let me know if you spot any gaps or edge cases we should simulate before the full canary redeploy.",
+      "SentDateTime": "2025-07-22T18:55:00Z",
+      "TimeStamp": "2025-07-22T18:55:00Z"
+    },
+    {
+      "type": "Chat",
+      "ChatId": "78806cf8-ccee-4a19-8adb-30fef0ba8423",
+      "ChatType": "Group",
+      "ChatName": "jwt-cache-optimization-metrics",
+      "Members": [
+        "lod_shakiag",
+        "lod_rufinag",
+        "lod_emorys",
+        "lod_eramanteca",
+        "lod_markitas"
+      ],
+      "ChatMessages": [
+        {
+          "ChatMessageId": "1540f7e5-9851-4fe7-b770-7d2188cff19f",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "Team, following up on our metrics instrumentation for jwt_cache_thrash_warnings_total. In last night’s load tests we saw thrash spikes at ~5 events in a 10m window. Should we lower the alert threshold to sum_over_time(jwt_cache_thrash_warnings_total[10m]) > 3 for 5m or adjust the query window?",
+          "SentDateTime": "2025-07-23T14:05:00Z"
+        },
+        {
+          "ChatMessageId": "268fb694-29fd-4a86-a0d9-a9100e4bd6fd",
+          "From": "lod_emorys",
+          "ContentType": "text",
+          "Content": "Based on CI logs, the 10m sum rarely exceeds 2 on warm workloads but peaks to 6 during cold cache evictions. I’d propose threshold >2 for 5m to catch early thrash, and tag events by cache_size to analyze correlation.",
+          "SentDateTime": "2025-07-23T14:07:00Z"
+        },
+        {
+          "ChatMessageId": "93bf673b-bcb8-455b-821d-120c37562327",
+          "From": "lod_eramanteca",
+          "ContentType": "text",
+          "Content": "We can emit the cache_size as a label on the counter. In JwtCacheMetrics.java do counter.labels(String.valueOf(currentCapacity)).increment(). Then Grafana panels can slice by size. I can draft a PR for that change.",
+          "SentDateTime": "2025-07-23T14:09:00Z"
+        },
+        {
+          "ChatMessageId": "aa2b445c-1ba5-4b3e-975e-399abc593f50",
+          "From": "lod_rufinag",
+          "ContentType": "text",
+          "Content": "Sounds good. I’ll update the integration test plan (FileId: 30ea04c1-3f08-4469-bc11-3b09aa8c5683) to validate that the labeled metrics appear correctly. I’ll add a new section for gauge label presence under the metrics verification steps.",
+          "SentDateTime": "2025-07-23T14:12:00Z"
+        },
+        {
+          "ChatMessageId": "0c101697-5801-4705-a55e-0c2c7ed6ae7d",
+          "From": "lod_markitas",
+          "ContentType": "text",
+          "Content": "Also, for tomorrow’s stand-up demo, should I prepare two Grafana panels: one showing total thrash warnings and another breaking down counts by cache_size label?",
+          "SentDateTime": "2025-07-23T14:15:00Z"
+        },
+        {
+          "ChatMessageId": "2efb576a-cbc7-448f-bf2b-d0fa76745abc",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "Yes, please prepare both. Update the JwtCache_Metrics_DeepDive_Slides.pptx (FileId: efee9dae-7a87-4f34-8761-f5d13e7295d8) with an extra slide after the current thrash panel. I’ll review your PR tonight and share feedback.",
+          "SentDateTime": "2025-07-23T14:18:00Z"
+        }
+      ],
+      "TimeStamp": "2025-07-23T14:05:00Z"
+    },
+    {
+      "type": "Chat",
+      "ChatId": "78806cf8-ccee-4a19-8adb-30fef0ba8423",
+      "ChatType": "Group",
+      "ChatName": "jwt-cache-optimization-metrics",
+      "Members": [
+        "lod_shakiag",
+        "lod_rufinag",
+        "lod_emorys",
+        "lod_eramanteca",
+        "lod_markitas"
+      ],
+      "ChatMessages": [
+        {
+          "ChatMessageId": "1540f7e5-9851-4fe7-b770-7d2188cff19f",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "Team, following up on our metrics instrumentation for jwt_cache_thrash_warnings_total. In last night’s load tests we saw thrash spikes at ~5 events in a 10m window. Should we lower the alert threshold to sum_over_time(jwt_cache_thrash_warnings_total[10m]) > 3 for 5m or adjust the query window?",
+          "SentDateTime": "2025-07-23T14:05:00Z"
+        },
+        {
+          "ChatMessageId": "268fb694-29fd-4a86-a0d9-a9100e4bd6fd",
+          "From": "lod_emorys",
+          "ContentType": "text",
+          "Content": "Based on CI logs, the 10m sum rarely exceeds 2 on warm workloads but peaks to 6 during cold cache evictions. I’d propose threshold >2 for 5m to catch early thrash, and tag events by cache_size to analyze correlation.",
+          "SentDateTime": "2025-07-23T14:07:00Z"
+        },
+        {
+          "ChatMessageId": "93bf673b-bcb8-455b-821d-120c37562327",
+          "From": "lod_eramanteca",
+          "ContentType": "text",
+          "Content": "We can emit the cache_size as a label on the counter. In JwtCacheMetrics.java do counter.labels(String.valueOf(currentCapacity)).increment(). Then Grafana panels can slice by size. I can draft a PR for that change.",
+          "SentDateTime": "2025-07-23T14:09:00Z"
+        },
+        {
+          "ChatMessageId": "aa2b445c-1ba5-4b3e-975e-399abc593f50",
+          "From": "lod_rufinag",
+          "ContentType": "text",
+          "Content": "Sounds good. I’ll update the integration test plan (FileId: 30ea04c1-3f08-4469-bc11-3b09aa8c5683) to validate that the labeled metrics appear correctly. I’ll add a new section for gauge label presence under the metrics verification steps.",
+          "SentDateTime": "2025-07-23T14:12:00Z"
+        },
+        {
+          "ChatMessageId": "0c101697-5801-4705-a55e-0c2c7ed6ae7d",
+          "From": "lod_markitas",
+          "ContentType": "text",
+          "Content": "Also, for tomorrow’s stand-up demo, should I prepare two Grafana panels: one showing total thrash warnings and another breaking down counts by cache_size label?",
+          "SentDateTime": "2025-07-23T14:15:00Z"
+        },
+        {
+          "ChatMessageId": "2efb576a-cbc7-448f-bf2b-d0fa76745abc",
+          "From": "lod_shakiag",
+          "ContentType": "text",
+          "Content": "Yes, please prepare both. Update the JwtCache_Metrics_DeepDive_Slides.pptx (FileId: efee9dae-7a87-4f34-8761-f5d13e7295d8) with an extra slide after the current thrash panel. I’ll review your PR tonight and share feedback.",
+          "SentDateTime": "2025-07-23T14:18:00Z"
+        }
+      ],
+      "TimeStamp": "2025-07-23T14:05:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-23T09:30:00Z",
+      "FileId": "ff2ad292-bf64-473d-a239-3c9d537b029c",
+      "FileLocation": "files\\JWT_Cache_Optimization_Workshop_Outcomes.pptx",
+      "FileName": "JWT_Cache_Optimization_Workshop_Outcomes.pptx",
+      "LastModifiedDate": "2025-07-23T09:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_rufinag",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_eramanteca",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "EngineeringDocuments/Slides",
+      "DestinationType": "site",
+      "Content": "Slide 1: Title• JWT Cache Optimization Workshop Outcomes• Presented by: Shakia Gencarelli, July 23, 2025Slide 2: Recap of Session• Date: July 22, 2025 at 14:30 UTC in #jwt-cache-optimizations channel• Participants: shakiag, rufinag, eramanteca, emorys, markitas• Objectives: enforce Java style guide, integrate security best practices, generate actionable bug reportsSlide 3: Key Metrics & Outcomes• Jira Tickets Reviewed: BUG-1785, BUG-1790, BUG-1802• New Ticket Filed: BUG-1805 for regex strip patch• Pull Requests Reviewed: PR-213, PR-216; 5 inline comments applied[Infographic: Bar chart comparing tickets triaged vs created vs resolved]Slide 4: Security Checklist Compliance• @NotNull annotations coverage: Pre-session 55% → Post-session 92%• @SecureEndpoint applied to 100% of public AuthService methods[Infographic: Gauge chart showing 92% annotation compliance]• Details in JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)Slide 5: Integration Test Pass Rates• Forced Eviction Test Pass Rate: 98.7% (target >95%)• Vault Readiness Flakiness: <1% after adding waitUntil probe• See JWT_Cache_Integration_Test_Plan.docx (FileId:30ea04c1-3f08-4469-bc11-3b09aa8c5683)Slide 6: Performance Benchmarks• Warm-cache P95 Latency: 1.4 ms; Cold-cache P95: 4.7 ms• Thrash Warning Events: 3 spikes / 10 min window[Infographic: Line chart of P95 latency over iteration count]• Full metrics: jwt_cache_perf_results.csv (FileId:338aff1e-684a-4cae-9dc0-116ce746224f) and JwtCache_Metrics_DeepDive_Slides.pptx (FileId:efee9dae-7a87-4f34-8761-f5d13e7295d8)Slide 7: Action Items & Next Steps• Rufina Ganie (rufinag): File BUG-1805 and finalize regex strip tests by COB Jul 23• Emory Scherping (emorys): Enhance integration tests for overflow guards by Jul 25• Era Manteca (eramanteca): Update Security/AuditGuide.md by COB Jul 22• Markita Sitra (markitas): Prepare stand-up demo slides for Jul 23 10:00 PST• See detailed roadmap in JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)Slide 8: Access & Resources• Workshop Plan: JWT_Cache_Optimization_Workshop_Plan.docx (FileId:4de41684-a33d-45e2-8472-6320eb87f0cc)• Integration Test Plan: JWT_Cache_Integration_Test_Plan.docx (FileId:30ea04c1-3f08-4469-bc11-3b09aa8c5683)• Metrics Deep Dive Slides: JwtCache_Metrics_DeepDive_Slides.pptx (FileId:efee9dae-7a87-4f34-8761-f5d13e7295d8)• Security Roadmap: JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)• Performance CSV: jwt_cache_perf_results.csv (FileId:338aff1e-684a-4cae-9dc0-116ce746224f)Slide 9: Thank You & Q&A• Questions or feedback? Reach out to shakiag@liveoak.digital",
+      "TimeStamp": "2025-07-23T09:30:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-23T09:00:00Z",
+      "FileId": "4de41684-a33d-45e2-8472-6320eb87f0cc",
+      "FileLocation": "files\\JWT_Cache_Optimization_Workshop_Plan.docx",
+      "FileName": "JWT_Cache_Optimization_Workshop_Plan.docx",
+      "LastModifiedDate": "2025-07-23T09:00:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_rufinag",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_eramanteca",
+          "PermissionLevel": "edit"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "EngineeringDocuments/Plans",
+      "DestinationType": "site",
+      "Content": "JWT Cache Optimization Workshop Post-Session PlanTable of Contents1 Executive Summary...............................................22 Workshop Objectives and Scope...................................23 Detailed Review of Identified Issues............................33.1 Missing @NotNull Annotations.................................33.2 Exception Handling Refinement...............................43.3 YAML Pipeline Test Plan Corrections..........................54 Action Items, Ownership, and Timelines.........................65 Appendix: Resources and References..............................71 Executive SummaryShakia Gencarelli led an extended mentoring session on July 22, 2025 at 14:30 UTC in the #jwt-cache-optimizations channel. The session focused on reinforcing our Java style guide and integrating security best practices into the AuthService JWT cache implementation. Key artifacts reviewed included Jira tickets BUG-1785, BUG-1790, and BUG-1802. This plan captures the detailed issue analysis, corrective measures, and assigned action items with deadlines.2 Workshop Objectives and ScopeThe primary objectives of the workshop are to:- Enforce mandatory @NotNull annotations on all public method parameters within AuthService.- Standardize exception handling patterns in JwtDecoder.java and JwtCacheLRU.java per chapter 3.2 of the Engineering Style Guide.- Correct YAML test plan formatting in the pipeline stress-test document to ensure robust CI integration.Scope:The scope includes code review of existing pull requests (PR-213 and PR-216), bug submission and triage, test coverage validation, and documentation updates. The deliverables from this plan will be used to inform subsequent integration test cycles and downstream workshops.3 Detailed Review of Identified Issues3.1 Missing @NotNull AnnotationsDuring the session, participants discovered several public methods in AuthService lacked @NotNull annotations, exposing potential null pointer exceptions. Shakia demonstrated how to annotate method signatures and update JUnit 5 tests to assert fail-fast when null inputs are provided. Example:public String decodeToken(@NotNull String jwt) { ... }Test coverage was expanded in JwtDecoderTest.java to include null input guards.3.2 Exception Handling RefinementAnalysis of JwtDecoder.java revealed overly permissive exception handling blocks. The recommended pattern is to catch specific exceptions and rethrow as domain errors with clear messaging:try {  ...} catch (MalformedJwtException e) {  throw new JwtProcessingException(\"Invalid JWT format\", e);}This approach was codified in a custom exception strategy and documented under Style Guide chapter 3.2.3.3 YAML Pipeline Test Plan CorrectionsThe pipeline stress-test document contained improperly formatted multi-line YAML blocks, causing CI failures. Specific corrections include:- Using literal block scalars (|) for secret value definitions.- Escaping special characters in regex patterns.- Aligning indentation to two spaces per level.A corrected snippet was live-edited and validated against yaml.safe_load tests in test/webhook/validateSignature.spec.ts.4 Action Items, Ownership, and TimelinesAll attendees have committed to the following tasks:- Rufina Ganie (rufinag): Finalize the regex strip patch for yaml.safe_load errors, file BUG-1805, and create at least two unit tests for multiline secrets by end of day July 23, 2025.- Emory Scherping (emorys): Develop an integration test for the forced eviction path in JwtCacheLRU.java, verifying integer overflow guards and @NotNull enforcement. Aim for 95% Jenkins pass rate by July 25, 2025.- Era Manteca (eramanteca): Update EngineeringDocuments/Security/AuditGuide.md with the @SecureEndpoint checklist, RS256 enforcement YAML snippet, and new Jest test patterns by COB July 22, 2025.- Markita Sitra (markitas): Prepare a 5-minute demo of JwtCacheMetrics.java refactoring (thrash warning counters & eviction thresholds) for the July 23, 2025 10:00 PST stand-up. Share the recording link in #standup channel.5 Appendix: Resources and References- Jira tickets: BUG-1785, BUG-1790, BUG-1802, BUG-1805- Pull requests: PR-213 (Dynamic Cache Resizing), PR-216 (CVE-2025-3210 Hotfix)- Google Doc: Live issue tracker for follow-up tasks- Confluence: Bug report template with reproduction steps and severity ratings- Repositories: AuthService codebase on GitHub, test/webhook/validateSignature.spec.ts",
+      "TimeStamp": "2025-07-23T09:00:00Z"
+    },
+    {
+      "type": "File",
+      "CreatedDate": "2025-07-23T09:30:00Z",
+      "FileId": "ff2ad292-bf64-473d-a239-3c9d537b029c",
+      "FileLocation": "files\\JWT_Cache_Optimization_Workshop_Outcomes.pptx",
+      "FileName": "JWT_Cache_Optimization_Workshop_Outcomes.pptx",
+      "LastModifiedDate": "2025-07-23T09:30:00Z",
+      "Owner": "lod_shakiag",
+      "SharedWith": [
+        {
+          "Email": "lod_rufinag",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_emorys",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_eramanteca",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_markitas",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_wilfordt",
+          "PermissionLevel": "view"
+        },
+        {
+          "Email": "lod_saulq",
+          "PermissionLevel": "view"
+        }
+      ],
+      "FileDestination": "EngineeringDocuments/Slides",
+      "DestinationType": "site",
+      "Content": "Slide 1: Title• JWT Cache Optimization Workshop Outcomes• Presented by: Shakia Gencarelli, July 23, 2025Slide 2: Recap of Session• Date: July 22, 2025 at 14:30 UTC in #jwt-cache-optimizations channel• Participants: shakiag, rufinag, eramanteca, emorys, markitas• Objectives: enforce Java style guide, integrate security best practices, generate actionable bug reportsSlide 3: Key Metrics & Outcomes• Jira Tickets Reviewed: BUG-1785, BUG-1790, BUG-1802• New Ticket Filed: BUG-1805 for regex strip patch• Pull Requests Reviewed: PR-213, PR-216; 5 inline comments applied[Infographic: Bar chart comparing tickets triaged vs created vs resolved]Slide 4: Security Checklist Compliance• @NotNull annotations coverage: Pre-session 55% → Post-session 92%• @SecureEndpoint applied to 100% of public AuthService methods[Infographic: Gauge chart showing 92% annotation compliance]• Details in JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)Slide 5: Integration Test Pass Rates• Forced Eviction Test Pass Rate: 98.7% (target >95%)• Vault Readiness Flakiness: <1% after adding waitUntil probe• See JWT_Cache_Integration_Test_Plan.docx (FileId:30ea04c1-3f08-4469-bc11-3b09aa8c5683)Slide 6: Performance Benchmarks• Warm-cache P95 Latency: 1.4 ms; Cold-cache P95: 4.7 ms• Thrash Warning Events: 3 spikes / 10 min window[Infographic: Line chart of P95 latency over iteration count]• Full metrics: jwt_cache_perf_results.csv (FileId:338aff1e-684a-4cae-9dc0-116ce746224f) and JwtCache_Metrics_DeepDive_Slides.pptx (FileId:efee9dae-7a87-4f34-8761-f5d13e7295d8)Slide 7: Action Items & Next Steps• Rufina Ganie (rufinag): File BUG-1805 and finalize regex strip tests by COB Jul 23• Emory Scherping (emorys): Enhance integration tests for overflow guards by Jul 25• Era Manteca (eramanteca): Update Security/AuditGuide.md by COB Jul 22• Markita Sitra (markitas): Prepare stand-up demo slides for Jul 23 10:00 PST• See detailed roadmap in JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)Slide 8: Access & Resources• Workshop Plan: JWT_Cache_Optimization_Workshop_Plan.docx (FileId:4de41684-a33d-45e2-8472-6320eb87f0cc)• Integration Test Plan: JWT_Cache_Integration_Test_Plan.docx (FileId:30ea04c1-3f08-4469-bc11-3b09aa8c5683)• Metrics Deep Dive Slides: JwtCache_Metrics_DeepDive_Slides.pptx (FileId:efee9dae-7a87-4f34-8761-f5d13e7295d8)• Security Roadmap: JWT_Cache_Security_Implementation_Roadmap.docx (FileId:54f264f9-c98e-4a42-80d1-f7614d06a240)• Performance CSV: jwt_cache_perf_results.csv (FileId:338aff1e-684a-4cae-9dc0-116ce746224f)Slide 9: Thank You & Q&A• Questions or feedback? Reach out to shakiag@liveoak.digital",
+      "TimeStamp": "2025-07-23T09:30:00Z"
+    }
+  ]
+}
