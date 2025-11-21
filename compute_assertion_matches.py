@@ -16,7 +16,7 @@ def load_qwen_model():
     Returns a tuple of (None, model_name) for API-based usage.
     """
     print("Connecting to Ollama API...")
-    model_name = "qwen2.5:7b"  # Default model, can be changed via --model argument
+    model_name = "qwen3:30b"  # Default model, can be changed via --model argument
     
     # Test connection
     try:
@@ -214,8 +214,8 @@ def main():
     )
     parser.add_argument(
         '--model',
-        default='qwen2.5:7b',
-        help='Ollama model name (default: qwen2.5:7b)'
+        default='qwen3:30b',
+        help='Ollama model name (default: qwen3:30b)'
     )
     
     args = parser.parse_args()
@@ -226,7 +226,7 @@ def main():
     try:
         model, model_name = load_qwen_model()
         # Override with command line argument if provided
-        if args.model != 'qwen2.5:7b':
+        if args.model != 'qwen3:30b':
             model_name = args.model
             print(f"Using model: {model_name}")
     except Exception as e:

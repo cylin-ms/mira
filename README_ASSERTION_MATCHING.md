@@ -35,7 +35,7 @@ brew install ollama
 ollama serve
 
 # In another terminal, pull the model
-ollama pull qwen2.5:7b
+ollama pull qwen3:30b
 ```
 
 ### Step 2: Run Offline Matching
@@ -144,7 +144,7 @@ The visualizer uses fading colors to indicate match strength:
 Make sure Ollama is running: `ollama serve`
 
 ### "Model not found"
-Pull the model first: `ollama pull qwen2.5:7b`
+Pull the model first: `ollama pull qwen3:30b`
 
 ### Poor match quality
 - Try a different model: `--model llama3.2:latest`
@@ -152,7 +152,7 @@ Pull the model first: `ollama pull qwen2.5:7b`
 - Increase batch size if responses are very long
 
 ### Slow processing
-- Use a faster model: `ollama pull qwen2.5:3b`
+- Use a faster/smaller model: `ollama pull qwen2.5:7b` or `qwen2.5:3b`
 - Reduce batch size in the script (currently 25 sentences)
 
 ## Future Enhancements
