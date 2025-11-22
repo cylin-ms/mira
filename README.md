@@ -68,7 +68,12 @@ If you want to re-run the matching process using a local LLM:
 Once the application is running, you can navigate through the generated plans and verify the assertions.
 
 1. **Select a Plan**: On the left sidebar, you will see a list of generated workback plans (labeled by their utterance or ID). Click on one to view its details.
-2. **View Coverage**: The dashboard displays a summary of how many assertions were successfully matched against the generated response.
+
+2. **Review Context & Prompt**:
+    - **Prompt View**: Expand the "Prompt" section to see the exact instruction given to the model.
+    - **Meeting Context**: View the "Context Entities" tab to see the graph of users, files, and meetings provided as input.
+    - **Entity Details**: Click on any entity in the context view to see a detailed card (e.g., user contact info, file metadata).
+
 3. **Inspect Assertions**:
     - The main view shows the **Generated Response** on one side and the list of **Assertions** on the other.
     - **Click on an Assertion**: When you select a specific assertion card, the tool will automatically **highlight the corresponding text** in the generated response that supports that assertion.
@@ -85,6 +90,21 @@ Once the application is running, you can navigate through the generated plans an
 
 ![Assertion Details](docs/screenshots/assertion_details.png)
 *Detailed view of a specific plan, highlighting the evidence in the text that matches the selected assertion.*
+
+### Prompt View
+
+![Prompt View](docs/screenshots/prompt_view.png)
+*View of the prompt used to generate the workback plan.*
+
+### Meeting Context
+
+![Meeting Context](docs/screenshots/meeting_context_view.png)
+*Visualization of the meeting context entities (users, files, events).*
+
+### Entity Card
+
+![Entity Card](docs/screenshots/entity_card_view.png)
+*Detailed card view for a specific entity (e.g., a User).*
 
 ## Project Structure
 
