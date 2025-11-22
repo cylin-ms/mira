@@ -4,13 +4,15 @@ This system uses a two-phase approach to match assertion evidence in generated r
 
 ## Architecture
 
-### Phase 1: Offline Pre-computation (Using gpt-oss:20b)
+### Phase 1: Offline Pre-computation (Using Large LLM)
+
 - **Script**: `compute_assertion_matches.py`
 - **Model**: gpt-oss:20b (or similar)
 - **Purpose**: Use a more powerful LLM to analyze full assertions and find supporting evidence in responses
 - **Output**: Enhanced JSONL file with `matched_segments` added to each assertion
 
 ### Phase 2: Visualization (Streamlit)
+
 - **Script**: `visualize_output.py`  
 - **Purpose**: Display pre-computed matches with color-coded highlighting
 - **Approach**: No runtime LLM inference; simply reads and displays stored matches
@@ -44,8 +46,8 @@ ollama pull gpt-oss:20b
 # Install Python dependencies
 pip install requests
 
-# Run the matching script (connects to Ollama on 192.168.2.163:11434)
-python compute_assertion_matches.py --input docs/output_v2.jsonl --output docs/output_v2_with_matches.jsonl
+# Run the matching script (connects to Ollama on configured host)
+python compute_assertion_matches.py --input docs/output_v2.jsonl --output docs/output_v2_with_matches.jsonl --model gpt-oss:20b
 
 # Optional: Use a different model
 python compute_assertion_matches.py --model llama3.2:latest
