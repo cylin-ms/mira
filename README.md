@@ -99,12 +99,12 @@ Once the application is running, you can navigate through the generated plans an
 ### Meeting Context
 
 ![Meeting Context](docs/screenshots/meeting_context_view.png)
-*Visualization of the meeting context entities (users, files, events).*
+*Visualization of the meeting context entities (User and Entities: File, Chat, Email, etc.).*
 
 ### Entity Card
 
 ![Entity Card](docs/screenshots/entity_card_view.png)
-*Detailed card view for a specific entity (e.g., a User).*
+*Detailed card view for a specific entity (e.g., a File).*
 
 ## Project Structure
 
