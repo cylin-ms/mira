@@ -4,6 +4,8 @@ This project provides tools for generating assertions from meeting contexts and 
 
 For details on how the dataset (meeting contexts, assertions, and plans) was created, please refer to [DATA_GENERATION.md](docs/DATA_GENERATION.md).
 
+Additionally, the methodology for deriving assertions for workback plans is documented in [deriving_assertions_workback_plan.md](docs/deriving_assertions_workback_plan.md) by Weiwei Cui. This document outlines the key attributes of a good workback plan (e.g., reverse schedule, clear owners, dependencies) and the two-stage approach used to generate high-quality assertions from meeting context.
+
 ## Overview
 
 The system consists of two main components:
