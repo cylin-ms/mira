@@ -2,6 +2,8 @@
 
 This project provides tools for generating assertions from meeting contexts and verifying them against generated workback plans. It includes an offline matching system using LLMs to validate assertions and a visualization tool to inspect the results.
 
+For details on how the dataset (meeting contexts, assertions, and plans) was created, please refer to [DATA_GENERATION.md](docs/DATA_GENERATION.md).
+
 ## Overview
 
 The system consists of two main components:
