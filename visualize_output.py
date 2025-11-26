@@ -15,7 +15,7 @@ st.set_page_config(
 # Paths to the files
 # Updated to use new format (11_25_output.jsonl) which uses 'justification' instead of 'reasoning'
 OUTPUT_FILE_PATH = os.path.join("docs", "11_25_output.jsonl")  # New format with justification/sourceID
-INPUT_FILE_PATH = os.path.join("docs", "LOD_1125.jsonl")  # Updated to new context file from Weiwei
+INPUT_FILE_PATH = os.path.join("docs", "LOD_1121.WithUserUrl.jsonl")  # New context file with user URLs for Test Tenant
 ANNOTATION_SAVE_PATH = os.path.join("docs", "annotations_temp.json")
 ANNOTATION_EXPORT_PATH = os.path.join("docs", "annotated_output.jsonl")
 
@@ -30,6 +30,10 @@ def init_annotation_state():
         st.session_state.last_save_time = time.time()
     if "annotation_modified" not in st.session_state:
         st.session_state.annotation_modified = False
+    if "judge_name" not in st.session_state:
+        st.session_state.judge_name = os.environ.get('USERNAME', os.environ.get('USER', ''))
+    if "expanded_assertions" not in st.session_state:
+        st.session_state.expanded_assertions = set()  # Track which assertion expanders are open
     
     # Try to load existing annotations from temp file
     if os.path.exists(ANNOTATION_SAVE_PATH):
@@ -40,6 +44,8 @@ def init_annotation_state():
                     st.session_state.annotations = saved["annotations"]
                 if "new_assertions" in saved:
                     st.session_state.new_assertions = saved["new_assertions"]
+                if "judge_name" in saved:
+                    st.session_state.judge_name = saved["judge_name"]
         except:
             pass
 
@@ -60,6 +66,7 @@ def save_annotations():
     save_data = {
         "annotations": st.session_state.annotations,
         "new_assertions": st.session_state.new_assertions,
+        "judge_name": st.session_state.judge_name,
         "last_saved": datetime.now().isoformat()
     }
     with open(ANNOTATION_SAVE_PATH, 'w', encoding='utf-8') as f:
@@ -73,14 +80,14 @@ def get_annotation(utterance, assertion_idx):
     return {}
 
 
-def set_annotation(utterance, assertion_idx, is_good=None, revision=None, original=None, note=None):
+def set_annotation(utterance, assertion_idx, is_good=None, revision=None, original=None, note=None, is_confident=None, is_judged=None):
     """Set annotation for a specific assertion."""
     if utterance not in st.session_state.annotations:
         st.session_state.annotations[utterance] = {}
     
     key = str(assertion_idx)
     if key not in st.session_state.annotations[utterance]:
-        st.session_state.annotations[utterance][key] = {"is_good": True, "revision": "", "original": "", "note": ""}
+        st.session_state.annotations[utterance][key] = {"is_good": True, "revision": "", "original": "", "note": "", "is_confident": True, "is_judged": False}
     
     if is_good is not None:
         st.session_state.annotations[utterance][key]["is_good"] = is_good
@@ -90,6 +97,10 @@ def set_annotation(utterance, assertion_idx, is_good=None, revision=None, origin
         st.session_state.annotations[utterance][key]["original"] = original
     if note is not None:
         st.session_state.annotations[utterance][key]["note"] = note
+    if is_confident is not None:
+        st.session_state.annotations[utterance][key]["is_confident"] = is_confident
+    if is_judged is not None:
+        st.session_state.annotations[utterance][key]["is_judged"] = is_judged
     
     st.session_state.annotation_modified = True
 
@@ -125,6 +136,8 @@ def export_annotated_data(output_data):
                 "assertion_index": i,
                 "original_text": assertion.get('text', ''),
                 "is_good": ann.get('is_good', True),  # Default is good
+                "is_confident": ann.get('is_confident', True),  # Default is confident
+                "is_judged": ann.get('is_judged', False),  # Default is not judged
             }
             
             # Add revision if exists
@@ -145,18 +158,29 @@ def export_annotated_data(output_data):
                 "text": new_assert.get('text', ''),
                 "level": new_assert.get('level', 'expected'),
                 "justification": new_assert.get('justification', {}),
-                "is_good": True
+                "is_good": True,
+                "is_confident": True,
+                "is_judged": True  # New assertions are considered judged
             })
         
         new_item['annotations'] = annotations_for_item
         
+        # Add judge information
+        new_item['judge'] = st.session_state.judge_name
+        
         # Calculate statistics
         good_count = sum(1 for a in annotations_for_item if a.get('is_good', True))
+        confident_count = sum(1 for a in annotations_for_item if a.get('is_confident', True))
+        judged_count = sum(1 for a in annotations_for_item if a.get('is_judged', False))
         total_count = len(annotations_for_item)
         new_item['annotation_stats'] = {
             "total": total_count,
             "good": good_count,
             "not_good": total_count - good_count,
+            "confident": confident_count,
+            "not_confident": total_count - confident_count,
+            "judged": judged_count,
+            "not_judged": total_count - judged_count,
             "revised": sum(1 for a in annotations_for_item if a.get('revised_text')),
             "new_added": len(new_asserts)
         }
@@ -425,8 +449,119 @@ def get_meeting_subject(item):
 
 def main():
     st.title("📋 Output Data Visualizer")
-    st.markdown("### Author: Kening Ren")
+    
+    # Judge name input in header
+    col_title, col_judge = st.columns([3, 1])
+    with col_judge:
+        judge_name = st.text_input(
+            "👤 Judge Name",
+            value=st.session_state.judge_name,
+            key="judge_name_input",
+            placeholder="Enter your name"
+        )
+        if judge_name != st.session_state.judge_name:
+            st.session_state.judge_name = judge_name
+            save_annotations()
+    
+    st.markdown(f"### 👤 Judge: **{st.session_state.judge_name or '(Please enter your name)'}**")
     st.markdown(f"Visualizing contents of: `{OUTPUT_FILE_PATH}` matched with `{INPUT_FILE_PATH}`")
+
+    # Load Data early so we can show progress
+    output_data = load_data(OUTPUT_FILE_PATH)
+    input_data = load_data(INPUT_FILE_PATH)
+
+    if not input_data:
+        st.error(f"Could not find or load data from {INPUT_FILE_PATH}. Please ensure the file exists.")
+        return
+
+    # === SYNC CHECKBOX STATES TO ANNOTATIONS ===
+    # This ensures progress calculation reflects current checkbox states
+    # (Streamlit checkboxes update session_state immediately, but our annotations
+    # need to be synced before we calculate progress)
+    for idx, item in enumerate(output_data):
+        utterance = item.get('utterance', '')
+        assertions = item.get('assertions', [])
+        for i in range(len(assertions)):
+            checkbox_key = f"judged_{idx}_{i}"
+            if checkbox_key in st.session_state:
+                # Get current annotation value
+                ann = get_annotation(utterance, i)
+                stored_judged = ann.get('is_judged', False)
+                checkbox_judged = st.session_state[checkbox_key]
+                # Sync if different
+                if checkbox_judged != stored_judged:
+                    set_annotation(utterance, i, is_judged=checkbox_judged)
+
+    # === PROGRESS REPORT ===
+    # Calculate how many meetings have been fully judged (all assertions have is_judged=True)
+    total_meetings = len(output_data)
+    fully_judged_meetings = 0
+    partially_judged_meetings = 0
+    total_assertions_judged = 0
+    total_assertions = 0
+    confident_judgments = 0
+    not_confident_judgments = 0
+    
+    # Build a map of meeting judgment status for sidebar use
+    meeting_judgment_status = {}  # utterance -> 'complete' | 'partial' | 'none'
+    
+    for item in output_data:
+        utterance = item.get('utterance', '')
+        assertions = item.get('assertions', [])
+        num_assertions = len(assertions)
+        total_assertions += num_assertions
+        
+        # Count judged assertions for this meeting
+        judged_count = 0
+        if utterance in st.session_state.annotations:
+            meeting_annotations = st.session_state.annotations[utterance]
+            for ann in meeting_annotations.values():
+                if ann.get('is_judged', False):
+                    judged_count += 1
+                    total_assertions_judged += 1
+                    # Count confidence only for judged assertions
+                    if ann.get('is_confident', True):
+                        confident_judgments += 1
+                    else:
+                        not_confident_judgments += 1
+        
+        # Determine meeting status
+        if num_assertions > 0 and judged_count == num_assertions:
+            meeting_judgment_status[utterance] = 'complete'
+            fully_judged_meetings += 1
+        elif judged_count > 0:
+            meeting_judgment_status[utterance] = 'partial'
+            partially_judged_meetings += 1
+        else:
+            meeting_judgment_status[utterance] = 'none'
+    
+    # Display progress report
+    progress_pct = (fully_judged_meetings / total_meetings * 100) if total_meetings > 0 else 0
+    
+    st.markdown("### 📊 Annotation Progress Report")
+    
+    # Progress bar
+    st.progress(fully_judged_meetings / total_meetings if total_meetings > 0 else 0)
+    
+    # Legend for status indicators
+    st.caption("📗 = Fully judged | 📙 = Partially judged | 📕 = Not started")
+    
+    # Metrics in columns
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Meetings Completed", f"{fully_judged_meetings} / {total_meetings}", f"{progress_pct:.1f}%")
+    with col2:
+        st.metric("Assertions Judged", f"{total_assertions_judged}", f"of {total_assertions} total")
+    with col3:
+        st.metric("Confident", f"{confident_judgments}", "✓ sure")
+    with col4:
+        st.metric("Uncertain", f"{not_confident_judgments}", "? unsure")
+    
+    # Show partial progress
+    if partially_judged_meetings > 0:
+        st.info(f"📙 {partially_judged_meetings} meeting(s) partially judged")
+    
+    st.markdown("---")
 
     # Display Prompt File
     PROMPT_FILE_PATH = os.path.join("docs", "step1_v2.md")
@@ -435,36 +570,68 @@ def main():
             with open(PROMPT_FILE_PATH, "r", encoding="utf-8") as f:
                 st.markdown(f"```markdown\n{f.read()}\n```")
 
-    # Load Data
-    output_data = load_data(OUTPUT_FILE_PATH)
-    input_data = load_data(INPUT_FILE_PATH)
-
-    if not input_data:
-        st.error(f"Could not find or load data from {INPUT_FILE_PATH}. Please ensure the file exists.")
-        return
-
     # Create a map for output data: utterance -> output_item
     output_map = {item.get('utterance'): item for item in output_data}
 
     # Sidebar Navigation
     st.sidebar.header("Select an Entry (from Input Data)")
     
+    # Filter by annotation status
+    filter_options = ["📋 All Meetings", "📗 Fully Judged", "📙 Partially Judged", "📕 Not Started"]
+    selected_filter = st.sidebar.selectbox(
+        "Filter by status:",
+        filter_options,
+        index=0,
+        help="Filter meetings by their annotation status"
+    )
+    
     # Create a list of options for the sidebar based on INPUT data
     # Input data structure: {"UTTERANCE": {"text": "..."}}
     options = []
+    filtered_indices = []  # Track original indices for filtered items
+    
     for i, item in enumerate(input_data):
         subject = get_meeting_subject(item)
         utterance_text = item.get('UTTERANCE', {}).get('text', 'No Utterance')
-        has_output = "✅" if utterance_text in output_map else "❌"
-        options.append(f"{i+1}. {has_output} {subject}")
+        
+        # Determine status indicator
+        if utterance_text not in output_map:
+            status = "⬜"  # No output data
+            judgment_status = 'none'
+        else:
+            judgment_status = meeting_judgment_status.get(utterance_text, 'none')
+            if judgment_status == 'complete':
+                status = "📗"  # Fully judged (green book)
+            elif judgment_status == 'partial':
+                status = "📙"  # Partially judged (orange book)
+            else:
+                status = "📕"  # Not started (red book)
+        
+        # Apply filter
+        include_item = False
+        if selected_filter == "📋 All Meetings":
+            include_item = True
+        elif selected_filter == "📗 Fully Judged" and judgment_status == 'complete':
+            include_item = True
+        elif selected_filter == "📙 Partially Judged" and judgment_status == 'partial':
+            include_item = True
+        elif selected_filter == "📕 Not Started" and judgment_status == 'none':
+            include_item = True
+        
+        if include_item:
+            options.append(f"{i+1}. {status} {subject}")
+            filtered_indices.append(i)
     
-    # Use radio buttons for selection if list is small, otherwise selectbox is standard.
-    # Streamlit's selectbox shows a dropdown. To show "20 items", we rely on the browser's rendering
-    # of the select element, but Streamlit's custom widget handles this.
-    # However, users often want a list they can see more of at once.
-    # A radio button list inside a scrollable container is a good alternative for "seeing more items".
+    # Show count of filtered results
+    st.sidebar.caption(f"Showing {len(options)} of {len(input_data)} meetings")
     
-    # Let's use a radio button list for better visibility of multiple items at once
+    # Handle case where filter returns no results
+    if not options:
+        st.sidebar.warning("No meetings match the selected filter.")
+        st.info("No meetings match the selected filter. Please change the filter to see meetings.")
+        return
+    
+    # Use radio buttons for selection
     selected_option = st.sidebar.radio(
         "Choose a meeting context:",
         options,
@@ -490,6 +657,60 @@ def main():
                 for item in exported:
                     f.write(json.dumps(item, ensure_ascii=False) + '\n')
             st.sidebar.success(f"✅ Exported!")
+    
+    # Reset All with confirmation
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("⚠️ Reset Options")
+    
+    reset_col1, reset_col2 = st.sidebar.columns(2)
+    with reset_col1:
+        # Reset current meeting only
+        if st.sidebar.button("🔄 Reset Current", help="Reset annotations for current meeting only", key="reset_current"):
+            st.session_state.show_reset_current_confirm = True
+    with reset_col2:
+        # Reset all annotations
+        if st.sidebar.button("🗑️ Reset All", help="Reset ALL annotations (requires confirmation)", key="reset_all"):
+            st.session_state.show_reset_all_confirm = True
+    
+    # Confirmation dialogs
+    if st.session_state.get('show_reset_current_confirm', False):
+        st.sidebar.warning("⚠️ Reset annotations for current meeting?")
+        conf_col1, conf_col2 = st.sidebar.columns(2)
+        with conf_col1:
+            if st.sidebar.button("✅ Yes, Reset", key="confirm_reset_current"):
+                # Get current utterance and reset its annotations
+                current_utterance = input_data[selected_index].get('UTTERANCE', {}).get('text', '')
+                if current_utterance in st.session_state.annotations:
+                    del st.session_state.annotations[current_utterance]
+                if current_utterance in st.session_state.new_assertions:
+                    del st.session_state.new_assertions[current_utterance]
+                # Clear expanded state for this meeting
+                keys_to_remove = [k for k in st.session_state.expanded_assertions if k.startswith(f"{selected_index}_")]
+                for k in keys_to_remove:
+                    st.session_state.expanded_assertions.discard(k)
+                save_annotations()
+                st.session_state.show_reset_current_confirm = False
+                st.rerun()
+        with conf_col2:
+            if st.sidebar.button("❌ Cancel", key="cancel_reset_current"):
+                st.session_state.show_reset_current_confirm = False
+                st.rerun()
+    
+    if st.session_state.get('show_reset_all_confirm', False):
+        st.sidebar.error("⚠️ This will DELETE ALL annotations!")
+        conf_col1, conf_col2 = st.sidebar.columns(2)
+        with conf_col1:
+            if st.sidebar.button("✅ Yes, Reset ALL", key="confirm_reset_all", type="primary"):
+                st.session_state.annotations = {}
+                st.session_state.new_assertions = {}
+                st.session_state.expanded_assertions = set()
+                save_annotations()
+                st.session_state.show_reset_all_confirm = False
+                st.rerun()
+        with conf_col2:
+            if st.sidebar.button("❌ Cancel", key="cancel_reset_all"):
+                st.session_state.show_reset_all_confirm = False
+                st.rerun()
     
     # Show annotation summary in sidebar
     total_annotated = len(st.session_state.annotations)
@@ -710,6 +931,22 @@ def main():
             
             st.markdown(f"**Stats:** {good_count}/{len(assertions)} marked good | {new_count} new added")
             
+            # Expand/Collapse all buttons
+            exp_col1, exp_col2, exp_col3 = st.columns([1, 1, 2])
+            with exp_col1:
+                if st.button("📂 Expand All", key=f"expand_all_{selected_index}", help="Expand all assertion cards"):
+                    for i in range(len(assertions)):
+                        st.session_state.expanded_assertions.add(f"{selected_index}_{i}")
+                    st.rerun()
+            with exp_col2:
+                if st.button("📁 Collapse All", key=f"collapse_all_{selected_index}", help="Collapse all assertion cards"):
+                    for i in range(len(assertions)):
+                        st.session_state.expanded_assertions.discard(f"{selected_index}_{i}")
+                    st.rerun()
+            with exp_col3:
+                expanded_count = sum(1 for i in range(len(assertions)) if f"{selected_index}_{i}" in st.session_state.expanded_assertions)
+                st.caption(f"📊 {expanded_count}/{len(assertions)} expanded")
+            
             if not assertions:
                 st.warning("No assertions found for this entry.")
             else:
@@ -745,13 +982,23 @@ def main():
                     is_good = ann.get('is_good', True)
                     revision = ann.get('revision', '')
                     note = ann.get('note', '')
+                    is_judged = ann.get('is_judged', False)
                     
                     # Revision/note indicator in header
                     has_feedback = revision or note
                     feedback_icon = "📝" if has_feedback else ""
                     
+                    # Judgment status indicator
+                    judged_icon = "✅" if is_judged else "⬜"
+                    
+                    # Track expander state with unique key
+                    expander_key = f"{selected_index}_{i}"
+                    is_expanded = expander_key in st.session_state.expanded_assertions
+                    
                     # Card-like expander for each assertion
-                    with st.expander(f"{evidence_icon} {feedback_icon} :{color}[**{level.upper()}**] - {assertion.get('text', '')[:50]}..."):
+                    with st.expander(f"{judged_icon} {evidence_icon} {feedback_icon} :{color}[**{level.upper()}**] - {assertion.get('text', '')[:50]}...", expanded=is_expanded):
+                        # Track that this expander is now open
+                        st.session_state.expanded_assertions.add(expander_key)
                         
                         # === ANNOTATION CONTROLS ===
                         st.markdown("##### 📋 Annotation")
@@ -768,15 +1015,56 @@ def main():
                         
                         st.caption("Check this assertion if it is correct; uncheck it if it is incorrect. Optionally, provide an explanation in the note below about why the assertion is incorrect.")
                         
-                        # Checkbox for correct/incorrect - green when checked (correct)
-                        # Use selected_index in key to prevent collisions between different entries
-                        is_good_new = st.checkbox(
-                            "This assertion is correct", 
-                            value=is_good, 
-                            key=f"good_{selected_index}_{i}"
-                        )
-                        if is_good_new != is_good:
-                            set_annotation(utterance_text, i, is_good=is_good_new, original=assertion.get('text', ''))
+                        # Get current confidence value
+                        is_confident = ann.get('is_confident', True)
+                        
+                        # Three columns: correctness, confidence, and mark as judged button
+                        col_correct, col_confident, col_judged = st.columns([1, 1, 1])
+                        
+                        with col_correct:
+                            # Checkbox for correct/incorrect - green when checked (correct)
+                            # Use selected_index in key to prevent collisions between different entries
+                            is_good_new = st.checkbox(
+                                "✅ This assertion is correct", 
+                                value=is_good, 
+                                key=f"good_{selected_index}_{i}"
+                            )
+                            if is_good_new != is_good:
+                                # Auto-mark as judged when user makes a judgment
+                                set_annotation(utterance_text, i, is_good=is_good_new, is_judged=True, original=assertion.get('text', ''))
+                                save_annotations()
+                        
+                        with col_confident:
+                            # Checkbox for confidence in judgment
+                            is_confident_new = st.checkbox(
+                                "🎯 Confident in judgment",
+                                value=is_confident,
+                                key=f"confident_{selected_index}_{i}"
+                            )
+                            if is_confident_new != is_confident:
+                                # Auto-mark as judged when user indicates confidence level
+                                set_annotation(utterance_text, i, is_confident=is_confident_new, is_judged=True)
+                                save_annotations()
+                        
+                        with col_judged:
+                            # Checkbox to mark assertion as judged (local update, no page jump)
+                            is_judged_new = st.checkbox(
+                                "📋 Judged",
+                                value=is_judged,
+                                key=f"judged_{selected_index}_{i}",
+                                help="Check this when you've finished reviewing this assertion"
+                            )
+                            if is_judged_new != is_judged:
+                                set_annotation(utterance_text, i, is_judged=is_judged_new)
+                                save_annotations()
+                        
+                        # Local status indicator that updates with checkbox state
+                        # Use the checkbox value directly for immediate feedback
+                        current_judged = st.session_state.get(f"judged_{selected_index}_{i}", is_judged)
+                        if current_judged:
+                            st.success("✅ **Judged** - This assertion has been reviewed")
+                        else:
+                            st.info("⬜ **Not yet judged** - Check the 'Judged' box when done reviewing")
                         
                         # Note field - always visible for comments
                         st.markdown("**Note:** (Optional comments or explanation)")
@@ -803,6 +1091,11 @@ def main():
                         )
                         if new_revision != revision:
                             set_annotation(utterance_text, i, revision=new_revision, original=assertion.get('text', ''))
+                        
+                        # Collapse button to close this expander when done
+                        if st.button("🔼 Done - Collapse", key=f"collapse_{selected_index}_{i}", help="Close this assertion card"):
+                            st.session_state.expanded_assertions.discard(expander_key)
+                            st.rerun()
                         
                         st.markdown("---")
                         
