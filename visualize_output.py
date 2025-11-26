@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Page Config
 st.set_page_config(
-    page_title="Output Visualizer",
+    page_title="Mira - Assertion Annotation",
     page_icon="📋",
     layout="wide"
 )
@@ -26,6 +26,8 @@ def init_annotation_state():
         st.session_state.annotations = {}  # {utterance: {assertion_idx: {is_good: bool, revision: str, original: str}}}
     if "new_assertions" not in st.session_state:
         st.session_state.new_assertions = {}  # {utterance: [{text, level, justification}]}
+    if "response_annotations" not in st.session_state:
+        st.session_state.response_annotations = {}  # {utterance: {section_idx: note, "overall": note}}
     if "last_save_time" not in st.session_state:
         st.session_state.last_save_time = time.time()
     if "annotation_modified" not in st.session_state:
@@ -44,6 +46,8 @@ def init_annotation_state():
                     st.session_state.annotations = saved["annotations"]
                 if "new_assertions" in saved:
                     st.session_state.new_assertions = saved["new_assertions"]
+                if "response_annotations" in saved:
+                    st.session_state.response_annotations = saved["response_annotations"]
                 if "judge_name" in saved:
                     st.session_state.judge_name = saved["judge_name"]
         except:
@@ -66,6 +70,7 @@ def save_annotations():
     save_data = {
         "annotations": st.session_state.annotations,
         "new_assertions": st.session_state.new_assertions,
+        "response_annotations": st.session_state.response_annotations,
         "judge_name": st.session_state.judge_name,
         "last_saved": datetime.now().isoformat()
     }
@@ -103,6 +108,85 @@ def set_annotation(utterance, assertion_idx, is_good=None, revision=None, origin
         st.session_state.annotations[utterance][key]["is_judged"] = is_judged
     
     st.session_state.annotation_modified = True
+
+
+def get_response_annotation(utterance, section_key):
+    """Get annotation for a specific response section or overall."""
+    if utterance in st.session_state.response_annotations:
+        return st.session_state.response_annotations[utterance].get(section_key, "")
+    return ""
+
+
+def set_response_annotation(utterance, section_key, note):
+    """Set annotation for a specific response section or overall."""
+    if utterance not in st.session_state.response_annotations:
+        st.session_state.response_annotations[utterance] = {}
+    st.session_state.response_annotations[utterance][section_key] = note
+    st.session_state.annotation_modified = True
+
+
+def parse_response_sections(response_text):
+    """Parse the response text into sections based on markdown headers or paragraphs."""
+    if not response_text:
+        return []
+    
+    sections = []
+    
+    # Try to split by markdown headers (##, ###, etc.) or numbered sections
+    # Pattern: lines starting with #, or numbered items like "1.", "2.", etc.
+    lines = response_text.split('\n')
+    current_section = {"title": "Introduction", "content": [], "start_line": 0}
+    
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        
+        # Check for markdown headers
+        if stripped.startswith('#'):
+            # Save previous section if it has content
+            if current_section["content"]:
+                current_section["content"] = '\n'.join(current_section["content"])
+                sections.append(current_section)
+            
+            # Extract title (remove # symbols)
+            title = stripped.lstrip('#').strip()
+            current_section = {"title": title, "content": [], "start_line": i}
+        
+        # Check for numbered sections like "1." "2." etc at the start
+        elif stripped and len(stripped) > 2 and stripped[0].isdigit() and stripped[1] == '.':
+            # Save previous section if it has content
+            if current_section["content"]:
+                current_section["content"] = '\n'.join(current_section["content"])
+                sections.append(current_section)
+            
+            # Use the numbered line as title
+            title = stripped[:50] + "..." if len(stripped) > 50 else stripped
+            current_section = {"title": title, "content": [stripped], "start_line": i}
+        
+        # Check for bold section headers like **Section Name**
+        elif stripped.startswith('**') and '**' in stripped[2:]:
+            # Save previous section if it has content
+            if current_section["content"]:
+                current_section["content"] = '\n'.join(current_section["content"])
+                sections.append(current_section)
+            
+            # Extract title from bold text
+            end_idx = stripped.index('**', 2)
+            title = stripped[2:end_idx]
+            current_section = {"title": title, "content": [stripped], "start_line": i}
+        
+        else:
+            current_section["content"].append(line)
+    
+    # Don't forget the last section
+    if current_section["content"]:
+        current_section["content"] = '\n'.join(current_section["content"])
+        sections.append(current_section)
+    
+    # If no sections were found, treat the whole response as one section
+    if not sections:
+        sections = [{"title": "Response", "content": response_text, "start_line": 0}]
+    
+    return sections
 
 
 def add_new_assertion(utterance, assertion_data):
@@ -164,6 +248,10 @@ def export_annotated_data(output_data):
             })
         
         new_item['annotations'] = annotations_for_item
+        
+        # Add response annotations
+        if utterance in st.session_state.response_annotations:
+            new_item['response_annotations'] = st.session_state.response_annotations[utterance]
         
         # Add judge information
         new_item['judge'] = st.session_state.judge_name
@@ -448,25 +536,60 @@ def get_meeting_subject(item):
     return utterance[:50] + "..." if len(utterance) > 50 else utterance
 
 def main():
-    st.title("📋 Output Data Visualizer")
+    # === PAGE CONFIG & CUSTOM CSS ===
+    # Add custom CSS for sticky command center
+    st.markdown("""
+    <style>
+    /* Sticky command center */
+    .command-center {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 12px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .command-center-title {
+        color: white;
+        font-size: 1.8em;
+        font-weight: bold;
+        margin: 0;
+    }
+    .command-center-subtitle {
+        color: rgba(255,255,255,0.8);
+        font-size: 0.9em;
+    }
+    /* Progress bar styling */
+    .stProgress > div > div > div > div {
+        background: linear-gradient(90deg, #28a745, #20c997);
+    }
+    /* Metrics styling */
+    [data-testid="stMetricValue"] {
+        font-size: 1.2rem;
+    }
+    /* Button styling in command center */
+    .stButton > button {
+        border-radius: 5px;
+        font-weight: 500;
+    }
+    /* Info cards */
+    .info-card {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 10px 15px;
+        border-left: 4px solid #007bff;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
-    # Judge name input in header
-    col_title, col_judge = st.columns([3, 1])
-    with col_judge:
-        judge_name = st.text_input(
-            "👤 Judge Name",
-            value=st.session_state.judge_name,
-            key="judge_name_input",
-            placeholder="Enter your name"
-        )
-        if judge_name != st.session_state.judge_name:
-            st.session_state.judge_name = judge_name
-            save_annotations()
+    st.title("✨ Mira - Assertion Annotation Tool")
     
-    st.markdown(f"### 👤 Judge: **{st.session_state.judge_name or '(Please enter your name)'}**")
-    st.markdown(f"Visualizing contents of: `{OUTPUT_FILE_PATH}` matched with `{INPUT_FILE_PATH}`")
+    # Compact data source info
+    st.caption(f"📂 Data: `{os.path.basename(OUTPUT_FILE_PATH)}` | Context: `{os.path.basename(INPUT_FILE_PATH)}`")
 
-    # Load Data early so we can show progress
+    # Load Data early so we can show progress and populate command center
     output_data = load_data(OUTPUT_FILE_PATH)
     input_data = load_data(INPUT_FILE_PATH)
 
@@ -492,8 +615,7 @@ def main():
                 if checkbox_judged != stored_judged:
                     set_annotation(utterance, i, is_judged=checkbox_judged)
 
-    # === PROGRESS REPORT ===
-    # Calculate how many meetings have been fully judged (all assertions have is_judged=True)
+    # === CALCULATE PROGRESS STATISTICS ===
     total_meetings = len(output_data)
     fully_judged_meetings = 0
     partially_judged_meetings = 0
@@ -535,31 +657,91 @@ def main():
         else:
             meeting_judgment_status[utterance] = 'none'
     
-    # Display progress report
     progress_pct = (fully_judged_meetings / total_meetings * 100) if total_meetings > 0 else 0
+    assertions_pct = (total_assertions_judged / total_assertions * 100) if total_assertions > 0 else 0
+    last_save = datetime.fromtimestamp(st.session_state.last_save_time).strftime("%H:%M:%S")
+
+    # ═══════════════════════════════════════════════════════════════════════════════
+    # 🎛️ COMMAND CENTER - All key controls in one place at the top
+    # ═══════════════════════════════════════════════════════════════════════════════
     
-    st.markdown("### 📊 Annotation Progress Report")
+    # Row 1: Judge name + Filter + Actions
+    cmd_col1, cmd_col2, cmd_col3, cmd_col4 = st.columns([2, 2, 2, 2])
     
-    # Progress bar
-    st.progress(fully_judged_meetings / total_meetings if total_meetings > 0 else 0)
+    with cmd_col1:
+        st.markdown("##### 👤 Judge")
+        judge_name = st.text_input(
+            "Judge name",
+            value=st.session_state.judge_name,
+            key="judge_name_input",
+            placeholder="Enter your name",
+            label_visibility="collapsed"
+        )
+        if judge_name != st.session_state.judge_name:
+            st.session_state.judge_name = judge_name
+            save_annotations()
     
-    # Legend for status indicators
-    st.caption("📗 = Fully judged | 📙 = Partially judged | 📕 = Not started")
+    with cmd_col2:
+        # Filter by annotation status
+        st.markdown("##### 🔍 Filter")
+        filter_options = ["📋 All Meetings", "📗 Fully Judged", "📙 Partially Judged", "📕 Not Started"]
+        selected_filter = st.selectbox(
+            "Filter",
+            filter_options,
+            index=0,
+            help="Filter meetings by their annotation status",
+            label_visibility="collapsed"
+        )
     
-    # Metrics in columns
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("Meetings Completed", f"{fully_judged_meetings} / {total_meetings}", f"{progress_pct:.1f}%")
-    with col2:
-        st.metric("Assertions Judged", f"{total_assertions_judged}", f"of {total_assertions} total")
-    with col3:
-        st.metric("Confident", f"{confident_judgments}", "✓ sure")
-    with col4:
-        st.metric("Uncertain", f"{not_confident_judgments}", "? unsure")
+    with cmd_col3:
+        st.markdown("##### 💾 Actions")
+        btn_col1, btn_col2 = st.columns(2)
+        with btn_col1:
+            if st.button("💾 Save", help="Save all annotations", use_container_width=True):
+                save_annotations()
+                st.toast("✅ Annotations saved!")
+        with btn_col2:
+            if st.button("📤 Export", help="Export annotated data", use_container_width=True):
+                exported = export_annotated_data(output_data)
+                with open(ANNOTATION_EXPORT_PATH, 'w', encoding='utf-8') as f:
+                    for item in exported:
+                        f.write(json.dumps(item, ensure_ascii=False) + '\n')
+                st.toast(f"✅ Exported to {ANNOTATION_EXPORT_PATH}")
     
-    # Show partial progress
-    if partially_judged_meetings > 0:
-        st.info(f"📙 {partially_judged_meetings} meeting(s) partially judged")
+    with cmd_col4:
+        st.markdown("##### ⚠️ Reset")
+        rst_col1, rst_col2 = st.columns(2)
+        with rst_col1:
+            if st.button("🔄 Current", help="Reset current meeting", use_container_width=True, key="cmd_reset_current"):
+                st.session_state.show_reset_current_confirm = True
+        with rst_col2:
+            if st.button("🗑️ All", help="Reset ALL annotations", use_container_width=True, key="cmd_reset_all"):
+                st.session_state.show_reset_all_confirm = True
+    
+    # Row 2: Progress bar and stats
+    st.markdown("---")
+    
+    # Compact progress display
+    prog_col1, prog_col2, prog_col3, prog_col4, prog_col5 = st.columns([3, 1.5, 1.5, 1.5, 1.5])
+    
+    with prog_col1:
+        st.progress(fully_judged_meetings / total_meetings if total_meetings > 0 else 0)
+        st.caption(f"📊 **{fully_judged_meetings}/{total_meetings}** meetings ({progress_pct:.0f}%) | **{total_assertions_judged}/{total_assertions}** assertions ({assertions_pct:.0f}%)")
+    
+    with prog_col2:
+        st.metric("📗 Complete", fully_judged_meetings)
+    
+    with prog_col3:
+        st.metric("📙 Partial", partially_judged_meetings)
+    
+    with prog_col4:
+        st.metric("✓ Confident", confident_judgments)
+    
+    with prog_col5:
+        st.metric("? Unsure", not_confident_judgments)
+    
+    # Legend and last save time
+    st.caption(f"📗 = Fully judged | 📙 = Partially judged | 📕 = Not started | 🕐 Last save: {last_save}")
     
     st.markdown("---")
 
@@ -573,17 +755,10 @@ def main():
     # Create a map for output data: utterance -> output_item
     output_map = {item.get('utterance'): item for item in output_data}
 
-    # Sidebar Navigation
-    st.sidebar.header("Select an Entry (from Input Data)")
-    
-    # Filter by annotation status
-    filter_options = ["📋 All Meetings", "📗 Fully Judged", "📙 Partially Judged", "📕 Not Started"]
-    selected_filter = st.sidebar.selectbox(
-        "Filter by status:",
-        filter_options,
-        index=0,
-        help="Filter meetings by their annotation status"
-    )
+    # ═══════════════════════════════════════════════════════════════════════════════
+    # 📚 SIDEBAR - Meeting Navigation (streamlined)
+    # ═══════════════════════════════════════════════════════════════════════════════
+    st.sidebar.header("📚 Meeting Navigation")
     
     # Create a list of options for the sidebar based on INPUT data
     # Input data structure: {"UTTERANCE": {"text": "..."}}
@@ -607,7 +782,7 @@ def main():
             else:
                 status = "📕"  # Not started (red book)
         
-        # Apply filter
+        # Apply filter (using the filter from command center)
         include_item = False
         if selected_filter == "📋 All Meetings":
             include_item = True
@@ -623,12 +798,12 @@ def main():
             filtered_indices.append(i)
     
     # Show count of filtered results
-    st.sidebar.caption(f"Showing {len(options)} of {len(input_data)} meetings")
+    st.sidebar.caption(f"📊 {len(options)} of {len(input_data)} meetings")
     
     # Handle case where filter returns no results
     if not options:
         st.sidebar.warning("No meetings match the selected filter.")
-        st.info("No meetings match the selected filter. Please change the filter to see meetings.")
+        st.info("No meetings match the selected filter. Please change the filter in the command center to see meetings.")
         return
     
     # Use radio buttons for selection
@@ -641,38 +816,7 @@ def main():
     # Extract index from the selected option string "1. ✅ Subject..."
     selected_index = int(selected_option.split('.')[0]) - 1
 
-    # === OVERALL SAVE & EXPORT BUTTONS IN SIDEBAR ===
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("📁 Save & Export All")
-    
-    sidebar_col1, sidebar_col2 = st.sidebar.columns(2)
-    with sidebar_col1:
-        if st.sidebar.button("💾 Save All", help="Save all annotations to temp file", key="sidebar_save_all"):
-            save_annotations()
-            st.sidebar.success("✅ Saved!")
-    with sidebar_col2:
-        if st.sidebar.button("📤 Export All", help="Export all annotated data", key="sidebar_export_all"):
-            exported = export_annotated_data(output_data)
-            with open(ANNOTATION_EXPORT_PATH, 'w', encoding='utf-8') as f:
-                for item in exported:
-                    f.write(json.dumps(item, ensure_ascii=False) + '\n')
-            st.sidebar.success(f"✅ Exported!")
-    
-    # Reset All with confirmation
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("⚠️ Reset Options")
-    
-    reset_col1, reset_col2 = st.sidebar.columns(2)
-    with reset_col1:
-        # Reset current meeting only
-        if st.sidebar.button("🔄 Reset Current", help="Reset annotations for current meeting only", key="reset_current"):
-            st.session_state.show_reset_current_confirm = True
-    with reset_col2:
-        # Reset all annotations
-        if st.sidebar.button("🗑️ Reset All", help="Reset ALL annotations (requires confirmation)", key="reset_all"):
-            st.session_state.show_reset_all_confirm = True
-    
-    # Confirmation dialogs
+    # === RESET CONFIRMATION DIALOGS (triggered from command center) ===
     if st.session_state.get('show_reset_current_confirm', False):
         st.sidebar.warning("⚠️ Reset annotations for current meeting?")
         conf_col1, conf_col2 = st.sidebar.columns(2)
@@ -712,14 +856,11 @@ def main():
                 st.session_state.show_reset_all_confirm = False
                 st.rerun()
     
-    # Show annotation summary in sidebar
+    # Sidebar summary
     total_annotated = len(st.session_state.annotations)
     total_new = sum(len(v) for v in st.session_state.new_assertions.values())
-    st.sidebar.caption(f"📊 {total_annotated} items annotated | {total_new} new assertions")
-    
-    last_save = datetime.fromtimestamp(st.session_state.last_save_time).strftime("%H:%M:%S")
-    st.sidebar.caption(f"🕐 Last save: {last_save}")
     st.sidebar.markdown("---")
+    st.sidebar.caption(f"📊 {total_annotated} meetings annotated | {total_new} new assertions")
 
     # Get selected input item
     input_item = input_data[selected_index]
@@ -728,8 +869,9 @@ def main():
     # Try to find matching output
     output_item = output_map.get(utterance_text)
 
-    # Display Content
-    st.markdown("---")
+    # ═══════════════════════════════════════════════════════════════════════════════
+    # 📄 MAIN CONTENT AREA
+    # ═══════════════════════════════════════════════════════════════════════════════
     
     # Utterance Section
     st.subheader("🗣️ Utterance")
@@ -764,20 +906,67 @@ def main():
         else:
             # Card View Implementation
             
-            # 1. User Info
-            st.markdown("#### 👤 User")
+            # 1. User Info - Modern Card using Streamlit components
             user_data = input_item.get('USER', {})
             if user_data:
                 # Check if this user is the linked entity
                 is_linked_user = linked_entity_type == "User" and linked_entity_data == user_data
-                border_style = "border: 3px solid #28a745;" if is_linked_user else ""
                 
+                # Extract user fields
+                display_name = user_data.get('displayName', 'Unknown')
+                user_id = user_data.get('id', 'N/A')
+                mail_nickname = user_data.get('mailNickName', '')
+                user_url = user_data.get('url', '')
+                
+                # Get initials for avatar
+                initials = ''.join([n[0].upper() for n in display_name.split()[:2]]) if display_name else '?'
+                
+                # Header with name as link to Azure Key Vault
+                linked_badge = " 🔗" if is_linked_user else ""
+                if user_url:
+                    st.markdown(
+                        f'#### 👤 Meeting Organizer: <a href="{user_url}" target="_blank" style="color: #0078d4; text-decoration: none;">{display_name}</a>{linked_badge}',
+                        unsafe_allow_html=True
+                    )
+                else:
+                    st.markdown(f"#### 👤 Meeting Organizer: {display_name}{linked_badge}")
+                
+                # Use Streamlit container with border for the card
                 with st.container(border=True):
-                    if is_linked_user:
-                        st.markdown("🔗 **LINKED ENTITY**", help="This is the entity referenced by the assertion's sourceID")
-                    st.markdown(f"**{user_data.get('displayName', 'Unknown')}**")
-                    st.caption(f"ID: {user_data.get('id', 'N/A')}")
-                    st.json(user_data, expanded=False)
+                    # Header row with avatar and details
+                    col_avatar, col_info = st.columns([1, 5])
+                    
+                    with col_avatar:
+                        # Avatar using markdown with background
+                        st.markdown(
+                            f"""<div style="
+                                width: 60px;
+                                height: 60px;
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: white;
+                                font-size: 1.5em;
+                                font-weight: bold;
+                            ">{initials}</div>""",
+                            unsafe_allow_html=True
+                        )
+                    
+                    with col_info:
+                        if is_linked_user:
+                            st.caption("✅ LINKED ENTITY")
+                        
+                        # Details in two rows
+                        st.markdown(f"**🆔 User ID:** `{user_id}`")
+                        st.markdown(f"**📧 Mail Nickname:** `{mail_nickname}`")
+                
+                # Expandable JSON view
+                with st.expander("📄 View Raw JSON", expanded=False):
+                    st.json(user_data)
+            else:
+                st.info("No user data available")
             
             # 2. Entities
             st.markdown("#### 📦 Entities")
@@ -867,69 +1056,119 @@ def main():
 
         with col1:
             st.subheader("🤖 Generated Response")
-            response_content = output_item.get('response', '*No response content*')
+            response_content_raw = output_item.get('response', '*No response content*')
             
-            # Apply highlighting
-            highlight_matches = st.session_state.get("highlight_matches")
-            highlight_term = st.session_state.get("highlight_term")
+            # Parse response into sections
+            response_sections = parse_response_sections(response_content_raw)
             
-            if highlight_matches:
-                # Colors for ranked matches: Strong -> Medium -> Weak
-                # Using RGBA for fading effect
-                colors = [
-                    "rgba(255, 193, 7, 1.0)",  # Rank 1: Strong Yellow
-                    "rgba(255, 193, 7, 0.6)",  # Rank 2: Medium Yellow
-                    "rgba(255, 193, 7, 0.3)"   # Rank 3: Light Yellow
-                ]
+            # Count sections with annotations
+            sections_with_notes = sum(1 for i in range(len(response_sections)) 
+                                      if get_response_annotation(utterance_text, f"section_{i}"))
+            overall_note = get_response_annotation(utterance_text, "overall")
+            
+            st.caption(f"📝 {sections_with_notes}/{len(response_sections)} sections annotated" + 
+                      (" | 📋 Has overall comment" if overall_note else ""))
+            
+            # Display each section with annotation dropdown
+            for section_idx, section in enumerate(response_sections):
+                section_title = section["title"]
+                section_content = section["content"]
+                section_key = f"section_{section_idx}"
                 
-                for i, match_text in enumerate(highlight_matches):
-                    if i < len(colors):
-                        color = colors[i]
-                        pattern = re.compile(re.escape(match_text), re.IGNORECASE)
-                        response_content = pattern.sub(
-                            lambda m: f"<mark style='background-color: {color}; color: black; border-radius: 3px;' title='Match Rank: {i+1}'>{m.group(0)}</mark>", 
-                            response_content
+                # Get existing annotation for this section
+                existing_note = get_response_annotation(utterance_text, section_key)
+                has_note = bool(existing_note)
+                
+                # Section container
+                with st.container(border=True):
+                    # Section header with annotation indicator
+                    note_indicator = "📝" if has_note else ""
+                    st.markdown(f"**{section_idx + 1}. {section_title}** {note_indicator}")
+                    
+                    # Apply highlighting to section content
+                    display_content = section_content
+                    highlight_matches = st.session_state.get("highlight_matches")
+                    highlight_term = st.session_state.get("highlight_term")
+                    
+                    if highlight_matches:
+                        colors = [
+                            "rgba(255, 193, 7, 1.0)",
+                            "rgba(255, 193, 7, 0.6)",
+                            "rgba(255, 193, 7, 0.3)"
+                        ]
+                        for i, match_text in enumerate(highlight_matches):
+                            if i < len(colors):
+                                color = colors[i]
+                                pattern = re.compile(re.escape(match_text), re.IGNORECASE)
+                                display_content = pattern.sub(
+                                    lambda m: f"<mark style='background-color: {color}; color: black; border-radius: 3px;'>{m.group(0)}</mark>", 
+                                    display_content
+                                )
+                    elif highlight_term:
+                        pattern = re.compile(re.escape(highlight_term), re.IGNORECASE)
+                        display_content = pattern.sub(
+                            lambda m: f"<mark style='background-color: #fff3cd; color: black;'>{m.group(0)}</mark>", 
+                            display_content
                         )
-            elif highlight_term:
-                # Case-insensitive replacement with yellow background
-                pattern = re.compile(re.escape(highlight_term), re.IGNORECASE)
-                # We use a lambda to preserve the case of the matched text
-                response_content = pattern.sub(lambda m: f"<mark style='background-color: #fff3cd; color: black;'>{m.group(0)}</mark>", response_content)
+                    
+                    st.markdown(display_content, unsafe_allow_html=True)
+                    
+                    # Annotation expander for this section
+                    with st.expander(f"📝 Add annotation for this section", expanded=has_note):
+                        new_note = st.text_area(
+                            "Section annotation",
+                            value=existing_note,
+                            key=f"response_note_{selected_index}_{section_idx}",
+                            height=80,
+                            placeholder="Enter your comments about this section...",
+                            label_visibility="collapsed"
+                        )
+                        if new_note != existing_note:
+                            set_response_annotation(utterance_text, section_key, new_note)
+                            save_annotations()
+            
+            # Overall response annotation box
+            st.markdown("---")
+            st.markdown("##### 📋 Overall Response Annotation")
+            
+            with st.container(border=True):
+                overall_existing = get_response_annotation(utterance_text, "overall")
+                overall_new = st.text_area(
+                    "Overall comments on the generated response",
+                    value=overall_existing,
+                    key=f"response_overall_{selected_index}",
+                    height=100,
+                    placeholder="Enter your overall assessment of the generated response...",
+                    label_visibility="collapsed"
+                )
+                if overall_new != overall_existing:
+                    set_response_annotation(utterance_text, "overall", overall_new)
+                    save_annotations()
                 
-            st.markdown(response_content, unsafe_allow_html=True)
+                if overall_new:
+                    st.success("✅ Overall annotation saved")
 
         with col2:
             st.subheader("✅ Assertions")
             
-            # Annotation controls
-            ann_col1, ann_col2, ann_col3 = st.columns([2, 2, 2])
-            with ann_col1:
-                if st.button("💾 Save Annotations", help="Save current annotations to temp file"):
-                    save_annotations()
-                    st.success("✅ Saved!")
-            with ann_col2:
-                if st.button("📤 Export Data", help="Export annotated data in Kening's format"):
-                    exported = export_annotated_data(output_data)
-                    with open(ANNOTATION_EXPORT_PATH, 'w', encoding='utf-8') as f:
-                        for item in exported:
-                            f.write(json.dumps(item, ensure_ascii=False) + '\n')
-                    st.success(f"✅ Exported to {ANNOTATION_EXPORT_PATH}")
-            with ann_col3:
-                # Auto-save indicator
-                if auto_save_annotations():
-                    st.toast("💾 Auto-saved annotations")
-                last_save = datetime.fromtimestamp(st.session_state.last_save_time).strftime("%H:%M:%S")
-                st.caption(f"🕐 Last save: {last_save}")
-            
             assertions = output_item.get('assertions', [])
             
             # Calculate annotation statistics
-            total_assertions = len(assertions) + len(get_new_assertions(utterance_text))
+            total_assertions_count = len(assertions) + len(get_new_assertions(utterance_text))
             good_count = sum(1 for i in range(len(assertions)) 
                            if get_annotation(utterance_text, i).get('is_good', True))
+            judged_count = sum(1 for i in range(len(assertions)) 
+                           if get_annotation(utterance_text, i).get('is_judged', False))
             new_count = len(get_new_assertions(utterance_text))
             
-            st.markdown(f"**Stats:** {good_count}/{len(assertions)} marked good | {new_count} new added")
+            # Stats row
+            stat_col1, stat_col2, stat_col3 = st.columns(3)
+            with stat_col1:
+                st.caption(f"✅ {judged_count}/{len(assertions)} judged")
+            with stat_col2:
+                st.caption(f"👍 {good_count}/{len(assertions)} correct")
+            with stat_col3:
+                st.caption(f"➕ {new_count} new")
             
             # Expand/Collapse all buttons
             exp_col1, exp_col2, exp_col3 = st.columns([1, 1, 2])

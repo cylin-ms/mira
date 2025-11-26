@@ -323,7 +323,7 @@ def find_assertion_matches(assertion_text: str, response_text: str, model, model
     
     return [sent for _, _, sent in scored_sentences[:top_k]]
 
-def process_output_file(input_path: str, output_path: str, model, model_name: str, use_jj: bool = False, limit: int = None):
+def process_output_file(input_path: str, output_path: str, model, model_name: str, use_jj: bool = False, limit: int = None, skip: int = 0):
     """
     Process the output JSONL file and add matched_segments to each assertion.
     
@@ -334,6 +334,7 @@ def process_output_file(input_path: str, output_path: str, model, model_name: st
         model_name: Name of the model
         use_jj: If True, use GPT-5 JJ; otherwise use Ollama
         limit: Maximum number of items to process (None for all)
+        skip: Number of items to skip at the beginning (for resuming)
     """
     
     if not os.path.exists(input_path):
@@ -341,11 +342,39 @@ def process_output_file(input_path: str, output_path: str, model, model_name: st
         return
     
     processed_items = []
+    skipped_items = []
+    
+    # If resuming, load existing output file first
+    if skip > 0 and os.path.exists(output_path):
+        print(f"📂 Loading {skip} already-processed items from {output_path}...")
+        with open(output_path, 'r', encoding='utf-8') as f:
+            for i, line in enumerate(f):
+                if i >= skip:
+                    break
+                line = line.strip()
+                if line:
+                    try:
+                        skipped_items.append(json.loads(line))
+                    except:
+                        pass
+        print(f"   Loaded {len(skipped_items)} items")
     
     with open(input_path, 'r', encoding='utf-8') as f:
         for line_num, line in enumerate(f, 1):
-            # Check limit
-            if limit and line_num > limit:
+            # Skip already processed items
+            if line_num <= skip:
+                if not skipped_items:  # If we couldn't load from output, keep original
+                    line = line.strip()
+                    if line:
+                        try:
+                            skipped_items.append(json.loads(line))
+                        except:
+                            pass
+                continue
+            
+            # Check limit (relative to items actually processed)
+            items_processed = line_num - skip
+            if limit and items_processed > limit:
                 print(f"\nReached limit of {limit} items, stopping.")
                 break
                 
@@ -378,12 +407,17 @@ def process_output_file(input_path: str, output_path: str, model, model_name: st
             
             processed_items.append(item)
     
+    # Combine skipped items with newly processed items
+    all_items = skipped_items + processed_items
+    
     # Write output
     with open(output_path, 'w', encoding='utf-8') as f:
-        for item in processed_items:
+        for item in all_items:
             f.write(json.dumps(item, ensure_ascii=False) + '\n')
     
     print(f"\n✅ Processing complete! Output written to: {output_path}")
+    if skip > 0:
+        print(f"   ({len(skipped_items)} skipped + {len(processed_items)} processed = {len(all_items)} total)")
 
 def main():
     parser = argparse.ArgumentParser(description='Compute assertion matches using LLM (Ollama or GPT-5 JJ)')
@@ -419,6 +453,12 @@ def main():
         default=None,
         help='Maximum number of meetings to process (default: all)'
     )
+    parser.add_argument(
+        '--skip',
+        type=int,
+        default=0,
+        help='Number of meetings to skip (for resuming interrupted runs)'
+    )
     
     args = parser.parse_args()
     
@@ -443,7 +483,7 @@ def main():
         return
     
     # Process file
-    process_output_file(args.input, args.output, model, model_name, use_jj=args.use_jj, limit=args.limit)
+    process_output_file(args.input, args.output, model, model_name, use_jj=args.use_jj, limit=args.limit, skip=args.skip)
 
 if __name__ == "__main__":
     main()
