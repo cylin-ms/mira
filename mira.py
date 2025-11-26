@@ -1238,8 +1238,23 @@ An assertion is **automatically marked as judged** when you:
     if expand_input:
         st.session_state["expand_input_context"] = False
 
+    # Meeting Context Section - Make it visually prominent
+    st.markdown(
+        """<div style='background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%); 
+            padding: 10px 15px; border-radius: 8px; margin: 10px 0;
+            border-left: 4px solid #1976d2;'>
+            <span style='font-size: 1.1em; font-weight: 600; color: #1565c0;'>
+                📋 Meeting Context Available
+            </span>
+            <span style='color: #666; margin-left: 10px;'>
+                View entities, organizer info, and source data used to generate assertions
+            </span>
+        </div>""",
+        unsafe_allow_html=True
+    )
+    
     # Input Data Toggle
-    with st.expander("📥 View Input Context (LOD Data)", expanded=expand_input):
+    with st.expander("📥 View Meeting Context (Entities, Organizer, Source Data)", expanded=expand_input):
         # Show linked entity notification if applicable
         if linked_entity_id:
             st.success(f"🔗 Linked to **{linked_entity_type}** entity with ID: `{linked_entity_id}`")

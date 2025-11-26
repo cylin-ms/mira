@@ -5,6 +5,14 @@
 
 > **✨ Mira** is a comprehensive annotation and evaluation tool for LLM-generated assertions from meeting contexts. It features GPT-5 JJ automated evaluation with span highlighting, a modern command center UI, rich entity card rendering (Chat, Email, File, User), per-section response annotations, and Azure Key Vault integration for Test Tenant access.
 
+### 🙏 Acknowledgments
+
+| Contributor | Contribution |
+|-------------|--------------|
+| **Weiwei Cui** | Meeting Context Data (LOD - LiveOak Data) generation, assertion methodology documentation |
+| **Kening Ren** | Workback Plan response generation, assertions with justification and sourceID |
+| **Chin-Yew Lin** | Mira annotation tool, GPT-5 JJ evaluation integration, documentation |
+
 ---
 
 ## 📋 Table of Contents
@@ -32,7 +40,24 @@ This project provides tools for generating assertions from meeting contexts and 
 - **Entity Card Rendering**: Rich display for Chat, Email, File, User, and ChannelMessage entities
 - **Offline Matching**: Find evidence in responses that supports specific assertions
 
-For details on how the dataset was created, see [DATA_GENERATION.md](docs/DATA_GENERATION.md).
+### Data Pipeline
+
+The dataset flows through the following pipeline:
+
+1. **Meeting Context Data** (by Weiwei Cui)
+   - LOD (LiveOak Data) files containing meeting entities: Events, Files, Emails, Chats, Users
+   - Utterances representing user requests for workback plans
+   - See [DATA_GENERATION.md](docs/DATA_GENERATION.md) for details
+
+2. **Workback Plan Generation** (by Kening Ren)
+   - LLM-generated responses to user utterances
+   - Assertions with justification and sourceID linking to specific entities
+   - 103 meetings with 1,395 total assertions
+
+3. **Assertion Evaluation** (by Chin-Yew Lin)
+   - GPT-5 JJ automated evaluation with 96.2% pass rate
+   - Supporting span extraction with confidence scores
+   - Mira annotation tool for human review
 
 The methodology for deriving assertions is documented in [deriving_assertions_workback_plan.md](docs/deriving_assertions_workback_plan.md) by Weiwei Cui.
 
@@ -184,10 +209,20 @@ The main area displays the selected meeting with multiple sections:
 **🗣️ Utterance**
 - The user's request displayed at the top
 
-**📥 View Input Context (LOD Data)**
-- Expandable section with Meeting Organizer card
-- Entity cards (Events, Files, Emails, Chats, Users)
-- SourceID linking for entity navigation
+**📋 Meeting Context Available** (Highlighted Banner)
+- Blue gradient banner prominently alerting judges to available source data
+- Contains all entities (Events, Files, Emails, Chats) used to generate assertions
+- **Essential for verifying assertion accuracy!**
+
+**📥 View Meeting Context** (Expandable Section)
+- **Meeting Organizer**: Card with avatar, name, and Azure Key Vault link
+- **Entity Cards**: Rich display of all source entities:
+  - 📅 Events: Meeting details, attendees, locations
+  - 📄 Files: Document content with Preview/Raw tabs
+  - 💬 Chats: Message history as styled bubbles
+  - ✉️ Emails: Subject, recipients, body preview
+  - 👤 Users: User info with Test Tenant access
+- **SourceID Linking**: Click "🔗 View Entity" on assertions to jump here
 
 **🤖 Generated Response**
 - Full LLM response with per-section annotation dropdowns
@@ -387,18 +422,25 @@ streamlit run mira.py
 2. **Select Filter** (optional): Use "🔍 Filter" to focus on specific meeting types
 3. **Select a Meeting**: Click on a meeting in the sidebar (📕 = Not Started)
 
-### Step 2: Review Meeting Context
+### Step 2: Review Meeting Context (Important!)
 
-1. **Check the Utterance**: Read the user's request at the top
-2. **Expand Input Context**: Click "📥 View Input Context (LOD Data)"
+> **📋 Note:** The Meeting Context section contains all the source data that was used to generate the assertions. Reviewing this context is essential for accurate annotation.
+
+1. **Notice the Banner**: A prominent blue banner "📋 Meeting Context Available" alerts you to the available context
+2. **Expand Meeting Context**: Click "📥 View Meeting Context (Entities, Organizer, Source Data)"
 3. **Review Meeting Organizer**: 
    - See the organizer's name, ID, and avatar
-   - Click the name to access Azure Key Vault credentials
-4. **Browse Entities**: Review rich entity cards
-   - 💬 Chat cards show message history as bubbles
-   - ✉️ Email cards show full body preview
-   - 📄 File cards have Preview/Raw tabs
-   - 👤 User cards link to Test Tenant
+   - Click the name to access Azure Key Vault credentials (for Test Tenant login)
+4. **Browse Entity Cards**: These are the source entities referenced by assertions
+   - 📅 **Event cards**: Meeting details, attendees, time/location
+   - 💬 **Chat cards**: Message history displayed as styled bubbles
+   - ✉️ **Email cards**: Subject, recipients, and full body preview
+   - 📄 **File cards**: Document content with Preview/Raw tabs
+   - 👤 **User cards**: User info with Azure Key Vault link
+5. **Check SourceID Links**: When you click "🔗 View Entity" on an assertion, it will:
+   - Auto-expand the Meeting Context section
+   - Highlight the linked entity with a green banner
+   - Help you verify if the assertion is correctly grounded
 
 ### Step 3: Review GPT-5 Evaluation
 
