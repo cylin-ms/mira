@@ -18,6 +18,47 @@ OUTPUT_FILE_PATH = os.path.join("docs", "11_25_output.jsonl")  # New format with
 INPUT_FILE_PATH = os.path.join("docs", "LOD_1121.WithUserUrl.jsonl")  # New context file with user URLs for Test Tenant
 ANNOTATION_SAVE_PATH = os.path.join("docs", "annotations_temp.json")
 ANNOTATION_EXPORT_PATH = os.path.join("docs", "annotated_output.jsonl")
+ASSERTION_SCORES_PATH = os.path.join("docs", "assertion_scores.json")  # GPT-5 JJ scoring results
+
+# ====== GPT-5 SCORING SYSTEM ======
+def load_assertion_scores():
+    """Load GPT-5 JJ assertion scoring results."""
+    if "assertion_scores" not in st.session_state:
+        st.session_state.assertion_scores = None
+        st.session_state.assertion_scores_index = {}  # {utterance: {assertion_text: score_data}}
+        
+        if os.path.exists(ASSERTION_SCORES_PATH):
+            try:
+                with open(ASSERTION_SCORES_PATH, 'r', encoding='utf-8') as f:
+                    scores = json.load(f)
+                    st.session_state.assertion_scores = scores
+                    
+                    # Build index for fast lookup
+                    for meeting in scores.get('meetings', []):
+                        utterance = meeting.get('utterance', '')
+                        if utterance not in st.session_state.assertion_scores_index:
+                            st.session_state.assertion_scores_index[utterance] = {}
+                        for result in meeting.get('assertion_results', []):
+                            assertion_text = result.get('assertion_text', '')
+                            st.session_state.assertion_scores_index[utterance][assertion_text] = result
+            except Exception as e:
+                st.session_state.assertion_scores = None
+    
+    return st.session_state.assertion_scores
+
+
+def get_assertion_score(utterance: str, assertion_text: str) -> dict:
+    """Get GPT-5 JJ score for a specific assertion.
+    
+    Returns dict with: passed (bool), explanation (str), or empty dict if not found.
+    """
+    if "assertion_scores_index" not in st.session_state:
+        load_assertion_scores()
+    
+    index = st.session_state.get('assertion_scores_index', {})
+    if utterance in index and assertion_text in index[utterance]:
+        return index[utterance][assertion_text]
+    return {}
 
 # ====== ANNOTATION SYSTEM ======
 def init_annotation_state():
@@ -280,6 +321,9 @@ def export_annotated_data(output_data):
 
 # Initialize annotation state
 init_annotation_state()
+
+# Load GPT-5 JJ assertion scores
+load_assertion_scores()
 
 
 def get_assertion_reasoning(assertion):
@@ -739,6 +783,32 @@ def main():
     
     with prog_col5:
         st.metric("? Unsure", not_confident_judgments)
+    
+    # Row 3: GPT-5 JJ Automated Evaluation Summary (if available)
+    if st.session_state.get('assertion_scores'):
+        scores = st.session_state.assertion_scores
+        overall = scores.get('overall_stats', {})
+        total_scored = overall.get('total_assertions', 0)
+        passed_scored = overall.get('passed_assertions', 0)
+        pass_rate = overall.get('pass_rate', 0) * 100
+        num_meetings = scores.get('num_samples', 0)
+        timestamp = scores.get('timestamp', 'Unknown')
+        
+        gpt_col1, gpt_col2, gpt_col3, gpt_col4 = st.columns([3, 1.5, 1.5, 2])
+        with gpt_col1:
+            st.caption(f"🤖 **GPT-5 JJ Evaluation:** {passed_scored}/{total_scored} assertions passed ({pass_rate:.0f}%) across {num_meetings} meetings")
+        with gpt_col2:
+            st.metric("✅ Passed", passed_scored, delta=None)
+        with gpt_col3:
+            st.metric("❌ Failed", total_scored - passed_scored, delta=None)
+        with gpt_col4:
+            # Parse and format the timestamp
+            try:
+                from datetime import datetime as dt
+                ts = dt.fromisoformat(timestamp)
+                st.caption(f"🕐 Scored: {ts.strftime('%b %d, %Y %I:%M %p')}")
+            except:
+                st.caption(f"🕐 {timestamp}")
     
     # Legend and last save time
     st.caption(f"📗 = Fully judged | 📙 = Partially judged | 📕 = Not started | 🕐 Last save: {last_save}")
@@ -1216,6 +1286,13 @@ def main():
                     else:
                         evidence_icon = ""  # No icon for old format (text sources)
                     
+                    # Get GPT-5 JJ score for this assertion
+                    gpt5_score = get_assertion_score(utterance_text, assertion.get('text', ''))
+                    if gpt5_score:
+                        gpt5_icon = "✅" if gpt5_score.get('passed', False) else "❌"
+                    else:
+                        gpt5_icon = ""  # No GPT-5 score available
+                    
                     # Get current annotation state
                     ann = get_annotation(utterance_text, i)
                     is_good = ann.get('is_good', True)
@@ -1235,7 +1312,9 @@ def main():
                     is_expanded = expander_key in st.session_state.expanded_assertions
                     
                     # Card-like expander for each assertion
-                    with st.expander(f"{judged_icon} {evidence_icon} {feedback_icon} :{color}[**{level.upper()}**] - {assertion.get('text', '')[:50]}...", expanded=is_expanded):
+                    # Include GPT-5 icon in header if available
+                    gpt5_header = f"[GPT5:{gpt5_icon}]" if gpt5_icon else ""
+                    with st.expander(f"{judged_icon} {gpt5_header} {evidence_icon} {feedback_icon} :{color}[**{level.upper()}**] - {assertion.get('text', '')[:50]}...", expanded=is_expanded):
                         # Track that this expander is now open
                         st.session_state.expanded_assertions.add(expander_key)
                         
@@ -1461,6 +1540,40 @@ def main():
                                             st.rerun()
                         else:
                             st.markdown("*No reasoning provided.*")
+                        
+                        # === GPT-5 JJ EVALUATION SECTION ===
+                        if gpt5_score:
+                            st.markdown("---")
+                            st.markdown("##### 🤖 GPT-5 JJ Automated Evaluation")
+                            passed = gpt5_score.get('passed', False)
+                            explanation = gpt5_score.get('explanation', 'No explanation provided.')
+                            
+                            if passed:
+                                st.markdown(
+                                    f"""<div style='background: linear-gradient(135deg, #d4edda, #c3e6cb); 
+                                        padding: 12px 15px; border-radius: 8px; 
+                                        border-left: 4px solid #28a745; margin-bottom: 10px;'>
+                                        <span style='font-size: 1.3em;'>✅</span>
+                                        <strong style='color: #155724; margin-left: 8px;'>PASS</strong>
+                                        <span style='color: #155724; margin-left: 15px;'>This assertion is satisfied by the response.</span>
+                                    </div>""",
+                                    unsafe_allow_html=True
+                                )
+                            else:
+                                st.markdown(
+                                    f"""<div style='background: linear-gradient(135deg, #f8d7da, #f5c6cb); 
+                                        padding: 12px 15px; border-radius: 8px; 
+                                        border-left: 4px solid #dc3545; margin-bottom: 10px;'>
+                                        <span style='font-size: 1.3em;'>❌</span>
+                                        <strong style='color: #721c24; margin-left: 8px;'>FAIL</strong>
+                                        <span style='color: #721c24; margin-left: 15px;'>This assertion is NOT satisfied by the response.</span>
+                                    </div>""",
+                                    unsafe_allow_html=True
+                                )
+                            
+                            # Show GPT-5's explanation
+                            with st.expander("📝 GPT-5 Explanation", expanded=False):
+                                st.markdown(f"*{explanation}*")
             
             # === DISPLAY USER-ADDED ASSERTIONS ===
             new_assertions = get_new_assertions(utterance_text)
