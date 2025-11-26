@@ -77,6 +77,8 @@ def init_annotation_state():
         st.session_state.judge_name = os.environ.get('USERNAME', os.environ.get('USER', ''))
     if "expanded_assertions" not in st.session_state:
         st.session_state.expanded_assertions = set()  # Track which assertion expanders are open
+    if "show_meeting_card" not in st.session_state:
+        st.session_state.show_meeting_card = False  # Toggle for meeting card display
     
     # Try to load existing annotations from temp file
     if os.path.exists(ANNOTATION_SAVE_PATH):
@@ -814,6 +816,40 @@ def main():
     st.caption(f"📗 = Fully judged | 📙 = Partially judged | 📕 = Not started | 🕐 Last save: {last_save}")
     
     st.markdown("---")
+    
+    # Help section
+    with st.expander("❓ Help: How to Annotate"):
+        st.markdown("""
+### Annotation Workflow
+        
+1. **Select a meeting** from the sidebar (📕 = not started, 📙 = partial, 📗 = complete)
+2. **Review each assertion** by expanding the assertion cards
+3. **Mark correctness**: Check "✅ This assertion is correct" or uncheck if incorrect
+4. **Set confidence**: Check "🎯 Confident in judgment" or uncheck if unsure
+5. **Add notes** (optional): Explain why an assertion is incorrect
+6. **Suggest revision** (optional): Provide improved assertion text
+
+### Meeting Completion Criteria
+
+| Status | Icon | Criteria |
+|--------|------|----------|
+| **Fully Judged** | 📗 | ALL assertions have been marked as judged |
+| **Partially Judged** | 📙 | At least 1 assertion judged, but not all |
+| **Not Started** | 📕 | No assertions have been judged yet |
+
+### Auto-Judging Behavior
+
+An assertion is **automatically marked as judged** when you:
+- Change the "✅ This assertion is correct" checkbox
+- Change the "🎯 Confident in judgment" checkbox
+- Explicitly check the "📋 Judged" checkbox
+
+### Tips
+
+- **Use the filter** in the command center to find meetings that need attention
+- **Save frequently** - click "💾 Save" or annotations auto-save every minute
+- **Export** your work by clicking "📤 Export" to save to `annotated_output.jsonl`
+        """)
 
     # Display Prompt File
     PROMPT_FILE_PATH = os.path.join("docs", "step1_v2.md")
@@ -942,6 +978,104 @@ def main():
     # ═══════════════════════════════════════════════════════════════════════════════
     # 📄 MAIN CONTENT AREA
     # ═══════════════════════════════════════════════════════════════════════════════
+    
+    # Show meeting number and subject with fancy styling
+    meeting_num = selected_index + 1
+    subject = get_meeting_subject(input_item)
+    
+    # Find the meeting/event data from entities
+    entities = input_item.get('ENTITIES_TO_USE', [])
+    meeting_event = None
+    for entity in entities:
+        if entity.get('type') == 'Event' and entity.get('Subject') == subject:
+            meeting_event = entity
+            break
+    # If no exact match, get the first Event
+    if not meeting_event:
+        for entity in entities:
+            if entity.get('type') == 'Event':
+                meeting_event = entity
+                break
+    
+    meeting_event_id = meeting_event.get('EventId', 'N/A') if meeting_event else 'N/A'
+    
+    # Meeting header with ID badge and clickable title
+    col_badge, col_title = st.columns([1, 8])
+    with col_badge:
+        st.markdown(
+            f"""<div style='background: linear-gradient(135deg, #667eea, #764ba2); 
+                        color: white; padding: 8px 16px; border-radius: 8px; 
+                        font-size: 1.5em; font-weight: bold;
+                        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+                        text-align: center;'>
+                #{meeting_num}
+            </div>""",
+            unsafe_allow_html=True
+        )
+    with col_title:
+        # Make the title clickable to show meeting card
+        if st.button(f"📅 {subject}", key=f"meeting_title_{selected_index}", help="Click to view meeting details", use_container_width=True):
+            st.session_state["show_meeting_card"] = True
+        st.caption(f"Event ID: `{meeting_event_id}`")
+    
+    # Show meeting card if clicked
+    if st.session_state.get("show_meeting_card", False) and meeting_event:
+        style_color = ENTITY_STYLES.get("Event", {}).get("color", "#9b59b6")
+        icon = ENTITY_STYLES.get("Event", {}).get("icon", "📅")
+        
+        with st.container(border=True):
+            # Header with icon and entity type
+            st.markdown(
+                f"""<div style='background: linear-gradient(135deg, {style_color}22, {style_color}11); 
+                    padding: 10px 15px; margin: -1rem -1rem 1rem -1rem; 
+                    border-bottom: 2px solid {style_color}; border-radius: 8px 8px 0 0;'>
+                    <span style='font-size: 1.5em;'>{icon}</span>
+                    <strong style='font-size: 1.2em; color: {style_color}; margin-left: 8px;'>Event / Meeting</strong>
+                    <span style='float: right; background: #d4edda; color: #155724; padding: 2px 8px; 
+                        border-radius: 12px; font-size: 0.75em;'>📅 Current Meeting</span>
+                </div>""",
+                unsafe_allow_html=True
+            )
+            
+            # Meeting details
+            st.markdown(f"### {meeting_event.get('Subject', 'Unknown')}")
+            st.caption(f"🔗 Event ID: `{meeting_event_id}`")
+            
+            # Key details in columns
+            detail_col1, detail_col2 = st.columns(2)
+            with detail_col1:
+                st.markdown(f"**📅 Start:** {meeting_event.get('StartDateTime', 'N/A')}")
+                st.markdown(f"**📅 End:** {meeting_event.get('EndDateTime', 'N/A')}")
+                st.markdown(f"**🌍 Timezone:** {meeting_event.get('TimeZone', 'N/A')}")
+            with detail_col2:
+                st.markdown(f"**👤 Organizer:** {meeting_event.get('Sender', 'N/A')}")
+                locations = meeting_event.get('Locations', [])
+                loc_str = ", ".join(locations) if locations else "N/A"
+                st.markdown(f"**📍 Location:** {loc_str}")
+                st.markdown(f"**📹 Online:** {'Yes' if meeting_event.get('IsOnlineMeeting') else 'No'}")
+            
+            # Attendees
+            attendees = meeting_event.get('RequiredAttendees', [])
+            if attendees:
+                # Handle attendees that could be strings or dicts
+                attendee_names = []
+                for att in attendees:
+                    if isinstance(att, str):
+                        attendee_names.append(att)
+                    elif isinstance(att, dict):
+                        attendee_names.append(att.get('name', att.get('emailAddress', str(att))))
+                    else:
+                        attendee_names.append(str(att))
+                st.markdown(f"**👥 Attendees:** {', '.join(attendee_names)}")
+            
+            # Raw JSON
+            with st.expander("📋 Raw JSON"):
+                st.json(meeting_event)
+            
+            # Close button
+            if st.button("❌ Close", key="close_meeting_card"):
+                st.session_state["show_meeting_card"] = False
+                st.rerun()
     
     # Utterance Section
     st.subheader("🗣️ Utterance")

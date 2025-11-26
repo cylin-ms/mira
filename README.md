@@ -114,6 +114,51 @@ Open your browser to `http://localhost:8501` after starting the app.
 - **🤖 Generated Response**: Response with per-section annotation dropdowns
 - **✅ Assertions**: Assertion cards with evaluation controls
 
+### Annotation Workflow & Completion Criteria
+
+#### How to Annotate an Assertion
+
+1. **Expand** the assertion card by clicking on it
+2. **Review** the assertion text, justification, and source entity
+3. **Mark correctness**: Check "✅ This assertion is correct" (or uncheck if incorrect)
+4. **Set confidence**: Check "🎯 Confident in judgment" (or uncheck if unsure)
+5. **Add notes** (optional): Explain why the assertion is incorrect
+6. **Suggest revision** (optional): Provide improved assertion text
+7. **Mark as judged**: The "📋 Judged" checkbox is auto-checked when you make a judgment
+
+#### Meeting Completion Status
+
+A meeting's annotation status is determined as follows:
+
+| Status | Icon | Criteria |
+|--------|------|----------|
+| **Fully Judged** | 📗 | ALL assertions have `is_judged: True` |
+| **Partially Judged** | 📙 | At least 1 assertion judged, but not all |
+| **Not Started** | 📕 | No assertions have been judged yet |
+
+**Important:** An assertion is marked as "judged" when:
+- You explicitly check the "📋 Judged" checkbox, OR
+- You change the "✅ This assertion is correct" checkbox, OR
+- You change the "🎯 Confident in judgment" checkbox
+
+#### Annotation Data Saved
+
+For each assertion, the following data is captured:
+- `is_good`: Whether the assertion is correct (true/false)
+- `is_confident`: Whether you're confident in your judgment (true/false)
+- `is_judged`: Whether the assertion has been reviewed (true/false)
+- `note`: Optional explanation or comments
+- `revision`: Optional suggested improvement to the assertion text
+- `original`: The original assertion text (for reference)
+
+#### Best Practices
+
+1. **Judge all assertions** in a meeting to mark it as "Fully Judged"
+2. **Use the filter** to find meetings that need attention (📕 Not Started or 📙 Partially Judged)
+3. **Save frequently** - click "💾 Save" or annotations auto-save every minute
+4. **Export before closing** - click "📤 Export" to save to `annotated_output.jsonl`
+5. **Add notes** for incorrect assertions to explain why they fail
+
 ### Context Files & Azure Key Vault Integration
 
 The project uses context files (LOD - LiveOak Data) with user URLs for Test Tenant access:
