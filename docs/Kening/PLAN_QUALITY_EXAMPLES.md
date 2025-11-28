@@ -1,7 +1,7 @@
 # Workback Plan Quality Examples & Evaluation Report
 
 > **Generated:** November 28, 2025  
-> **Purpose:** Demonstrate how the 10 assertion patterns (P1-P10) apply to workback plans at different quality levels  
+> **Purpose:** Demonstrate how the 10 assertion patterns (S1-S10) apply to workback plans at different quality levels  
 > **GitHub:** [docs/Kening](https://github.com/cylin-ms/mira/tree/master/docs/Kening)
 
 ---
@@ -33,20 +33,20 @@ The team is preparing for a major product launch scheduled for February 1, 2025.
 
 ---
 
-## Pattern Reference (P1-P10)
+## Pattern Reference (S1-S10)
 
 | ID | Pattern | Level | Key Criteria |
-|----|---------|-------|--------------|
-| P1 | Explicit Meeting Details | Critical | Correct date, time, attendees |
-| P2 | Timeline Backward Planning | Critical | Tasks scheduled before T₀ with buffers |
-| P3 | Ownership Assignment | Critical | Every task has named owner |
-| P4 | Artifact Specification | Expected | Key artifacts listed with deadlines |
-| P5 | Dependency Sequencing | Expected | Tasks logically ordered |
-| P6 | Meeting Objective Clarity | Expected | Purpose clearly stated |
-| P7 | Assumption Disclosure | Aspirational | Gaps explicitly noted |
-| P8 | Stakeholder Alignment | Aspirational | Review steps with stakeholders |
-| P9 | Grounding in Context | Critical | No fabricated details |
-| P10 | Risk Identification | Aspirational | Risks and mitigations noted |
+|----|---------|-------|--------------||
+| S1 | Explicit Meeting Details | Critical | Correct date, time, attendees |
+| S2 | Timeline Backward Planning | Critical | Tasks scheduled before T₀ with buffers |
+| S3 | Ownership Assignment | Critical | Every task has named owner |
+| S4 | Artifact Specification | Expected | Key artifacts listed with deadlines |
+| S5 | Dependency Sequencing | Expected | Tasks logically ordered |
+| S6 | Meeting Objective Clarity | Expected | Purpose clearly stated |
+| S7 | Assumption Disclosure | Aspirational | Gaps explicitly noted |
+| S8 | Stakeholder Alignment | Aspirational | Review steps with stakeholders |
+| S9 | Grounding in Context | Critical | No fabricated details |
+| S10 | Risk Identification | Aspirational | Risks and mitigations noted |
 
 ---
 
@@ -113,7 +113,7 @@ Review all launch readiness items for the February 1, 2025 product launch, ident
 
 ---
 
-## Assertions for Perfect Plan (Based on P1-P10)
+## Assertions for Perfect Plan (Based on S1-S10)
 
 ### Critical Level Assertions
 
@@ -203,7 +203,7 @@ Review all launch readiness items for the February 1, 2025 product launch, ident
 
 ---
 
-## Assertions for Medium Plan (Based on P1-P10)
+## Assertions for Medium Plan (Based on S1-S10)
 
 *(Same assertions as Perfect Plan - A1 through A10)*
 
@@ -257,7 +257,7 @@ Get ready for the launch meeting next week.
 
 ---
 
-## Assertions for Low Plan (Based on P1-P10)
+## Assertions for Low Plan (Based on S1-S10)
 
 *(Same assertions as Perfect Plan - A1 through A10)*
 
@@ -324,34 +324,34 @@ Low Plan:      ████                                      9%
 
 ## Evaluation Workflow
 
-1. **Start with Critical Patterns (P1, P2, P3, P9)**
+1. **Start with Critical Patterns (S1, S2, S3, S9)**
    - These are must-haves
    - Failing any critical pattern should cap the score at 60%
 
-2. **Check Expected Patterns (P4, P5, P6)**
+2. **Check Expected Patterns (S4, S5, S6)**
    - Important for completeness
    - Missing these reduces practical usefulness
 
-3. **Assess Aspirational Patterns (P7, P8, P10)**
+3. **Assess Aspirational Patterns (S7, S8, S10)**
    - Differentiators for excellence
    - Bonus points for plans that include these
 
 ## Quick Checklist
 
-- [ ] **P1:** Are date, time, timezone, and all attendees correct?
-- [ ] **P2:** Is there a backward timeline with dates and buffer?
-- [ ] **P3:** Does every task have a named owner?
-- [ ] **P9:** Are all details grounded in provided context?
-- [ ] **P4:** Are specific artifacts referenced?
-- [ ] **P5:** Are dependencies explicit and sequenced correctly?
-- [ ] **P6:** Is the meeting objective clearly stated?
-- [ ] **P7:** Are assumptions disclosed?
-- [ ] **P8:** Are there stakeholder alignment tasks?
-- [ ] **P10:** Are risks identified with mitigations?
+- [ ] **S1:** Are date, time, timezone, and all attendees correct?
+- [ ] **S2:** Is there a backward timeline with dates and buffer?
+- [ ] **S3:** Does every task have a named owner?
+- [ ] **S9:** Are all details grounded in provided context?
+- [ ] **S4:** Are specific artifacts referenced?
+- [ ] **S5:** Are dependencies explicit and sequenced correctly?
+- [ ] **S6:** Is the meeting objective clearly stated?
+- [ ] **S7:** Are assumptions disclosed?
+- [ ] **S8:** Are there stakeholder alignment tasks?
+- [ ] **S10:** Are risks identified with mitigations?
 
 ## Minimum Acceptable Score
 
-A workback plan should score **at least 60/100** with **all critical patterns (P1, P2, P3, P9) passing** to be considered acceptable for production use.
+A workback plan should score **at least 60/100** with **all critical patterns (S1, S2, S3, S9) passing** to be considered acceptable for production use.
 
 ---
 

@@ -2,12 +2,12 @@
   "meta": {
     "version": "2.0",
     "last_updated": "2025-11-28",
-    "description": "Assertion pattern framework with structural patterns (P1-P10) and grounding assertions (G1-G5)",
+    "description": "Assertion pattern framework with structural patterns (S1-S10) and grounding assertions (G1-G5)",
     "key_insight": "Structural patterns check SHAPE (does the plan have X?), grounding assertions verify FACTS (is X accurate to source?)"
   },
   "patterns": [
     {
-      "pattern_id": "P1",
+      "pattern_id": "S1",
       "pattern_name": "Explicit Meeting Details",
       "pattern_description": "Checks that the response states the correct meeting date, time, and key participants as per the official event.",
       "pattern_template": "The response should explicitly state the meeting date, time, and attendees matching the official invite.",
@@ -32,7 +32,7 @@
       "grounding_requirement": "G2 - All dates/times must match source MEETING or EMAIL timestamps"
     },
     {
-      "pattern_id": "P2",
+      "pattern_id": "S2",
       "pattern_name": "Timeline Backward Planning",
       "pattern_description": "Ensures the response provides a clear backward schedule from T₀ with logical sequencing and buffers.",
       "pattern_template": "The response should include a backward timeline from the meeting start (T₀) with all preparation tasks scheduled logically and with buffer time.",
@@ -56,7 +56,7 @@
       "grounding_requirement": "G2 - Timeline dates must be derivable from source meeting date"
     },
     {
-      "pattern_id": "P3",
+      "pattern_id": "S3",
       "pattern_name": "Ownership Assignment",
       "pattern_description": "Checks that every task in the plan has a clearly assigned owner.",
       "pattern_template": "The response should assign an explicit owner for each listed task.",
@@ -79,7 +79,7 @@
       "grounding_requirement": "G1 - All owners must exist in ATTENDEES or ENTITIES_TO_USE"
     },
     {
-      "pattern_id": "P4",
+      "pattern_id": "S4",
       "pattern_name": "Artifact Specification",
       "pattern_description": "Ensures the plan identifies required artifacts and their readiness steps.",
       "pattern_template": "The response should specify key artifacts to be prepared or shared and include deadlines for their readiness.",
@@ -102,7 +102,7 @@
       "grounding_requirement": "G3 - All files must exist in ENTITIES_TO_USE with type=File"
     },
     {
-      "pattern_id": "P5",
+      "pattern_id": "S5",
       "pattern_name": "Dependency Sequencing",
       "pattern_description": "Checks that tasks are logically ordered and dependencies are explicit.",
       "pattern_template": "The response should sequence tasks logically and make critical dependencies explicit.",
@@ -125,7 +125,7 @@
       "grounding_requirement": "G4 - Dependencies should align with topics in UTTERANCE or MEETING.Subject"
     },
     {
-      "pattern_id": "P6",
+      "pattern_id": "S6",
       "pattern_name": "Meeting Objective Clarity",
       "pattern_description": "Ensures the response states the meeting purpose and scope explicitly.",
       "pattern_template": "The response should clearly state the meeting's purpose and scope, aligned with context or assumptions.",
@@ -148,7 +148,7 @@
       "grounding_requirement": "G4 - Purpose must align with UTTERANCE intent or MEETING.Subject"
     },
     {
-      "pattern_id": "P7",
+      "pattern_id": "S7",
       "pattern_name": "Assumption Disclosure",
       "pattern_description": "Checks that the response explicitly notes assumptions or missing information.",
       "pattern_template": "The response should explicitly disclose assumptions or gaps in available information.",
@@ -171,7 +171,7 @@
       "grounding_requirement": "G5 - Disclosed assumptions should reflect actual gaps in source context"
     },
     {
-      "pattern_id": "P8",
+      "pattern_id": "S8",
       "pattern_name": "Stakeholder Alignment",
       "pattern_description": "Ensures the plan includes steps to confirm alignment with key stakeholders before T₀.",
       "pattern_template": "The response should include tasks to confirm input or alignment from stakeholders before finalizing agenda or materials.",
@@ -194,7 +194,7 @@
       "grounding_requirement": "G1 - Stakeholders must exist in ATTENDEES or ENTITIES_TO_USE"
     },
     {
-      "pattern_id": "P9",
+      "pattern_id": "S9",
       "pattern_name": "Grounding in Provided Context",
       "pattern_description": "Checks that the response does not introduce extraneous or fictitious details.",
       "pattern_template": "The response should only include attendees, files, and topics consistent with the provided context.",
@@ -217,7 +217,7 @@
       "grounding_requirement": "G5 - This IS the core grounding pattern; enforced via G1-G4"
     },
     {
-      "pattern_id": "P10",
+      "pattern_id": "S10",
       "pattern_name": "Risk Identification",
       "pattern_description": "Ensures the response identifies potential risks and mitigation strategies.",
       "pattern_template": "The response should identify timeline or dependency risks and propose mitigation steps.",
@@ -242,9 +242,9 @@
     }
   ],
   "grounding_assertions": {
-    "description": "Grounding assertions verify that claims in the response are FACTUALLY ACCURATE to the source context. Structural patterns (P1-P10) check if the plan HAS certain elements; grounding assertions (G1-G5) verify those elements are CORRECT.",
+    "description": "Grounding assertions verify that claims in the response are FACTUALLY ACCURATE to the source context. Structural patterns (S1-S10) check if the plan HAS certain elements; grounding assertions (G1-G5) verify those elements are CORRECT.",
     "key_distinction": {
-      "structural_check": "Does the plan have a meeting date? (P1)",
+      "structural_check": "Does the plan have a meeting date? (S1)",
       "grounding_check": "Is the meeting date CORRECT per source? (G2)"
     },
     "assertions": [
@@ -286,12 +286,12 @@
         "template": "No novel entities should be introduced that don't exist in source context",
         "verification": "Scan response for any entity not traceable to source → Flag as potential hallucination",
         "failure_mode": "Any fabricated person, file, date, topic, or fact",
-        "applies_to_patterns": ["P7", "P9", "P10"]
+        "applies_to_patterns": ["S7", "S9", "S10"]
       }
     ],
     "evaluation_approach": {
       "two_phase": {
-        "phase_1": "Structural Check (P1-P10): Does the plan HAVE the required elements?",
+        "phase_1": "Structural Check (S1-S10): Does the plan HAVE the required elements?",
         "phase_2": "Grounding Check (G1-G5): Are those elements ACCURATE to source?"
       },
       "scoring": {

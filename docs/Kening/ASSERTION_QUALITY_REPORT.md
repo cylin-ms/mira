@@ -30,7 +30,7 @@ The current assertion set demonstrates solid foundational coverage with signific
 ### Key Recommendations
 
 1. **Adopt Two-Layer Evaluation Framework**
-   - Layer 1: Structural Patterns (P1-P10) - "Does the plan have X?"
+   - Layer 1: Structural Patterns (S1-S10) - "Does the plan have X?"
    - Layer 2: Grounding Assertions (G1-G5) - "Is X factually correct?"
 
 2. **Prioritize Grounding Over Structure**
@@ -141,13 +141,13 @@ Assertions with **parameterized references** that verify against source at runti
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│              STRUCTURAL PATTERNS (P1-P10)                   │
+│              STRUCTURAL PATTERNS (S1-S10)                   │
 │         "Does the plan HAVE the right shape?"               │
 ├─────────────────────────────────────────────────────────────┤
-│  P1: Has meeting date/time?                    [✓/✗]       │
-│  P2: Has backward timeline?                    [✓/✗]       │
-│  P3: Has task owners?                          [✓/✗]       │
-│  P4: Has artifacts listed?                     [✓/✗]       │
+│  S1: Has meeting date/time?                    [✓/✗]       │
+│  S2: Has backward timeline?                    [✓/✗]       │
+│  S3: Has task owners?                          [✓/✗]       │
+│  S4: Has artifacts listed?                     [✓/✗]       │
 │  ...                                                        │
 └─────────────────────────────────────────────────────────────┘
                             ↓
@@ -167,11 +167,11 @@ Assertions with **parameterized references** that verify against source at runti
 
 | ID | Name | Template | Applies To |
 |----|------|----------|------------|
-| G1 | People Grounding | All people mentioned must exist in {source.ATTENDEES} | P1, P3, P8 |
-| G2 | Temporal Grounding | All dates must be derivable from {source.MEETING.StartTime} | P1, P2 |
-| G3 | Artifact Grounding | All files must exist in {source.ENTITIES where type=File} | P4, P9 |
-| G4 | Topic Grounding | Topics must align with {source.UTTERANCE} or {source.MEETING.Subject} | P5, P6 |
-| G5 | No Hallucination | No entities introduced that don't exist in source | P7, P9, P10 |
+| G1 | People Grounding | All people mentioned must exist in {source.ATTENDEES} | S1, S3, S8 |
+| G2 | Temporal Grounding | All dates must be derivable from {source.MEETING.StartTime} | S1, S2 |
+| G3 | Artifact Grounding | All files must exist in {source.ENTITIES where type=File} | S4, S9 |
+| G4 | Topic Grounding | Topics must align with {source.UTTERANCE} or {source.MEETING.Subject} | S5, S6 |
+| G5 | No Hallucination | No entities introduced that don't exist in source | S7, S9, S10 |
 
 ### Evidence-Based Scoring
 
@@ -195,7 +195,7 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 
 ### Quality Score Matrix
 
-| Scenario | Structural (P1-P10) | Grounding (G1-G5) | Overall Quality |
+| Scenario | Structural (S1-S10) | Grounding (G1-G5) | Overall Quality |
 |----------|---------------------|-------------------|-----------------|
 | Complete & Accurate | ✅ Pass | ✅ Pass | **Excellent** |
 | Complete but Hallucinated | ✅ Pass | ❌ Fail | **Reject** |
@@ -208,9 +208,9 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 
 **Priority Order (Revised):**
 1. **Grounding (G1-G5)** - Factual accuracy first
-2. **Critical Structural (P1, P2, P3, P9)** - Essential elements
-3. **Expected Structural (P4, P5, P6)** - Standard quality
-4. **Aspirational (P7, P8, P10)** - Excellence indicators
+2. **Critical Structural (S1, S2, S3, S9)** - Essential elements
+3. **Expected Structural (S4, S5, S6)** - Standard quality
+4. **Aspirational (S7, S8, S10)** - Excellence indicators
 
 ---
 
@@ -629,16 +629,16 @@ Target: >80% for Critical, >70% for Expected, >60% for Aspirational
 
 | Pattern | Primary Dimension | Secondary Dimensions |
 |---------|-------------------|---------------------|
-| P1: Explicit Meeting Details | Timeline & Scheduling | Meeting Context |
-| P2: Timeline Backward Planning | Timeline & Scheduling | Dependencies |
-| P3: Ownership Assignment | Task Ownership | - |
-| P4: Artifact Specification | Artifact Readiness | Timeline & Scheduling |
-| P5: Dependency Sequencing | Dependencies | Task Ownership |
-| P6: Meeting Objective Clarity | Meeting Context | - |
-| P7: Assumption Disclosure | Assumptions & Risks | - |
-| P8: Stakeholder Alignment | Stakeholder Alignment | Communication Quality |
-| P9: Grounding in Context | Meeting Context | - |
-| P10: Risk Identification | Assumptions & Risks | - |
+| S1: Explicit Meeting Details | Timeline & Scheduling | Meeting Context |
+| S2: Timeline Backward Planning | Timeline & Scheduling | Dependencies |
+| S3: Ownership Assignment | Task Ownership | - |
+| S4: Artifact Specification | Artifact Readiness | Timeline & Scheduling |
+| S5: Dependency Sequencing | Dependencies | Task Ownership |
+| S6: Meeting Objective Clarity | Meeting Context | - |
+| S7: Assumption Disclosure | Assumptions & Risks | - |
+| S8: Stakeholder Alignment | Stakeholder Alignment | Communication Quality |
+| S9: Grounding in Context | Meeting Context | - |
+| S10: Risk Identification | Assumptions & Risks | - |
 
 ### Appendix C: Recommended Tool Enhancements
 
@@ -650,7 +650,7 @@ Target: >80% for Critical, >70% for Expected, >60% for Aspirational
 
 ### Appendix D: GPT-5 Simulation & Examples
 
-To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (P1-P10)** and **Grounding Assertions (G1-G5)**.
+To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (S1-S10)** and **Grounding Assertions (G1-G5)**.
 
 **What the simulation demonstrates:**
 - How structural assertions check if a plan "has the right shape"
@@ -673,7 +673,7 @@ To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation
 | **GPT-5 Simulation Script** | Python script to generate plans and evaluate with two-layer framework | [generate_plan_examples_gpt5.py](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples_gpt5.py) |
 | **Generated Report** | Full evaluation report with Perfect/Medium/Low plan examples | [PLAN_QUALITY_EXAMPLES_GPT5.md](https://github.com/cylin-ms/mira/blob/master/docs/Kening/PLAN_QUALITY_EXAMPLES_GPT5.md) |
 | **Raw JSON Data** | Structured data including plans, assertions, and evaluations | [plan_examples_gpt5.json](https://github.com/cylin-ms/mira/blob/master/docs/Kening/plan_examples_gpt5.json) |
-| **Assertion Patterns** | P1-P10 structural patterns with G1-G5 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/Kening/assertion_patterns.json) |
+| **Assertion Patterns** | S1-S10 structural patterns with G1-G5 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/Kening/assertion_patterns.json) |
 
 ---
 
