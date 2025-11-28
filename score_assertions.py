@@ -240,35 +240,63 @@ async def evaluate_assertion(
 • Identifying actionable items, owners, deadlines, and deliverables
 • Recognizing implicit vs explicit information in planning documents
 
-## Your Evaluation Task:
-Determine if a workback plan response SATISFIES a given assertion. Focus on SEMANTIC MEANING, not exact wording.
+## TWO-LAYER EVALUATION FRAMEWORK
+
+Assertions belong to TWO distinct types requiring DIFFERENT evaluation logic:
+
+### Layer 1: STRUCTURAL Assertions (Patterns S1-S10)
+**Question:** "Does the plan HAVE X?" (Checks PRESENCE/SHAPE)
+
+| Pattern | What It Checks |
+|---------|----------------|
+| S1 | Has explicit meeting details (date, time, attendees) |
+| S2 | Has timeline aligned to meeting date |
+| S3 | Has named task owners (not generic "someone") |
+| S4 | Lists specific artifacts/files |
+| S5 | States reasonable completion dates |
+| S6 | Identifies blockers and dependencies |
+| S7 | Links tasks to specific source entities |
+| S8 | Mentions appropriate communication channels |
+| S9 | Meta-check: passes when G1-G5 all pass |
+| S10 | Prioritizes tasks appropriately |
+
+**Evaluation Rule:** ✅ PASS if element EXISTS, ❌ FAIL if element MISSING
+**Do NOT fail because value is wrong** - that's grounding's job!
+
+### Layer 2: GROUNDING Assertions (Patterns G1-G5)  
+**Question:** "Is X CORRECT vs source?" (Checks FACTUAL ACCURACY)
+
+| Pattern | What It Checks |
+|---------|----------------|
+| G1 | People match source.ATTENDEES |
+| G2 | Dates match source.MEETING.StartTime |
+| G3 | Files match source.ENTITIES_TO_USE |
+| G4 | Topics align with source.UTTERANCE |
+| G5 | No fabricated/hallucinated entities |
+
+**Evaluation Rule:** ✅ PASS if value MATCHES source, ❌ FAIL if HALLUCINATION
 
 ## Evaluation Criteria by Level:
 
 🔴 **CRITICAL** (Must Pass):
-- Information MUST be present and accurate
-- Core requirements that define a valid workback plan
-- Examples: correct meeting date/time, key participants mentioned, main tasks identified
-- FAIL only if clearly missing or factually wrong
+- For Structural: Core structure MUST be present
+- For Grounding: Critical facts MUST be accurate
+- FAIL only if clearly missing (structural) or factually wrong (grounding)
 
 🟡 **EXPECTED** (Should Pass):
-- Standard best practices that a good plan should include
-- Examples: task owners assigned, reasonable timeline, relevant context referenced
-- PASS if the concept is addressed, even with different wording or structure
-- PASS if the intent is satisfied through equivalent content
+- Standard best practices for structure and accuracy
+- PASS if the concept is addressed appropriately
 
 🟢 **ASPIRATIONAL** (Nice to Have):
-- Enhancements that elevate quality but aren't essential
-- Examples: risk mitigation, follow-up suggestions, alternative approaches
-- PASS if there's ANY reasonable attempt to address the concept
-- PASS if related helpful content is provided instead
+- Enhancements beyond basic requirements
+- PASS if there's ANY reasonable attempt
 
 ## Key Principle:
-Evaluate INTENT and SUBSTANCE over exact phrasing. If the response achieves the goal of the assertion through different but equivalent means, it PASSES.
+First determine if this is STRUCTURAL (presence) or GROUNDING (accuracy), then evaluate accordingly.
 
 ## Output Format (JSON only):
 {"passed": true, "explanation": "Brief evidence from response"}
-{"passed": false, "explanation": "What's specifically missing"}"""
+{"passed": false, "explanation": "What's specifically missing/wrong"}"""
 
     user_prompt = f"""## Workback Plan Response:
 

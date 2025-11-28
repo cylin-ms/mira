@@ -195,6 +195,27 @@ def build_critique_prompt(assertions_batch: List[Dict]) -> str:
 
 A workback plan helps users prepare for upcoming meetings by identifying tasks, deadlines, dependencies, and materials needed.
 
+## TWO-LAYER ASSERTION FRAMEWORK
+
+When critiquing assertions, classify each as STRUCTURAL or GROUNDING:
+
+### STRUCTURAL Assertions (S1-S10) - Check PRESENCE/SHAPE
+- Question: "Does the plan HAVE X?"
+- Should NOT contain hardcoded values (dates, names, files)
+- Examples: "Has a meeting date", "Lists attendees", "Has task owners"
+
+### GROUNDING Assertions (G1-G5) - Check FACTUAL ACCURACY
+- Question: "Is X CORRECT vs source?"
+- MUST reference a source field (e.g., source.ATTENDEES, source.MEETING.StartTime)
+- Examples: "Date matches source.MEETING.StartTime", "Owners exist in source.ATTENDEES"
+
+### COMMON PITFALLS TO FLAG:
+❌ Structural assertion with hardcoded values: "Plan states date as January 15" → Should be "Plan includes a meeting date"
+❌ Grounding without source reference: "All attendees are correct" → Should be "Attendees match source.ATTENDEES"
+❌ Mixing layers: "Plan has correct attendees" → Split into S (has attendees) + G (match source)
+
+---
+
 Analyze the following {len(assertions_batch)} assertions used to evaluate workback plan quality. For EACH assertion, provide a structured critique:
 
 {assertions_text}
@@ -204,17 +225,25 @@ For EACH assertion, analyze and provide a JSON response with this structure:
   "critiques": [
     {{
       "assertion_index": 1,
+      "assertion_layer": "structural or grounding",
+      "layer_compliance": "compliant, violation, or needs-split",
+      "layer_violation_reason": "<if violation: explain what's wrong>",
       "quality_score": <1-10>,
       "issues": [
         {{
-          "type": "<specificity|measurability|applicability|robustness|redundancy|ambiguity|completeness>",
+          "type": "<specificity|measurability|applicability|robustness|redundancy|ambiguity|completeness|layer-mixing|hardcoded-values|missing-source-ref>",
           "severity": "<high|medium|low>",
           "description": "<specific issue>"
         }}
       ],
       "strengths": ["<strength 1>", "<strength 2>"],
       "improvement_suggestions": ["<suggestion 1>", "<suggestion 2>"],
-      "rewritten_assertion": "<improved version or 'N/A' if already good>",
+      "rewritten_assertion": "<improved version following two-layer framework or 'N/A' if already good>",
+      "split_recommendation": {{
+        "needed": true or false,
+        "structural_version": "<if needs split: structural-only version>",
+        "grounding_version": "<if needs split: grounding-only version with source reference>"
+      }},
       "generalizability": "<high|medium|low>",
       "generalizability_notes": "<can this be applied to other workback plans?>"
     }}
@@ -222,13 +251,14 @@ For EACH assertion, analyze and provide a JSON response with this structure:
 }}
 
 Focus on these quality dimensions:
-1. **Specificity**: Is it specific enough to be testable but not overly tied to one example?
-2. **Measurability**: Can an evaluator objectively determine pass/fail?
-3. **Applicability**: Does it apply to workback plans generally or just this specific one?
-4. **Robustness**: Will it work across different meeting types, domains, and contexts?
-5. **Redundancy**: Is it duplicating what other assertions already check?
-6. **Ambiguity**: Are there multiple valid interpretations?
-7. **Completeness**: Does it fully capture the quality aspect it's meant to check?
+1. **Layer Compliance**: Does it correctly follow the structural vs grounding distinction?
+2. **Specificity**: Is it specific enough to be testable but not overly tied to one example?
+3. **Measurability**: Can an evaluator objectively determine pass/fail?
+4. **Applicability**: Does it apply to workback plans generally or just this specific one?
+5. **Robustness**: Will it work across different meeting types, domains, and contexts?
+6. **Redundancy**: Is it duplicating what other assertions already check?
+7. **Ambiguity**: Are there multiple valid interpretations?
+8. **Source Reference**: For grounding assertions, is the source field clearly specified?
 
 Return ONLY valid JSON, no other text."""
 
@@ -251,24 +281,75 @@ def build_pattern_clustering_prompt(assertions: List[Dict], dimensions: List[str
     
     return f"""You are an expert in evaluation framework design for AI systems.
 
+## TWO-LAYER ASSERTION FRAMEWORK (REQUIRED)
+
+All assertions MUST be classified into exactly one of two layers:
+
+### Layer 1: STRUCTURAL Assertions (S1-S10)
+**Purpose:** Check if the plan HAS required elements (PRESENCE/SHAPE)
+**Question:** "Does the plan HAVE X?"
+**Key Rule:** Do NOT include specific values - only check if the element EXISTS
+
+| ID | Pattern | Checks For |
+|----|---------|------------|
+| S1 | Explicit Meeting Details | Has date, time, timezone, attendees listed |
+| S2 | Timeline Alignment | Has timeline working back from meeting |
+| S3 | Ownership Assignment | Has named owners (not "someone", "team") |
+| S4 | Artifact Specification | Lists specific files/documents |
+| S5 | Date Specification | States completion dates for tasks |
+| S6 | Blocker Identification | Identifies dependencies and blockers |
+| S7 | Source Traceability | Links tasks to specific source entities |
+| S8 | Communication Channels | Mentions appropriate communication methods |
+| S9 | Grounding Meta-Check | Passes when G1-G5 all pass |
+| S10 | Priority Assignment | Has priority levels for tasks |
+
+### Layer 2: GROUNDING Assertions (G1-G5)  
+**Purpose:** Check if values are CORRECT vs source (FACTUAL ACCURACY)
+**Question:** "Is X CORRECT?"
+**Key Rule:** MUST reference a source field for comparison
+
+| ID | Pattern | Checks Against |
+|----|---------|---------------|
+| G1 | People Grounding | source.ATTENDEES |
+| G2 | Temporal Grounding | source.MEETING.StartTime |
+| G3 | Artifact Grounding | source.ENTITIES_TO_USE |
+| G4 | Topic Grounding | source.UTTERANCE |
+| G5 | No Hallucination | No fabricated entities |
+
+## COMMON PITFALLS TO AVOID
+
+❌ **Wrong:** "The plan states the meeting date as January 15" (This is GROUNDING mixed into structural!)
+✅ **Correct Structural:** "The plan includes a meeting date"
+✅ **Correct Grounding:** "The meeting date matches source.MEETING.StartTime"
+
+❌ **Wrong:** "Tasks are assigned to Sarah, Mike, or Lisa" (Hardcoded names!)
+✅ **Correct Structural:** "Each task has a named owner"
+✅ **Correct Grounding:** "All task owners exist in source.ATTENDEES"
+
+---
+
 Analyze these workback plan assertions grouped by dimension and identify generalizable PATTERNS that human judges can use to evaluate ANY workback plan response.
 
 Current assertions by dimension:
 {dim_samples}
 
 Your task:
-1. Identify 10-15 HIGH-LEVEL ASSERTION PATTERNS that generalize across specific examples
-2. For each pattern, provide concrete evaluation criteria for human judges
-3. Suggest how patterns can be combined for comprehensive coverage
+1. Classify each pattern as STRUCTURAL (S1-S10) or GROUNDING (G1-G5)
+2. Ensure structural patterns check PRESENCE only, not specific values
+3. Ensure grounding patterns reference specific source fields
+4. Suggest how patterns can be combined for comprehensive coverage
 
 Return JSON with this structure:
 {{
   "patterns": [
     {{
-      "pattern_id": "P1",
+      "pattern_id": "S1 or G1 (use S for structural, G for grounding)",
+      "pattern_layer": "structural or grounding",
       "pattern_name": "<short descriptive name>",
       "pattern_description": "<what this pattern checks>",
-      "pattern_template": "The response should [VERB] [WHAT] [CONDITION/CONTEXT]",
+      "pattern_question": "For structural: 'Does the plan HAVE X?' For grounding: 'Is X CORRECT vs source?'",
+      "pattern_template": "For structural: 'The plan includes/has/lists [ELEMENT]'. For grounding: 'The [ELEMENT] matches source.[FIELD]'",
+      "source_reference": "For grounding only: source.ATTENDEES, source.MEETING.StartTime, etc.",
       "applies_to_dimensions": ["<dim1>", "<dim2>"],
       "level_recommendation": "<critical|expected|aspirational>",
       "evaluation_criteria": [
@@ -276,10 +357,12 @@ Return JSON with this structure:
         "<criterion 2 for human judges>"
       ],
       "example_instances": [
-        "<concrete example assertion following this pattern>"
+        "<concrete example assertion following this pattern - NO HARDCODED VALUES for structural>"
       ],
       "anti_patterns": [
-        "<what NOT to do when creating assertions of this type>"
+        "Mixing grounding values into structural assertions",
+        "Hardcoding specific names, dates, or files",
+        "<other anti-pattern>"
       ],
       "robustness_notes": "<how robust is this pattern across different contexts?>"
     }}

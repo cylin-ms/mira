@@ -238,8 +238,34 @@ def evaluate_assertion(assertion: Dict, response_text: str) -> Dict:
     justification = assertion.get('justification', assertion.get('reasoning', {}))
     source_id = justification.get('sourceID', justification.get('source', ''))
     
-    # Prompt for GPT-5 evaluation
+    # Prompt for GPT-5 evaluation with Two-Layer Framework
     prompt = f"""You are evaluating whether a response correctly satisfies an assertion.
+
+## TWO-LAYER EVALUATION FRAMEWORK
+
+Assertions fall into two categories that require DIFFERENT evaluation approaches:
+
+**STRUCTURAL Assertions (S1-S10)** - Check PRESENCE/SHAPE:
+- Question: "Does the plan HAVE X?"
+- Checks: Does the element exist? Is the format correct?
+- Examples: "Has a meeting date", "Lists attendees", "Has task owners"
+- Evaluation: Look for PRESENCE of the structural element, NOT its correctness
+- ✅ PASS if the element exists, even if the value might be wrong
+- ❌ FAIL only if the element is completely missing
+
+**GROUNDING Assertions (G1-G5)** - Check FACTUAL ACCURACY:
+- Question: "Is X CORRECT vs source?"
+- Checks: Does the value match the authoritative source?
+- Examples: "Date matches source.MEETING.StartTime", "Attendees exist in source.ATTENDEES"
+- Evaluation: Compare the value against the ground truth source
+- ✅ PASS if value matches source
+- ❌ FAIL if value doesn't match (hallucination)
+
+## CRITICAL DISTINCTION
+| Type | Checks For | Example Pass | Example Fail |
+|------|-----------|--------------|---------------|
+| Structural | PRESENCE | Plan has a date field | No date mentioned |
+| Grounding | ACCURACY | Date is Jan 15 (matches source) | Date is Jan 16 (source says Jan 15) |
 
 ASSERTION:
 "{assertion_text}"
@@ -248,15 +274,18 @@ RESPONSE TO EVALUATE:
 {response_text}
 
 Analyze the response and determine:
-1. Does the response satisfy this assertion? (true/false)
-2. What parts of the response support or contradict the assertion?
-3. Which section/header of the response contains each piece of evidence?
-4. How confident is the support for each relevant part?
+1. Is this a STRUCTURAL assertion (checking presence) or GROUNDING assertion (checking accuracy)?
+2. Does the response satisfy this assertion based on the correct evaluation type?
+3. What parts of the response support or contradict the assertion?
+4. Which section/header of the response contains each piece of evidence?
+5. How confident is the support for each relevant part?
 
 Return your analysis as JSON in this exact format:
 {{
+    "assertion_type": "structural" or "grounding",
     "passed": true or false,
     "explanation": "Brief explanation of your evaluation",
+    "evaluation_basis": "For structural: what element was found/missing. For grounding: what value was compared to what source.",
     "supporting_spans": [
         {{
             "text": "exact quote from the response that supports/contradicts the assertion",
@@ -268,6 +297,9 @@ Return your analysis as JSON in this exact format:
 }}
 
 Important:
+- FIRST determine if this is a structural (presence) or grounding (accuracy) assertion
+- For STRUCTURAL: Pass if the element EXISTS, regardless of its value
+- For GROUNDING: Pass only if the value is CORRECT vs source
 - Extract 1-5 most relevant text spans from the response
 - Use EXACT quotes from the response (copy-paste the text)
 - Include the section/header name where each quote appears (look for markdown headers like ##, ###, or labeled sections)
