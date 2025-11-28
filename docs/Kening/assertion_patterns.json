@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "version": "2.0",
+    "last_updated": "2025-11-28",
+    "description": "Assertion pattern framework with structural patterns (P1-P10) and grounding assertions (G1-G5)",
+    "key_insight": "Structural patterns check SHAPE (does the plan have X?), grounding assertions verify FACTS (is X accurate to source?)"
+  },
   "patterns": [
     {
       "pattern_id": "P1",
@@ -22,7 +28,8 @@
         "Introducing fictitious attendees or incorrect meeting times.",
         "Omitting the meeting date/time entirely."
       ],
-      "robustness_notes": "Highly robust; applies to any workback plan regardless of context."
+      "robustness_notes": "Highly robust; applies to any workback plan regardless of context.",
+      "grounding_requirement": "G2 - All dates/times must match source MEETING or EMAIL timestamps"
     },
     {
       "pattern_id": "P2",
@@ -45,7 +52,8 @@
         "Listing tasks without dates.",
         "Scheduling tasks after the meeting start."
       ],
-      "robustness_notes": "Applicable across all meeting prep scenarios; buffer duration may vary."
+      "robustness_notes": "Applicable across all meeting prep scenarios; buffer duration may vary.",
+      "grounding_requirement": "G2 - Timeline dates must be derivable from source meeting date"
     },
     {
       "pattern_id": "P3",
@@ -67,7 +75,8 @@
         "Using vague terms like 'someone' or 'team' instead of a person.",
         "Leaving tasks unassigned."
       ],
-      "robustness_notes": "Strongly generalizable; applies to any structured plan."
+      "robustness_notes": "Strongly generalizable; applies to any structured plan.",
+      "grounding_requirement": "G1 - All owners must exist in ATTENDEES or ENTITIES_TO_USE"
     },
     {
       "pattern_id": "P4",
@@ -89,7 +98,8 @@
         "Referring vaguely to 'documents' without specifying which ones.",
         "Failing to mention artifact distribution timing."
       ],
-      "robustness_notes": "Generalizable if adapted to context-specific artifacts."
+      "robustness_notes": "Generalizable if adapted to context-specific artifacts.",
+      "grounding_requirement": "G3 - All files must exist in ENTITIES_TO_USE with type=File"
     },
     {
       "pattern_id": "P5",
@@ -111,7 +121,8 @@
         "Listing tasks without any order.",
         "Scheduling dependent tasks before their prerequisites."
       ],
-      "robustness_notes": "Widely applicable; dependency complexity may vary."
+      "robustness_notes": "Widely applicable; dependency complexity may vary.",
+      "grounding_requirement": "G4 - Dependencies should align with topics in UTTERANCE or MEETING.Subject"
     },
     {
       "pattern_id": "P6",
@@ -133,7 +144,8 @@
         "Leaving the purpose unstated.",
         "Inventing an unrelated purpose."
       ],
-      "robustness_notes": "Generalizable; purpose can be inferred if not explicitly given."
+      "robustness_notes": "Generalizable; purpose can be inferred if not explicitly given.",
+      "grounding_requirement": "G4 - Purpose must align with UTTERANCE intent or MEETING.Subject"
     },
     {
       "pattern_id": "P7",
@@ -155,7 +167,8 @@
         "Failing to acknowledge obvious gaps.",
         "Making assumptions without disclosure."
       ],
-      "robustness_notes": "Important for transparency; applicability depends on context ambiguity."
+      "robustness_notes": "Important for transparency; applicability depends on context ambiguity.",
+      "grounding_requirement": "G5 - Disclosed assumptions should reflect actual gaps in source context"
     },
     {
       "pattern_id": "P8",
@@ -177,7 +190,8 @@
         "Finalizing agenda without stakeholder input.",
         "Omitting stakeholder tasks entirely."
       ],
-      "robustness_notes": "Applicable in multi-party contexts; less relevant for solo meetings."
+      "robustness_notes": "Applicable in multi-party contexts; less relevant for solo meetings.",
+      "grounding_requirement": "G1 - Stakeholders must exist in ATTENDEES or ENTITIES_TO_USE"
     },
     {
       "pattern_id": "P9",
@@ -199,7 +213,8 @@
         "Adding unrelated agenda topics or files.",
         "Inventing new participants."
       ],
-      "robustness_notes": "Critical for factual accuracy; universally applicable."
+      "robustness_notes": "Critical for factual accuracy; universally applicable.",
+      "grounding_requirement": "G5 - This IS the core grounding pattern; enforced via G1-G4"
     },
     {
       "pattern_id": "P10",
@@ -222,9 +237,71 @@
         "Ignoring obvious risks.",
         "Listing risks without mitigation."
       ],
-      "robustness_notes": "Adds depth; not always required but valuable for complex plans."
+      "robustness_notes": "Adds depth; not always required but valuable for complex plans.",
+      "grounding_requirement": "G5 - Risks should be inferable from context complexity, not fabricated"
     }
   ],
+  "grounding_assertions": {
+    "description": "Grounding assertions verify that claims in the response are FACTUALLY ACCURATE to the source context. Structural patterns (P1-P10) check if the plan HAS certain elements; grounding assertions (G1-G5) verify those elements are CORRECT.",
+    "key_distinction": {
+      "structural_check": "Does the plan have a meeting date? (P1)",
+      "grounding_check": "Is the meeting date CORRECT per source? (G2)"
+    },
+    "assertions": [
+      {
+        "id": "G1",
+        "name": "People Grounding",
+        "template": "All people mentioned must exist in {source.ATTENDEES} or {source.ENTITIES_TO_USE}",
+        "verification": "Extract all person names from response → Check each exists in source attendees or entity list",
+        "failure_mode": "Fabricated attendee or owner not in source context",
+        "applies_to_patterns": ["P1", "P3", "P8"]
+      },
+      {
+        "id": "G2",
+        "name": "Temporal Grounding",
+        "template": "All dates/times must be derivable from {source.MEETING.StartTime} or {source.EMAIL timestamps}",
+        "verification": "Extract all dates from response → Verify each is derivable from source meeting/email dates",
+        "failure_mode": "Incorrect meeting date, fabricated deadlines not relative to T₀",
+        "applies_to_patterns": ["P1", "P2"]
+      },
+      {
+        "id": "G3",
+        "name": "Artifact Grounding",
+        "template": "All files/documents must exist in {source.ENTITIES_TO_USE where type=File}",
+        "verification": "Extract all file references from response → Check each exists in source entity list",
+        "failure_mode": "Reference to non-existent files or fabricated document names",
+        "applies_to_patterns": ["P4", "P9"]
+      },
+      {
+        "id": "G4",
+        "name": "Topic Grounding",
+        "template": "All topics/purposes must align with {source.UTTERANCE} intent or {source.MEETING.Subject}",
+        "verification": "Extract stated purpose/topics → Verify alignment with user query and meeting subject",
+        "failure_mode": "Invented meeting purpose unrelated to source context",
+        "applies_to_patterns": ["P5", "P6"]
+      },
+      {
+        "id": "G5",
+        "name": "No Hallucination",
+        "template": "No novel entities should be introduced that don't exist in source context",
+        "verification": "Scan response for any entity not traceable to source → Flag as potential hallucination",
+        "failure_mode": "Any fabricated person, file, date, topic, or fact",
+        "applies_to_patterns": ["P7", "P9", "P10"]
+      }
+    ],
+    "evaluation_approach": {
+      "two_phase": {
+        "phase_1": "Structural Check (P1-P10): Does the plan HAVE the required elements?",
+        "phase_2": "Grounding Check (G1-G5): Are those elements ACCURATE to source?"
+      },
+      "scoring": {
+        "structural_only_pass": "Plan has good shape but may contain hallucinations",
+        "grounding_only_pass": "Facts are accurate but plan may be incomplete",
+        "both_pass": "High-quality, complete, and factually accurate plan"
+      },
+      "evidence_requirement": "Each grounding assertion should include supporting_spans citing source location"
+    }
+  },
   "dimension_consolidation": {
     "Timeline & Scheduling": [
       "Timeline & Buffers",
