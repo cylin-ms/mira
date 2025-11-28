@@ -30,7 +30,9 @@ The current assertion set demonstrates solid foundational coverage with signific
 ### Key Recommendations
 
 1. **Adopt Two-Layer Evaluation Framework**
-   - Layer 1: Structural Patterns (S1-S10) - "Does the plan have X?"
+   - Layer 1: Structural Patterns (S1-S18) - "Does the plan have X?"
+     - S1-S10 (Core): Original 10 structural dimensions for essential WBP elements
+     - S11-S18 (Extended): Additional dimensions for advanced planning aspects
    - Layer 2: Grounding Assertions (G1-G5) - "Is X factually correct?"
 
 2. **Prioritize Grounding Over Structure**
@@ -141,14 +143,18 @@ Assertions with **parameterized references** that verify against source at runti
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│              STRUCTURAL PATTERNS (S1-S10)                   │
+│              STRUCTURAL PATTERNS (S1-S18)                   │
 │         "Does the plan HAVE the right shape?"               │
 ├─────────────────────────────────────────────────────────────┤
-│  S1: Has meeting date/time?                    [✓/✗]       │
-│  S2: Has backward timeline?                    [✓/✗]       │
-│  S3: Has task owners?                          [✓/✗]       │
-│  S4: Has artifacts listed?                     [✓/✗]       │
-│  ...                                                        │
+│  S1-S10 (Core): Essential WBP elements                      │
+│    S1: Has meeting date/time?                  [✓/✗]       │
+│    S2: Has backward timeline?                  [✓/✗]       │
+│    S3: Has task owners?                        [✓/✗]       │
+│    ...S4-S10                                               │
+│  S11-S18 (Extended): Advanced planning aspects              │
+│    S11: Has risk mitigation strategy?          [✓/✗]       │
+│    S12: Has milestone validation?              [✓/✗]       │
+│    ...S13-S18                                              │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -195,7 +201,7 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 
 ### Quality Score Matrix
 
-| Scenario | Structural (S1-S10) | Grounding (G1-G5) | Overall Quality |
+| Scenario | Structural (S1-S18) | Grounding (G1-G5) | Overall Quality |
 |----------|---------------------|-------------------|-----------------|
 | Complete & Accurate | ✅ Pass | ✅ Pass | **Excellent** |
 | Complete but Hallucinated | ✅ Pass | ❌ Fail | **Reject** |
@@ -208,9 +214,13 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 
 **Priority Order (Revised):**
 1. **Grounding (G1-G5)** - Factual accuracy first
-2. **Critical Structural (S1, S2, S3, S9)** - Essential elements
-3. **Expected Structural (S4, S5, S6)** - Standard quality
-4. **Aspirational (S7, S8, S10)** - Excellence indicators
+2. **Critical Structural (S1, S2, S3, S9)** - Essential elements (weight=3)
+3. **Expected Structural (S4, S5, S6, S7, S8, S10)** - Standard quality (weight=2)
+4. **Extended Structural (S11-S18)** - Advanced planning aspects (weight=2)
+   - S11: Risk Mitigation Strategy, S12: Milestone Validation
+   - S13: Constraint Recognition, S14: Dependency Mapping
+   - S15: Deliverable Specification, S16: Communication Plan
+   - S17: Progress Tracking, S18: Contingency Planning
 
 ---
 
@@ -650,7 +660,7 @@ Target: >80% for Critical, >70% for Expected, >60% for Aspirational
 
 ### Appendix D: GPT-5 Simulation & Examples
 
-To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (S1-S10)** and **Grounding Assertions (G1-G5)**.
+To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (S1-S18)** and **Grounding Assertions (G1-G5)**.
 
 **What the simulation demonstrates:**
 - How structural assertions check if a plan "has the right shape"
@@ -671,9 +681,9 @@ To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation
 | Resource | Description | Link |
 |----------|-------------|------|
 | **GPT-5 Simulation Script** | Python script to generate plans and evaluate with two-layer framework | [generate_plan_examples_gpt5.py](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples_gpt5.py) |
-| **Generated Report** | Full evaluation report with Perfect/Medium/Low plan examples | [PLAN_QUALITY_EXAMPLES_GPT5.md](https://github.com/cylin-ms/mira/blob/master/docs/Kening/PLAN_QUALITY_EXAMPLES_GPT5.md) |
-| **Raw JSON Data** | Structured data including plans, assertions, and evaluations | [plan_examples_gpt5.json](https://github.com/cylin-ms/mira/blob/master/docs/Kening/plan_examples_gpt5.json) |
-| **Assertion Patterns** | S1-S10 structural patterns with G1-G5 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/Kening/assertion_patterns.json) |
+| **Generated Report** | Full evaluation report with Perfect/Medium/Low plan examples | [PLAN_QUALITY_EXAMPLES_GPT5.md](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/PLAN_QUALITY_EXAMPLES_GPT5.md) |
+| **Raw JSON Data** | Structured data including plans, assertions, and evaluations | [plan_examples_gpt5.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/plan_examples_gpt5.json) |
+| **Assertion Patterns** | S1-S18 structural patterns with G1-G5 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/assertion_patterns.json) |
 
 ---
 
