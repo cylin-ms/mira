@@ -1,0 +1,437 @@
+{
+  "metadata": {
+    "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
+    "timestamp": "2025-11-28T18:18:57.629951",
+    "num_meetings": 2,
+    "total_assertions": 23,
+    "evaluation_method": "gpt5",
+    "rubric": "Chin-Yew's WBP Evaluation Rubric",
+    "dimensions_used": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S11",
+      "S18",
+      "S19",
+      "G1",
+      "G2",
+      "G3",
+      "G4",
+      "G5"
+    ]
+  },
+  "statistics": {
+    "total_assertions": 23,
+    "dimension_distribution": {
+      "S1": 2,
+      "S19": 2,
+      "S6": 3,
+      "S3": 4,
+      "S4": 6,
+      "S2": 5,
+      "G5": 1
+    },
+    "layer_distribution": {
+      "structural": 22,
+      "grounding": 1,
+      "unknown": 0
+    },
+    "quality_distribution": {
+      "missing (0)": 8,
+      "partial (1)": 1,
+      "fully_met (2)": 14
+    },
+    "average_quality": 1.2608695652173914,
+    "passed": 15,
+    "failed": 8,
+    "pass_rate": 65.2,
+    "with_issues": 9,
+    "issue_rate": 39.1,
+    "gpt5_evaluated": 23,
+    "gpt5_rate": 100.0,
+    "unmapped_dimensions": 0,
+    "unmapped_rate": 0.0
+  },
+  "weighted_score": 0.661,
+  "meetings": [
+    {
+      "index": 0,
+      "utterance": "Help me make a workback plan for the upcoming meeting '1:1 Action Items Review'",
+      "num_assertions": 11,
+      "assertion_evaluations": [
+        {
+          "assertion_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
+          "level": "critical",
+          "original_dimension": "Timeline & Meeting Details",
+          "mapped_dimension": "S1",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response clearly includes the meeting subject and the scheduled date/time in PST.",
+          "evidence": "Subject: 1:1 Action Items Review\nDate/Time: 2025-07-26 @ 14:00–14:30 PST",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
+          "level": "critical",
+          "original_dimension": "Disclosure of assumptions",
+          "mapped_dimension": "S19",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response explicitly states that the timeline is extremely tight and provides the current time and remaining hours before the meeting.",
+          "evidence": "Current Time: 2025-07-25 22:00 (+08:00) → ~16 hours remain before meeting start\nTimeline extremely tight → focus on immediate prep and alignment",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
+          "level": "critical",
+          "original_dimension": "Dependencies & Sequencing",
+          "mapped_dimension": "S6",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response lists pre-meeting tasks including confirming agenda, sharing pre-read, and verifying artifact accessibility with specific times before the meeting.",
+          "evidence": "Confirm agenda & time slot (Immediate)\nShare pre-read with links ... by July 26, 00:15 PST\nVerify artifact accessibility by July 26, 00:30 PST",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
+          "level": "critical",
+          "original_dimension": "Ownership",
+          "mapped_dimension": "S3",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response identifies Tisa Odonoghue as the plan owner, which implies ownership of the listed tasks.",
+          "evidence": "Plan Owner: Tisa Odonoghue",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
+          "level": "expected",
+          "original_dimension": "Meeting Objective & Scope",
+          "mapped_dimension": "S1",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response explicitly states the assumed purpose of the meeting as closing out configuration standards items and aligning on pending AIs.",
+          "evidence": "Assumed purpose: Close out configuration standards items and align on pending AIs",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should include a task to share pre-reads that reference 'Config_Change_Log.xlsx', 'Secure_Defaults_and_Vault_Guide.docx', and 'Schema_Validation_Pipeline_Details.docx'.",
+          "level": "expected",
+          "original_dimension": "Artifact Readiness",
+          "mapped_dimension": "S4",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response explicitly lists a task to share pre-read materials and includes all three specified artifact filenames.",
+          "evidence": "Share pre-read with links to: Config_Change_Log.xlsx, Secure_Defaults_and_Vault_Guide.docx, Schema_Validation_Pipeline_Details.docx by July 26, 00:15 PST",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
+          "level": "expected",
+          "original_dimension": "Timeline & Buffers",
+          "mapped_dimension": "S2",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response specifies the pre-read sharing task with a deadline of July 26, 00:15 PST, which is before the meeting start time.",
+          "evidence": "Share pre-read with links ... by July 26, 00:15 PST",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
+          "level": "expected",
+          "original_dimension": "Logistics & Sequencing",
+          "mapped_dimension": "S6",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response includes a task for meeting day prep to check Teams link and create a live doc by July 26, 12:30 PST, which aligns with the assertion.",
+          "evidence": "Meeting day prep tasks (check Teams link, create live doc) by July 26, 12:30 PST",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should include a step to draft the agenda outline by July 26, 00:00 PST with bullet points aligned to schema validation and vault updates.",
+          "level": "aspirational",
+          "original_dimension": "Agenda & Preparation Quality",
+          "mapped_dimension": "S4",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 1,
+          "explanation": "The response includes a step to draft the agenda outline by July 26, 00:00 PST, but does not mention bullet points aligned to schema validation and vault updates.",
+          "evidence": "Draft Action Items Agenda Outline by July 26, 00:00 PST",
+          "issues": [
+            "Agenda content details (schema validation and vault updates) not specified."
+          ],
+          "suggestions": [
+            "Include explicit mention of agenda topics such as schema validation and vault updates."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should identify that artifact permissions need verification and clearly schedule this task before midnight buffer (by July 26, 00:30 PST).",
+          "level": "expected",
+          "original_dimension": "Artifact Readiness & Dependencies",
+          "mapped_dimension": "S4",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response includes a task to verify artifact accessibility by July 26, 00:30 PST, which satisfies the requirement.",
+          "evidence": "Verify artifact accessibility by July 26, 00:30 PST",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should not introduce any attendee other than Tisa Odonoghue and Nila Tanguma as participants in the plan.",
+          "level": "critical",
+          "original_dimension": "Accuracy & Scope",
+          "mapped_dimension": "G5",
+          "layer": "grounding",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response lists only Tisa Odonoghue as Organizer and Nila Tanguma as Attendee, with no additional participants mentioned.",
+          "evidence": "Organizer: Tisa Odonoghue\nAttendee: Nila Tanguma",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        }
+      ],
+      "weighted_score": 0.962,
+      "timestamp": "2025-11-28T18:18:32.217155"
+    },
+    {
+      "index": 1,
+      "utterance": "Help me make a workback plan for the upcoming meeting '1:1 Action Items Review'",
+      "num_assertions": 12,
+      "assertion_evaluations": [
+        {
+          "assertion_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
+          "level": "critical",
+          "original_dimension": "Timeline",
+          "mapped_dimension": "S2",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response explicitly states the meeting date and time as July 26, 2025 at 14:00 PST.",
+          "evidence": "**Scheduled Date:** **Saturday, July 26, 2025**\n**Time:** 14:00–14:30 PST",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
+          "level": "critical",
+          "original_dimension": "Ownership clarity",
+          "mapped_dimension": "S3",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response lists Tisa Odonoghue as the organizer and Nila Tanguma as an attendee.",
+          "evidence": "**Organizer:** Tisa Odonoghue (DevOps Engineer)\n**Attendee(s):**  - Nila Tanguma (Engineering Manager)",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
+          "level": "critical",
+          "original_dimension": "Ownership clarity",
+          "mapped_dimension": "S3",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "The excerpt does not show any actionable tasks with owners and due dates; it only begins to outline phases without listing tasks.",
+          "evidence": "The response ends at: '### **PHASE 1: TODAY THROUGH JULY 24 (Planning & Alignment)** **1. Confi' — no tasks with owners or due dates are visible.",
+          "issues": [
+            "No explicit tasks with owners and due dates are present in the provided content."
+          ],
+          "suggestions": [
+            "Include at least five tasks with clear owners and due dates before the meeting."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
+          "level": "critical",
+          "original_dimension": "Timeline & dependencies",
+          "mapped_dimension": "S2",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "The response does not show the specific task 'Confirm Meeting Objectives & Scope' with owner and due date; the text cuts off before any such detail.",
+          "evidence": "The snippet ends with '**1. Confi', which suggests the start of a task but does not provide full details.",
+          "issues": [
+            "Task details are incomplete or missing."
+          ],
+          "suggestions": [
+            "Add the full task 'Confirm Meeting Objectives & Scope' with Tisa as owner and due date before July 24 EOD PST."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
+          "level": "critical",
+          "original_dimension": "Dependency",
+          "mapped_dimension": "S6",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "No dependency information regarding drafting a 1-pager after consolidating open items is present in the visible content.",
+          "evidence": "No mention of '1-pager' or dependency relationships in the provided excerpt.",
+          "issues": [
+            "Dependency between tasks is not stated."
+          ],
+          "suggestions": [
+            "Include a clear dependency note that drafting the 1-pager depends on completing consolidation of open items."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
+          "level": "critical",
+          "original_dimension": "Disclosure of assumptions",
+          "mapped_dimension": "S19",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "The response does not include any explicit section or statement disclosing assumptions or clarifying inferred details about the agenda.",
+          "evidence": "No mention of 'assumptions', 'uncertainties', or caveats in the provided excerpt.",
+          "issues": [
+            "Missing explicit assumptions or caveats section."
+          ],
+          "suggestions": [
+            "Add a section stating assumptions about agenda topics and clarify that details are inferred from context."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should reference the file 'Vault_Secret_Management_Deep_Dive.pdf' as part of the preparation artifacts.",
+          "level": "expected",
+          "original_dimension": "Artifact readiness",
+          "mapped_dimension": "S4",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "Although the response mentions a 'technical deep dive PDF on July 23', it does not explicitly name 'Vault_Secret_Management_Deep_Dive.pdf' or provide a link.",
+          "evidence": "Quote: 'Vault Secret Management (Tisa authored a technical deep dive PDF on July 23)'",
+          "issues": [
+            "File name not explicitly referenced."
+          ],
+          "suggestions": [
+            "Explicitly list 'Vault_Secret_Management_Deep_Dive.pdf' in the preparation artifacts section with a link if available."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should reference the file 'FeatureFlagRollout_ComplianceDeepDive.pptx' in the prep tasks or pre-read list.",
+          "level": "expected",
+          "original_dimension": "Artifact readiness",
+          "mapped_dimension": "S4",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "The response does not mention 'FeatureFlagRollout_ComplianceDeepDive.pptx' or any related presentation file.",
+          "evidence": "No reference to this file in the provided text.",
+          "issues": [
+            "Missing reference to required presentation artifact."
+          ],
+          "suggestions": [
+            "Include 'FeatureFlagRollout_ComplianceDeepDive.pptx' in the prep tasks or pre-read list."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
+          "level": "expected",
+          "original_dimension": "Timeline & buffers",
+          "mapped_dimension": "S2",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "The excerpt does not show any mention of a final review buffer or specific time allocation before the meeting.",
+          "evidence": "No explicit buffer or review slot mentioned in the visible plan.",
+          "issues": [
+            "Missing final review buffer before T₀."
+          ],
+          "suggestions": [
+            "Add a task for final review at least 5 hours before the meeting start time."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should propose sending a pre-read at least 2 hours before T₀ including links to key security and compliance docs.",
+          "level": "expected",
+          "original_dimension": "Artifact readiness",
+          "mapped_dimension": "S4",
+          "layer": "structural",
+          "passed": false,
+          "quality_score": 0,
+          "explanation": "The response does not mention sending a pre-read or timing for sharing documents before the meeting.",
+          "evidence": "No mention of pre-read distribution in the provided text.",
+          "issues": [
+            "Pre-read task and timing not included."
+          ],
+          "suggestions": [
+            "Add a step to send pre-read materials at least 2 hours before the meeting, including links to security and compliance documents."
+          ],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
+          "level": "critical",
+          "original_dimension": "Participant accuracy",
+          "mapped_dimension": "S3",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response lists only Nila Tanguma as the attendee, which matches the requirement of having only one confirmed attendee.",
+          "evidence": "**Attendee(s):**  \n  - Nila Tanguma (Engineering Manager)",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        },
+        {
+          "assertion_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
+          "level": "expected",
+          "original_dimension": "Timeline feasibility",
+          "mapped_dimension": "S2",
+          "layer": "structural",
+          "passed": true,
+          "quality_score": 2,
+          "explanation": "The response explicitly mentions the 2.5-day timeline and emphasizes the need to prioritize deliverables and confirm dependencies quickly, indicating urgency.",
+          "evidence": "**Current Time:** July 23, 2025, 22:00 +08:00 → roughly **2.5 days away**\n**Implication:** Tight schedule. Prioritize deliverables and confirm dependencies ASAP.",
+          "issues": [],
+          "suggestions": [],
+          "evaluation_method": "gpt5"
+        }
+      ],
+      "weighted_score": 0.4,
+      "timestamp": "2025-11-28T18:18:55.628862"
+    }
+  ]
+}
