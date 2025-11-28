@@ -1,19 +1,19 @@
 # Framework Comparison Report
 
-## Kening's WBP Evaluation Rubric vs. Our Current Pipeline
+## Chin-Yew's WBP Evaluation Rubric vs. Our Current Pipeline
 
 **Date:** November 28, 2025  
-**Purpose:** Compare Kening's comprehensive WBP Evaluation Rubric with our current Two-Layer Assertion Pipeline and recommend next steps for alignment.
+**Purpose:** Compare Chin-Yew's comprehensive WBP Evaluation Rubric with our current Two-Layer Assertion Pipeline and recommend next steps for alignment.
 
 ---
 
 ## Executive Summary
 
-Kening's rubric is **significantly more comprehensive** than our current implementation:
-- **Structural Dimensions:** 18 (Kening) vs 10 (ours)
+Chin-Yew's rubric is **significantly more comprehensive** than our current implementation:
+- **Structural Dimensions:** 18 (Chin-Yew) vs 10 (ours)
 - **Grounding Dimensions:** 5 (same)
-- **Scoring:** Weighted 3-tier (Kening) vs Binary pass/fail (ours)
-- **Output:** Includes suggested fixes and actionable next steps (Kening)
+- **Scoring:** Weighted 3-tier (Chin-Yew) vs Binary pass/fail (ours)
+- **Output:** Includes suggested fixes and actionable next steps (Chin-Yew)
 
 ### Key Recommendations
 1. **Expand structural patterns** from S1-S10 to S1-S18
@@ -27,18 +27,18 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 ### Structural Dimensions Alignment
 
-| Kening ID | Kening Name | Our ID | Our Name | Status | Gap |
+| Rubric ID | Rubric Name | Our ID | Our Name | Status | Gap |
 |-----------|-------------|--------|----------|--------|-----|
 | S1 | Meeting Details | S1 | Explicit Meeting Details | ✅ Aligned | Minor wording |
 | S2 | Timeline Alignment | S2 | Timeline Alignment | ✅ Aligned | - |
-| S3 | Ownership Assignment | S3 | Ownership Assignment | ⚠️ Partial | Kening supports role/skill placeholders |
-| S4 | Deliverables & Artifacts | S4 | Artifact Specification | ⚠️ Partial | Kening adds links, versions, formats |
+| S3 | Ownership Assignment | S3 | Ownership Assignment | ⚠️ Partial | Rubric supports role/skill placeholders |
+| S4 | Deliverables & Artifacts | S4 | Artifact Specification | ⚠️ Partial | Rubric adds links, versions, formats |
 | S5 | Task Dates | S5 | Date Specification | ✅ Aligned | - |
-| S6 | Dependencies & Blockers | S6 | Blocker Identification | ⚠️ Partial | Kening adds mitigation steps |
+| S6 | Dependencies & Blockers | S6 | Blocker Identification | ⚠️ Partial | Rubric adds mitigation steps |
 | S7 | Source Traceability | S7 | Source Traceability | ✅ Aligned | - |
 | S8 | Communication Channels | S8 | Communication Channels | ✅ Aligned | - |
 | S9 | Grounding Meta-Check | S9 | Grounding Meta-Check | ✅ Aligned | - |
-| S10 | Priority Assignment | S10 | Priority Assignment | ⚠️ Partial | Kening adds critical path justification |
+| S10 | Priority Assignment | S10 | Priority Assignment | ⚠️ Partial | Rubric adds critical path justification |
 | S11 | Risk Mitigation Strategy | ❌ Missing | - | 🔴 Gap | New pattern needed |
 | S12 | Milestone Validation | ❌ Missing | - | 🔴 Gap | New pattern needed |
 | S13 | Goal & Success Criteria | ❌ Missing | - | 🔴 Gap | New pattern needed |
@@ -50,7 +50,7 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 ### Grounding Dimensions Alignment
 
-| Kening ID | Kening Name | Our ID | Our Name | Status |
+| Rubric ID | Rubric Name | Our ID | Our Name | Status |
 |-----------|-------------|--------|----------|--------|
 | G1 | Attendee Grounding | G1 | People Grounding | ✅ Aligned |
 | G2 | Date/Time Grounding | G2 | Temporal Grounding | ✅ Aligned |
@@ -64,7 +64,7 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 ### Scoring System
 
-| Feature | Kening | Ours | Gap |
+| Feature | Chin-Yew's Rubric | Ours | Gap |
 |---------|--------|------|-----|
 | Score Scale | 0/1/2 (Missing/Partial/Fully Met) | 0/1 (Fail/Pass) | 🔴 Missing partial scores |
 | Weights | Critical=3, Moderate=2, Light=1 | All equal | 🔴 No weighting |
@@ -73,7 +73,7 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 ### Output Quality
 
-| Feature | Kening | Ours | Gap |
+| Feature | Chin-Yew's Rubric | Ours | Gap |
 |---------|--------|------|-----|
 | Rationale per assertion | ✅ Yes | ✅ Yes (explanation) | ✅ Aligned |
 | Suggested fix per assertion | ✅ Yes | ❌ No | 🔴 Missing |
@@ -83,7 +83,7 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 ### Ownership Model
 
-| Feature | Kening | Ours | Gap |
+| Feature | Chin-Yew's Rubric | Ours | Gap |
 |---------|--------|------|-----|
 | Named owner | ✅ Yes | ✅ Yes | ✅ Aligned |
 | Role placeholder | ✅ Yes ("Role: Staff PM") | ❌ No | 🔴 Missing |
@@ -91,7 +91,7 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 ---
 
-## Priority Weights from Kening's Rubric
+## Priority Weights from Chin-Yew's Rubric
 
 ### Critical (Weight = 3)
 - S1: Meeting Details
@@ -219,7 +219,7 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 9. **Role/skill ownership support**
 10. **Link validation for artifacts**
-11. **JSON schema alignment** with Kening's spec
+11. **JSON schema alignment** with Chin-Yew's spec
 
 ---
 
@@ -239,7 +239,7 @@ Kening's rubric is **significantly more comprehensive** than our current impleme
 
 ## Conclusion
 
-Kening's rubric provides a **comprehensive and production-ready** evaluation framework. Our current pipeline has the right conceptual foundation (two-layer separation) but needs:
+Chin-Yew's rubric provides a **comprehensive and production-ready** evaluation framework. Our current pipeline has the right conceptual foundation (two-layer separation) but needs:
 
 1. **Expansion**: 8 more structural patterns
 2. **Refinement**: Weighted scoring instead of binary
