@@ -75,20 +75,24 @@ Kening's original assertions used **232 unique dimension names**, leading to:
 
 ## 3. Converted Assertions (Chin-Yew's WBP Framework)
 
-### Consolidated to 7 Dimensions
+### Consolidated to 12 Dimensions
 
-The conversion consolidated 232 dimensions into Chin-Yew's 14 selected dimensions, with 7 dimensions actively used:
+The conversion consolidated 232 dimensions into Chin-Yew's 14 selected dimensions, with 12 dimensions actively used:
 
-| Dimension | Name | Count | % |
-|-----------|------|-------|---|
-| S2 | Timeline Alignment | 449 | 19.4% |
-| S3 | Ownership Assignment | 414 | 17.9% |
-| S4 | Deliverables & Artifacts | 399 | 17.2% |
-| S6 | Dependencies & Blockers | 322 | 13.9% |
-| S1 | Meeting Details | 321 | 13.8% |
-| S19 | Caveat & Clarification | 279 | 12.0% |
-| G5 | Hallucination Check | 60 | 2.6% |
-| Other | (unmapped) | 74 | 3.2% |
+| Dimension | Name | Count | % | Phase |
+|-----------|------|-------|---|-------|
+| S2 | Timeline Alignment | 449 | 19.4% | Phase 1 |
+| S3 | Ownership Assignment | 414 | 17.9% | Phase 1 |
+| S4 | Deliverables & Artifacts | 399 | 17.2% | Phase 1 |
+| S6 | Dependencies & Blockers | 322 | 13.9% | Phase 1 |
+| S1 | Meeting Details | 321 | 13.8% | Phase 1 |
+| S19 | Caveat & Clarification | 279 | 12.0% | Phase 1 |
+| G5 | Hallucination Check | 60 | 2.6% | Phase 1 |
+| S11 | Risk Mitigation Strategy | 42 | 1.8% | Phase 1 |
+| S5 | Task Dates | 16 | 0.7% | Phase 2 |
+| S18 | Post-Event Actions | 10 | 0.4% | Phase 1 |
+| G1 | Attendee Grounding | 3 | 0.1% | Phase 1 |
+| G4 | Topic Grounding | 3 | 0.1% | Phase 1 |
 
 ### Layer Distribution
 | Layer | Count | % |
@@ -287,7 +291,116 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 ---
 
-## 8. Conclusion
+## 8. Data Files Reference
+
+The conversion process produces three key JSONL files that document the migration pipeline:
+
+### 8.1 Source: `Assertions_genv2_for_LOD1126part1.jsonl`
+
+**Kening's original assertions** - the source data for this conversion.
+
+| Property | Value |
+|----------|-------|
+| Meetings | 224 |
+| Total Assertions | 2,318 |
+| Unique Dimensions | 232 (fragmented) |
+
+**Schema:**
+```json
+{
+  "utterance": "meeting transcript text",
+  "assertions": [
+    {
+      "text": "The plan must include explicit owner assignment for...",
+      "level": "critical|expected|aspirational",
+      "anchors": {
+        "Dim": "Timeline & Meeting Details",
+        "sourceID": "entity-guid"
+      }
+    }
+  ]
+}
+```
+
+### 8.2 Intermediate: `assertions_kening_enhanced.jsonl`
+
+**Enhanced assertions** with WBP dimension mapping metadata added to each assertion.
+
+| Property | Value |
+|----------|-------|
+| Meetings | 224 |
+| Total Assertions | 2,318 |
+| Added Field | `_mira_metadata` |
+
+**Schema (additional fields):**
+```json
+{
+  "assertions": [
+    {
+      "text": "...",
+      "level": "...",
+      "anchors": { ... },
+      "_mira_metadata": {
+        "dimension_id": "S2",
+        "dimension_name": "Timeline Alignment",
+        "layer": "structural",
+        "weight": 3,
+        "sourceID": "entity-guid",
+        "mapping_rationale": "This assertion evaluates timeline consistency..."
+      }
+    }
+  ]
+}
+```
+
+### 8.3 Output: `assertions_converted_full.jsonl`
+
+**Final converted assertions** in Chin-Yew's WBP format, ready for evaluation.
+
+| Property | Value |
+|----------|-------|
+| Meetings | 224 |
+| Total Assertions | 2,318 |
+| Phase 1 Coverage | 99.3% (2,302 assertions) |
+| Phase 2 Coverage | 0.7% (16 assertions) |
+
+**Schema:**
+```json
+{
+  "utterance": "meeting transcript text",
+  "assertions": [
+    {
+      "text": "The plan must include explicit [person_name] assignment...",
+      "level": "critical",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "weight": 3,
+      "source_reference": "entity-guid",
+      "original_text": "The plan must include explicit owner assignment for...",
+      "rationale": "Maps to S3 because it evaluates task ownership clarity",
+      "quality_assessment": { ... },
+      "conversion_method": "gpt5"
+    }
+  ]
+}
+```
+
+### File Relationships
+
+```
+Assertions_genv2_for_LOD1126part1.jsonl (Source)
+        │
+        ▼ [GPT-5 dimension mapping]
+assertions_kening_enhanced.jsonl (Intermediate)
+        │
+        ▼ [GPT-5 format conversion]
+assertions_converted_full.jsonl (Output)
+```
+
+---
+
+## 9. Conclusion
 
 The conversion from Kening's 232-dimension assertions to Chin-Yew's WBP framework represents a significant improvement:
 
