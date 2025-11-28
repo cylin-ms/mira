@@ -572,7 +572,7 @@ Return JSON:
     "layer": "{dim_spec.get('layer', '')}",
     "level": "critical|expected|aspirational",
     "weight": {dim_spec.get('weight', 1)},
-    "source_reference": "{{source.FIELD}} if grounding, null if structural",
+    "sourceID": "{{source.FIELD}} if grounding, null if structural",
     "placeholders_used": ["[PLACEHOLDER1]", "[PLACEHOLDER2]"],
     "rationale": {{
         "mapping_reason": "Why this maps to {mapped_dim}",
@@ -629,7 +629,7 @@ Return JSON with array of conversions:
             "layer": "structural|grounding",
             "level": "critical|expected|aspirational",
             "weight": 1|2|3,
-            "source_reference": "{{source.FIELD}} or null",
+            "sourceID": "{{source.FIELD}} or null",
             "placeholders_used": [],
             "rationale": {{
                 "mapping_reason": "...",
@@ -701,7 +701,7 @@ def convert_assertion_heuristic(assertion: Dict) -> Dict:
         "layer": dim_spec.get('layer', 'unknown'),
         "level": level,
         "weight": dim_spec.get('weight', 1),
-        "source_reference": None,
+        "sourceID": None,
         "placeholders_used": [],
         "rationale": {
             "mapping_reason": f"Kening's '{original_dim}' maps to {mapped_dim} based on keyword matching",
@@ -1016,7 +1016,7 @@ def main():
                     "dimension_name": conv.get("dimension_name", ""),
                     "layer": conv.get("layer", ""),
                     "weight": conv.get("weight", 1),
-                    "source_reference": conv.get("source_reference"),
+                    "sourceID": conv.get("sourceID"),
                     "original_text": conv.get("original_text", ""),
                     "rationale": conv.get("rationale", {}),
                     "quality_assessment": conv.get("quality_assessment", {}),

@@ -127,7 +127,7 @@
         "name": "People Grounding",
         "level": "critical",
         "text": "All individuals mentioned in the workback plan must appear in the source attendees list: Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson.",
-        "source_reference": "attendees",
+        "sourceID": "attendees",
         "failure_examples": [
           "Including a person named 'John Smith' who is not in the attendee list.",
           "Referring to 'Emily Davis' as a reviewer when she is not listed as an attendee."
@@ -139,7 +139,7 @@
         "name": "Temporal Grounding",
         "level": "critical",
         "text": "All dates and times in the workback plan must match or logically derive from the meeting date (January 15, 2025, 2:00 PM PST) and the launch date (February 1, 2025).",
-        "source_reference": "meeting_date, meeting_time, topics",
+        "sourceID": "meeting_date, meeting_time, topics",
         "failure_examples": [
           "Stating the meeting occurred on January 20, 2025.",
           "Claiming the product launch is scheduled for March 1, 2025."
@@ -151,7 +151,7 @@
         "name": "Artifact Grounding",
         "level": "critical",
         "text": "All referenced files in the workback plan must exist in the source files list: Product_Launch_Checklist_v3.xlsx, Engineering_Status_Report.pdf, Design_Assets_Summary.docx, QA_Test_Results_Dec.pdf.",
-        "source_reference": "files",
+        "sourceID": "files",
         "failure_examples": [
           "Referencing 'Marketing_Plan_Q1.docx' which is not in the source files.",
           "Mentioning 'QA_Test_Results_Jan.pdf' instead of the correct December file."
@@ -163,7 +163,7 @@
         "name": "Topic Grounding",
         "level": "critical",
         "text": "All topics and objectives in the workback plan must align with the source meeting topics: Q1 Product Launch, February 1, 2025 launch, readiness items, blockers, launch checklist.",
-        "source_reference": "topics",
+        "sourceID": "topics",
         "failure_examples": [
           "Including a discussion on 'Q2 Budget Planning' which is not part of the meeting topics.",
           "Adding 'Customer Support Training' as a primary agenda item when it is not listed."
@@ -175,7 +175,7 @@
         "name": "No Hallucination",
         "level": "critical",
         "text": "The workback plan must not introduce any entities (people, files, dependencies, or topics) that are not present in the source data.",
-        "source_reference": "attendees, files, topics, dependencies",
+        "sourceID": "attendees, files, topics, dependencies",
         "failure_examples": [
           "Adding a dependency on 'Finance approval before launch' which is not in the source dependencies.",
           "Introducing a new attendee 'Alex Brown' who is not listed in the source attendees."

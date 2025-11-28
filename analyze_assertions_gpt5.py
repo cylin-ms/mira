@@ -349,7 +349,7 @@ Return JSON with this structure:
       "pattern_description": "<what this pattern checks>",
       "pattern_question": "For structural: 'Does the plan HAVE X?' For grounding: 'Is X CORRECT vs source?'",
       "pattern_template": "For structural: 'The plan includes/has/lists [ELEMENT]'. For grounding: 'The [ELEMENT] matches source.[FIELD]'",
-      "source_reference": "For grounding only: source.ATTENDEES, source.MEETING.StartTime, etc.",
+      "sourceID": "For grounding only: source.ATTENDEES, source.MEETING.StartTime, etc.",
       "applies_to_dimensions": ["<dim1>", "<dim2>"],
       "level_recommendation": "<critical|expected|aspirational>",
       "evaluation_criteria": [

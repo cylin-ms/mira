@@ -384,7 +384,7 @@ Return a JSON array with 5 objects, each containing:
 - "name": Brief name (e.g., "People Grounding")
 - "level": "critical" (all grounding assertions are critical)
 - "text": The assertion text
-- "source_reference": What source data to check against
+- "sourceID": What source data to check against
 - "failure_examples": Examples of what would fail this check
 
 Return ONLY the JSON array, no markdown or other text.
@@ -491,7 +491,7 @@ def evaluate_plan_grounding(plan: str, assertions: List[Dict], quality_label: st
     source_json = json.dumps(SOURCE_ENTITIES, indent=2)
     
     assertions_text = "\n".join([
-        f"- **{a['id']} ({a.get('name', 'N/A')})**: {a['text']}\n  Source to check: {a.get('source_reference', 'N/A')}"
+        f"- **{a['id']} ({a.get('name', 'N/A')})**: {a['text']}\n  Source to check: {a.get('sourceID', 'N/A')}"
         for a in assertions
     ])
     
@@ -614,7 +614,7 @@ def generate_report(plans: Dict[str, str], assertions: Dict[str, List[Dict]], ev
     ground_table = "| ID | Name | Source Reference | Assertion |\n|----|------|------------------|----|\n"
     for a in grounding_assertions:
         text = a['text'][:60] + "..." if len(a['text']) > 60 else a['text']
-        source = a.get('source_reference', 'N/A')[:30] + "..." if len(a.get('source_reference', '')) > 30 else a.get('source_reference', 'N/A')
+        source = a.get('sourceID', 'N/A')[:30] + "..." if len(a.get('sourceID', '')) > 30 else a.get('sourceID', 'N/A')
         ground_table += f"| {a['id']} | {a.get('name', 'N/A')} | {source} | {text} |\n"
     
     # Build evaluation sections
