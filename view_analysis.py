@@ -139,7 +139,7 @@ st.markdown("""
 # Load data
 @st.cache_data
 def load_analysis():
-    analysis_path = Path("docs/Kening/assertion_analysis.json")
+    analysis_path = Path("docs/ChinYew/assertion_analysis.json")
     if analysis_path.exists():
         with open(analysis_path, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -147,7 +147,7 @@ def load_analysis():
 
 @st.cache_data
 def load_patterns():
-    patterns_path = Path("docs/Kening/assertion_patterns.json")
+    patterns_path = Path("docs/ChinYew/assertion_patterns.json")
     if patterns_path.exists():
         with open(patterns_path, 'r', encoding='utf-8') as f:
             return json.load(f)

@@ -334,7 +334,9 @@ class PlanEvaluationResult:
     grounding_results: List[AssertionResult]
     structural_score: float  # % passed
     grounding_score: float  # % passed
-    overall_verdict: str  # "pass", "fail_structure", "fail_grounding", "fail_both"
+    weighted_score: float = 0.0  # Weighted score per Chin-Yew's rubric
+    overall_verdict: str = ""  # "pass", "fail_structure", "fail_grounding", "fail_both"
+    summary: Dict = field(default_factory=dict)  # strengths, weaknesses, next_actions
     evaluated_at: str = field(default_factory=lambda: datetime.now().isoformat())
     
     def to_dict(self) -> Dict:
@@ -343,6 +345,108 @@ class PlanEvaluationResult:
             "structural_results": [r.to_dict() for r in self.structural_results],
             "grounding_results": [r.to_dict() for r in self.grounding_results]
         }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Chin-Yew's WBP Evaluation Rubric - Dimension Definitions
+# Reference: docs/ChinYew/WBP_Evaluation_Rubric.md
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Scoring Model:
+# - Scale: 0 = Missing, 1 = Partial, 2 = Fully Met
+# - Weights: Critical = 3, Moderate = 2, Light = 1
+
+# Dimension Groups:
+# - S1–S10 (Core): Original 10 structural dimensions covering essential WBP elements
+#   (meeting details, timeline, ownership, deliverables, dates, dependencies,
+#   traceability, communication, grounding meta-check, priorities)
+# - S11–S18 (Extended): Additional dimensions for completeness covering advanced
+#   planning aspects (risk mitigation, milestones, goals, resources, compliance,
+#   review loops, escalation, post-event actions)
+# Each dimension is evaluated independently with its own definition, weight, and success/fail criteria.
+
+# Structural Dimensions - Core (S1-S10)
+STRUCTURAL_DIMENSIONS_CORE = {
+    "S1": {"name": "Meeting Details", "weight": 3, "definition": "Subject, date, time, timezone, attendee list clearly stated.", "group": "core"},
+    "S2": {"name": "Timeline Alignment", "weight": 3, "definition": "Backward scheduling (T-minus) with dependency-aware sequencing from meeting date.", "group": "core"},
+    "S3": {"name": "Ownership Assignment", "weight": 3, "definition": "Named owners per task OR role/skill placeholder if names unavailable.", "group": "core"},
+    "S4": {"name": "Deliverables & Artifacts", "weight": 2, "definition": "All outputs listed with working links, version/format specified.", "group": "core"},
+    "S5": {"name": "Task Dates", "weight": 2, "definition": "Due dates for every task aligned with S2/S12 sequencing.", "group": "core"},
+    "S6": {"name": "Dependencies & Blockers", "weight": 2, "definition": "Predecessors and risks identified; mitigation steps documented.", "group": "core"},
+    "S7": {"name": "Source Traceability", "weight": 2, "definition": "Tasks/artifacts link back to original source priorities/files.", "group": "core"},
+    "S8": {"name": "Communication Channels", "weight": 1, "definition": "Collaboration methods specified (Teams, email, meeting cadence).", "group": "core"},
+    "S9": {"name": "Grounding Meta-Check", "weight": 2, "definition": "All Grounding assertions (G1-G5) pass; no factual drift.", "group": "core"},
+    "S10": {"name": "Priority Assignment", "weight": 2, "definition": "Tasks ranked by critical path/impact on meeting success.", "group": "core"},
+}
+
+# Structural Dimensions - Extended (S11-S18)
+STRUCTURAL_DIMENSIONS_EXTENDED = {
+    "S11": {"name": "Risk Mitigation Strategy", "weight": 2, "definition": "Concrete contingencies for top risks with owners.", "group": "extended"},
+    "S12": {"name": "Milestone Validation", "weight": 2, "definition": "Milestones feasible, right-sized, coherent, and verifiable via acceptance criteria.", "group": "extended"},
+    "S13": {"name": "Goal & Success Criteria", "weight": 2, "definition": "Clear objectives and measurable indicators of success.", "group": "extended"},
+    "S14": {"name": "Resource Allocation", "weight": 2, "definition": "People/time/tools/budget availability and constraints visible.", "group": "extended"},
+    "S15": {"name": "Compliance & Governance", "weight": 1, "definition": "Security, privacy, regulatory checks noted.", "group": "extended"},
+    "S16": {"name": "Review & Feedback Loops", "weight": 1, "definition": "Scheduled checkpoints to validate and iterate the plan.", "group": "extended"},
+    "S17": {"name": "Escalation Path", "weight": 1, "definition": "Escalation owners and steps for critical risks defined.", "group": "extended"},
+    "S18": {"name": "Post-Event Actions", "weight": 1, "definition": "Wrap-up tasks, retrospectives, and reporting.", "group": "extended"},
+}
+
+# Combined Structural Dimensions (S1-S18)
+STRUCTURAL_DIMENSIONS = {**STRUCTURAL_DIMENSIONS_CORE, **STRUCTURAL_DIMENSIONS_EXTENDED}
+
+# Grounding Dimensions (G1-G5) sorted by priority
+GROUNDING_DIMENSIONS = {
+    # Critical (Weight 3)
+    "G1": {"name": "Attendee Grounding", "weight": 3, "definition": "Attendees match source; no hallucinated names."},
+    "G2": {"name": "Date/Time Grounding", "weight": 3, "definition": "Meeting date/time/timezone match the source."},
+    "G5": {"name": "Hallucination Check", "weight": 3, "definition": "No extraneous entities or fabricated details."},
+    
+    # Moderate (Weight 2)
+    "G3": {"name": "Artifact Grounding", "weight": 2, "definition": "Files/decks referenced exist in the source repository."},
+    "G4": {"name": "Topic Grounding", "weight": 2, "definition": "Agenda topics align with source priorities/context."},
+}
+
+# Priority order for evaluation (Critical dimensions first)
+STRUCTURAL_CORE_ORDER = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10"]
+STRUCTURAL_EXTENDED_ORDER = ["S11", "S12", "S13", "S14", "S15", "S16", "S17", "S18"]
+STRUCTURAL_PRIORITY_ORDER = STRUCTURAL_CORE_ORDER + STRUCTURAL_EXTENDED_ORDER
+GROUNDING_PRIORITY_ORDER = ["G1", "G2", "G5", "G3", "G4"]
+
+
+def get_dimension_weight(dim_id: str) -> int:
+    """Get the weight for a dimension ID."""
+    if dim_id in STRUCTURAL_DIMENSIONS:
+        return STRUCTURAL_DIMENSIONS[dim_id]["weight"]
+    elif dim_id in GROUNDING_DIMENSIONS:
+        return GROUNDING_DIMENSIONS[dim_id]["weight"]
+    return 1  # Default weight
+
+
+def calculate_weighted_score(results: List[AssertionResult]) -> float:
+    """
+    Calculate weighted quality score per Chin-Yew's rubric.
+    
+    Formula: sum(score * weight) / max_possible
+    Scale: 0 = Missing, 1 = Partial, 2 = Fully Met
+    """
+    if not results:
+        return 0.0
+    
+    total_weighted = 0
+    max_possible = 0
+    
+    for r in results:
+        # Extract dimension ID from assertion ID (e.g., "S1" from "S1" or "A1-S1")
+        dim_id = r.assertion_id.split("-")[-1] if "-" in r.assertion_id else r.assertion_id
+        weight = get_dimension_weight(dim_id)
+        
+        # Convert boolean passed to 0/2 score (1 = partial would need more nuanced evaluation)
+        score = 2 if r.passed else 0
+        
+        total_weighted += score * weight
+        max_possible += 2 * weight  # Max score is 2 per dimension
+    
+    return round(total_weighted / max_possible, 3) if max_possible > 0 else 0.0
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

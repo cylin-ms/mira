@@ -18,7 +18,7 @@ except ImportError:
     SubstrateLLM = None
 
 # Load assertion patterns
-with open('docs/Kening/assertion_patterns.json', 'r', encoding='utf-8') as f:
+with open('docs/ChinYew/assertion_patterns.json', 'r', encoding='utf-8') as f:
     patterns_data = json.load(f)
 
 PATTERNS = patterns_data['patterns']
@@ -336,7 +336,7 @@ A plan should score at least **60/100** with all critical patterns passing to be
 """
     
     # Save the document
-    output_path = 'docs/Kening/PLAN_QUALITY_EXAMPLES.md'
+    output_path = 'docs/ChinYew/PLAN_QUALITY_EXAMPLES.md'
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(doc)
     

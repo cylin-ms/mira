@@ -1,8 +1,8 @@
-# Two-Layer Assertion Evaluation Pipeline
+# WBP Evaluation Pipeline
 
 ## User Guide
 
-This guide explains how to use the Two-Layer Assertion Evaluation Pipeline to simulate and evaluate workback plan generation quality.
+This guide explains how to use the Workback Plan (WBP) Evaluation Pipeline based on **Chin-Yew's WBP Evaluation Rubric** to simulate and evaluate workback plan generation quality.
 
 ---
 
@@ -25,10 +25,10 @@ This guide explains how to use the Two-Layer Assertion Evaluation Pipeline to si
 The pipeline simulates the full lifecycle of workback plan generation and evaluation:
 
 1. **Creates realistic meeting scenarios** with attendees, dates, artifacts, and context
-2. **Generates two-layer assertions** (Structural + Grounding) to evaluate plan quality
+2. **Generates two-layer assertions** (Structural S1-S18 + Grounding G1-G5) to evaluate plan quality
 3. **Produces plans at three quality levels** (perfect, medium, low) for testing
-4. **Evaluates plans** against assertions using GPT-5 JJ
-5. **Generates comprehensive reports** with metrics and insights
+4. **Evaluates plans** against assertions using GPT-5 JJ with weighted scoring
+5. **Generates comprehensive reports** with metrics, strengths, weaknesses, and next actions
 
 ### Why Use This Pipeline?
 
@@ -42,40 +42,52 @@ The pipeline simulates the full lifecycle of workback plan generation and evalua
 
 ## What Does It Do?
 
-### The Two-Layer Framework
+### Chin-Yew's WBP Evaluation Rubric
 
-The pipeline uses a **Two-Layer Assertion Framework** to evaluate workback plans:
+The pipeline implements **Chin-Yew's WBP Evaluation Rubric** (see `docs/ChinYew/WBP_Evaluation_Rubric.md`) with:
 
-#### Layer 1: Structural Assertions (S1-S10)
+- **Scoring Model:** 0 = Missing, 1 = Partial, 2 = Fully Met
+- **Weighted Quality Score:** Σ(score × weight) / max_possible
+- **Weights:** Critical = 3, Moderate = 2, Light = 1
+
+#### Layer 1: Structural Assertions (S1-S18)
 *Question: "Does the plan HAVE X?"*
 
 These check for **presence** of required elements:
 
-| ID | Pattern | What It Checks |
-|----|---------|----------------|
-| S1 | Explicit Meeting Details | Has date, time, timezone, attendees |
-| S2 | Timeline Alignment | Has timeline working back from meeting |
-| S3 | Ownership Assignment | Has named owners (not "someone") |
-| S4 | Artifact Specification | Lists specific files/documents |
-| S5 | Date Specification | States completion dates for tasks |
-| S6 | Blocker Identification | Identifies dependencies and blockers |
-| S7 | Source Traceability | Links tasks to source entities |
-| S8 | Communication Channels | Mentions communication methods |
-| S9 | Grounding Meta-Check | Passes when G1-G5 all pass |
-| S10 | Priority Assignment | Has priority levels for tasks |
+| ID | Pattern | Weight | What It Checks |
+|----|---------|:------:|----------------|
+| **S1** | Meeting Details | 3 | Subject, date, time, timezone, attendee list |
+| **S2** | Timeline Alignment | 3 | Backward scheduling (T-minus) with dependency-aware sequencing |
+| **S3** | Ownership Assignment | 3 | Named owners OR role/skill placeholders |
+| S12 | Milestone Validation | 2 | Feasible, right-sized, coherent milestones |
+| S4 | Deliverables & Artifacts | 2 | Outputs with links, version/format |
+| S5 | Task Dates | 2 | Due dates aligned with timeline |
+| S6 | Dependencies & Blockers | 2 | Predecessors, risks, mitigation steps |
+| S7 | Source Traceability | 2 | Tasks/artifacts link to source |
+| S9 | Grounding Meta-Check | 2 | All G1-G5 pass; no factual drift |
+| S10 | Priority Assignment | 2 | Tasks ranked by critical path |
+| S11 | Risk Mitigation Strategy | 2 | Concrete contingencies with owners |
+| S13 | Goal & Success Criteria | 2 | Clear objectives and measurable indicators |
+| S14 | Resource Allocation | 2 | People/time/tools/budget visibility |
+| S8 | Communication Channels | 1 | Teams, email, meeting cadence |
+| S15 | Compliance & Governance | 1 | Security, privacy, regulatory checks |
+| S16 | Review & Feedback Loops | 1 | Scheduled checkpoints |
+| S17 | Escalation Path | 1 | Escalation owners and steps |
+| S18 | Post-Event Actions | 1 | Wrap-up tasks, retrospectives |
 
 #### Layer 2: Grounding Assertions (G1-G5)
 *Question: "Is X CORRECT vs source?"*
 
 These check for **factual accuracy** against source data:
 
-| ID | Pattern | Source Field |
-|----|---------|--------------|
-| G1 | People Grounding | source.attendees |
-| G2 | Temporal Grounding | source.meeting_date/time |
-| G3 | Artifact Grounding | source.files |
-| G4 | Topic Grounding | source.topics |
-| G5 | Hallucination Check | All source fields |
+| ID | Pattern | Weight | Source Field |
+|----|---------|:------:|--------------|
+| **G1** | Attendee Grounding | 3 | source.attendees |
+| **G2** | Date/Time Grounding | 3 | source.meeting_date/time |
+| **G5** | Hallucination Check | 3 | All source fields |
+| G3 | Artifact Grounding | 2 | source.files |
+| G4 | Topic Grounding | 2 | source.topics |
 
 ### Quality Levels
 

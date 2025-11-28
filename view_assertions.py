@@ -295,7 +295,7 @@ def load_data(file_path):
     return data
 
 # Default file path
-DEFAULT_FILE = "docs/Kening/Assertions_genv2_for_LOD1126part1.jsonl"
+DEFAULT_FILE = "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl"
 
 # Sidebar
 with st.sidebar:

@@ -234,6 +234,7 @@ def evaluate_plan(
     source_data: Dict
 ) -> PlanEvaluationResult:
     """Evaluate a plan against all assertions in the set."""
+    from .config import calculate_weighted_score
     
     print(f"    Evaluating {plan.quality_level} plan...")
     
@@ -258,6 +259,10 @@ def evaluate_plan(
     grounding_passed = sum(1 for r in grounding_results if r.passed)
     grounding_score = grounding_passed / len(grounding_results) if grounding_results else 0
     
+    # Calculate weighted score per Chin-Yew's rubric
+    all_results = structural_results + grounding_results
+    weighted_score = calculate_weighted_score(all_results)
+    
     # Determine overall verdict
     if structural_score >= 0.8 and grounding_score >= 0.8:
         verdict = "pass"
@@ -268,8 +273,21 @@ def evaluate_plan(
     else:
         verdict = "fail_grounding"
     
+    # Generate summary (strengths, weaknesses, next_actions)
+    strengths = [r.assertion_text for r in all_results if r.passed][:5]
+    weaknesses = [r.assertion_text for r in all_results if not r.passed][:5]
+    next_actions = [f"Address: {r.explanation}" for r in all_results if not r.passed][:3]
+    
+    summary = {
+        "weighted_score": weighted_score,
+        "strengths": strengths,
+        "weaknesses": weaknesses,
+        "next_actions": next_actions
+    }
+    
     print(f"      S: {structural_passed}/{len(structural_results)} ({structural_score*100:.0f}%)")
     print(f"      G: {grounding_passed}/{len(grounding_results)} ({grounding_score*100:.0f}%)")
+    print(f"      Weighted: {weighted_score*100:.1f}%")
     print(f"      Verdict: {verdict}")
     
     return PlanEvaluationResult(
@@ -279,7 +297,9 @@ def evaluate_plan(
         grounding_results=grounding_results,
         structural_score=structural_score,
         grounding_score=grounding_score,
-        overall_verdict=verdict
+        weighted_score=weighted_score,
+        overall_verdict=verdict,
+        summary=summary
     )
 
 
