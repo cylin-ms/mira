@@ -396,7 +396,7 @@ The conversion process produces three key JSONL files that document the migratio
       "dimension_name": "Ownership Assignment",
       "layer": "structural",
       "weight": 3,
-      "source_reference": "entity-guid",
+      "sourceID": "entity-guid",
       "original_text": "The plan must include explicit owner assignment for...",
       "rationale": "Maps to S3 because it evaluates task ownership clarity",
       "quality_assessment": { ... },
@@ -427,8 +427,8 @@ assertions_converted_full.jsonl (Output)
 | `assertions_converted_full.jsonl` | ⚠️ **No** | New WBP schema (removes `anchors`, adds WBP fields) |
 
 **Key Schema Differences in Output:**
-- **Preserved:** `text`, `level`
-- **Removed:** `anchors` (replaced by `source_reference`)
+- **Preserved:** `text`, `level`, `sourceID` (extracted from `anchors.sourceID`)
+- **Removed:** `anchors.Dim` (replaced by structured `dimension` fields)
 - **Added:** `dimension`, `dimension_name`, `layer`, `weight`, `original_text`, `rationale`, `quality_assessment`, `conversion_method`
 
 ---
