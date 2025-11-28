@@ -91,17 +91,17 @@ The conversion consolidated 232 dimensions into Chin-Yew's 14 selected dimension
 | 2 (Medium) | expected | 842 | 36.3% |
 | 1 (Low) | aspirational | 188 | 8.1% |
 
-### Unmapped Assertions Analysis (74 assertions, 3.2%)
+### Non-Core Dimension Mappings (74 assertions, 3.2%)
 
-The 74 unmapped assertions were converted to dimensions **outside** Chin-Yew's 14 Selected Dimensions. GPT-5 mapped them to related but non-selected dimensions:
+74 assertions were mapped to dimensions outside the 9 core Phase 1 structural dimensions (S1-S4, S6, S19). Note: **All 5 Grounding dimensions (G1-G5) are Phase 1**.
 
-| Dimension | Name | Count | Reason Not Selected |
-|-----------|------|-------|---------------------|
-| S11 | Risk Mitigation Strategy | 42 | Not in Phase 1 dimensions |
+| Dimension | Name | Count | Status |
+|-----------|------|-------|--------|
+| S11 | Risk Mitigation Strategy | 42 | Phase 2 - not in Phase 1 structural dimensions |
 | S5 | Task Dates | 16 | Phase 2 - overlaps with S2 (Timeline Alignment) |
-| S18 | Post-Event Actions | 10 | Not in Phase 1 dimensions |
-| G1 | Attendee Grounding | 3 | Phase 1 - but GPT-5 mapped to G5 overlap |
-| G4 | Topic Grounding | 3 | Not in Phase 1 dimensions |
+| S18 | Post-Event Actions | 10 | Phase 2 - not in Phase 1 structural dimensions |
+| G1 | Attendee Grounding | 3 | Phase 1 ✓ - GPT-5 correctly mapped |
+| G4 | Topic Grounding | 3 | Phase 1 ✓ - GPT-5 correctly mapped |
 
 **Why These Cannot Be Mapped to Selected Dimensions:**
 
@@ -128,7 +128,7 @@ The 74 unmapped assertions were converted to dimensions **outside** Chin-Yew's 1
 5. **G4 (Topic Grounding)** - 3 assertions
    - Original assertions about verifying agenda topics match source
    - Example: *"Agenda topics should align with source priorities and context..."*
-   - **Why Phase 2:** G4 ensures topic accuracy. While important, it overlaps with the general hallucination check (G5).
+   - **Phase 1 ✓:** G4 is correctly a Phase 1 grounding dimension. All grounding dimensions (G1-G5) are Phase 1.
 
 **Recommendation:** Consider either:
 1. Adding S11 (Risk Mitigation) to the selected dimensions if risk assessment is important for WBP evaluation
