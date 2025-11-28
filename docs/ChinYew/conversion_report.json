@@ -1,0 +1,1076 @@
+{
+  "metadata": {
+    "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
+    "output_kening_enhanced": "docs/ChinYew/assertions_kening_enhanced.jsonl",
+    "output_converted_full": "docs/ChinYew/assertions_converted_full.jsonl",
+    "timestamp": "2025-11-28T21:19:56.136357",
+    "num_meetings": 45,
+    "total_assertions": 478,
+    "conversion_method": "gpt5",
+    "target_spec": "WBP_Selected_Dimensions.md"
+  },
+  "output_formats": {
+    "kening_enhanced": {
+      "description": "Kening's original schema with _mira_metadata added",
+      "preserves": [
+        "text",
+        "level",
+        "anchors"
+      ],
+      "adds": [
+        "_mira_metadata.dimension_id",
+        "_mira_metadata.layer",
+        "_mira_metadata.weight",
+        "_mira_metadata.sourceID"
+      ]
+    },
+    "converted_full": {
+      "description": "Full conversion to Chin-Yew's format with rationale",
+      "includes": [
+        "converted_text",
+        "dimension",
+        "layer",
+        "weight",
+        "original_text",
+        "rationale",
+        "quality_assessment"
+      ]
+    }
+  },
+  "statistics": {
+    "total_assertions": 478,
+    "dimension_distribution": {
+      "S2": 96,
+      "S1": 58,
+      "S4": 80,
+      "S3": 87,
+      "S6": 69,
+      "S19": 57,
+      "S5": 5,
+      "S11": 9,
+      "G5": 12,
+      "G1": 1,
+      "G4": 2,
+      "S18": 2
+    },
+    "layer_distribution": {
+      "structural": 463,
+      "grounding": 15,
+      "unknown": 0
+    },
+    "level_distribution": {
+      "critical": 268,
+      "expected": 178,
+      "aspirational": 32
+    },
+    "well_formed_count": 478,
+    "well_formed_rate": 100.0,
+    "testable_count": 478,
+    "testable_rate": 100.0,
+    "gpt5_converted": 478,
+    "gpt5_rate": 100.0,
+    "unmapped_count": 0,
+    "unmapped_rate": 0.0
+  },
+  "dimension_templates": {
+    "S1": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
+    "S2": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+    "S3": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
+    "S4": "The response should list [DELIVERABLES] with working links, version/format specified",
+    "S5": "The response should include due dates for every [TASK] aligned with timeline sequencing",
+    "S6": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
+    "S11": "The response should include concrete [RISK MITIGATION] strategies with owners",
+    "S18": "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)",
+    "S19": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+    "G1": "All people mentioned must exist in {source.ATTENDEES}",
+    "G2": "Meeting date must match {source.MEETING.StartTime}",
+    "G3": "All files must exist in {source.ENTITIES where type=File}",
+    "G4": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
+    "G5": "No entities introduced that don't exist in source"
+  },
+  "dimension_mapping_used": {
+    "Meeting Objective": "S1",
+    "Meeting Objective & Scope": "S1",
+    "Meeting Objective & Schedule": "S1",
+    "Meeting Objective & Timing": "S1",
+    "Meeting Objective Alignment": "S1",
+    "Meeting Scope": "S1",
+    "Meeting Logistics": "S1",
+    "Meeting logistics": "S1",
+    "Meeting Readiness": "S1",
+    "MeetingObjective": "S1",
+    "Objective": "S1",
+    "Objective & Scope": "S1",
+    "Objectives & Scope": "S1",
+    "ObjectivesAndTasks": "S1",
+    "Timeline & Meeting Details": "S1",
+    "Timeline & Meeting Scope": "S1",
+    "Logistics": "S1",
+    "Logistics & Setup": "S1",
+    "Logistics & Tech Setup": "S1",
+    "Logistics & Tooling": "S1"
+  },
+  "sample_conversions": [
+    {
+      "index": 179,
+      "utterance": "Help me make a workback plan for the upcoming meeting '1:1: Review JWT Optimizer Patch Implementation'",
+      "response": "Here’s an **actionable, realistic workback plan** for your upcoming meeting:\n\n---\n\n## ✅ Extracted Meeting Details\n- **Meeting:** *1:1: Review JWT Optimizer Patch Implementation*  \n- **Date & Time:** **2025-07-25**, 15:00–15:45 UTC (**Friday**)  \n- **Current Time (Request):** 2025-07-22 23:00 +08:00 → ~2.25 days remain  \n- **Organizer:** Sau Alquesta *(Platform Technical Lead)*  \n- **Attendees:**  \n  - Required: Sau Alquesta (lod_saulq), Markita Sitra (lod_markitas)  \n  - Optional: Era Manteca (lod_eramanteca)  \n- **Meeting Body/Agenda:**  \n  - Walk through PerformanceGuru optimizer patch internals (self-extracting JAR)  \n  - Review JMH integration with JSONOutputFormat  \n  - Discuss risk mitigation for dynamic `–Xmx` adjustments  \n  - Extend flamegraph CI pipeline to surface segmented warming metrics  \n- **Attachments & Related Docs:**  \n  - `AuthPerf_Detailed_Metrics.xlsx` (with performance metrics)  \n  - REQ-1423 Requirements spec (referenced in body)  \n\n---\n\n## ⚠️ Timeframe Reality\nMeeting is in **~2 days (Friday)**. All preparation steps must fit into a **tight 48-hour window**. This is **aggressive**, so allow no slippage and minimize iteration cycles.\n\n---\n\n## 📅 Workback Plan (Starting from Meeting Date)\n### **Meeting Day: Fri, July 25**\n| Timeframe | Task | Owner | Notes |\n|-----------|------|-------|-------|\n| *10:00–11:00 UTC* | Final dry run & sanity check of demo/script, confirm Teams link & screenshare setup | **Markita** | Ensure `AuthPerf_Detailed_Metrics.xlsx` is open and REQ-1423 reference is handy; verify flamegraph pipeline metrics available |\n| *By 13:00 UTC* | Send **reminder email w/ final agenda & materials link** | **Markita** | Attach confirmed slide snippets, metrics file link |\n\n---\n\n### **T-1 Day: Thurs, July 24**\n| Deadline | Task | Owner | Notes |\n|----------|------|-------|-------|\n| **12:00 UTC** | Finalize discussion flow & required talking points for: Patch internals, JMH JSONOutputFormat, –Xmx risk | **Markita** | Align talking points with Sau’s expectations; note any blockers |\n| **15:00 UTC** | Validate `AuthPerf_Detailed_Metrics.xlsx` key charts/benchmarks | **Markita** | Extract top 3 charts for quick reference |\n| **18:00 UTC** | Populate problem-risk-mitigation matrix for dynamic memory adjustments | **Markita** | Pull action items from previous performance deep dive |\n\n---\n\n### **T-2 Days: Wed Night (Today + tomorrow morning overlap)**\n| Deadline | Task | Owner | Notes |\n|----------|------|-------|-------|\n| **Before 2025-07-23 09:00 UTC** | Confirm receipt/access of REQ-1423 doc + AuthPerf XLS | **Markita** | If missing, request from Sau ASAP |\n| **By 14:00 UTC (July 23)** | Draft **mini-agenda doc** (include meeting link, topics, time allocations) | **Markita** | Keep concise; share via Teams for Sau’s input |\n| **By 16:00 UTC** | Review CI flamegraph pipeline snapshots (segmented warming) | **Markita** | Ensure ability to pull latest run data or screenshots for demo |\n\n---\n\n## 🔑 Dependencies & Risks\n- **REQ-1423** must be located early. If unavailable by Wed EOD, escalate to Sau.  \n- Flamegraph pipeline data freshness may need Jenkins run before demo — **flag now** if needed.  \n- Time zone differences: Sau (US) vs Markita (+08:00). Account for async delays.  \n- No buffer for big surprises → confirm scope today.  \n\n---\n\n## **Summary Timeline Visual**\n- **July 23 (Wed):** Lock agenda draft & confirm docs by mid-day UTC  \n- **July 24 (Thurs):** Deep dive content prep + finalize risk matrix  \n- **July 25 (Fri):** Dry run AM, send reminder, execute meeting PM UTC  \n\n---\n\n## ✅ Immediate Next Step for You\n**Today:** Confirm access to REQ-1423 spec and `AuthPerf_Detailed_Metrics.xlsx`, then draft the agenda outline **before July 23 14:00 UTC**.\n\n---\n\n### ⚠️ Assumptions\n- Meeting scope limited to listed agenda.  \n- REQ-1423 exists but must confirm you can open it.  \n- No additional attendees beyond those named.\n\n---\n\n❓Do you want me to **generate a pre-formatted agenda template and email draft** for circulation, or **create a Teams-friendly checklist with these deadlines**?",
+      "original_assertions": [
+        {
+          "text": "The response should state the meeting *1:1: Review JWT Optimizer Patch Implementation* is scheduled for **2025-07-25 at 15:00 UTC**, matching the event details.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Timeline",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include agenda items that match or closely align with the invite body, specifically covering 'PerformanceGuru optimizer patch internals', 'JMH integration with JSONOutputFormat', and 'dynamic –Xmx adjustments risk mitigation'.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Meeting Objective & Scope",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should schedule a task to confirm access to **REQ-1423** and **AuthPerf_Detailed_Metrics.xlsx** no later than **July 23 09:00 UTC**.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Artifact Readiness",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should assign clear ownership to all preparation tasks, naming Markita as the responsible person for items such as agenda drafting, validation of metrics file, and dry run.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Ownership",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should back-schedule preparatory actions so that a mini-agenda draft is completed by **July 23 14:00 UTC**, at least 24 hours before the meeting day.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Timeline",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should explicitly acknowledge that the ability to access REQ-1423 is assumed and call it out as a dependency or risk.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Dependencies & Risks",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include a specific task on meeting day to send a reminder email with the final agenda and materials link by 13:00 UTC.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Dependencies & sequencing",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include a dry run scheduled on the meeting day (July 25) before 11:00 UTC to ensure demo readiness and Teams link verification.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Timeline",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should plan a review of CI flamegraph pipeline snapshots by July 23 16:00 UTC as a separate preparatory step.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Meeting Objective & Scope",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should indicate, through an assumptions or risks section, that no additional attendees beyond those named are expected.",
+          "level": "aspirational",
+          "anchors": {
+            "Dim": "Disclosure of Missing Info",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        }
+      ],
+      "num_assertions": 10,
+      "conversions": [
+        {
+          "index": 1,
+          "original_text": "The response should state the meeting *1:1: Review JWT Optimizer Patch Implementation* is scheduled for **2025-07-25 at 15:00 UTC**, matching the even...",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.MEETING.StartTime}",
+          "placeholders_used": [
+            "T₀"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion focuses on ensuring the meeting date/time is correctly scheduled and aligned, which relates to timeline alignment and sequencing.",
+            "conversion_changes": [
+              "Removed specific meeting subject and date/time",
+              "Generalized to backward timeline requirement",
+              "Aligned with S2 template"
+            ],
+            "template_alignment": "Used S2 template: 'The response should include a backward timeline from T₀ with dependency-aware sequencing'",
+            "value_removed": "Specific date (2025-07-25) and time (15:00 UTC)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 2,
+          "original_text": "The response should include agenda items that match or closely align with the invite body, specifically covering 'PerformanceGuru optimizer patch inte...",
+          "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
+          "dimension_id": "S1",
+          "dimension_name": "Meeting Details",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.MEETING.Subject}, {source.MEETING.StartTime}, {source.ATTENDEES}",
+          "placeholders_used": [
+            "[SUBJECT]",
+            "[DATE/TIME]",
+            "[TIMEZONE]",
+            "[ATTENDEES]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion checks for agenda alignment with meeting body, which falls under meeting details completeness.",
+            "conversion_changes": [
+              "Removed specific agenda items like 'PerformanceGuru optimizer patch internals'",
+              "Generalized to meeting details template"
+            ],
+            "template_alignment": "Used S1 template: 'The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately'",
+            "value_removed": "Specific agenda topics"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 3,
+          "original_text": "The response should schedule a task to confirm access to **REQ-1423** and **AuthPerf_Detailed_Metrics.xlsx** no later than **July 23 09:00 UTC**....",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.ENTITIES where type=File}",
+          "placeholders_used": [
+            "[DELIVERABLES]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion ensures readiness of specific artifacts, which maps to deliverables and artifacts presence.",
+            "conversion_changes": [
+              "Removed specific file names (REQ-1423, AuthPerf_Detailed_Metrics.xlsx)",
+              "Generalized to listing deliverables with links and format"
+            ],
+            "template_alignment": "Used S4 template: 'The response should list [DELIVERABLES] with working links, version/format specified'",
+            "value_removed": "Specific file names and due date"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 4,
+          "original_text": "The response should assign clear ownership to all preparation tasks, naming Markita as the responsible person for items such as agenda drafting, valid...",
+          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
+          "dimension_id": "S3",
+          "dimension_name": "Ownership Assignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": null,
+          "placeholders_used": [
+            "[TASK]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion emphasizes assigning ownership for tasks, which directly maps to S3.",
+            "conversion_changes": [
+              "Removed specific person name (Markita)",
+              "Generalized to owner assignment for each task"
+            ],
+            "template_alignment": "Used S3 template: 'The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable'",
+            "value_removed": "Specific task examples and person name"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 5,
+          "original_text": "The response should back-schedule preparatory actions so that a mini-agenda draft is completed by **July 23 14:00 UTC**, at least 24 hours before the ...",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.MEETING.StartTime}",
+          "placeholders_used": [
+            "T₀"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion focuses on backward scheduling of tasks before the meeting, which is timeline alignment.",
+            "conversion_changes": [
+              "Removed specific due date (July 23 14:00 UTC)",
+              "Generalized to backward timeline requirement"
+            ],
+            "template_alignment": "Used S2 template: 'The response should include a backward timeline from T₀ with dependency-aware sequencing'",
+            "value_removed": "Specific mini-agenda draft deadline"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 1,
+          "original_text": "The response should explicitly acknowledge that the ability to access REQ-1423 is assumed and call it out as a dependency or risk....",
+          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented, including assumptions about access to required artifacts.",
+          "dimension_id": "S6",
+          "dimension_name": "Dependencies & Blockers",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": "{source.ENTITIES where type=File}",
+          "placeholders_used": [
+            "[DEPENDENCIES/BLOCKERS]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion refers to acknowledging access to REQ-1423 as a dependency or risk, which aligns with S6 that focuses on identifying dependencies and blockers.",
+            "conversion_changes": [
+              "Removed specific file name (REQ-1423) and generalized to required artifacts",
+              "Aligned language to template by including 'with mitigation steps documented'"
+            ],
+            "template_alignment": "Follows S6 template: 'The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented'",
+            "value_removed": "Specific reference to REQ-1423"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 2,
+          "original_text": "The response should include a specific task on meeting day to send a reminder email with the final agenda and materials link by 13:00 UTC....",
+          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented, such as ensuring timely distribution of agenda and materials before the meeting.",
+          "dimension_id": "S6",
+          "dimension_name": "Dependencies & Blockers",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": null,
+          "placeholders_used": [
+            "[DEPENDENCIES/BLOCKERS]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion implies a dependency on sending agenda and materials, which is a coordination dependency.",
+            "conversion_changes": [
+              "Removed specific time (13:00 UTC)",
+              "Generalized to 'timely distribution of agenda and materials'"
+            ],
+            "template_alignment": "Aligned with S6 template by framing as dependency with mitigation",
+            "value_removed": "Exact time and email action details"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 3,
+          "original_text": "The response should include a dry run scheduled on the meeting day (July 25) before 11:00 UTC to ensure demo readiness and Teams link verification....",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing, ensuring preparatory tasks such as a dry run occur before the meeting start.",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": "{source.MEETING.StartTime}",
+          "placeholders_used": [
+            "T₀"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion focuses on scheduling a dry run before the meeting, which relates to timeline alignment and sequencing.",
+            "conversion_changes": [
+              "Removed specific date and time",
+              "Generalized to 'before the meeting start' and included dependency-aware sequencing"
+            ],
+            "template_alignment": "Matches S2 template: 'The response should include a backward timeline from T₀ with dependency-aware sequencing'",
+            "value_removed": "Specific date (July 25) and time (11:00 UTC)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 4,
+          "original_text": "The response should plan a review of CI flamegraph pipeline snapshots by July 23 16:00 UTC as a separate preparatory step....",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing, incorporating preparatory reviews such as CI pipeline checks before the meeting.",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": "{source.MEETING.StartTime}",
+          "placeholders_used": [
+            "T₀"
+          ],
+          "rationale": {
+            "mapping_reason": "Although original dimension was marked as Meeting Objective, the content is about scheduling a preparatory review, which fits timeline alignment (S2).",
+            "conversion_changes": [
+              "Removed specific date/time (July 23 16:00 UTC)",
+              "Generalized to 'incorporating preparatory reviews such as CI pipeline checks'"
+            ],
+            "template_alignment": "Aligned with S2 template for backward timeline and sequencing",
+            "value_removed": "Specific date/time details"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 5,
+          "original_text": "The response should indicate, through an assumptions or risks section, that no additional attendees beyond those named are expected....",
+          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties, such as confirming that no additional attendees are anticipated.",
+          "dimension_id": "S19",
+          "dimension_name": "Caveat & Clarification",
+          "layer": "structural",
+          "level": "aspirational",
+          "weight": 1,
+          "source_reference": "{source.ATTENDEES}",
+          "placeholders_used": [
+            "[CAVEATS]",
+            "[ASSUMPTIONS]",
+            "[CLARIFICATIONS]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion requests explicit assumptions about attendees, which falls under caveats and clarifications.",
+            "conversion_changes": [
+              "Generalized to template language",
+              "Kept example of assumption about attendees"
+            ],
+            "template_alignment": "Matches S19 template for disclosing caveats, assumptions, and clarifications",
+            "value_removed": "Specific phrasing about 'through an assumptions or risks section'"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        }
+      ],
+      "timestamp": "2025-11-28T20:51:30.548674"
+    },
+    {
+      "index": 180,
+      "utterance": "Help me make a workback plan for the upcoming meeting '1:1: Review JWT Optimizer Patch Implementation'",
+      "response": "Here’s a **structured workback plan** for your upcoming meeting, based on the verified enterprise data and your request:\n\n---\n\n## ✅ Meeting Context\n\n- **Meeting Name / Subject:** `1:1: Review JWT Optimizer Patch Implementation`\n- **Scheduled Date & Time:** **Friday, July 25, 2025 – 15:00 to 15:45 UTC**  \n  *(From grounding data: EventId `56a39282-5641-416b-a060-7bc188f8e582`)*\n- **Organizer:** Sau Alquesta (you)\n- **Required Attendee:** Markita Sitra (DevOps Engineer)  \n- **Optional Attendee:** Era Manteca (Software Engineer)  \n- **Location:** Microsoft Teams Meeting — [Teams link in invite](https://teams.microsoft.com/l/meetup-join/NEW_TEAMS_LINK_1)  \n- **Objective:** Review PerformanceGuru optimizer patch details:\n  - Self-extracting JAR internals  \n  - JMH integration with `JSONOutputFormat`  \n  - Risk mitigation around dynamic –Xmx adjustments  \n  - Extension of flamegraph CI pipeline for segmented warming metrics  \n- **Attachments referenced:** `AuthPerf_Detailed_Metrics.xlsx` *(meeting invite attachment)*  \n- **Current Date/Time:** July 18, 2025 @ 23:00 UTC+8 ⇒ ~**7 days remain** until meeting  \n\n---\n\n## ✅ Workback Plan Timeline (Working Back from July 25 Meeting)\n\n> **Note:** Timeline assumes UTC for deadlines (align with your team’s working time). Adjust if regional time zones matter. Bold = critical path.\n\n---\n\n### **Phase 1: Pre-Read & Material Prep**\n\n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| **Upload & verify supporting file AuthPerf_Detailed_Metrics.xlsx in Teams meeting chat** | **July 19 (Sat)** | Sau Alquesta | Ensure attachment is easily accessible; confirm version matches REQ-1423 spec referenced in invite. |\n| Draft 2–3 summary slides highlighting JMH integration & risk mitigations for agenda anchor | July 20 (Sun) | Sau Alquesta | Pull key findings from AuthPerf_Detailed_Metrics including segmented warmup metrics. |\n| Circulate pre-read (slides + metrics file) to attendees via Teams & email | July 21 (Mon) | Sau Alquesta | Mark as “Review ahead of meeting”; include brief context & expectations in message. |\n\n---\n\n### **Phase 2: Agenda Alignment & Logistics**\n\n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| Validate agenda flow: JAR internals → JMH JSONOutputFormat → Xmx tuning risks → CI flamegraph extension | July 21 (Mon) | Sau Alquesta | Use invite body as base; confirm optional topics if Era can attend. |\n| Confirm Teams link and meeting recording enabled | July 22 (Tue) | Sau Alquesta | Check “Meeting Options” in Teams; allow recording for retrospective documentation. |\n| Ping Markita and Era for pre-read acknowledgment & confirm attendance | July 22 (Tue) | Sau Alquesta | Use Teams DM or email; call out discussion points relevant to each role. |\n\n---\n\n### **Phase 3: Validation & Dry Run**\n\n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| Integrate latest optimizer JAR build into staging (if demo planned) & validate JMH report generation | July 23 (Wed) | Markita Sitra *(coordinate with Era if needed)* | Ensure `JSONOutputFormat` results match baseline; verify system handles Xmx settings dynamically. |\n| Confirm flamegraph CI pipeline snippet ready for screen-share | July 24 (Thu) | Sau Alquesta | Pull current pipeline script from repo; store snippet locally for quick demo. |\n| Conduct 15-min dry run of talking points & screen-share setup | July 24 (Thu) | Sau Alquesta | Validate Teams screen-share, metric file readability, and key narrative flow. |\n\n---\n\n### **Phase 4: Final Checks & Meeting Execution**\n\n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| Re-confirm meeting reminder & notify attendees of any agenda tweaks | July 24 (Thu) EOD | Sau Alquesta | Send a short Teams message or email. |\n| Load slide deck & metrics doc in Teams before start | July 25 (Fri) 14:45 UTC | Sau Alquesta | Ensure local backup; check connectivity 10 mins prior. |\n| Host meeting: capture decisions & follow-up actions | July 25 (Fri) 15:00 UTC | Sau Alquesta | Use built-in Teams recording; note next steps for CI pipeline and JVM config refinements. |\n\n---\n\n## ✅ Assumptions & Notes\n- Owners inferred from meeting invite and roles in grounding data.\n- Pre-read and dry-run assumed necessary given technical depth (JMH performance, ByteBuffer handling, CI modifications).\n- Risk: Only **7 days available** → timeline is tight; recommend weekend prep for artifact readiness.\n- Attachments stated in invite: `AuthPerf_Detailed_Metrics.xlsx`. If **REQ-1423 spec** mentioned in invite is missing, confirm location in Teams or SharePoint ASAP.\n- If optional attendee (Era) cannot join, Markita should be ready to cover any pipeline implementation queries.\n\n---\n\n### 📌 Next Step (Immediate Action)\n- **Today:** Confirm file `AuthPerf_Detailed_Metrics.xlsx` latest version and retrieve REQ-1423 spec.\n- Start drafting summary content and publish pre-read plan by July 21.\n\n---\n\n✅ This plan aligns with enterprise context, uses real schedule and roles, and provides a step-by-step countdown to ensure a **well-prepped, risk-mitigated technical discussion** on July 25.\n\n---\n\n**Would you like me to also create a `Teams post-ready checklist` for day-of activities**, or draft a **one-line Teams reminder message you can send on July 21 with the pre-read link**?",
+      "original_assertions": [
+        {
+          "text": "The response should state the meeting date and time as July 25, 2025 from 15:00 to 15:45 UTC, matching the event invite.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Timeline & Buffers",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include the meeting objective elements: review of optimizer patch internals, JMH integration with JSONOutputFormat, dynamic –Xmx risk mitigation, and CI pipeline flamegraph extension.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Objective & Scope",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should identify Sau Alquesta as the organizer and Markita Sitra as the required attendee as per the invite details.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Ownership",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should define a backward schedule starting from July 25 and include specific due dates for tasks (e.g., July 19, July 20, July 21, July 22, July 23, July 24).",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Timeline & Buffers",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include a task to upload and verify the file 'AuthPerf_Detailed_Metrics.xlsx' as part of pre-read preparation.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Artifact Readiness",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should assign every major task (file upload, summary slides, pre-read circulation, agenda confirmation, JAR validation, dry run) to a named owner.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Ownership",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include a step to circulate the pre-read documents at least 72 hours before the meeting (by July 21).",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Artifact Readiness",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should explicitly acknowledge that the REQ-1423 specification file location is assumed and must be confirmed.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Disclosure of Assumptions",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include a buffer or contingency note that the timeline is tight with only 7 days available.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Timeline & Buffers",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should provide at least one dependency or sequence indication, such as confirming agenda before sending reminders or validating JAR build before hosting a demo.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Dependencies & Sequencing",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include a dry run of the meeting flow and screen-share setup on July 24.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Readiness",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should plan for confirming the Teams link and enabling recording before the meeting.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Logistics",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should not claim ownership for any attendee beyond Sau Alquesta, Markita Sitra, and Era Manteca, since no additional roles appear in the invite.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Ownership Accuracy",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should include a next-immediate action, such as validating the metrics file version today.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Actionability",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        },
+        {
+          "text": "The response should not omit mention of assumptions where required details like access to REQ-1423 are not fully confirmed.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Disclosure of Assumptions",
+            "sourceID": "56a39282-5641-416b-a060-7bc188f8e582"
+          }
+        }
+      ],
+      "num_assertions": 15,
+      "conversions": [
+        {
+          "index": 1,
+          "original_text": "The response should state the meeting date and time as July 25, 2025 from 15:00 to 15:45 UTC, matching the event invite....",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.MEETING.StartTime}",
+          "placeholders_used": [
+            "T₀"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion focuses on meeting date/time and scheduling, which relates to timeline alignment and sequencing.",
+            "conversion_changes": [
+              "Removed hardcoded date/time (July 25, 2025, 15:00-15:45 UTC)",
+              "Generalized to backward timeline requirement per template"
+            ],
+            "template_alignment": "Aligned with S2 template: 'The response should include a backward timeline from T₀ with dependency-aware sequencing'",
+            "value_removed": "Specific date/time details replaced with T₀ placeholder"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 2,
+          "original_text": "The response should include the meeting objective elements: review of optimizer patch internals, JMH integration with JSONOutputFormat, dynamic –Xmx r...",
+          "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES]",
+          "dimension_id": "S1",
+          "dimension_name": "Meeting Details",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.MEETING.Subject}",
+          "placeholders_used": [
+            "[SUBJECT]",
+            "[DATE/TIME]",
+            "[TIMEZONE]",
+            "[ATTENDEES]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion emphasizes meeting objectives and scope, which falls under meeting details.",
+            "conversion_changes": [
+              "Removed specific objectives like optimizer patch internals and JMH integration",
+              "Replaced with generic placeholders for subject, date/time, timezone, and attendees"
+            ],
+            "template_alignment": "Aligned with S1 template: 'The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES]'",
+            "value_removed": "Detailed objectives replaced with standard meeting details placeholders"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 3,
+          "original_text": "The response should identify Sau Alquesta as the organizer and Markita Sitra as the required attendee as per the invite details....",
+          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
+          "dimension_id": "S3",
+          "dimension_name": "Ownership Assignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.ATTENDEES}",
+          "placeholders_used": [
+            "[TASK]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion relates to identifying roles and responsibilities, which corresponds to ownership assignment.",
+            "conversion_changes": [
+              "Removed specific names (Sau Alquesta, Markita Sitra)",
+              "Generalized to assigning an owner for each task"
+            ],
+            "template_alignment": "Aligned with S3 template: 'The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable'",
+            "value_removed": "Specific attendee names replaced with generic ownership requirement"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 4,
+          "original_text": "The response should define a backward schedule starting from July 25 and include specific due dates for tasks (e.g., July 19, July 20, July 21, July 2...",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.MEETING.StartTime}",
+          "placeholders_used": [
+            "T₀"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion is about creating a backward schedule with due dates, which is timeline alignment.",
+            "conversion_changes": [
+              "Removed explicit dates (July 19, July 20, etc.)",
+              "Generalized to backward timeline requirement"
+            ],
+            "template_alignment": "Aligned with S2 template: 'The response should include a backward timeline from T₀ with dependency-aware sequencing'",
+            "value_removed": "Specific due dates replaced with generic backward timeline placeholder"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 5,
+          "original_text": "The response should include a task to upload and verify the file 'AuthPerf_Detailed_Metrics.xlsx' as part of pre-read preparation....",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.ENTITIES where type=File}",
+          "placeholders_used": [
+            "[DELIVERABLES]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion focuses on including a specific file as part of preparation, which is about deliverables and artifacts.",
+            "conversion_changes": [
+              "Removed specific file name 'AuthPerf_Detailed_Metrics.xlsx'",
+              "Generalized to listing deliverables with links and format"
+            ],
+            "template_alignment": "Aligned with S4 template: 'The response should list [DELIVERABLES] with working links, version/format specified'",
+            "value_removed": "Specific file name replaced with generic deliverables placeholder"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 1,
+          "original_text": "The response should assign every major task (file upload, summary slides, pre-read circulation, agenda confirmation, JAR validation, dry run) to a nam...",
+          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
+          "dimension_id": "S3",
+          "dimension_name": "Ownership Assignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": null,
+          "placeholders_used": [
+            "[TASK]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion focuses on assigning owners for tasks, which aligns with S3: Ownership Assignment.",
+            "conversion_changes": [
+              "Removed specific task examples and replaced with generic placeholder [TASK]",
+              "Removed partial name reference to maintain template neutrality"
+            ],
+            "template_alignment": "Used the exact template for S3: 'The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable'",
+            "value_removed": "Specific tasks like file upload, summary slides, etc., and any name references"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 2,
+          "original_text": "The response should include a step to circulate the pre-read documents at least 72 hours before the meeting (by July 21)....",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": null,
+          "placeholders_used": [
+            "[DELIVERABLES]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion is about ensuring pre-read documents are included and shared, which relates to deliverables and artifacts.",
+            "conversion_changes": [
+              "Removed timing detail (72 hours, July 21) to focus on structural requirement",
+              "Generalized 'pre-read documents' to [DELIVERABLES]"
+            ],
+            "template_alignment": "Aligned with S4 template requiring deliverables with links and version/format",
+            "value_removed": "Specific timing and example of pre-read documents"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 3,
+          "original_text": "The response should explicitly acknowledge that the REQ-1423 specification file location is assumed and must be confirmed....",
+          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+          "dimension_id": "S19",
+          "dimension_name": "Caveat & Clarification",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": null,
+          "placeholders_used": [
+            "[CAVEATS]",
+            "[ASSUMPTIONS]",
+            "[CLARIFICATIONS]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion is about acknowledging an assumption regarding file location, which falls under caveats and clarifications.",
+            "conversion_changes": [
+              "Removed specific reference to REQ-1423 specification file",
+              "Generalized to cover all caveats, assumptions, and clarifications"
+            ],
+            "template_alignment": "Used S19 template verbatim",
+            "value_removed": "REQ-1423 and specific file location details"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 4,
+          "original_text": "The response should include a buffer or contingency note that the timeline is tight with only 7 days available....",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Original assertion relates to timeline constraints and contingency, which is part of timeline alignment.",
+            "conversion_changes": [
+              "Removed specific buffer note and 7-day detail",
+              "Generalized to require backward timeline with dependencies"
+            ],
+            "template_alignment": "Used S2 template for timeline alignment",
+            "value_removed": "Specific mention of 7 days and buffer note"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 5,
+          "original_text": "The response should provide at least one dependency or sequence indication, such as confirming agenda before sending reminders or validating JAR build...",
+          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
+          "dimension_id": "S6",
+          "dimension_name": "Dependencies & Blockers",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": null,
+          "placeholders_used": [
+            "[DEPENDENCIES/BLOCKERS]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion is about showing dependencies or sequencing, which aligns with S6.",
+            "conversion_changes": [
+              "Removed specific examples like agenda confirmation and JAR build",
+              "Generalized to dependencies/blockers with mitigation steps"
+            ],
+            "template_alignment": "Used S6 template exactly",
+            "value_removed": "Specific dependency examples"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 1,
+          "original_text": "The response should include a dry run of the meeting flow and screen-share setup on July 24....",
+          "converted_text": "The response should include due dates for every [TASK] aligned with timeline sequencing",
+          "dimension_id": "S5",
+          "dimension_name": "Task Dates",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": null,
+          "placeholders_used": [
+            "[TASK]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion emphasizes scheduling a dry run before the meeting, which relates to specifying due dates for tasks.",
+            "conversion_changes": [
+              "Removed specific date (July 24) and replaced with generic requirement for due dates",
+              "Generalized 'dry run and screen-share setup' to [TASK]"
+            ],
+            "template_alignment": "Aligned with S5 template: 'The response should include due dates for every [TASK] aligned with timeline sequencing'",
+            "value_removed": "Specific date and task details were removed to maintain generality"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 2,
+          "original_text": "The response should plan for confirming the Teams link and enabling recording before the meeting....",
+          "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
+          "dimension_id": "S1",
+          "dimension_name": "Meeting Details",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": "{source.MEETING}",
+          "placeholders_used": [
+            "[SUBJECT]",
+            "[DATE/TIME]",
+            "[TIMEZONE]",
+            "[ATTENDEES]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion relates to ensuring meeting logistics (Teams link, recording) which falls under meeting details completeness.",
+            "conversion_changes": [
+              "Removed specific mention of Teams link and recording",
+              "Replaced with standardized requirement to include meeting subject, date/time, timezone, and attendees"
+            ],
+            "template_alignment": "Aligned with S1 template for meeting details",
+            "value_removed": "Specific logistics details were generalized"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 3,
+          "original_text": "The response should not claim ownership for any attendee beyond Sau Alquesta, Markita Sitra, and Era Manteca, since no additional roles appear in the ...",
+          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
+          "dimension_id": "S3",
+          "dimension_name": "Ownership Assignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": "{source.ATTENDEES}",
+          "placeholders_used": [
+            "[TASK]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion enforces correct ownership assignment, which maps to S3.",
+            "conversion_changes": [
+              "Removed specific attendee names",
+              "Generalized to requirement for assigning an owner for each task or placeholder if name is missing"
+            ],
+            "template_alignment": "Aligned with S3 template",
+            "value_removed": "Specific attendee names and negative phrasing were removed"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 4,
+          "original_text": "The response should include a next-immediate action, such as validating the metrics file version today....",
+          "converted_text": "The response should include due dates for every [TASK] aligned with timeline sequencing",
+          "dimension_id": "S5",
+          "dimension_name": "Task Dates",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "source_reference": null,
+          "placeholders_used": [
+            "[TASK]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion emphasizes immediate action with a due date, which aligns with S5.",
+            "conversion_changes": [
+              "Removed specific example (validating metrics file)",
+              "Generalized to requirement for due dates for all tasks"
+            ],
+            "template_alignment": "Aligned with S5 template",
+            "value_removed": "Specific task and urgency phrasing were removed"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        },
+        {
+          "index": 5,
+          "original_text": "The response should not omit mention of assumptions where required details like access to REQ-1423 are not fully confirmed....",
+          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+          "dimension_id": "S19",
+          "dimension_name": "Caveat & Clarification",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "source_reference": null,
+          "placeholders_used": [
+            "[CAVEATS]",
+            "[ASSUMPTIONS]",
+            "[CLARIFICATIONS]"
+          ],
+          "rationale": {
+            "mapping_reason": "Original assertion focuses on disclosing assumptions and uncertainties, which maps to S19.",
+            "conversion_changes": [
+              "Removed specific reference to REQ-1423",
+              "Generalized to disclosure of caveats, assumptions, and clarifications"
+            ],
+            "template_alignment": "Aligned with S19 template",
+            "value_removed": "Specific requirement ID and negative phrasing were removed"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "gpt5"
+        }
+      ],
+      "timestamp": "2025-11-28T20:52:21.879576"
+    }
+  ]
+}
