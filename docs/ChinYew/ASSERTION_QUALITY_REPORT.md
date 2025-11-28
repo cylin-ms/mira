@@ -150,11 +150,11 @@ Assertions with **parameterized references** that verify against source at runti
 │    S1: Has meeting date/time?                  [✓/✗]       │
 │    S2: Has backward timeline?                  [✓/✗]       │
 │    S3: Has task owners?                        [✓/✗]       │
-│    ...S4-S10                                               │
+│    ...S4-S10                                                │
 │  S11-S18 (Extended): Advanced planning aspects              │
 │    S11: Has risk mitigation strategy?          [✓/✗]       │
 │    S12: Has milestone validation?              [✓/✗]       │
-│    ...S13-S18                                              │
+│    ...S13-S18                                               │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -357,68 +357,164 @@ DUPLICATES FOUND:
 - Allow for reasonable time zone variations
 ```
 
-**Template Library (10 Core Patterns):**
+**Template Library (18 Structural Patterns — S1-S18):**
 
-| Pattern ID | Template | Applies To |
-|------------|----------|------------|
-| P1 | "The response should state the meeting [DATE/TIME] accurately" | Timeline |
-| P2 | "The response should include a backward timeline from T₀ with [N] preparation milestones" | Planning |
-| P3 | "The response should assign an owner for each [TASK TYPE]" | Ownership |
-| P4 | "The response should list required [ARTIFACT TYPE] and their preparation deadlines" | Artifacts |
-| P5 | "The response should identify dependencies between [TASK A] and [TASK B]" | Dependencies |
-| P6 | "The response should state the meeting's [PURPOSE/OBJECTIVE]" | Scope |
-| P7 | "The response should disclose any [ASSUMPTIONS/GAPS] in available information" | Transparency |
-| P8 | "The response should include [STAKEHOLDER] alignment checkpoints" | Stakeholders |
-| P9 | "The response should only reference [ENTITIES] from the provided context" | Grounding |
-| P10 | "The response should identify [RISK TYPE] and propose mitigations" | Risk |
+#### Core Patterns (S1–S10) — Original 10 structural dimensions
+
+| ID | Template | Dimension | Weight |
+|----|----------|-----------|:------:|
+| S1 | "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately" | Meeting Details | 3 |
+| S2 | "The response should include a backward timeline from T₀ with dependency-aware sequencing" | Timeline Alignment | 3 |
+| S3 | "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable" | Ownership Assignment | 3 |
+| S4 | "The response should list [DELIVERABLES] with working links, version/format specified" | Deliverables & Artifacts | 2 |
+| S5 | "The response should include due dates for every [TASK] aligned with timeline sequencing" | Task Dates | 2 |
+| S6 | "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented" | Dependencies & Blockers | 2 |
+| S7 | "The response should link [TASKS/ARTIFACTS] back to original source priorities/files" | Source Traceability | 2 |
+| S8 | "The response should specify [COMMUNICATION CHANNELS] (Teams, email, meeting cadence)" | Communication Channels | 1 |
+| S9 | "The response should only reference [ENTITIES] verified against source (meta-grounding check)" | Grounding Meta-Check | 2 |
+| S10 | "The response should rank [TASKS] by critical path/impact on meeting success" | Priority Assignment | 2 |
+
+#### Extended Patterns (S11–S18) — Additional dimensions for advanced planning
+
+| ID | Template | Dimension | Weight |
+|----|----------|-----------|:------:|
+| S11 | "The response should include concrete [RISK MITIGATION] strategies with owners" | Risk Mitigation Strategy | 2 |
+| S12 | "The response should validate [MILESTONES] are feasible, right-sized, and verifiable" | Milestone Validation | 2 |
+| S13 | "The response should state clear [GOALS] and measurable [SUCCESS CRITERIA]" | Goal & Success Criteria | 2 |
+| S14 | "The response should specify [RESOURCE ALLOCATION] (people/time/tools/budget)" | Resource Allocation | 2 |
+| S15 | "The response should note [COMPLIANCE/GOVERNANCE] requirements (security, privacy, regulatory)" | Compliance & Governance | 1 |
+| S16 | "The response should include [REVIEW/FEEDBACK] checkpoints to validate the plan" | Review & Feedback Loops | 1 |
+| S17 | "The response should define [ESCALATION PATH] with owners for critical risks" | Escalation Path | 1 |
+| S18 | "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)" | Post-Event Actions | 1 |
 
 ---
 
 ### Strategy 2: Dimension Consolidation
 
-**Objective:** Reduce 232 dimensions to 12 canonical categories
+**Objective:** Consolidate legacy 232 dimensions into S1-S18 canonical framework
 
-**Proposed Taxonomy:**
+**New Taxonomy (S1-S18 + G1-G5):**
 
-| New Dimension | Merged From | Count |
-|---------------|-------------|-------|
-| **Timeline & Scheduling** | Timeline & Buffers, Timeline | 424 |
-| **Meeting Context** | Meeting Objective & Scope, Grounding & traceability | 305 |
-| **Artifact Readiness** | Artifact readiness, Artifact Readiness | 371 |
-| **Task Ownership** | Ownership clarity, Ownership Clarity, Ownership | 352 |
-| **Dependencies** | Dependencies & sequencing, Dependencies & Sequencing, Dependencies | 306 |
-| **Assumptions & Risks** | Disclosure of missing info..., Disclosure of assumptions | 99 |
-| **Stakeholder Alignment** | Stakeholder Alignment | 26 |
-| **Communication Quality** | (NEW) | 0 |
-| **Feasibility** | (NEW) | 0 |
-| **Progress Tracking** | (NEW) | 0 |
-| **Prioritization** | (NEW) | 0 |
-| **Resource Allocation** | (NEW) | 0 |
+#### Core Structural Dimensions (S1–S10)
+
+| ID | New Dimension | Merged From | Weight |
+|----|---------------|-------------|:------:|
+| S1 | **Meeting Details** | Meeting Objective & Scope, Meeting Context | 3 |
+| S2 | **Timeline Alignment** | Timeline & Buffers, Timeline, Backward scheduling | 3 |
+| S3 | **Ownership Assignment** | Ownership clarity, Ownership Clarity, Task Ownership | 3 |
+| S4 | **Deliverables & Artifacts** | Artifact readiness, Artifact Readiness | 2 |
+| S5 | **Task Dates** | Due dates, Task scheduling | 2 |
+| S6 | **Dependencies & Blockers** | Dependencies & sequencing, Dependencies, Blockers | 2 |
+| S7 | **Source Traceability** | Grounding & traceability, Source references | 2 |
+| S8 | **Communication Channels** | Communication Quality, Coordination | 1 |
+| S9 | **Grounding Meta-Check** | Entity grounding, Factual alignment | 2 |
+| S10 | **Priority Assignment** | Prioritization, Critical path | 2 |
+
+#### Extended Structural Dimensions (S11–S18)
+
+| ID | New Dimension | Merged From | Weight |
+|----|---------------|-------------|:------:|
+| S11 | **Risk Mitigation Strategy** | Assumptions & Risks, Risk management | 2 |
+| S12 | **Milestone Validation** | Feasibility, Milestone coherence | 2 |
+| S13 | **Goal & Success Criteria** | Success metrics, Objectives | 2 |
+| S14 | **Resource Allocation** | Resource Allocation, Budget/tools | 2 |
+| S15 | **Compliance & Governance** | Regulatory, Security checks | 1 |
+| S16 | **Review & Feedback Loops** | Progress Tracking, Review checkpoints | 1 |
+| S17 | **Escalation Path** | Escalation procedures, Contact chain | 1 |
+| S18 | **Post-Event Actions** | Wrap-up, Retrospectives | 1 |
+
+#### Grounding Dimensions (G1–G5)
+
+| ID | Dimension | Weight |
+|----|-----------|:------:|
+| G1 | **Attendee Grounding** | 3 |
+| G2 | **Date/Time Grounding** | 3 |
+| G3 | **Artifact Grounding** | 2 |
+| G4 | **Topic Grounding** | 2 |
+| G5 | **Hallucination Check** | 3 |
 
 **Migration Script:**
 ```python
+# Maps legacy dimension names to S1-S18 canonical IDs
 DIMENSION_MAP = {
-    # Timeline consolidation
-    "Timeline & Buffers": "Timeline & Scheduling",
-    "Timeline": "Timeline & Scheduling",
+    # S1: Meeting Details
+    "Meeting Objective & Scope": "S1",
+    "Meeting Context": "S1",
     
-    # Artifact consolidation
-    "Artifact readiness": "Artifact Readiness",
-    "Artifact Readiness": "Artifact Readiness",
+    # S2: Timeline Alignment
+    "Timeline & Buffers": "S2",
+    "Timeline": "S2",
+    "Backward scheduling": "S2",
     
-    # Ownership consolidation
-    "Ownership clarity": "Task Ownership",
-    "Ownership Clarity": "Task Ownership",
-    "Ownership": "Task Ownership",
+    # S3: Ownership Assignment
+    "Ownership clarity": "S3",
+    "Ownership Clarity": "S3",
+    "Ownership": "S3",
+    "Task Ownership": "S3",
     
-    # Dependencies consolidation
-    "Dependencies & sequencing": "Dependencies",
-    "Dependencies & Sequencing": "Dependencies",
-    "Dependencies": "Dependencies",
+    # S4: Deliverables & Artifacts
+    "Artifact readiness": "S4",
+    "Artifact Readiness": "S4",
     
-    # Disclosure consolidation
-    "Disclosure of missing info and assumptions": "Assumptions & Risks",
-    "Disclosure of assumptions": "Assumptions & Risks",
+    # S5: Task Dates
+    "Due dates": "S5",
+    "Task scheduling": "S5",
+    
+    # S6: Dependencies & Blockers
+    "Dependencies & sequencing": "S6",
+    "Dependencies & Sequencing": "S6",
+    "Dependencies": "S6",
+    "Blockers": "S6",
+    
+    # S7: Source Traceability
+    "Grounding & traceability": "S7",
+    "Source references": "S7",
+    
+    # S8: Communication Channels
+    "Communication Quality": "S8",
+    "Coordination": "S8",
+    
+    # S9: Grounding Meta-Check
+    "Entity grounding": "S9",
+    "Factual alignment": "S9",
+    
+    # S10: Priority Assignment
+    "Prioritization": "S10",
+    "Critical path": "S10",
+    
+    # S11: Risk Mitigation Strategy
+    "Assumptions & Risks": "S11",
+    "Disclosure of missing info and assumptions": "S11",
+    "Disclosure of assumptions": "S11",
+    "Risk management": "S11",
+    
+    # S12: Milestone Validation
+    "Feasibility": "S12",
+    "Milestone coherence": "S12",
+    
+    # S13: Goal & Success Criteria
+    "Success metrics": "S13",
+    "Objectives": "S13",
+    
+    # S14: Resource Allocation
+    "Resource Allocation": "S14",
+    "Budget/tools": "S14",
+    
+    # S15: Compliance & Governance
+    "Regulatory": "S15",
+    "Security checks": "S15",
+    
+    # S16: Review & Feedback Loops
+    "Progress Tracking": "S16",
+    "Review checkpoints": "S16",
+    
+    # S17: Escalation Path
+    "Escalation procedures": "S17",
+    "Contact chain": "S17",
+    
+    # S18: Post-Event Actions
+    "Wrap-up": "S18",
+    "Retrospectives": "S18",
 }
 ```
 
