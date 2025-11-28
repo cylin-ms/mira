@@ -89,16 +89,16 @@ The team is preparing for a major product launch scheduled for February 1, 2025.
 
 | ID | Pattern | Level | Key Criteria |
 |----|---------|-------|--------------|
-| P1 | Explicit Meeting Details | critical | Does the response include the correct meeting date... |
-| P2 | Timeline Backward Planning | critical | Does the response show tasks scheduled before T₀ i... |
-| P3 | Ownership Assignment | critical | Does every task have a named owner? |
-| P4 | Artifact Specification | expected | Does the response list specific artifacts (e.g., f... |
-| P5 | Dependency Sequencing | expected | Does the response indicate which tasks depend on o... |
-| P6 | Meeting Objective Clarity | expected | Does the response describe the meeting's purpose? |
-| P7 | Assumption Disclosure | aspirational | Does the response include the word 'Assumption' or... |
-| P8 | Stakeholder Alignment | aspirational | Does the plan include stakeholder review or confir... |
-| P9 | Grounding in Provided Context | critical | Does the response avoid introducing unlisted atten... |
-| P10 | Risk Identification | aspirational | Does the response mention risks related to timing ... |
+| S1 | Explicit Meeting Details | critical | Does the response include the correct meeting date... |
+| S2 | Timeline Backward Planning | critical | Does the response show tasks scheduled before T₀ i... |
+| S3 | Ownership Assignment | critical | Does every task have a named owner? |
+| S4 | Artifact Specification | expected | Does the response list specific artifacts (e.g., f... |
+| S5 | Dependency Sequencing | expected | Does the response indicate which tasks depend on o... |
+| S6 | Meeting Objective Clarity | expected | Does the response describe the meeting's purpose? |
+| S7 | Assumption Disclosure | aspirational | Does the response include the word 'Assumption' or... |
+| S8 | Stakeholder Alignment | aspirational | Does the plan include stakeholder review or confir... |
+| S9 | Grounding in Provided Context | critical | Does the response avoid introducing unlisted atten... |
+| S10 | Risk Identification | aspirational | Does the response mention risks related to timing ... |
 
 
 ### Grounding Assertions (G1-G5) - "Is X accurate to source?"
@@ -117,16 +117,16 @@ The team is preparing for a major product launch scheduled for February 1, 2025.
 
 | ID | Pattern | Level | Assertion |
 |----|---------|----|----|
-| A1 | P1 | critical | The workback plan explicitly states the meeting date as January 15, 2025, the ti... |
-| A2 | P2 | critical | The workback plan includes a backward timeline starting from the meeting on Janu... |
-| A3 | P3 | critical | Every task in the workback plan has an explicitly named owner, using only the kn... |
-| A4 | P4 | expected | The workback plan specifies preparation or distribution tasks for the following ... |
-| A5 | P5 | expected | The workback plan sequences tasks logically and makes dependencies explicit, suc... |
-| A6 | P6 | expected | The workback plan clearly states the meeting's purpose as reviewing readiness it... |
-| A7 | P7 | aspirational | The workback plan explicitly discloses any assumptions or gaps in information us... |
-| A8 | P8 | aspirational | The workback plan includes at least one task to confirm alignment with key stake... |
-| A9 | P9 | critical | The workback plan avoids introducing any attendees, files, or topics not mention... |
-| A10 | P10 | aspirational | The workback plan identifies at least one potential risk related to timing or de... |
+| A1 | S1 | critical | The workback plan explicitly states the meeting date as January 15, 2025, the ti... |
+| A2 | S2 | critical | The workback plan includes a backward timeline starting from the meeting on Janu... |
+| A3 | S3 | critical | Every task in the workback plan has an explicitly named owner, using only the kn... |
+| A4 | S4 | expected | The workback plan specifies preparation or distribution tasks for the following ... |
+| A5 | S5 | expected | The workback plan sequences tasks logically and makes dependencies explicit, suc... |
+| A6 | S6 | expected | The workback plan clearly states the meeting's purpose as reviewing readiness it... |
+| A7 | S7 | aspirational | The workback plan explicitly discloses any assumptions or gaps in information us... |
+| A8 | S8 | aspirational | The workback plan includes at least one task to confirm alignment with key stake... |
+| A9 | S9 | critical | The workback plan avoids introducing any attendees, files, or topics not mention... |
+| A10 | S10 | aspirational | The workback plan identifies at least one potential risk related to timing or de... |
 
 
 ## Generated Grounding Assertions (G1-G5)
@@ -255,16 +255,16 @@ The workback plan meets all structural requirements, including clear meeting det
 
 | Assertion | Pattern | Level | Pass/Fail | Score | Evidence |
 |-----------|---------|-------|-----------|-------|----------|
-| A1 | P1 | critical | ✅ PASS | 10/10 | Meeting Details section states: 'January 15, 2025,... |
-| A2 | P2 | critical | ✅ PASS | 10/10 | Backward timeline starts from Jan 15 meeting and i... |
-| A3 | P3 | critical | ✅ PASS | 10/10 | Every task in the timeline has an owner: Sarah Che... |
-| A4 | P4 | expected | ✅ PASS | 10/10 | Tasks reference artifacts: 'Consolidate updated ar... |
-| A5 | P5 | expected | ✅ PASS | 10/10 | Dependencies section explicitly states: 'Engineeri... |
-| A6 | P6 | expected | ✅ PASS | 10/10 | Meeting Objective: 'To review all readiness items ... |
-| A7 | P7 | aspirational | ✅ PASS | 10/10 | Assumptions section lists: 'No major new feature r... |
-| A8 | P8 | aspirational | ✅ PASS | 10/10 | Stakeholder Alignment Steps include: 'Jan 07: Inte... |
-| A9 | P9 | critical | ✅ PASS | 10/10 | No extra attendees or artifacts introduced beyond ... |
-| A10 | P10 | aspirational | ✅ PASS | 10/10 | Risks & Mitigation section includes timing/depende... |
+| A1 | S1 | critical | ✅ PASS | 10/10 | Meeting Details section states: 'January 15, 2025,... |
+| A2 | S2 | critical | ✅ PASS | 10/10 | Backward timeline starts from Jan 15 meeting and i... |
+| A3 | S3 | critical | ✅ PASS | 10/10 | Every task in the timeline has an owner: Sarah Che... |
+| A4 | S4 | expected | ✅ PASS | 10/10 | Tasks reference artifacts: 'Consolidate updated ar... |
+| A5 | S5 | expected | ✅ PASS | 10/10 | Dependencies section explicitly states: 'Engineeri... |
+| A6 | S6 | expected | ✅ PASS | 10/10 | Meeting Objective: 'To review all readiness items ... |
+| A7 | S7 | aspirational | ✅ PASS | 10/10 | Assumptions section lists: 'No major new feature r... |
+| A8 | S8 | aspirational | ✅ PASS | 10/10 | Stakeholder Alignment Steps include: 'Jan 07: Inte... |
+| A9 | S9 | critical | ✅ PASS | 10/10 | No extra attendees or artifacts introduced beyond ... |
+| A10 | S10 | aspirational | ✅ PASS | 10/10 | Risks & Mitigation section includes timing/depende... |
 
 
 ### Layer 2: Grounding Evaluation (Are those elements FACTUALLY CORRECT?)
@@ -351,16 +351,16 @@ The workback plan includes a clear timeline and avoids introducing extraneous el
 
 | Assertion | Pattern | Level | Pass/Fail | Score | Evidence |
 |-----------|---------|-------|-----------|-------|----------|
-| A1 | P1 | critical | ❌ FAIL | 3/10 | Meeting date is stated as January 15, 2025, but ti... |
-| A2 | P2 | critical | ✅ PASS | 10/10 | Tasks are scheduled on Jan 6, 8, 10, 13, and 14 be... |
-| A3 | P3 | critical | ❌ FAIL | 4/10 | Two tasks are unassigned (legal review and verifyi... |
-| A4 | P4 | expected | ❌ FAIL | 5/10 | Plan includes Product_Launch_Checklist_v3.xlsx and... |
-| A5 | P5 | expected | ❌ FAIL | 4/10 | Tasks are in chronological order, but dependencies... |
-| A6 | P6 | expected | ❌ FAIL | 5/10 | Objective says 'Review readiness for upcoming prod... |
-| A7 | P7 | aspirational | ❌ FAIL | 0/10 | No assumptions are explicitly disclosed using the ... |
-| A8 | P8 | aspirational | ✅ PASS | 8/10 | Task on Jan 10: 'Draft meeting agenda and circulat... |
-| A9 | P9 | critical | ✅ PASS | 10/10 | No extra attendees, files, or topics introduced be... |
-| A10 | P10 | aspirational | ❌ FAIL | 0/10 | No risks or mitigation steps mentioned, such as le... |
+| A1 | S1 | critical | ❌ FAIL | 3/10 | Meeting date is stated as January 15, 2025, but ti... |
+| A2 | S2 | critical | ✅ PASS | 10/10 | Tasks are scheduled on Jan 6, 8, 10, 13, and 14 be... |
+| A3 | S3 | critical | ❌ FAIL | 4/10 | Two tasks are unassigned (legal review and verifyi... |
+| A4 | S4 | expected | ❌ FAIL | 5/10 | Plan includes Product_Launch_Checklist_v3.xlsx and... |
+| A5 | S5 | expected | ❌ FAIL | 4/10 | Tasks are in chronological order, but dependencies... |
+| A6 | S6 | expected | ❌ FAIL | 5/10 | Objective says 'Review readiness for upcoming prod... |
+| A7 | S7 | aspirational | ❌ FAIL | 0/10 | No assumptions are explicitly disclosed using the ... |
+| A8 | S8 | aspirational | ✅ PASS | 8/10 | Task on Jan 10: 'Draft meeting agenda and circulat... |
+| A9 | S9 | critical | ✅ PASS | 10/10 | No extra attendees, files, or topics introduced be... |
+| A10 | S10 | aspirational | ❌ FAIL | 0/10 | No risks or mitigation steps mentioned, such as le... |
 
 
 ### Layer 2: Grounding Evaluation (Are those elements FACTUALLY CORRECT?)
@@ -446,16 +446,16 @@ The workback plan fails most structural checks. It lacks accurate meeting detail
 
 | Assertion | Pattern | Level | Pass/Fail | Score | Evidence |
 |-----------|---------|-------|-----------|-------|----------|
-| A1 | P1 | critical | ❌ FAIL | 0/10 | Plan lists meeting date as January 16, 2025 at 3:0... |
-| A2 | P2 | critical | ❌ FAIL | 0/10 | Tasks have vague timing like 'Before the meeting' ... |
-| A3 | P3 | critical | ❌ FAIL | 0/10 | Owners are listed as 'Team will handle' or 'Someon... |
-| A4 | P4 | expected | ❌ FAIL | 2/10 | Plan does not mention any of the specific artifact... |
-| A5 | P5 | expected | ❌ FAIL | 2/10 | No explicit sequencing or dependencies like engine... |
-| A6 | P6 | expected | ❌ FAIL | 3/10 | Plan does not clearly state the meeting's purpose;... |
-| A7 | P7 | aspirational | ❌ FAIL | 0/10 | No assumptions are explicitly disclosed using the ... |
-| A8 | P8 | aspirational | ❌ FAIL | 0/10 | No task to confirm alignment with Sarah Chen or ot... |
-| A9 | P9 | critical | ❌ FAIL | 0/10 | Introduces John from Marketing as an attendee, whi... |
-| A10 | P10 | aspirational | ❌ FAIL | 0/10 | No risks or mitigation steps related to timing or ... |
+| A1 | S1 | critical | ❌ FAIL | 0/10 | Plan lists meeting date as January 16, 2025 at 3:0... |
+| A2 | S2 | critical | ❌ FAIL | 0/10 | Tasks have vague timing like 'Before the meeting' ... |
+| A3 | S3 | critical | ❌ FAIL | 0/10 | Owners are listed as 'Team will handle' or 'Someon... |
+| A4 | S4 | expected | ❌ FAIL | 2/10 | Plan does not mention any of the specific artifact... |
+| A5 | S5 | expected | ❌ FAIL | 2/10 | No explicit sequencing or dependencies like engine... |
+| A6 | S6 | expected | ❌ FAIL | 3/10 | Plan does not clearly state the meeting's purpose;... |
+| A7 | S7 | aspirational | ❌ FAIL | 0/10 | No assumptions are explicitly disclosed using the ... |
+| A8 | S8 | aspirational | ❌ FAIL | 0/10 | No task to confirm alignment with Sarah Chen or ot... |
+| A9 | S9 | critical | ❌ FAIL | 0/10 | Introduces John from Marketing as an attendee, whi... |
+| A10 | S10 | aspirational | ❌ FAIL | 0/10 | No risks or mitigation steps related to timing or ... |
 
 
 ### Layer 2: Grounding Evaluation (Are those elements FACTUALLY CORRECT?)
