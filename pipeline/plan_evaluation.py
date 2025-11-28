@@ -310,10 +310,33 @@ def main():
     assertions_by_scenario = {}
     for a in assertions_data.get("assertions", []):
         scenario_id = a["scenario_id"]
+        
+        # Filter out extra fields not in dataclass
+        structural_list = []
+        for s in a.get("structural", []):
+            structural_list.append(StructuralAssertion(
+                id=s.get("id", ""),
+                pattern_id=s.get("pattern_id", ""),
+                text=s.get("text", ""),
+                level=s.get("level", "expected"),
+                checks_for=s.get("checks_for", "")
+            ))
+        
+        grounding_list = []
+        for g in a.get("grounding", []):
+            grounding_list.append(GroundingAssertion(
+                id=g.get("id", ""),
+                pattern_id=g.get("pattern_id", ""),
+                text=g.get("text", ""),
+                level=g.get("level", "critical"),
+                source_field=g.get("source_field", ""),
+                verification_method=g.get("verification_method", "")
+            ))
+        
         assertions_by_scenario[scenario_id] = AssertionSet(
             scenario_id=scenario_id,
-            structural=[StructuralAssertion(**s) for s in a.get("structural", [])],
-            grounding=[GroundingAssertion(**g) for g in a.get("grounding", [])]
+            structural=structural_list,
+            grounding=grounding_list
         )
     
     plans_data = load_json(args.plans)

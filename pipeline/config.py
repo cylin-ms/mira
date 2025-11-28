@@ -282,7 +282,8 @@ def call_gpt5_api(
     
     headers = {
         "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-ModelType": JJ_MODEL
     }
     
     payload = {

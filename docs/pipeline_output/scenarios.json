@@ -1,0 +1,171 @@
+{
+  "generated_at": "2025-11-28T15:07:56.003863",
+  "source": "templates",
+  "count": 3,
+  "scenarios": [
+    {
+      "id": "scenario_001",
+      "title": "Q1 Product Launch Readiness Review",
+      "date": "January 15, 2025",
+      "time": "2:00 PM",
+      "timezone": "PST",
+      "duration_minutes": 90,
+      "organizer": "Sarah Chen",
+      "attendees": [
+        "Sarah Chen",
+        "Mike Johnson",
+        "Lisa Park",
+        "Tom Wilson"
+      ],
+      "context": "The team is preparing for a major product launch scheduled for February 1, 2025. \nThis meeting is to review all readiness items, identify blockers, and finalize the launch checklist.\nEngineering has completed 90% of features, but there are concerns about QA timeline.",
+      "artifacts": [
+        "Product_Launch_Checklist_v3.xlsx",
+        "Engineering_Status_Report.pdf",
+        "Design_Assets_Summary.docx",
+        "QA_Test_Results_Dec.pdf"
+      ],
+      "dependencies": [
+        "Engineering sign-off required before QA final approval",
+        "Design assets must be finalized before marketing materials",
+        "Legal review pending on Terms of Service updates"
+      ],
+      "user_prompt": "Help me create a workback plan for the upcoming meeting 'Q1 Product Launch Readiness Review'",
+      "source_entities": {
+        "attendees": [
+          "Sarah Chen",
+          "Mike Johnson",
+          "Lisa Park",
+          "Tom Wilson"
+        ],
+        "organizer": "Sarah Chen",
+        "meeting_date": "January 15, 2025",
+        "meeting_time": "2:00 PM",
+        "timezone": "PST",
+        "files": [
+          "Product_Launch_Checklist_v3.xlsx",
+          "Engineering_Status_Report.pdf",
+          "Design_Assets_Summary.docx",
+          "QA_Test_Results_Dec.pdf"
+        ],
+        "topics": [
+          "Q1 Product Launch Readiness Review"
+        ],
+        "dependencies": [
+          "Engineering sign-off required before QA final approval",
+          "Design assets must be finalized before marketing materials",
+          "Legal review pending on Terms of Service updates"
+        ]
+      }
+    },
+    {
+      "id": "scenario_002",
+      "title": "Budget Planning FY26 Kickoff",
+      "date": "December 5, 2024",
+      "time": "10:00 AM",
+      "timezone": "EST",
+      "duration_minutes": 120,
+      "organizer": "James Miller",
+      "attendees": [
+        "James Miller",
+        "Emily Davis",
+        "Robert Brown",
+        "Amanda Lee",
+        "Chris Taylor"
+      ],
+      "context": "Annual budget planning kickoff for FY26. Finance team needs to consolidate \ndepartmental requests, review historical spending, and align with strategic priorities.\nCFO has requested 5% overall cost reduction target.",
+      "artifacts": [
+        "FY25_Actual_Spending.xlsx",
+        "Department_Budget_Requests.xlsx",
+        "Strategic_Priorities_FY26.pptx",
+        "Cost_Reduction_Guidelines.pdf"
+      ],
+      "dependencies": [
+        "Department heads must submit requests before consolidation",
+        "Strategic priorities document from CEO required",
+        "HR headcount projections needed for salary planning"
+      ],
+      "user_prompt": "Create a workback plan to prepare for the FY26 Budget Planning Kickoff meeting",
+      "source_entities": {
+        "attendees": [
+          "James Miller",
+          "Emily Davis",
+          "Robert Brown",
+          "Amanda Lee",
+          "Chris Taylor"
+        ],
+        "organizer": "James Miller",
+        "meeting_date": "December 5, 2024",
+        "meeting_time": "10:00 AM",
+        "timezone": "EST",
+        "files": [
+          "FY25_Actual_Spending.xlsx",
+          "Department_Budget_Requests.xlsx",
+          "Strategic_Priorities_FY26.pptx",
+          "Cost_Reduction_Guidelines.pdf"
+        ],
+        "topics": [
+          "Budget Planning FY26 Kickoff"
+        ],
+        "dependencies": [
+          "Department heads must submit requests before consolidation",
+          "Strategic priorities document from CEO required",
+          "HR headcount projections needed for salary planning"
+        ]
+      }
+    },
+    {
+      "id": "scenario_003",
+      "title": "Customer Escalation Review - Acme Corp",
+      "date": "November 20, 2024",
+      "time": "3:30 PM",
+      "timezone": "PST",
+      "duration_minutes": 60,
+      "organizer": "Jennifer White",
+      "attendees": [
+        "Jennifer White",
+        "David Kim",
+        "Rachel Green",
+        "Mark Thompson"
+      ],
+      "context": "Critical customer escalation from Acme Corp regarding service outages. \nCustomer is threatening contract termination unless issues are resolved.\nThree major incidents in the past month need root cause analysis.",
+      "artifacts": [
+        "Acme_Incident_Report_Nov.pdf",
+        "Service_Level_Agreement.pdf",
+        "System_Architecture_Diagram.png",
+        "Previous_Meeting_Notes.docx"
+      ],
+      "dependencies": [
+        "Engineering post-mortem reports due before meeting",
+        "Account manager to provide customer sentiment update",
+        "Legal to review SLA breach implications"
+      ],
+      "user_prompt": "Help me prepare a workback plan for the Acme Corp escalation review meeting",
+      "source_entities": {
+        "attendees": [
+          "Jennifer White",
+          "David Kim",
+          "Rachel Green",
+          "Mark Thompson"
+        ],
+        "organizer": "Jennifer White",
+        "meeting_date": "November 20, 2024",
+        "meeting_time": "3:30 PM",
+        "timezone": "PST",
+        "files": [
+          "Acme_Incident_Report_Nov.pdf",
+          "Service_Level_Agreement.pdf",
+          "System_Architecture_Diagram.png",
+          "Previous_Meeting_Notes.docx"
+        ],
+        "topics": [
+          "Customer Escalation Review - Acme Corp"
+        ],
+        "dependencies": [
+          "Engineering post-mortem reports due before meeting",
+          "Account manager to provide customer sentiment update",
+          "Legal to review SLA breach implications"
+        ]
+      }
+    }
+  ]
+}
