@@ -1,0 +1,301 @@
+{
+  "patterns": [
+    {
+      "pattern_id": "P1",
+      "pattern_name": "Explicit Meeting Details",
+      "pattern_description": "Checks that the response states the correct meeting date, time, and key participants as per the official event.",
+      "pattern_template": "The response should explicitly state the meeting date, time, and attendees matching the official invite.",
+      "applies_to_dimensions": [
+        "Timeline",
+        "Meeting Objective & Scope",
+        "Grounding & Traceability"
+      ],
+      "level_recommendation": "critical",
+      "evaluation_criteria": [
+        "Does the response include the correct meeting date and time?",
+        "Does the response list attendees without introducing uninvited participants?"
+      ],
+      "example_instances": [
+        "The response should state the meeting date and time as July 26, 2025 at 14:00 PST, matching the scheduled meeting details."
+      ],
+      "anti_patterns": [
+        "Introducing fictitious attendees or incorrect meeting times.",
+        "Omitting the meeting date/time entirely."
+      ],
+      "robustness_notes": "Highly robust; applies to any workback plan regardless of context."
+    },
+    {
+      "pattern_id": "P2",
+      "pattern_name": "Timeline Backward Planning",
+      "pattern_description": "Ensures the response provides a clear backward schedule from T₀ with logical sequencing and buffers.",
+      "pattern_template": "The response should include a backward timeline from the meeting start (T₀) with all preparation tasks scheduled logically and with buffer time.",
+      "applies_to_dimensions": [
+        "Timeline & Buffers",
+        "Dependencies & Sequencing"
+      ],
+      "level_recommendation": "critical",
+      "evaluation_criteria": [
+        "Does the response show tasks scheduled before T₀ in reverse order?",
+        "Is there at least one buffer day or reasonable time gap before the meeting?"
+      ],
+      "example_instances": [
+        "The response should use consistent timeline buffers, ensuring all preparation tasks complete by July 25 EOD PST to allow at least a one-day buffer before the meeting."
+      ],
+      "anti_patterns": [
+        "Listing tasks without dates.",
+        "Scheduling tasks after the meeting start."
+      ],
+      "robustness_notes": "Applicable across all meeting prep scenarios; buffer duration may vary."
+    },
+    {
+      "pattern_id": "P3",
+      "pattern_name": "Ownership Assignment",
+      "pattern_description": "Checks that every task in the plan has a clearly assigned owner.",
+      "pattern_template": "The response should assign an explicit owner for each listed task.",
+      "applies_to_dimensions": [
+        "Ownership clarity"
+      ],
+      "level_recommendation": "critical",
+      "evaluation_criteria": [
+        "Does every task have a named owner?",
+        "Are owners consistent with known roles (e.g., organizer, attendee)?"
+      ],
+      "example_instances": [
+        "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀."
+      ],
+      "anti_patterns": [
+        "Using vague terms like 'someone' or 'team' instead of a person.",
+        "Leaving tasks unassigned."
+      ],
+      "robustness_notes": "Strongly generalizable; applies to any structured plan."
+    },
+    {
+      "pattern_id": "P4",
+      "pattern_name": "Artifact Specification",
+      "pattern_description": "Ensures the plan identifies required artifacts and their readiness steps.",
+      "pattern_template": "The response should specify key artifacts to be prepared or shared and include deadlines for their readiness.",
+      "applies_to_dimensions": [
+        "Artifact readiness"
+      ],
+      "level_recommendation": "expected",
+      "evaluation_criteria": [
+        "Does the response list specific artifacts (e.g., files, decks)?",
+        "Are there tasks to prepare and distribute these artifacts before T₀?"
+      ],
+      "example_instances": [
+        "The response should reference the file 'Vault_Secret_Management_Deep_Dive.pdf' as part of the preparation artifacts."
+      ],
+      "anti_patterns": [
+        "Referring vaguely to 'documents' without specifying which ones.",
+        "Failing to mention artifact distribution timing."
+      ],
+      "robustness_notes": "Generalizable if adapted to context-specific artifacts."
+    },
+    {
+      "pattern_id": "P5",
+      "pattern_name": "Dependency Sequencing",
+      "pattern_description": "Checks that tasks are logically ordered and dependencies are explicit.",
+      "pattern_template": "The response should sequence tasks logically and make critical dependencies explicit.",
+      "applies_to_dimensions": [
+        "Dependencies & Sequencing"
+      ],
+      "level_recommendation": "expected",
+      "evaluation_criteria": [
+        "Does the response indicate which tasks depend on others?",
+        "Are prerequisite tasks scheduled before dependent tasks?"
+      ],
+      "example_instances": [
+        "The response should include tasks sequenced so that 'Finalize Meeting Agenda' occurs before 'Send Agenda + Pre-Reads'."
+      ],
+      "anti_patterns": [
+        "Listing tasks without any order.",
+        "Scheduling dependent tasks before their prerequisites."
+      ],
+      "robustness_notes": "Widely applicable; dependency complexity may vary."
+    },
+    {
+      "pattern_id": "P6",
+      "pattern_name": "Meeting Objective Clarity",
+      "pattern_description": "Ensures the response states the meeting purpose and scope explicitly.",
+      "pattern_template": "The response should clearly state the meeting's purpose and scope, aligned with context or assumptions.",
+      "applies_to_dimensions": [
+        "Meeting Objective & Scope"
+      ],
+      "level_recommendation": "expected",
+      "evaluation_criteria": [
+        "Does the response describe the meeting's purpose?",
+        "Is the stated purpose consistent with known context or assumptions?"
+      ],
+      "example_instances": [
+        "The response should clarify the purpose of the meeting as reviewing open Unit Test Workshop action items and CI/CD improvements."
+      ],
+      "anti_patterns": [
+        "Leaving the purpose unstated.",
+        "Inventing an unrelated purpose."
+      ],
+      "robustness_notes": "Generalizable; purpose can be inferred if not explicitly given."
+    },
+    {
+      "pattern_id": "P7",
+      "pattern_name": "Assumption Disclosure",
+      "pattern_description": "Checks that the response explicitly notes assumptions or missing information.",
+      "pattern_template": "The response should explicitly disclose assumptions or gaps in available information.",
+      "applies_to_dimensions": [
+        "Disclosure of missing info and assumptions"
+      ],
+      "level_recommendation": "aspirational",
+      "evaluation_criteria": [
+        "Does the response include the word 'Assumption' or equivalent?",
+        "Are assumptions relevant and clearly tied to missing details?"
+      ],
+      "example_instances": [
+        "The response should explicitly note that the meeting purpose was inferred from context and include the word 'Assumption' to clarify this gap."
+      ],
+      "anti_patterns": [
+        "Failing to acknowledge obvious gaps.",
+        "Making assumptions without disclosure."
+      ],
+      "robustness_notes": "Important for transparency; applicability depends on context ambiguity."
+    },
+    {
+      "pattern_id": "P8",
+      "pattern_name": "Stakeholder Alignment",
+      "pattern_description": "Ensures the plan includes steps to confirm alignment with key stakeholders before T₀.",
+      "pattern_template": "The response should include tasks to confirm input or alignment from stakeholders before finalizing agenda or materials.",
+      "applies_to_dimensions": [
+        "Stakeholder Alignment"
+      ],
+      "level_recommendation": "aspirational",
+      "evaluation_criteria": [
+        "Does the plan include stakeholder review or confirmation steps?",
+        "Are these steps scheduled early enough to influence the agenda?"
+      ],
+      "example_instances": [
+        "The response should schedule a task on July 16, 2025, to draft and share the high-level agenda with Shakia Gencarelli as a stakeholder."
+      ],
+      "anti_patterns": [
+        "Finalizing agenda without stakeholder input.",
+        "Omitting stakeholder tasks entirely."
+      ],
+      "robustness_notes": "Applicable in multi-party contexts; less relevant for solo meetings."
+    },
+    {
+      "pattern_id": "P9",
+      "pattern_name": "Grounding in Provided Context",
+      "pattern_description": "Checks that the response does not introduce extraneous or fictitious details.",
+      "pattern_template": "The response should only include attendees, files, and topics consistent with the provided context.",
+      "applies_to_dimensions": [
+        "Grounding & traceability"
+      ],
+      "level_recommendation": "critical",
+      "evaluation_criteria": [
+        "Does the response avoid introducing unlisted attendees?",
+        "Are all artifacts and topics relevant to the stated meeting?"
+      ],
+      "example_instances": [
+        "The response should not introduce any attendees that are not listed in the official calendar event for July 26."
+      ],
+      "anti_patterns": [
+        "Adding unrelated agenda topics or files.",
+        "Inventing new participants."
+      ],
+      "robustness_notes": "Critical for factual accuracy; universally applicable."
+    },
+    {
+      "pattern_id": "P10",
+      "pattern_name": "Risk Identification",
+      "pattern_description": "Ensures the response identifies potential risks and mitigation strategies.",
+      "pattern_template": "The response should identify timeline or dependency risks and propose mitigation steps.",
+      "applies_to_dimensions": [
+        "Dependencies & Sequencing",
+        "Disclosure of assumptions"
+      ],
+      "level_recommendation": "aspirational",
+      "evaluation_criteria": [
+        "Does the response mention risks related to timing or dependencies?",
+        "Are mitigation strategies proposed?"
+      ],
+      "example_instances": [
+        "The response should include risk identification and mitigation strategy related to timeline or dependency on other team members."
+      ],
+      "anti_patterns": [
+        "Ignoring obvious risks.",
+        "Listing risks without mitigation."
+      ],
+      "robustness_notes": "Adds depth; not always required but valuable for complex plans."
+    }
+  ],
+  "dimension_consolidation": {
+    "Timeline & Scheduling": [
+      "Timeline & Buffers",
+      "Timeline"
+    ],
+    "Meeting Context": [
+      "Meeting Objective & Scope",
+      "Grounding & traceability"
+    ],
+    "Artifacts": [
+      "Artifact readiness",
+      "Artifact Readiness"
+    ],
+    "Ownership": [
+      "Ownership clarity",
+      "Ownership Clarity",
+      "Ownership"
+    ],
+    "Dependencies": [
+      "Dependencies & sequencing",
+      "Dependencies & Sequencing",
+      "Dependencies"
+    ],
+    "Assumptions & Risks": [
+      "Disclosure of missing info and assumptions",
+      "Disclosure of assumptions"
+    ],
+    "Stakeholder Engagement": [
+      "Stakeholder Alignment"
+    ]
+  },
+  "coverage_gaps": [
+    "Quality of communication (clarity and conciseness of instructions)",
+    "Feasibility check (are timelines realistic given current date?)",
+    "Progress tracking or status indicators"
+  ],
+  "redundancy_analysis": {
+    "highly_redundant_patterns": [
+      "Timeline & Buffers vs Timeline",
+      "Artifact readiness vs Artifact Readiness",
+      "Ownership clarity vs Ownership Clarity vs Ownership",
+      "Dependencies & sequencing vs Dependencies & Sequencing vs Dependencies"
+    ],
+    "consolidation_suggestions": [
+      "Merge all timeline-related dimensions into 'Timeline & Scheduling'.",
+      "Merge artifact-related dimensions into 'Artifacts'.",
+      "Merge ownership-related dimensions into 'Ownership'.",
+      "Merge dependency-related dimensions into 'Dependencies'."
+    ]
+  },
+  "human_judge_guidelines": {
+    "priority_order": [
+      "P1",
+      "P2",
+      "P3",
+      "P9",
+      "P4",
+      "P5",
+      "P6",
+      "P7",
+      "P8",
+      "P10"
+    ],
+    "minimum_coverage": [
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P9"
+    ],
+    "evaluation_workflow": "Start by verifying factual accuracy (P1, P9), then check structural completeness (P2, P3, P4, P5), followed by clarity of purpose (P6) and transparency (P7). Finally, assess stakeholder engagement (P8) and risk management (P10) if applicable."
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "report_metadata": {
+    "title": "Workback Plan Assertion Quality Analysis",
+    "date": "2025-11-28",
+    "dataset": "Assertions_genv2_for_LOD1126part1.jsonl",
+    "total_assertions": 2318,
+    "sampled_for_critique": 308,
+    "overall_grade": "B",
+    "average_quality_score": 7.4
+  },
+  
+  "weakness_analysis": {
+    "W1_over_specificity": {
+      "severity": "HIGH",
+      "issue_count": 186,
+      "percentage": 43,
+      "description": "Assertions too tightly bound to specific instances (names, dates, files)",
+      "examples": [
+        "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025",
+        "The response should reference the file 'FeatureFlagRollout_ComplianceDeepDive.pptx'",
+        "The response should identify Shakia Gencarelli as the meeting organizer"
+      ],
+      "root_causes": [
+        "Assertions generated from specific examples without abstraction",
+        "Hardcoded dates, names, and file references",
+        "No separation between instance-specific and pattern-level requirements"
+      ]
+    },
+    
+    "W2_limited_applicability": {
+      "severity": "HIGH",
+      "issue_count": 137,
+      "percentage": 32,
+      "description": "Assertions cannot be evaluated without access to original context",
+      "impact": [
+        "Evaluators cannot assess workback plans for new meetings",
+        "High false-negative rate when context differs",
+        "Increased evaluation time due to context lookup"
+      ]
+    },
+    
+    "W3_dimension_chaos": {
+      "severity": "MEDIUM",
+      "current_dimension_count": 232,
+      "target_dimension_count": 12,
+      "duplicates_found": [
+        {"canonical": "Timeline & Scheduling", "variants": ["Timeline & Buffers", "Timeline"]},
+        {"canonical": "Artifact Readiness", "variants": ["Artifact readiness", "Artifact Readiness"]},
+        {"canonical": "Task Ownership", "variants": ["Ownership clarity", "Ownership Clarity", "Ownership"]},
+        {"canonical": "Dependencies", "variants": ["Dependencies & sequencing", "Dependencies & Sequencing", "Dependencies"]},
+        {"canonical": "Assumptions & Risks", "variants": ["Disclosure of missing info and assumptions", "Disclosure of assumptions"]}
+      ]
+    },
+    
+    "W4_unbalanced_levels": {
+      "severity": "MEDIUM",
+      "current_distribution": {
+        "critical": {"count": 1288, "percentage": 55.6},
+        "expected": {"count": 843, "percentage": 36.4},
+        "aspirational": {"count": 187, "percentage": 8.1}
+      },
+      "target_distribution": {
+        "critical": {"min": 30, "max": 35},
+        "expected": {"min": 45, "max": 50},
+        "aspirational": {"min": 15, "max": 25}
+      }
+    },
+    
+    "W5_coverage_gaps": {
+      "severity": "MEDIUM",
+      "missing_dimensions": [
+        "Communication Quality - Clarity, conciseness, tone",
+        "Feasibility Assessment - Are proposed timelines realistic?",
+        "Progress Tracking - Status indicators, checkpoints",
+        "Risk Management - Contingency plans",
+        "Prioritization - Task priority ordering",
+        "Resource Allocation - Capacity planning"
+      ]
+    },
+    
+    "W6_low_robustness": {
+      "severity": "MEDIUM",
+      "issue_count": 33,
+      "percentage": 8,
+      "description": "Assertions fail when applied to different meeting types or domains"
+    }
+  },
+  
+  "mitigation_strategies": {
+    "S1_templatization": {
+      "priority": 1,
+      "effort": "HIGH",
+      "impact": "VERY_HIGH",
+      "objective": "Convert specific assertions into parameterized templates",
+      "templates": [
+        {"id": "P1", "template": "The response should state the meeting [DATE/TIME] accurately", "dimension": "Timeline"},
+        {"id": "P2", "template": "The response should include a backward timeline from T₀ with [N] preparation milestones", "dimension": "Planning"},
+        {"id": "P3", "template": "The response should assign an owner for each [TASK TYPE]", "dimension": "Ownership"},
+        {"id": "P4", "template": "The response should list required [ARTIFACT TYPE] and their preparation deadlines", "dimension": "Artifacts"},
+        {"id": "P5", "template": "The response should identify dependencies between [TASK A] and [TASK B]", "dimension": "Dependencies"},
+        {"id": "P6", "template": "The response should state the meeting's [PURPOSE/OBJECTIVE]", "dimension": "Scope"},
+        {"id": "P7", "template": "The response should disclose any [ASSUMPTIONS/GAPS] in available information", "dimension": "Transparency"},
+        {"id": "P8", "template": "The response should include [STAKEHOLDER] alignment checkpoints", "dimension": "Stakeholders"},
+        {"id": "P9", "template": "The response should only reference [ENTITIES] from the provided context", "dimension": "Grounding"},
+        {"id": "P10", "template": "The response should identify [RISK TYPE] and propose mitigations", "dimension": "Risk"}
+      ]
+    },
+    
+    "S2_dimension_consolidation": {
+      "priority": 1,
+      "effort": "LOW",
+      "impact": "HIGH",
+      "objective": "Reduce 232 dimensions to 12 canonical categories",
+      "dimension_map": {
+        "Timeline & Scheduling": ["Timeline & Buffers", "Timeline"],
+        "Meeting Context": ["Meeting Objective & Scope", "Grounding & traceability"],
+        "Artifact Readiness": ["Artifact readiness", "Artifact Readiness"],
+        "Task Ownership": ["Ownership clarity", "Ownership Clarity", "Ownership"],
+        "Dependencies": ["Dependencies & sequencing", "Dependencies & Sequencing", "Dependencies"],
+        "Assumptions & Risks": ["Disclosure of missing info and assumptions", "Disclosure of assumptions"],
+        "Stakeholder Alignment": ["Stakeholder Alignment"],
+        "Communication Quality": [],
+        "Feasibility": [],
+        "Progress Tracking": [],
+        "Prioritization": [],
+        "Resource Allocation": []
+      }
+    },
+    
+    "S3_level_rebalancing": {
+      "priority": 2,
+      "effort": "MEDIUM",
+      "impact": "MEDIUM",
+      "objective": "Achieve appropriate distribution of assertion levels",
+      "level_criteria": {
+        "critical": {
+          "description": "Must pass - truly essential requirements",
+          "examples": [
+            "Factual accuracy (dates, times, attendees)",
+            "Safety and compliance requirements",
+            "Core functionality (provides a timeline)"
+          ]
+        },
+        "expected": {
+          "description": "Should pass - standard quality bar",
+          "examples": [
+            "Task ownership assignments",
+            "Artifact identification",
+            "Dependency sequencing",
+            "Reasonable buffer times"
+          ]
+        },
+        "aspirational": {
+          "description": "Excellence indicators",
+          "examples": [
+            "Proactive risk identification",
+            "Stakeholder alignment suggestions",
+            "Assumption transparency",
+            "Communication quality"
+          ]
+        }
+      }
+    },
+    
+    "S4_generalization_pipeline": {
+      "priority": 2,
+      "effort": "HIGH",
+      "impact": "VERY_HIGH",
+      "objective": "Systematically convert specific assertions to generalizable ones",
+      "steps": [
+        "Entity Extraction - Identify specific entities (PERSON, DATE, FILE) in assertion text",
+        "Parameterization - Replace specific values with placeholders",
+        "Context Binding - Create evaluation function that binds to context at runtime"
+      ]
+    },
+    
+    "S5_robustness_testing": {
+      "priority": 3,
+      "effort": "MEDIUM",
+      "impact": "HIGH",
+      "objective": "Ensure assertions work across diverse meeting types",
+      "test_matrix_meeting_types": [
+        "1:1 Meeting",
+        "Team Standup",
+        "All-Hands",
+        "Project Review",
+        "Client Meeting",
+        "Training Session"
+      ],
+      "target_robustness_scores": {
+        "critical": 80,
+        "expected": 70,
+        "aspirational": 60
+      }
+    },
+    
+    "S6_human_evaluation_framework": {
+      "priority": 2,
+      "effort": "MEDIUM",
+      "impact": "HIGH",
+      "objective": "Provide clear, consistent guidelines for human evaluators",
+      "evaluation_phases": [
+        {"phase": 1, "name": "Factual Accuracy", "level": "Critical", "checks": ["Meeting date/time correct?", "Attendees match context?", "No fabricated information?"]},
+        {"phase": 2, "name": "Structural Completeness", "level": "Critical + Expected", "checks": ["Backward timeline present?", "Tasks have owners?", "Artifacts identified?", "Dependencies sequenced?"]},
+        {"phase": 3, "name": "Clarity & Transparency", "level": "Expected", "checks": ["Meeting purpose stated?", "Assumptions disclosed?", "Instructions clear?"]},
+        {"phase": 4, "name": "Excellence Indicators", "level": "Aspirational", "checks": ["Risks identified?", "Stakeholder alignment included?", "Proactive suggestions offered?"]}
+      ],
+      "scoring_rubric": [
+        {"score": 5, "label": "Excellent", "criteria": "All critical pass, >90% expected pass, >50% aspirational pass"},
+        {"score": 4, "label": "Good", "criteria": "All critical pass, >80% expected pass"},
+        {"score": 3, "label": "Acceptable", "criteria": "All critical pass, >60% expected pass"},
+        {"score": 2, "label": "Needs Work", "criteria": "1-2 critical failures, <60% expected pass"},
+        {"score": 1, "label": "Poor", "criteria": "Multiple critical failures"}
+      ]
+    }
+  },
+  
+  "implementation_roadmap": {
+    "phase_1_quick_wins": {
+      "timeline": "Week 1-2",
+      "actions": [
+        {"action": "Normalize dimension casing", "owner": "Data Team", "effort_hours": 2, "impact": "HIGH"},
+        {"action": "Merge duplicate dimensions", "owner": "Data Team", "effort_hours": 4, "impact": "HIGH"},
+        {"action": "Document level criteria", "owner": "PM", "effort_hours": 4, "impact": "MEDIUM"},
+        {"action": "Create evaluation checklist", "owner": "PM", "effort_hours": 2, "impact": "MEDIUM"}
+      ]
+    },
+    "phase_2_systematic": {
+      "timeline": "Week 3-4",
+      "actions": [
+        {"action": "Build templatization pipeline", "owner": "Engineering", "effort_days": 2, "impact": "HIGH"},
+        {"action": "Rebalance assertion levels", "owner": "Data + PM", "effort_days": 1, "impact": "MEDIUM"},
+        {"action": "Add missing dimensions", "owner": "PM", "effort_days": 1, "impact": "MEDIUM"},
+        {"action": "Create robustness test suite", "owner": "QA", "effort_days": 2, "impact": "HIGH"}
+      ]
+    },
+    "phase_3_evolution": {
+      "timeline": "Month 2",
+      "actions": [
+        {"action": "Implement parameterized assertions", "owner": "Engineering", "effort_weeks": 1, "impact": "VERY_HIGH"},
+        {"action": "Build human evaluation UI", "owner": "Engineering", "effort_weeks": 1, "impact": "HIGH"},
+        {"action": "Train evaluators", "owner": "PM", "effort_days": 2, "impact": "HIGH"},
+        {"action": "Pilot with 50 new meetings", "owner": "All", "effort_weeks": 1, "impact": "HIGH"}
+      ]
+    }
+  },
+  
+  "success_metrics": {
+    "quality_metrics": [
+      {"metric": "Average assertion quality score", "current": 7.4, "target": 8.5, "timeline": "4 weeks"},
+      {"metric": "Specificity issues %", "current": 43, "target": 15, "timeline": "4 weeks"},
+      {"metric": "Applicability issues %", "current": 32, "target": 10, "timeline": "4 weeks"},
+      {"metric": "Unique dimensions", "current": 232, "target": 12, "timeline": "2 weeks"}
+    ],
+    "evaluation_metrics": [
+      {"metric": "Inter-rater reliability", "current": "Unknown", "target": 0.85, "timeline": "6 weeks"},
+      {"metric": "Evaluation time per meeting (minutes)", "current": "Unknown", "target": 10, "timeline": "4 weeks"},
+      {"metric": "False positive rate %", "current": "Unknown", "target": 5, "timeline": "6 weeks"},
+      {"metric": "False negative rate %", "current": "Unknown", "target": 10, "timeline": "6 weeks"}
+    ]
+  },
+  
+  "sample_rewrites": [
+    {
+      "original": "The response should identify Shakia Gencarelli as the meeting organizer",
+      "score": 5,
+      "issue": "Specificity",
+      "rewritten": "The response should identify the meeting organizer by name as shown in the calendar event"
+    },
+    {
+      "original": "The response should reference the file 'FeatureFlagRollout_ComplianceDeepDive.pptx'",
+      "score": 5,
+      "issue": "Specificity",
+      "rewritten": "The response should reference relevant files from the meeting context as pre-read materials"
+    },
+    {
+      "original": "The response should include a step to draft the agenda outline by July 26, 00:00 PST",
+      "score": 5,
+      "issue": "Specificity, Applicability",
+      "rewritten": "The response should include a step to draft the agenda outline at least 24 hours before T₀"
+    },
+    {
+      "original": "The response should incorporate a note suggesting lessons from the migration rollback experience",
+      "score": 5,
+      "issue": "Specificity, Applicability, Measurability",
+      "rewritten": "The response should incorporate relevant lessons learned from prior similar initiatives when available in context"
+    }
+  ]
+}
