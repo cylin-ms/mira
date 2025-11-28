@@ -9,14 +9,23 @@ Each scenario includes:
 - Dependencies and blockers
 - Source entities for grounding verification
 
+Safety Features:
+- Will NOT overwrite existing output files by default
+- Use --force to overwrite (creates a timestamped backup first)
+- Use --output to specify a different output file
+
 Usage:
     python -m pipeline.scenario_generation
     python -m pipeline.scenario_generation --from-data docs/LOD_1121.WithUserUrl.jsonl
     python -m pipeline.scenario_generation --template
+    python -m pipeline.scenario_generation --force              # Overwrite with backup
+    python -m pipeline.scenario_generation --output custom.json # Different output file
 """
 
 import json
 import argparse
+import os
+import shutil
 from datetime import datetime
 from typing import List, Dict
 import uuid
@@ -283,7 +292,22 @@ def main():
     parser.add_argument("--enrich", action="store_true", help="Use GPT-5 to enrich scenarios")
     parser.add_argument("--limit", type=int, default=5, help="Limit number of scenarios from data")
     parser.add_argument("--output", type=str, default=SCENARIOS_FILE, help="Output file path")
+    parser.add_argument("--force", action="store_true", help="Force overwrite existing output file (creates backup)")
     args = parser.parse_args()
+    
+    # Check if output file already exists
+    if os.path.exists(args.output):
+        if not args.force:
+            print(f"\n⚠️  Output file already exists: {args.output}")
+            print(f"   Use --force to overwrite (a backup will be created)")
+            print(f"   Or use --output <path> to specify a different output file")
+            return None
+        else:
+            # Create backup with timestamp
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            backup_path = f"{args.output}.backup_{timestamp}"
+            shutil.copy2(args.output, backup_path)
+            print(f"\n📦 Created backup: {backup_path}")
     
     if args.from_data:
         scenarios = generate_from_data(args.from_data, args.limit)
