@@ -52,6 +52,7 @@ REPORT_TEMPLATE = """# Two-Layer Assertion Evaluation Report
 
 | Metric | Value |
 |--------|-------|
+| Total Scenarios | {total_scenarios} |
 | Total Plans Evaluated | {total_plans} |
 | Total Assertions | {total_assertions} |
 | Overall Structural Score | {overall_structural}% |
@@ -60,7 +61,25 @@ REPORT_TEMPLATE = """# Two-Layer Assertion Evaluation Report
 
 ---
 
-## Results by Quality Level
+## Scenarios
+
+{scenarios_section}
+
+---
+
+## Assertions
+
+{assertions_section}
+
+---
+
+## Plans
+
+{plans_section}
+
+---
+
+## Evaluation Results by Quality Level
 
 {quality_level_section}
 
@@ -134,6 +153,160 @@ REPORT_TEMPLATE = """# Two-Layer Assertion Evaluation Report
 # ═══════════════════════════════════════════════════════════════════════════════
 # Report Generation Functions
 # ═══════════════════════════════════════════════════════════════════════════════
+
+def generate_scenarios_section(scenarios_data: Dict) -> str:
+    """Generate scenarios section showing all input scenarios."""
+    scenarios = scenarios_data.get("scenarios", [])
+    
+    if not scenarios:
+        return "*No scenarios loaded.*"
+    
+    lines = []
+    
+    for scenario in scenarios:
+        sid = scenario.get("id", "unknown")
+        title = scenario.get("title", "Untitled")
+        date = scenario.get("date", "N/A")
+        time = scenario.get("time", "N/A")
+        timezone = scenario.get("timezone", "N/A")
+        organizer = scenario.get("organizer", "N/A")
+        attendees = scenario.get("attendees", [])
+        context = scenario.get("context", "")
+        artifacts = scenario.get("artifacts", [])
+        user_prompt = scenario.get("user_prompt", "")
+        
+        lines.append(f"### {sid}: {title}")
+        lines.append("")
+        lines.append(f"**Meeting Details:**")
+        lines.append(f"- 📅 **Date:** {date}")
+        lines.append(f"- ⏰ **Time:** {time} ({timezone})")
+        lines.append(f"- 👤 **Organizer:** {organizer}")
+        lines.append(f"- 👥 **Attendees:** {', '.join(attendees)}")
+        lines.append("")
+        
+        if context:
+            lines.append(f"**Context:** {context[:200]}{'...' if len(context) > 200 else ''}")
+            lines.append("")
+        
+        if artifacts:
+            lines.append(f"**Artifacts:** {', '.join(artifacts[:5])}")
+            lines.append("")
+        
+        if user_prompt:
+            lines.append(f"**User Prompt:** _{user_prompt}_")
+            lines.append("")
+        
+        lines.append("---")
+        lines.append("")
+    
+    return "\n".join(lines)
+
+
+def generate_assertions_section(assertions_data: Dict) -> str:
+    """Generate assertions section showing all generated assertions."""
+    assertions_list = assertions_data.get("assertions", [])
+    
+    if not assertions_list:
+        return "*No assertions loaded.*"
+    
+    lines = []
+    
+    for assertion_set in assertions_list:
+        scenario_id = assertion_set.get("scenario_id", "unknown")
+        structural = assertion_set.get("structural", [])
+        grounding = assertion_set.get("grounding", [])
+        
+        lines.append(f"### {scenario_id}")
+        lines.append("")
+        
+        # Structural assertions table
+        lines.append("**Structural Assertions (S1-S10):** _Check PRESENCE_")
+        lines.append("")
+        lines.append("| ID | Pattern | Assertion | Level |")
+        lines.append("|----|---------|-----------|-------|")
+        for s in structural:
+            aid = s.get("id", "")
+            pattern = s.get("pattern_id", "")
+            text = s.get("text", "")[:60] + ("..." if len(s.get("text", "")) > 60 else "")
+            level = s.get("level", "expected")
+            lines.append(f"| {aid} | {pattern} | {text} | {level} |")
+        lines.append("")
+        
+        # Grounding assertions table
+        lines.append("**Grounding Assertions (G1-G5):** _Check ACCURACY_")
+        lines.append("")
+        lines.append("| ID | Pattern | Assertion | Source Field |")
+        lines.append("|----|---------|-----------|--------------|")
+        for g in grounding:
+            gid = g.get("id", "")
+            pattern = g.get("pattern_id", "")
+            text = g.get("text", "")[:60] + ("..." if len(g.get("text", "")) > 60 else "")
+            source = g.get("source_field", "")
+            lines.append(f"| {gid} | {pattern} | {text} | {source} |")
+        lines.append("")
+        lines.append("---")
+        lines.append("")
+    
+    return "\n".join(lines)
+
+
+def generate_plans_section(plans_data: Dict) -> str:
+    """Generate plans section showing all generated plans."""
+    plans = plans_data.get("plans", [])
+    
+    if not plans:
+        return "*No plans loaded.*"
+    
+    lines = []
+    
+    # Group by scenario
+    plans_by_scenario = {}
+    for plan in plans:
+        sid = plan.get("scenario_id", "unknown")
+        if sid not in plans_by_scenario:
+            plans_by_scenario[sid] = []
+        plans_by_scenario[sid].append(plan)
+    
+    for scenario_id, scenario_plans in plans_by_scenario.items():
+        lines.append(f"### {scenario_id}")
+        lines.append("")
+        
+        for plan in scenario_plans:
+            quality = plan.get("quality_level", "unknown")
+            intended_s = plan.get("intended_structural_score", 0) * 100
+            intended_g = plan.get("intended_grounding_score", 0) * 100
+            issues = plan.get("deliberate_issues", [])
+            content = plan.get("content", "")
+            
+            quality_emoji = {"perfect": "🌟", "medium": "⚡", "low": "⚠️"}.get(quality, "❓")
+            
+            lines.append(f"#### {quality_emoji} {quality.capitalize()} Quality Plan")
+            lines.append("")
+            lines.append(f"**Intended Scores:** Structural {intended_s:.0f}%, Grounding {intended_g:.0f}%")
+            
+            if issues:
+                lines.append(f"**Deliberate Issues:** {', '.join(issues[:3])}")
+            
+            lines.append("")
+            lines.append("<details>")
+            lines.append("<summary>📋 View Plan Content</summary>")
+            lines.append("")
+            lines.append("```")
+            # Truncate very long content
+            if len(content) > 1500:
+                lines.append(content[:1500] + "\n... (truncated)")
+            else:
+                lines.append(content)
+            lines.append("```")
+            lines.append("")
+            lines.append("</details>")
+            lines.append("")
+        
+        lines.append("---")
+        lines.append("")
+    
+    return "\n".join(lines)
+
 
 def generate_executive_summary(evaluation_data: Dict) -> str:
     """Generate executive summary section."""
@@ -439,7 +612,8 @@ def generate_insights_section(evaluation_data: Dict) -> str:
 # Main
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def generate_report(evaluation_data: Dict) -> str:
+def generate_report(evaluation_data: Dict, scenarios_data: Dict = None, 
+                    assertions_data: Dict = None, plans_data: Dict = None) -> str:
     """Generate the complete evaluation report."""
     summary = evaluation_data.get("summary", {})
     by_quality = summary.get("by_quality", {})
@@ -458,15 +632,22 @@ def generate_report(evaluation_data: Dict) -> str:
     pass_count = summary.get("by_verdict", {}).get("pass", 0)
     pass_rate = pass_count / len(results) * 100 if results else 0
     
+    # Count scenarios
+    total_scenarios = len(scenarios_data.get("scenarios", [])) if scenarios_data else 0
+    
     # Generate report sections
     report = REPORT_TEMPLATE.format(
         generated_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        total_scenarios=total_scenarios,
         total_plans=len(results),
         total_assertions=total_structural + total_grounding,
         overall_structural=f"{overall_s:.0f}",
         overall_grounding=f"{overall_g:.0f}",
         pass_rate=f"{pass_rate:.0f}",
         executive_summary=generate_executive_summary(evaluation_data),
+        scenarios_section=generate_scenarios_section(scenarios_data) if scenarios_data else "*Scenarios data not loaded.*",
+        assertions_section=generate_assertions_section(assertions_data) if assertions_data else "*Assertions data not loaded.*",
+        plans_section=generate_plans_section(plans_data) if plans_data else "*Plans data not loaded.*",
         quality_level_section=generate_quality_level_section(evaluation_data),
         structural_analysis=generate_structural_analysis(evaluation_data),
         grounding_analysis=generate_grounding_analysis(evaluation_data),
@@ -481,6 +662,9 @@ def generate_report(evaluation_data: Dict) -> str:
 def main():
     """Main entry point for report generation."""
     parser = argparse.ArgumentParser(description="Stage 5: Report Generation")
+    parser.add_argument("--scenarios", type=str, default=SCENARIOS_FILE, help="Input scenarios file")
+    parser.add_argument("--assertions", type=str, default=ASSERTIONS_FILE, help="Input assertions file")
+    parser.add_argument("--plans", type=str, default=PLANS_FILE, help="Input plans file")
     parser.add_argument("--evaluation", type=str, default=EVALUATION_FILE, help="Input evaluation file")
     parser.add_argument("--output", type=str, default=REPORT_FILE, help="Output report file (markdown)")
     parser.add_argument("--json", action="store_true", help="Also output JSON summary")
@@ -489,12 +673,35 @@ def main():
     print("\n📈 Stage 5: Report Generation")
     print("=" * 60)
     
-    # Load evaluation data
+    # Load all input data
+    scenarios_data = None
+    assertions_data = None
+    plans_data = None
+    
+    try:
+        scenarios_data = load_json(args.scenarios)
+        print(f"  📋 Loaded {len(scenarios_data.get('scenarios', []))} scenarios from {args.scenarios}")
+    except Exception as e:
+        print(f"  ⚠️ Could not load scenarios: {e}")
+    
+    try:
+        assertions_data = load_json(args.assertions)
+        print(f"  📋 Loaded {len(assertions_data.get('assertions', []))} assertion sets from {args.assertions}")
+    except Exception as e:
+        print(f"  ⚠️ Could not load assertions: {e}")
+    
+    try:
+        plans_data = load_json(args.plans)
+        print(f"  📋 Loaded {len(plans_data.get('plans', []))} plans from {args.plans}")
+    except Exception as e:
+        print(f"  ⚠️ Could not load plans: {e}")
+    
+    # Load evaluation data (required)
     evaluation_data = load_json(args.evaluation)
-    print(f"  Loaded evaluation data from {args.evaluation}")
+    print(f"  📊 Loaded evaluation data from {args.evaluation}")
     
     # Generate report
-    report = generate_report(evaluation_data)
+    report = generate_report(evaluation_data, scenarios_data, assertions_data, plans_data)
     
     # Save report
     with open(args.output, 'w', encoding='utf-8') as f:
