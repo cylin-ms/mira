@@ -6,16 +6,21 @@
 
 ---
 
-## Key Insight: Specificity ≠ Grounding
+## Key Insight: Structure vs. Grounding
 
-| Concept | Description | Example |
-|---------|-------------|---------|
-| **Bad Specificity** | Hardcoded values that don't generalize | "Must mention Sarah Chen" |
-| **Good Grounding** | Parameterized verification against source | "All people must exist in source.attendees" |
+| Layer | Question | Checks For | Example |
+|-------|----------|------------|---------|
+| **Structural (S1-S10)** | "Does the plan HAVE X?" | Presence/Shape | "Does the plan have a meeting date?" ✓/✗ |
+| **Grounding (G1-G5)** | "Is X CORRECT?" | Factual Accuracy | "Is the date January 15, 2025 per source?" ✓/✗ |
+
+**Common Mistake:** Mixing grounding into structural assertions.
+- ❌ Wrong: "The plan states the meeting date as January 15, 2025" (this is grounding!)
+- ✅ Correct Structural: "The plan includes a meeting date"
+- ✅ Correct Grounding: "The stated date matches source.MEETING.StartTime"
 
 **The Two-Layer Framework:**
-- **Structural Patterns (S1-S10):** "Does the plan HAVE the right shape?"
-- **Grounding Assertions (G1-G5):** "Are those elements FACTUALLY CORRECT?"
+- **Structural Patterns (S1-S10):** Check SHAPE - "Does the plan HAVE X?"
+- **Grounding Assertions (G1-G5):** Check FACTS - "Is X ACCURATE to source?"
 
 **Critical Rule:** A plan that passes structural checks but fails grounding is **WORSE** than one that is incomplete but accurate. Hallucinated plans with good structure can mislead users.
 
@@ -85,59 +90,68 @@ The team is preparing for a major product launch scheduled for February 1, 2025.
 
 ## Assertion Patterns Reference
 
-### Structural Patterns (S1-S10) - "Does the plan have X?"
+### Structural Patterns (S1-S10) - "Does the plan HAVE X?" (Shape Check)
 
-| ID | Pattern | Level | Key Criteria |
-|----|---------|-------|--------------|
-| S1 | Explicit Meeting Details | critical | Does the response include the correct meeting date... |
-| S2 | Timeline Backward Planning | critical | Does the response show tasks scheduled before T₀ i... |
-| S3 | Ownership Assignment | critical | Does every task have a named owner? |
-| S4 | Artifact Specification | expected | Does the response list specific artifacts (e.g., f... |
-| S5 | Dependency Sequencing | expected | Does the response indicate which tasks depend on o... |
-| S6 | Meeting Objective Clarity | expected | Does the response describe the meeting's purpose? |
-| S7 | Assumption Disclosure | aspirational | Does the response include the word 'Assumption' or... |
-| S8 | Stakeholder Alignment | aspirational | Does the plan include stakeholder review or confir... |
-| S9 | Grounding in Provided Context | critical | Does the response avoid introducing unlisted atten... |
-| S10 | Risk Identification | aspirational | Does the response mention risks related to timing ... |
+These check for **presence and structure**, NOT factual accuracy. They answer: "Is the element present?"
+
+| ID | Pattern | Level | Structural Question |
+|----|---------|-------|---------------------|
+| S1 | Explicit Meeting Details | critical | Does the plan INCLUDE a meeting date, time, and attendee list? |
+| S2 | Timeline Backward Planning | critical | Does the plan HAVE a backward timeline with tasks before T₀? |
+| S3 | Ownership Assignment | critical | Does every task HAVE a named owner? |
+| S4 | Artifact Specification | expected | Does the plan LIST specific artifacts with preparation tasks? |
+| S5 | Dependency Sequencing | expected | Does the plan SHOW explicit task dependencies? |
+| S6 | Meeting Objective Clarity | expected | Does the plan STATE the meeting's purpose? |
+| S7 | Assumption Disclosure | aspirational | Does the plan DISCLOSE assumptions explicitly? |
+| S8 | Stakeholder Alignment | aspirational | Does the plan INCLUDE stakeholder alignment tasks? |
+| S9 | Grounding Check (Meta) | critical | Does the plan PASS grounding assertions G1-G5? |
+| S10 | Risk Identification | aspirational | Does the plan IDENTIFY risks with mitigations? |
 
 
-### Grounding Assertions (G1-G5) - "Is X accurate to source?"
+### Grounding Assertions (G1-G5) - "Is X CORRECT?" (Fact Check)
+
+These verify **factual accuracy** against source data. They answer: "Is the value accurate?"
 
 | ID | Name | Verification | Failure Mode |
 |----|------|--------------|--------------|
-| G1 | People Grounding | All people → source.attendees | Fabricated attendee |
-| G2 | Temporal Grounding | All dates → source.meeting_date | Wrong date/time |
-| G3 | Artifact Grounding | All files → source.files | Non-existent file |
-| G4 | Topic Grounding | Topics → source.topics | Invented purpose |
-| G5 | No Hallucination | No novel entities | Any fabrication |
+| G1 | People Grounding | All people → source.ATTENDEES | Fabricated attendee |
+| G2 | Temporal Grounding | All dates → source.MEETING.StartTime | Wrong date/time |
+| G3 | Artifact Grounding | All files → source.ENTITIES (type=File) | Non-existent file |
+| G4 | Topic Grounding | Topics → source.UTTERANCE / MEETING.Subject | Invented purpose |
+| G5 | No Hallucination | No novel entities in any category | Any fabrication |
 
 ---
 
 ## Generated Structural Assertions (A1-A10)
 
+**Key Principle:** Structural assertions check SHAPE/PRESENCE ("Does the plan HAVE X?"), NOT factual accuracy. Grounding assertions (G1-G5) verify factual correctness.
+
 | ID | Pattern | Level | Assertion |
 |----|---------|----|----|
-| A1 | S1 | critical | The workback plan explicitly states the meeting date as January 15, 2025, the ti... |
-| A2 | S2 | critical | The workback plan includes a backward timeline starting from the meeting on Janu... |
-| A3 | S3 | critical | Every task in the workback plan has an explicitly named owner, using only the kn... |
-| A4 | S4 | expected | The workback plan specifies preparation or distribution tasks for the following ... |
-| A5 | S5 | expected | The workback plan sequences tasks logically and makes dependencies explicit, suc... |
-| A6 | S6 | expected | The workback plan clearly states the meeting's purpose as reviewing readiness it... |
-| A7 | S7 | aspirational | The workback plan explicitly discloses any assumptions or gaps in information us... |
-| A8 | S8 | aspirational | The workback plan includes at least one task to confirm alignment with key stake... |
-| A9 | S9 | critical | The workback plan avoids introducing any attendees, files, or topics not mention... |
-| A10 | S10 | aspirational | The workback plan identifies at least one potential risk related to timing or de... |
+| A1 | S1 | critical | The workback plan explicitly states a meeting date, time, timezone, and lists attendees. |
+| A2 | S2 | critical | The workback plan includes a backward timeline from T₀ with tasks scheduled before the meeting and at least one buffer period. |
+| A3 | S3 | critical | Every task in the workback plan has an explicitly named owner (not "someone" or "team"). |
+| A4 | S4 | expected | The workback plan lists specific artifacts (files, documents, decks) with preparation or distribution tasks. |
+| A5 | S5 | expected | The workback plan sequences tasks with explicit dependencies (e.g., "after X completes", "before Y"). |
+| A6 | S6 | expected | The workback plan clearly states the meeting's purpose and scope. |
+| A7 | S7 | aspirational | The workback plan explicitly discloses assumptions using words like "Assumption" or "Assumed". |
+| A8 | S8 | aspirational | The workback plan includes at least one task to confirm alignment with stakeholders. |
+| A9 | S9 | critical | The workback plan does not introduce fabricated elements (checked via G1-G5 grounding). |
+| A10 | S10 | aspirational | The workback plan identifies at least one potential risk with a mitigation strategy. |
 
+**Note:** A9 (S9) is a meta-structural check that delegates to grounding assertions G1-G5 for verification.
 
 ## Generated Grounding Assertions (G1-G5)
 
+**Key Principle:** Grounding assertions verify FACTUAL ACCURACY against source data. They check if the elements found by structural assertions are CORRECT.
+
 | ID | Name | Source Reference | Assertion |
 |----|------|------------------|----|
-| G1 | People Grounding | attendees | All individuals mentioned in the workback plan must appear i... |
-| G2 | Temporal Grounding | meeting_date, meeting_time, to... | All dates and times in the workback plan must match or logic... |
-| G3 | Artifact Grounding | files | All referenced files in the workback plan must exist in the ... |
-| G4 | Topic Grounding | topics | All topics and objectives in the workback plan must align wi... |
-| G5 | No Hallucination | attendees, files, topics, depe... | The workback plan must not introduce any entities (people, f... |
+| G1 | People Grounding | source.ATTENDEES | All people mentioned (owners, stakeholders) must exist in source attendees list. |
+| G2 | Temporal Grounding | source.MEETING.StartTime | All dates/times must match or be logically derivable from source meeting date. |
+| G3 | Artifact Grounding | source.ENTITIES (type=File) | All referenced files must exist in source ENTITIES_TO_USE with type=File. |
+| G4 | Topic Grounding | source.UTTERANCE, source.MEETING.Subject | All topics and objectives must align with source utterance or meeting subject. |
+| G5 | No Hallucination | All source fields | No entities (people, files, dates, topics) introduced that don't exist in source. |
 
 
 
