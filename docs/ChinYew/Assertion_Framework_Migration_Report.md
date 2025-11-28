@@ -4,6 +4,23 @@
 **Date:** November 28, 2025  
 **Updated:** November 29, 2025
 
+---
+
+## Table of Contents
+
+1. [Executive Summary](#executive-summary)
+2. [Conversion Statistics](#1-conversion-statistics)
+3. [Original Kening Assertions Analysis](#2-original-kening-assertions-analysis)
+4. [Converted Assertions (Chin-Yew's WBP Framework)](#3-converted-assertions-chin-yews-wbp-framework)
+5. [Phase 1 vs Phase 2 Distribution](#4-phase-1-vs-phase-2-distribution)
+6. [Quality Assessment](#5-quality-assessment)
+7. [Insights & Analysis](#6-insights--analysis)
+8. [Recommendations](#7-recommendations)
+9. [Data Files Reference](#8-data-files-reference)
+10. [Conclusion](#9-conclusion)
+
+---
+
 ## Executive Summary
 
 This report analyzes the conversion of **2,318 assertions** from Kening's original format across **224 meetings** to Chin-Yew's WBP (Workback Plan) Evaluation Framework.
