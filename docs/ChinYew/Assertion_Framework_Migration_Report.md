@@ -304,6 +304,7 @@ The conversion process produces three key JSONL files that document the migratio
 | Meetings | 224 |
 | Total Assertions | 2,318 |
 | Unique Dimensions | 232 (fragmented) |
+| **Schema Compatibility** | ✅ **Kening's original format** |
 
 **Schema:**
 ```json
@@ -331,6 +332,7 @@ The conversion process produces three key JSONL files that document the migratio
 | Meetings | 224 |
 | Total Assertions | 2,318 |
 | Added Field | `_mira_metadata` |
+| **Schema Compatibility** | ✅ **Backward compatible with Kening** (preserves `text`, `level`, `anchors`) |
 
 **Schema (additional fields):**
 ```json
@@ -363,6 +365,7 @@ The conversion process produces three key JSONL files that document the migratio
 | Total Assertions | 2,318 |
 | Phase 1 Coverage | 99.3% (2,302 assertions) |
 | Phase 2 Coverage | 0.7% (16 assertions) |
+| **Schema Compatibility** | ⚠️ **New WBP format** (not backward compatible with Kening) |
 
 **Schema:**
 ```json
@@ -397,6 +400,19 @@ assertions_kening_enhanced.jsonl (Intermediate)
         ▼ [GPT-5 format conversion]
 assertions_converted_full.jsonl (Output)
 ```
+
+### Schema Compatibility Summary
+
+| File | Kening Compatible | Changes |
+|------|-------------------|---------|
+| `Assertions_genv2_for_LOD1126part1.jsonl` | ✅ **Yes** | Original Kening format |
+| `assertions_kening_enhanced.jsonl` | ✅ **Yes** | Adds `_mira_metadata` (preserves `text`, `level`, `anchors`) |
+| `assertions_converted_full.jsonl` | ⚠️ **No** | New WBP schema (removes `anchors`, adds WBP fields) |
+
+**Key Schema Differences in Output:**
+- **Preserved:** `text`, `level`
+- **Removed:** `anchors` (replaced by `source_reference`)
+- **Added:** `dimension`, `dimension_name`, `layer`, `weight`, `original_text`, `rationale`, `quality_assessment`, `conversion_method`
 
 ---
 
