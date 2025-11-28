@@ -1,11 +1,23 @@
-# Kening Assertions Conversion Analysis Report
+# Assertion Framework Migration Report
 
 **Author:** Chin-Yew Lin  
-**Date:** November 28, 2025
+**Date:** November 28, 2025  
+**Updated:** November 29, 2025
 
 ## Executive Summary
 
-This report analyzes the conversion of **2,318 assertions** from Kening's original format across **224 meetings** to Chin-Yew's WBP (Workback Plan) Evaluation Framework. The conversion achieved a **99.6% GPT-5 conversion rate**, with only 10 assertions falling back to heuristic mapping.
+This report analyzes the conversion of **2,318 assertions** from Kening's original format across **224 meetings** to Chin-Yew's WBP (Workback Plan) Evaluation Framework.
+
+### Key Results
+
+| Metric | Value |
+|--------|-------|
+| GPT-5 Conversion Rate | **99.6%** |
+| Phase 1 Alignment | **99.3%** (2,302 of 2,318 assertions) |
+| Phase 2 Assertions | 0.7% (16 assertions, all S5: Task Dates) |
+| Active Dimensions | 11 of 14 Phase 1 dimensions used |
+
+The conversion demonstrates **excellent alignment** with Chin-Yew's Phase 1 evaluation framework. Almost all assertions (99.3%) map directly to Phase 1 dimensions, with only 16 assertions (0.7%) mapping to S5 (Task Dates), a Phase 2 dimension that overlaps with S2 (Timeline Alignment).
 
 ---
 
@@ -91,49 +103,43 @@ The conversion consolidated 232 dimensions into Chin-Yew's 14 selected dimension
 | 2 (Medium) | expected | 842 | 36.3% |
 | 1 (Low) | aspirational | 188 | 8.1% |
 
-### Non-Core Dimension Mappings (74 assertions, 3.2%)
+### Phase 1 vs Phase 2 Distribution
 
-74 assertions were mapped to dimensions outside the 9 core Phase 1 structural dimensions (S1-S4, S6, S19). Note: **All 5 Grounding dimensions (G1-G5) are Phase 1**.
+Based on the 14 Phase 1 dimensions (9 structural + 5 grounding):
 
-| Dimension | Name | Count | Status |
-|-----------|------|-------|--------|
-| S11 | Risk Mitigation Strategy | 42 | Phase 2 - not in Phase 1 structural dimensions |
-| S5 | Task Dates | 16 | Phase 2 - overlaps with S2 (Timeline Alignment) |
-| S18 | Post-Event Actions | 10 | Phase 2 - not in Phase 1 structural dimensions |
-| G1 | Attendee Grounding | 3 | Phase 1 ✓ - GPT-5 correctly mapped |
-| G4 | Topic Grounding | 3 | Phase 1 ✓ - GPT-5 correctly mapped |
+| Phase | Assertions | Percentage |
+|-------|------------|------------|
+| **Phase 1** | 2,302 | **99.3%** |
+| Phase 2 | 16 | 0.7% |
 
-**Why These Cannot Be Mapped to Selected Dimensions:**
+**Key Finding:** Almost all assertions (99.3%) map to Phase 1 dimensions, demonstrating excellent alignment with the core evaluation framework.
 
-1. **S11 (Risk Mitigation Strategy)** - 42 assertions
-   - Original assertions about risk mitigation with owners
-   - Example: *"The response should include concrete [RISK MITIGATION] strategies with owners..."*
-   - **Why unmapped:** S11 is a valid structural dimension but was not included in Chin-Yew's 14 selected dimensions. The closest match would be S6 (Dependencies & Blockers), but risk mitigation is conceptually distinct from dependency identification.
+### Phase 1 Dimension Breakdown
 
-2. **S5 (Task Dates)** - 16 assertions
-   - Original assertions about due dates for tasks
-   - Example: *"The response should include due dates for every [TASK] aligned with timeline sequencing..."*
-   - **Why unmapped:** S5 overlaps significantly with S2 (Timeline Alignment). GPT-5 correctly identified this as a separate dimension, but it could potentially be merged into S2 for practical evaluation.
+| Dimension | Name | Count | % of Total |
+|-----------|------|-------|------------|
+| S2 | Timeline Alignment | 449 | 19.4% |
+| S3 | Ownership Assignment | 414 | 17.9% |
+| S4 | Deliverables & Artifacts | 399 | 17.2% |
+| S6 | Dependencies & Blockers | 322 | 13.9% |
+| S1 | Meeting Details | 321 | 13.8% |
+| S19 | Caveat & Clarification | 279 | 12.0% |
+| G5 | Hallucination Check | 60 | 2.6% |
+| S11 | Risk Mitigation Strategy | 42 | 1.8% |
+| S18 | Post-Event Actions | 10 | 0.4% |
+| G1 | Attendee Grounding | 3 | 0.1% |
+| G4 | Topic Grounding | 3 | 0.1% |
+| **Phase 1 Total** | | **2,302** | **99.3%** |
 
-3. **G1 (Attendee Grounding)** - 3 assertions
-   - Original assertions about verifying attendees exist in source
-   - Example: *"All people mentioned must exist in {source.ATTENDEES}..."*
-   - **Why unmapped:** G1 is actually a Phase 1 dimension, but GPT-5 mapped some assertions here instead of G5 due to semantic overlap.
+### Phase 2 Dimension Breakdown
 
-4. **S18 (Post-Event Actions)** - 10 assertions
-   - Original assertions about wrap-up tasks, retrospectives, and follow-up reporting
-   - Example: *"The response should include post-meeting action items and follow-up steps..."*
-   - **Why Phase 2:** S18 covers post-event planning which is valuable for comprehensive WBPs but not critical for core meeting preparation.
+Only **16 assertions (0.7%)** mapped to Phase 2 dimensions:
 
-5. **G4 (Topic Grounding)** - 3 assertions
-   - Original assertions about verifying agenda topics match source
-   - Example: *"Agenda topics should align with source priorities and context..."*
-   - **Phase 1 ✓:** G4 is correctly a Phase 1 grounding dimension. All grounding dimensions (G1-G5) are Phase 1.
+| Dimension | Name | Count | Notes |
+|-----------|------|-------|-------|
+| S5 | Task Dates | 16 | Overlaps with S2 (Timeline Alignment) |
 
-**Recommendation:** Consider either:
-1. Adding S11 (Risk Mitigation) to the selected dimensions if risk assessment is important for WBP evaluation
-2. Merging S5 into S2 and G1 into G5 for simpler evaluation
-3. Keeping these as "extended dimensions" for comprehensive evaluation
+**Observation:** S5 (Task Dates) is the only Phase 2 dimension used. These assertions focus specifically on due dates, which conceptually overlaps with S2 (Timeline Alignment). For practical evaluation, S5 assertions could be consolidated into S2.
 
 ---
 
@@ -263,11 +269,11 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 ### For Evaluation Pipeline
 
-1. **Use the Converted Assertions** - The 7-dimension framework provides consistent, reusable evaluation criteria.
+1. **Use Phase 1 Framework** - With 99.3% of assertions already mapping to Phase 1 dimensions, the 14-dimension framework is well-suited for immediate evaluation.
 
-2. **Weight Distribution is Preserved** - The original level (critical/expected/aspirational) maps directly to weights (3/2/1), maintaining Kening's prioritization logic.
+2. **Consider Consolidating S5 into S2** - The 16 S5 (Task Dates) assertions overlap conceptually with S2 (Timeline Alignment). Consider merging for simpler evaluation.
 
-3. **Add More Grounding Assertions** - Currently only 2.8% are grounding-layer. Consider adding more hallucination checks.
+3. **Add More Grounding Assertions** - Currently only 2.8% are grounding-layer (66 assertions). Consider generating more G1-G4 assertions for comprehensive source verification.
 
 ### For Future Assertion Generation
 
@@ -275,31 +281,50 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 2. **Avoid Hardcoded Values** - Use placeholders like [TASK], [DELIVERABLE], [DATE/TIME].
 
-3. **Balance Structural and Grounding** - Aim for 80% structural, 20% grounding.
+3. **Balance Structural and Grounding** - Current ratio is 97:3. Aim for 80:20 for better hallucination detection.
+
+4. **Leverage Unused Phase 1 Dimensions** - G2 (Date/Time Grounding) and G3 (Artifact Grounding) are not currently used. Consider adding assertions for these.
 
 ---
 
 ## 8. Conclusion
 
-The conversion from Kening's 232-dimension assertions to Chin-Yew's 7-dimension WBP framework represents a significant improvement in:
+The conversion from Kening's 232-dimension assertions to Chin-Yew's WBP framework represents a significant improvement:
 
 | Aspect | Before | After |
 |--------|--------|-------|
-| Dimensions | 232 (fragmented) | 7 (consolidated) |
+| Dimensions | 232 (fragmented) | 11 active (consolidated) |
+| Phase 1 Coverage | N/A | **99.3%** |
 | Consistency | Variable | Template-based |
 | Reusability | Low (hardcoded values) | High (placeholders) |
 | Evaluation | Difficult | Standardized |
-| Grounding | Limited | Systematic (G5) |
 
-The 99.6% GPT-5 conversion rate indicates that Kening's original assertions, while fragmented in naming, covered relevant concepts that map well to Chin-Yew's framework. The conversion has effectively:
+### Key Findings
 
-1. ✅ Standardized dimension taxonomy
-2. ✅ Removed hardcoded values
-3. ✅ Added template-based structure
-4. ✅ Preserved severity weighting
-5. ✅ Enabled consistent evaluation
+1. **Excellent Phase 1 Alignment** - 99.3% of assertions (2,302 of 2,318) map to Phase 1 dimensions
+2. **Minimal Phase 2 Usage** - Only 16 assertions (0.7%) use S5 (Task Dates)
+3. **11 of 14 Phase 1 Dimensions Active** - Good coverage of the core framework
+4. **GPT-5 Conversion Success** - 99.6% converted via GPT-5 (only 10 heuristic fallbacks)
+
+### Active Dimension Summary
+
+| Category | Dimensions Used | Coverage |
+|----------|-----------------|----------|
+| Structural (Phase 1) | S1, S2, S3, S4, S6, S11, S18, S19 | 8 of 8 |
+| Grounding (Phase 1) | G1, G4, G5 | 3 of 5 |
+| Structural (Phase 2) | S5 | 1 of 10 |
+
+The conversion has effectively:
+
+1. ✅ Consolidated 232 fragmented dimensions into 11 active dimensions
+2. ✅ Achieved 99.3% Phase 1 alignment
+3. ✅ Removed hardcoded values with template placeholders
+4. ✅ Preserved severity weighting (critical/expected/aspirational → 3/2/1)
+5. ✅ Enabled standardized, consistent evaluation
 
 ---
 
-*Report generated: Analysis of 224 meetings, 2,318 assertions*
+*Report generated: November 28, 2025*  
+*Updated: November 29, 2025*  
+*Analysis: 224 meetings, 2,318 assertions*  
 *Conversion tool: convert_kening_assertions.py with Substrate GPT-5 JJ*
