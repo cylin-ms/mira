@@ -6,12 +6,14 @@ This module provides:
 - Authentication helpers
 - Common file paths
 - Shared data structures
+- Run ID management for tracking pipeline runs
 """
 
 import os
 import json
 import time
 import ctypes
+import uuid
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional, Any
 from datetime import datetime
@@ -35,9 +37,155 @@ _jj_token_cache = None
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# File Paths
+# Run ID and File Paths
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# Base output directory
+PIPELINE_OUTPUT_BASE = os.path.join("docs", "pipeline_runs")
+
+# Current run state (set by initialize_run or load_run)
+_current_run_id: Optional[str] = None
+_current_run_dir: Optional[str] = None
+
+
+def generate_run_id() -> str:
+    """Generate a unique run ID with timestamp and short UUID."""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    short_uuid = str(uuid.uuid4())[:8]
+    return f"run_{timestamp}_{short_uuid}"
+
+
+def initialize_run(run_id: Optional[str] = None) -> str:
+    """
+    Initialize a new pipeline run with a unique ID and directory.
+    
+    Args:
+        run_id: Optional custom run ID. If None, generates a new one.
+        
+    Returns:
+        The run ID being used.
+    """
+    global _current_run_id, _current_run_dir
+    
+    _current_run_id = run_id or generate_run_id()
+    _current_run_dir = os.path.join(PIPELINE_OUTPUT_BASE, _current_run_id)
+    
+    # Create run directory
+    os.makedirs(_current_run_dir, exist_ok=True)
+    
+    # Save run metadata
+    metadata = {
+        "run_id": _current_run_id,
+        "created_at": datetime.now().isoformat(),
+        "status": "initialized"
+    }
+    with open(os.path.join(_current_run_dir, "run_metadata.json"), 'w') as f:
+        json.dump(metadata, f, indent=2)
+    
+    return _current_run_id
+
+
+def load_run(run_id: str) -> str:
+    """
+    Load an existing run by ID.
+    
+    Args:
+        run_id: The run ID to load.
+        
+    Returns:
+        The run ID if found.
+        
+    Raises:
+        ValueError: If run ID doesn't exist.
+    """
+    global _current_run_id, _current_run_dir
+    
+    run_dir = os.path.join(PIPELINE_OUTPUT_BASE, run_id)
+    if not os.path.exists(run_dir):
+        raise ValueError(f"Run '{run_id}' not found in {PIPELINE_OUTPUT_BASE}")
+    
+    _current_run_id = run_id
+    _current_run_dir = run_dir
+    
+    return run_id
+
+
+def get_current_run_id() -> Optional[str]:
+    """Get the current run ID."""
+    return _current_run_id
+
+
+def get_current_run_dir() -> str:
+    """
+    Get the current run directory, initializing if needed.
+    
+    Returns:
+        Path to the current run directory.
+    """
+    global _current_run_id, _current_run_dir
+    
+    if _current_run_dir is None:
+        initialize_run()
+    
+    return _current_run_dir
+
+
+def list_runs() -> List[Dict[str, Any]]:
+    """
+    List all available pipeline runs.
+    
+    Returns:
+        List of run metadata dictionaries sorted by creation time (newest first).
+    """
+    runs = []
+    
+    if not os.path.exists(PIPELINE_OUTPUT_BASE):
+        return runs
+    
+    for run_id in os.listdir(PIPELINE_OUTPUT_BASE):
+        run_dir = os.path.join(PIPELINE_OUTPUT_BASE, run_id)
+        metadata_file = os.path.join(run_dir, "run_metadata.json")
+        
+        if os.path.isdir(run_dir) and os.path.exists(metadata_file):
+            try:
+                with open(metadata_file, 'r') as f:
+                    metadata = json.load(f)
+                metadata["path"] = run_dir
+                runs.append(metadata)
+            except Exception:
+                runs.append({
+                    "run_id": run_id,
+                    "path": run_dir,
+                    "created_at": None,
+                    "status": "unknown"
+                })
+    
+    # Sort by creation time (newest first)
+    runs.sort(key=lambda x: x.get("created_at") or "", reverse=True)
+    return runs
+
+
+def get_run_file(filename: str) -> str:
+    """
+    Get the full path to a file within the current run directory.
+    
+    Args:
+        filename: The filename (e.g., "scenarios.json")
+        
+    Returns:
+        Full path to the file.
+    """
+    return os.path.join(get_current_run_dir(), filename)
+
+
+# Standard file names within a run
+SCENARIOS_FILENAME = "scenarios.json"
+ASSERTIONS_FILENAME = "assertions.json"
+PLANS_FILENAME = "plans.json"
+EVALUATION_FILENAME = "evaluation_results.json"
+REPORT_FILENAME = "evaluation_report.md"
+
+# Legacy paths (for backward compatibility during transition)
 PIPELINE_OUTPUT_DIR = os.path.join("docs", "pipeline_output")
 SCENARIOS_FILE = os.path.join(PIPELINE_OUTPUT_DIR, "scenarios.json")
 ASSERTIONS_FILE = os.path.join(PIPELINE_OUTPUT_DIR, "assertions.json")
@@ -45,7 +193,8 @@ PLANS_FILE = os.path.join(PIPELINE_OUTPUT_DIR, "plans.json")
 EVALUATION_FILE = os.path.join(PIPELINE_OUTPUT_DIR, "evaluation_results.json")
 REPORT_FILE = os.path.join(PIPELINE_OUTPUT_DIR, "evaluation_report.md")
 
-# Ensure output directory exists
+# Ensure base directories exist
+os.makedirs(PIPELINE_OUTPUT_BASE, exist_ok=True)
 os.makedirs(PIPELINE_OUTPUT_DIR, exist_ok=True)
 
 

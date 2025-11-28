@@ -1,0 +1,137 @@
+{
+  "generated_at": "2025-11-28T15:28:43.841575",
+  "scenarios_source": "docs\\pipeline_runs\\run_20251128_152644_fdcff2d3\\scenarios.json",
+  "quality_levels": [
+    "perfect",
+    "medium",
+    "low"
+  ],
+  "count": 9,
+  "plans_by_quality": {
+    "perfect": 3,
+    "medium": 3,
+    "low": 3
+  },
+  "plans": [
+    {
+      "scenario_id": "scenario_001",
+      "quality_level": "perfect",
+      "content": "# Q1 Product Launch Readiness Review – Workback Plan\n\n## Meeting Details\n- **Title:** Q1 Product Launch Readiness Review\n- **Date:** January 15, 2025\n- **Time:** 2:00 PM PST\n- **Duration:** 90 minutes\n- **Organizer:** Sarah Chen\n- **Attendees:** Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson\n\n## Objective\nEnsure all readiness items for the Q1 product launch (scheduled for February 1, 2025) are on track, identify blockers, and finalize the launch checklist.\n\n---\n\n## Timeline & Tasks\n\n### 1. **Review Engineering Status**\n- **Owner:** Mike Johnson\n- **Due Date:** January 10, 2025\n- **Artifact:** Engineering_Status_Report.pdf\n- **Details:** Confirm 100% feature completion and obtain engineering sign-off.\n- **Blocker:** Engineering sign-off required before QA final approval.\n\n### 2. **Finalize QA Testing**\n- **Owner:** Lisa Park\n- **Start Date:** January 11, 2025 (after engineering sign-off)\n- **Due Date:** January 20, 2025\n- **Artifact:** QA_Test_Results_Dec.pdf\n- **Details:** Complete final QA cycle and document results.\n- **Blocker:** Dependent on engineering sign-off.\n\n### 3. **Design Asset Completion**\n- **Owner:** Tom Wilson\n- **Due Date:** January 12, 2025\n- **Artifact:** Design_Assets_Summary.docx\n- **Details:** Finalize all design assets for marketing.\n- **Blocker:** Design assets must be finalized before marketing materials.\n\n### 4. **Legal Review of Terms of Service**\n- **Owner:** Sarah Chen\n- **Due Date:** January 18, 2025\n- **Artifact:** Product_Launch_Checklist_v3.xlsx (tracks legal review status)\n- **Details:** Ensure legal team completes review and approval of updated Terms of Service.\n- **Blocker:** Legal review pending on Terms of Service updates.\n\n### 5. **Finalize Launch Checklist**\n- **Owner:** Sarah Chen\n- **Due Date:** January 22, 2025\n- **Artifact:** Product_Launch_Checklist_v3.xlsx\n- **Details:** Confirm all tasks are complete and checklist is signed off.\n\n---\n\n## Key Dependencies\n- Engineering sign-off required before QA final approval.\n- Design assets must be finalized before marketing materials.\n- Legal review pending on Terms of Service updates.\n\n---\n\n## Upcoming Milestones\n- **January 10, 2025:** Engineering sign-off complete.\n- **January 12, 2025:** Design assets finalized.\n- **January 15, 2025:** Readiness review meeting.\n- **January 18, 2025:** Legal review complete.\n- **January 20, 2025:** QA testing finalized.\n- **January 22, 2025:** Launch checklist finalized.\n- **February 1, 2025:** Product launch.\n\n---\n\n## Risks & Blockers\n- Delay in engineering sign-off will impact QA timeline.\n- Legal review delay could block final checklist sign-off.\n- Design asset delays will affect marketing readiness.\n",
+      "intended_structural_score": 1.0,
+      "intended_grounding_score": 1.0,
+      "deliberate_issues": [],
+      "generated_at": "2025-11-28T15:27:35.395891"
+    },
+    {
+      "scenario_id": "scenario_001",
+      "quality_level": "medium",
+      "content": "# Q1 Product Launch Readiness Review - Workback Plan\n\n**Meeting Date:** January 15, 2025  \n**Organizer:** Sarah Chen  \n**Attendees:** Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson  \n\n---\n\n## Objective\nEnsure all readiness tasks are completed in time for the February 1, 2025 product launch. Review dependencies, finalize QA, and confirm marketing and legal readiness.\n\n---\n\n## Timeline Overview\n- **Launch Date:** February 1, 2025\n- **Current Date:** January 15, 2025\n- **Time Remaining:** ~17 days\n\n---\n\n## Key Milestones\n| Milestone | Date |\n|-----------|------|\n| Engineering Sign-off | January 18, 2025 |\n| QA Final Approval | January 21, 2025 |\n| Marketing Assets Finalized | January 24, 2025 |\n| Legal Review Complete | January 28, 2025 |\n| Launch | February 1, 2025 |\n\n---\n\n## Tasks & Owners\n\n### 1. Engineering Sign-off\n- **Task:** Complete final code merge and sign-off\n- **Owner:** Mike Johnson\n- **Due:** January 18, 2025\n- **Notes:** Refer to `Engineering_Status_Report.pdf`\n\n### 2. QA Final Approval\n- **Task:** Complete regression testing and approve build\n- **Owner:** Lisa Park\n- **Due:** January 21, 2025\n- **Notes:** Use `QA_Test_Results_Dec.pdf` for reference\n\n### 3. Marketing Materials\n- **Task:** Finalize launch email and social media assets\n- **Owner:** Alex Thompson  \n- **Due:** January 23, 2025 *(Note: This date is earlier than the milestone of January 24, slight misalignment)*\n- **Notes:** Drafts in `Marketing_Brief.pdf`\n\n### 4. Legal Review\n- **Task:** Complete Terms of Service review\n- **Owner:** Tom Wilson\n- **Due:** January 28, 2025\n- **Notes:** Coordinate with legal team\n\n---\n\n## Dependencies\n- Engineering sign-off required before QA final approval\n- Design assets must be finalized before marketing materials\n- Legal review pending on Terms of Service updates\n\n---\n\n## Risks & Mitigation\n- **Risk:** QA timeline is tight. Mitigation: Allocate extra testers if needed.\n- **Risk:** Legal review could delay launch. Mitigation: Escalate to legal early.\n\n---\n\n## Next Steps\n- Confirm task owners and deadlines by EOD January 15, 2025\n- Schedule daily stand-ups starting January 16, 2025\n\n---\n\n## Notes\n- Refer to `Product_Launch_Checklist_v3.xlsx` for full checklist\n",
+      "intended_structural_score": 0.8,
+      "intended_grounding_score": 0.6,
+      "deliberate_issues": [
+        "Fabricated attendee name: Alex Thompson assigned as task owner for Marketing Materials",
+        "Reference to non-existent file: Marketing_Brief.pdf",
+        "One date misalignment: Marketing task due January 23, but milestone is January 24"
+      ],
+      "generated_at": "2025-11-28T15:27:44.323425"
+    },
+    {
+      "scenario_id": "scenario_001",
+      "quality_level": "low",
+      "content": "# Workback Plan for Product Launch Meeting\n\n## Overview\nThis plan is to prepare for the big product launch discussion. The team will ensure everything is ready and address any issues that come up. The meeting will happen sometime in early February.\n\n## Key Steps\n- Someone should gather all the documents like Launch_Overview_Final.docx and Marketing_Strategy_2025.pdf.\n- The team will review the roadmap and check for any missing components.\n- TBD will confirm that all stakeholders are aligned on the vision and objectives.\n- Someone should schedule a follow-up sync with the extended leadership group.\n\n## Attendees\n- Sarah Chen\n- Mike Johnson\n- Lisa Park\n- Tom Wilson\n- Jennifer Lee\n- Robert Smith\n- Alex Martinez\n\n## Action Items\n- Review technical specs and make sure the architecture diagram in System_Design_v4.docx is updated.\n- The team should finalize the promotional video and upload it to the shared drive.\n- Someone should draft an email announcement for internal teams.\n\n## Timeline\n- By March 10: All QA checks should be completed.\n- By March 15: Marketing assets finalized.\n- By March 20: Legal review completed.\n\n## Notes\n- Ensure everyone is comfortable with the new branding guidelines.\n- Discuss opportunities for cross-team collaboration in future quarters.\n\n---\n\nNo blockers or dependencies identified at this time.\n",
+      "intended_structural_score": 0.4,
+      "intended_grounding_score": 0.2,
+      "deliberate_issues": [
+        "No explicit meeting date/time included or incorrect date mentioned (early February instead of Jan 15)",
+        "Used generic owners like 'someone should', 'the team will', 'TBD'",
+        "Referenced non-existent files: Launch_Overview_Final.docx, Marketing_Strategy_2025.pdf, System_Design_v4.docx",
+        "Added fabricated attendees: Jennifer Lee, Robert Smith, Alex Martinez",
+        "Timeline dates do not match the actual launch schedule (March dates instead of February 1)",
+        "Topics drifted from actual meeting subject (added branding guidelines and future collaboration)",
+        "Missing specific artifacts from source data",
+        "No blockers, dependencies, or priorities listed"
+      ],
+      "generated_at": "2025-11-28T15:27:51.948933"
+    },
+    {
+      "scenario_id": "scenario_002",
+      "quality_level": "perfect",
+      "content": "# Workback Plan: Budget Planning FY26 Kickoff\n\n## Meeting Details\n- **Title:** Budget Planning FY26 Kickoff\n- **Date:** December 5, 2024\n- **Time:** 10:00 AM EST\n- **Duration:** 120 minutes\n- **Organizer:** James Miller\n- **Attendees:** James Miller, Emily Davis, Robert Brown, Amanda Lee, Chris Taylor\n\n---\n\n## Objective\nPrepare all necessary data, documents, and analysis to ensure a productive FY26 Budget Planning Kickoff meeting. Align departmental budgets with strategic priorities and incorporate the CFO’s 5% cost reduction target.\n\n---\n\n## Timeline & Tasks\n\n### **Task 1: Collect Department Budget Requests**\n- **Owner:** Amanda Lee\n- **Description:** Ensure all department heads submit their budget requests for FY26.\n- **Due Date:** November 15, 2024\n- **Dependencies:** Department heads must submit requests before consolidation.\n- **Artifacts:** Department_Budget_Requests.xlsx\n- **Potential Blockers:** Delayed submissions from department heads.\n\n---\n\n### **Task 2: Gather Strategic Priorities Document**\n- **Owner:** James Miller\n- **Description:** Obtain the finalized strategic priorities presentation from the CEO.\n- **Due Date:** November 18, 2024\n- **Dependencies:** Strategic priorities document from CEO required.\n- **Artifacts:** Strategic_Priorities_FY26.pptx\n- **Potential Blockers:** Delay in CEO approval.\n\n---\n\n### **Task 3: Compile HR Headcount Projections**\n- **Owner:** Emily Davis\n- **Description:** Collect HR’s headcount and salary projections for FY26.\n- **Due Date:** November 20, 2024\n- **Dependencies:** HR headcount projections needed for salary planning.\n- **Artifacts:** (Data will be integrated into Department_Budget_Requests.xlsx)\n- **Potential Blockers:** HR delays in finalizing projections.\n\n---\n\n### **Task 4: Review FY25 Actual Spending**\n- **Owner:** Robert Brown\n- **Description:** Analyze FY25 actual spending to identify trends and opportunities for cost reduction.\n- **Due Date:** November 22, 2024\n- **Artifacts:** FY25_Actual_Spending.xlsx, Cost_Reduction_Guidelines.pdf\n- **Potential Blockers:** Incomplete or inaccurate FY25 data.\n\n---\n\n### **Task 5: Consolidate Department Budgets & Apply Cost Reduction Target**\n- **Owner:** Chris Taylor\n- **Description:** Consolidate all departmental requests and apply the CFO’s 5% overall cost reduction target.\n- **Due Date:** November 27, 2024\n- **Artifacts:** Department_Budget_Requests.xlsx, Cost_Reduction_Guidelines.pdf\n- **Potential Blockers:** Missing departmental data or unclear cost reduction guidelines.\n\n---\n\n### **Task 6: Prepare Pre-Read Materials for Meeting**\n- **Owner:** James Miller\n- **Description:** Compile all finalized documents and prepare a pre-read packet for attendees.\n- **Due Date:** December 2, 2024\n- **Artifacts:** FY25_Actual_Spending.xlsx, Department_Budget_Requests.xlsx, Strategic_Priorities_FY26.pptx, Cost_Reduction_Guidelines.pdf\n- **Potential Blockers:** Delays in prior tasks.\n\n---\n\n## Final Checkpoint\n- **Date:** December 4, 2024\n- **Owner:** James Miller\n- **Action:** Confirm all materials are ready and distributed to attendees.\n\n---\n\n## Summary Timeline\n- **Nov 15:** Department budget requests collected\n- **Nov 18:** Strategic priorities document obtained\n- **Nov 20:** HR headcount projections compiled\n- **Nov 22:** FY25 actual spending reviewed\n- **Nov 27:** Department budgets consolidated with cost reduction applied\n- **Dec 2:** Pre-read materials prepared\n- **Dec 4:** Final checkpoint\n- **Dec 5:** Budget Planning FY26 Kickoff Meeting\n\n---\n\n## Risks & Blockers\n- Late submissions from departments or HR\n- Delay in CEO approval of strategic priorities\n- Incomplete financial data\n\n---\n\n## Artifacts Summary\n- FY25_Actual_Spending.xlsx\n- Department_Budget_Requests.xlsx\n- Strategic_Priorities_FY26.pptx\n- Cost_Reduction_Guidelines.pdf\n",
+      "intended_structural_score": 1.0,
+      "intended_grounding_score": 1.0,
+      "deliberate_issues": [],
+      "generated_at": "2025-11-28T15:28:02.137458"
+    },
+    {
+      "scenario_id": "scenario_002",
+      "quality_level": "medium",
+      "content": "# FY26 Budget Planning Kickoff - Workback Plan\n\n**Meeting Title:** Budget Planning FY26 Kickoff  \n**Meeting Date:** December 5, 2024  \n**Time:** 10:00 AM EST  \n**Duration:** 120 minutes  \n**Organizer:** James Miller  \n\n---\n\n## Objective\nPrepare all necessary financial data, departmental inputs, and strategic alignment materials for the FY26 Budget Planning Kickoff meeting.\n\n---\n\n## Timeline & Tasks\n\n### November 10, 2024\n- **Task:** Distribute cost reduction guidelines to department heads  \n- **Owner:** Emily Davis  \n- **Dependencies:** None  \n- **Notes:** Ensure all departments understand the 5% reduction target.\n\n### November 15, 2024\n- **Task:** Collect departmental budget requests  \n- **Owner:** Robert Brown  \n- **Dependencies:** Department heads must submit requests before consolidation  \n- **Reference:** Department_Budget_Requests.xlsx\n\n### November 18, 2024\n- **Task:** Gather HR headcount projections for salary planning  \n- **Owner:** Amanda Lee  \n- **Dependencies:** HR team input required  \n\n### November 20, 2024\n- **Task:** Review historical spending data and identify cost-saving opportunities  \n- **Owner:** Chris Taylor  \n- **Reference:** FY25_Actual_Spending.xlsx\n\n### November 25, 2024\n- **Task:** Prepare consolidated budget draft  \n- **Owner:** Alex Thompson  \n- **Dependencies:** Completion of departmental requests and HR projections  \n- **Reference:** Marketing_Brief.pdf\n\n### November 30, 2024\n- **Task:** Align consolidated draft with strategic priorities  \n- **Owner:** Emily Davis  \n- **Dependencies:** Strategic_Priorities_FY26.pptx available  \n\n### December 1, 2024\n- **Task:** Finalize presentation materials for kickoff meeting  \n- **Owner:** James Miller  \n- **Dependencies:** Consolidated draft approved  \n\n### December 6, 2024\n- **Task:** Distribute meeting summary and action items  \n- **Owner:** Amanda Lee  \n- **Note:** This date is after the meeting (December 5), but included for completeness.\n\n---\n\n## Dependencies Summary\n- Department heads must submit requests before consolidation.\n- Strategic priorities document from CEO required.\n- HR headcount projections needed for salary planning.\n\n---\n\n## Risks & Mitigation\n- **Risk:** Delayed departmental submissions  \n  **Mitigation:** Send reminders and escalate to department leads.\n- **Risk:** Missing HR projections  \n  **Mitigation:** Schedule early check-ins with HR.\n\n---\n\n## Notes\n- CFO requires 5% overall cost reduction target.\n- Ensure alignment with strategic priorities.\n",
+      "intended_structural_score": 0.8,
+      "intended_grounding_score": 0.6,
+      "deliberate_issues": [
+        "Added fabricated attendee name 'Alex Thompson' as task owner for November 25 task",
+        "Referenced non-existent file 'Marketing_Brief.pdf'",
+        "Included a task on December 6, 2024, which is after the meeting date (misaligned timeline)"
+      ],
+      "generated_at": "2025-11-28T15:28:11.606173"
+    },
+    {
+      "scenario_id": "scenario_002",
+      "quality_level": "low",
+      "content": "# Workback Plan for Budget Planning Meeting\n\n## Overview\nThis plan outlines the steps to prepare for the upcoming budget discussion. The team will ensure everything is ready for the session.\n\n## Key Actions\n- Someone should gather all the necessary financial data from previous years.\n- The team will review the long-term strategy and prepare slides.\n- TBD will collect reports from all relevant departments.\n- Someone should check compliance guidelines and update the documents.\n\n## Tasks\n1. Collect data from **Annual_Spending_Overview.docx** and **Budget_Projections_FY30.xlsx**.\n2. Schedule a pre-meeting sync with Sarah Johnson, Michael Smith, and Laura Chen to align on talking points.\n3. Draft initial talking points on cost optimization and future investment opportunities.\n4. Prepare a summary document for leadership review.\n\n## Notes\n- Ensure that marketing plans and new product launch timelines are included in the discussion.\n- Consider adding a section on vendor management and technology upgrades.\n\n## Next Steps\n- The team will finalize everything before the meeting scheduled for January 15, 2025.\n- Someone should upload all files to the shared drive.\n\n## Additional Considerations\n- Review any pending legal approvals.\n- Check if the sustainability roadmap needs to be included.\n",
+      "intended_structural_score": 0.4,
+      "intended_grounding_score": 0.2,
+      "deliberate_issues": [
+        "No explicit meeting date/time from the actual meeting; wrong date (January 15, 2025 instead of December 5, 2024)",
+        "Generic owners used (team, someone, TBD)",
+        "Referenced non-existent files: Annual_Spending_Overview.docx, Budget_Projections_FY30.xlsx",
+        "Fabricated attendees: Sarah Johnson, Michael Smith, Laura Chen",
+        "Topics drifted (marketing plans, vendor management, technology upgrades) unrelated to budget kickoff specifics",
+        "Missing specific artifacts mentioned in source (FY25_Actual_Spending.xlsx, Department_Budget_Requests.xlsx, etc.)",
+        "No timeline with actual dates for tasks",
+        "No blockers, dependencies, or priorities included"
+      ],
+      "generated_at": "2025-11-28T15:28:19.355289"
+    },
+    {
+      "scenario_id": "scenario_003",
+      "quality_level": "perfect",
+      "content": "# Workback Plan: Customer Escalation Review - Acme Corp\n\n## Meeting Details\n- **Title:** Customer Escalation Review - Acme Corp\n- **Date:** November 20, 2024\n- **Time:** 3:30 PM PST\n- **Duration:** 60 minutes\n- **Organizer:** Jennifer White\n- **Attendees:** Jennifer White, David Kim, Rachel Green, Mark Thompson\n\n---\n\n## Objective\nPrepare for critical escalation review with Acme Corp to address service outages, analyze root causes, and align on resolution plan to prevent contract termination.\n\n---\n\n## Timeline & Tasks\n\n| Date       | Task                                                      | Owner           | Artifact(s)                                  | Dependencies                                      | Potential Blockers                      |\n|------------|-----------------------------------------------------------|-----------------|----------------------------------------------|---------------------------------------------------|------------------------------------------|\n| Nov 12, 2024 | Complete engineering post-mortem reports for 3 incidents | David Kim       | Acme_Incident_Report_Nov.pdf                | Engineering post-mortem reports due before meeting | Delay in root cause analysis completion |\n| Nov 14, 2024 | Provide customer sentiment update                        | Rachel Green    | Previous_Meeting_Notes.docx                 | Account manager to provide customer sentiment update | Awaiting customer feedback              |\n| Nov 15, 2024 | Legal review of SLA breach implications                  | Mark Thompson   | Service_Level_Agreement.pdf                 | Legal to review SLA breach implications            | Legal team bandwidth                    |\n| Nov 18, 2024 | Review system architecture for failure points            | David Kim       | System_Architecture_Diagram.png             | Post-mortem findings                               | Access to architecture diagrams          |\n| Nov 19, 2024 | Finalize meeting deck and consolidate findings           | Jennifer White  | Acme_Incident_Report_Nov.pdf, Previous_Meeting_Notes.docx | Completion of prior tasks                            | Late inputs from other teams            |\n\n---\n\n## Artifacts for Meeting\n- **Acme_Incident_Report_Nov.pdf** (Engineering incidents summary)\n- **Service_Level_Agreement.pdf** (For SLA breach review)\n- **System_Architecture_Diagram.png** (Technical reference)\n- **Previous_Meeting_Notes.docx** (Context from prior discussions)\n\n---\n\n## Risks & Mitigation\n- **Risk:** Delay in engineering post-mortem reports\n  - *Mitigation:* Schedule daily sync with engineering until completion\n- **Risk:** Legal review delays\n  - *Mitigation:* Escalate to legal leadership by Nov 13 if not started\n\n---\n\n## Final Checkpoint\n- **Date:** Nov 19, 2024\n- **Action:** Organizer (Jennifer White) confirms all tasks complete and artifacts ready for meeting\n",
+      "intended_structural_score": 1.0,
+      "intended_grounding_score": 1.0,
+      "deliberate_issues": [],
+      "generated_at": "2025-11-28T15:28:26.765698"
+    },
+    {
+      "scenario_id": "scenario_003",
+      "quality_level": "medium",
+      "content": "# Workback Plan: Customer Escalation Review - Acme Corp\n\n**Meeting Date:** November 20, 2024  \n**Time:** 3:30 PM PST  \n**Organizer:** Jennifer White  \n\n---\n\n## Objective\nPrepare for the escalation review meeting with Acme Corp to address recent service outages, identify root causes, and present an action plan to prevent future incidents.\n\n---\n\n## Timeline & Tasks\n\n### November 10, 2024\n- **Task:** Draft initial summary of incidents and key metrics.\n- **Owner:** Rachel Green\n- **Notes:** Use data from Acme_Incident_Report_Nov.pdf and Marketing_Brief.pdf for context.\n\n### November 12, 2024\n- **Task:** Collect engineering post-mortem reports.\n- **Owner:** David Kim\n- **Dependencies:** Engineering team must complete analysis by this date.\n\n### November 14, 2024\n- **Task:** Legal review of SLA breach implications.\n- **Owner:** Mark Thompson\n- **Reference:** Service_Level_Agreement.pdf\n\n### November 15, 2024\n- **Task:** Gather customer sentiment update from account manager.\n- **Owner:** Alex Thompson\n- **Notes:** Ensure insights are aligned with escalation context.\n\n### November 18, 2024\n- **Task:** Compile final meeting deck and circulate for review.\n- **Owner:** Jennifer White\n- **Reference:** Include system diagrams from System_Architecture_Diagram.png\n\n### November 21, 2024\n- **Task:** Finalize post-meeting action items.\n- **Owner:** Jennifer White\n- **Notes:** Summarize decisions and next steps.\n\n---\n\n## Dependencies\n- Engineering post-mortem reports ready by Nov 12.\n- Legal review completed by Nov 14.\n- Customer sentiment update by Nov 15.\n\n---\n\n## Risks\n- Delays in engineering reports could compress prep time.\n- Legal review might flag additional compliance issues.\n\n---\n\n## Deliverables\n- Meeting deck (with incident summaries, root cause analysis, and action plan)\n- Updated risk mitigation strategy\n\n---\n\n## Next Steps After Meeting\n- Distribute meeting notes and updated action items.\n- Schedule follow-up with Acme Corp within one week.\n",
+      "intended_structural_score": 0.8,
+      "intended_grounding_score": 0.6,
+      "deliberate_issues": [
+        "Task on Nov 15 assigned to fabricated attendee 'Alex Thompson' (not in attendee list)",
+        "Reference to non-existent file 'Marketing_Brief.pdf'",
+        "Task scheduled for November 21, which is after the meeting date (November 20)"
+      ],
+      "generated_at": "2025-11-28T15:28:34.597345"
+    },
+    {
+      "scenario_id": "scenario_003",
+      "quality_level": "low",
+      "content": "# Workback Plan for Upcoming Discussion\n\n## Objective\nPrepare for the upcoming discussion about recent challenges and ensure everything is ready for review.\n\n## Key Steps\n- Someone should gather all relevant documents, including the Summary_Notes.docx and Customer_Feedback_Analysis.xlsx.\n- The team will review the Performance_Improvement_Strategy.pdf to align on next steps.\n- TBD will confirm if all stakeholders like Alex Johnson, Maria Lopez, and Kevin Smith are informed.\n- Someone should check if the draft of the Technical_Roadmap_2025.docx is complete.\n- The team will brainstorm ideas for improving customer engagement and marketing campaigns.\n\n## Action Items\n- Review historical data from the last quarter.\n- Draft a preliminary response plan for any potential issues.\n- Ensure that all team members have access to the shared folder with these files.\n\n## Next Steps\n- Team will meet again after the holiday season to finalize decisions.\n- TBD will send out a summary email after the meeting.\n\n## Notes\nThis plan is flexible and can be adjusted as needed. The team should stay aligned and communicate frequently.\n",
+      "intended_structural_score": 0.4,
+      "intended_grounding_score": 0.2,
+      "deliberate_issues": [
+        "No explicit meeting date/time included",
+        "Used generic owners like 'someone should', 'the team will', 'TBD'",
+        "Referenced non-existent files: Summary_Notes.docx, Customer_Feedback_Analysis.xlsx, Performance_Improvement_Strategy.pdf, Technical_Roadmap_2025.docx",
+        "Added fabricated attendees: Alex Johnson, Maria Lopez, Kevin Smith",
+        "Topics drifted to customer engagement and marketing campaigns, unrelated to escalation review",
+        "No timeline with dates provided",
+        "No mention of actual artifacts from source data",
+        "No mention of dependencies, blockers, or priorities"
+      ],
+      "generated_at": "2025-11-28T15:28:41.840692"
+    }
+  ]
+}

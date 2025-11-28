@@ -1,0 +1,2873 @@
+{
+  "evaluated_at": "2025-11-28T15:33:18.913542",
+  "framework": "Two-Layer (Structural + Grounding)",
+  "sources": {
+    "scenarios": "docs\\pipeline_runs\\run_20251128_152644_fdcff2d3\\scenarios.json",
+    "assertions": "docs\\pipeline_runs\\run_20251128_152644_fdcff2d3\\assertions.json",
+    "plans": "docs\\pipeline_runs\\run_20251128_152644_fdcff2d3\\plans.json"
+  },
+  "summary": {
+    "total_plans": 9,
+    "by_quality": {
+      "perfect": {
+        "count": 3,
+        "avg_structural": 0.767,
+        "avg_grounding": 0.867
+      },
+      "medium": {
+        "count": 3,
+        "avg_structural": 0.633,
+        "avg_grounding": 0.4
+      },
+      "low": {
+        "count": 3,
+        "avg_structural": 0.333,
+        "avg_grounding": 0.0
+      }
+    },
+    "by_verdict": {
+      "fail_structure": 1,
+      "fail_both": 6,
+      "pass": 2
+    }
+  },
+  "results": [
+    {
+      "scenario_id": "scenario_001",
+      "quality_level": "perfect",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes explicit meeting details: a date (January 15, 2025), time (2:00 PM), timezone (PST), and an attendee list (Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson).",
+          "supporting_spans": [
+            {
+              "text": "**Date:** January 15, 2025\n**Time:** 2:00 PM PST\n**Attendees:** Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a 'Timeline & Tasks' section with tasks and due dates leading up to the meeting date, indicating a backward-looking timeline.",
+          "supporting_spans": [
+            {
+              "text": "## Timeline & Tasks\n\n### 1. **Review Engineering Status**\n- **Due Date:** January 10, 2025\n...\n### 5. **Finalize Launch Checklist**\n- **Due Date:** January 22, 2025",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns a specific named owner for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each task in the plan includes an explicit named owner, satisfying the requirement for ownership assignment.",
+          "supporting_spans": [
+            {
+              "text": "Examples: 'Review Engineering Status – Owner: Mike Johnson', 'Finalize QA Testing – Owner: Lisa Park', 'Design Asset Completion – Owner: Tom Wilson', 'Legal Review of Terms of Service – Owner: Sarah Chen', 'Finalize Launch Checklist – Owner: Sarah Chen'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents to be reviewed or prepared",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes specific artifacts or documents for each task, such as reports and checklists.",
+          "supporting_spans": [
+            {
+              "text": "**Artifact:** Engineering_Status_Report.pdf; **Artifact:** QA_Test_Results_Dec.pdf; **Artifact:** Design_Assets_Summary.docx; **Artifact:** Product_Launch_Checklist_v3.xlsx",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies completion dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each task in the workback plan includes a due date, indicating completion dates are specified.",
+          "supporting_spans": [
+            {
+              "text": "Examples: \n- Review Engineering Status: Due Date: January 10, 2025\n- Finalize QA Testing: Due Date: January 20, 2025\n- Design Asset Completion: Due Date: January 12, 2025\n- Legal Review of Terms of Service: Due Date: January 18, 2025\n- Finalize Launch Checklist: Due Date: January 22, 2025",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies any blockers or dependencies that could impact the timeline",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes a dedicated 'Key Dependencies' section and mentions blockers within individual tasks and in the 'Risks & Blockers' section.",
+          "supporting_spans": [
+            {
+              "text": "## Key Dependencies\n- Engineering sign-off required before QA final approval.\n- Design assets must be finalized before marketing materials.\n- Legal review pending on Terms of Service updates.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to specific source materials or inputs",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "Each task in the plan includes an 'Artifact' field that references specific source materials or inputs, establishing traceability.",
+          "supporting_spans": [
+            {
+              "text": "Example: '### 1. **Review Engineering Status** - **Artifact:** Engineering_Status_Report.pdf'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or methods for updates and coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan is grounded in the provided context and passes all grounding checks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The assertion refers to grounding and alignment with context, which is not a structural element explicitly present in the plan. There is no section or statement indicating that the plan is grounded in provided context or passes grounding checks.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan lists tasks with owners, due dates, and details, but does not include any priority levels or importance indicators for the tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Compared all attendee names in the plan against the source list. All names match exactly with the source attendees.",
+          "supporting_spans": [
+            {
+              "text": "Sarah Chen",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mike Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Lisa Park",
+              "type": "plan_value"
+            },
+            {
+              "text": "Tom Wilson",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan lists the meeting date as January 15, 2025, the time as 2:00 PM, and the timezone as PST, which exactly match the source data.",
+          "supporting_spans": [
+            {
+              "text": "January 15, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "2:00 PM",
+              "type": "plan_value"
+            },
+            {
+              "text": "PST",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "All artifacts mentioned in the plan (Engineering_Status_Report.pdf, QA_Test_Results_Dec.pdf, Design_Assets_Summary.docx, Product_Launch_Checklist_v3.xlsx) match the files listed in the source data.",
+          "supporting_spans": [
+            {
+              "text": "Engineering_Status_Report.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "QA_Test_Results_Dec.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Design_Assets_Summary.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Product_Launch_Checklist_v3.xlsx",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or agenda items in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "high",
+          "passed": true,
+          "explanation": "The plan's topic 'Q1 Product Launch Readiness Review' matches the source topic exactly. No additional or fabricated topics were found.",
+          "supporting_spans": [
+            {
+              "text": "Q1 Product Launch Readiness Review",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan does not introduce any fabricated entities not present in the source data",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "Compared all people, dates, times, files, and topics in the plan against the source. While attendees, organizer, meeting date/time, files, and dependencies match the source, the plan introduces a fabricated milestone and date: 'Product launch scheduled for February 1, 2025', which is not present in the source data. This violates the grounding assertion.",
+          "supporting_spans": [
+            {
+              "text": "Sarah Chen",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mike Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Lisa Park",
+              "type": "plan_value"
+            },
+            {
+              "text": "Tom Wilson",
+              "type": "plan_value"
+            },
+            {
+              "text": "January 15, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "2:00 PM PST",
+              "type": "plan_value"
+            },
+            {
+              "text": "Product_Launch_Checklist_v3.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Engineering_Status_Report.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Design_Assets_Summary.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "QA_Test_Results_Dec.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Q1 Product Launch Readiness Review",
+              "type": "plan_value"
+            },
+            {
+              "text": "February 1, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "February 1, 2025",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.7,
+      "grounding_score": 0.8,
+      "overall_verdict": "fail_structure",
+      "evaluated_at": "2025-11-28T15:29:12.858147"
+    },
+    {
+      "scenario_id": "scenario_001",
+      "quality_level": "medium",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes a meeting date and attendees but does not mention a meeting time or timezone.",
+          "supporting_spans": [
+            {
+              "text": "Meeting Date: January 15, 2025; Attendees: Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a 'Timeline Overview' section that references the meeting date and remaining time, indicating a backward-looking timeline from the meeting date.",
+          "supporting_spans": [
+            {
+              "text": "## Timeline Overview\n- **Launch Date:** February 1, 2025\n- **Current Date:** January 15, 2025\n- **Time Remaining:** ~17 days",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns a specific named owner for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each listed task in the plan includes an explicit named owner, satisfying the structural requirement.",
+          "supporting_spans": [
+            {
+              "text": "Examples: 'Owner: Mike Johnson', 'Owner: Lisa Park', 'Owner: Alex Thompson', 'Owner: Tom Wilson'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents to be reviewed or prepared",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes references to specific artifacts and documents such as status reports, test results, briefs, and checklists.",
+          "supporting_spans": [
+            {
+              "text": "Refer to `Engineering_Status_Report.pdf`; Use `QA_Test_Results_Dec.pdf` for reference; Drafts in `Marketing_Brief.pdf`; Refer to `Product_Launch_Checklist_v3.xlsx`",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies completion dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan lists due dates for each task under the 'Tasks & Owners' section.",
+          "supporting_spans": [
+            {
+              "text": "Examples: 'Due: January 18, 2025', 'Due: January 21, 2025', 'Due: January 23, 2025', 'Due: January 28, 2025'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies any blockers or dependencies that could impact the timeline",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes a section explicitly listing dependencies that could impact the timeline.",
+          "supporting_spans": [
+            {
+              "text": "## Dependencies\n- Engineering sign-off required before QA final approval\n- Design assets must be finalized before marketing materials\n- Legal review pending on Terms of Service updates",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to specific source materials or inputs",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes notes under tasks that reference specific source materials or inputs, indicating traceability.",
+          "supporting_spans": [
+            {
+              "text": "Notes: Refer to `Engineering_Status_Report.pdf`",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or methods for updates and coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan is grounded in the provided context and passes all grounding checks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The assertion refers to grounding and alignment with context (G1-G5), which is about correctness and external validation, not a structural element explicitly present in the plan. There is no explicit section or statement in the plan indicating it is grounded in provided context or that grounding checks were passed.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan lists tasks with owners and due dates, but there are no priority levels or importance indicators assigned to any tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Compared attendees listed in the plan against the source attendees. All names match exactly with the source data.",
+          "supporting_spans": [
+            {
+              "text": "Sarah Chen",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mike Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Lisa Park",
+              "type": "plan_value"
+            },
+            {
+              "text": "Tom Wilson",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes the meeting date (January 15, 2025) which matches the source, but it does not mention the meeting time (2:00 PM) or the timezone (PST) at all. Since the assertion requires all three to match, the absence of time and timezone means it fails.",
+          "supporting_spans": [
+            {
+              "text": "Meeting Date: January 15, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "Meeting Time: not specified",
+              "type": "plan_value"
+            },
+            {
+              "text": "Timezone: not specified",
+              "type": "plan_value"
+            },
+            {
+              "text": "Meeting Time missing",
+              "type": "mismatch"
+            },
+            {
+              "text": "Timezone missing",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "Compared all file references in the plan against the source files list. The plan references 'Product_Launch_Checklist_v3.xlsx', 'Engineering_Status_Report.pdf', and 'QA_Test_Results_Dec.pdf', which match the source. However, it also references 'Marketing_Brief.pdf', which does not exist in the source.files list, causing a mismatch.",
+          "supporting_spans": [
+            {
+              "text": "Product_Launch_Checklist_v3.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Engineering_Status_Report.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "QA_Test_Results_Dec.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or agenda items in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "high",
+          "passed": true,
+          "explanation": "The plan's topic 'Q1 Product Launch Readiness Review' matches the source topic exactly. No additional or fabricated topics were found.",
+          "supporting_spans": [
+            {
+              "text": "Q1 Product Launch Readiness Review",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan does not introduce any fabricated entities not present in the source data",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "Compared all people, dates, times, files, and topics mentioned in the plan against the source data. The plan introduces an extra person (Alex Thompson) and a file (Marketing_Brief.pdf) that are not present in the source. All other values such as meeting date, organizer, attendees (except the extra), and dependencies match the source.",
+          "supporting_spans": [
+            {
+              "text": "Sarah Chen",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mike Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Lisa Park",
+              "type": "plan_value"
+            },
+            {
+              "text": "Tom Wilson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "January 15, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "February 1, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "Product_Launch_Checklist_v3.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Engineering_Status_Report.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "QA_Test_Results_Dec.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Q1 Product Launch Readiness Review",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "mismatch"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.6,
+      "grounding_score": 0.4,
+      "overall_verdict": "fail_both",
+      "evaluated_at": "2025-11-28T15:29:43.464515"
+    },
+    {
+      "scenario_id": "scenario_001",
+      "quality_level": "low",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes attendees but does not provide an explicit meeting date, time, or timezone.",
+          "supporting_spans": [
+            {
+              "text": "Attendees section lists names: 'Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson, Jennifer Lee, Robert Smith, Alex Martinez'. No explicit date, time, or timezone found.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a timeline section with specific dates for tasks, which indicates a backward-looking schedule from the meeting timeframe.",
+          "supporting_spans": [
+            {
+              "text": "## Timeline\n- By March 10: All QA checks should be completed.\n- By March 15: Marketing assets finalized.\n- By March 20: Legal review completed.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns a specific named owner for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan lists tasks but does not assign a specific named owner to each task; ownership is expressed vaguely as 'someone' or 'the team' rather than explicit names.",
+          "supporting_spans": [
+            {
+              "text": "Examples: '- Someone should gather all the documents...', '- The team will review the roadmap...', '- TBD will confirm that all stakeholders are aligned...'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents to be reviewed or prepared",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes references to specific documents such as Launch_Overview_Final.docx, Marketing_Strategy_2025.pdf, and System_Design_v4.docx, which satisfies the requirement.",
+          "supporting_spans": [
+            {
+              "text": "Launch_Overview_Final.docx and Marketing_Strategy_2025.pdf; System_Design_v4.docx",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies completion dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes a timeline with some dates, but the individual tasks in the Key Steps and Action Items sections do not have specific completion dates assigned to them.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies any blockers or dependencies that could impact the timeline",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan explicitly states that no blockers or dependencies have been identified, which counts as addressing blockers/dependencies.",
+          "supporting_spans": [
+            {
+              "text": "No blockers or dependencies identified at this time.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to specific source materials or inputs",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes tasks that reference specific source materials such as documents, indicating traceability between tasks and inputs.",
+          "supporting_spans": [
+            {
+              "text": "Someone should gather all the documents like Launch_Overview_Final.docx and Marketing_Strategy_2025.pdf.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or methods for updates and coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan is grounded in the provided context and passes all grounding checks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The assertion refers to grounding and alignment with context, which is not a structural element explicitly present in the plan. There is no section or statement indicating that the plan is grounded in provided context or that grounding checks were considered.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan lists tasks and timelines but does not include any priority levels or importance indicators for those tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes attendees not present in the source data. The source lists only Sarah Chen, Mike Johnson, Lisa Park, and Tom Wilson, but the plan also includes Jennifer Lee, Robert Smith, and Alex Martinez, which are not in the source.",
+          "supporting_spans": [
+            {
+              "text": "Sarah Chen",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mike Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Lisa Park",
+              "type": "plan_value"
+            },
+            {
+              "text": "Tom Wilson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Jennifer Lee",
+              "type": "plan_value"
+            },
+            {
+              "text": "Robert Smith",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Martinez",
+              "type": "plan_value"
+            },
+            {
+              "text": "Jennifer Lee",
+              "type": "mismatch"
+            },
+            {
+              "text": "Robert Smith",
+              "type": "mismatch"
+            },
+            {
+              "text": "Alex Martinez",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan states the meeting will happen sometime in early February, which does not match the source date of January 15, 2025. The plan does not mention a specific time or timezone, so these values are missing and do not match the source.",
+          "supporting_spans": [
+            {
+              "text": "early February (no specific date)",
+              "type": "plan_value"
+            },
+            {
+              "text": "no time provided",
+              "type": "plan_value"
+            },
+            {
+              "text": "no timezone provided",
+              "type": "plan_value"
+            },
+            {
+              "text": "early February",
+              "type": "mismatch"
+            },
+            {
+              "text": "missing time",
+              "type": "mismatch"
+            },
+            {
+              "text": "missing timezone",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan references files that do not appear in the source files list. Specifically, 'Launch_Overview_Final.docx', 'Marketing_Strategy_2025.pdf', and 'System_Design_v4.docx' are not in the source data. Therefore, the grounding assertion fails.",
+          "supporting_spans": [
+            {
+              "text": "Launch_Overview_Final.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Strategy_2025.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "System_Design_v4.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Launch_Overview_Final.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Marketing_Strategy_2025.pdf",
+              "type": "mismatch"
+            },
+            {
+              "text": "System_Design_v4.docx",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or agenda items in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "high",
+          "passed": false,
+          "explanation": "The source specifies the topic as 'Q1 Product Launch Readiness Review', but the plan does not explicitly mention this topic. Instead, it refers to a 'big product launch discussion' and other general tasks, which do not match the source topic.",
+          "supporting_spans": [
+            {
+              "text": "big product launch discussion",
+              "type": "plan_value"
+            },
+            {
+              "text": "review the roadmap",
+              "type": "plan_value"
+            },
+            {
+              "text": "check for any missing components",
+              "type": "plan_value"
+            },
+            {
+              "text": "big product launch discussion",
+              "type": "mismatch"
+            },
+            {
+              "text": "review the roadmap",
+              "type": "mismatch"
+            },
+            {
+              "text": "check for any missing components",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan does not introduce any fabricated entities not present in the source data",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan introduces multiple fabricated entities not present in the source data, including additional attendees, files, and dates. The source specifies only four attendees, specific files, and a January 15, 2025 meeting date, but the plan mentions extra people, different documents, and timelines in February and March.",
+          "supporting_spans": [
+            {
+              "text": "Attendees: Sarah Chen, Mike Johnson, Lisa Park, Tom Wilson, Jennifer Lee, Robert Smith, Alex Martinez",
+              "type": "plan_value"
+            },
+            {
+              "text": "Files: Launch_Overview_Final.docx, Marketing_Strategy_2025.pdf, System_Design_v4.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Meeting date: early February",
+              "type": "plan_value"
+            },
+            {
+              "text": "Timeline dates: March 10, March 15, March 20",
+              "type": "plan_value"
+            },
+            {
+              "text": "Jennifer Lee",
+              "type": "mismatch"
+            },
+            {
+              "text": "Robert Smith",
+              "type": "mismatch"
+            },
+            {
+              "text": "Alex Martinez",
+              "type": "mismatch"
+            },
+            {
+              "text": "Launch_Overview_Final.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Marketing_Strategy_2025.pdf",
+              "type": "mismatch"
+            },
+            {
+              "text": "System_Design_v4.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "early February",
+              "type": "mismatch"
+            },
+            {
+              "text": "March 10",
+              "type": "mismatch"
+            },
+            {
+              "text": "March 15",
+              "type": "mismatch"
+            },
+            {
+              "text": "March 20",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.4,
+      "grounding_score": 0.0,
+      "overall_verdict": "fail_both",
+      "evaluated_at": "2025-11-28T15:30:15.085005"
+    },
+    {
+      "scenario_id": "scenario_002",
+      "quality_level": "perfect",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes explicit meeting details with a date, time (including timezone), and a list of attendees.",
+          "supporting_spans": [
+            {
+              "text": "- **Date:** December 5, 2024\n- **Time:** 10:00 AM EST\n- **Attendees:** James Miller, Emily Davis, Robert Brown, Amanda Lee, Chris Taylor",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a structured timeline section that lists tasks and dates leading up to the meeting date, indicating a workback approach.",
+          "supporting_spans": [
+            {
+              "text": "## Summary Timeline\n- **Nov 15:** Department budget requests collected\n- **Nov 18:** Strategic priorities document obtained\n- **Nov 20:** HR headcount projections compiled\n- **Nov 22:** FY25 actual spending reviewed\n- **Nov 27:** Department budgets consolidated with cost reduction applied\n- **Dec 2:** Pre-read materials prepared\n- **Dec 4:** Final checkpoint\n- **Dec 5:** Budget Planning FY26 Kickoff Meeting",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns ownership of each task to a specifically named individual",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each task in the workback plan includes an 'Owner' field with a specifically named individual.",
+          "supporting_spans": [
+            {
+              "text": "Examples: \n- Task 1: Owner: Amanda Lee\n- Task 2: Owner: James Miller\n- Task 3: Owner: Emily Davis\n- Task 4: Owner: Robert Brown\n- Task 5: Owner: Chris Taylor\n- Task 6: Owner: James Miller",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents required for preparation",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes multiple references to specific artifacts and documents required for preparation, such as spreadsheets and presentations.",
+          "supporting_spans": [
+            {
+              "text": "Examples include: 'Artifacts: Department_Budget_Requests.xlsx', 'Artifacts: Strategic_Priorities_FY26.pptx', and 'Artifacts Summary: FY25_Actual_Spending.xlsx, Department_Budget_Requests.xlsx, Strategic_Priorities_FY26.pptx, Cost_Reduction_Guidelines.pdf'.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies completion dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each task in the workback plan includes a specified due date, indicating completion dates are present for all tasks.",
+          "supporting_spans": [
+            {
+              "text": "Examples: \n- Task 1: Due Date: November 15, 2024\n- Task 2: Due Date: November 18, 2024\n- Task 3: Due Date: November 20, 2024\n- Task 4: Due Date: November 22, 2024\n- Task 5: Due Date: November 27, 2024\n- Task 6: Due Date: December 2, 2024",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies dependencies or potential blockers for tasks",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes both dependencies and potential blockers for multiple tasks, indicating that this element is present.",
+          "supporting_spans": [
+            {
+              "text": "Example from Task 1: 'Dependencies: Department heads must submit requests before consolidation.' and 'Potential Blockers: Delayed submissions from department heads.'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to specific source materials or inputs",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "Each task in the plan includes an 'Artifacts' section listing specific source materials or inputs, demonstrating traceability between tasks and artifacts.",
+          "supporting_spans": [
+            {
+              "text": "Example from Task 1: 'Artifacts: Department_Budget_Requests.xlsx'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or tools for updates and coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan includes grounding elements that align with provided context",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": true,
+          "explanation": "The plan includes contextual grounding elements such as strategic priorities, CFO’s cost reduction target, and references to FY25 actual spending, which indicate alignment with provided context.",
+          "supporting_spans": [
+            {
+              "text": "Objective: Align departmental budgets with strategic priorities and incorporate the CFO’s 5% cost reduction target.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The workback plan lists tasks with owners, descriptions, due dates, and other details, but does not include any priority levels or importance indicators for the tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "All person names mentioned in the plan (James Miller, Emily Davis, Robert Brown, Amanda Lee, Chris Taylor) match the attendees listed in the source data.",
+          "supporting_spans": [
+            {
+              "text": "James Miller",
+              "type": "plan_value"
+            },
+            {
+              "text": "Emily Davis",
+              "type": "plan_value"
+            },
+            {
+              "text": "Robert Brown",
+              "type": "plan_value"
+            },
+            {
+              "text": "Amanda Lee",
+              "type": "plan_value"
+            },
+            {
+              "text": "Chris Taylor",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan lists the meeting date as December 5, 2024, the time as 10:00 AM, and the timezone as EST, which exactly match the source values.",
+          "supporting_spans": [
+            {
+              "text": "December 5, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "10:00 AM",
+              "type": "plan_value"
+            },
+            {
+              "text": "EST",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "All artifacts mentioned in the plan match the files listed in the source data. No extra or missing files were found.",
+          "supporting_spans": [
+            {
+              "text": "FY25_Actual_Spending.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Department_Budget_Requests.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Strategic_Priorities_FY26.pptx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Cost_Reduction_Guidelines.pdf",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or meeting purpose in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan's stated meeting title and objective align with the source topic 'Budget Planning FY26 Kickoff'. Both refer to the same purpose of initiating FY26 budget planning.",
+          "supporting_spans": [
+            {
+              "text": "Budget Planning FY26 Kickoff",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan does not introduce any people, files, dates, or topics not present in the source (no hallucinated entities)",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "Compared attendees, organizer, meeting date/time, files, and topics from the plan against the source. While all names, files, and topics match the source, the plan introduces a fabricated element: the CFO’s 5% cost reduction target, which is not present in the source data. This violates the grounding assertion that no additional entities or concepts should be introduced.",
+          "supporting_spans": [
+            {
+              "text": "James Miller",
+              "type": "plan_value"
+            },
+            {
+              "text": "Emily Davis",
+              "type": "plan_value"
+            },
+            {
+              "text": "Robert Brown",
+              "type": "plan_value"
+            },
+            {
+              "text": "Amanda Lee",
+              "type": "plan_value"
+            },
+            {
+              "text": "Chris Taylor",
+              "type": "plan_value"
+            },
+            {
+              "text": "December 5, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "10:00 AM EST",
+              "type": "plan_value"
+            },
+            {
+              "text": "FY25_Actual_Spending.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Department_Budget_Requests.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Strategic_Priorities_FY26.pptx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Cost_Reduction_Guidelines.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Budget Planning FY26 Kickoff",
+              "type": "plan_value"
+            },
+            {
+              "text": "CFO’s 5% cost reduction target",
+              "type": "plan_value"
+            },
+            {
+              "text": "CFO’s 5% cost reduction target",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.8,
+      "grounding_score": 0.8,
+      "overall_verdict": "pass",
+      "evaluated_at": "2025-11-28T15:30:46.176856"
+    },
+    {
+      "scenario_id": "scenario_002",
+      "quality_level": "medium",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes meeting date and time with timezone, but does not list attendees. Only the organizer is mentioned, which does not constitute an attendee list.",
+          "supporting_spans": [
+            {
+              "text": "Meeting Date: December 5, 2024; Time: 10:00 AM EST; Organizer: James Miller",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a structured timeline with dated tasks leading up to and following the meeting date, indicating a workback structure.",
+          "supporting_spans": [
+            {
+              "text": "### November 10, 2024\n- **Task:** Distribute cost reduction guidelines to department heads\n...\n### December 6, 2024\n- **Task:** Distribute meeting summary and action items",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns ownership of each task to a specifically named individual",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each task in the workback plan includes an 'Owner' field with a specific individual's name assigned.",
+          "supporting_spans": [
+            {
+              "text": "\"November 10, 2024 - Task: Distribute cost reduction guidelines to department heads - Owner: Emily Davis\"",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents required for preparation",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes references to specific documents such as spreadsheets and presentations, indicating required artifacts for preparation.",
+          "supporting_spans": [
+            {
+              "text": "Reference: Department_Budget_Requests.xlsx; Reference: FY25_Actual_Spending.xlsx; Reference: Marketing_Brief.pdf; Dependencies: Strategic_Priorities_FY26.pptx available",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies completion dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The workback plan lists specific completion dates for each task, such as November 10, November 15, November 18, November 20, November 25, November 30, December 1, and December 6, 2024.",
+          "supporting_spans": [
+            {
+              "text": "Examples: '### November 10, 2024', '### November 15, 2024', '### December 1, 2024'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies dependencies or potential blockers for tasks",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes explicit dependency information for multiple tasks, indicating awareness of prerequisites and potential blockers.",
+          "supporting_spans": [
+            {
+              "text": "\"Dependencies: Department heads must submit requests before consolidation\"",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to specific source materials or inputs",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes references to source materials for certain tasks, indicating traceability between tasks and source artifacts.",
+          "supporting_spans": [
+            {
+              "text": "Example: '### November 15, 2024 - **Task:** Collect departmental budget requests ... **Reference:** Department_Budget_Requests.xlsx'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or tools for updates and coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan includes grounding elements that align with provided context",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": true,
+          "explanation": "The plan includes contextual grounding elements such as references to strategic priorities, historical data, and cost reduction targets, which indicate alignment with provided context.",
+          "supporting_spans": [
+            {
+              "text": "Ensure all departments understand the 5% reduction target.; Reference: FY25_Actual_Spending.xlsx; Dependencies: Strategic_Priorities_FY26.pptx available",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan lists tasks with dates, owners, dependencies, and references, but does not include any priority levels or indicators of importance for the tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan mentions an additional person, Alex Thompson, who is not listed in the source attendees. All other names match the source attendees list.",
+          "supporting_spans": [
+            {
+              "text": "James Miller",
+              "type": "plan_value"
+            },
+            {
+              "text": "Emily Davis",
+              "type": "plan_value"
+            },
+            {
+              "text": "Robert Brown",
+              "type": "plan_value"
+            },
+            {
+              "text": "Amanda Lee",
+              "type": "plan_value"
+            },
+            {
+              "text": "Chris Taylor",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan lists the meeting date as December 5, 2024, the time as 10:00 AM, and the timezone as EST, which exactly match the source values.",
+          "supporting_spans": [
+            {
+              "text": "December 5, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "10:00 AM",
+              "type": "plan_value"
+            },
+            {
+              "text": "EST",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan references files that do not exist in the source list. Specifically, 'Marketing_Brief.pdf' is mentioned in the plan but is not present in the source files. All other referenced files match the source.",
+          "supporting_spans": [
+            {
+              "text": "Cost_Reduction_Guidelines.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Department_Budget_Requests.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "FY25_Actual_Spending.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Strategic_Priorities_FY26.pptx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or meeting purpose in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan's stated meeting title and objective clearly align with the source topic 'Budget Planning FY26 Kickoff'. Both reference the FY26 budget planning kickoff, indicating a direct match.",
+          "supporting_spans": [
+            {
+              "text": "Budget Planning FY26 Kickoff",
+              "type": "plan_value"
+            },
+            {
+              "text": "Prepare all necessary financial data, departmental inputs, and strategic alignment materials for the FY26 Budget Planning Kickoff meeting",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan does not introduce any people, files, dates, or topics not present in the source (no hallucinated entities)",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan introduces entities not present in the source data. Specifically, 'Alex Thompson' is listed as an owner, which is not among the source attendees. Additionally, the file 'Marketing_Brief.pdf' is referenced, which is not in the source file list. All other names, dates, and topics match the source.",
+          "supporting_spans": [
+            {
+              "text": "James Miller",
+              "type": "plan_value"
+            },
+            {
+              "text": "Emily Davis",
+              "type": "plan_value"
+            },
+            {
+              "text": "Robert Brown",
+              "type": "plan_value"
+            },
+            {
+              "text": "Amanda Lee",
+              "type": "plan_value"
+            },
+            {
+              "text": "Chris Taylor",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "FY25_Actual_Spending.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Department_Budget_Requests.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Strategic_Priorities_FY26.pptx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Cost_Reduction_Guidelines.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "December 5, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "Budget Planning FY26 Kickoff",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "mismatch"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.7,
+      "grounding_score": 0.4,
+      "overall_verdict": "fail_both",
+      "evaluated_at": "2025-11-28T15:31:16.148815"
+    },
+    {
+      "scenario_id": "scenario_002",
+      "quality_level": "low",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes a meeting date (January 15, 2025) and mentions some attendees for a pre-meeting sync, but it does not provide a meeting time or timezone. Therefore, explicit meeting details as defined (date, time, timezone, and attendee list) are incomplete.",
+          "supporting_spans": [
+            {
+              "text": "The team will finalize everything before the meeting scheduled for January 15, 2025. Schedule a pre-meeting sync with Sarah Johnson, Michael Smith, and Laura Chen.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan mentions a meeting date but does not include a structured timeline or sequence of tasks working back from that date.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns ownership of each task to a specifically named individual",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan lists tasks but does not assign ownership of each task to specifically named individuals. Only one task mentions a meeting with named people, but no explicit ownership is assigned to them.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents required for preparation",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes references to specific documents needed for preparation.",
+          "supporting_spans": [
+            {
+              "text": "Collect data from **Annual_Spending_Overview.docx** and **Budget_Projections_FY30.xlsx**.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies completion dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan lists tasks but does not provide specific completion dates for each task.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies dependencies or potential blockers for tasks",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any dependencies or potential blockers for tasks.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to specific source materials or inputs",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes a task that explicitly references specific source documents, indicating traceability between tasks and source materials.",
+          "supporting_spans": [
+            {
+              "text": "Collect data from **Annual_Spending_Overview.docx** and **Budget_Projections_FY30.xlsx**.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or tools for updates and coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan includes grounding elements that align with provided context",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": true,
+          "explanation": "The plan includes references to specific documents and files, which serve as contextual grounding elements.",
+          "supporting_spans": [
+            {
+              "text": "Collect data from **Annual_Spending_Overview.docx** and **Budget_Projections_FY30.xlsx**.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan lists tasks but does not include any priority levels or importance indicators for them.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan mentions Sarah Johnson, Michael Smith, and Laura Chen, none of whom are in the source attendees list. Therefore, not all people mentioned in the plan exist in the source attendees.",
+          "supporting_spans": [
+            {
+              "text": "Sarah Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Michael Smith",
+              "type": "plan_value"
+            },
+            {
+              "text": "Laura Chen",
+              "type": "plan_value"
+            },
+            {
+              "text": "Sarah Johnson",
+              "type": "mismatch"
+            },
+            {
+              "text": "Michael Smith",
+              "type": "mismatch"
+            },
+            {
+              "text": "Laura Chen",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan states the meeting is scheduled for January 15, 2025, but the source specifies December 5, 2024 at 10:00 AM EST. The date does not match, and the plan does not mention time or timezone.",
+          "supporting_spans": [
+            {
+              "text": "January 15, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "January 15, 2025",
+              "type": "mismatch"
+            },
+            {
+              "text": "Missing time",
+              "type": "mismatch"
+            },
+            {
+              "text": "Missing timezone",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan references files 'Annual_Spending_Overview.docx' and 'Budget_Projections_FY30.xlsx', which do not appear in the source files list. None of the files mentioned in the plan match the source files.",
+          "supporting_spans": [
+            {
+              "text": "Annual_Spending_Overview.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Budget_Projections_FY30.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Annual_Spending_Overview.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Budget_Projections_FY30.xlsx",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or meeting purpose in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan's stated topics and purpose focus on a general budget discussion, cost optimization, future investment opportunities, marketing plans, and vendor management, which do not match the source topic 'Budget Planning FY26 Kickoff'.",
+          "supporting_spans": [
+            {
+              "text": "upcoming budget discussion",
+              "type": "plan_value"
+            },
+            {
+              "text": "cost optimization",
+              "type": "plan_value"
+            },
+            {
+              "text": "future investment opportunities",
+              "type": "plan_value"
+            },
+            {
+              "text": "marketing plans",
+              "type": "plan_value"
+            },
+            {
+              "text": "new product launch timelines",
+              "type": "plan_value"
+            },
+            {
+              "text": "vendor management",
+              "type": "plan_value"
+            },
+            {
+              "text": "technology upgrades",
+              "type": "plan_value"
+            },
+            {
+              "text": "upcoming budget discussion",
+              "type": "mismatch"
+            },
+            {
+              "text": "cost optimization",
+              "type": "mismatch"
+            },
+            {
+              "text": "future investment opportunities",
+              "type": "mismatch"
+            },
+            {
+              "text": "marketing plans",
+              "type": "mismatch"
+            },
+            {
+              "text": "new product launch timelines",
+              "type": "mismatch"
+            },
+            {
+              "text": "vendor management",
+              "type": "mismatch"
+            },
+            {
+              "text": "technology upgrades",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan does not introduce any people, files, dates, or topics not present in the source (no hallucinated entities)",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan introduces multiple entities (people, files, dates, topics) that are not present in the source data. Specifically, it mentions different files, additional attendees, a different meeting date, and extra topics not listed in the source.",
+          "supporting_spans": [
+            {
+              "text": "Annual_Spending_Overview.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Budget_Projections_FY30.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Sarah Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Michael Smith",
+              "type": "plan_value"
+            },
+            {
+              "text": "Laura Chen",
+              "type": "plan_value"
+            },
+            {
+              "text": "January 15, 2025",
+              "type": "plan_value"
+            },
+            {
+              "text": "marketing plans",
+              "type": "plan_value"
+            },
+            {
+              "text": "new product launch timelines",
+              "type": "plan_value"
+            },
+            {
+              "text": "vendor management",
+              "type": "plan_value"
+            },
+            {
+              "text": "technology upgrades",
+              "type": "plan_value"
+            },
+            {
+              "text": "Annual_Spending_Overview.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Budget_Projections_FY30.xlsx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Sarah Johnson",
+              "type": "mismatch"
+            },
+            {
+              "text": "Michael Smith",
+              "type": "mismatch"
+            },
+            {
+              "text": "Laura Chen",
+              "type": "mismatch"
+            },
+            {
+              "text": "January 15, 2025",
+              "type": "mismatch"
+            },
+            {
+              "text": "marketing plans",
+              "type": "mismatch"
+            },
+            {
+              "text": "new product launch timelines",
+              "type": "mismatch"
+            },
+            {
+              "text": "vendor management",
+              "type": "mismatch"
+            },
+            {
+              "text": "technology upgrades",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.3,
+      "grounding_score": 0.0,
+      "overall_verdict": "fail_both",
+      "evaluated_at": "2025-11-28T15:31:46.438442"
+    },
+    {
+      "scenario_id": "scenario_003",
+      "quality_level": "perfect",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes explicit meeting details with a date (November 20, 2024), time (3:30 PM), timezone (PST), and an attendee list (Jennifer White, David Kim, Rachel Green, Mark Thompson).",
+          "supporting_spans": [
+            {
+              "text": "- **Date:** November 20, 2024\n- **Time:** 3:30 PM PST\n- **Attendees:** Jennifer White, David Kim, Rachel Green, Mark Thompson",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a structured timeline with dates and tasks leading up to the meeting date, indicating a workback approach.",
+          "supporting_spans": [
+            {
+              "text": "| Date       | Task                                                      | Owner           | Artifact(s)                                  | Dependencies                                      | Potential Blockers                      |",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns ownership of each task to specifically named individuals",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each task in the timeline includes a specifically named individual as the owner.",
+          "supporting_spans": [
+            {
+              "text": "| Nov 12, 2024 | Complete engineering post-mortem reports for 3 incidents | David Kim | ... | Nov 14, 2024 | Provide customer sentiment update | Rachel Green | ... | Nov 15, 2024 | Legal review of SLA breach implications | Mark Thompson | ... | Nov 18, 2024 | Review system architecture for failure points | David Kim | ... | Nov 19, 2024 | Finalize meeting deck and consolidate findings | Jennifer White | ...",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents required for preparation",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes a section listing specific artifacts and also references documents in the task table.",
+          "supporting_spans": [
+            {
+              "text": "## Artifacts for Meeting\n- **Acme_Incident_Report_Nov.pdf** (Engineering incidents summary)\n- **Service_Level_Agreement.pdf** (For SLA breach review)\n- **System_Architecture_Diagram.png** (Technical reference)\n- **Previous_Meeting_Notes.docx** (Context from prior discussions)",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies due dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a timeline table where each task has an associated due date.",
+          "supporting_spans": [
+            {
+              "text": "| Nov 12, 2024 | Complete engineering post-mortem reports for 3 incidents |",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies any dependencies or potential blockers",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes a 'Dependencies' and 'Potential Blockers' column in the Timeline & Tasks table, listing specific dependencies and blockers for each task.",
+          "supporting_spans": [
+            {
+              "text": "| Dependencies                                      | Potential Blockers                      |",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to their relevant source materials or context",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes an 'Artifact(s)' column in the Timeline & Tasks table, linking each task to relevant source materials or context.",
+          "supporting_spans": [
+            {
+              "text": "| Nov 12, 2024 | Complete engineering post-mortem reports for 3 incidents | David Kim | Acme_Incident_Report_Nov.pdf |",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or methods for updates and coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan demonstrates grounding by including all required contextual elements",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": true,
+          "explanation": "The plan includes meeting details (title, date, time), attendees, a list of artifacts, and contextual information in the objective section.",
+          "supporting_spans": [
+            {
+              "text": "Meeting Details section includes date and attendees; Artifacts for Meeting section lists documents; Objective section provides context.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The workback plan lists tasks with dates, owners, artifacts, dependencies, and blockers, but there are no priority levels or importance indicators assigned to any tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "All person names mentioned in the plan (attendees and task owners) match the source attendees list exactly. No extra or missing names were found.",
+          "supporting_spans": [
+            {
+              "text": "Jennifer White",
+              "type": "plan_value"
+            },
+            {
+              "text": "David Kim",
+              "type": "plan_value"
+            },
+            {
+              "text": "Rachel Green",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mark Thompson",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "Meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan lists the meeting date as November 20, 2024, time as 3:30 PM, and timezone as PST, which exactly match the source data fields.",
+          "supporting_spans": [
+            {
+              "text": "November 20, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "3:30 PM",
+              "type": "plan_value"
+            },
+            {
+              "text": "PST",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "All artifacts mentioned in the plan (Acme_Incident_Report_Nov.pdf, Service_Level_Agreement.pdf, System_Architecture_Diagram.png, Previous_Meeting_Notes.docx) exactly match the files listed in the source data.",
+          "supporting_spans": [
+            {
+              "text": "Acme_Incident_Report_Nov.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Service_Level_Agreement.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "System_Architecture_Diagram.png",
+              "type": "plan_value"
+            },
+            {
+              "text": "Previous_Meeting_Notes.docx",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or agenda items in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "high",
+          "passed": true,
+          "explanation": "The plan includes the topic 'Customer Escalation Review - Acme Corp', which exactly matches the source topic. No additional or fabricated topics were found.",
+          "supporting_spans": [
+            {
+              "text": "Customer Escalation Review - Acme Corp",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan contains no fabricated entities such as extra attendees, files, dates, or topics not present in any source field",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "All entities in the plan (attendees, files, dates, topics) match the source data. No extra or fabricated attendees, files, dates, or topics were found.",
+          "supporting_spans": [
+            {
+              "text": "Jennifer White",
+              "type": "plan_value"
+            },
+            {
+              "text": "David Kim",
+              "type": "plan_value"
+            },
+            {
+              "text": "Rachel Green",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mark Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "November 20, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "3:30 PM PST",
+              "type": "plan_value"
+            },
+            {
+              "text": "Acme_Incident_Report_Nov.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Service_Level_Agreement.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "System_Architecture_Diagram.png",
+              "type": "plan_value"
+            },
+            {
+              "text": "Previous_Meeting_Notes.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Customer Escalation Review - Acme Corp",
+              "type": "plan_value"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.8,
+      "grounding_score": 1.0,
+      "overall_verdict": "pass",
+      "evaluated_at": "2025-11-28T15:32:16.385484"
+    },
+    {
+      "scenario_id": "scenario_003",
+      "quality_level": "medium",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan includes meeting date, time, and timezone, but does not provide an explicit attendee list.",
+          "supporting_spans": [
+            {
+              "text": "Meeting Date: November 20, 2024  \nTime: 3:30 PM PST",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes a structured timeline with dated tasks leading up to and following the meeting date.",
+          "supporting_spans": [
+            {
+              "text": "## Timeline & Tasks\n\n### November 10, 2024\n- **Task:** Draft initial summary of incidents and key metrics.\n...\n### November 21, 2024\n- **Task:** Finalize post-meeting action items.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns ownership of each task to specifically named individuals",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "Each task in the timeline includes an assigned owner with a specific name, satisfying the requirement for ownership assignment.",
+          "supporting_spans": [
+            {
+              "text": "\"November 10, 2024 - Task: Draft initial summary of incidents and key metrics. - Owner: Rachel Green\"",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents required for preparation",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan references specific documents such as incident reports, marketing briefs, SLAs, and system diagrams, which are artifacts required for preparation.",
+          "supporting_spans": [
+            {
+              "text": "Use data from Acme_Incident_Report_Nov.pdf and Marketing_Brief.pdf for context.; Reference: Service_Level_Agreement.pdf; Include system diagrams from System_Architecture_Diagram.png",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies due dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan includes specific due dates for each task in the Timeline & Tasks section.",
+          "supporting_spans": [
+            {
+              "text": "Examples: '### November 10, 2024', '### November 12, 2024', '### November 14, 2024', '### November 15, 2024', '### November 18, 2024', '### November 21, 2024'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies any dependencies or potential blockers",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes a section explicitly listing dependencies and also mentions potential blockers in the Risks section.",
+          "supporting_spans": [
+            {
+              "text": "## Dependencies\n- Engineering post-mortem reports ready by Nov 12.\n- Legal review completed by Nov 14.\n- Customer sentiment update by Nov 15.\n\n## Risks\n- Delays in engineering reports could compress prep time.\n- Legal review might flag additional compliance issues.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to their relevant source materials or context",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes references to source materials or context within tasks, indicating traceability between tasks and relevant documents.",
+          "supporting_spans": [
+            {
+              "text": "Notes: Use data from Acme_Incident_Report_Nov.pdf and Marketing_Brief.pdf for context.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any communication channels or methods for providing updates or coordinating among team members.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan demonstrates grounding by including all required contextual elements",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan includes meeting details and contextual information (objective, references, dependencies), but it does not list attendees explicitly, which is one of the required contextual elements.",
+          "supporting_spans": [
+            {
+              "text": "Meeting details: 'Meeting Date: November 20, 2024  Time: 3:30 PM PST  Organizer: Jennifer White'; Context: 'Objective: Prepare for the escalation review meeting...'; Artifacts: 'Use data from Acme_Incident_Report_Nov.pdf and Marketing_Brief.pdf'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan lists tasks with dates and owners but does not include any priority levels or importance indicators for the tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan mentions an additional person, Alex Thompson, who is not listed in the source attendees. All other names match the source attendees.",
+          "supporting_spans": [
+            {
+              "text": "Jennifer White",
+              "type": "plan_value"
+            },
+            {
+              "text": "Rachel Green",
+              "type": "plan_value"
+            },
+            {
+              "text": "David Kim",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mark Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "Meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": true,
+          "explanation": "The plan lists the meeting date as November 20, 2024, time as 3:30 PM, and timezone as PST, which exactly match the source data.",
+          "supporting_spans": [
+            {
+              "text": "November 20, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "3:30 PM",
+              "type": "plan_value"
+            },
+            {
+              "text": "PST",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "Compared all file names mentioned in the plan against the source files. The plan references 'Acme_Incident_Report_Nov.pdf', 'Marketing_Brief.pdf', 'Service_Level_Agreement.pdf', and 'System_Architecture_Diagram.png'. The source contains 'Acme_Incident_Report_Nov.pdf', 'Service_Level_Agreement.pdf', 'System_Architecture_Diagram.png', and 'Previous_Meeting_Notes.docx'. 'Marketing_Brief.pdf' is not in the source, so the assertion fails.",
+          "supporting_spans": [
+            {
+              "text": "Acme_Incident_Report_Nov.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Service_Level_Agreement.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "System_Architecture_Diagram.png",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or agenda items in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "high",
+          "passed": true,
+          "explanation": "The plan's topic 'Customer Escalation Review - Acme Corp' matches the source topic exactly. No additional or fabricated topics were introduced.",
+          "supporting_spans": [
+            {
+              "text": "Customer Escalation Review - Acme Corp",
+              "type": "plan_value"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan contains no fabricated entities such as extra attendees, files, dates, or topics not present in any source field",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan introduces an extra attendee/owner 'Alex Thompson' and references a file 'Marketing_Brief.pdf' which are not present in the source data. All other entities such as meeting date, time, organizer, and most files match the source.",
+          "supporting_spans": [
+            {
+              "text": "Jennifer White",
+              "type": "plan_value"
+            },
+            {
+              "text": "David Kim",
+              "type": "plan_value"
+            },
+            {
+              "text": "Rachel Green",
+              "type": "plan_value"
+            },
+            {
+              "text": "Mark Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "plan_value"
+            },
+            {
+              "text": "November 20, 2024",
+              "type": "plan_value"
+            },
+            {
+              "text": "3:30 PM PST",
+              "type": "plan_value"
+            },
+            {
+              "text": "Acme_Incident_Report_Nov.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Service_Level_Agreement.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "System_Architecture_Diagram.png",
+              "type": "plan_value"
+            },
+            {
+              "text": "Customer Escalation Review - Acme Corp",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Thompson",
+              "type": "mismatch"
+            },
+            {
+              "text": "Marketing_Brief.pdf",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.6,
+      "grounding_score": 0.4,
+      "overall_verdict": "fail_both",
+      "evaluated_at": "2025-11-28T15:32:46.430977"
+    },
+    {
+      "scenario_id": "scenario_003",
+      "quality_level": "low",
+      "structural_results": [
+        {
+          "assertion_id": "A1",
+          "assertion_text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan mentions a future meeting but does not provide explicit meeting details such as date, time, or timezone. While attendees are partially implied through stakeholder names, the required date, time, and timezone are missing.",
+          "supporting_spans": [
+            {
+              "text": "Team will meet again after the holiday season to finalize decisions.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A2",
+          "assertion_text": "The workback plan includes a timeline that works back from the meeting date",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan does not include a structured timeline that works back from the meeting date; it only mentions that the team will meet again after the holiday season without providing a timeline.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A3",
+          "assertion_text": "The workback plan assigns ownership of each task to specifically named individuals",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan does not assign ownership of each task to specifically named individuals; most tasks are assigned to 'someone', 'the team', or 'TBD' rather than named people.",
+          "supporting_spans": [
+            {
+              "text": "Example: '- Someone should gather all relevant documents...' and '- TBD will confirm if all stakeholders like Alex Johnson, Maria Lopez, and Kevin Smith are informed.'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A4",
+          "assertion_text": "The workback plan lists specific artifacts or documents required for preparation",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan references multiple specific documents required for preparation.",
+          "supporting_spans": [
+            {
+              "text": "including the Summary_Notes.docx and Customer_Feedback_Analysis.xlsx; review the Performance_Improvement_Strategy.pdf; check if the draft of the Technical_Roadmap_2025.docx is complete",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A5",
+          "assertion_text": "The workback plan specifies due dates for each task",
+          "layer": "structural",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan lists tasks and steps but does not include any specific due dates for those tasks.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A6",
+          "assertion_text": "The workback plan identifies any dependencies or potential blockers",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any dependencies or potential blockers; it only lists tasks and steps without referencing what depends on what or any risks.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A7",
+          "assertion_text": "The workback plan links tasks to their relevant source materials or context",
+          "layer": "structural",
+          "level": "expected",
+          "passed": true,
+          "explanation": "The plan includes tasks that reference specific source materials such as documents, providing traceability between tasks and their relevant context.",
+          "supporting_spans": [
+            {
+              "text": "Someone should gather all relevant documents, including the Summary_Notes.docx and Customer_Feedback_Analysis.xlsx.",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A8",
+          "assertion_text": "The workback plan specifies communication channels for updates and coordination",
+          "layer": "structural",
+          "level": "expected",
+          "passed": false,
+          "explanation": "The plan does not mention any specific communication channels (e.g., email, chat, calls) for updates or coordination.",
+          "supporting_spans": []
+        },
+        {
+          "assertion_id": "A9",
+          "assertion_text": "The workback plan demonstrates grounding by including all required contextual elements",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": true,
+          "explanation": "The plan includes meeting details (team will meet again after the holiday season), attendees (Alex Johnson, Maria Lopez, Kevin Smith), artifacts (Summary_Notes.docx, Customer_Feedback_Analysis.xlsx, Performance_Improvement_Strategy.pdf, Technical_Roadmap_2025.docx), and context (objective and notes about flexibility and alignment).",
+          "supporting_spans": [
+            {
+              "text": "Meeting details: 'Team will meet again after the holiday season'; Attendees: 'Alex Johnson, Maria Lopez, and Kevin Smith'; Artifacts: 'Summary_Notes.docx and Customer_Feedback_Analysis.xlsx', 'Performance_Improvement_Strategy.pdf', 'Technical_Roadmap_2025.docx'; Context: 'Prepare for the upcoming discussion about recent challenges and ensure everything is ready for review.'",
+              "type": "evidence"
+            }
+          ]
+        },
+        {
+          "assertion_id": "A10",
+          "assertion_text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "layer": "structural",
+          "level": "aspirational",
+          "passed": false,
+          "explanation": "The plan lists tasks and action items but does not include any priority levels or importance indicators for those tasks.",
+          "supporting_spans": []
+        }
+      ],
+      "grounding_results": [
+        {
+          "assertion_id": "G1",
+          "assertion_text": "All people mentioned in the plan exist in source.attendees",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan mentions people (Alex Johnson, Maria Lopez, Kevin Smith) who do not appear in the source attendees list. None of the names in the plan match the source attendees.",
+          "supporting_spans": [
+            {
+              "text": "Alex Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Maria Lopez",
+              "type": "plan_value"
+            },
+            {
+              "text": "Kevin Smith",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Johnson",
+              "type": "mismatch"
+            },
+            {
+              "text": "Maria Lopez",
+              "type": "mismatch"
+            },
+            {
+              "text": "Kevin Smith",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G2",
+          "assertion_text": "Meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan does not mention any meeting date, time, or timezone, so it cannot match the source values.",
+          "supporting_spans": [
+            {
+              "text": "Meeting date missing",
+              "type": "mismatch"
+            },
+            {
+              "text": "Meeting time missing",
+              "type": "mismatch"
+            },
+            {
+              "text": "Timezone missing",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G3",
+          "assertion_text": "All artifacts referenced in the plan exist in source.files",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan references files that do not exist in the source data. None of the files mentioned in the plan match the files listed in the source.",
+          "supporting_spans": [
+            {
+              "text": "Summary_Notes.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Customer_Feedback_Analysis.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Performance_Improvement_Strategy.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Technical_Roadmap_2025.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Summary_Notes.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Customer_Feedback_Analysis.xlsx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Performance_Improvement_Strategy.pdf",
+              "type": "mismatch"
+            },
+            {
+              "text": "Technical_Roadmap_2025.docx",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G4",
+          "assertion_text": "The topics or agenda items in the plan align with source.topics",
+          "layer": "grounding",
+          "level": "high",
+          "passed": false,
+          "explanation": "The plan includes agenda items such as brainstorming ideas for improving customer engagement and marketing campaigns, which do not match the source topic. The source specifies only 'Customer Escalation Review - Acme Corp' as the topic. Therefore, the topics in the plan do not align with the source.",
+          "supporting_spans": [
+            {
+              "text": "brainstorm ideas for improving customer engagement and marketing campaigns",
+              "type": "plan_value"
+            },
+            {
+              "text": "brainstorm ideas for improving customer engagement and marketing campaigns",
+              "type": "mismatch"
+            }
+          ]
+        },
+        {
+          "assertion_id": "G5",
+          "assertion_text": "The plan contains no fabricated entities such as extra attendees, files, dates, or topics not present in any source field",
+          "layer": "grounding",
+          "level": "critical",
+          "passed": false,
+          "explanation": "The plan introduces multiple fabricated entities not present in the source data, including extra attendees (Alex Johnson, Maria Lopez, Kevin Smith), files (Summary_Notes.docx, Customer_Feedback_Analysis.xlsx, Performance_Improvement_Strategy.pdf, Technical_Roadmap_2025.docx), and topics (improving customer engagement and marketing campaigns). These do not match any source fields.",
+          "supporting_spans": [
+            {
+              "text": "Alex Johnson",
+              "type": "plan_value"
+            },
+            {
+              "text": "Maria Lopez",
+              "type": "plan_value"
+            },
+            {
+              "text": "Kevin Smith",
+              "type": "plan_value"
+            },
+            {
+              "text": "Summary_Notes.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Customer_Feedback_Analysis.xlsx",
+              "type": "plan_value"
+            },
+            {
+              "text": "Performance_Improvement_Strategy.pdf",
+              "type": "plan_value"
+            },
+            {
+              "text": "Technical_Roadmap_2025.docx",
+              "type": "plan_value"
+            },
+            {
+              "text": "improving customer engagement and marketing campaigns",
+              "type": "plan_value"
+            },
+            {
+              "text": "Alex Johnson",
+              "type": "mismatch"
+            },
+            {
+              "text": "Maria Lopez",
+              "type": "mismatch"
+            },
+            {
+              "text": "Kevin Smith",
+              "type": "mismatch"
+            },
+            {
+              "text": "Summary_Notes.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Customer_Feedback_Analysis.xlsx",
+              "type": "mismatch"
+            },
+            {
+              "text": "Performance_Improvement_Strategy.pdf",
+              "type": "mismatch"
+            },
+            {
+              "text": "Technical_Roadmap_2025.docx",
+              "type": "mismatch"
+            },
+            {
+              "text": "improving customer engagement and marketing campaigns",
+              "type": "mismatch"
+            }
+          ]
+        }
+      ],
+      "structural_score": 0.3,
+      "grounding_score": 0.0,
+      "overall_verdict": "fail_both",
+      "evaluated_at": "2025-11-28T15:33:16.912736"
+    }
+  ]
+}

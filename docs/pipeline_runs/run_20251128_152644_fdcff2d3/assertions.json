@@ -1,0 +1,412 @@
+{
+  "generated_at": "2025-11-28T15:27:28.228021",
+  "framework_version": "2.0",
+  "framework": "Two-Layer (Structural S1-S10 + Grounding G1-G5)",
+  "scenarios_source": "docs\\pipeline_runs\\run_20251128_152644_fdcff2d3\\scenarios.json",
+  "count": 3,
+  "assertions": [
+    {
+      "scenario_id": "scenario_001",
+      "structural": [
+        {
+          "id": "A1",
+          "pattern_id": "S1",
+          "text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "level": "critical",
+          "checks_for": "Presence of meeting date, time, timezone, and attendee list",
+          "layer": "structural"
+        },
+        {
+          "id": "A2",
+          "pattern_id": "S2",
+          "text": "The workback plan includes a timeline that works back from the meeting date",
+          "level": "critical",
+          "checks_for": "Presence of a backward-looking timeline aligned to the meeting",
+          "layer": "structural"
+        },
+        {
+          "id": "A3",
+          "pattern_id": "S3",
+          "text": "The workback plan assigns a specific named owner for each task",
+          "level": "critical",
+          "checks_for": "Presence of explicit ownership for all tasks",
+          "layer": "structural"
+        },
+        {
+          "id": "A4",
+          "pattern_id": "S4",
+          "text": "The workback plan lists specific artifacts or documents to be reviewed or prepared",
+          "level": "expected",
+          "checks_for": "Presence of references to concrete files or documents",
+          "layer": "structural"
+        },
+        {
+          "id": "A5",
+          "pattern_id": "S5",
+          "text": "The workback plan specifies completion dates for each task",
+          "level": "critical",
+          "checks_for": "Presence of due dates for all tasks",
+          "layer": "structural"
+        },
+        {
+          "id": "A6",
+          "pattern_id": "S6",
+          "text": "The workback plan identifies any blockers or dependencies that could impact the timeline",
+          "level": "expected",
+          "checks_for": "Presence of noted blockers or dependencies",
+          "layer": "structural"
+        },
+        {
+          "id": "A7",
+          "pattern_id": "S7",
+          "text": "The workback plan links tasks to specific source materials or inputs",
+          "level": "expected",
+          "checks_for": "Presence of traceability between tasks and source entities",
+          "layer": "structural"
+        },
+        {
+          "id": "A8",
+          "pattern_id": "S8",
+          "text": "The workback plan specifies communication channels for updates and coordination",
+          "level": "expected",
+          "checks_for": "Presence of defined communication methods",
+          "layer": "structural"
+        },
+        {
+          "id": "A9",
+          "pattern_id": "S9",
+          "text": "The workback plan is grounded in the provided context and passes all grounding checks",
+          "level": "aspirational",
+          "checks_for": "Presence of alignment with context ensuring G1-G5 can pass",
+          "layer": "structural"
+        },
+        {
+          "id": "A10",
+          "pattern_id": "S10",
+          "text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "level": "aspirational",
+          "checks_for": "Presence of priority or ranking for tasks",
+          "layer": "structural"
+        }
+      ],
+      "grounding": [
+        {
+          "id": "G1",
+          "pattern_id": "G1",
+          "text": "All people mentioned in the plan exist in source.attendees",
+          "level": "critical",
+          "source_field": "source.attendees",
+          "verification_method": "Compare each attendee name in the plan against the names listed in source.attendees",
+          "layer": "grounding"
+        },
+        {
+          "id": "G2",
+          "pattern_id": "G2",
+          "text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "level": "critical",
+          "source_field": "source.meeting_date, source.meeting_time, source.timezone",
+          "verification_method": "Verify that the plan's meeting date equals source.meeting_date, the time equals source.meeting_time, and the timezone equals source.timezone",
+          "layer": "grounding"
+        },
+        {
+          "id": "G3",
+          "pattern_id": "G3",
+          "text": "All artifacts referenced in the plan exist in source.files",
+          "level": "critical",
+          "source_field": "source.files",
+          "verification_method": "Check that every file name mentioned in the plan appears in the source.files list",
+          "layer": "grounding"
+        },
+        {
+          "id": "G4",
+          "pattern_id": "G4",
+          "text": "The topics or agenda items in the plan align with source.topics",
+          "level": "high",
+          "source_field": "source.topics",
+          "verification_method": "Compare each topic or agenda item in the plan to ensure it matches or is a subset of source.topics",
+          "layer": "grounding"
+        },
+        {
+          "id": "G5",
+          "pattern_id": "G5",
+          "text": "The plan does not introduce any fabricated entities not present in the source data",
+          "level": "critical",
+          "source_field": "ALL source fields",
+          "verification_method": "Check that all people, dates, times, files, and topics mentioned in the plan exist within the corresponding source fields",
+          "layer": "grounding"
+        }
+      ],
+      "generated_at": "2025-11-28T15:26:57.353557",
+      "total_assertions": 15
+    },
+    {
+      "scenario_id": "scenario_002",
+      "structural": [
+        {
+          "id": "A1",
+          "pattern_id": "S1",
+          "text": "The workback plan includes explicit meeting details (date, time, and attendees)",
+          "level": "critical",
+          "checks_for": "Presence of meeting date, time, timezone, and attendee list",
+          "layer": "structural"
+        },
+        {
+          "id": "A2",
+          "pattern_id": "S2",
+          "text": "The workback plan includes a timeline that works back from the meeting date",
+          "level": "critical",
+          "checks_for": "Presence of a structured timeline aligned to the meeting",
+          "layer": "structural"
+        },
+        {
+          "id": "A3",
+          "pattern_id": "S3",
+          "text": "The workback plan assigns ownership of each task to a specifically named individual",
+          "level": "critical",
+          "checks_for": "Presence of named owners for all tasks",
+          "layer": "structural"
+        },
+        {
+          "id": "A4",
+          "pattern_id": "S4",
+          "text": "The workback plan lists specific artifacts or documents required for preparation",
+          "level": "expected",
+          "checks_for": "Presence of references to specific files or documents",
+          "layer": "structural"
+        },
+        {
+          "id": "A5",
+          "pattern_id": "S5",
+          "text": "The workback plan specifies completion dates for each task",
+          "level": "critical",
+          "checks_for": "Presence of due dates for all tasks",
+          "layer": "structural"
+        },
+        {
+          "id": "A6",
+          "pattern_id": "S6",
+          "text": "The workback plan identifies dependencies or potential blockers for tasks",
+          "level": "expected",
+          "checks_for": "Presence of dependency or blocker information",
+          "layer": "structural"
+        },
+        {
+          "id": "A7",
+          "pattern_id": "S7",
+          "text": "The workback plan links tasks to specific source materials or inputs",
+          "level": "expected",
+          "checks_for": "Presence of traceability between tasks and source artifacts",
+          "layer": "structural"
+        },
+        {
+          "id": "A8",
+          "pattern_id": "S8",
+          "text": "The workback plan specifies communication channels for updates and coordination",
+          "level": "expected",
+          "checks_for": "Presence of defined communication methods or tools",
+          "layer": "structural"
+        },
+        {
+          "id": "A9",
+          "pattern_id": "S9",
+          "text": "The workback plan includes grounding elements that align with provided context",
+          "level": "aspirational",
+          "checks_for": "Presence of contextual grounding elements as per G1-G5",
+          "layer": "structural"
+        },
+        {
+          "id": "A10",
+          "pattern_id": "S10",
+          "text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "level": "aspirational",
+          "checks_for": "Presence of priority or ranking for tasks",
+          "layer": "structural"
+        }
+      ],
+      "grounding": [
+        {
+          "id": "G1",
+          "pattern_id": "G1",
+          "text": "All people mentioned in the plan exist in source.attendees",
+          "level": "critical",
+          "source_field": "source.attendees",
+          "verification_method": "Extract all person names from the plan and confirm each one matches an entry in source.attendees",
+          "layer": "grounding"
+        },
+        {
+          "id": "G2",
+          "pattern_id": "G2",
+          "text": "The meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "level": "critical",
+          "source_field": "source.meeting_date, source.meeting_time, source.timezone",
+          "verification_method": "Compare the plan's stated meeting date, time, and timezone to the corresponding values in the source",
+          "layer": "grounding"
+        },
+        {
+          "id": "G3",
+          "pattern_id": "G3",
+          "text": "All artifacts referenced in the plan exist in source.files",
+          "level": "critical",
+          "source_field": "source.files",
+          "verification_method": "Extract all file names mentioned in the plan and verify each one is present in source.files",
+          "layer": "grounding"
+        },
+        {
+          "id": "G4",
+          "pattern_id": "G4",
+          "text": "The topics or meeting purpose in the plan align with source.topics",
+          "level": "critical",
+          "source_field": "source.topics",
+          "verification_method": "Check that the plan's stated topics or purpose match or closely correspond to entries in source.topics",
+          "layer": "grounding"
+        },
+        {
+          "id": "G5",
+          "pattern_id": "G5",
+          "text": "The plan does not introduce any people, files, dates, or topics not present in the source (no hallucinated entities)",
+          "level": "critical",
+          "source_field": "ALL source fields",
+          "verification_method": "Cross-check all entities (names, files, dates, topics) mentioned in the plan against the combined set of source fields to ensure none are fabricated",
+          "layer": "grounding"
+        }
+      ],
+      "generated_at": "2025-11-28T15:27:11.927947",
+      "total_assertions": 15
+    },
+    {
+      "scenario_id": "scenario_003",
+      "structural": [
+        {
+          "id": "A1",
+          "pattern_id": "S1",
+          "text": "The workback plan includes explicit meeting details (date, time, timezone, and attendees)",
+          "level": "critical",
+          "checks_for": "Presence of meeting date, time, timezone, and attendee list",
+          "layer": "structural"
+        },
+        {
+          "id": "A2",
+          "pattern_id": "S2",
+          "text": "The workback plan includes a timeline that works back from the meeting date",
+          "level": "critical",
+          "checks_for": "Presence of a structured timeline aligned to the meeting",
+          "layer": "structural"
+        },
+        {
+          "id": "A3",
+          "pattern_id": "S3",
+          "text": "The workback plan assigns ownership of each task to specifically named individuals",
+          "level": "critical",
+          "checks_for": "Presence of named owners for all tasks",
+          "layer": "structural"
+        },
+        {
+          "id": "A4",
+          "pattern_id": "S4",
+          "text": "The workback plan lists specific artifacts or documents required for preparation",
+          "level": "expected",
+          "checks_for": "Presence of references to specific files or documents",
+          "layer": "structural"
+        },
+        {
+          "id": "A5",
+          "pattern_id": "S5",
+          "text": "The workback plan specifies due dates for each task",
+          "level": "critical",
+          "checks_for": "Presence of completion dates for tasks",
+          "layer": "structural"
+        },
+        {
+          "id": "A6",
+          "pattern_id": "S6",
+          "text": "The workback plan identifies any dependencies or potential blockers",
+          "level": "expected",
+          "checks_for": "Presence of blockers or dependency information",
+          "layer": "structural"
+        },
+        {
+          "id": "A7",
+          "pattern_id": "S7",
+          "text": "The workback plan links tasks to their relevant source materials or context",
+          "level": "expected",
+          "checks_for": "Presence of traceability between tasks and source entities",
+          "layer": "structural"
+        },
+        {
+          "id": "A8",
+          "pattern_id": "S8",
+          "text": "The workback plan specifies communication channels for updates and coordination",
+          "level": "expected",
+          "checks_for": "Presence of communication methods for status updates",
+          "layer": "structural"
+        },
+        {
+          "id": "A9",
+          "pattern_id": "S9",
+          "text": "The workback plan demonstrates grounding by including all required contextual elements",
+          "level": "aspirational",
+          "checks_for": "Presence of meeting details, attendees, artifacts, and context",
+          "layer": "structural"
+        },
+        {
+          "id": "A10",
+          "pattern_id": "S10",
+          "text": "The workback plan assigns priority levels or importance indicators to tasks",
+          "level": "aspirational",
+          "checks_for": "Presence of priority or importance markers for tasks",
+          "layer": "structural"
+        }
+      ],
+      "grounding": [
+        {
+          "id": "G1",
+          "pattern_id": "G1",
+          "text": "All people mentioned in the plan exist in source.attendees",
+          "level": "critical",
+          "source_field": "source.attendees",
+          "verification_method": "Extract all person names from the plan and confirm each matches an entry in source.attendees",
+          "layer": "grounding"
+        },
+        {
+          "id": "G2",
+          "pattern_id": "G2",
+          "text": "Meeting date, time, and timezone in the plan match source.meeting_date, source.meeting_time, and source.timezone",
+          "level": "critical",
+          "source_field": "source.meeting_date, source.meeting_time, source.timezone",
+          "verification_method": "Compare the plan's stated meeting date, time, and timezone against the corresponding source fields",
+          "layer": "grounding"
+        },
+        {
+          "id": "G3",
+          "pattern_id": "G3",
+          "text": "All artifacts referenced in the plan exist in source.files",
+          "level": "critical",
+          "source_field": "source.files",
+          "verification_method": "Extract all file names from the plan and verify each is present in source.files",
+          "layer": "grounding"
+        },
+        {
+          "id": "G4",
+          "pattern_id": "G4",
+          "text": "The topics or agenda items in the plan align with source.topics",
+          "level": "high",
+          "source_field": "source.topics",
+          "verification_method": "Compare each topic or agenda item in the plan to ensure it matches or is a subset of source.topics",
+          "layer": "grounding"
+        },
+        {
+          "id": "G5",
+          "pattern_id": "G5",
+          "text": "The plan contains no fabricated entities such as extra attendees, files, dates, or topics not present in any source field",
+          "level": "critical",
+          "source_field": "ALL source fields",
+          "verification_method": "Cross-check all entities mentioned in the plan (people, files, dates, topics) against the combined set of all source fields to ensure no additional or unknown entities exist",
+          "layer": "grounding"
+        }
+      ],
+      "generated_at": "2025-11-28T15:27:26.227172",
+      "total_assertions": 15
+    }
+  ],
+  "validation": null
+}
