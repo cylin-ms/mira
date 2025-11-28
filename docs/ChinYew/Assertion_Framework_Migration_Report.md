@@ -17,7 +17,8 @@
 7. [Insights & Analysis](#6-insights--analysis)
 8. [Recommendations](#7-recommendations)
 9. [Data Files Reference](#8-data-files-reference)
-10. [Conclusion](#9-conclusion)
+10. [Scripts Reference](#9-scripts-reference)
+11. [Conclusion](#10-conclusion)
 
 ---
 
@@ -433,7 +434,53 @@ assertions_converted_full.jsonl (Output)
 
 ---
 
-## 9. Conclusion
+## 9. Scripts Reference
+
+The conversion pipeline uses the following Python scripts:
+
+### 9.1 Primary Conversion Script
+
+| Script | Description | GitHub |
+|--------|-------------|--------|
+| [`convert_kening_assertions.py`](https://github.com/cylin-ms/mira/blob/master/convert_kening_assertions.py) | Main conversion script. Maps Kening's 232 dimensions to WBP format using GPT-5 JJ. Produces enhanced and converted JSONL files. | [View](https://github.com/cylin-ms/mira/blob/master/convert_kening_assertions.py) |
+
+**Usage:**
+```bash
+python convert_kening_assertions.py
+```
+
+### 9.2 Analysis & Evaluation Scripts
+
+| Script | Description | GitHub |
+|--------|-------------|--------|
+| [`analyze_assertions_gpt5.py`](https://github.com/cylin-ms/mira/blob/master/analyze_assertions_gpt5.py) | GPT-5 assertion quality analysis & pattern clustering | [View](https://github.com/cylin-ms/mira/blob/master/analyze_assertions_gpt5.py) |
+| [`evaluate_kening_assertions.py`](https://github.com/cylin-ms/mira/blob/master/evaluate_kening_assertions.py) | Evaluates assertions against selected WBP dimensions | [View](https://github.com/cylin-ms/mira/blob/master/evaluate_kening_assertions.py) |
+| [`evaluate_kening_gpt5.py`](https://github.com/cylin-ms/mira/blob/master/evaluate_kening_gpt5.py) | Evaluates assertions against Chin-Yew's rubric | [View](https://github.com/cylin-ms/mira/blob/master/evaluate_kening_gpt5.py) |
+| [`evaluate_assertions_gpt5.py`](https://github.com/cylin-ms/mira/blob/master/evaluate_assertions_gpt5.py) | GPT-5 assertion evaluation with span highlighting | [View](https://github.com/cylin-ms/mira/blob/master/evaluate_assertions_gpt5.py) |
+| [`score_assertions.py`](https://github.com/cylin-ms/mira/blob/master/score_assertions.py) | Score assertions against responses using GPT-5 JJ | [View](https://github.com/cylin-ms/mira/blob/master/score_assertions.py) |
+
+### 9.3 Visualization Scripts
+
+| Script | Description | GitHub |
+|--------|-------------|--------|
+| [`mira.py`](https://github.com/cylin-ms/mira/blob/master/mira.py) | Main Streamlit visualization UI | [View](https://github.com/cylin-ms/mira/blob/master/mira.py) |
+| [`view_assertions.py`](https://github.com/cylin-ms/mira/blob/master/view_assertions.py) | Fluent Design assertions viewer | [View](https://github.com/cylin-ms/mira/blob/master/view_assertions.py) |
+| [`view_analysis.py`](https://github.com/cylin-ms/mira/blob/master/view_analysis.py) | Visualize GPT-5 analysis results | [View](https://github.com/cylin-ms/mira/blob/master/view_analysis.py) |
+| [`show_assertion_html.py`](https://github.com/cylin-ms/mira/blob/master/show_assertion_html.py) | Generate HTML showing assertions matched to segments | [View](https://github.com/cylin-ms/mira/blob/master/show_assertion_html.py) |
+| [`show_assertion_details.py`](https://github.com/cylin-ms/mira/blob/master/show_assertion_details.py) | Generate detailed HTML for assertion matches | [View](https://github.com/cylin-ms/mira/blob/master/show_assertion_details.py) |
+
+### 9.4 Utility Scripts
+
+| Script | Description | GitHub |
+|--------|-------------|--------|
+| [`compute_assertion_matches.py`](https://github.com/cylin-ms/mira/blob/master/compute_assertion_matches.py) | Offline script to compute assertion matches using LLM | [View](https://github.com/cylin-ms/mira/blob/master/compute_assertion_matches.py) |
+| [`check_sourceid_recovery.py`](https://github.com/cylin-ms/mira/blob/master/check_sourceid_recovery.py) | Verify SourceID recovery against entity IDs | [View](https://github.com/cylin-ms/mira/blob/master/check_sourceid_recovery.py) |
+| [`generate_plan_examples_gpt5.py`](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples_gpt5.py) | Generate plan quality examples using GPT-5 JJ | [View](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples_gpt5.py) |
+| [`generate_plan_examples.py`](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples.py) | Generate example workback plans at three quality levels | [View](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples.py) |
+
+---
+
+## 10. Conclusion
 
 The conversion from Kening's 232-dimension assertions to Chin-Yew's WBP framework represents a significant improvement:
 
