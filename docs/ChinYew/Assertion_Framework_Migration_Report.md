@@ -295,7 +295,7 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 The conversion process produces three key JSONL files that document the migration pipeline:
 
-### 8.1 Source: `Assertions_genv2_for_LOD1126part1.jsonl`
+### 8.1 Source: [`Assertions_genv2_for_LOD1126part1.jsonl`](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl)
 
 **Kening's original assertions** - the source data for this conversion.
 
@@ -322,7 +322,7 @@ The conversion process produces three key JSONL files that document the migratio
 }
 ```
 
-### 8.2 Intermediate: `assertions_kening_enhanced.jsonl`
+### 8.2 Intermediate: [`assertions_kening_enhanced.jsonl`](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/assertions_kening_enhanced.jsonl)
 
 **Enhanced assertions** with WBP dimension mapping metadata added to each assertion.
 
@@ -353,7 +353,7 @@ The conversion process produces three key JSONL files that document the migratio
 }
 ```
 
-### 8.3 Output: `assertions_converted_full.jsonl`
+### 8.3 Output: [`assertions_converted_full.jsonl`](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/assertions_converted_full.jsonl)
 
 **Final converted assertions** in Chin-Yew's WBP format, ready for evaluation.
 
