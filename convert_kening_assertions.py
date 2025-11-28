@@ -47,6 +47,7 @@ from pipeline.config import (
 # =============================================================================
 
 INPUT_FILE = "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl"
+WEIWEI_FILE = "docs/Weiwei/UseUserEntity_Part1.WithUserUrl.jsonl"  # For USER info
 
 # Output 1: Kening's schema with minimal enhancements (compatible format)
 OUTPUT_KENING_ENHANCED = "docs/ChinYew/assertions_kening_enhanced.jsonl"
@@ -1001,14 +1002,40 @@ def main():
     print()
     print("💾 Saving Output 2: Full conversion format...")
     
+    # Build utterance -> USER map from Weiwei file
+    utterance_to_user = {}
+    if os.path.exists(WEIWEI_FILE):
+        with open(WEIWEI_FILE, 'r', encoding='utf-8') as wf:
+            for line in wf:
+                item = json.loads(line)
+                utt = item.get('UTTERANCE', {}).get('text', '')
+                user = item.get('USER', {})
+                if utt and utt not in utterance_to_user:
+                    utterance_to_user[utt] = user
+        print(f"   Loaded {len(utterance_to_user)} user mappings from Weiwei file")
+    
     with open(OUTPUT_CONVERTED_FULL, 'w', encoding='utf-8') as f:
         for result in all_results:
+            # Get USER from Weiwei file mapping
+            user_data = utterance_to_user.get(result["utterance"], {})
+            
             # Full conversion format with all details
             output_item = {
+                "user": user_data,  # USER info from Weiwei file
                 "utterance": result["utterance"],
+                "response": result.get("response", ""),  # Include response from source
                 "assertions": []
             }
-            for conv in result["conversions"]:
+            
+            # Get original assertions for preserving sourceID
+            original_assertions = result.get("original_assertions", [])
+            
+            for idx, conv in enumerate(result["conversions"]):
+                # Get original sourceID from original_assertions (not from conversion)
+                orig_sourceID = ""
+                if idx < len(original_assertions):
+                    orig_sourceID = original_assertions[idx].get("anchors", {}).get("sourceID", "")
+                
                 output_item["assertions"].append({
                     "text": conv.get("converted_text", ""),
                     "level": conv.get("level", "expected"),
@@ -1016,7 +1043,7 @@ def main():
                     "dimension_name": conv.get("dimension_name", ""),
                     "layer": conv.get("layer", ""),
                     "weight": conv.get("weight", 1),
-                    "sourceID": conv.get("sourceID"),
+                    "sourceID": orig_sourceID,  # Use original sourceID, not converted template
                     "original_text": conv.get("original_text", ""),
                     "rationale": conv.get("rationale", {}),
                     "quality_assessment": conv.get("quality_assessment", {}),

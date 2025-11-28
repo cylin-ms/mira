@@ -388,7 +388,14 @@ The conversion process produces three key JSONL files that document the migratio
 **Schema:**
 ```json
 {
+  "user": {
+    "id": "lod_username",
+    "displayName": "Full Name",
+    "mailNickName": "lod_username",
+    "url": "https://ms.portal.azure.com/..."
+  },
   "utterance": "meeting transcript text",
+  "response": "Here's your workback plan...",
   "assertions": [
     {
       "text": "The plan must include explicit [person_name] assignment...",
@@ -428,7 +435,8 @@ assertions_converted_full.jsonl (Output)
 | `assertions_converted_full.jsonl` | ⚠️ **No** | New WBP schema (removes `anchors`, adds WBP fields) |
 
 **Key Schema Differences in Output:**
-- **Preserved:** `text`, `level`, `sourceID` (extracted from `anchors.sourceID`)
+- **Preserved:** `utterance`, `response`, `text`, `level`, `sourceID` (extracted from `anchors.sourceID`)
+- **Added from Weiwei:** `user` object with `id`, `displayName`, `mailNickName`, `url` (from Weiwei's entity file)
 - **Removed:** `anchors.Dim` (replaced by structured `dimension` fields)
 - **Added:** `dimension`, `dimension_name`, `layer`, `weight`, `original_text`, `rationale`, `quality_assessment`, `conversion_method`
 

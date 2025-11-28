@@ -443,6 +443,52 @@ For each assertion, the following data is captured:
 
 **Note:** The app supports both new format (`justification`/`sourceID`) and legacy format (`reasoning`/`source`).
 
+### WBP Converted Assertion Format (assertions_converted_full.jsonl)
+
+This format is used by **Mira 2.0** for viewing WBP-framework assertions with dimension/layer/weight classification:
+
+```json
+{
+  "user": {
+    "id": "lod_username",
+    "displayName": "Full Name",
+    "mailNickName": "lod_username",
+    "url": "https://ms.portal.azure.com/..."
+  },
+  "utterance": "Help me make a workback plan for...",
+  "response": "Here's your workback plan...",
+  "assertions": [
+    {
+      "text": "The response should state the meeting [SUBJECT], [DATE/TIME]...",
+      "level": "critical|expected|aspirational",
+      "dimension": "S1",
+      "dimension_name": "Meeting Details",
+      "layer": "structural|grounding",
+      "weight": 3,
+      "sourceID": "entity-uuid-reference",
+      "original_text": "Original Kening assertion text...",
+      "rationale": {
+        "mapping_reason": "Why this maps to S1",
+        "quality_notes": "Assessment notes"
+      },
+      "quality_assessment": {
+        "clarity": "high",
+        "specificity": "high"
+      },
+      "conversion_method": "gpt5|heuristic"
+    }
+  ]
+}
+```
+
+**Key fields:**
+- `dimension`: WBP dimension code (S1-S19, G1-G5)
+- `dimension_name`: Human-readable dimension name
+- `layer`: "structural" or "grounding"
+- `weight`: Importance weight (1-3)
+- `original_text`: Kening's original assertion text
+- `conversion_method`: How the assertion was converted (gpt5 or heuristic)
+
 ### Context File Format (LOD_1121.WithUserUrl.jsonl)
 
 ```json
