@@ -97,11 +97,11 @@ The 74 unmapped assertions were converted to dimensions **outside** Chin-Yew's 1
 
 | Dimension | Name | Count | Reason Not Selected |
 |-----------|------|-------|---------------------|
-| S11 | Risk Mitigation Strategy | 42 | Not in Chin-Yew's 14 selected dimensions |
-| S5 | Task Dates | 16 | Overlaps with S2 (Timeline Alignment) |
-| S18 | (Unknown) | 10 | Not in selected dimensions |
-| G1 | Attendee Grounding | 3 | Overlaps with G5 (Hallucination Check) |
-| G4 | (Unknown) | 3 | Not in selected dimensions |
+| S11 | Risk Mitigation Strategy | 42 | Not in Phase 1 dimensions |
+| S5 | Task Dates | 16 | Phase 2 - overlaps with S2 (Timeline Alignment) |
+| S18 | Post-Event Actions | 10 | Not in Phase 1 dimensions |
+| G1 | Attendee Grounding | 3 | Phase 1 - but GPT-5 mapped to G5 overlap |
+| G4 | Topic Grounding | 3 | Not in Phase 1 dimensions |
 
 **Why These Cannot Be Mapped to Selected Dimensions:**
 
@@ -118,7 +118,17 @@ The 74 unmapped assertions were converted to dimensions **outside** Chin-Yew's 1
 3. **G1 (Attendee Grounding)** - 3 assertions
    - Original assertions about verifying attendees exist in source
    - Example: *"All people mentioned must exist in {source.ATTENDEES}..."*
-   - **Why unmapped:** G1 is a grounding dimension focused specifically on attendees. It overlaps with G5 (Hallucination Check), which is more general. These could be merged into G5.
+   - **Why unmapped:** G1 is actually a Phase 1 dimension, but GPT-5 mapped some assertions here instead of G5 due to semantic overlap.
+
+4. **S18 (Post-Event Actions)** - 10 assertions
+   - Original assertions about wrap-up tasks, retrospectives, and follow-up reporting
+   - Example: *"The response should include post-meeting action items and follow-up steps..."*
+   - **Why Phase 2:** S18 covers post-event planning which is valuable for comprehensive WBPs but not critical for core meeting preparation.
+
+5. **G4 (Topic Grounding)** - 3 assertions
+   - Original assertions about verifying agenda topics match source
+   - Example: *"Agenda topics should align with source priorities and context..."*
+   - **Why Phase 2:** G4 ensures topic accuracy. While important, it overlaps with the general hallucination check (G5).
 
 **Recommendation:** Consider either:
 1. Adding S11 (Risk Mitigation) to the selected dimensions if risk assessment is important for WBP evaluation
