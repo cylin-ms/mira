@@ -3,7 +3,8 @@
 A self-contained Python package for WBP (Workback Plan) assertion analysis using GPT-5.
 
 **Authors:** Chin-Yew Lin, Haidong Zhang  
-**Version:** 2.0 (November 2025)
+**Version:** 2.1 (November 2025)  
+**Prompts:** v3.0 (with atomic decomposition support)
 
 > **⚠️ Windows Only**: This package requires Windows due to the MSAL broker authentication for GPT-5 API access. Linux and macOS are not supported.
 
@@ -178,6 +179,38 @@ When evaluating an S assertion like "Task 'finalize slides' has due date March 1
 - **G6** grounds the task (is "finalize slides" in the scenario's action items?)
 
 The standalone G assertion definitions serve as a **reference library** that S assertions link to. This is why Step 4 uses GPT-5 to intelligently select relevant G dimensions based on each S assertion's content.
+
+### Key Concept: S+G Dimensions Are ATOMIC
+
+**Each S or G dimension tests exactly ONE thing.** However, free-form assertions (like those written by humans) can combine multiple requirements in one sentence.
+
+The conversion task is to **DECOMPOSE** one free-form assertion into **multiple atomic S+G units**:
+
+```
+Free-form assertion:
+"The response should state that the meeting '1:1 Action Items Review' 
+ is scheduled for July 26, 2025 at 14:00 PST."
+                    |
+                    v DECOMPOSE
++---------------------------------------------------------------+
+| S1: Title - "State the meeting title"                         |
+|   +-- G5: slot_value = "1:1 Action Items Review"              |
++---------------------------------------------------------------+
+| S5: Task Dates - "State the meeting date/time"                |
+|   +-- G3: slot_value = "July 26, 2025 at 14:00 PST"           |
++---------------------------------------------------------------+
+```
+
+This decomposition is handled by the **decomposition prompt** (`prompts/decomposition_prompt.json`), which:
+1. Identifies ALL S dimensions present in the assertion
+2. Extracts slot values for linked G dimensions
+3. Returns an array of atomic S+G units
+
+**Why atomic matters:**
+- Single-responsibility: Each assertion tests one thing
+- Precise scoring: Pass/fail at granular level
+- Clear traceability: S→G linkage is explicit
+- Composable: Complex assertions = multiple atomic units
 
 The key insight is that **structural assertions imply grounding requirements**:
 
@@ -599,7 +632,11 @@ assertion_analyzer/
 ├── analyzer.py          # Core analysis functions
 ├── config.py            # API configuration
 ├── dimensions.py        # Dimension definitions & S→G mapping
-├── prompts.json         # Customizable GPT-5 prompts
+├── prompts.json         # Legacy GPT-5 prompts (v2.1)
+├── prompts/             # Optimized prompt files (v3.0)
+│   ├── classification_prompt.json      # Single assertion → dimension(s)
+│   ├── ie_slot_extraction_prompt.json  # Extract slot values for G dims
+│   └── decomposition_prompt.json       # Free-form → atomic S+G units
 ├── requirements.txt     # Python dependencies
 ├── setup_env.py         # Environment setup script
 ├── run.ps1              # Windows run script
@@ -611,6 +648,23 @@ assertion_analyzer/
 ├── .venv/               # Virtual environment (created on first run)
 └── README.md            # This file
 ```
+
+### Prompt Files (v3.0)
+
+The `prompts/` directory contains optimized JSON prompt files designed through GPT-5 iteration:
+
+| File | Purpose | Version |
+|------|---------|---------|
+| `classification_prompt.json` | Classify assertions into S/G dimensions with all definitions inline | 2.0 |
+| `ie_slot_extraction_prompt.json` | Extract slot values (names, dates, files) for G dimensions | 2.0 |
+| `decomposition_prompt.json` | Decompose free-form assertions into atomic S+G units | 3.0 |
+
+Each prompt file contains:
+- `system_prompt`: Role and task description
+- `user_prompt_template`: Template with `{assertion_text}` placeholder
+- `output_schema`: Expected JSON structure
+- `temperature`: Recommended temperature setting
+- `notes`: Design decisions and usage tips
 
 ## Dependencies
 

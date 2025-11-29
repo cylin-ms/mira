@@ -1,0 +1,82 @@
+{
+  "test_name": "Compound Assertion Decomposition",
+  "prompt_version": "3.0",
+  "input_count": 3,
+  "total_s_units": 4,
+  "total_g_slots": 6,
+  "results": [
+    {
+      "original_assertion": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
+      "atomic_units": [
+        {
+          "s_dimension": "S1",
+          "s_name": "Title",
+          "s_assertion": "State the meeting title",
+          "linked_g": [
+            {
+              "g_dimension": "G5",
+              "slot_value": "1:1 Action Items Review"
+            }
+          ]
+        },
+        {
+          "s_dimension": "S5",
+          "s_name": "Task Dates",
+          "s_assertion": "State the meeting date/time",
+          "linked_g": [
+            {
+              "g_dimension": "G3",
+              "slot_value": "July 26, 2025 at 14:00 PST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "original_assertion": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
+      "atomic_units": [
+        {
+          "s_dimension": "S3",
+          "s_name": "Ownership Assignment",
+          "s_assertion": "Assign task owner",
+          "linked_g": [
+            {
+              "g_dimension": "G2",
+              "slot_value": "Tisa Odonoghue"
+            },
+            {
+              "g_dimension": "G6",
+              "slot_value": [
+                "confirming agenda",
+                "distributing pre-reads"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "original_assertion": "The response should include a task to share pre-reads referencing 'Config_Change_Log.xlsx' and 'Schema_Validation_Pipeline_Details.docx' by July 26, 00:15 PST.",
+      "atomic_units": [
+        {
+          "s_dimension": "S19",
+          "s_name": "Communication Plan",
+          "s_assertion": "Include a task to share pre-read materials",
+          "linked_g": [
+            {
+              "g_dimension": "G4",
+              "slot_value": [
+                "Config_Change_Log.xlsx",
+                "Schema_Validation_Pipeline_Details.docx"
+              ]
+            },
+            {
+              "g_dimension": "G3",
+              "slot_value": "July 26, 00:15 PST"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

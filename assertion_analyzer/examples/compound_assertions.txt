@@ -1,0 +1,12 @@
+# Compound Assertions for Atomic Decomposition Testing
+# Each assertion combines multiple structural requirements
+# Expected: decomposition into multiple atomic S+G units
+
+# Test 1: Title + Date/Time (should decompose to S1 + S5)
+The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.
+
+# Test 2: Ownership + Action Items (should decompose to S3 with multiple G)
+The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.
+
+# Test 3: Communication + Artifacts + Date (should decompose to S19 + S5)
+The response should include a task to share pre-reads referencing 'Config_Change_Log.xlsx' and 'Schema_Validation_Pipeline_Details.docx' by July 26, 00:15 PST.

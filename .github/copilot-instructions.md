@@ -170,6 +170,9 @@ result = response.json()["choices"][0]["message"]["content"]
 - **G9 Planner-Generated Consistency**: Added G9 to validate planner-created content (assumptions, blockers, mitigations, open questions). Enables GOOD PLANNING while preventing HALLUCINATION (contradicting scenario facts).
 - **Dimension Status Classifications**: REQUIRED, ASPIRATIONAL, CONDITIONAL, N/A (operational), MERGED. Use these to determine penalty/scoring.
 - **Slot Type Grounding**: GROUNDED (must match scenario), DERIVED (inferable), CONDITIONAL (if provided), PLANNER-GEN (G9 checks consistency), N/A (structural, no grounding).
+- **S+G Dimensions are ATOMIC**: Each S or G dimension tests exactly ONE thing. Free-form assertions (like Kening's) can combine multiple requirements in one sentence. The conversion task is to DECOMPOSE one free-form assertion into multiple atomic S+G units. Example: "meeting '1:1 Review' scheduled July 26" → S1 (Title) + G5 (slot: '1:1 Review') AND S5 (Task Dates) + G3 (slot: 'July 26').
+- **Multi-label Classification**: Use `decomposition_prompt.json` to break down free-form assertions. One assertion can trigger multiple S dimensions, each with linked G dimensions and extracted slot values.
+- **Optimized Prompts via GPT-5**: When designing prompts for classification/IE tasks, run GPT-5 3 times and synthesize. Store optimized prompts in `assertion_analyzer/prompts/` as JSON files with version, system_prompt, user_prompt_template, output_schema, temperature, and notes.
 
 ## 5. Scratchpad
 
@@ -215,5 +218,15 @@ result = response.json()["choices"][0]["message"]["content"]
 [X] S8, S9, S16, S18, S19 marked ASPIRATIONAL
 [X] Created WBP_Framework_Design_Summary.md with 7 design principles
 
+#### Completed (2025-11-30 continued):
+[X] 13. Identified key insight: S+G dimensions are ATOMIC, free-form assertions need DECOMPOSITION
+[X] 14. Asked GPT-5 3x to optimize decomposition prompt (sessions 018-020)
+[X] 15. Created `assertion_analyzer/prompts/decomposition_prompt.json` v3.0
+[X] 16. Tested decomposition on 4 assertions - all correctly decomposed into atomic S+G units
+[X] 17. Created `assertion_analyzer/prompts/classification_prompt.json` v2.0 (optimized)
+[X] 18. Created `assertion_analyzer/prompts/ie_slot_extraction_prompt.json` v2.0 (optimized)
+
 #### Plan:
-[ ] 1. [Awaiting next task from user]
+[ ] 1. Update convert_kening_assertions_v2.py to use decomposition prompt
+[ ] 2. Re-run conversion on full dataset with atomic decomposition
+[ ] 3. Validate output format and quality

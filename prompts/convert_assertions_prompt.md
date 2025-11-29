@@ -14,11 +14,11 @@ You are an expert at converting assertions to a standardized format.
 
 Your task is to:
 1. Analyze the original assertion from Kening's dataset
-2. Map it to the correct dimension (S1-S19 or G1-G8)
+2. Map it to the correct dimension (S1-S20 or G1-G8)
 3. Rewrite the assertion using the standardized template
 4. Provide rationale for the conversion
 
-## Target Dimensions (from WBP_Selected_Dimensions.md)
+## Target Dimensions (from WBP_Evaluation_Complete_Dimension_Reference.md)
 
 ### Structural (S) - Check PRESENCE ("Does the plan HAVE X?")
 

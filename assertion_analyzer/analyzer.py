@@ -672,6 +672,80 @@ Return ONLY valid JSON, no other text.
     return result
 
 
+def classify_assertion(assertion_text: str, verbose: bool = False) -> dict:
+    """
+    Lightweight classification of an assertion - classification only, no WBP generation.
+    
+    This is faster than analyze_assertion() as it only classifies the assertion
+    into a dimension without generating scenarios, WBPs, or verification.
+    
+    Args:
+        assertion_text: The assertion to classify
+        verbose: Whether to print progress messages
+        
+    Returns:
+        dict with:
+        - dimension: The classified dimension ID (e.g., "S5", "G3", or "UNKNOWN")
+        - dimension_name: Full name of the dimension
+        - layer: "structural" or "grounding"  
+        - level: "critical", "expected", or "aspirational"
+        - rationale: Why this dimension was chosen
+        - linked_g_dims: List of grounding dimensions that apply (for S dimensions)
+    """
+    # Load optimized prompt from file
+    prompt_file = os.path.join(os.path.dirname(__file__), "prompts", "classification_prompt.json")
+    try:
+        with open(prompt_file, 'r', encoding='utf-8') as f:
+            prompt_config = json.load(f)
+        prompt_template = prompt_config.get("user_prompt_template", "")
+        system_prompt = prompt_config.get("system_prompt", SYSTEM_PROMPT)
+        temperature = prompt_config.get("temperature", 0.2)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        if verbose:
+            print(f"Warning: Could not load classification_prompt.json: {e}, using fallback")
+        # Fallback prompt
+        prompt_template = '''Classify this assertion into WBP framework dimension (S1-S20 or G1-G9).
+Assertion: "{assertion_text}"
+Return JSON: {{"dimension_id": "S5", "dimension_name": "...", "layer": "structural", "level": "critical", "rationale": "..."}}'''
+        system_prompt = SYSTEM_PROMPT
+        temperature = 0.2
+    
+    prompt = prompt_template.replace("{assertion_text}", assertion_text)
+
+    if verbose:
+        print(f"Classifying: {assertion_text[:50]}...")
+    
+    result_text = call_gpt5_api(prompt, system_prompt=system_prompt, temperature=temperature)
+    
+    try:
+        result = extract_json_from_response(result_text)
+    except:
+        json_match = re.search(r'\{[^{}]*\}', result_text, re.DOTALL)
+        if json_match:
+            try:
+                result = json.loads(json_match.group())
+            except:
+                result = {"dimension_id": "UNKNOWN", "error": "Failed to parse response"}
+        else:
+            result = {"dimension_id": "UNKNOWN", "error": "Failed to parse response"}
+    
+    # Normalize and add linked_g_dims
+    dimension_id = result.get("dimension_id", "UNKNOWN")
+    
+    # Validate dimension exists
+    if dimension_id not in DIMENSION_NAMES and dimension_id != "UNKNOWN":
+        dimension_id = "UNKNOWN"
+    
+    return {
+        "dimension": dimension_id,
+        "dimension_name": result.get("dimension_name", DIMENSION_NAMES.get(dimension_id, "Unknown")),
+        "layer": result.get("layer", "unknown"),
+        "level": result.get("level", "expected"),
+        "rationale": result.get("rationale", ""),
+        "linked_g_dims": S_TO_G_MAP.get(dimension_id, []) if dimension_id.startswith("S") else []
+    }
+
+
 def generate_sg_assertions(
     gpt5_result: dict, 
     assertion_text: str, 

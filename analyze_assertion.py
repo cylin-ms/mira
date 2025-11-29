@@ -21,6 +21,26 @@ sys.path.insert(0, '.')
 from pipeline.config import call_gpt5_api, extract_json_from_response
 
 # =============================================================================
+# LOAD PROMPTS FROM EXTERNAL FILE (for easy fine-tuning)
+# =============================================================================
+PROMPTS_FILE = os.path.join(os.path.dirname(__file__), "prompts.json")
+
+def load_prompts():
+    """Load prompts from prompts.json file."""
+    try:
+        with open(PROMPTS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"⚠️ Warning: {PROMPTS_FILE} not found, using built-in prompts")
+        return {}
+    except json.JSONDecodeError as e:
+        print(f"⚠️ Warning: Error parsing {PROMPTS_FILE}: {e}")
+        return {}
+
+# Load prompts at module import time
+PROMPTS = load_prompts()
+
+# =============================================================================
 # S → G MAPPING (which grounding dimensions apply to each structural dimension)
 # =============================================================================
 S_TO_G_MAP = {
@@ -263,13 +283,19 @@ DIMENSION_SPEC = {
 }
 
 # =============================================================================
-# SYSTEM PROMPT
+# PROMPTS - Load from prompts.json or use fallback
 # =============================================================================
-SYSTEM_PROMPT = '''You are an expert at classifying assertions according to the Mira 2.0 WBP (Workback Plan) framework.
 
-The framework has 27 dimensions:
+def get_prompt(key: str, fallback: str = "") -> str:
+    """Get a prompt from the loaded PROMPTS dict with fallback."""
+    return PROMPTS.get(key, fallback)
 
-STRUCTURAL (S1-S19) - Verify plan structure and completeness:
+# System prompt for assertion classification
+SYSTEM_PROMPT = get_prompt("system_prompt", '''You are an expert at classifying assertions according to the Mira 2.0 WBP (Workback Plan) framework.
+
+The framework has 28 dimensions:
+
+STRUCTURAL (S1-S20) - Verify plan structure and completeness:
 - S1: Meeting Details (forward-looking, actionable)
 - S2: Timeline Alignment (sequencing, buffer time, contingency)
 - S3: Ownership Assignment
@@ -304,13 +330,13 @@ Classification guidelines:
 - Choose the MOST SPECIFIC dimension that fits
 - Use "critical" for must-have requirements, "expected" for should-have, "aspirational" for nice-to-have
 - Structural (S) dimensions verify plan structure; Grounding (G) dimensions verify factual accuracy
-'''
+''')
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SCENARIO GENERATION - Create context where the assertion makes sense
+# SCENARIO GENERATION - Load from prompts.json
 # ═══════════════════════════════════════════════════════════════════════════════
 
-SCENARIO_GENERATION_PROMPT = '''You are generating a realistic meeting SCENARIO that provides context for an assertion to be meaningful.
+SCENARIO_GENERATION_PROMPT = get_prompt("scenario_generation_prompt", '''You are generating a realistic meeting SCENARIO that provides context for an assertion to be meaningful.
 
 ## ASSERTION TO CONTEXTUALIZE
 "{assertion_text}"
@@ -342,17 +368,14 @@ Return JSON with:
 }}
 
 IMPORTANT: The scenario must provide ground truth that makes the assertion verifiable.
-For example, if the assertion mentions "draft slides before review slides", the discussion_points
-should include something like "Team agreed to draft slides first, then schedule review".
-
 Return ONLY valid JSON.
-'''
+''')
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# WBP GENERATION - Generate WBP conditioned on scenario + assertions
+# WBP GENERATION - Load from prompts.json
 # ═══════════════════════════════════════════════════════════════════════════════
 
-WBP_GENERATION_PROMPT = '''You are generating a Workback Plan (WBP) based on a meeting scenario.
+WBP_GENERATION_PROMPT = get_prompt("wbp_generation_prompt", '''You are generating a Workback Plan (WBP) based on a meeting scenario.
 
 ## MEETING SCENARIO (Ground Truth)
 ```json
@@ -383,15 +406,22 @@ Generate a Workback Plan that:
 - ONLY reference artifacts from: {artifacts}
 - Action items must trace to discussion_points: {discussion_points}
 
+## WBP FORMAT REQUIREMENTS
+The WBP MUST include a Timeline Overview table with columns: T-n, Date, Task, Owner, Deliverable.
+
 Return JSON with:
 {{
-  "workback_plan": "The complete workback plan in markdown format"
+  "workback_plan": "The complete workback plan in markdown format with the timeline table"
 }}
 
 Return ONLY valid JSON.
-'''
+''')
 
-WBP_VERIFICATION_PROMPT = '''You are verifying a Workback Plan against a scenario and assertions.
+# ═══════════════════════════════════════════════════════════════════════════════
+# WBP VERIFICATION - Load from prompts.json
+# ═══════════════════════════════════════════════════════════════════════════════
+
+WBP_VERIFICATION_PROMPT = get_prompt("wbp_verification_prompt", '''You are verifying a Workback Plan against a scenario and assertions.
 
 ## MEETING SCENARIO (Ground Truth)
 ```json
@@ -409,13 +439,6 @@ WBP_VERIFICATION_PROMPT = '''You are verifying a Workback Plan against a scenari
 ## TASK
 For EACH assertion, verify if the WBP passes using the scenario as ground truth.
 
-For GROUNDING assertions, check:
-- G2 (Attendee): Are all names in the WBP from the scenario's attendees list?
-- G3 (Date/Time): Are all dates consistent with the scenario's meeting date?
-- G4 (Artifact): Are all referenced files from the scenario's artifacts list?
-- G5 (Topic): Are topics aligned with the scenario's discussion_points?
-- G6 (Action Item): Are action items traceable to the scenario's action_items_discussed?
-
 Return JSON with:
 {{
   "overall_passes": true/false,
@@ -432,7 +455,7 @@ Return JSON with:
 }}
 
 Return ONLY valid JSON.
-'''
+''')
 
 
 def generate_scenario_for_assertion(assertion_text: str) -> dict:
@@ -474,6 +497,108 @@ def generate_scenario_for_assertion(assertion_text: str) -> dict:
             "discussion_points": [],
             "action_items_discussed": []
         }
+
+
+def fix_markdown_table_alignment(text: str) -> str:
+    """
+    Post-process markdown tables to ensure proper column alignment.
+    Finds markdown tables and fixes column widths so all pipes align.
+    """
+    import re
+    
+    lines = text.split('\n')
+    result_lines = []
+    table_lines = []
+    in_table = False
+    
+    for line in lines:
+        # Detect if line is part of a markdown table (contains | characters)
+        stripped = line.strip()
+        if '|' in stripped and (stripped.startswith('|') or re.match(r'^[\|\s\-]+$', stripped)):
+            in_table = True
+            table_lines.append(line)
+        else:
+            if in_table and table_lines:
+                # Process the collected table
+                fixed_table = _align_table(table_lines)
+                result_lines.extend(fixed_table)
+                table_lines = []
+                in_table = False
+            result_lines.append(line)
+    
+    # Handle table at end of text
+    if table_lines:
+        fixed_table = _align_table(table_lines)
+        result_lines.extend(fixed_table)
+    
+    return '\n'.join(result_lines)
+
+
+def _align_table(table_lines: list) -> list:
+    """
+    Align a markdown table so all columns have consistent widths.
+    """
+    if not table_lines:
+        return table_lines
+    
+    # Parse cells from each row
+    rows = []
+    separator_idx = -1
+    leading_spaces = ""
+    
+    for i, line in enumerate(table_lines):
+        # Capture leading whitespace
+        if i == 0:
+            leading_spaces = line[:len(line) - len(line.lstrip())]
+        
+        stripped = line.strip()
+        # Check if this is a separator row (contains only |, -, :, spaces)
+        if set(stripped.replace('|', '').replace('-', '').replace(':', '').replace(' ', '')) == set():
+            separator_idx = i
+            rows.append(None)  # Placeholder for separator
+        else:
+            # Split by | and strip each cell
+            cells = [c.strip() for c in stripped.split('|')]
+            # Remove empty strings from start/end (from leading/trailing |)
+            if cells and cells[0] == '':
+                cells = cells[1:]
+            if cells and cells[-1] == '':
+                cells = cells[:-1]
+            rows.append(cells)
+    
+    if not rows:
+        return table_lines
+    
+    # Find max width for each column
+    num_cols = max(len(r) for r in rows if r is not None)
+    col_widths = [0] * num_cols
+    
+    for row in rows:
+        if row is None:
+            continue
+        for i, cell in enumerate(row):
+            if i < num_cols:
+                col_widths[i] = max(col_widths[i], len(cell))
+    
+    # Ensure minimum widths
+    col_widths = [max(w, 3) for w in col_widths]
+    
+    # Rebuild table with aligned columns
+    result = []
+    for row in rows:
+        if row is None:
+            # Separator row
+            sep_parts = ['|'] + ['-' * (w + 2) + '|' for w in col_widths]
+            result.append(leading_spaces + ''.join(sep_parts))
+        else:
+            # Data row - pad each cell to column width
+            padded_cells = []
+            for i in range(num_cols):
+                cell = row[i] if i < len(row) else ''
+                padded_cells.append(' ' + cell.ljust(col_widths[i]) + ' ')
+            result.append(leading_spaces + '|' + '|'.join(padded_cells) + '|')
+    
+    return result
 
 
 def generate_wbp_with_scenario(scenario: dict, original_utterance: str, 
@@ -522,17 +647,21 @@ def generate_wbp_with_scenario(scenario: dict, original_utterance: str,
     
     try:
         result = extract_json_from_response(result_text)
-        return result.get("workback_plan", result_text)
+        wbp = result.get("workback_plan", result_text)
     except:
         import re
         json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
         if json_match:
             try:
                 result = json.loads(json_match.group())
-                return result.get("workback_plan", "")
+                wbp = result.get("workback_plan", "")
             except:
-                pass
-        return "Unable to generate WBP"
+                wbp = "Unable to generate WBP"
+        else:
+            wbp = "Unable to generate WBP"
+    
+    # Post-process to fix table alignment
+    return fix_markdown_table_alignment(wbp)
 
 
 def verify_wbp_against_scenario(scenario: dict, wbp_content: str, 
@@ -896,35 +1025,83 @@ def generate_final_report(assertions: list, original_utterance: str, output_dir:
     # Build summary table
     table_lines = []
     table_lines.append("")
-    table_lines.append("=" * 120)
+    table_lines.append("=" * 140)
     table_lines.append("ASSERTION ANALYSIS REPORT")
-    table_lines.append("=" * 120)
+    table_lines.append("=" * 140)
     table_lines.append(f"Timestamp: {report['metadata']['timestamp']}")
     table_lines.append(f"Input: \"{original_utterance}\"")
     table_lines.append("")
     
+    # Workflow steps
+    table_lines.append("-" * 140)
+    table_lines.append("WORKFLOW EXECUTED")
+    table_lines.append("-" * 140)
+    table_lines.append("  Step 1: INPUT ASSERTION")
+    table_lines.append(f"          \"{original_utterance}\"")
+    table_lines.append("")
+    table_lines.append("  Step 2: SCENARIO GENERATION (GPT-5)")
+    table_lines.append(f"          Generated meeting context as ground truth for grounding assertions")
+    if scenario:
+        table_lines.append(f"          → Meeting: {scenario.get('title', 'N/A')}")
+        table_lines.append(f"          → Attendees: {len(scenario.get('attendees', []))} | Artifacts: {len(scenario.get('artifacts', []))}")
+    table_lines.append("")
+    table_lines.append("  Step 3: ASSERTION ANALYSIS (GPT-5)")
+    if assertions:
+        primary = assertions[0]
+        table_lines.append(f"          Classified as: {primary.get('dimension_id')} - {primary.get('dimension_name')}")
+        table_lines.append(f"          Layer: {primary.get('layer')} | Level: {primary.get('level')}")
+    table_lines.append("")
+    table_lines.append("  Step 4: S+G ASSERTION CONVERSION")
+    s_count = sum(1 for a in assertions if a.get('dimension_id', '').startswith('S'))
+    g_count = sum(1 for a in assertions if a.get('dimension_id', '').startswith('G'))
+    table_lines.append(f"          Generated {s_count} Structural + {g_count} Grounding assertions with linkage")
+    if g_count > 0:
+        g_dims = [a.get('dimension_id') for a in assertions if a.get('dimension_id', '').startswith('G')]
+        table_lines.append(f"          → S→G mapping: {assertions[0].get('dimension_id')} → {', '.join(g_dims)}")
+    table_lines.append("")
+    table_lines.append("  Step 5: WBP GENERATION & VERIFICATION (GPT-5)")
+    table_lines.append(f"          Generated WBP conditioned on scenario, verified against all S+G assertions")
+    vs = report['verification_summary']
+    table_lines.append(f"          → Result: {vs['total_verified']} passed, {vs['total_failed']} failed")
+    table_lines.append("")
+    
     # Scenario summary
     if scenario:
-        table_lines.append("-" * 120)
+        table_lines.append("-" * 140)
         table_lines.append("SCENARIO CONTEXT (Ground Truth)")
-        table_lines.append("-" * 120)
+        table_lines.append("-" * 140)
         table_lines.append(f"  Meeting: {scenario.get('title', 'N/A')}")
         table_lines.append(f"  Date: {scenario.get('date', 'N/A')} at {scenario.get('time', 'N/A')}")
         table_lines.append(f"  Organizer: {scenario.get('organizer', 'N/A')}")
         table_lines.append(f"  Attendees: {', '.join(scenario.get('attendees', []))}")
         if scenario.get('artifacts'):
             table_lines.append(f"  Artifacts: {', '.join(scenario.get('artifacts', []))}")
+        if scenario.get('action_items_discussed'):
+            table_lines.append(f"  Action Items: {len(scenario.get('action_items_discussed', []))} items discussed")
+        table_lines.append("")
+    
+    # Generated WBP
+    if wbp:
+        table_lines.append("-" * 140)
+        table_lines.append("GENERATED WORKBACK PLAN (WBP)")
+        table_lines.append("-" * 140)
+        # Show the WBP content (limit to reasonable length for console)
+        wbp_lines = wbp.split('\n')
+        for line in wbp_lines[:50]:  # Show first 50 lines
+            table_lines.append(f"  {line}")
+        if len(wbp_lines) > 50:
+            table_lines.append(f"  ... ({len(wbp_lines) - 50} more lines, see JSON for full WBP)")
         table_lines.append("")
     
     # Assertions table
-    table_lines.append("-" * 120)
+    table_lines.append("-" * 140)
     table_lines.append("ASSERTIONS SUMMARY TABLE")
-    table_lines.append("-" * 120)
+    table_lines.append("-" * 140)
     
-    # Header
-    header = f"{'ID':<15} {'Dim':<5} {'Layer':<12} {'Level':<10} {'Verified':<10} {'Mapping Reason':<50}"
+    # Header - includes Success Example column
+    header = f"{'ID':<15} {'Dim':<5} {'Layer':<12} {'Level':<10} {'Mapping Reason':<45} {'Success Example':<50}"
     table_lines.append(header)
-    table_lines.append("-" * 120)
+    table_lines.append("-" * 140)
     
     # Rows
     for a in assertions:
@@ -933,28 +1110,29 @@ def generate_final_report(assertions: list, original_utterance: str, output_dir:
         layer = a.get('layer', 'N/A')
         level = a.get('level', 'N/A')
         
-        # Find verification status
-        verified = "N/A"
-        for v in verification_results:
-            if v.get('assertion_id') == aid:
-                verified = "✅ PASS" if v.get('passes') else "❌ FAIL"
-                break
-        
         # Get mapping reason (truncated)
-        reason = a.get('rationale', {}).get('mapping_reason', '')[:48]
-        if len(a.get('rationale', {}).get('mapping_reason', '')) > 48:
+        reason = a.get('rationale', {}).get('mapping_reason', '')[:43]
+        if len(a.get('rationale', {}).get('mapping_reason', '')) > 43:
             reason += ".."
         
-        row = f"{aid:<15} {dim:<5} {layer:<12} {level:<10} {verified:<10} {reason:<50}"
+        # Get success example evidence (truncated)
+        example_text = ""
+        for v in verification_results:
+            if v.get('assertion_id') == aid:
+                example_text = v.get('evidence', '')[:48]
+                if len(v.get('evidence', '')) > 48:
+                    example_text += ".."
+                break
+        
+        row = f"{aid:<15} {dim:<5} {layer:<12} {level:<10} {reason:<45} {example_text:<50}"
         table_lines.append(row)
     
-    table_lines.append("-" * 120)
+    table_lines.append("-" * 140)
     
     # Verification summary
     table_lines.append("")
     table_lines.append("VERIFICATION SUMMARY")
-    table_lines.append("-" * 120)
-    vs = report['verification_summary']
+    table_lines.append("-" * 140)
     status = "✅ ALL PASSED" if vs['all_passed'] else f"⚠️ {vs['total_failed']} FAILED"
     table_lines.append(f"  Status: {status}")
     table_lines.append(f"  Passed: {vs['total_verified']} / {vs['total_verified'] + vs['total_failed']}")
@@ -963,7 +1141,7 @@ def generate_final_report(assertions: list, original_utterance: str, output_dir:
     # Evidence details
     if verification_results:
         table_lines.append("VERIFICATION DETAILS")
-        table_lines.append("-" * 120)
+        table_lines.append("-" * 140)
         for v in verification_results:
             status_icon = "✅" if v.get('passes') else "❌"
             table_lines.append(f"  {status_icon} [{v.get('assertion_id')}] {v.get('dimension')}")
@@ -972,9 +1150,9 @@ def generate_final_report(assertions: list, original_utterance: str, output_dir:
             table_lines.append("")
     
     # File output
-    table_lines.append("=" * 120)
+    table_lines.append("=" * 140)
     table_lines.append(f"📄 JSON Report saved to: {json_path}")
-    table_lines.append("=" * 120)
+    table_lines.append("=" * 140)
     
     summary_table = "\n".join(table_lines)
     

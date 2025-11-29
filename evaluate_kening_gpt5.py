@@ -64,7 +64,7 @@ DELAY_BETWEEN_MEETINGS = 2  # seconds
 DELAY_BETWEEN_ASSERTIONS = 1  # seconds
 
 # =============================================================================
-# SELECTED DIMENSIONS (from WBP_Selected_Dimensions.md)
+# SELECTED DIMENSIONS (from WBP_Evaluation_Complete_Dimension_Reference.md)
 # =============================================================================
 
 SELECTED_DIMENSIONS = {
@@ -441,7 +441,7 @@ You are evaluating assertions from Kening's dataset against Chin-Yew's quality r
 
 Assertions fall into two categories with DIFFERENT evaluation approaches:
 
-### Structural Assertions (S1-S19) - Check PRESENCE/SHAPE
+### Structural Assertions (S1-S20) - Check PRESENCE/SHAPE
 - Question: "Does the plan HAVE X?"
 - Checks: Does the element exist? Is the format correct?
 - ✅ PASS if the element exists (even if value might be imprecise)

@@ -2,15 +2,19 @@
 Assertion Analyzer - Self-contained package for WBP assertion analysis.
 
 This package provides:
-- GPT-5 based assertion classification (28 dimensions: S1-S20 + G1-G8)
+- GPT-5 based assertion classification (29 dimensions: S1-S20 + G1-G9)
 - Scenario generation for assertion context
 - Workback Plan (WBP) generation with S+G linkage
 - WBP verification against scenario ground truth
 
 Usage:
-    # As a module
+    # As a module - full analysis with WBP
     from assertion_analyzer import analyze_assertion, AssertionAnalyzer
     result = analyze_assertion("Your assertion text here")
+    
+    # Lightweight classification only (no WBP)
+    from assertion_analyzer import classify_assertion
+    result = classify_assertion("Your assertion text here")
     
     # From command line
     python -m assertion_analyzer "Your assertion text here"
@@ -18,6 +22,7 @@ Usage:
 
 from .analyzer import (
     analyze_assertion,
+    classify_assertion,
     AssertionAnalyzer,
     generate_scenario_for_assertion,
     generate_wbp_with_scenario,
@@ -38,9 +43,10 @@ from .dimensions import (
     GROUNDING_DIMENSIONS,
 )
 
-__version__ = "1.0.0"
+__version__ = "2.1.0"
 __all__ = [
     "analyze_assertion",
+    "classify_assertion",
     "AssertionAnalyzer",
     "generate_scenario_for_assertion",
     "generate_wbp_with_scenario",

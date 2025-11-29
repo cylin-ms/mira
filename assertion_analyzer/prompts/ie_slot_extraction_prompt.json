@@ -1,0 +1,37 @@
+{
+  "name": "ie_slot_extraction_prompt",
+  "version": "2.0",
+  "description": "Optimized prompt for extracting slot values from assertions for grounding verification",
+  "source": "GPT-5 optimization sessions 015-017 (2025-11-30)",
+  "system_prompt": "You are an expert information extraction system. Extract specific slot values from assertions for fact-checking against source scenarios. Return structured JSON only.",
+  "user_prompt_template": "Extract slot values from this assertion for grounding verification.\n\n=== ASSERTION ===\n\"{assertion_text}\"\n\n=== SLOTS TO EXTRACT ===\n{slot_descriptions}\n\n=== EXTRACTION RULES ===\n1. Extract EXACT text as written (preserve formatting, spelling, punctuation)\n2. If a slot type is NOT mentioned, return null\n3. If MULTIPLE values exist for a slot, return as a list\n4. Do NOT infer, guess, or rephrase - only extract explicit mentions\n5. For dates: include full date/time with timezone if present\n6. For names: include full name as written\n7. For files: include extension and path if present\n\n=== EXAMPLES ===\nExample 1:\nAssertion: \"Tisa Odonoghue and John Smith will finalize the report by July 26, 2025 at 14:00 PST.\"\nSlots: G2 (names), G3 (dates)\nOutput: {{\"G2\": [\"Tisa Odonoghue\", \"John Smith\"], \"G3\": \"July 26, 2025 at 14:00 PST\"}}\n\nExample 2:\nAssertion: \"The response should reference the artifact 'config-standards.docx'.\"\nSlots: G4 (artifacts)\nOutput: {{\"G4\": \"config-standards.docx\"}}\n\nExample 3:\nAssertion: \"Include tasks for confirming agenda and distributing pre-reads.\"\nSlots: G6 (action items)\nOutput: {{\"G6\": [\"confirming agenda\", \"distributing pre-reads\"]}}\n\nExample 4:\nAssertion: \"The meeting should cover budget review and quarterly planning.\"\nSlots: G5 (topics)\nOutput: {{\"G5\": [\"budget review\", \"quarterly planning\"]}}\n\nExample 5:\nAssertion: \"Assign the technical lead role to complete the review.\"\nSlots: G2 (names), G7 (roles)\nOutput: {{\"G2\": null, \"G7\": \"technical lead\"}}\n\n=== NOW EXTRACT ===\nReturn ONLY valid JSON with extracted values (or null if not found).",
+  "slot_descriptions": {
+    "G2": "Person names - specific people mentioned (e.g., 'Tisa Odonoghue', 'John Smith')",
+    "G3": "Dates/times - specific dates, times, deadlines (e.g., 'July 26, 2025 at 14:00 PST', 'before T₀')",
+    "G4": "Artifacts - files, documents, links (e.g., 'Report.xlsx', 'config-standards.docx')",
+    "G5": "Topics - meeting subjects, agenda items (e.g., 'budget review', 'quarterly planning')",
+    "G6": "Action items - specific tasks (e.g., 'confirm agenda', 'distribute pre-reads')",
+    "G7": "Roles - role/responsibility assignments (e.g., 'meeting organizer', 'technical lead')",
+    "G8": "Constraints - limits, requirements (e.g., 'max 30 minutes', 'must complete by EOD')",
+    "G9": "Planner-generated - assumptions, blockers, mitigations (e.g., 'assuming all attendees available')"
+  },
+  "output_schema": {
+    "type": "object",
+    "description": "Keys are G dimension codes, values are extracted text or null",
+    "additionalProperties": {
+      "oneOf": [
+        {"type": "string"},
+        {"type": "array", "items": {"type": "string"}},
+        {"type": "null"}
+      ]
+    }
+  },
+  "temperature": 0.1,
+  "notes": [
+    "Very low temperature (0.1) for precise extraction",
+    "Always extract EXACT text spans",
+    "Support both single values and lists",
+    "null means slot not mentioned (not same as empty string)",
+    "Slot descriptions are injected dynamically based on linked_g_dims"
+  ]
+}

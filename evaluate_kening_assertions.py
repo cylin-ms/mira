@@ -37,7 +37,7 @@ AZURE_API_VERSION = "2024-12-01-preview"
 AZURE_DEPLOYMENT = "gpt-5-turbo"  # or your deployment name
 
 # =============================================================================
-# SELECTED DIMENSIONS (from WBP_Selected_Dimensions.md)
+# SELECTED DIMENSIONS (from WBP_Evaluation_Complete_Dimension_Reference.md)
 # =============================================================================
 
 SELECTED_DIMENSIONS = {

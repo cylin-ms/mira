@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-11-30T04:08:23.368464",
+  "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
+  "output_file": "docs/ChinYew/assertions_sg_classified.jsonl",
+  "meetings_processed": 1,
+  "statistics": {
+    "total_input_assertions": 11,
+    "total_output_assertions": 21,
+    "s_assertions": 6,
+    "g_assertions_generated": 10,
+    "unknown": 0,
+    "by_dimension": {
+      "G3": 3,
+      "S2": 1,
+      "S5": 3,
+      "S3": 1,
+      "S16": 1,
+      "G4": 1,
+      "G2": 1
+    },
+    "by_layer": {
+      "structural": 6,
+      "grounding": 5,
+      "unknown": 0
+    },
+    "by_level": {
+      "critical": 5,
+      "expected": 5,
+      "aspirational": 1
+    }
+  },
+  "dry_run": false
+}

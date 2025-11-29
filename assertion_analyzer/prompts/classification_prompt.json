@@ -1,0 +1,43 @@
+{
+  "name": "classification_prompt",
+  "version": "2.0",
+  "description": "Optimized prompt for classifying workback plan assertions into S/G dimensions",
+  "source": "GPT-5 optimization sessions 015-017 (2025-11-30)",
+  "system_prompt": "You are an expert classifier for the WBP (Workback Plan) framework. Your task is to classify assertions into predefined dimensions. Return structured JSON only.",
+  "user_prompt_template": "Classify this workback plan assertion into the SINGLE BEST dimension.\n\n=== STRUCTURAL (S) - What must be present in the plan ===\nS1: Title - Plan must include meeting/event title\nS2: Timeline Alignment - Plan aligns with overall timeline, acknowledges time constraints\nS3: Ownership Assignment - Each task has an assigned owner\nS4: Participant Identification - Identify attendees and stakeholders\nS5: Task Dates - Tasks have scheduled dates (before/after T₀)\nS6: Risk Assessment - Risk analysis, mitigation, escalation paths\nS8: Task Descriptions - Clear descriptions of what each task involves\nS9: Success Criteria - Define what success looks like\nS10: Buffer Time - Include contingency or slack time\nS16: Assumptions & Prerequisites - State assumptions and prerequisites\nS17: Dependencies - Identify task dependencies\nS18: Milestones - Include key checkpoints\nS19: Communication Plan - Define notification and sharing actions\nS20: Review & Approval - Include review cycles and sign-offs\n\n=== GROUNDING (G) - Values must match source scenario ===\nG1: Hallucination Prevention - Do not invent details not in source\nG2: Attendee Grounding - Names must match scenario attendees\nG3: Date/Time Grounding - Dates and times must match scenario\nG4: Artifact Grounding - Files and documents must match scenario\nG5: Topic Grounding - Topics must match scenario agenda\nG6: Action Item Grounding - Tasks must match scenario action items\nG7: Role Grounding - Roles must match scenario assignments\nG8: Constraint Grounding - Constraints must match scenario limits\nG9: Planner-Generated Consistency - Generated content (assumptions, blockers) must not contradict scenario\n\n=== CLASSIFICATION EXAMPLES ===\nStructural:\n- \"assign Tisa Odonoghue as the owner\" → S3 (Ownership Assignment)\n- \"include tasks scheduled before T₀\" → S5 (Task Dates)\n- \"include a risk escalation path\" → S6 (Risk Assessment)\n- \"state an assumption about the meeting purpose\" → S16 (Assumptions)\n\nGrounding:\n- \"state the meeting is scheduled for July 26, 2025 at 14:00 PST\" → G3 (Date/Time Grounding)\n- \"not introduce attendees not in the source\" → G2 (Attendee Grounding)\n- \"reference the artifact 'Report.xlsx'\" → G4 (Artifact Grounding)\n\n=== NOW CLASSIFY ===\nAssertion: \"{assertion_text}\"\n\nIf the assertion does not clearly fit any dimension, use dimension_id: \"UNKNOWN\".\n\nReturn ONLY this JSON:\n{{\n  \"dimension_id\": \"<S1-S20 or G1-G9 or UNKNOWN>\",\n  \"dimension_name\": \"<full dimension name>\",\n  \"layer\": \"<structural or grounding>\",\n  \"level\": \"<critical or expected or aspirational>\",\n  \"rationale\": \"<brief reason for classification>\"\n}}",
+  "output_schema": {
+    "type": "object",
+    "required": ["dimension_id", "dimension_name", "layer", "level", "rationale"],
+    "properties": {
+      "dimension_id": {
+        "type": "string",
+        "description": "Dimension code (S1-S20, G1-G9, or UNKNOWN)"
+      },
+      "dimension_name": {
+        "type": "string",
+        "description": "Full name of the dimension"
+      },
+      "layer": {
+        "type": "string",
+        "enum": ["structural", "grounding"],
+        "description": "Whether structural or grounding dimension"
+      },
+      "level": {
+        "type": "string",
+        "enum": ["critical", "expected", "aspirational"],
+        "description": "Importance level"
+      },
+      "rationale": {
+        "type": "string",
+        "description": "Brief explanation of classification"
+      }
+    }
+  },
+  "temperature": 0.2,
+  "notes": [
+    "Include all dimension definitions inline for accuracy",
+    "Provide examples for both S and G categories",
+    "UNKNOWN is fallback for unclear assertions",
+    "Low temperature (0.2) for consistent classification"
+  ]
+}

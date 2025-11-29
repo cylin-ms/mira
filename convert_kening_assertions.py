@@ -5,11 +5,11 @@ Convert Kening's Assertions to Chin-Yew's WBP Format
 This script:
 1. Reads Kening's assertions JSONL
 2. Evaluates each assertion using GPT-5 JJ
-3. Maps and converts to Chin-Yew's WBP_Selected_Dimensions.md format
+3. Maps and converts to Chin-Yew's WBP_Evaluation_Complete_Dimension_Reference.md format
 4. Generates templated assertions conforming to our spec
 5. Adds rationale explaining each conversion
 
-Target Format (from WBP_Selected_Dimensions.md):
+Target Format (from WBP_Evaluation_Complete_Dimension_Reference.md):
 - 9 Structural Dimensions: S1, S2, S3, S4, S5, S6, S11, S18, S19
 - 5 Grounding Dimensions: G1, G2, G3, G4, G5
 - Each assertion follows the template pattern for its dimension
@@ -70,7 +70,7 @@ RATES_PER_MINUTE = 10  # conservative rate limit
 DELAY_BETWEEN_BATCHES = 6  # 10 requests per minute = 1 per 6 seconds
 
 # =============================================================================
-# TARGET DIMENSION SPEC (from WBP_Selected_Dimensions.md)
+# TARGET DIMENSION SPEC (from WBP_Evaluation_Complete_Dimension_Reference.md)
 # =============================================================================
 
 DIMENSION_SPEC = {
@@ -603,11 +603,11 @@ def get_fallback_system_prompt():
 
 Your task is to:
 1. Analyze the original assertion from Kening's dataset
-2. Map it to the correct dimension (S1-S19 or G1-G8)
+2. Map it to the correct dimension (S1-S20 or G1-G8)
 3. Rewrite the assertion using the standardized template
 4. Provide rationale for the conversion
 
-## Target Dimensions (from WBP_Selected_Dimensions.md)
+## Target Dimensions (from WBP_Evaluation_Complete_Dimension_Reference.md)
 
 ### Structural (S) - Check PRESENCE ("Does the plan HAVE X?")
 - S1: Meeting Details - "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES]"
@@ -803,6 +803,9 @@ def convert_assertion_heuristic(assertion: Dict) -> Dict:
     else:
         converted_text = original_text
     
+    # Get linked G dimensions for S assertions
+    linked_g_dims = S_TO_G_MAP.get(mapped_dim, []) if mapped_dim.startswith("S") else []
+    
     return {
         "original_text": original_text,
         "converted_text": converted_text,
@@ -811,6 +814,7 @@ def convert_assertion_heuristic(assertion: Dict) -> Dict:
         "layer": dim_spec.get('layer', 'unknown'),
         "level": level,
         "weight": dim_spec.get('weight', 1),
+        "linked_g_dims": linked_g_dims,  # NEW: G dimensions that apply to this S assertion
         "sourceID": None,
         "placeholders_used": [],
         "rationale": {
@@ -834,6 +838,7 @@ def enhance_gpt5_result_with_sg(gpt5_result: Dict, assertion_index: int, origina
     
     This ensures GPT-5 results follow the same schema as heuristic results:
     - Add assertion_id to the primary (S) assertion
+    - Add linked_g_dims field specifying which G dimensions apply
     - Generate corresponding G assertions with parent_assertion_id linkage
     - Keep S and G assertions adjacent in the output
     
@@ -857,6 +862,12 @@ def enhance_gpt5_result_with_sg(gpt5_result: Dict, assertion_index: int, origina
     # Add assertion_id to the GPT-5 result
     gpt5_result["assertion_id"] = primary_assertion_id
     gpt5_result["parent_assertion_id"] = None  # Primary assertions have no parent
+    
+    # Add linked_g_dims for S assertions
+    if dimension_id.startswith("S") and dimension_id in S_TO_G_MAP:
+        gpt5_result["linked_g_dims"] = S_TO_G_MAP[dimension_id]
+    else:
+        gpt5_result["linked_g_dims"] = []
     
     # Ensure required fields exist
     if "original_text" not in gpt5_result:
@@ -918,9 +929,10 @@ def convert_assertion_with_grounding(assertion: Dict, assertion_index: int = 0) 
     
     For each original assertion:
     1. Generate the primary S (structural) assertion with unique assertion_id
-    2. Generate corresponding G (grounding) assertions based on S_TO_G_MAP
-    3. G assertions include parent_assertion_id linking back to their source S
-    4. S and G assertions are returned adjacently in the list
+    2. Add linked_g_dims field specifying which G dimensions apply
+    3. Generate corresponding G (grounding) assertions based on S_TO_G_MAP
+    4. G assertions include parent_assertion_id linking back to their source S
+    5. S and G assertions are returned adjacently in the list
     
     Returns: List of converted assertions (1 S + 0-N G assertions, kept adjacent)
     """
@@ -939,6 +951,8 @@ def convert_assertion_with_grounding(assertion: Dict, assertion_index: int = 0) 
     primary = convert_assertion_heuristic(assertion)
     primary["assertion_id"] = primary_assertion_id
     primary["parent_assertion_id"] = None  # Primary assertions have no parent
+    
+    # linked_g_dims is already set by convert_assertion_heuristic
     results.append(primary)
     
     # If mapped to a structural dimension, add corresponding grounding assertions
@@ -1405,7 +1419,7 @@ def main():
             "num_meetings": len(all_results),
             "total_assertions": stats.get("total_assertions", 0),
             "conversion_method": "gpt5" if use_gpt5 else "heuristic",
-            "target_spec": "WBP_Selected_Dimensions.md"
+            "target_spec": "WBP_Evaluation_Complete_Dimension_Reference.md"
         },
         "output_formats": {
             "kening_enhanced": {
