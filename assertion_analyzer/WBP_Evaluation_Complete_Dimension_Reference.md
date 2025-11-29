@@ -1,6 +1,6 @@
 # WBP Dimension Assertion Examples
 
-**Author**: Chin-Yew Lin and Haidong Zhang
+**Author**: Chin-Yew Lin and Haidong Zhang  
 **Date**: November 29, 2025  
 **Format**: GPT-5 Generated Hybrid Assertions (Template + Instantiated)
 
