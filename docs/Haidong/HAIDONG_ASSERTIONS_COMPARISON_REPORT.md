@@ -181,14 +181,15 @@
 ### No New Dimensions Needed
 All 9 of Haidong's dimensions already exist in our WBP framework.
 
-### Minor Enhancements to Consider
+### Minor Enhancements ✅ IMPLEMENTED (Nov 29, 2025)
 
-| Priority | Dimension | Enhancement | Source |
+| Priority | Dimension | Enhancement | Status |
 |----------|-----------|-------------|--------|
-| 🟡 LOW | S1 | Add "forward-looking" temporal validation concept | Haidong assertion #1 |
-| 🟡 LOW | S2 | Mention "buffers or contingency time" explicitly | Haidong assertion #2 |
-| 🟡 LOW | S5 | Add "or date ranges" to due dates | Haidong assertion |
-| 🟡 LOW | S18 | Add "with owners and deadlines" | Haidong assertion |
+| ✅ | S1 | Added "forward-looking" temporal validation concept | **DONE** |
+| ✅ | S2 | Added "buffer/contingency time" explicitly | **DONE** |
+| ✅ | S5 | Added "or date ranges" to due dates | **DONE** |
+| ✅ | S18 | Added "with owners and deadlines" | **DONE** |
+| ✅ | S19 | Added "open questions" explicitly | **DONE** |
 
 ### Validation
 Haidong's assertions provide **independent validation** that our Phase 1 structural dimensions are well-defined and comprehensive.

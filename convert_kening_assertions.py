@@ -80,19 +80,19 @@ DIMENSION_SPEC = {
         "weight": 3,
         "layer": "structural",
         "level": "event/meeting",
-        "template": 'The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately',
-        "definition": "Subject, date, time, timezone, attendee list clearly stated.",
-        "evaluation": "Plan includes all meeting metadata; missing any field = fail.",
+        "template": 'The response should describe a forward-looking plan and state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately',
+        "definition": "Forward-looking plan with subject, date, time, timezone, attendee list clearly stated.",
+        "evaluation": "Plan is prospective (not retrospective) and includes all meeting metadata; missing any field = fail.",
         "success_example": "Board Review — Dec 15, 2025, 10:00 AM CST; Attendees: Alice Chen, Bob Li; TZ: CST.",
-        "fail_example": "Board Review next month (no date/time/timezone or attendee list)."
+        "fail_example": "Board Review next month (no date/time/timezone or attendee list); or retrospective summary of past meeting."
     },
     "S2": {
         "name": "Timeline Alignment",
         "weight": 3,
         "layer": "structural",
         "level": "overall",
-        "template": 'The response should include a backward timeline from T₀ with dependency-aware sequencing',
-        "definition": "Backward scheduling (T-minus) with dependency-aware sequencing from meeting date.",
+        "template": 'The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time',
+        "definition": "Backward scheduling (T-minus) with dependency-aware sequencing and buffer time for delays.",
         "evaluation": "Tasks arranged in reverse order from meeting date; dependencies respected.",
         "success_example": "T–30: Draft deck → T–15: Review → T–1: Dry run → Meeting Day.",
         "fail_example": "Tasks listed randomly; e.g., Review deck after meeting."
@@ -124,8 +124,8 @@ DIMENSION_SPEC = {
         "weight": 2,
         "layer": "structural",
         "level": "task",
-        "template": 'The response should include due dates for every [TASK] aligned with timeline sequencing',
-        "definition": "Due dates for every task aligned with S2 sequencing.",
+        "template": 'The response should include due dates or date ranges for every [TASK] aligned with timeline sequencing',
+        "definition": "Due dates or date ranges for every task aligned with S2 sequencing.",
         "evaluation": "All tasks have due dates; dates match milestone/timeline logic.",
         "success_example": "Draft deck due Dec 1; Review Dec 10; Dry run Dec 14.",
         "fail_example": "No dates provided for any task."
@@ -157,22 +157,22 @@ DIMENSION_SPEC = {
         "weight": 1,
         "layer": "structural",
         "level": "post-event",
-        "template": 'The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)',
-        "definition": "Wrap-up tasks, retrospectives, and reporting.",
-        "evaluation": "Post-event steps listed; none = fail.",
-        "success_example": "Post-meeting: send summary; archive deck; retrospective; publish decisions.",
-        "fail_example": "No post-event tasks listed."
+        "template": 'The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting) with owners and deadlines',
+        "definition": "Wrap-up tasks, retrospectives, and reporting with owners and deadlines.",
+        "evaluation": "Post-event steps listed with owners and deadlines; none = fail.",
+        "success_example": "Post-meeting: send summary (Owner: Alice, by EOD); archive deck (Owner: Bob, T+1); retrospective (Owner: Team, T+3).",
+        "fail_example": "No post-event tasks listed; or tasks without owners/deadlines."
     },
     "S19": {
         "name": "Caveat & Clarification",
         "weight": 1,
         "layer": "structural",
         "level": "transparency",
-        "template": 'The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties',
-        "definition": "Explicit disclosure of assumptions, missing information, uncertainties.",
-        "evaluation": "Caveats and assumptions clearly stated; hidden assumptions = fail.",
-        "success_example": "Caveat: Budget figures pending CFO approval; Assumption: All attendees confirmed.",
-        "fail_example": "Plan presents uncertain items as facts; no disclosure of assumptions."
+        "template": 'The response should disclose [CAVEATS], [ASSUMPTIONS], [OPEN QUESTIONS], and [CLARIFICATIONS] about information gaps or uncertainties',
+        "definition": "Explicit disclosure of assumptions, open questions, missing information, uncertainties.",
+        "evaluation": "Caveats, assumptions, and open questions clearly stated; hidden assumptions = fail.",
+        "success_example": "Caveat: Budget figures pending CFO approval; Assumption: All attendees confirmed; Open Question: Venue TBD.",
+        "fail_example": "Plan presents uncertain items as facts; no disclosure of assumptions or open questions."
     },
     # Grounding Dimensions
     # G1 is the overall recall check - should pass if all other G dimensions pass

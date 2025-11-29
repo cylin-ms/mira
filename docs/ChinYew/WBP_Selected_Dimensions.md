@@ -39,11 +39,11 @@ The original 10 structural dimensions covering essential WBP elements.
 
 | ID | Dimension | Weight | Phase | Template | Definition |
 |----|-----------|:------:|:-----:|----------|------------|
-| **S1** | Meeting Details | 3 | ✅ P1 | "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately" | Subject, date, time, timezone, attendee list clearly stated |
-| **S2** | Timeline Alignment | 3 | ✅ P1 | "The response should include a backward timeline from T₀ with dependency-aware sequencing" | Backward scheduling (T-minus) with dependency-aware sequencing |
+| **S1** | Meeting Details | 3 | ✅ P1 | "The response should describe a forward-looking plan and state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately" | Forward-looking plan with subject, date, time, timezone, attendee list clearly stated |
+| **S2** | Timeline Alignment | 3 | ✅ P1 | "The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time" | Backward scheduling (T-minus) with dependency-aware sequencing and buffer time |
 | **S3** | Ownership Assignment | 3 | ✅ P1 | "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable" | Named owners per task OR role/skill placeholder |
 | **S4** | Deliverables & Artifacts | 2 | ✅ P1 | "The response should list [DELIVERABLES] with working links, version/format specified" | All outputs listed with working links, version/format |
-| S5 | Task Dates | 2 | ⬜ P2 | "The response should include due dates for every [TASK] aligned with timeline sequencing" | Due dates for every task aligned with S2 sequencing |
+| S5 | Task Dates | 2 | ⬜ P2 | "The response should include due dates or date ranges for every [TASK] aligned with timeline sequencing" | Due dates or date ranges for every task aligned with S2 sequencing |
 | **S6** | Dependencies & Blockers | 2 | ✅ P1 | "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented" | Predecessors and risks identified; mitigation steps documented |
 | S7 | Source Traceability | 2 | ⬜ P2 | "The response should link [TASKS/ARTIFACTS] back to original source priorities/files" | Tasks/artifacts link back to original source |
 | S8 | Communication Channels | 1 | ⬜ P2 | "The response should specify [COMMUNICATION CHANNELS] (Teams, email, meeting cadence)" | Collaboration methods specified |
@@ -63,8 +63,8 @@ Additional structural dimensions for comprehensive planning aspects.
 | S15 | Compliance & Governance | 1 | ⬜ P2 | "The response should note [COMPLIANCE/GOVERNANCE] requirements (security, privacy, regulatory)" | Security, privacy, regulatory checks noted |
 | S16 | Review & Feedback Loops | 1 | ⬜ P2 | "The response should include [REVIEW/FEEDBACK] checkpoints to validate the plan" | Scheduled checkpoints to validate and iterate |
 | S17 | Escalation Path | 1 | ⬜ P2 | "The response should define [ESCALATION PATH] with owners for critical risks" | Escalation owners and steps defined |
-| **S18** | Post-Event Actions | 1 | ✅ P1 | "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)" | Wrap-up tasks, retrospectives, and reporting |
-| **S19** | Caveat & Clarification | 2 | ✅ P1 | "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties" | Assumptions, information gaps, uncertainties disclosed |
+| **S18** | Post-Event Actions | 1 | ✅ P1 | "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting) with owners and deadlines" | Wrap-up tasks, retrospectives, and reporting with owners and deadlines |
+| **S19** | Caveat & Clarification | 2 | ✅ P1 | "The response should disclose [CAVEATS], [ASSUMPTIONS], [OPEN QUESTIONS], and [CLARIFICATIONS] about information gaps or uncertainties" | Assumptions, open questions, information gaps, uncertainties disclosed |
 
 ---
 
@@ -157,14 +157,14 @@ Based on conversion of 2,318 assertions from 224 meetings:
 
 | ID | Dimension | Success Example | Fail Example |
 |----|-----------|-----------------|--------------|
-| S1 | Meeting Details | "Board Review — Dec 15, 2025, 10:00 AM CST; Attendees: Alice Chen, Bob Li" | "Board Review next month" (no date/time/attendees) |
-| S2 | Timeline Alignment | T–30: Draft → T–15: Review → T–1: Dry run → Meeting Day | Tasks listed randomly; "Review after meeting" |
+| S1 | Meeting Details | "Forward-looking plan: Board Review — Dec 15, 2025, 10:00 AM CST; Attendees: Alice Chen, Bob Li" | "Board Review next month" (no date/time/attendees); or retrospective summary of past meeting |
+| S2 | Timeline Alignment | T–30: Draft → T–15: Review → T–1: Dry run (buffer day) → Meeting Day | Tasks listed randomly; no buffer time; "Review after meeting" |
 | S3 | Ownership Assignment | "Draft deck — Owner: Alice Chen" or "Role: Staff PM" | "Draft deck — Owner: TBD" |
 | S4 | Deliverables & Artifacts | "Final deck (link); v3.2 PDF" | "Prepare documents" (no links/versions) |
 | S6 | Dependencies & Blockers | "Dependency: Finance approval; Mitigation: escalate to CFO" | No blockers mentioned |
 | S11 | Risk Mitigation Strategy | "Risk: Vendor delay; Mitigation: backup vendor PO" | "Monitor vendor" (vague) |
-| S18 | Post-Event Actions | "Post-meeting: send summary; retrospective" | No post-event tasks |
-| S19 | Caveat & Clarification | "Assumption: Budget approved; Gap: Vendor TBD" | Hidden assumptions presented as facts |
+| S18 | Post-Event Actions | "Post-meeting: send summary (Owner: Alice, by EOD); retrospective (Owner: Team, T+3)" | No post-event tasks; or tasks without owners/deadlines |
+| S19 | Caveat & Clarification | "Assumption: Budget approved; Open Question: Venue TBD; Gap: Vendor pending" | Hidden assumptions presented as facts; no open questions disclosed |
 
 ### Grounding Dimensions
 
