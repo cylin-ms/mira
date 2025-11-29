@@ -4,19 +4,19 @@
 **Date:** November 28, 2025  
 **Version:** 1.1
 
-**Purpose:** A comprehensive reference of all 23 WBP evaluation dimensions (S1-S19 + G1-G5), organized into Phase 1 (core) and Phase 2 (extended) evaluation frameworks.
+**Purpose:** A comprehensive reference of all 25 WBP evaluation dimensions (S1-S19 + G1-G6), organized into Phase 1 (core) and Phase 2 (extended) evaluation frameworks.
 
 ---
 
 ## Overview
 
-This document defines the complete set of **23 evaluation dimensions** for Workback Plan (WBP) assessment:
+This document defines the complete set of **25 evaluation dimensions** for Workback Plan (WBP) assessment:
 
 | Layer | Total | Phase 1 | Phase 2 |
 |-------|:-----:|:-------:|:-------:|
 | Structural (S1-S19) | 19 | 9 | 10 |
-| Grounding (G1-G5) | 5 | 5 | 0 |
-| **Total** | **24** | **14** | **10** |
+| Grounding (G1-G6) | 6 | 6 | 0 |
+| **Total** | **25** | **15** | **10** |
 
 **Phase Legend:**
 - ✅ **Phase 1** — Core dimensions for initial evaluation framework (14 dimensions)
@@ -68,36 +68,39 @@ Additional structural dimensions for comprehensive planning aspects.
 
 ---
 
-## Grounding Dimensions (G1-G5)
+## Grounding Dimensions (G1-G6)
 
-Grounding dimensions verify factual accuracy against source data. **All 5 are Phase 1** dimensions for the evaluation framework.
+Grounding dimensions verify factual accuracy against source data. **All 6 are Phase 1** dimensions for the evaluation framework.
+
+**Note:** G1 (Hallucination Check) is placed first as the **overall grounding recall check**. If G2-G6 all pass, G1 passes. G1 also catches entity types not covered by G2-G6.
 
 | ID | Dimension | Weight | Phase | Template | Definition |
 |----|-----------|:------:|:-----:|----------|------------|
-| **G1** | Attendee Grounding | 3 | ✅ P1 | "All people mentioned must exist in {source.ATTENDEES}" | Attendees match source; no hallucinated names |
-| **G2** | Date/Time Grounding | 3 | ✅ P1 | "Meeting date must match {source.MEETING.StartTime}" | Meeting date/time/timezone match the source |
-| **G3** | Artifact Grounding | 2 | ✅ P1 | "All files must exist in {source.ENTITIES where type=File}" | Files/decks referenced exist in source repository |
-| **G4** | Topic Grounding | 2 | ✅ P1 | "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}" | Agenda topics align with source priorities/context |
-| **G5** | Hallucination Check | 3 | ✅ P1 | "No entities introduced that don't exist in source" | No extraneous entities or fabricated details |
+| **G1** | Hallucination Check | 3 | ✅ P1 | "No entities introduced that don't exist in source" | Overall grounding recall - no fabricated entities |
+| **G2** | Attendee Grounding | 3 | ✅ P1 | "All people mentioned must exist in {source.ATTENDEES}" | Attendees match source; no hallucinated names |
+| **G3** | Date/Time Grounding | 3 | ✅ P1 | "Meeting date must match {source.MEETING.StartTime}" | Meeting date/time/timezone match the source |
+| **G4** | Artifact Grounding | 2 | ✅ P1 | "All files must exist in {source.ENTITIES where type=File}" | Files/decks referenced exist in source repository |
+| **G5** | Topic Grounding | 2 | ✅ P1 | "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}" | Agenda topics align with source (nouns/subjects) |
+| **G6** | Task Grounding | 3 | ✅ P1 | "All tasks/action items must exist in {source.ENTITIES}" | Tasks derived from source, not fabricated (verbs/to-dos) |
 
 ---
 
-## Phase 1 Dimensions Summary (14 Total)
+## Phase 1 Dimensions Summary (15 Total)
 
 ### By Layer
 
 | Layer | Phase 1 Dimensions | Count |
 |-------|---------------------|:-----:|
 | Structural | S1, S2, S3, S4, S6, S11, S18, S19 | 9 |
-| Grounding | G1, G2, G3, G4, G5 | 5 |
-| **Total** | | **14** |
+| Grounding | G1, G2, G3, G4, G5, G6 | 6 |
+| **Total** | | **15** |
 
 ### By Weight
 
 | Weight | Level | Phase 1 Dimensions | Count |
 |:------:|-------|---------------------|:-----:|
-| 3 | Critical | S1, S2, S3, G1, G2, G5 | 6 |
-| 2 | Moderate | S4, S6, S11, S19, G3, G4 | 6 |
+| 3 | Critical | S1, S2, S3, G1, G2, G3, G6 | 7 |
+| 2 | Moderate | S4, S6, S11, S19, G4, G5 | 6 |
 | 1 | Light | S18 | 1 |
 
 **Note:** S19 weight was updated from 1 to 2 to reflect its importance for transparency.
@@ -165,11 +168,12 @@ Based on conversion of 2,318 assertions from 224 meetings:
 
 | ID | Dimension | Success Example | Fail Example |
 |----|-----------|-----------------|--------------|
-| G1 | Attendee Grounding | Attendees exactly match invite roster | Adds "John Doe" not in source |
-| G2 | Date/Time Grounding | Date/time exactly match invite | Uses Dec 16 instead of Dec 15 |
-| G3 | Artifact Grounding | Deck link points to real file | Links to non-existent file |
-| G4 | Topic Grounding | Topics match source agenda | Adds "New launch" not in source |
-| G5 | Hallucination Check | No extra entities beyond source | Includes fabricated task |
+| G1 | Hallucination Check | No extra entities beyond source | Invents "Project Beta" or fake relationships |
+| G2 | Attendee Grounding | Attendees exactly match invite roster | Adds "John Doe" not in source |
+| G3 | Date/Time Grounding | Date/time exactly match invite | Uses Dec 16 instead of Dec 15 |
+| G4 | Artifact Grounding | Deck link points to real file | Links to non-existent file |
+| G5 | Topic Grounding | Topics match source agenda | Adds "New launch" not in source |
+| G6 | Task Grounding | Tasks match action items in emails/chats | Invents "Review Q4 budget" task |
 
 ---
 
@@ -201,11 +205,12 @@ Based on conversion of 2,318 assertions from 224 meetings:
 │                    GROUNDING DIMENSIONS                         │
 │              "Are those elements FACTUALLY CORRECT?"            │
 ├─────────────────────────────────────────────────────────────────┤
-│  ✅ P1: G1: Attendee Grounding — People exist in source?        │
-│  ✅ P1: G2: Date/Time Grounding — Dates match source?           │
-│  ✅ P1: G3: Artifact Grounding — Files exist in source?         │
-│  ✅ P1: G4: Topic Grounding — Topics align with source?         │
-│  ✅ P1: G5: Hallucination Check — No fabricated entities?       │
+│  ✅ P1: G1: Hallucination Check — Overall recall check (first)  │
+│  ✅ P1: G2: Attendee Grounding — People exist in source?        │
+│  ✅ P1: G3: Date/Time Grounding — Dates match source?           │
+│  ✅ P1: G4: Artifact Grounding — Files exist in source?         │
+│  ✅ P1: G5: Topic Grounding — Topics align with source? (nouns) │
+│  ✅ P1: G6: Task Grounding — Tasks exist in source? (verbs)     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -226,7 +231,9 @@ Based on conversion of 2,318 assertions from 224 meetings:
 
 ## Evaluation Priority Order
 
-1. **Grounding First (G1-G5)** — Factual accuracy is paramount
+1. **Grounding First (G1-G6)** — Factual accuracy is paramount
+   - G1 (Hallucination Check) is the overall recall check
+   - G2-G6 are specific entity type checks
 2. **Critical Structural (S1, S2, S3)** — Weight = 3
 3. **Moderate Structural (S4, S6, S11, S19)** — Weight = 2
 4. **Light Structural (S18)** — Weight = 1
@@ -261,6 +268,9 @@ These dimensions are available for extended/comprehensive evaluation in Phase 2:
 
 ---
 
-*Document Version: 1.2*  
-*Last Updated: November 28, 2025*  
+*Document Version: 1.3*  
+*Last Updated: November 29, 2025*  
 *Author: Chin-Yew Lin*
+
+**Change Log:**
+- v1.3 (Nov 29): Reordered G dimensions - G1 is now Hallucination Check (overall recall); Added G6 (Task Grounding)

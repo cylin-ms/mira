@@ -30,7 +30,7 @@ Each dimension is evaluated independently with its own definition, weight, and s
 | S6  | Dependencies & Blockers  |   2    | Predecessors and risks identified; mitigation steps documented.                  | Blockers and mitigations listed; absence = fail.                               |
 | S7  | Source Traceability      |   2    | Tasks/artifacts link back to original source priorities/files.                   | Every task/artifact maps to source; missing links = fail.                      |
 | S8  | Communication Channels   |   1    | Collaboration methods specified (Teams, email, meeting cadence).                 | Channels explicitly stated; absence = fail.                                    |
-| S9  | Grounding Meta-Check     |   2    | All Grounding assertions (G1–G5) pass; no factual drift.                         | Plan aligns fully with source; any hallucination = fail.                       |
+| S9  | Grounding Meta-Check     |   2    | All Grounding assertions (G1–G6) pass; no factual drift.                         | Plan aligns fully with source; any hallucination = fail.                       |
 | S10 | Priority Assignment      |   2    | Tasks ranked by critical path/impact on meeting success.                         | Priority tags present; high-impact tasks appear before dependent milestones.   |
 
 ### Extended Dimensions (S11–S18)
@@ -53,13 +53,16 @@ Each dimension is evaluated independently with its own definition, weight, and s
 ---
 ## Grounding Dimensions (G) — Sorted by Priority
 
+**Note:** G1 (Hallucination Check) is the **overall grounding recall check** placed first. If G2-G6 all pass, G1 passes. G1 also catches entity types not covered by G2-G6 (e.g., project names, budget figures, fabricated relationships).
+
 | ID  | Dimension              | Weight | Concise Definition                                        | Objective Evaluation Statement                                |
 |-----|------------------------|:------:|------------------------------------------------------------|----------------------------------------------------------------|
-| G1  | Attendee Grounding     |   3    | Attendees match source; no hallucinated names.             | All attendees verified against source list.                    |
-| G2  | Date/Time Grounding    |   3    | Meeting date/time/timezone match the source.               | No deviation from source meeting schedule.                     |
-| G5  | Hallucination Check    |   3    | No extraneous entities or fabricated details.              | Plan contains only source-backed entities.                     |
-| G3  | Artifact Grounding     |   2    | Files/decks referenced exist in the source repository.     | Artifacts validated; missing or fabricated = fail.             |
-| G4  | Topic Grounding        |   2    | Agenda topics align with source priorities/context.        | Topics match source; unrelated topics = fail.                  |
+| G1  | Hallucination Check    |   3    | No extraneous entities or fabricated details (overall).    | Plan contains only source-backed entities; if G2-G6 pass, G1 passes. |
+| G2  | Attendee Grounding     |   3    | Attendees match source; no hallucinated names.             | All attendees verified against source list.                    |
+| G3  | Date/Time Grounding    |   3    | Meeting date/time/timezone match the source.               | No deviation from source meeting schedule.                     |
+| G4  | Artifact Grounding     |   2    | Files/decks referenced exist in the source repository.     | Artifacts validated; missing or fabricated = fail.             |
+| G5  | Topic Grounding        |   2    | Agenda topics align with source priorities/context (nouns).| Topics match source; unrelated topics = fail.                  |
+| G6  | Task Grounding         |   3    | Tasks/action items derived from source material (verbs).   | All tasks traceable to source; fabricated tasks = fail.        |
 
 ---
 ## Success & Fail Examples — Each Dimension
@@ -96,11 +99,12 @@ Each dimension is evaluated independently with its own definition, weight, and s
 
 | ID  | Success Example                                                | Fail Example                                  |
 |-----|----------------------------------------------------------------|-----------------------------------------------|
-| G1  | Attendees exactly match the invite roster.                     | Adds "John Doe" not in source.                |
-| G2  | Date/time/timezone exactly match the invite.                   | Uses Dec 16 instead of Dec 15.                |
-| G3  | Deck link points to real file in repo; opens correctly.        | Links to non-existent or fabricated file.     |
-| G4  | Agenda topics: Budget, Strategy — match the source agenda.     | Adds "New product launch" not in source.      |
-| G5  | No extra tasks or entities beyond source-backed items.         | Includes "Prepare marketing video" not in source. |
+| G1  | No extra entities or relationships beyond source-backed items. | Invents "Project Beta" or fabricated coordination. |
+| G2  | Attendees exactly match the invite roster.                     | Adds "John Doe" not in source.                |
+| G3  | Date/time/timezone exactly match the invite.                   | Uses Dec 16 instead of Dec 15.                |
+| G4  | Deck link points to real file in repo; opens correctly.        | Links to non-existent or fabricated file.     |
+| G5  | Agenda topics: Budget, Strategy — match the source agenda.     | Adds "New product launch" not in source.      |
+| G6  | Tasks match action items mentioned in source emails/chats.     | Includes "Review Q4 budget" not in any source.|
 
 ---
 ## Gold Reference — Ideal WBP (One-Page Checklist)
@@ -110,7 +114,7 @@ A plan **fulfills the goal of an ideal WBP** when it:
 2. Assigns accountable owners (S3) — or role/skill placeholders when names are pending.  
 3. Lists deliverables with working links and versions (S4), and sets dates per task (S5).  
 4. Captures dependencies/risks plus mitigations (S6, S11) and prioritizes the critical path (S10).  
-5. Grounds all entities to source (S7, G1–G5, S9); **no hallucinations**.  
+5. Grounds all entities to source (S7, G1–G6, S9); **no hallucinations**.  
 6. Plans for execution quality (S14, S16, S17), closes the loop (S18), and states clear success criteria (S13).  
 7. Meets compliance needs (S15) and specifies channels (S8) for coordination.  
 
@@ -164,9 +168,10 @@ Use in an LLM-as-Judge pipeline; supports role/skill-based ownership.
       "S18": { "score": 0, "weight": 1, "rationale": "string", "suggested_fix": "string" },
       "G1": { "score": 0, "weight": 3, "rationale": "string", "suggested_fix": "string" },
       "G2": { "score": 0, "weight": 3, "rationale": "string", "suggested_fix": "string" },
-      "G3": { "score": 0, "weight": 2, "rationale": "string", "suggested_fix": "string" },
+      "G3": { "score": 0, "weight": 3, "rationale": "string", "suggested_fix": "string" },
       "G4": { "score": 0, "weight": 2, "rationale": "string", "suggested_fix": "string" },
-      "G5": { "score": 0, "weight": 3, "rationale": "string", "suggested_fix": "string" }
+      "G5": { "score": 0, "weight": 2, "rationale": "string", "suggested_fix": "string" },
+      "G6": { "score": 0, "weight": 3, "rationale": "string", "suggested_fix": "string" }
     },
     "summary": {
       "weighted_score": 0.0,

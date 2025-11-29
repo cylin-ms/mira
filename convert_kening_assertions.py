@@ -175,7 +175,19 @@ DIMENSION_SPEC = {
         "fail_example": "Plan presents uncertain items as facts; no disclosure of assumptions."
     },
     # Grounding Dimensions
+    # G1 is the overall recall check - should pass if all other G dimensions pass
     "G1": {
+        "name": "Hallucination Check",
+        "weight": 3,
+        "layer": "grounding",
+        "level": "grounding",
+        "template": 'No entities introduced that don\'t exist in source',
+        "definition": "No extraneous entities or fabricated details. Overall grounding recall check.",
+        "evaluation": "Plan contains only source-backed entities. If G2-G6 all pass, G1 passes.",
+        "success_example": "No extra tasks or entities beyond source-backed items.",
+        "fail_example": "Includes 'Prepare marketing video' not in source."
+    },
+    "G2": {
         "name": "Attendee Grounding",
         "weight": 3,
         "layer": "grounding",
@@ -186,7 +198,7 @@ DIMENSION_SPEC = {
         "success_example": "Attendees exactly match the invite roster.",
         "fail_example": "Adds 'John Doe' not in source."
     },
-    "G2": {
+    "G3": {
         "name": "Date/Time Grounding",
         "weight": 3,
         "layer": "grounding",
@@ -197,7 +209,7 @@ DIMENSION_SPEC = {
         "success_example": "Date/time/timezone exactly match the invite.",
         "fail_example": "Uses Dec 16 instead of Dec 15."
     },
-    "G3": {
+    "G4": {
         "name": "Artifact Grounding",
         "weight": 2,
         "layer": "grounding",
@@ -208,7 +220,7 @@ DIMENSION_SPEC = {
         "success_example": "Deck link points to real file in repo.",
         "fail_example": "Links to non-existent or fabricated file."
     },
-    "G4": {
+    "G5": {
         "name": "Topic Grounding",
         "weight": 2,
         "layer": "grounding",
@@ -219,16 +231,16 @@ DIMENSION_SPEC = {
         "success_example": "Agenda topics match the source agenda.",
         "fail_example": "Adds 'New product launch' not in source."
     },
-    "G5": {
-        "name": "Hallucination Check",
+    "G6": {
+        "name": "Task Grounding",
         "weight": 3,
         "layer": "grounding",
         "level": "grounding",
-        "template": 'No entities introduced that don\'t exist in source',
-        "definition": "No extraneous entities or fabricated details.",
-        "evaluation": "Plan contains only source-backed entities.",
-        "success_example": "No extra tasks or entities beyond source-backed items.",
-        "fail_example": "Includes 'Prepare marketing video' not in source."
+        "template": 'All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)',
+        "definition": "Tasks and action items derived from source material, not fabricated.",
+        "evaluation": "All tasks traceable to source entities; fabricated tasks = fail.",
+        "success_example": "Action items match those mentioned in source emails/chats.",
+        "fail_example": "Adds 'Review Q4 budget' task not mentioned in any source."
     }
 }
 

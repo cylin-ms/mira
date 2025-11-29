@@ -29,9 +29,9 @@ We have successfully migrated **2,318 assertions** across **224 meetings** from 
 
 | Problem (Kening's Original) | Solution (WBP Framework) |
 |----------------------------|--------------------------|
-| 232 inconsistent dimension names | 14 well-defined dimensions with clear codes (S1-S19, G1-G5) |
+| 232 inconsistent dimension names | 25 well-defined dimensions with clear codes (S1-S19, G1-G6) |
 | Hardcoded dates and names | Template-based reusable assertions |
-| Only ~3% grounding checks | Dedicated Grounding layer (G1-G5) |
+| Only ~3% grounding checks | Dedicated Grounding layer (G1-G6) |
 | Inconsistent phrasing | Standardized evaluation criteria |
 
 ### Dimension Distribution
@@ -61,7 +61,7 @@ A dedicated viewer for WBP assertions with the following features:
 
 - **Color-coded dimension badges**
   - 🔵 **Blue** = Structural dimensions (S1-S19)
-  - 🟣 **Purple** = Grounding dimensions (G1-G5)
+  - 🟣 **Purple** = Grounding dimensions (G1-G6)
 
 - **Smart assertion sorting**
   - Structural assertions (S) displayed before Grounding (G)
@@ -134,7 +134,7 @@ This structure supports:
 
 2. **Consider consolidating S5 into S2** - The 16 S5 (Task Dates) assertions overlap with S2 (Timeline Alignment)
 
-3. **Add more Grounding assertions** - Currently only 2.8% are grounding-layer; consider generating more G1-G4 assertions
+3. **Add more Grounding assertions** - Currently only 2.8% are grounding-layer; consider generating more G2-G6 assertions
 
 ---
 
@@ -154,11 +154,14 @@ This structure supports:
 | S19 | Caveat & Clarification |
 
 ### Grounding Dimensions (G)
-| Code | Name |
-|------|------|
-| G1 | Attendee Grounding |
-| G4 | Topic Grounding |
-| G5 | Hallucination Check |
+| Code | Name | Description |
+|------|------|-------------|
+| G1 | Hallucination Check | **Overall recall** - no fabricated entities (if G2-G6 pass, G1 passes) |
+| G2 | Attendee Grounding | People mentioned exist in source |
+| G3 | DateTime Grounding | Dates/times match source |
+| G4 | Artifact Grounding | Files/documents exist in source |
+| G5 | Topic Grounding | Topics align with source (nouns) |
+| G6 | Task Grounding | Tasks/action items exist in source (verbs/to-dos) |
 
 ---
 

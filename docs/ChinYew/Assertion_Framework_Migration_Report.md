@@ -15,10 +15,11 @@
 5. [Phase 1 vs Phase 2 Distribution](#4-phase-1-vs-phase-2-distribution)
 6. [Quality Assessment](#5-quality-assessment)
 7. [Insights & Analysis](#6-insights--analysis)
-8. [Recommendations](#7-recommendations)
-9. [Data Files Reference](#8-data-files-reference)
-10. [Scripts Reference](#9-scripts-reference)
-11. [Conclusion](#10-conclusion)
+8. [Grounding Layer Design Rationale](#7-grounding-layer-design-rationale) ← **NEW**
+9. [Recommendations](#8-recommendations)
+10. [Data Files Reference](#9-data-files-reference)
+11. [Scripts Reference](#10-scripts-reference)
+12. [Conclusion](#11-conclusion)
 
 ---
 
@@ -287,9 +288,95 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 ---
 
-## 7. Recommendations
+## 7. Grounding Layer Design Rationale
 
-### For Evaluation Pipeline
+### 7.1 Updated Grounding Dimensions (G1-G6)
+
+The Grounding layer has been reorganized for clarity and extensibility:
+
+| Code | Name | Entity Type | Description |
+|------|------|-------------|-------------|
+| **G1** | **Hallucination Check** | **All** | Overall recall check - catches any fabricated entity |
+| G2 | Attendee Grounding | People | Names/people exist in source |
+| G3 | Date/Time Grounding | Temporal | Dates/times match source |
+| G4 | Artifact Grounding | Files | Documents/files exist in source |
+| G5 | Topic Grounding | Nouns | Topics/subjects align with source |
+| G6 | Task Grounding | Verbs | Tasks/action items exist in source |
+
+### 7.2 Why G1 (Hallucination Check) is First
+
+**Design Decision:** G1 is placed first as the **overall grounding recall check**.
+
+**Relationship:** `G1 = G2 ∧ G3 ∧ G4 ∧ G5 ∧ G6 ∧ (uncategorized entities)`
+
+If all specific checks (G2-G6) pass → G1 should pass.
+If any specific check fails → G1 fails.
+
+### 7.3 Why G1 is Valuable Beyond Being a "Catch-All"
+
+G1 serves important purposes beyond just aggregating G2-G6:
+
+#### Example 1: Uncategorized Entity Types
+
+**Scenario:** LLM response mentions a project code not covered by G2-G6.
+
+- **Source:** Email says "Project Alpha has $50K budget"
+- **LLM Output:** "Project Beta requires $75K budget" ← Hallucination!
+
+Neither G2-G6 covers "project names" or "budget figures" specifically.
+**G1 catches this** because "Project Beta" and "$75K" don't exist in source.
+
+#### Example 2: Fabricated Relationships
+
+**Scenario:** LLM invents a relationship between real entities.
+
+- **Source:** "Alice owns Task A. Bob owns Task B."
+- **LLM Output:** "Alice should coordinate with Bob on Task A" ← Fabricated coordination!
+
+G2 passes (Alice & Bob exist), G6 passes (Task A exists).
+**G1 catches this** because the "coordination relationship" doesn't exist in source.
+
+#### Example 3: Invented Meeting Outcomes
+
+**Scenario:** LLM creates conclusions not in the source.
+
+- **Source:** Meeting transcript discusses options, no decision made
+- **LLM Output:** "The team decided to proceed with Option B" ← Hallucination!
+
+No specific G2-G6 covers "decisions" or "outcomes".
+**G1 catches this** because the decision entity doesn't exist in source.
+
+#### Example 4: Hallucinated Context/Assumptions
+
+**Scenario:** LLM adds context not present in source.
+
+- **Source:** "Review the config changes before deployment"
+- **LLM Output:** "Due to the production outage last week, review config changes urgently"
+
+The "production outage" is fabricated context.
+**G1 catches this** as an entity/fact not in source.
+
+### 7.4 Extensibility
+
+By placing G1 first, future grounding dimensions (G7, G8, etc.) can be added without burying the overall recall check:
+
+```
+G1  - Overall Hallucination Check (always first)
+G2  - Attendee Grounding
+G3  - Date/Time Grounding
+G4  - Artifact Grounding
+G5  - Topic Grounding
+G6  - Task Grounding
+G7  - (Future: Quantitative Grounding - budgets, counts, percentages)
+G8  - (Future: Location Grounding - places, rooms, addresses)
+...
+```
+
+---
+
+## 8. Recommendations
+
+### 8.1 For Evaluation Pipeline
 
 1. **Use Phase 1 Framework** - With 99.3% of assertions already mapping to Phase 1 dimensions, the 14-dimension framework is well-suited for immediate evaluation.
 
@@ -297,7 +384,7 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 3. **Add More Grounding Assertions** - Currently only 2.8% are grounding-layer (66 assertions). Consider generating more G1-G4 assertions for comprehensive source verification.
 
-### For Future Assertion Generation
+### 8.2 For Future Assertion Generation
 
 1. **Use Chin-Yew's Templates** - Generate assertions using the standardized templates from the start.
 
@@ -309,7 +396,7 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 ---
 
-## 8. Data Files Reference
+## 9. Data Files Reference
 
 The conversion process produces three key JSONL files that document the migration pipeline:
 
@@ -442,7 +529,7 @@ assertions_converted_full.jsonl (Output)
 
 ---
 
-## 9. Scripts Reference
+## 10. Scripts Reference
 
 The conversion pipeline uses the following Python scripts:
 
@@ -488,7 +575,7 @@ python convert_kening_assertions.py
 
 ---
 
-## 10. Conclusion
+## 11. Conclusion
 
 The conversion from Kening's 232-dimension assertions to Chin-Yew's WBP framework represents a significant improvement:
 
