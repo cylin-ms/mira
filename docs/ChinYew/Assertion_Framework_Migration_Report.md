@@ -376,6 +376,107 @@ G10 - (Future: Location Grounding - places, rooms, addresses)
 ...
 ```
 
+### 7.5 How G7 and G8 Were Discovered (Data-Driven Analysis)
+
+G7 (Role Grounding) and G8 (Constraint Grounding) were identified through a **two-phase analysis** of 3,700 assertions from Kening's data.
+
+#### Data Sources Analyzed
+
+| Source | Assertions | Description |
+|--------|------------|-------------|
+| `11_25_output_with_matches.jsonl` | 1,382 | 102 meeting instances |
+| `Assertions_genv2_for_LOD1126part1.jsonl` | 2,318 | 224 meeting instances |
+| **Total** | **3,700** | Combined corpus |
+
+#### Phase 1: Keyword Pattern Analysis (Regex)
+
+First, a regex-based analysis (`analyze_grounding_gaps.py`) scanned assertion text for entity patterns:
+
+```python
+GROUNDING_PATTERNS = {
+    # Current G2-G6 coverage
+    'attendee/people': r'attendee|participant|name|person|owner',
+    'date/time': r'date|time|deadline|schedule|timeline',
+    'file/artifact': r'file|document|deck|slide|attachment',
+    'topic/subject': r'topic|subject|agenda|scope|objective',
+    'task/action': r'task|action|step|deliverable|milestone',
+    # Potential gaps (NOT in G2-G6)
+    'role/responsibility': r'role|responsible|accountable|raci|approver',
+    'constraint/limit': r'constraint|limit|restriction|requirement|must not',
+    ...
+}
+```
+
+**Regex Results (patterns NOT in G2-G6):**
+
+| Pattern | Count | Potential New G |
+|---------|-------|-----------------|
+| status/progress | 96 | Low signal |
+| role/responsibility | 74 | **G7 candidate** |
+| decision/outcome | 62 | Low signal |
+| constraint/limit | 40 | **G8 candidate** |
+
+#### Phase 2: GPT-5 Semantic Classification
+
+Simple regex over-counts due to incidental keyword matches. To get accurate classification, GPT-5 JJ analyzed a 300-assertion sample to identify **what each assertion is actually verifying**.
+
+**GPT-5 Classification Prompt:**
+```
+For each assertion, identify what type of grounding entity it is verifying.
+- If it fits G2-G6, label it with that dimension
+- If it verifies something NOT in G2-G6, propose a new category name
+
+Categories: [G2_Attendee, G3_DateTime, G4_Artifact, G5_Topic, G6_Task,
+            NEW_Status, NEW_Decision, NEW_Constraint, NEW_Priority,
+            NEW_Role, NEW_Location, NEW_Quantity, NEW_Communication, OTHER]
+```
+
+**GPT-5 Results (300 sample):**
+
+| Dimension | Count | % | Confidence |
+|-----------|-------|---|------------|
+| G6_Task | 65 | 22% | High: 62 |
+| G3_DateTime | 61 | 20% | High: 57 |
+| G5_Topic | 41 | 14% | High: 34 |
+| **NEW_Role** | **37** | **12%** | **High: 33** |
+| G4_Artifact | 34 | 11% | High: 32 |
+| G2_Attendee | 27 | 9% | High: 25 |
+| **NEW_Constraint** | **18** | **6%** | **Medium: 11** |
+| Other | 17 | 6% | - |
+
+#### Key Findings
+
+1. **G7 (Role Grounding)** - 37 occurrences (12% of sample)
+   - Example: *"The response should assign Markita Sitra and Rufina Ganie as owners for 'Gather current cache settings'..."*
+   - GPT-5 reasoning: "Assigns owners for a task, which relates to role/responsibility."
+
+2. **G8 (Constraint Grounding)** - 18 occurrences (6% of sample)
+   - Example: *"The response should disclose assumptions around weekend availability or owner confirmation due to the compressed timeline..."*
+   - GPT-5 reasoning: "Mentions assumptions around availability due to a compressed timeline, which is a constraint."
+
+3. **Why Other Candidates Were Rejected:**
+   - `NEW_Status` (1 occurrence) - Too rare in sample
+   - `NEW_Decision` (1 occurrence) - Overlaps with G5 (Topic)
+   - `NEW_Communication` (5 occurrences) - Overlaps with G4 (Artifact)
+
+#### Comparison: Regex vs GPT-5
+
+| Pattern | Regex Count | GPT-5 Count | Insight |
+|---------|-------------|-------------|---------|
+| role/responsibility | 74 | 37 | Regex over-counted by 2x |
+| constraint/limit | 40 | 18 | Regex over-counted by 2.2x |
+| status/progress | 96 | 1 | Regex massively over-counted |
+| decision/outcome | 62 | 1 | Regex massively over-counted |
+
+**Conclusion:** GPT-5 semantic classification filtered out false positives where keywords appeared incidentally rather than as the assertion's focus.
+
+#### Analysis Scripts
+
+| Script | Purpose | Output |
+|--------|---------|--------|
+| `analyze_grounding_gaps.py` | Regex keyword analysis | Console output |
+| `analyze_grounding_gaps_gpt5.py` | GPT-5 semantic classification | `docs/grounding_gap_analysis_gpt5.json` |
+
 ---
 
 ## 8. Recommendations
