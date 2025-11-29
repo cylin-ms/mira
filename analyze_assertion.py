@@ -45,6 +45,85 @@ S_TO_G_MAP = {
 }
 
 # =============================================================================
+# G RATIONALE FOR S - Why each G dimension applies to its parent S dimension
+# =============================================================================
+G_RATIONALE_FOR_S = {
+    # S1: Meeting Details
+    ("S1", "G2"): "Meeting details must reference actual attendees from the meeting context to verify participant accuracy",
+    ("S1", "G3"): "Meeting details must match the actual meeting date/time to ensure schedule accuracy",
+    ("S1", "G5"): "Meeting subject/agenda must align with actual topics from the meeting context",
+    
+    # S2: Timeline Alignment
+    ("S2", "G3"): "Timeline sequencing requires verifying that scheduled dates are consistent with the actual meeting date and don't conflict",
+    ("S2", "G6"): "Task ordering in the timeline must be traceable to actual action items discussed in the meeting",
+    
+    # S3: Ownership Assignment
+    ("S3", "G2"): "Task owners must be actual attendees who can be held accountable for the work",
+    ("S3", "G6"): "Ownership assignments must correspond to action items that were actually agreed upon",
+    
+    # S4: Deliverables & Artifacts
+    ("S4", "G4"): "Referenced deliverables/documents must actually exist or be creatable from available artifacts",
+    ("S4", "G5"): "Deliverables must align with topics actually discussed, not fabricated requirements",
+    
+    # S5: Task Dates
+    ("S5", "G3"): "Task start/end dates must be consistent with the meeting date and realistic timeframes",
+    
+    # S6: Dependencies & Blockers
+    ("S6", "G5"): "Dependencies must relate to topics actually discussed, not assumed or hallucinated blockers",
+    ("S6", "G6"): "Blockers should be traceable to action items or issues raised in the discussion",
+    
+    # S7: Meeting Outcomes
+    ("S7", "G5"): "Expected outcomes must align with actual meeting topics and agenda items",
+    ("S7", "G7"): "Outcomes should preserve the context of what was actually requested or discussed",
+    
+    # S8: Parallel Workstreams
+    ("S8", "G6"): "Parallel tasks must be traceable to distinct action items that can proceed independently",
+    
+    # S9: Checkpoints
+    ("S9", "G3"): "Checkpoint dates must be realistic and consistent with the project timeline",
+    ("S9", "G6"): "Checkpoints should align with key action items that need review",
+    
+    # S10: Resource Allocation
+    ("S10", "G2"): "Resource assignments must reference actual attendees or known team members",
+    
+    # S11: Risk Mitigation
+    ("S11", "G5"): "Identified risks must relate to topics actually discussed, not hypothetical concerns",
+    ("S11", "G6"): "Mitigation actions must be traceable to commitments made during the meeting",
+    
+    # S12: Communication Plan
+    ("S12", "G2"): "Communication recipients must be actual stakeholders from the attendee list",
+    ("S12", "G5"): "Communication topics must align with what was actually discussed",
+    
+    # S13: Escalation Protocol
+    ("S13", "G2"): "Escalation contacts must be actual attendees with authority to resolve issues",
+    
+    # S14: Feedback Integration
+    ("S14", "G5"): "Feedback mechanisms must relate to actual topics that need refinement",
+    ("S14", "G7"): "Feedback integration must preserve the original context and intent",
+    
+    # S15: Progress Tracking
+    ("S15", "G6"): "Progress metrics must track actual action items that were committed to",
+    
+    # S16: Assumptions & Prerequisites
+    ("S16", "G5"): "Listed assumptions must relate to topics actually discussed or implied",
+    ("S16", "G7"): "Prerequisites should preserve context from the original discussion",
+    
+    # S17: Cross-team Coordination
+    ("S17", "G2"): "Cross-team contacts must be actual people mentioned or implied in the meeting",
+    ("S17", "G5"): "Coordination needs must relate to actual cross-team topics discussed",
+    
+    # S18: Post-Event Actions
+    ("S18", "G2"): "Post-event action owners must be actual attendees who can execute them",
+    ("S18", "G3"): "Post-event deadlines must be realistic relative to the meeting date",
+    ("S18", "G6"): "Post-event actions must be traceable to decisions made during the meeting",
+    
+    # S19: Caveat & Clarification
+    ("S19", "G5"): "Caveats must relate to actual topics discussed, not fabricated limitations",
+    ("S19", "G7"): "Clarifications must preserve the original context and not distort meaning",
+    ("S19", "G8"): "Clarifications must adhere to any specific user instructions about format or scope",
+}
+
+# =============================================================================
 # DIMENSION SPECIFICATIONS
 # =============================================================================
 DIMENSION_SPEC = {
@@ -254,6 +333,12 @@ def generate_sg_assertions(gpt5_result: dict, assertion_text: str, assertion_ind
             
             g_assertion_id = f"A{assertion_index:04d}_{g_dim}_{g_idx}"
             
+            # Get specific rationale for why this G applies to this S
+            g_rationale = G_RATIONALE_FOR_S.get(
+                (dimension_id, g_dim),
+                f"Generated from {dimension_id}: {g_spec.get('name', '')} grounds {dimension_name}"
+            )
+            
             g_assertion = {
                 "assertion_id": g_assertion_id,
                 "parent_assertion_id": primary_assertion_id,
@@ -265,7 +350,7 @@ def generate_sg_assertions(gpt5_result: dict, assertion_text: str, assertion_ind
                 "level": "critical",
                 "weight": g_spec.get('weight', 3),
                 "rationale": {
-                    "mapping_reason": f"Generated from {dimension_id} via S_TO_G_MAP",
+                    "mapping_reason": g_rationale,
                     "parent_dimension": dimension_id,
                     "parent_dimension_name": dimension_name,
                     "conversion_method": "s_to_g_mapping"
