@@ -574,18 +574,42 @@ DIMENSION_MAP = {
 # =============================================================================
 # GPT-5 CONVERSION PROMPT
 # =============================================================================
+# Full prompt documentation: prompts/convert_assertions_prompt.md
+# =============================================================================
 
-SYSTEM_PROMPT = """You are an expert at converting assertions to a standardized format.
+PROMPT_FILE = os.path.join(os.path.dirname(__file__), "prompts", "convert_assertions_prompt.md")
+
+def load_system_prompt():
+    """Load system prompt from markdown file, extracting the code block."""
+    try:
+        with open(PROMPT_FILE, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Extract system prompt from markdown code block
+        import re
+        match = re.search(r'## System Prompt\s+```\s*(.*?)\s*```', content, re.DOTALL)
+        if match:
+            return match.group(1).strip()
+        else:
+            print(f"Warning: Could not extract system prompt from {PROMPT_FILE}, using fallback")
+            return get_fallback_system_prompt()
+    except FileNotFoundError:
+        print(f"Warning: Prompt file not found: {PROMPT_FILE}, using fallback")
+        return get_fallback_system_prompt()
+
+def get_fallback_system_prompt():
+    """Fallback system prompt if file not found."""
+    return """You are an expert at converting assertions to a standardized format.
 
 Your task is to:
 1. Analyze the original assertion from Kening's dataset
-2. Map it to the correct dimension (S1-S19 or G1-G5)
+2. Map it to the correct dimension (S1-S19 or G1-G8)
 3. Rewrite the assertion using the standardized template
 4. Provide rationale for the conversion
 
 ## Target Dimensions (from WBP_Selected_Dimensions.md)
 
-### Structural (S) - Check PRESENCE
+### Structural (S) - Check PRESENCE ("Does the plan HAVE X?")
 - S1: Meeting Details - "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES]"
 - S2: Timeline Alignment - "The response should include a backward timeline from T₀ with dependency-aware sequencing"
 - S3: Ownership Assignment - "The response should assign an owner for each [TASK] or specify role/skill placeholder"
@@ -596,12 +620,15 @@ Your task is to:
 - S18: Post-Event Actions - "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)"
 - S19: Caveat & Clarification - "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS]"
 
-### Grounding (G) - Check ACCURACY vs Source
-- G1: Attendee Grounding - "All people mentioned must exist in {source.ATTENDEES}"
-- G2: Date/Time Grounding - "Meeting date must match {source.MEETING.StartTime}"
-- G3: Artifact Grounding - "All files must exist in {source.ENTITIES where type=File}"
-- G4: Topic Grounding - "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}"
-- G5: Hallucination Check - "No entities introduced that don't exist in source"
+### Grounding (G) - Check ACCURACY ("Is X CORRECT vs source?")
+- G1: Hallucination Check - "No entities introduced that don't exist in source"
+- G2: Attendee Grounding - "All people mentioned must exist in {source.ATTENDEES}"
+- G3: Date/Time Grounding - "Meeting date must match {source.MEETING.StartTime}"
+- G4: Artifact Grounding - "All files must exist in {source.ENTITIES where type=File}"
+- G5: Topic Grounding - "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}"
+- G6: Task Grounding - "All tasks/action items must exist in {source.ENTITIES}"
+- G7: Role Grounding - "All role/responsibility assignments must match {source.ENTITIES} or context"
+- G8: Constraint Grounding - "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}"
 
 ## Key Conversion Rules
 
@@ -611,6 +638,9 @@ Your task is to:
 4. **Level assignment** - critical (weight 3), expected (weight 2), aspirational (weight 1)
 
 Respond ONLY in valid JSON format."""
+
+# Load system prompt at module initialization
+SYSTEM_PROMPT = load_system_prompt()
 
 
 def get_conversion_prompt(assertion: Dict, response: str, mapped_dim: str) -> str:
