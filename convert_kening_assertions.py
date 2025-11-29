@@ -245,6 +245,51 @@ DIMENSION_SPEC = {
 }
 
 # =============================================================================
+# S-TO-G MAPPING: Which grounding checks apply to each structural dimension
+# =============================================================================
+# Each S dimension should have corresponding G checks to verify accuracy
+# This enables generating both S (structure) and G (grounding) assertions
+
+S_TO_G_MAP = {
+    # S1 (Meeting Details) → Check attendees and dates are correct
+    "S1": ["G2", "G3"],  # G2: Attendee Grounding, G3: Date/Time Grounding
+    
+    # S2 (Timeline) → Check dates and tasks are from source
+    "S2": ["G3", "G6"],  # G3: Date/Time Grounding, G6: Task Grounding
+    
+    # S3 (Ownership) → Check people and tasks are real
+    "S3": ["G2", "G6"],  # G2: Attendee Grounding, G6: Task Grounding
+    
+    # S4 (Deliverables) → Check artifacts exist in source
+    "S4": ["G4"],  # G4: Artifact Grounding
+    
+    # S5 (Task Dates) → Check dates and tasks
+    "S5": ["G3", "G6"],  # G3: Date/Time Grounding, G6: Task Grounding
+    
+    # S6 (Dependencies) → Check tasks/blockers are real
+    "S6": ["G6"],  # G6: Task Grounding
+    
+    # S11 (Risk) → Check topics and tasks
+    "S11": ["G5", "G6"],  # G5: Topic Grounding, G6: Task Grounding
+    
+    # S18 (Post-Event) → Check tasks
+    "S18": ["G6"],  # G6: Task Grounding
+    
+    # S19 (Caveat) → Check topics/assumptions align with source
+    "S19": ["G5"],  # G5: Topic Grounding
+}
+
+# Grounding assertions that map from original grounding dimensions
+G_DIRECT_MAP = {
+    "G1": "G1",  # Hallucination Check (overall)
+    "G2": "G2",  # Attendee Grounding (was G1 in old mapping)
+    "G3": "G3",  # Date/Time Grounding (was G2)
+    "G4": "G4",  # Artifact Grounding (was G3)
+    "G5": "G5",  # Topic Grounding (was G4)
+    "G6": "G6",  # Task Grounding (new)
+}
+
+# =============================================================================
 # KENING'S DIMENSION MAPPING
 # =============================================================================
 
@@ -691,7 +736,7 @@ def save_checkpoint(checkpoint: Dict):
 
 
 def convert_assertion_heuristic(assertion: Dict) -> Dict:
-    """Heuristic conversion without GPT-5."""
+    """Heuristic conversion without GPT-5 - returns single assertion."""
     original_dim = assertion.get('anchors', {}).get('Dim', 'unknown')
     mapped_dim = DIMENSION_MAP.get(original_dim, "UNMAPPED")
     dim_spec = DIMENSION_SPEC.get(mapped_dim, {})
@@ -729,6 +774,65 @@ def convert_assertion_heuristic(assertion: Dict) -> Dict:
         },
         "conversion_method": "heuristic"
     }
+
+
+def convert_assertion_with_grounding(assertion: Dict) -> List[Dict]:
+    """
+    Convert assertion to S+G pair(s).
+    
+    For each original assertion:
+    1. Generate the primary S (structural) assertion
+    2. Generate corresponding G (grounding) assertions based on S_TO_G_MAP
+    
+    Returns: List of converted assertions (1 S + 0-N G assertions)
+    """
+    results = []
+    original_dim = assertion.get('anchors', {}).get('Dim', 'unknown')
+    mapped_dim = DIMENSION_MAP.get(original_dim, "UNMAPPED")
+    original_text = assertion.get('text', '')
+    level = assertion.get('level', 'expected')
+    
+    # Generate primary assertion (S or G)
+    primary = convert_assertion_heuristic(assertion)
+    results.append(primary)
+    
+    # If mapped to a structural dimension, add corresponding grounding assertions
+    if mapped_dim.startswith("S") and mapped_dim in S_TO_G_MAP:
+        g_dims = S_TO_G_MAP[mapped_dim]
+        
+        for g_dim in g_dims:
+            g_spec = DIMENSION_SPEC.get(g_dim, {})
+            if not g_spec:
+                continue
+            
+            # Create grounding assertion
+            g_assertion = {
+                "original_text": original_text,
+                "converted_text": g_spec.get('template', ''),
+                "dimension_id": g_dim,
+                "dimension_name": g_spec.get('name', 'Unknown'),
+                "layer": "grounding",
+                "level": "critical",  # Grounding is always critical
+                "weight": g_spec.get('weight', 3),
+                "sourceID": None,
+                "placeholders_used": [],
+                "rationale": {
+                    "mapping_reason": f"Generated from {mapped_dim} ({primary['dimension_name']}) via S_TO_G_MAP",
+                    "conversion_changes": ["Applied grounding template for factual verification"],
+                    "template_alignment": f"S→G mapping: {mapped_dim}→{g_dim}",
+                    "value_removed": "N/A (grounding complement)"
+                },
+                "quality_assessment": {
+                    "is_well_formed": True,
+                    "is_testable": True,
+                    "issues": []
+                },
+                "conversion_method": "heuristic_s_to_g",
+                "derived_from": mapped_dim
+            }
+            results.append(g_assertion)
+    
+    return results
 
 
 def convert_assertion_gpt5(assertion: Dict, response: str) -> Dict:
@@ -819,6 +923,10 @@ def compute_statistics(all_conversions: List[Dict]) -> Dict:
     
     # Conversion method
     gpt5_converted = sum(1 for c in all_conversions if c.get("conversion_method") == "gpt5")
+    heuristic_s_to_g = sum(1 for c in all_conversions if c.get("conversion_method") == "heuristic_s_to_g")
+    
+    # Count derived grounding assertions (from S_TO_G_MAP)
+    derived_from_s = sum(1 for c in all_conversions if c.get("derived_from"))
     
     return {
         "total_assertions": total,
@@ -832,7 +940,11 @@ def compute_statistics(all_conversions: List[Dict]) -> Dict:
         "gpt5_converted": gpt5_converted,
         "gpt5_rate": round(gpt5_converted / total * 100, 1),
         "unmapped_count": dim_counts.get("UNMAPPED", 0),
-        "unmapped_rate": round(dim_counts.get("UNMAPPED", 0) / total * 100, 1)
+        "unmapped_rate": round(dim_counts.get("UNMAPPED", 0) / total * 100, 1),
+        "s_to_g_derived": heuristic_s_to_g,
+        "s_to_g_derived_rate": round(heuristic_s_to_g / total * 100, 1) if total > 0 else 0,
+        "structural_count": layer_counts.get("structural", 0),
+        "grounding_count": layer_counts.get("grounding", 0),
     }
 
 
@@ -848,6 +960,7 @@ def main():
     parser.add_argument("--force", action="store_true", help="Force reprocess all")
     parser.add_argument("--dry-run", action="store_true", help="Use heuristic only (no GPT-5)")
     parser.add_argument("--batch-size", type=int, default=5, help="Assertions per GPT-5 call")
+    parser.add_argument("--with-grounding", action="store_true", help="Generate S+G assertion pairs")
     args = parser.parse_args()
     
     print("=" * 70)
@@ -902,6 +1015,12 @@ def main():
         print("🔧 Dry-run mode: Using heuristic conversion only")
         use_gpt5 = False
     
+    # S+G mode
+    generate_grounding = args.with_grounding
+    if generate_grounding:
+        print()
+        print("🔗 S+G Mode: Will generate grounding assertions for each structural assertion")
+    
     print()
     print("🔄 Converting assertions...")
     print("-" * 70)
@@ -930,11 +1049,17 @@ def main():
                     time.sleep(DELAY_BETWEEN_BATCHES)
                 except Exception as e:
                     print(f"    ⚠️ Batch error: {e}")
-                    meeting_conversions.extend([convert_assertion_heuristic(a) for a in batch])
+                    for a in batch:
+                        if generate_grounding:
+                            meeting_conversions.extend(convert_assertion_with_grounding(a))
+                        else:
+                            meeting_conversions.append(convert_assertion_heuristic(a))
             else:
-                meeting_conversions.extend([convert_assertion_heuristic(a) for a in batch])
-        
-        # Store meeting result with both original assertions and conversions
+                for a in batch:
+                    if generate_grounding:
+                        meeting_conversions.extend(convert_assertion_with_grounding(a))
+                    else:
+                        meeting_conversions.append(convert_assertion_heuristic(a))        # Store meeting result with both original assertions and conversions
         all_results.append({
             "index": i,
             "utterance": item.get('utterance', ''),

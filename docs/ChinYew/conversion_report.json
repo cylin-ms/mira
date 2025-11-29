@@ -3,10 +3,10 @@
     "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
     "output_kening_enhanced": "docs/ChinYew/assertions_kening_enhanced.jsonl",
     "output_converted_full": "docs/ChinYew/assertions_converted_full.jsonl",
-    "timestamp": "2025-11-28T23:21:39.560888",
-    "num_meetings": 6,
-    "total_assertions": 60,
-    "conversion_method": "gpt5",
+    "timestamp": "2025-11-29T10:41:52.310827",
+    "num_meetings": 3,
+    "total_assertions": 81,
+    "conversion_method": "heuristic",
     "target_spec": "WBP_Selected_Dimensions.md"
   },
   "output_formats": {
@@ -38,36 +38,42 @@
     }
   },
   "statistics": {
-    "total_assertions": 60,
+    "total_assertions": 81,
     "dimension_distribution": {
-      "S1": 6,
-      "S4": 9,
-      "S3": 10,
-      "S6": 9,
-      "S2": 12,
-      "S19": 7,
-      "G5": 5,
-      "S18": 1,
-      "S11": 1
+      "S1": 3,
+      "G2": 8,
+      "G3": 11,
+      "S19": 3,
+      "G5": 4,
+      "S6": 5,
+      "G6": 18,
+      "S3": 5,
+      "S4": 8,
+      "G4": 8,
+      "S2": 8
     },
     "layer_distribution": {
-      "structural": 55,
-      "grounding": 5,
+      "structural": 32,
+      "grounding": 49,
       "unknown": 0
     },
     "level_distribution": {
-      "critical": 35,
-      "expected": 23,
-      "aspirational": 2
+      "critical": 64,
+      "expected": 14,
+      "aspirational": 3
     },
-    "well_formed_count": 60,
+    "well_formed_count": 81,
     "well_formed_rate": 100.0,
-    "testable_count": 60,
+    "testable_count": 81,
     "testable_rate": 100.0,
-    "gpt5_converted": 60,
-    "gpt5_rate": 100.0,
+    "gpt5_converted": 0,
+    "gpt5_rate": 0.0,
     "unmapped_count": 0,
-    "unmapped_rate": 0.0
+    "unmapped_rate": 0.0,
+    "s_to_g_derived": 48,
+    "s_to_g_derived_rate": 59.3,
+    "structural_count": 32,
+    "grounding_count": 49
   },
   "dimension_templates": {
     "S1": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
@@ -79,11 +85,12 @@
     "S11": "The response should include concrete [RISK MITIGATION] strategies with owners",
     "S18": "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)",
     "S19": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
-    "G1": "All people mentioned must exist in {source.ATTENDEES}",
-    "G2": "Meeting date must match {source.MEETING.StartTime}",
-    "G3": "All files must exist in {source.ENTITIES where type=File}",
-    "G4": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
-    "G5": "No entities introduced that don't exist in source"
+    "G1": "No entities introduced that don't exist in source",
+    "G2": "All people mentioned must exist in {source.ATTENDEES}",
+    "G3": "Meeting date must match {source.MEETING.StartTime}",
+    "G4": "All files must exist in {source.ENTITIES where type=File}",
+    "G5": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
+    "G6": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)"
   },
   "dimension_mapping_used": {
     "Meeting Objective": "S1",
@@ -109,778 +116,1643 @@
   },
   "sample_conversions": [
     {
-      "index": 173,
-      "utterance": "Help me make a workback plan for the upcoming meeting 'Canary Pipeline Debrief & Metrics Analysis'",
-      "response": "Here’s your **comprehensive workback plan** for the meeting:\n\n---\n\n# ✅ Workback Plan for **“Canary Pipeline Debrief & Metrics Analysis”**\n**Meeting Date:** Friday, **2025-07-25**, **08:00–08:30 UTC**  \n**Organizer:** Keren Guisbert  \n**Attendees:** Cortez Dehn (DevOps), Rufina Ganie (Software Eng), Myles Mckoan (QA), Keren Guisbert  \n**Location:** Online – [Teams Meeting Link](https://teams.microsoft.com/l/meetup-join/120c38b1-775f-4a54-98b5-e01822bbda69)  \n**Objective:** Review canary pipeline run results, analyze deployment success/error counts/performance metrics, and plan next steps before production promotion.  \n**Current Time:** 2025-07-18 16:00 (+08:00).  \n⏳ **Time Remaining:** ~7 days (1 workweek) → tight but feasible.\n\n---\n\n## 📅 Timeline Overview\nThe plan works backward from **July 25** to today, balancing time for metrics collection, Q&A alignment, pre-read prep, and final setup.\n\n---\n\n## **Phase 1: Final Prep (Day Before Meeting)**  \n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| Finalize **meeting deck** with charts, success/error rates, latency graphs | **Thu, 2025-07-24, 17:00 UTC** | Keren Guisbert | Incorporate all QA validation and DevOps performance snapshots; confirm baseline vs canary deltas |\n| Send **pre-read email** + link to dashboard snapshot + Teams link | **Thu, 2025-07-24, EOD** | Keren | Mention questions to prep (promotion criteria, rollback gates) |\n| Confirm **Teams meeting logistics** (recording enabled, screen share) | **Thu, 2025-07-24** | Keren | Buffer for last-minute tech checks |\n\n---\n\n## **Phase 2: Analysis & Material Prep (Mid-Week)**  \n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| QA validates **error counts & performance metrics** in staging | **Wed, 2025-07-23** | Myles Mckoan | Confirm thresholds in Jenkins canary job logs |\n| DevOps aggregates **deployment success stats**, rollback triggers, pipeline logs | **Wed, 2025-07-23** | Cortez Dehn | Pull final Prometheus summaries & Azure DevOps pipeline history |\n| Prepare **summary dashboard exports** (Grafana / Pipeline JSON) | **Wed, 2025-07-23** | Keren | Use latest snapshots; include runbook drilldown links for on-call |\n| Draft meeting **agenda slide** (what we review, open decisions) | **Wed, 2025-07-23** | Keren | Keep concise: metrics summary, decision gates, next deployment window |\n\n---\n\n## **Phase 3: Team Checkpoint (Early Next Week)**  \n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| Internal **sync call (15 mins)** to resolve metrics interpretation | **Mon, 2025-07-21** | Keren (with Cortez, Rufina, Myles) | Confirm readiness and clarify any edge-case logs |\n| Collate **QA validation notes** on functional regressions (if any) | **Mon, 2025-07-21** | Myles | Provide Jira ticket list; highlight blockers to production push |\n| Define **decision criteria doc** for “Go/No-Go” after meeting | **Mon, 2025-07-21** | Cortez | Keep in shared drive for quick reference during meeting |\n\n---\n\n## **Phase 4: Immediate Next Steps (Today + Weekend)**  \n| Task | Due Date | Owner | Notes |\n|------|----------|-------|-------|\n| Retrieve **canary run artifacts**: Jenkins logs, metrics snapshots | **Fri, 2025-07-18 (today)** | Cortez Dehn | Store under `/pipeline/canary-2025-07` shared path |\n| Rufina reviews **code deltas** merged into canary build | **Sat, 2025-07-19** | Rufina | Check for risky commits that could explain spikes |\n| Open **draft deck shell** (title, agenda placeholders) | **Sat, 2025-07-19** | Keren | Outline now for faster population later |\n\n---\n\n### 📌 Key Assumptions & Risks  \n- **Assumption:** Canary metrics finalized by mid-week; no new pipeline failures after July 21.  \n- **Risk:** Metrics collection delayed → compresses deck prep; mitigate by drafting template early (as planned).  \n- **Mitigation:** Early checkpoint on 2025-07-21 ensures issues surface with 3+ days buffer.  \n\n---\n\n## ✅ Quick Links  \n- [Teams Meeting Link](https://teams.microsoft.com/l/meetup-join/120c38b1-775f-4a54-98b5-e01822bbda69)  \n- Related Docs: *TBD (Keren to confirm if analysis doc or dashboard snapshot is shared before pre-read)*  \n\n---\n\n**Summary:**  \nYou have a 7-day runway – focus this weekend on setting up scaffolding (deck shell, artifact collection), block Monday for alignment, dedicate Wed for heavy analysis + visuals, and leave Thursday for final touches and comms.\n\n---\n\n👉 Do you want me to **also generate a one-line executive summary** you can paste into the pre-read email, summarizing the meeting objective and required prep? Or **create the actual pre-read template now**?",
+      "index": 0,
+      "utterance": "Help me make a workback plan for the upcoming meeting '1:1 Action Items Review'",
+      "response": "✅ Workback Plan for **“1:1 Action Items Review”**\n\n**Meeting Details:**\n- Subject: 1:1 Action Items Review\n- Date/Time: 2025-07-26 @ 14:00–14:30 PST\n- Organizer: Tisa Odonoghue\n- Attendee: Nila Tanguma\n- Location: Microsoft Teams link\n- Current Time: 2025-07-25 22:00 (+08:00) → ~16 hours remain before meeting start\n\n**Assumptions & Risks:**\n- Assumed purpose: Close out configuration standards items and align on pending AIs\n- Timeline extremely tight → focus on immediate prep and alignment\n\n**Workback Schedule Highlights:**\n- Confirm agenda & time slot (Immediate)\n- Summarize Open Items from Previous Deep Dives by July 25, 23:00 PST\n- Draft Action Items Agenda Outline by July 26, 00:00 PST\n- Share pre-read with links to: Config_Change_Log.xlsx, Secure_Defaults_and_Vault_Guide.docx, Schema_Validation_Pipeline_Details.docx by July 26, 00:15 PST\n- Verify artifact accessibility by July 26, 00:30 PST\n- Meeting day prep tasks (check Teams link, create live doc) by July 26, 12:30 PST\n\n**Plan Owner:** Tisa Odonoghue\n**Next Check-in:** Immediate\n\nIncludes explicit assumption disclosure, artifact references, and compressed timeline context.",
       "original_assertions": [
         {
-          "text": "The response should explicitly state the meeting date and time as 2025-07-25 08:00 UTC, matching the scheduled meeting.",
+          "text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
           "level": "critical",
           "anchors": {
-            "Dim": "Meeting Objective & Scope",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Timeline & Meeting Details",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should schedule a task to send the pre-read email, including the Teams link and dashboard snapshot, at least 24 hours before 2025-07-25 08:00 UTC.",
+          "text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
           "level": "critical",
+          "anchors": {
+            "Dim": "Disclosure of assumptions",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
+          }
+        },
+        {
+          "text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Dependencies & Sequencing",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
+          }
+        },
+        {
+          "text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Ownership",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
+          }
+        },
+        {
+          "text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Meeting Objective & Scope",
+            "sourceID": "3bf21d05-6f05-4674-a3f1-3a15e5befc3e"
+          }
+        },
+        {
+          "text": "The response should include a task to share pre-reads that reference 'Config_Change_Log.xlsx', 'Secure_Defaults_and_Vault_Guide.docx', and 'Schema_Validation_Pipeline_Details.docx'.",
+          "level": "expected",
           "anchors": {
             "Dim": "Artifact Readiness",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "sourceID": "106554d5-ad9b-4972-863e-ad73a5fbd6fd"
           }
         },
         {
-          "text": "The response should assign ownership for QA validation of error counts and performance metrics to Myles Mckoan with a concrete due date before the meeting.",
-          "level": "critical",
-          "anchors": {
-            "Dim": "Ownership clarity",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
-          }
-        },
-        {
-          "text": "The response should include a dependency that retrieval of canary run artifacts by Cortez must occur before analysis tasks scheduled mid-week.",
-          "level": "expected",
-          "anchors": {
-            "Dim": "Dependencies & Sequencing",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
-          }
-        },
-        {
-          "text": "The response should reserve time for a team checkpoint alignment call on or before 2025-07-21 to resolve interpretation of canary metrics.",
+          "text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
           "level": "expected",
           "anchors": {
             "Dim": "Timeline & Buffers",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "sourceID": "106554d5-ad9b-4972-863e-ad73a5fbd6fd"
           }
         },
         {
-          "text": "The response should acknowledge that related documentation or dashboard snapshots to be included in the pre-read are marked as TBD and require confirmation.",
-          "level": "critical",
-          "anchors": {
-            "Dim": "Disclosure of Missing Info",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
-          }
-        },
-        {
-          "text": "The response should allocate the final meeting deck preparation task for July 24, clearly identified as to occur after QA and DevOps analysis tasks.",
-          "level": "critical",
-          "anchors": {
-            "Dim": "Dependencies & Sequencing",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
-          }
-        },
-        {
-          "text": "The response should specify that the meeting objective covers reviewing canary pipeline results, error rates, and planning next steps before production promotion.",
-          "level": "critical",
-          "anchors": {
-            "Dim": "Meeting Objective & Scope",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
-          }
-        },
-        {
-          "text": "The response should add a contingency buffer by completing core analysis on July 23, leaving at least one full day for final review.",
+          "text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
           "level": "expected",
           "anchors": {
-            "Dim": "Timeline & Buffers",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Logistics & Sequencing",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should not contradict the attendee list confirmed in the meeting invite (Keren Guisbert, Cortez Dehn, Rufina Ganie, and Myles Mckoan).",
+          "text": "The response should include a step to draft the agenda outline by July 26, 00:00 PST with bullet points aligned to schema validation and vault updates.",
+          "level": "aspirational",
+          "anchors": {
+            "Dim": "Agenda & Preparation Quality",
+            "sourceID": "3bf21d05-6f05-4674-a3f1-3a15e5befc3e"
+          }
+        },
+        {
+          "text": "The response should identify that artifact permissions need verification and clearly schedule this task before midnight buffer (by July 26, 00:30 PST).",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Artifact Readiness & Dependencies",
+            "sourceID": "106554d5-ad9b-4972-863e-ad73a5fbd6fd"
+          }
+        },
+        {
+          "text": "The response should not introduce any attendee other than Tisa Odonoghue and Nila Tanguma as participants in the plan.",
           "level": "critical",
           "anchors": {
-            "Dim": "Grounding & Traceability",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Accuracy & Scope",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         }
       ],
-      "num_assertions": 10,
+      "num_assertions": 11,
       "conversions": [
         {
-          "index": 1,
-          "original_text": "The response should explicitly state the meeting date and time as 2025-07-25 08:00 UTC, matching the scheduled meeting....",
+          "original_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
           "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
           "dimension_id": "S1",
           "dimension_name": "Meeting Details",
           "layer": "structural",
           "level": "critical",
           "weight": 3,
-          "sourceID": "{source.MEETING}",
-          "placeholders_used": [
-            "[SUBJECT]",
-            "[DATE/TIME]",
-            "[TIMEZONE]",
-            "[ATTENDEES]"
-          ],
+          "sourceID": null,
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion focuses on including meeting date/time and accuracy, which falls under S1: Meeting Details.",
+            "mapping_reason": "Kening's 'Timeline & Meeting Details' maps to S1 based on keyword matching",
             "conversion_changes": [
-              "Removed hardcoded date/time (2025-07-25 08:00 UTC)",
-              "Generalized to placeholders for subject, date/time, timezone, and attendees"
+              "Applied template pattern"
             ],
-            "template_alignment": "Aligned with S1 template requiring presence of subject, date/time, timezone, and attendees",
-            "value_removed": "Specific date/time replaced with placeholders"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 2,
-          "original_text": "The response should schedule a task to send the pre-read email, including the Teams link and dashboard snapshot, at least 24 hours before 2025-07-25 0...",
-          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
-          "dimension_id": "S4",
-          "dimension_name": "Deliverables & Artifacts",
-          "layer": "structural",
+          "original_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
+          "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
+          "dimension_id": "G2",
+          "dimension_name": "Attendee Grounding",
+          "layer": "grounding",
           "level": "critical",
           "weight": 3,
-          "sourceID": "{source.ENTITIES where type=File or MeetingLink}",
-          "placeholders_used": [
-            "[DELIVERABLES]"
-          ],
+          "sourceID": null,
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion is about ensuring pre-read email and links are included, which relates to deliverables and artifacts.",
+            "mapping_reason": "Generated from S1 (Meeting Details) via S_TO_G_MAP",
             "conversion_changes": [
-              "Removed specific timing requirement (24 hours before meeting)",
-              "Generalized to require listing deliverables with links and format"
+              "Applied grounding template for factual verification"
             ],
-            "template_alignment": "Aligned with S4 template requiring deliverables with working links and version/format",
-            "value_removed": "Specific email content and timing details replaced with generic deliverables requirement"
+            "template_alignment": "S→G mapping: S1→G2",
+            "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S1"
         },
         {
-          "index": 3,
-          "original_text": "The response should assign ownership for QA validation of error counts and performance metrics to Myles Mckoan with a concrete due date before the mee...",
+          "original_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
+          "converted_text": "Meeting date must match {source.MEETING.StartTime}",
+          "dimension_id": "G3",
+          "dimension_name": "Date/Time Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S1 (Meeting Details) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S1→G3",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S1"
+        },
+        {
+          "original_text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
+          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+          "dimension_id": "S19",
+          "dimension_name": "Caveat & Clarification",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 1,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Disclosure of assumptions' maps to S19 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
+          "converted_text": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
+          "dimension_id": "G5",
+          "dimension_name": "Topic Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S19 (Caveat & Clarification) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S19→G5",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S19"
+        },
+        {
+          "original_text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
+          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
+          "dimension_id": "S6",
+          "dimension_name": "Dependencies & Blockers",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Dependencies & Sequencing' maps to S6 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S6 (Dependencies & Blockers) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S6→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S6"
+        },
+        {
+          "original_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
           "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
           "dimension_id": "S3",
           "dimension_name": "Ownership Assignment",
           "layer": "structural",
           "level": "critical",
           "weight": 3,
-          "sourceID": "{source.ATTENDEES}",
-          "placeholders_used": [
-            "[TASK]"
-          ],
-          "rationale": {
-            "mapping_reason": "Original assertion emphasizes assigning ownership for tasks, which is S3.",
-            "conversion_changes": [
-              "Removed specific person name (Myles Mckoan)",
-              "Removed specific task details (QA validation of error counts and performance metrics)",
-              "Generalized to all tasks"
-            ],
-            "template_alignment": "Aligned with S3 template requiring owner assignment for each task",
-            "value_removed": "Specific owner and task details replaced with placeholders"
-          },
-          "quality_assessment": {
-            "is_well_formed": true,
-            "is_testable": true,
-            "issues": []
-          },
-          "conversion_method": "gpt5"
-        },
-        {
-          "index": 4,
-          "original_text": "The response should include a dependency that retrieval of canary run artifacts by Cortez must occur before analysis tasks scheduled mid-week....",
-          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
-          "dimension_id": "S6",
-          "dimension_name": "Dependencies & Blockers",
-          "layer": "structural",
-          "level": "expected",
-          "weight": 2,
-          "sourceID": null,
-          "placeholders_used": [
-            "[DEPENDENCIES/BLOCKERS]"
-          ],
-          "rationale": {
-            "mapping_reason": "Original assertion is about sequencing tasks and identifying dependencies, which is S6.",
-            "conversion_changes": [
-              "Removed specific dependency details (retrieval of canary run artifacts by Cortez)",
-              "Generalized to all dependencies and blockers"
-            ],
-            "template_alignment": "Aligned with S6 template requiring identification of dependencies/blockers and mitigation steps",
-            "value_removed": "Specific person and artifact details replaced with placeholders"
-          },
-          "quality_assessment": {
-            "is_well_formed": true,
-            "is_testable": true,
-            "issues": []
-          },
-          "conversion_method": "gpt5"
-        },
-        {
-          "index": 5,
-          "original_text": "The response should reserve time for a team checkpoint alignment call on or before 2025-07-21 to resolve interpretation of canary metrics....",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
-          "dimension_id": "S2",
-          "dimension_name": "Timeline Alignment",
-          "layer": "structural",
-          "level": "expected",
-          "weight": 2,
           "sourceID": null,
           "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion relates to timeline planning and sequencing, which is S2.",
+            "mapping_reason": "Kening's 'Ownership' maps to S3 based on keyword matching",
             "conversion_changes": [
-              "Removed specific checkpoint date (2025-07-21)",
-              "Generalized to backward timeline with dependency-aware sequencing"
+              "Applied template pattern"
             ],
-            "template_alignment": "Aligned with S2 template requiring backward timeline from T₀",
-            "value_removed": "Specific date and meeting details replaced with generic timeline requirement"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 1,
-          "original_text": "The response should acknowledge that related documentation or dashboard snapshots to be included in the pre-read are marked as TBD and require confirm...",
-          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
-          "dimension_id": "S19",
-          "dimension_name": "Caveat & Clarification",
-          "layer": "structural",
+          "original_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
+          "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
+          "dimension_id": "G2",
+          "dimension_name": "Attendee Grounding",
+          "layer": "grounding",
           "level": "critical",
           "weight": 3,
           "sourceID": null,
-          "placeholders_used": [
-            "[CAVEATS]",
-            "[ASSUMPTIONS]",
-            "[CLARIFICATIONS]"
-          ],
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion refers to acknowledging missing or TBD information, which aligns with S19's requirement to disclose caveats and clarifications.",
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
             "conversion_changes": [
-              "Removed specific mention of documentation/dashboard snapshots",
-              "Generalized to template placeholders for caveats and assumptions"
+              "Applied grounding template for factual verification"
             ],
-            "template_alignment": "Used S19 template: 'The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties'",
-            "value_removed": "Specific references to pre-read and dashboard snapshots"
+            "template_alignment": "S→G mapping: S3→G2",
+            "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
         },
         {
-          "index": 2,
-          "original_text": "The response should allocate the final meeting deck preparation task for July 24, clearly identified as to occur after QA and DevOps analysis tasks....",
-          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
-          "dimension_id": "S6",
-          "dimension_name": "Dependencies & Blockers",
-          "layer": "structural",
+          "original_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
           "level": "critical",
           "weight": 3,
           "sourceID": null,
-          "placeholders_used": [
-            "[DEPENDENCIES/BLOCKERS]"
-          ],
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion emphasizes sequencing and dependency of final deck preparation after QA and DevOps tasks, which fits S6.",
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
             "conversion_changes": [
-              "Removed specific date and task names",
-              "Generalized to dependency identification and mitigation"
+              "Applied grounding template for factual verification"
             ],
-            "template_alignment": "Used S6 template: 'The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented'",
-            "value_removed": "Specific date (July 24) and task details"
+            "template_alignment": "S→G mapping: S3→G6",
+            "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
         },
         {
-          "index": 3,
-          "original_text": "The response should specify that the meeting objective covers reviewing canary pipeline results, error rates, and planning next steps before productio...",
+          "original_text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
           "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
           "dimension_id": "S1",
           "dimension_name": "Meeting Details",
           "layer": "structural",
-          "level": "critical",
+          "level": "expected",
           "weight": 3,
-          "sourceID": "{source.MEETING}",
-          "placeholders_used": [
-            "[SUBJECT]",
-            "[DATE/TIME]",
-            "[TIMEZONE]",
-            "[ATTENDEES]"
-          ],
+          "sourceID": null,
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion focuses on meeting objective and scope, which is part of meeting details as per S1.",
+            "mapping_reason": "Kening's 'Meeting Objective & Scope' maps to S1 based on keyword matching",
             "conversion_changes": [
-              "Removed specific objective details",
-              "Replaced with placeholders for meeting details"
+              "Applied template pattern"
             ],
-            "template_alignment": "Used S1 template: 'The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately'",
-            "value_removed": "Specific mention of canary pipeline and next steps"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 4,
-          "original_text": "The response should add a contingency buffer by completing core analysis on July 23, leaving at least one full day for final review....",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
-          "dimension_id": "S2",
-          "dimension_name": "Timeline Alignment",
+          "original_text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
+          "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
+          "dimension_id": "G2",
+          "dimension_name": "Attendee Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S1 (Meeting Details) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S1→G2",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S1"
+        },
+        {
+          "original_text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
+          "converted_text": "Meeting date must match {source.MEETING.StartTime}",
+          "dimension_id": "G3",
+          "dimension_name": "Date/Time Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S1 (Meeting Details) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S1→G3",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S1"
+        },
+        {
+          "original_text": "The response should include a task to share pre-reads that reference 'Config_Change_Log.xlsx', 'Secure_Defaults_and_Vault_Guide.docx', and 'Schema_Validation_Pipeline_Details.docx'.",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
           "layer": "structural",
           "level": "expected",
           "weight": 2,
           "sourceID": null,
           "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion refers to timeline planning and buffer, which aligns with S2's requirement for backward timeline and sequencing.",
+            "mapping_reason": "Kening's 'Artifact Readiness' maps to S4 based on keyword matching",
             "conversion_changes": [
-              "Removed specific date (July 23)",
-              "Generalized to backward timeline requirement"
+              "Applied template pattern"
             ],
-            "template_alignment": "Used S2 template: 'The response should include a backward timeline from T₀ with dependency-aware sequencing'",
-            "value_removed": "Specific contingency buffer details"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 5,
-          "original_text": "The response should not contradict the attendee list confirmed in the meeting invite (Keren Guisbert, Cortez Dehn, Rufina Ganie, and Myles Mckoan)....",
-          "converted_text": "No entities introduced that don't exist in source",
-          "dimension_id": "G5",
-          "dimension_name": "Hallucination Check",
+          "original_text": "The response should include a task to share pre-reads that reference 'Config_Change_Log.xlsx', 'Secure_Defaults_and_Vault_Guide.docx', and 'Schema_Validation_Pipeline_Details.docx'.",
+          "converted_text": "All files must exist in {source.ENTITIES where type=File}",
+          "dimension_id": "G4",
+          "dimension_name": "Artifact Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S4 (Deliverables & Artifacts) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S4→G4",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S4"
+        },
+        {
+          "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Timeline & Buffers' maps to S2 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
+          "converted_text": "Meeting date must match {source.MEETING.StartTime}",
+          "dimension_id": "G3",
+          "dimension_name": "Date/Time Grounding",
           "layer": "grounding",
           "level": "critical",
           "weight": 3,
-          "sourceID": "{source.ATTENDEES}",
+          "sourceID": null,
           "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion ensures no extra attendees beyond the confirmed list, which aligns with G5 hallucination check.",
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
             "conversion_changes": [
-              "Removed specific attendee names",
-              "Generalized to no entities outside source"
+              "Applied grounding template for factual verification"
             ],
-            "template_alignment": "Used G5 template: 'No entities introduced that don't exist in source'",
-            "value_removed": "Specific attendee names"
+            "template_alignment": "S→G mapping: S2→G3",
+            "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
+          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
+          "dimension_id": "S6",
+          "dimension_name": "Dependencies & Blockers",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Logistics & Sequencing' maps to S6 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S6 (Dependencies & Blockers) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S6→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S6"
+        },
+        {
+          "original_text": "The response should include a step to draft the agenda outline by July 26, 00:00 PST with bullet points aligned to schema validation and vault updates.",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
+          "layer": "structural",
+          "level": "aspirational",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Agenda & Preparation Quality' maps to S4 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should include a step to draft the agenda outline by July 26, 00:00 PST with bullet points aligned to schema validation and vault updates.",
+          "converted_text": "All files must exist in {source.ENTITIES where type=File}",
+          "dimension_id": "G4",
+          "dimension_name": "Artifact Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S4 (Deliverables & Artifacts) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S4→G4",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S4"
+        },
+        {
+          "original_text": "The response should identify that artifact permissions need verification and clearly schedule this task before midnight buffer (by July 26, 00:30 PST).",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Artifact Readiness & Dependencies' maps to S4 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should identify that artifact permissions need verification and clearly schedule this task before midnight buffer (by July 26, 00:30 PST).",
+          "converted_text": "All files must exist in {source.ENTITIES where type=File}",
+          "dimension_id": "G4",
+          "dimension_name": "Artifact Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S4 (Deliverables & Artifacts) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S4→G4",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S4"
+        },
+        {
+          "original_text": "The response should not introduce any attendee other than Tisa Odonoghue and Nila Tanguma as participants in the plan.",
+          "converted_text": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
+          "dimension_id": "G5",
+          "dimension_name": "Topic Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Accuracy & Scope' maps to G5 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
         }
       ],
-      "timestamp": "2025-11-28T23:18:45.032523"
+      "timestamp": "2025-11-29T10:41:45.403839"
     },
     {
-      "index": 174,
-      "utterance": "Help me make a workback plan for the upcoming meeting 'Canary Pipeline Debrief & Metrics Analysis'",
-      "response": "Here’s an actionable **workback plan** for your upcoming meeting **\"Canary Pipeline Debrief & Metrics Analysis\"**, based strictly on the provided enterprise data.\n\n---\n\n## ✅ Meeting Details (from grounding data)\n- **Subject:** Canary Pipeline Debrief & Metrics Analysis  \n- **Date & Time:** **Friday, July 25, 2025 – 08:00–08:30 UTC**  \n- **Organizer:** Keren Guisbert (lod_kerenguisbert)  \n- **Attendees:** Cortez Dehn *(you)*, Keren G., Rufina G., Myles M.  \n- **Objective (from event body):**  \n  > Review outcome of the canary pipeline run, analyze deployment success rates, error counts, performance metrics, and plan next steps before promotion to production.  \n- **Location:** Teams Meeting Link  \n- **Current time:** 2025-07-18T16:00:00 +08:00 (≈7 days before meeting)  \n- **Related artifacts:**  \n  - *FeatureFlagInfra_Outcomes_Presentation.pdf* (pipeline bake, canary test outcomes)  \n  - *FeatureFlagInfra_PipelineMetrics.xlsx* (stage-level timings and success data)  \n\n---\n\n## 🔍 Context Observations   \n- Tight timeline: **7 calendar days**, 5 working days if assuming no weekend work.  \n- Related files show metrics and outcomes from previous pipeline work—should serve as pre-reads.  \n- Attendees are engineering and QA roles → expect technical discussion on metrics and quality gates.  \n- Objective implies **data consolidation**, **agenda alignment**, and **pre-read distribution** are critical.  \n\n---\n\n## 📅 Workback Plan (Anchored to July 25, 08:00 UTC)  \n\n### **Phase 1 – Final Prep (Meeting Week)**\n| #  | Task | Due Date | Owner | Notes |\n|----|------|----------|-------|-------|\n| 1 | **Validate call logistics** (Teams link, time zones) | **July 23 (Wed)** | Keren (Organizer) | Ensure no conflicts and attendees have link. |\n| 2 | **Dry-run review of metrics deck** | **July 24 (Thu), 12:00 UTC** | Cortez | Use *FeatureFlagInfra_Outcomes_Presentation.pdf* and pipeline metrics sheet; confirm all charts are up-to-date. |\n| 3 | **Send final reminder with agenda & pre-read links** | **July 24 (Thu), EOD** | Keren | Attach deck link + spreadsheet from shared location. |\n\n---\n\n### **Phase 2 – Core Content Finalization**\n| #  | Task | Due Date | Owner | Notes |\n|----|------|----------|-------|-------|\n| 4 | **Draft agenda (include discussion time for next steps)** | **July 21 (Mon)** | Keren + Cortez | Topics: success rate summary, error log analysis, gating thresholds. |\n| 5 | **Ingest latest canary run results** | **July 22 (Tue), noon UTC** | Cortez | Pull metrics from pipeline dashboards; update Excel file. |\n| 6 | **Update & freeze metrics deck** (*FeatureFlagInfra_Outcomes_Presentation.pdf*) | **July 22 (Tue), EOD** | Cortez | Ensure charts reflect final data; incorporate any delta from last runs. |\n\n---\n\n### **Phase 3 – Early Prep & Inputs Collection**\n| #  | Task | Due Date | Owner | Notes |\n|----|------|----------|-------|-------|\n| 7 | **Confirm attendee availability & roles (QA vs Eng)** | **July 19 (Sat)** | Keren | If conflicts arise, escalate for backup rep for QA or DevOps. |\n| 8 | **Identify open issues / high-risk anomalies in Canary** | **July 20 (Sun)** | Rufina & Myles | Flag any threshold breaches, error counts so pre-discussion data is visible. |\n| 9 | **Collect feedback from stakeholders on focus metrics** | **July 20 (Sun)** | Keren | Ping team on Slack/Teams channels for any extra agenda items. |\n\n---\n\n## 🗒 Notes / Assumptions\n- **Time zone check:** Meeting is in UTC; confirm local times for attendees.  \n- **Artifacts already exist** (PDF + XLSX) → no need to generate new templates.  \n- Owners inferred from roles:  \n  - *Cortez (you)* = DevOps metrics + deck update  \n  - *Keren* = Organizer + agenda/logistics  \n  - *Rufina & Myles* = QA/engineering anomaly validation  \n- Using buffer: key content frozen by **EOD July 22**, allows 2 days for distribution and last-minute fixes.  \n- Weekends included for availability check only; real work targeted on weekdays.  \n\n---\n\n### ✅ Summary Timeline\n- **T-6 days:** Confirm attendees & collect metric focus inputs (July 19–20)  \n- **T-4 days:** Agenda finalized; metrics refreshed (July 21–22)  \n- **T-1 day:** Pre-read & reminder sent; deck dry run (July 24)  \n- **Day 0:** Meeting at 08:00 UTC on July 25  \n\n---\n\nDo you want me to **auto-generate a consolidated pre-read packet link** (combining *PipelineMetrics.xlsx* and *Outcomes_Presentation.pdf*) and add **a timeline view (Gantt-like) for clarity**?",
+      "index": 1,
+      "utterance": "Help me make a workback plan for the upcoming meeting '1:1 Action Items Review'",
+      "response": "Here’s a comprehensive, **actionable workback plan** for the upcoming meeting, grounded entirely on the provided enterprise data:\n\n---\n\n## ✅ Meeting Details\n- **Meeting Subject:** `1:1 Action Items Review`\n- **Scheduled Date:** **Saturday, July 26, 2025**\n- **Time:** 14:00–14:30 PST (per calendar EventId: `0788e132-56ad-45de-a531-4553a88af64a`)\n- **Organizer:** Tisa Odonoghue (DevOps Engineer)\n- **Attendee(s):**  \n  - Nila Tanguma (Engineering Manager)  \n- **Location:** Online (Teams Meeting link provided)\n- **Current Time:** July 23, 2025, 22:00 +08:00 → roughly **2.5 days away**\n- **Objective:** Review action items from recent initiatives (context strongly tied to ongoing platform activities such as Jenkins security pipeline upgrades, compliance enforcement rollout, vault integration work, per multiple threads and files authored by Tisa).\n\n---\n\n## ⏪ Time Analysis\nToday (Jul 23, late evening APAC) → Meeting (Jul 26, 14:00 PST).  \n**Available prep time:** ~2.5 days (including only one weekday and part of Friday US time).  \n**Implication:** Tight schedule. Prioritize deliverables and confirm dependencies ASAP.\n\n---\n\n### **Preparation Goals Anchored on Context**\n- Integration work referenced in numerous recent messages:\n  - Jenkins security pipeline (parallelization, failure gating logic – see *Jenkinsfile.security.groovy*, DAST gating snippet)\n  - Vault Secret Management (Tisa authored a technical deep dive PDF on July 23)\n  - Compliance enforcement stage (mentions of staging dry run, Liquibase annotations, rollback metrics readiness)\n- Meeting likely to be a 1:1 checkpoint with Nila (an Engineering Manager) to confirm:  \n  - Status of compliance tasks  \n  - Pipeline enhancement progress  \n  - Documentation readiness  \n  - Any remaining risk items (rollback safeguards, Prometheus alerts, Confluence updates)\n\n---\n\n# **Workback Plan for “1:1 Action Items Review” (Meeting: 2025-07-26, 14:00 PST)**\n\n### **PHASE 1: TODAY THROUGH JULY 24 (Planning & Alignment)**\n**1. Confirm Meeting Objectives & Scope**\n- **Due:** Jul 24 EOD PST  \n- **Owner:** Tisa  \n- **Notes:** Validate whether Nila expects focus on:\n  - Compliance stage rollout & OpenSCAP scans  \n  - Vault token reuse optimization (staging test post-matrix parallelization)  \n  - Liquibase audit rule enforcement status  \n- **Dependency:** None; email/Teams ping Nila for clarity.\n\n**2. Consolidate Open Items from Recent Threads**\n- **Due:** Jul 24 EOD PST  \n- **Owner:** Tisa  \n- **Notes:** Pull from:\n  - Compliance Enforcement Stage Chat (#platform-planning)  \n  - Strategy doc: *Compliance_Enforcement_Snippet.groovy*  \n  - Vault Deep Dive PDF (File: `Vault_Secret_Management_Deep_Dive.pdf`)  \n- **Output:** Draft list of open action items (e.g., retroactiveScan signoff, rollback metrics PR merge).\n\n---\n\n### **PHASE 2: MAIN PREP (JULY 25)**\n**3. Draft 1-Pager for Discussion**\n- **Due:** Jul 25, 14:00 PST  \n- **Owner:** Tisa  \n- **Notes:** Summarize:\n  - Action items status + blockers  \n  - References to prior deep dives (*FeatureFlagRollout_ComplianceDeepDive.pptx*, *Security_Automation_Outcomes_DeepDive.pptx*)  \n  - Highlight due dates vs current progress (+ any JIRA tags like FEDRAMP-102/103 if applicable)\n- **Dependency:** Phase 1 output finalized.\n\n**4. Verify Artifact Accessibility**\n- **Due:** Jul 25, COB PST  \n- **Owner:** Tisa  \n- **Notes:** Ensure:\n  - Latest Jenkinsfile/security snippets accessible in repo  \n  - Confluence links for runbook & compliance gating docs live  \n  - Metrics dashboards and PromQL queries validated in Grafana \n- **Risk:** Metrics panel sync requires coordination with ops (Danille) – flag early.\n\n---\n\n### **PHASE 3: FINAL TOUCHPOINT (JULY 26 MORNING)**\n**5. Final Review & Prep Meeting Notes**\n- **Due:** Jul 26, 09:00 PST  \n- **Owner:** Tisa  \n- **Deliverable:**  \n  - Confirm Teams meeting link functionality  \n  - Rehearse key points (compliance scan status, Liquibase annotations, rollback metrics, schedule for next steps)\n- **Dependency:** Completed 1-pager ready to share on call.\n\n**6. Share Pre-Read (Optional but Recommended)**\n- **Due:** Jul 26, 2 hours before meeting  \n- **Owner:** Tisa  \n- **Content:** PDF or Teams message with:\n  - Summary of action items vs status  \n  - Links to critical docs:\n    - `Vault_Secret_Management_Deep_Dive.pdf`\n    - `Security_Automation_Outcomes_DeepDive.pptx`\n    - `FeatureFlagRollout_ComplianceDeepDive.pptx`\n\n---\n\n## 🔍 **Assumptions & Risks**\n- Meeting agenda is inferred from context (recent compliance, pipeline, and secret management initiatives).\n- Only Nila is confirmed attendee from calendar. If others join, adjust pre-read distribution.\n- Very tight timeline: any slip in consolidation (Phase 1) will compress review time.\n\n---\n\n### ✅ Practicality Check\n- **2.5 days total** → immediate action is critical. Most tasks align with Tisa’s role (pipeline owner).\n- Slack time minimal; bake in dependency checks early (e.g., metric validation may need Danille/Saul).\n\n---\n\n## **Summary Table View**\n\n| Task                                      | Due Date       | Owner | Notes                                                              |\n|------------------------------------------|---------------|-------|-------------------------------------------------------------------|\n| Confirm objectives with Nila            | Jul 24 EOD    | Tisa  | Align expectations; adjust prep if needed                        |\n| Consolidate open action items           | Jul 24 EOD    | Tisa  | Pull from Jenkins, Vault, Compliance threads                     |\n| Draft 1-pager summary                   | Jul 25 14:00  | Tisa  | Include key files & progress summary                             |\n| Verify artifact access (Jenkins, Grafana)| Jul 25 COB    | Tisa  | Metric dashboards, snippets, Confluence docs                     |\n| Final review & discussion prep          | Jul 26 09:00  | Tisa  | Dry run key points; ensure meeting link active                   |\n| Share pre-read pack                     | Jul 26 ~12:00 | Tisa  | Include PDF & PPT links                                          |\n\n---\n\nWould you like me to:\n✔ **Generate a ready-to-share pre-read template** for the 1-pager **OR**\n✔ **Draft a Teams message/email** summarizing the plan with embedded critical links?  \n(That would save prep time immediately.)",
       "original_assertions": [
         {
-          "text": "The response should explicitly state the meeting date and time as July 25, 2025, 08:00 UTC, matching the scheduled event.",
+          "text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
           "level": "critical",
           "anchors": {
-            "Dim": "Timeline & Buffers",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Timeline",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should assign distinct owners to all listed tasks, namely Keren, Cortez, Rufina, and Myles, with no task left unassigned.",
+          "text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
           "level": "critical",
           "anchors": {
             "Dim": "Ownership clarity",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should include a task to update and freeze the metrics deck before distributing pre-reads, and state that this update completes before the reminder email is sent.",
+          "text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
           "level": "critical",
           "anchors": {
-            "Dim": "Dependencies & sequencing",
-            "sourceID": "fccb6b4b-dd67-4114-89f7-b34a8fe84299"
+            "Dim": "Ownership clarity",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should provide due dates for all preparation tasks that precede the meeting and show those dates occur before July 25, 2025.",
+          "text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
           "level": "critical",
           "anchors": {
-            "Dim": "Timeline & Buffers",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Timeline & dependencies",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should reference the specific pre-read artifacts FeatureFlagInfra_Outcomes_Presentation.pdf and FeatureFlagInfra_PipelineMetrics.xlsx and schedule their distribution at least one day before the meeting.",
+          "text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Dependency",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
+          }
+        },
+        {
+          "text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
+          "level": "critical",
+          "anchors": {
+            "Dim": "Disclosure of assumptions",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
+          }
+        },
+        {
+          "text": "The response should reference the file 'Vault_Secret_Management_Deep_Dive.pdf' as part of the preparation artifacts.",
           "level": "expected",
           "anchors": {
             "Dim": "Artifact readiness",
-            "sourceID": "6b5c1dc5-2dee-4c3c-8d1c-318a66e1404a"
+            "sourceID": "a8b47570-5778-48bf-9d26-44fa1fe19536"
           }
         },
         {
-          "text": "The response should include a note stating that task owners were inferred from attendee roles, indicating an explicit assumption was made.",
+          "text": "The response should reference the file 'FeatureFlagRollout_ComplianceDeepDive.pptx' in the prep tasks or pre-read list.",
           "level": "expected",
           "anchors": {
-            "Dim": "Disclosure of missing info and assumptions",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Artifact readiness",
+            "sourceID": "3610a1f7-56aa-40de-8551-e038d5dff5d2"
           }
         },
         {
-          "text": "The response should create a clear agenda drafting step that aligns with the meeting objective to review canary pipeline run outcomes and gating thresholds.",
-          "level": "critical",
-          "anchors": {
-            "Dim": "Meeting Objective & Scope",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
-          }
-        },
-        {
-          "text": "The response should indicate use of a two-day buffer between the metrics deck freeze and the pre-read distribution to account for last-minute fixes.",
+          "text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
           "level": "expected",
           "anchors": {
-            "Dim": "Timeline & Buffers",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Timeline & buffers",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should not invent attendees or tasks that are not mentioned in the event details or supporting files.",
+          "text": "The response should propose sending a pre-read at least 2 hours before T₀ including links to key security and compliance docs.",
+          "level": "expected",
+          "anchors": {
+            "Dim": "Artifact readiness",
+            "sourceID": "a5996112-bc82-4a70-a2ed-85cf4f91a28a"
+          }
+        },
+        {
+          "text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
           "level": "critical",
           "anchors": {
-            "Dim": "Grounding & traceability",
-            "sourceID": "55af38ac-70eb-4988-9209-67bab6fda48c"
+            "Dim": "Participant accuracy",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         },
         {
-          "text": "The response should optionally suggest enhancements like generating a Gantt-style timeline or consolidated pre-read packet link as aspirational improvements.",
-          "level": "aspirational",
+          "text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
+          "level": "expected",
           "anchors": {
-            "Dim": "Aspirational enhancements",
-            "sourceID": "6b5c1dc5-2dee-4c3c-8d1c-318a66e1404a"
+            "Dim": "Timeline feasibility",
+            "sourceID": "0788e132-56ad-45de-a531-4553a88af64a"
           }
         }
       ],
-      "num_assertions": 10,
+      "num_assertions": 12,
       "conversions": [
         {
-          "index": 1,
-          "original_text": "The response should explicitly state the meeting date and time as July 25, 2025, 08:00 UTC, matching the scheduled event....",
-          "converted_text": "The response should include a backward timeline from T₀ (the meeting date/time) with dependency-aware sequencing.",
+          "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
           "level": "critical",
           "weight": 3,
-          "sourceID": "{source.MEETING.StartTime}",
-          "placeholders_used": [
-            "T₀ (meeting date/time)"
-          ],
+          "sourceID": null,
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "The original assertion focuses on ensuring the meeting date/time is reflected and tasks are sequenced relative to it, which aligns with timeline alignment.",
+            "mapping_reason": "Kening's 'Timeline' maps to S2 based on keyword matching",
             "conversion_changes": [
-              "Removed hardcoded date/time (July 25, 2025, 08:00 UTC)",
-              "Generalized to T₀ placeholder",
-              "Aligned with template emphasizing backward timeline and dependency-aware sequencing"
+              "Applied template pattern"
             ],
-            "template_alignment": "Matches S2 template: 'The response should include a backward timeline from T₀ with dependency-aware sequencing'",
-            "value_removed": "Specific date/time value"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 2,
-          "original_text": "The response should assign distinct owners to all listed tasks, namely Keren, Cortez, Rufina, and Myles, with no task left unassigned....",
-          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable.",
+          "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
+          "converted_text": "Meeting date must match {source.MEETING.StartTime}",
+          "dimension_id": "G3",
+          "dimension_name": "Date/Time Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G3",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
+          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
           "dimension_id": "S3",
           "dimension_name": "Ownership Assignment",
           "layer": "structural",
           "level": "critical",
           "weight": 3,
           "sourceID": null,
-          "placeholders_used": [
-            "[TASK]",
-            "role/skill placeholder"
-          ],
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "The original assertion is about assigning owners to tasks, which directly maps to S3.",
+            "mapping_reason": "Kening's 'Ownership clarity' maps to S3 based on keyword matching",
             "conversion_changes": [
-              "Removed specific names (Keren, Cortez, Rufina, Myles)",
-              "Generalized to all tasks using placeholder [TASK]",
-              "Added fallback for role/skill placeholder per template"
+              "Applied template pattern"
             ],
-            "template_alignment": "Matches S3 template: 'The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable'",
-            "value_removed": "Specific attendee names"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 3,
-          "original_text": "The response should include a task to update and freeze the metrics deck before distributing pre-reads, and state that this update completes before th...",
-          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented.",
-          "dimension_id": "S6",
-          "dimension_name": "Dependencies & Blockers",
+          "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
+          "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
+          "dimension_id": "G2",
+          "dimension_name": "Attendee Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G2",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
+          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
+          "dimension_id": "S3",
+          "dimension_name": "Ownership Assignment",
           "layer": "structural",
           "level": "critical",
           "weight": 3,
           "sourceID": null,
-          "placeholders_used": [
-            "[DEPENDENCIES/BLOCKERS]"
-          ],
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "The original assertion emphasizes sequencing and dependency (freeze metrics deck before pre-read distribution), which maps to S6.",
+            "mapping_reason": "Kening's 'Ownership clarity' maps to S3 based on keyword matching",
             "conversion_changes": [
-              "Removed specific task details (update metrics deck, pre-reads)",
-              "Generalized to identifying dependencies/blockers",
-              "Added requirement for mitigation steps per template"
+              "Applied template pattern"
             ],
-            "template_alignment": "Matches S6 template: 'The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented'",
-            "value_removed": "Specific task names and order"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 4,
-          "original_text": "The response should provide due dates for all preparation tasks that precede the meeting and show those dates occur before July 25, 2025....",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing.",
+          "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
+          "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
+          "dimension_id": "G2",
+          "dimension_name": "Attendee Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G2",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
           "level": "critical",
           "weight": 3,
-          "sourceID": "{source.MEETING.StartTime}",
-          "placeholders_used": [
-            "T₀"
-          ],
+          "sourceID": null,
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "The original assertion focuses on due dates before the meeting, which is part of timeline alignment.",
+            "mapping_reason": "Kening's 'Timeline & dependencies' maps to S2 based on keyword matching",
             "conversion_changes": [
-              "Removed specific date (July 25, 2025)",
-              "Generalized to T₀ and backward timeline",
-              "Aligned with template emphasizing dependency-aware sequencing"
+              "Applied template pattern"
             ],
-            "template_alignment": "Matches S2 template",
-            "value_removed": "Specific meeting date"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 5,
-          "original_text": "The response should reference the specific pre-read artifacts FeatureFlagInfra_Outcomes_Presentation.pdf and FeatureFlagInfra_PipelineMetrics.xlsx and...",
-          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified.",
+          "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
+          "converted_text": "Meeting date must match {source.MEETING.StartTime}",
+          "dimension_id": "G3",
+          "dimension_name": "Date/Time Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G3",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
+          "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
+          "dimension_id": "S6",
+          "dimension_name": "Dependencies & Blockers",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Dependency' maps to S6 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S6 (Dependencies & Blockers) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S6→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S6"
+        },
+        {
+          "original_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
+          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+          "dimension_id": "S19",
+          "dimension_name": "Caveat & Clarification",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 1,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Disclosure of assumptions' maps to S19 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
+          "converted_text": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
+          "dimension_id": "G5",
+          "dimension_name": "Topic Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S19 (Caveat & Clarification) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S19→G5",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S19"
+        },
+        {
+          "original_text": "The response should reference the file 'Vault_Secret_Management_Deep_Dive.pdf' as part of the preparation artifacts.",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
           "dimension_id": "S4",
           "dimension_name": "Deliverables & Artifacts",
           "layer": "structural",
           "level": "expected",
           "weight": 2,
-          "sourceID": "{source.ENTITIES where type=File}",
-          "placeholders_used": [
-            "[DELIVERABLES]"
-          ],
+          "sourceID": null,
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "The original assertion is about referencing specific artifacts, which maps to S4.",
+            "mapping_reason": "Kening's 'Artifact readiness' maps to S4 based on keyword matching",
             "conversion_changes": [
-              "Removed specific file names",
-              "Generalized to [DELIVERABLES]",
-              "Added requirement for working links and version/format per template"
+              "Applied template pattern"
             ],
-            "template_alignment": "Matches S4 template: 'The response should list [DELIVERABLES] with working links, version/format specified'",
-            "value_removed": "Specific artifact names"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 1,
-          "original_text": "The response should include a note stating that task owners were inferred from attendee roles, indicating an explicit assumption was made....",
-          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
-          "dimension_id": "S19",
-          "dimension_name": "Caveat & Clarification",
+          "original_text": "The response should reference the file 'Vault_Secret_Management_Deep_Dive.pdf' as part of the preparation artifacts.",
+          "converted_text": "All files must exist in {source.ENTITIES where type=File}",
+          "dimension_id": "G4",
+          "dimension_name": "Artifact Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S4 (Deliverables & Artifacts) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S4→G4",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S4"
+        },
+        {
+          "original_text": "The response should reference the file 'FeatureFlagRollout_ComplianceDeepDive.pptx' in the prep tasks or pre-read list.",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
           "layer": "structural",
           "level": "expected",
           "weight": 2,
           "sourceID": null,
-          "placeholders_used": [
-            "[CAVEATS]",
-            "[ASSUMPTIONS]",
-            "[CLARIFICATIONS]"
-          ],
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion is about explicitly noting assumptions regarding task ownership, which falls under disclosure of assumptions and clarifications.",
+            "mapping_reason": "Kening's 'Artifact readiness' maps to S4 based on keyword matching",
             "conversion_changes": [
-              "Removed specific mention of task owners and attendee roles",
-              "Generalized to cover any caveats, assumptions, and clarifications"
+              "Applied template pattern"
             ],
-            "template_alignment": "Aligned with S19 template requiring disclosure of caveats, assumptions, and clarifications",
-            "value_removed": "Specific context about task owners inferred from roles"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 2,
-          "original_text": "The response should create a clear agenda drafting step that aligns with the meeting objective to review canary pipeline run outcomes and gating thres...",
-          "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
-          "dimension_id": "S1",
-          "dimension_name": "Meeting Details",
-          "layer": "structural",
+          "original_text": "The response should reference the file 'FeatureFlagRollout_ComplianceDeepDive.pptx' in the prep tasks or pre-read list.",
+          "converted_text": "All files must exist in {source.ENTITIES where type=File}",
+          "dimension_id": "G4",
+          "dimension_name": "Artifact Grounding",
+          "layer": "grounding",
           "level": "critical",
-          "weight": 3,
-          "sourceID": "{source.MEETING}",
-          "placeholders_used": [
-            "[SUBJECT]",
-            "[DATE/TIME]",
-            "[TIMEZONE]",
-            "[ATTENDEES]"
-          ],
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion focuses on agenda alignment with meeting objective, which relates to ensuring meeting details are clearly stated.",
+            "mapping_reason": "Generated from S4 (Deliverables & Artifacts) via S_TO_G_MAP",
             "conversion_changes": [
-              "Removed reference to agenda drafting and objectives",
-              "Replaced with requirement to state meeting details per S1 template"
+              "Applied grounding template for factual verification"
             ],
-            "template_alignment": "S1 requires presence of subject, date/time, timezone, and attendees",
-            "value_removed": "Specific mention of canary pipeline and gating thresholds"
+            "template_alignment": "S→G mapping: S4→G4",
+            "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S4"
         },
         {
-          "index": 3,
-          "original_text": "The response should indicate use of a two-day buffer between the metrics deck freeze and the pre-read distribution to account for last-minute fixes....",
+          "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
           "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
           "level": "expected",
-          "weight": 2,
+          "weight": 3,
           "sourceID": null,
-          "placeholders_used": [
-            "T₀"
-          ],
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion is about timeline buffers and sequencing, which maps to timeline alignment.",
+            "mapping_reason": "Kening's 'Timeline & buffers' maps to S2 based on keyword matching",
             "conversion_changes": [
-              "Removed specific buffer duration and task names",
-              "Generalized to backward timeline with dependency-aware sequencing"
+              "Applied template pattern"
             ],
-            "template_alignment": "S2 template specifies backward timeline from T₀ with dependencies",
-            "value_removed": "Specific two-day buffer and metrics deck context"
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic"
         },
         {
-          "index": 4,
-          "original_text": "The response should not invent attendees or tasks that are not mentioned in the event details or supporting files....",
-          "converted_text": "No entities introduced that don't exist in source",
-          "dimension_id": "G5",
-          "dimension_name": "Hallucination Check",
+          "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
+          "converted_text": "Meeting date must match {source.MEETING.StartTime}",
+          "dimension_id": "G3",
+          "dimension_name": "Date/Time Grounding",
           "layer": "grounding",
           "level": "critical",
           "weight": 3,
-          "sourceID": "{source}",
+          "sourceID": null,
           "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion is about avoiding invented attendees or tasks, which is a hallucination check.",
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
             "conversion_changes": [
-              "Removed explicit mention of attendees and tasks",
-              "Generalized to all entities per G5 template"
+              "Applied grounding template for factual verification"
             ],
-            "template_alignment": "G5 requires that no entities are introduced beyond the source",
-            "value_removed": "Specific examples of attendees and tasks"
+            "template_alignment": "S→G mapping: S2→G3",
+            "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
         },
         {
-          "index": 5,
-          "original_text": "The response should optionally suggest enhancements like generating a Gantt-style timeline or consolidated pre-read packet link as aspirational improv...",
-          "converted_text": "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)",
-          "dimension_id": "S18",
-          "dimension_name": "Post-Event Actions",
-          "layer": "structural",
-          "level": "aspirational",
-          "weight": 1,
+          "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
           "sourceID": null,
-          "placeholders_used": [
-            "[POST-EVENT ACTIONS]"
-          ],
+          "placeholders_used": [],
           "rationale": {
-            "mapping_reason": "Original assertion suggests aspirational improvements like Gantt charts and consolidated links, which relate to post-event enhancements.",
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
             "conversion_changes": [
-              "Removed specific enhancements like Gantt-style timeline",
-              "Generalized to listing post-event actions per S18 template"
+              "Applied grounding template for factual verification"
             ],
-            "template_alignment": "S18 requires listing post-event actions such as wrap-up and reporting",
-            "value_removed": "Specific mention of Gantt-style timeline and pre-read packet link"
+            "template_alignment": "S→G mapping: S2→G6",
+            "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
             "is_well_formed": true,
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "gpt5"
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should propose sending a pre-read at least 2 hours before T₀ including links to key security and compliance docs.",
+          "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
+          "dimension_id": "S4",
+          "dimension_name": "Deliverables & Artifacts",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Artifact readiness' maps to S4 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should propose sending a pre-read at least 2 hours before T₀ including links to key security and compliance docs.",
+          "converted_text": "All files must exist in {source.ENTITIES where type=File}",
+          "dimension_id": "G4",
+          "dimension_name": "Artifact Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S4 (Deliverables & Artifacts) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S4→G4",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S4"
+        },
+        {
+          "original_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
+          "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
+          "dimension_id": "S3",
+          "dimension_name": "Ownership Assignment",
+          "layer": "structural",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Participant accuracy' maps to S3 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
+          "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
+          "dimension_id": "G2",
+          "dimension_name": "Attendee Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G2",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "dimension_id": "S2",
+          "dimension_name": "Timeline Alignment",
+          "layer": "structural",
+          "level": "expected",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Kening's 'Timeline feasibility' maps to S2 based on keyword matching",
+            "conversion_changes": [
+              "Applied template pattern"
+            ],
+            "template_alignment": "Uses dimension template as base",
+            "value_removed": "N/A (heuristic conversion)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic"
+        },
+        {
+          "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
+          "converted_text": "Meeting date must match {source.MEETING.StartTime}",
+          "dimension_id": "G3",
+          "dimension_name": "Date/Time Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G3",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
+          "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+          "dimension_id": "G6",
+          "dimension_name": "Task Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 3,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
         }
       ],
-      "timestamp": "2025-11-28T23:19:18.540921"
+      "timestamp": "2025-11-29T10:41:47.405039"
     }
   ]
 }
