@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "2.0",
-    "last_updated": "2025-11-28",
-    "description": "Assertion pattern framework with structural patterns (S1-S19) and grounding assertions (G1-G6)",
+    "version": "2.1",
+    "last_updated": "2025-11-29",
+    "description": "Assertion pattern framework with structural patterns (S1-S19) and grounding assertions (G1-G8)",
     "key_insight": "Structural patterns check SHAPE (does the plan have X?), grounding assertions verify FACTS (is X accurate to source?)"
   },
   "patterns": [
@@ -295,6 +295,22 @@
         "verification": "Extract all tasks from response → Check each is traceable to source material",
         "failure_mode": "Fabricated tasks or action items not mentioned in source",
         "applies_to_patterns": ["S3", "S6"]
+      },
+      {
+        "id": "G7",
+        "name": "Role Grounding",
+        "template": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
+        "verification": "Extract role assignments → Verify each role is accurate to source or reasonably inferred",
+        "failure_mode": "Fabricated roles or responsibilities not supported by source",
+        "applies_to_patterns": ["S3"]
+      },
+      {
+        "id": "G8",
+        "name": "Constraint Grounding",
+        "template": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+        "verification": "Extract constraints → Verify each is traceable to source material or context",
+        "failure_mode": "Fabricated constraints or limitations not mentioned in source",
+        "applies_to_patterns": ["S2", "S6", "S11", "S19"]
       }
     ],
     "evaluation_approach": {

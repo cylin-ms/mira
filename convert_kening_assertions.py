@@ -241,6 +241,28 @@ DIMENSION_SPEC = {
         "evaluation": "All tasks traceable to source entities; fabricated tasks = fail.",
         "success_example": "Action items match those mentioned in source emails/chats.",
         "fail_example": "Adds 'Review Q4 budget' task not mentioned in any source."
+    },
+    "G7": {
+        "name": "Role Grounding",
+        "weight": 2,
+        "layer": "grounding",
+        "level": "grounding",
+        "template": 'All role/responsibility assignments must match {source.ENTITIES} or be derivable from context',
+        "definition": "Roles and responsibilities assigned to people must be accurate to source or reasonably inferred.",
+        "evaluation": "All role assignments traceable to source; fabricated roles = fail.",
+        "success_example": "Owner assignments match organizer/attendee roles from source.",
+        "fail_example": "Assigns 'Project Lead' role to someone who is just an attendee."
+    },
+    "G8": {
+        "name": "Constraint Grounding",
+        "weight": 2,
+        "layer": "grounding",
+        "level": "grounding",
+        "template": 'All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}',
+        "definition": "Constraints, limitations, and requirements mentioned must exist in or be derivable from source.",
+        "evaluation": "All constraints traceable to source; fabricated constraints = fail.",
+        "success_example": "Timeline constraint matches meeting date from source.",
+        "fail_example": "Claims 'budget cap of $50K' not mentioned in any source."
     }
 }
 
@@ -254,11 +276,11 @@ S_TO_G_MAP = {
     # S1 (Meeting Details) → Check attendees and dates are correct
     "S1": ["G2", "G3"],  # G2: Attendee Grounding, G3: Date/Time Grounding
     
-    # S2 (Timeline) → Check dates and tasks are from source
-    "S2": ["G3", "G6"],  # G3: Date/Time Grounding, G6: Task Grounding
+    # S2 (Timeline) → Check dates, tasks, and constraints
+    "S2": ["G3", "G6", "G8"],  # G3: Date/Time, G6: Task, G8: Constraint
     
-    # S3 (Ownership) → Check people and tasks are real
-    "S3": ["G2", "G6"],  # G2: Attendee Grounding, G6: Task Grounding
+    # S3 (Ownership) → Check people, tasks, and roles are real
+    "S3": ["G2", "G6", "G7"],  # G2: Attendee, G6: Task, G7: Role
     
     # S4 (Deliverables) → Check artifacts exist in source
     "S4": ["G4"],  # G4: Artifact Grounding
@@ -266,17 +288,17 @@ S_TO_G_MAP = {
     # S5 (Task Dates) → Check dates and tasks
     "S5": ["G3", "G6"],  # G3: Date/Time Grounding, G6: Task Grounding
     
-    # S6 (Dependencies) → Check tasks/blockers are real
-    "S6": ["G6"],  # G6: Task Grounding
+    # S6 (Dependencies) → Check tasks/blockers and constraints
+    "S6": ["G6", "G8"],  # G6: Task, G8: Constraint
     
-    # S11 (Risk) → Check topics and tasks
-    "S11": ["G5", "G6"],  # G5: Topic Grounding, G6: Task Grounding
+    # S11 (Risk) → Check topics, tasks, and constraints
+    "S11": ["G5", "G6", "G8"],  # G5: Topic, G6: Task, G8: Constraint
     
     # S18 (Post-Event) → Check tasks
     "S18": ["G6"],  # G6: Task Grounding
     
-    # S19 (Caveat) → Check topics/assumptions align with source
-    "S19": ["G5"],  # G5: Topic Grounding
+    # S19 (Caveat) → Check topics/assumptions and constraints
+    "S19": ["G5", "G8"],  # G5: Topic, G8: Constraint
 }
 
 # Grounding assertions that map from original grounding dimensions
@@ -1244,7 +1266,7 @@ def main():
     print()
     
     print("📐 Dimension Distribution:")
-    for dim in ["S1", "S2", "S3", "S4", "S5", "S6", "S11", "S18", "S19", "G1", "G2", "G3", "G4", "G5"]:
+    for dim in ["S1", "S2", "S3", "S4", "S5", "S6", "S11", "S18", "S19", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8"]:
         count = stats.get("dimension_distribution", {}).get(dim, 0)
         if count > 0:
             dim_name = DIMENSION_SPEC.get(dim, {}).get("name", dim)

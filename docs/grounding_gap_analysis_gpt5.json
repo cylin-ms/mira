@@ -1,0 +1,2461 @@
+{
+  "total_assertions": 3700,
+  "sample_size": 300,
+  "classifications": [
+    {
+      "assertion_id": 1,
+      "grounding_type": "NEW_Decision",
+      "confidence": "medium",
+      "reasoning": "Mentions sign-off risks and confirmation, which relates to decision-making and approvals.",
+      "original_text": "The response should disclose assumptions about sign-off risks on Liquibase Audit Rule Stage since no confirmation is given.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "References a specific pre-read file by name, which is an artifact.",
+      "original_text": "The response should reference the pre-read file 'Alert_Rule_Configs_2025-07-29.yaml' mentioned in the event body.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Identifies the meeting organizer, which is an attendee role.",
+      "original_text": "The response should identify Shakia Gencarelli as the meeting organizer.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Assigns owners for a task, which relates to role/responsibility.",
+      "original_text": "The response should assign Markita Sitra and Rufina Ganie as owners for 'Gather current cache settings & recent performance data' scheduled for July 16.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Requires assigning an owner for each task, which is about responsibility.",
+      "original_text": "The response should clearly assign an owner for each task, including Shakia Gencarelli, Wilford Taussig, Miss Bjorkman, and Nila Tanguma.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Specifies explicit due dates before a certain date and time.",
+      "original_text": "The response should include individual prep tasks with explicit due dates before July 21, 2025 at 11:00 AM PST.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Lists organizer and attendees, which are participant names.",
+      "original_text": "The response should identify Miss Bjorkman as the organizer and list Terina Hafen, Jack Schrott, and Sau Alquesta as attendees.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "References attached files as pre-read artifacts.",
+      "original_text": "The response should reference the attached file 'chaos_experiment_metrics_summary.xlsx' and related 'Chaos_Automation_Detailed_Overview.pptx' as required pre-read artifacts.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "NEW_Role",
+      "confidence": "medium",
+      "reasoning": "States that owners were inferred from roles, which relates to responsibility.",
+      "original_text": "The response should explicitly state that owners were inferred from roles and that this is an assumption.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "NEW_Communication",
+      "confidence": "high",
+      "reasoning": "Mentions collecting feedback from a chat thread, which is a communication channel.",
+      "original_text": "The response should include a reference to collecting feedback from the 'sdk-v1.4-threshold-implementation' chat thread before finalizing materials.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a task to prepare a decision points document and its dependency.",
+      "original_text": "The response should include a task to prepare decision points document before the meeting and state that it is dependent on prior data review tasks.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Requires listing all required attendees by name.",
+      "original_text": "The response should present specific names of all required attendees as listed in the event: Shakia Gencarelli, Emory Scherping, Era Manteca, Markita Sitra, and Rufina Ganie.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "Mentions assumptions around availability due to a compressed timeline, which is a constraint.",
+      "original_text": "The response should disclose assumptions around weekend availability or owner confirmation due to the compressed timeline.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies scheduling and ordering of tasks.",
+      "original_text": "The response should schedule completion of 'Draft meeting objectives & agenda' before 'Share Draft Deck for Review'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "Focuses on assumptions disclosure rather than a specific grounding entity.",
+      "original_text": "The response should clearly call out which details are assumed rather than confirmed, such as attendee availability or data accessibility.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Mentions agenda items and specific topics for discussion.",
+      "original_text": "The response should include agenda items such as 'Test scenarios coverage across JSON schema versions v1 and v2' and 'Prometheus counter labels: status, schema_version, violation_count'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Requires inclusion of a preparatory task involving PromQL queries.",
+      "original_text": "The response should incorporate at least one preparatory task involving PromQL queries similar to histogram_quantile for P95 latency, reflecting observability focus mentioned in the invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Specifies the meeting subject, which is a topic.",
+      "original_text": "The response should explicitly state the meeting subject as 'Jenkins Pipeline Deep Dive' matching the event details.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Requires a timeline with start and deadline dates.",
+      "original_text": "The response should provide a realistic timeline for task completion, starting immediately on July 27 with deadlines leading up to the meeting next day.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "States the scheduled meeting date and time.",
+      "original_text": "The response should state that the meeting 'Feature Flag Feedback Deep Dive 1:1' is scheduled for July 20, 2025 at 10:00 AM PST, consistent with the meeting invite.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It verifies a dependency between tasks (finalizing the deck after receiving charts), which relates to task grounding.",
+      "original_text": "The response should show dependency sequencing, such as finalizing the deck after Emory provides performance charts, which was noted in the chat and inferred in Additional Notes.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies an after-meeting follow-up task and includes a deadline, which is a task grounding requirement.",
+      "original_text": "The response should include an optional after-meeting follow-up task to summarize key decisions by end of day July 19, 2025.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It focuses on assigning an owner to each task, which relates to role/responsibility grounding.",
+      "original_text": "The response should assign an owner (Jason) to each scheduled task, ensuring no task is left unassigned.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "NEW_Location",
+      "confidence": "high",
+      "reasoning": "It confirms the meeting location (Teams link), which falls under location/place grounding.",
+      "original_text": "The response should explicitly mention that the location (Teams link) is confirmed for the meeting session.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It schedules a specific task (load-test scenario outline) with an owner and due date, which is task grounding.",
+      "original_text": "The response should schedule a load-test scenario outline by Porsha, covering JWKS rotation and eviction surge, due July 27.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It schedules a task with a due date and assigns an owner, which is task grounding.",
+      "original_text": "The response should schedule 'Draft talking points for each agenda item' for July 17, 2025, and assign Saturnina Soyke as the owner.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It describes a dependency between tasks (PromQL rule validation depends on confirmation), which is task grounding.",
+      "original_text": "The response should include a dependency note that PromQL rule validation relies on Ossie\u2019s confirmation before end of day.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It requires inclusion of agenda items from the event body, which relates to topic grounding.",
+      "original_text": "The response should incorporate all four agenda items from the event body, including 'Validate Grafana alert threshold changes and runbook references'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "NEW_Communication",
+      "confidence": "high",
+      "reasoning": "It involves notifying participants in Teams, which is a communication-related grounding.",
+      "original_text": "The response should recommend an immediate next action for the organizer today, such as notifying Cortez, Tisa, Nila, and Bev in Teams to start preparation.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a task with a due date and owners, which is task grounding.",
+      "original_text": "The response should include a task for Prometheus metrics and CI logs collection due on July 14 with owners Era Manteca and Emory Scherping.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It assigns an owner and due date for a specific task, which is task grounding.",
+      "original_text": "The response should assign Wilford Taussig to the task 'Gather baseline HPA telemetry & retry logs' with a due date prior to July 14, 2025.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G3_DateTime",
+      "confidence": "medium",
+      "reasoning": "It refers to a timeline with milestone markers (T-6, T-4), which relates to date/time grounding.",
+      "original_text": "The response should provide a summary timeline with milestones aligned to T-6, T-4, T-2, T-1, and T-0 markers to demonstrate progressive preparation.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It lists required attendees by name, which is attendee grounding.",
+      "original_text": "The response should list all required attendees: Emory Scherping, Markita Sitra, Terina Hafen, Keren Guisbert, and Ashley Engel.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It schedules a pre-read packet distribution task with a deadline, which is task grounding.",
+      "original_text": "The response should schedule a pre-read packet distribution or draft sharing to Danille at least 72 hours before the meeting (by July 18).",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G5_Topic",
+      "confidence": "medium",
+      "reasoning": "It mentions preparing Prometheus metric snippets for specific counters, which relates to topic/subject matter grounding.",
+      "original_text": "The response should mention Prometheus metric snippet preparation for counters named status, schema_version, and violation_count.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It identifies a dependency between tasks (finalizing deck contingent on updates), which is task grounding.",
+      "original_text": "The response should identify dependencies, specifically that finalizing the retro deck is contingent on incorporating metric and security updates before 12:00 UTC.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It refers to agenda or prep materials (artifacts) that need to be created, which is artifact grounding.",
+      "original_text": "The response should specify that no official agenda or prep materials exist and must explicitly note that these artifacts need to be created.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G5_Topic",
+      "confidence": "medium",
+      "reasoning": "It addresses risk mitigation strategies as a discussion topic, which relates to topic grounding.",
+      "original_text": "The response should highlight risk mitigation strategies for late SME input and documentation drift, as stated under quick risk callouts.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies the meeting date and time, which is date/time grounding.",
+      "original_text": "The response should state the meeting date and time as July 31, 2025, 15:00\u201317:00 UTC, matching the meeting invite.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It confirms the organizer and lists required attendees, which is attendee grounding.",
+      "original_text": "The response should confirm that the organizer is Keren Guisbert and list required attendees Cortez Dehn, Rufina Ganie, and Myles Mckoan, consistent with the meeting entity.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "high",
+      "reasoning": "Mentions a tight timeline and minimal buffer, which indicates a constraint or limitation.",
+      "original_text": "The response should acknowledge that due to a tight timeline, task sequencing has minimal buffer and must be managed carefully.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "high",
+      "reasoning": "Acknowledging a tight 36-hour timeline reflects a scheduling constraint.",
+      "original_text": "The response should include observation or assumption statements acknowledging the tight 36-hour timeline.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Refers to including agenda items matching event details, which are topics.",
+      "original_text": "The response should include at least one agenda item matching the event details such as 'Review JWT cache thrash warning counter trends & alert configs'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Specifies distribution of a pre-read packet containing a named document, which is an artifact.",
+      "original_text": "The response should schedule distribution of the pre-read packet containing 'v2.1.0_Canary_Postmortem.pdf' at least 24 hours before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "States the meeting start time with a specific date and time.",
+      "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Mentions explicit due times in UTC for tasks, which are date/time elements.",
+      "original_text": "The response should provide explicit due times in UTC for Phase 1 critical tasks, such as 11:00 and 12:00 UTC deadlines.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Refers to agenda items matching those in the invite, which are topics.",
+      "original_text": "The response should break down the agenda into items that match those listed in the invite body text (state transition labels, histogram bucket edge cases, Q&A, next steps).",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a task to validate a CLI command before the meeting.",
+      "original_text": "The response should include a task to validate AJV CLI command with '--errors-distinct --verbose' flags against fixtures before the meeting.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "States the meeting objective, which relates to the meeting topic and purpose.",
+      "original_text": "The response should state the correct meeting objective as reviewing the canary pipeline outcome, analyzing success/error metrics, and planning next steps before production promotion.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Mentions a task encouraging early meeting join or setup, which is an action item.",
+      "original_text": "The response should mention at least one task encouraging early meeting join or final setup prior to start time.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Specifies confirming attendance and decision-making roles for named individuals.",
+      "original_text": "The response should include a step to confirm attendance and decision-making roles for Danille, Era, and Tonycool by 4:00 PM PST.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Instructs that tasks be presented in reverse time order, which relates to task structuring.",
+      "original_text": "The response should present tasks in reverse time order leading up to the 10:00 AM PDT meeting start to reflect a true workback structure.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Explicitly states the meeting start time with date and time.",
+      "original_text": "The response should explicitly state the meeting start time as July 24, 2025 at 10:00 UTC, consistent with the official meeting invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "high",
+      "reasoning": "Mentions a contingency or risk mitigation note related to a compressed timeline, which is a constraint.",
+      "original_text": "The response should include a contingency or risk mitigation note related to the compressed timeline.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Identifies specific individuals as organizer and required attendee.",
+      "original_text": "The response should identify Shakia Gencarelli as the meeting organizer and Nila Tanguma as a required attendee.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Includes specific documents as preparation references, which are artifacts.",
+      "original_text": "The response should explicitly include relevant artifacts such as 'Integration_Test_Suite_CI_Enforcement_Detailed.docx' and 'Optimization_Workshop_Metrics_DeepDive.pptx' among preparation references.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a dependency between tasks (agenda confirmation after draft), which is task-related.",
+      "original_text": "The response should include a dependency indicating that agenda confirmation with Tisa occurs after the draft agenda step.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Assigns ownership and responsibilities for tasks, which relates to roles.",
+      "original_text": "The response should assign Wilford as the owner for all preparatory tasks and make explicit that responsibilities fall on the requester for readiness.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Explicitly includes agenda items from the meeting invite, which are topics.",
+      "original_text": "The response should explicitly include the four agenda items from the meeting invite: schema validation, authentication strategy, rate-limiting, and test planning.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Defines dependencies requiring confirmation before drafting, which is task-related.",
+      "original_text": "The response should define dependencies by requiring confirmation of meeting objectives before drafting the detailed agenda.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It verifies that tasks have explicit owners, which relates to roles and responsibilities.",
+      "original_text": "The response should include explicit task assignments with owners and due times (e.g., Finalize Jenkins Groovy Snippet \u2013 Danille by 07:00 PDT).",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It checks for inclusion of a mitigation step, which is a specific action item or task.",
+      "original_text": "The response should include a mitigation step for alert rule or dashboard failure, such as using screenshots as a backup.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "It involves verifying access requirements and mitigation, which is a constraint or assumption rather than a task alone.",
+      "original_text": "The response should include a risk/assumption that all attendees have CI/CD environment access verified by July 26, 2025, and describe mitigation for access failure.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It checks that the meeting date and time match the event details.",
+      "original_text": "The response should state that the meeting 'HPA Scaling 1:1 Deep Dive' is scheduled for July 19, 2025, 15:00 UTC, matching the event details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies the scheduled meeting time aligns with the StartDateTime.",
+      "original_text": "The response should state that the meeting 'Canary Pipeline Debrief & Metrics Analysis' is scheduled for July 25, 2025, 08:00\u201308:30 UTC, matching the StartDateTime in the grounding data.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It requires explicit owners for tasks, which relates to roles and responsibilities.",
+      "original_text": "The response should provide explicit owners for major tasks, such as assigning Emory for 'Validate Prometheus test metrics and Jenkins pipeline snippet in staging'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It checks that the meeting subject matches the grounded event topic.",
+      "original_text": "The response should explicitly state the meeting subject as 'Mockups Finalization 1:1' matching the grounded event.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It verifies that specific attendee names are included.",
+      "original_text": "The response should include the attendee names 'Shakia Gencarelli' and 'Era Manteca' as participants.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires inclusion of a task to draft or finalize the agenda.",
+      "original_text": "The response should include an early morning July 25 task to draft or finalize the meeting agenda based on the event description and related integration plan files.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G3_DateTime",
+      "confidence": "medium",
+      "reasoning": "It checks for a backward timeline starting a certain number of days before a meeting date.",
+      "original_text": "The response should provide a backward timeline that begins by acknowledging ~2.5 days of preparation before the July 23 meeting date.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It requires linking a compliance check task to a specific artifact (PDF file).",
+      "original_text": "The response should explicitly link the compliance check task to the Mid_Sprint_Design_Review_Deck.pdf artifact and schedule it prior to the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G4_Artifact",
+      "confidence": "medium",
+      "reasoning": "It references attachments and dashboard JSON availability, which are artifacts.",
+      "original_text": "The response should reference the lack of explicit attachments in the event and note that dashboard JSON availability is assumed.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It specifies avoiding unrelated files, which relates to artifact grounding.",
+      "original_text": "The response should not include references to unrelated projects or files like 'TransactionRouter_Deep_Dive_Details.pptx', as these are not relevant to SDK Delivery Pipeline.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires inclusion of a specific task with a due date and assignment.",
+      "original_text": "The response should include a task to 'Fix TLS cipher suite in checkout-service Helm chart & merge PR #712' due on July 19, 2025 and assign it to Shakia.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G5_Topic",
+      "confidence": "medium",
+      "reasoning": "It concerns the meeting agenda content, which is part of the topic or subject.",
+      "original_text": "The response should explicitly disclose that the meeting agenda content is assumed because the event body did not specify an agenda.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It checks the meeting objective aligns with the agenda, which is topic grounding.",
+      "original_text": "The response should describe the meeting's objective to refactor the shared library for schema validation and YAML lint steps, consistent with the event agenda.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "It addresses a compressed timeline and risk mitigations, which are constraints.",
+      "original_text": "The response should acknowledge the compressed timeline of under 36 hours and suggest risk mitigations (e.g., compress follow-ups, contingency for PR delays).",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "It involves disclosing assumptions about pre-reading, which is a constraint or assumption.",
+      "original_text": "The response should incorporate a disclosure that no pre-reading beyond the slide deck is assumed, as stated in the assumptions.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "It requires disclosure of assumptions like no dry run and file availability, which are constraints.",
+      "original_text": "The response should explicitly disclose assumptions, including that no dry run is possible and all files are already uploaded and shared.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies the meeting date and time match the event StartDateTime and TimeZone.",
+      "original_text": "The response should state the meeting date and time as July 29, 2025, 15:00\u201316:30 PST, which aligns with the event StartDateTime and TimeZone.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It verifies ownership allocation for tasks, which relates to roles and responsibilities.",
+      "original_text": "The response should allocate ownership for each task, specifying Tisa for organizing and Nila for validation tasks.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies a date (July 26, 2025) for tasks, which is a datetime grounding.",
+      "original_text": "The response should place all setup tasks on July 26, 2025, to reflect the limited ~34-hour window before meeting start.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It requires scheduling a call on or before a specific date (2025-07-21), which is datetime grounding.",
+      "original_text": "The response should reserve time for a team checkpoint alignment call on or before 2025-07-21 to resolve interpretation of canary metrics.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It asks for assigning Shakia as the owner for a task, which is about role responsibility.",
+      "original_text": "The response should include at least one task specifying Shakia as the owner for updating proposal slides.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "high",
+      "reasoning": "It mentions a time constraint (~12 hours) and requires noting it as a constraint or assumption.",
+      "original_text": "The response should clearly indicate that time to meeting is short (~12 hours) and note this as a constraint or assumption.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It involves validating role assignments and assigning ownership, which relates to roles and responsibilities.",
+      "original_text": "The response should schedule validation of role assignments for least_privilege_deployer and remote_access_operator groups prior to the meeting, with ownership by Saturnina Soyke.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It requires explicit due times for tasks, which is datetime grounding.",
+      "original_text": "The response should provide explicit due times for all tasks rather than vague references.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies planning an activity (early join or dry run), which is a task.",
+      "original_text": "The response should plan an activity on the meeting day, such as an early join or dry run, to validate screen sharing and accessibility of final materials.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It states the meeting date and time, which is datetime grounding.",
+      "original_text": "The response should state the meeting is scheduled for July 30, 2025 at 10:00 AM PST, matching the meeting invite.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It references a specific file and scheduling its distribution, which is artifact grounding.",
+      "original_text": "The response should explicitly reference distributing the pre-read file 'Advanced_JUnit_Parametrization_and_RSD_Traceability_Guide.pdf' before the workshop and schedule it at least 24 hours prior to T\u2080.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It requires assigning an owner for each task, which relates to roles and responsibilities.",
+      "original_text": "The response should assign an owner for each listed task and explicitly state 'Owner: Shakia' where applicable.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies scheduling a task to confirm a missing document, which is a task grounding.",
+      "original_text": "The response should ensure at least one task is scheduled to confirm missing overview document with Danille by July 17, as the event reference indicates the attachment is missing.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It mentions dependency on a planning document, which is an artifact grounding.",
+      "original_text": "The response should specify that agenda drafting on July 16 depends on insights from the Unit Test Workshop planning document.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "NEW_Role",
+      "confidence": "medium",
+      "reasoning": "It refers to assumptions about ownership and timing, which relates to roles and responsibilities.",
+      "original_text": "The response should explicitly state assumptions regarding ownership and timing because the provided grounding data does not confirm all task owners.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G5_Topic",
+      "confidence": "medium",
+      "reasoning": "It involves incorporating rollback automation lessons, which is a topic or subject matter.",
+      "original_text": "The response should clarify that incorporating rollback automation lessons is optional and assumed, as this dependency is not in the event details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It references specific supporting documents, which is artifact grounding.",
+      "original_text": "The response should reference critical supporting documents such as 'Migration_Rollback_DetailedMetrics.xlsx' and 'Grafana_MigrationRollback_Panel_DeepDive.docx' for pre-meeting preparation.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "NEW_Status",
+      "confidence": "high",
+      "reasoning": "It mentions previous action items being mostly complete, which relates to status/progress.",
+      "original_text": "The response should acknowledge assumptions and risks, such as previous action items being mostly complete and compressed preparation schedule due to same-day planning.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It identifies the meeting organizer and required attendee, which is attendee grounding.",
+      "original_text": "The response should identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the required attendee.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It requires alignment with agenda items such as reviewing a postmortem and root cause analysis, which are topics.",
+      "original_text": "The response should include an explicit summary of agenda items that aligns with the event\u2019s agenda text, such as reviewing the postmortem OnePager and discussing root cause analysis.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It references sending pre-read materials including a specific file, which is artifact grounding.",
+      "original_text": "The response should schedule sending of pre-read materials, including the updated 'JwtCache_Metrics_DeepDive_Slides.pptx', by July 22, at least 72 hours before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It requires assigning an explicit owner to a task, which relates to roles and responsibilities.",
+      "original_text": "The response should assign an explicit owner, Cortez Dehn, for the 'Draft and share agenda & pre-read materials' task.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It verifies that all required attendees are listed, matching the meeting invite.",
+      "original_text": "The response should list all required attendees including Shari Jatho, Loria Furlan, Bev Mcginty, Ashley Engel, Nila Tanguma, Cortez Dehn, Terina Hafen, Era Manteca, and Tisa Odonoghue, consistent with the meeting invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies inclusion of tasks related to Jenkins shared library changes and schema validation.",
+      "original_text": "The response should include tasks for verifying Jenkins shared library changes with schema-validation gate and npm run validate-schema, acknowledging dependency on Danille Ciardullo's prior integration.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "NEW_Communication",
+      "confidence": "medium",
+      "reasoning": "It references prior communications as the source for PromQL expression changes.",
+      "original_text": "The response should include PromQL expression changes to add region labels, as mentioned in prior communications, for example using `by (le,flag,region)` in queries.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies the correct meeting date and time.",
+      "original_text": "The response should include the correct meeting date and time as July 23, 2025, 19:00 PDT consistent with the event details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It checks that the meeting start time matches the event details.",
+      "original_text": "The response should state the meeting start time as July 24, 2025 at 19:00 UTC, matching the event details.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It ensures the agenda covers specific topics like HPA metrics and retry backoff adjustments.",
+      "original_text": "The response should explicitly mention that the agenda covers HPA metrics and retry backoff adjustments.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "high",
+      "reasoning": "It involves assumptions about limited time and parallelization, which are constraints.",
+      "original_text": "The response should clearly indicate that assumptions about limited time (16 hours) and potential overnight parallelization are explicitly stated.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires inclusion of a pre-meeting reminder task, which is an actionable item.",
+      "original_text": "The response should specify at least one pre-meeting reminder task sent to attendees with agenda and document links.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a task to confirm security remediation details.",
+      "original_text": "The response should include a task to confirm security remediation details from Trivy and OWASP ZAP scans.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It ensures no extra attendees beyond those in the original invite are added.",
+      "original_text": "The response should avoid adding any attendees not listed in the original event invite, such as unrelated team members.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It calls for an immediate next action for the organizer, which is a task.",
+      "original_text": "The response should include an immediate next action for the organizer (e.g., posting agenda draft by July 14, 2025) rather than leaving initial steps implicit.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It verifies the meeting subject, which is a topic/agenda item.",
+      "original_text": "The response should state the meeting subject exactly as 'Review Tool Evaluation Matrix and Next Steps'.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It checks that the meeting name and scheduled time match event details.",
+      "original_text": "The response should state that the meeting 'Pipeline Q&A Session: Integration and Metrics' is scheduled on 2025-08-05 at 14:00 UTC, matching the event details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It involves backward-scheduling tasks relative to a specific meeting time and deadlines.",
+      "original_text": "The response should backward-schedule tasks relative to the meeting time (T\u2080 = 2025-07-25T10:00 UTC) and include a near-term deadline for at least one preparatory action before T\u2080 (e.g., Jul 24 tasks).",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies the meeting time range.",
+      "original_text": "The response should specify the meeting time as July 19, 2025 from 16:00 to 17:30 PST.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "It proposes a risk mitigation strategy, which does not fit existing or new categories.",
+      "original_text": "The response should propose a risk mitigation strategy, such as using static charts if Grafana performance panel is unavailable.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires listing actionable, time-bound tasks before the meeting.",
+      "original_text": "The response should clearly list at least three actionable, time-bound tasks prior to the meeting: drafting agenda, pulling metrics, and finalizing talking points.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies the correct meeting date and time window.",
+      "original_text": "The response should specify the correct meeting date and time as July 22, 2025 from 10:00 to 11:30 UTC consistent with the event start and end time.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It references reviewing or uploading a specific file, which is an artifact.",
+      "original_text": "The response should explicitly mention reviewing or uploading the file 'Security Assessment Deep Dive.docx' as part of meeting preparation.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Specifies a deadline (July 24, 16:00 UTC) for a scheduled task.",
+      "original_text": "The response should schedule 'Send Pre-Read Reminder' no later than July 24, 16:00 UTC, at least 16 hours before T\u2080.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Mentions agenda drafting aligned with meeting objectives and specific topics (canary pipeline run outcomes and gating thresholds).",
+      "original_text": "The response should create a clear agenda drafting step that aligns with the meeting objective to review canary pipeline run outcomes and gating thresholds.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Requires explicit due dates and times for tasks, e.g., June 19 at 16:00 UTC.",
+      "original_text": "The response should provide explicit due dates and times for each task, such as June 19 at 16:00 UTC for sending the pre-read email.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "NEW_Role",
+      "confidence": "medium",
+      "reasoning": "Mentions owners for tasks, which relates to roles/responsibilities.",
+      "original_text": "The response should show a summary table capturing at least five major tasks with deadlines and owners for quick stakeholder visibility.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Specifies a scheduled dry run on July 28 (Day -1).",
+      "original_text": "The response should include a pre-meeting dry run in staging scheduled for July 28 (Day -1) to validate alert expressions and dashboards.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "States the meeting date and time as July 21, 2025, from 09:00 to 09:30 UTC.",
+      "original_text": "The response should state the meeting date and time as July 21, 2025, from 09:00 to 09:30 UTC.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G2_Attendee",
+      "confidence": "medium",
+      "reasoning": "References attendees by assuming no additional attendees beyond the provided list.",
+      "original_text": "The response should explicitly disclose the assumption that no additional attendees beyond the provided list will join the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Mentions sequencing tasks in a timeline working backward from T-0.",
+      "original_text": "The response should present a timeline that works backward from T-0 (16:00 PDT) with at least three intermediate tasks sequenced prior to the meeting start.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a dependency between tasks (draft agenda before pre-read distribution).",
+      "original_text": "The response should include a clear dependency that the draft agenda must be completed before pre-read distribution.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Includes a due time (July 23, 2025, 17:00 PDT) for sending a pre-meeting reminder.",
+      "original_text": "The response should explicitly reference sending a pre-meeting reminder with pre-reads to attendees and include the correct due time of July 23, 2025, 17:00 PDT.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G6_Task",
+      "confidence": "medium",
+      "reasoning": "Mentions a task to test Teams link before the meeting start.",
+      "original_text": "The response should include a tech readiness or Teams link test before the meeting start, such as at T-30 min.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Lists required attendees by name.",
+      "original_text": "The response should list the required attendees including Jack Schrott, Wilford Taussig, Terina Hafen, Ashley Engel, Sau Alquesta, Keren Guisbert, and Ossie Ziller.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Confirms meeting start time as 2025-07-22 at 14:00 UTC.",
+      "original_text": "The response should explicitly state the confirmed meeting start time as 2025-07-22 at 14:00 UTC, consistent with the scheduled Event.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Mentions a responsible owner (Shakia Gencarelli) for distributing pre-read materials.",
+      "original_text": "The response should include the distribution of final pre-read materials by July 23, 2025 with Shakia Gencarelli as the responsible owner.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "States the meeting date and time as June 29, 2025 at 10:00 UTC.",
+      "original_text": "The response should explicitly state the meeting is scheduled for June 29, 2025 at 10:00 UTC.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G6_Task",
+      "confidence": "medium",
+      "reasoning": "Specifies verifying Teams meeting settings as a task.",
+      "original_text": "The response should provide explicit notes on verifying Teams meeting settings, such as enabling recording and checking screen share capability.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Mentions a dry run scheduled on July 2 at 08:00 UTC.",
+      "original_text": "The response should show a buffer or checkpoint before the meeting, such as a dry run scheduled on July 2 at 08:00 UTC.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Mentions assignment of a task to Nila Tanguma and the Engineering team.",
+      "original_text": "The response should include a task to gather incident details such as metrics, timelines, and log extracts by July 12, 2025, assigned to Nila Tanguma and the Engineering team.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "References an attached file 'Go_Test_Hygiene_Template_v2.docx'.",
+      "original_text": "The response should include the attached file 'Go_Test_Hygiene_Template_v2.docx' as part of pre-read distribution milestones.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "States the meeting date and time as July 29, 2025 at 16:00 PDT.",
+      "original_text": "The response should state the meeting date and time as July 29, 2025 at 16:00 PDT, matching the official meeting invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Mentions agenda review and content freeze, which are agenda topics.",
+      "original_text": "The response should provide a backward-looking timeline that covers at least agenda review, content freeze, pre-read distribution, and final rehearsal before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Specifies the exact meeting start time and date.",
+      "original_text": "The response should state the meeting start time as July 23, 2025 at 10:15 AM PDT, matching the official meeting invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G4_Artifact",
+      "confidence": "medium",
+      "reasoning": "References a specific file (onboardingErrorScenarios.yaml) and deadline.",
+      "original_text": "The response should specify that lab material finalization, including onboardingErrorScenarios.yaml, must complete by end of day July 26, 2025, to allow buffer before finalization day.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Mentions agenda items like reviewing schema definitions and histogram buckets.",
+      "original_text": "The response should include at least two key agenda items mentioned in the meeting body, such as reviewing 'chaos-schema.yaml' definitions and Resilience4j histogram buckets.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Focuses on sequencing tasks backward from the meeting date.",
+      "original_text": "The response should incorporate time-bounded tasks sequenced backward from the meeting date with specific timestamps.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Verifies the meeting subject which relates to the meeting topic.",
+      "original_text": "The response should explicitly state the meeting subject '1:1 Deep Dive: Retry Backoff Configuration Design' and match the event data.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Specifies assigning owners to tasks, which relates to roles and responsibilities.",
+      "original_text": "The response should assign explicit owners to all pre-meeting tasks, including Keren for documentation and Rufina for metrics aggregation.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Describes a specific task with assigned owners and a deadline.",
+      "original_text": "The response should include a task for 'Collect supporting material for technical items' with owners as Cortez, Emory, and Wilford for CI/CD pipeline data before July 18.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Identifies specific attendees and organizer.",
+      "original_text": "The response should identify Ossie Ziller as the organizer and Wilford Taussig as the attendee for the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Verifies the meeting title which reflects the topic.",
+      "original_text": "The response should explicitly state the meeting title as '1:1: Security Deep Dive: Cache Config Webhook and Authentication'.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Mentions a specific document as part of pre-read materials.",
+      "original_text": "The response should include preparing and distributing 'FeatureFlags_CanaryDeployment_Planning_Document.docx' as part of the pre-read materials.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Lists agenda items from the meeting description.",
+      "original_text": "The response should list the agenda items matching the meeting description, including 'Review test plan coverage across JSON schema versions v1 and v2' and 'Prometheus counter labels for schema validation'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Shows dependency between tasks with a specific deadline.",
+      "original_text": "The response should show at least one dependency, for example, 'cache_manager dynamic resizing PR review' must complete before 'PR freeze' on Jul 27.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "Mentions assumptions about reusing prior outputs, which doesn't fit existing or new categories.",
+      "original_text": "The response should display an explicit assumption acknowledging that prior workshop outputs will be reused to save time.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Requires a visual timeline of tasks scheduled backward from a date.",
+      "original_text": "The response should provide a visual timeline of tasks clearly showing backward scheduling from July 22 to July 9.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "Acknowledges a limitation (no dedicated planning document), which is a constraint.",
+      "original_text": "The response should acknowledge that there is no dedicated OTLP planning document available and clearly mark this as an assumption or limitation.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "References specific files to review before the meeting.",
+      "original_text": "The response should include a preparation task to review 'Optimization_Workshop_Performance_Action_Tracker.xlsx' and 'Post_Workshop_Detailed_Data_Analysis.xlsx' at least one day before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "Mentions assumptions about CI pipeline and availability, not clearly fitting existing or proposed categories.",
+      "original_text": "The response should explicitly state assumptions like CI pipeline passing and attendee availability in the Additional Notes section.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "NEW_Communication",
+      "confidence": "high",
+      "reasoning": "Recommends establishing a backup communication channel.",
+      "original_text": "The response should recommend establishing a contingency or backup communication channel for the meeting (e.g., #ci-cd-sync).",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Includes meeting purpose and agenda items related to specific technical topics.",
+      "original_text": "The response should include the meeting purpose and agenda items that mention reviewing the Jenkins canary.groovy rollback guard snippet and validating 'CanaryRollbackInitiated' metric logging.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a rehearsal task on a specific date to prepare for technical topics.",
+      "original_text": "The response should include a dry-run or rehearsal step on Jul 29 to prepare for technical discussion points like Mockery and coverage integration.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Verifies that specific attendees are identified and match the meeting invite.",
+      "original_text": "The response should identify the required attendees as Shari Jatho and Ossie Ziller, matching the meeting invite.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Checks that the meeting date and time match the event details.",
+      "original_text": "The response should state that the 'Post-Canary Pipeline Retrospective' meeting is scheduled for July 25, 2025, from 08:00 to 08:30 UTC, matching the event details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Requires circulation of specific pre-read files, which are artifacts.",
+      "original_text": "The response should schedule circulation of full pre-read files (`Vault_Integration_Workflow_Documentation.pdf`, `vault_backoff_analysis.xlsx`, `VaultIntegration_DetailedMetrics.xlsx`, `vault_backoff_recs.docx`) on July 28, 2025.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Ensures the confirmed meeting date and time is stated accurately.",
+      "original_text": "The response should state the confirmed meeting date and time as July 21, 2025 at 14:00 UTC.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Requires inclusion of agenda items, which are topics from the event description.",
+      "original_text": "The response should explicitly mention the agenda items such as CVE remediation timelines and Jenkins pipeline gates, consistent with the event description.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "Mentions risk and mitigation, which do not fit existing categories or proposed new ones.",
+      "original_text": "The response should explicitly identify at least one risk (such as late slide updates) and a mitigation plan (like a buffer before the meeting).",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Requires a backward timeline with at least one scheduled task before a certain date.",
+      "original_text": "The response should include a backward timeline with at least one task scheduled before July 23 to prepare for the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a quick sync task with presenters before the meeting.",
+      "original_text": "The response should propose a same-day quick sync task with presenters prior to the meeting start.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Focuses on ownership and roles, ensuring no extra roles beyond those listed.",
+      "original_text": "The response should not claim ownership for any attendee beyond Sau Alquesta, Markita Sitra, and Era Manteca, since no additional roles appear in the invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Requires a task scheduled on a specific date to prepare and share the agenda.",
+      "original_text": "The response should include at least one task scheduled for July 18, 2025 that prepares the agenda to be shared with Cortez Dehn before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Checks that the meeting date and time match the invite details.",
+      "original_text": "The response should state the meeting date and time as July 23, 2025 at 17:00 PDT, consistent with the meeting invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Verifies the scheduled date and time for a specific meeting name.",
+      "original_text": "The response should state that the meeting 'One-on-One: Jenkins Shared Library Test Plan Deep Dive' is scheduled for July 19, 2025 at 14:00 UTC, matching the calendar event.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "Mentions risk and mitigation, which do not align with existing or proposed categories.",
+      "original_text": "The response should include a risk note regarding the tight timeline and available mitigation.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a sequence of tasks with associated dates.",
+      "original_text": "The response should create a clear sequence where 'Telemetry & Metrics Verification' on July 26 occurs before 'Draft Workshop Deck Completion' on July 28.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Ensures no fictitious attendees are introduced beyond those in the invite.",
+      "original_text": "The response should not introduce any attendees who are not listed in the official invite (e.g., ensure no fictitious participants are added).",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Requires a backward-scheduled timeline with specific preparation tasks.",
+      "original_text": "The response should provide a realistic timeline breakdown (Jul 17 prep, Jul 18 finalization, Jul 19 buffer) backward scheduled from the meeting date.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Requires inclusion of specific agenda topics aligning with the meeting description.",
+      "original_text": "The response should include agenda items on CPU/memory request adjustments, HPA YAML validation, and Jenkins pipeline snippet integration aligning with the meeting description.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Checks the meeting date, time, and name against the event details.",
+      "original_text": "The response should state the meeting is scheduled for July 19, 2025 at 15:00 UTC and name it as 'HPA Scaling 1:1 Deep Dive', matching the event details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Specifies a task to share a pre-read with a named attendee before the meeting.",
+      "original_text": "The response should list an explicit task for sharing a pre-read (including schema and agenda) with Tony Coolbrith before the meeting.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies that the distribution occurs at least 24 hours before the meeting start time, which is a date/time constraint.",
+      "original_text": "The response should schedule the distribution of a pre-read (including JSON snippet and threshold proposal) at least 24 hours before the meeting start time.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies a dry run scheduled on a specific date and time (2025-07-21 09:30 UTC).",
+      "original_text": "The response should plan for a final dry run on 2025-07-21 09:30 UTC prior to the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It requires assigning explicit owners to tasks, which relates to roles and responsibilities.",
+      "original_text": "The response should assign explicit owners to each task, using grounded user names such as Shakia, Danille, or Emory where appropriate.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies the meeting title and date/time, which falls under date/time grounding.",
+      "original_text": "The response should explicitly state the meeting title as 'Feature Flag Feedback Deep Dive 1:1' and the meeting date as July 20, 2025 at 10:00 AM PST.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It mentions scheduling distribution of a specific file (ExecSummary_v2.pdf), which is an artifact.",
+      "original_text": "The response should schedule distribution of the attachment ExecSummary_v2.pdf as a pre-read at least 24 hours before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It lists required attendees by name, which is attendee grounding.",
+      "original_text": "The response should list all required attendees: Shakia Gencarelli, Emory Scherping, Era Manteca, Markita Sitra, and Rufina Ganie.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It requires a backward-timed schedule across specific dates, which is date/time grounding.",
+      "original_text": "The response should provide a backward-timed workback schedule starting from T\u2080 (July 20, 2025 at 10:00 PST) that distributes preparation steps across July 17, 18, 19 with minimal but explicit buffer.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "It acknowledges assumptions about no holidays or blackout periods, which are constraints.",
+      "original_text": "The response should acknowledge that the timeline assumes no additional holidays or blackout periods since these details are not verified.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It requires every task to have a named owner, which relates to roles and responsibilities.",
+      "original_text": "Every listed task in the plan should have a clearly named owner (Wilford) as shown in the candidate response.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It specifies the meeting objective and topics such as canary deployment outcomes and metrics.",
+      "original_text": "The response should include the meeting objective to review canary deployment outcomes, error spikes, performance metrics, and plan corrective actions before production rollout.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It verifies specific people as organizer and attendee, which is attendee grounding.",
+      "original_text": "The response should list Wilford Taussig as organizer and Sau Alquesta as confirmed attendee, consistent with the event.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It refers to slides or a pre-read deck, which are artifacts.",
+      "original_text": "The response should specify that slides or a pre-read deck will be finalized and distributed before the meeting rather than leaving artifacts unmentioned.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies distributing an agenda by a certain date, which is a date/time requirement.",
+      "original_text": "The response should schedule distribution of a detailed agenda by July 31, which is at least 5 days before the meeting date.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "It addresses mitigation for risks related to recovery windows, which is a constraint consideration.",
+      "original_text": "The response should provide mitigation for risks such as having no recovery window for failed validation, showing early validation as a countermeasure.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It states the meeting date and time explicitly, which is date/time grounding.",
+      "original_text": "The response should state that the 'Vault Integration Retrospective' meeting is scheduled for July 28, 2025 at 10:00 AM PST.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It lists attendees by name, which is attendee grounding.",
+      "original_text": "The response should list attendees that include Danille Ciardullo, Era Manteca, Octavia Jaso, Ossie Ziller, Tony Coolbrith, and Loria Furlan as provided in the calendar event.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It assigns ownership of a task to a specific person, which relates to roles and responsibilities.",
+      "original_text": "The response should assign ownership for 'Distribute pre-read deck' to Shari Jatho.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It outlines agenda items and discussion topics, which is topic grounding.",
+      "original_text": "The response should outline agenda items matching Event details, including integration test architecture overview, code walkthrough of JwtCacheLRU, Vault demo, integer overflow guard tests, metrics validation with Prometheus, CI pipeline integration, and Q&A.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "It requires allocating buffer time, which is a scheduling constraint.",
+      "original_text": "The response should allocate at least one day of buffer before the meeting for final review and readiness.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It involves gathering specific technical artifacts and includes a due date, primarily focusing on artifacts.",
+      "original_text": "The response should include gathering technical artifacts such as Jenkinsfile samples, Helm chart snippet, and Trivy scan reports, due by July 21, 2025, and name Danille Ciardullo and Era Manteca as owners.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "Mentions assumptions and risks related to availability, which reflects constraints rather than attendees or tasks.",
+      "original_text": "The response should include a statement about assumptions and risks, such as weekend availability or absence of additional attendees.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Specifically verifies organizer and attendee names.",
+      "original_text": "The response should correctly identify Shakia Gencarelli as the organizer and Era Manteca as an attendee.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Focuses on scheduling a document preparation step with a specific deadline.",
+      "original_text": "The response should schedule the preparation of the 'Meeting Ready Notes' document at least two days before the meeting date (on or before July 28, 2025).",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Mentions specific artifacts (Grafana dashboard JSON and JMeter summary) and timing for sharing.",
+      "original_text": "The response should schedule pre-read or artifact sharing at least 3 hours before the meeting and name Grafana dashboard JSON and JMeter summary in that step.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "Verifies agenda items and topics from the event body.",
+      "original_text": "The response should list the agenda items exactly as in the event body, including 'Parameterized Tests and onboardingErrorScenarios.yaml usage' and 'Jenkins pipeline parallel execution and COVERAGE_THRESHOLD overrides'.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Requires assigning an owner for each task, which relates to roles and responsibilities.",
+      "original_text": "The response should assign an owner (e.g., Jason) for each listed task in the workback plan.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "high",
+      "reasoning": "Highlights aggressive timing as a constraint impacting planning.",
+      "original_text": "The response should include a contingency statement acknowledging that aggressive timing (~34 hours) is assumed from the current request time and highlight this as a constraint.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "medium",
+      "reasoning": "Mentions assumptions about no further prep meetings and buffer application, indicating constraints.",
+      "original_text": "The response should include an explicit assumption disclosure indicating that no further prep meetings are planned and buffers are applied due to the short preparation window.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "Specifies an exact date and time for sending pre-read materials.",
+      "original_text": "The response should specify that the pre-read package including the Figma link and annotated notes will be sent on July 23, 2025, by 09:00 PDT, providing at least 10 hours before the meeting time.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "NEW_Communication",
+      "confidence": "high",
+      "reasoning": "Mentions stakeholder confirmation using a Teams chat group, which is a communication channel.",
+      "original_text": "The response should include mention of stakeholder confirmation using the Teams chat group 'migration-rollback-runbook'.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Verifies organizer and attendee names match the event invite.",
+      "original_text": "The response should list Nila Tanguma as the organizer and include attendees Danille Ciardullo, Shakia Gencarelli, Keren Guisbert, Octavia Jaso, Jack Schrott, Terina Hafen, Shari Jatho, and Tony Coolbrith matching the event invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Assigns ownership (Danille) for collecting questions, indicating role responsibility.",
+      "original_text": "The response should mention collecting attendee questions before the meeting date and assign Danille as the owner.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "NEW_Constraint",
+      "confidence": "high",
+      "reasoning": "Notes a time-based constraint (16 hours remaining) affecting urgency.",
+      "original_text": "The response should clearly state that only approximately 16 hours remain until the meeting, noting that this constraint is an assumption impacting task urgency.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Specifies a named document as part of pre-read materials.",
+      "original_text": "The response should list 'MigrationRollbackAutomationResearch.pdf' as part of the pre-read materials to be distributed.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Links a specific artifact to a preparation step.",
+      "original_text": "The response should link the Performance_Contract_Metrics_Detail.xlsx artifact to the metric consolidation step occurring the night before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "Lists specific files required for preparation.",
+      "original_text": "The response should list 'ChaosSecurityAssessment_Details.xlsx' and 'ExecSummary_v2.pdf' as related files for preparation.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "Assigns a task to a specific person (Ossie) with a due date, indicating role responsibility.",
+      "original_text": "The response should assign Draft meeting objectives & outline to Ossie and include a due date before July 19, 2025.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "Verifies that only specific attendees are included as required participants.",
+      "original_text": "The response should not contradict the listed attendees and should include only Keren Guisbert, Cortez Dehn, Rufina Ganie, and Myles Mckoan as required participants.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Ensures correct sequencing of a specific task relative to others.",
+      "original_text": "The response should show sequencing such that 'Validate PR #216 HPA Config Changes' occurs before the meeting and not after pre-read distribution, maintaining dependency order.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "Requires inclusion of a task (draft and confirm agenda) with a specific deadline.",
+      "original_text": "The response should include a task to draft and confirm the agenda before end of day July 25 with clear timing.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a task (Confluence page sync) with a deadline (July 15), which is a grounded action item.",
+      "original_text": "The response should state that Confluence page sync with Shakia must occur by July 15, ensuring documentation readiness before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It verifies the meeting title, which is a subject/topic element.",
+      "original_text": "The response should state the meeting title exactly as 'Grafana Dashboard Implementation Deep Dive' matching the Event Subject.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires scheduling a task and showing dependency, which is task grounding.",
+      "original_text": "The response should schedule a task to finalize the metrics deck after collecting performance stats, demonstrating dependency between these tasks.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It mentions uploading specific documents, which are artifacts.",
+      "original_text": "The response should upload related reference documents like 'Security Pipeline Gating Deep Dive Presentation.pdf' and 'Security_Automation_Pipeline_Gating_Framework_Study_v1.0.pdf' to a shared location before the session.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It checks that agenda items match the meeting invite, which is topic grounding.",
+      "original_text": "The response should include agenda items that match the meeting invite text, such as 'Review P95 alert rule performance and thresholds' and 'Evaluate Grafana histogram panels'.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G3_DateTime",
+      "confidence": "medium",
+      "reasoning": "It refers to a summary table listing tasks with dates, focusing on date consistency.",
+      "original_text": "The response should provide a reverse timeline summary table listing key tasks with dates consistent with the main schedule.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G3_DateTime",
+      "confidence": "medium",
+      "reasoning": "It emphasizes confirmation by a specific date (July 21), which is date/time grounding.",
+      "original_text": "The response should explicitly state that the environment readiness for demos is a risk that needs confirmation by July 21.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies a same-day sync on the morning of July 23, which is a time-based requirement.",
+      "original_text": "The response should include a same-day dry run or final sync on the morning of July 23 before the meeting start time.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G5_Topic",
+      "confidence": "medium",
+      "reasoning": "It refers to confirming meeting scope and topics, which relates to agenda content.",
+      "original_text": "The response should explicitly disclose that the detailed meeting scope (e.g., Cypress coverage topics) is assumed and may need confirmation with Shari Jatho.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G5_Topic",
+      "confidence": "medium",
+      "reasoning": "It mentions naming a control tag and retentionDays in agenda context, which is topic-specific detail.",
+      "original_text": "The response should name the Opsgenie SI-10 control tag and retentionDays=2555 within agenda confirmation context.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a final pre-meeting check task scheduled before the meeting, which is a task.",
+      "original_text": "The response should include at least one final pre-meeting check task scheduled within one hour before the meeting start.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "It requires including an Event ID, which is a metadata reference not covered by existing dimensions.",
+      "original_text": "The response should include the Event ID 239571e1-6fe5-4283-8957-2467e9bf28ce when referencing the meeting details.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It verifies that specific attendees are named, which is attendee grounding.",
+      "original_text": "The response should name Emory Scherping and Danille Ciardullo as attendees consistent with the event invite.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires scheduling a dry run as a separate task, which is task grounding.",
+      "original_text": "The response should explicitly schedule a dry run or technical check on July 23, 2025, as a task separate from content drafting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It requires assigning an explicit owner to each task, which relates to roles/responsibilities.",
+      "original_text": "The response should assign an explicit owner to each listed task.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "NEW_Role",
+      "confidence": "medium",
+      "reasoning": "It discusses assumptions about owners for agenda points based on roles, which is role-related.",
+      "original_text": "The response should explicitly disclose that the owners for some agenda discussion points (if any not identified from participants) are assumed based on roles.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It requires assigning explicit owners to tasks using attendee names, which is about roles.",
+      "original_text": "The response should assign explicit owners to all tasks, using attendee names from the meeting invitation, such as Nila, Jason, Sau, and Shakia.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G5_Topic",
+      "confidence": "medium",
+      "reasoning": "It mentions assumptions about meeting purpose due to lack of agenda, which relates to topic grounding.",
+      "original_text": "The response should explicitly disclose that the assumption was made about the meeting purpose since no detailed agenda was provided, using language like 'assumed from title'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It specifies assigning owners for preparatory tasks, which is role responsibility.",
+      "original_text": "The response should assign owners for each listed preparatory task, such as Saturnina for file confirmation and reminder email.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires identifying a dependency between tasks, which is task grounding.",
+      "original_text": "The response should identify at least one dependency, such as QA validation completing before agenda finalization, in the risk or dependency section.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It verifies a specific task (preparing talking points or summary) and its linkage to an owner.",
+      "original_text": "The response should state that preparing talking points or summary of HPA test results occurs before T\u2080 and is linked as Wilford's task.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires scheduling a specific task (Quick Talking Point Sync) with timing and attendee involvement.",
+      "original_text": "The response should schedule a task for 'Quick Talking Point Sync' involving all attendees with a time before T\u2080 to confirm roles for the discussion.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It focuses on presenting a backward timeline with specific timestamps.",
+      "original_text": "The response should present a backward timeline of tasks starting from the meeting time and moving to current time with specific timestamps.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It lists specific agenda topics that must be included.",
+      "original_text": "The response should mention all key agenda topics from the meeting body, including self-extracting JAR internals, JMH integration with JSONOutputFormat, dynamic -Xmx adjustments, off-heap ByteBuffer prefetch threads, and extending the flamegraph CI pipeline.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "It enforces exclusion of unmentioned agenda items, attendees, or files, which is a meta-validation rather than grounding a specific entity.",
+      "original_text": "The response should not introduce any agenda items, attendees, or files that are not mentioned in the meeting event or related communications.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It explicitly states the meeting date and time.",
+      "original_text": "The response should clearly state the meeting date and time as July 27, 2025 from 17:00 to 18:00 PDT.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It refers to key agenda items and discussion points from the meeting body.",
+      "original_text": "The response should include the key agenda items such as reviewing P99 expressions for `migration_duration_seconds` and `rollback_duration_seconds`, discussing threshold color overrides, validating JSON model changes in `dashboard/migration_rollback.json` lines 20\u201340, and planning the PR reviewer assignment.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It requires referencing a specific file as an artifact.",
+      "original_text": "The response should reference the file 'SecurityPipelineWorkshopMetrics.xlsx' as an attachment or artifact needed for preparation.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It focuses on assigning clear owners, which relates to roles and responsibilities.",
+      "original_text": "The response should assign clear owners to each preparation task (e.g., Shakia or Era).",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G2_Attendee",
+      "confidence": "medium",
+      "reasoning": "It deals with attendee list completeness and confirmation as a task.",
+      "original_text": "The response should include a disclaimer that the attendee list is incomplete and mark attendee confirmation as a separate task with a due date.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It verifies the meeting organizer's name matches the calendar invite.",
+      "original_text": "The response should mention the meeting organizer as Shakia Gencarelli consistent with the calendar invite.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a task (prepare demo visuals) with timing and ownership.",
+      "original_text": "The response should include a task to prepare demo visuals such as 2\u20133 screenshots for the Monday stand-up, indicating timing and owner responsibility.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires listing a task and its dependency on a specific artifact.",
+      "original_text": "The response should explicitly list 'Create draft deep-dive deck' task and indicate that it depends on 'v2.1.0_Canary_Postmortem.pdf' as the base material.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It focuses on sequencing tasks based on specific dates.",
+      "original_text": "The response should sequence tasks backward from the meeting date, starting with final readiness on July 2 and preceding tasks on July 1.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It verifies the inclusion of the meeting purpose, which is a topic.",
+      "original_text": "The response should mention the meeting purpose as a deep dive on HPA metrics and retry backoff adjustments.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a readiness activity (dry run or tech check) as a task.",
+      "original_text": "The response should include a meeting readiness activity such as a dry run or tech check to verify Teams access and dashboards before the session.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It validates the meeting date and time against scheduled details.",
+      "original_text": "The response should state the meeting date and time as July 27, 2025, 14:00\u201314:30 UTC matching the scheduled event details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It involves scheduling a sync to confirm roles, which relates to responsibilities.",
+      "original_text": "The response should schedule an ownership confirmation or team sync on roles prior to T\u2080 (e.g., 30\u201345 minutes before the meeting begins).",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It requires inclusion of specific agenda items from the meeting body.",
+      "original_text": "The response should include all four agenda items listed in the meeting body, such as 'Analyze TTL guard triggers on linux_arm' and 'Determine TTL default and margin values for production'.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It checks the meeting name and scheduled date/time, primarily focusing on date/time accuracy.",
+      "original_text": "The response should correctly state that the meeting \"1:1 Deep Dive: Security Remediation Roadmap\" is scheduled for 2025-06-29 at 10:00 UTC.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "The assertion verifies the meeting subject, which is a topic or agenda-related detail.",
+      "original_text": "The response should state the correct meeting subject 'Mid-Sprint Design Review: Banking UI & Compliance Mockups' matching the event details.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies dates (Jul 24 and Jul 22) for dependencies, which relates to timeline grounding.",
+      "original_text": "The response should include an explicit dependency that finalizing the agenda on Jul 24 is contingent on collecting attendee questions by Jul 22.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It checks for proper sequencing of tasks, which falls under task grounding.",
+      "original_text": "The response should maintain proper sequencing of dependencies by placing 'Draft Structured Agenda with Talking Points' before 'Finalize Slide Outline or Notes for Discussion'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It verifies task dependencies involving confirming objectives and reviewing agenda, which are tasks.",
+      "original_text": "The response should include an explicit dependency that 'Confirm meeting objectives with Shakia' occurs before 'Review final agenda & talking points'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It assigns owners to tasks, which relates to roles and responsibilities.",
+      "original_text": "The response should assign the owner 'Markita' for refining the presentation deck and 'Danille' for validating PR merge status.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies dependency between two tasks, which is task grounding.",
+      "original_text": "The response should include an explicit dependency that 'Validate Grafana Dashboard Export' must be completed before 'Circulate Final Pre-read Package'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It requires explicit timeline phases with specific dates, which is date/time grounding.",
+      "original_text": "The response should include explicit timeline phases with task deadlines scheduled on June 17, June 18, June 19, and June 20, demonstrating a clear workback from the meeting date.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It involves confirming an attendee by name and a deadline, primarily attendee grounding.",
+      "original_text": "The response should schedule confirmation of additional attendee Markita Sitra, who is the sender of the original meeting invite, no later than July 16, 2025.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It checks for dependencies between tasks like data gathering and pre-read consolidation.",
+      "original_text": "The response should clearly identify dependencies between tasks, such as data gathering before pre-read consolidation.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It requires each task to include a specific due time in UTC, which is date/time grounding.",
+      "original_text": "Each task in the workback plan should include a specific due time in UTC prior to the meeting start.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It includes agenda confirmation as a planned task and its sequence, which is task grounding.",
+      "original_text": "The response should include agenda confirmation with stakeholders as a planned task and indicate it occurs before slide finalization.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It verifies the meeting date and time, which is date/time grounding.",
+      "original_text": "The response should state the meeting is on 2025-06-16 at 16:00 UTC, matching the meeting invite start time.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It requires tasks scheduled before T\u2080, which is task grounding.",
+      "original_text": "The response should include tasks scheduled before T\u2080 that cover confirming agenda, sharing pre-read, and verifying artifact access.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies the meeting date and start time, which is date/time grounding.",
+      "original_text": "The response should provide the meeting date and start time as July 23, 2025, 17:00 PDT, matching the Event entity.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G6_Task",
+      "confidence": "medium",
+      "reasoning": "It references collecting logs as preparation steps, which is a task-related requirement.",
+      "original_text": "The response should include collecting recent dry-run logs for validatePipelineSchema and note schema v1 vs v2 coverage.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It references a specific file 'dashboard/migration_rollback.json', which is artifact grounding.",
+      "original_text": "The response should reference preparation steps involving the file 'dashboard/migration_rollback.json' as relevant to JSON validation.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It identifies the meeting organizer and owner of tasks, which relates to roles and responsibilities.",
+      "original_text": "The response should clearly identify Shakia Gencarelli as the meeting organizer and the owner of tasks.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It mentions the existence of a specific document PipelineValidation_TestPlan.md, which is artifact grounding.",
+      "original_text": "The response should disclose that the existence of PipelineValidation_TestPlan.md is assumed and indicate fallback steps if missing.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It includes Nila Tanguma as an optional attendee, which is attendee grounding.",
+      "original_text": "The response should include Nila Tanguma as an optional attendee, matching the invite.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It specifies a pre-read document pipeline-shared-library-refactor.md, which is artifact grounding.",
+      "original_text": "The response should specify that the pre-read document pipeline-shared-library-refactor.md is to be reviewed before the meeting, as indicated in the event body.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 1,
+      "grounding_type": "G2_Attendee",
+      "confidence": "high",
+      "reasoning": "It requires including the meeting organizer's name, which is an attendee reference.",
+      "original_text": "The response should explicitly include the meeting organizer Terina Hafen by name in the plan details.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 2,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It focuses on assigning tasks to owners, which relates to roles and responsibilities.",
+      "original_text": "The response should assign all tasks in the plan to specific owners or explicitly note if an owner is TBD.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 3,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It mentions a specific document that must be included in a task.",
+      "original_text": "The response should include at least one task to review Security_Vault_Integration_Planning_Document.pdf before the meeting.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 4,
+      "grounding_type": "OTHER",
+      "confidence": "medium",
+      "reasoning": "It is a general validation about not inventing entities, not verifying a specific grounding element.",
+      "original_text": "The response should not invent agenda items, attendees, or files that are not present in the grounding data.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 5,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It specifies the meeting organizer and ownership of tasks, which is about roles and responsibilities.",
+      "original_text": "The response should identify Saturnina Soyke as the meeting organizer and owner of pre-meeting tasks as indicated in the plan.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 6,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It references leveraging insights from a specific file.",
+      "original_text": "The response should mention leveraging insights from 'VaultIntegration_TechnicalDeepDive.pptx' in retrospective preparation.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 7,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a concrete task with a due date and assignee.",
+      "original_text": "The response should assign the task 'Extract OpenSCAP compliance scan results and remediation status' due by 2025-07-20 14:00 UTC to Danille.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 8,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It mentions using a specific document for preparation.",
+      "original_text": "The response should identify using 'AdvancedLogRouting_DeepDive.pdf' for deck updates as a preparation step.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 9,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It defines task dependencies, which is part of task grounding.",
+      "original_text": "The response should define dependencies where Jenkins snippet validation must occur before drafting the Grafana panel plan.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 10,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It refers to specific topics included in the meeting purpose.",
+      "original_text": "The response should mention the meeting purpose includes OWASP ZAP integration and failure gating in Jenkins pipeline.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 11,
+      "grounding_type": "G4_Artifact",
+      "confidence": "high",
+      "reasoning": "It specifies attaching two documents to a Teams chat.",
+      "original_text": "The response should mention attaching both `PaymentsAPI_Retro_Deck.pdf` and `ExecSummary_v2.pdf` to the Teams meeting chat as per Phase 2 tasks.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 12,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It requires checking a meeting link and confirmation by a specific date.",
+      "original_text": "The response should check Teams meeting link and calendar confirmation by July 20, four days before the meeting.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 13,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It lists agenda items and technical topics that must align with the event details.",
+      "original_text": "The response should include agenda items that align with the event details, such as reviewing P99 latency distribution, TTL guard triggers, validating jitterParams and backoffFactor, and defining PR merge readiness.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 14,
+      "grounding_type": "G5_Topic",
+      "confidence": "high",
+      "reasoning": "It references specific agenda items from the meeting body.",
+      "original_text": "The response should reference the agenda items 'Review of default value enforcement for maxReceiveMessageSize' and 'Deep dive into patternProperties for vaultReference regex', as specified in the meeting body.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 15,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It specifies scheduling a pre-read distribution by a certain date and time.",
+      "original_text": "The response should schedule pre-read distribution by July 24 before end-of-day to allow overnight review.",
+      "source_file": "11_25_output_with_matches.jsonl"
+    },
+    {
+      "assertion_id": 16,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It emphasizes that each task should have an owner and assigns ownership to a specific person.",
+      "original_text": "Each listed task in the workback plan should have a named owner, and the response should assign ownership to 'Shakia' matching the user's identity.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 17,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It describes a specific task for a person with a deadline.",
+      "original_text": "The response should list a task for Danille to identify dev dependency freezes before July 14 in preparation for pipeline gating or Helm PR merges.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 18,
+      "grounding_type": "G6_Task",
+      "confidence": "high",
+      "reasoning": "It specifies a task for confirming attendee availability by a certain date.",
+      "original_text": "The response should include a task specifically for confirming attendee availability with Danille on July 21 prior to sending the agenda reminder.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 19,
+      "grounding_type": "NEW_Role",
+      "confidence": "high",
+      "reasoning": "It identifies task ownership distribution among participants, which relates to roles.",
+      "original_text": "The response should identify that most tasks are assigned to Markita and that Danille contributes to reviewing retentionDays and YAML lint specifics.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    },
+    {
+      "assertion_id": 20,
+      "grounding_type": "G3_DateTime",
+      "confidence": "high",
+      "reasoning": "It states the exact meeting date and time.",
+      "original_text": "The response should state the meeting date and time as July 27, 2025, 17:00\u201318:00 PDT for '1:1 Deep Dive: Resource Autoscaling & HPA Jenkins Integration'.",
+      "source_file": "Assertions_genv2_for_LOD1126part1.jsonl"
+    }
+  ],
+  "summary": {
+    "current_g": {
+      "G4_Artifact": 34,
+      "G2_Attendee": 27,
+      "G3_DateTime": 61,
+      "G6_Task": 65,
+      "G5_Topic": 41
+    },
+    "new_types": {
+      "NEW_Decision": 1,
+      "NEW_Role": 37,
+      "NEW_Communication": 5,
+      "NEW_Constraint": 18,
+      "NEW_Location": 1,
+      "NEW_Status": 1
+    },
+    "recommendations": [
+      {
+        "name": "Role",
+        "count": 37,
+        "examples": [
+          {
+            "text": "The response should assign Markita Sitra and Rufina Ganie as owners for 'Gather current cache settin",
+            "reasoning": "Assigns owners for a task, which relates to role/responsibility."
+          },
+          {
+            "text": "The response should clearly assign an owner for each task, including Shakia Gencarelli, Wilford Taus",
+            "reasoning": "Requires assigning an owner for each task, which is about responsibility."
+          },
+          {
+            "text": "The response should explicitly state that owners were inferred from roles and that this is an assump",
+            "reasoning": "States that owners were inferred from roles, which relates to responsibility."
+          }
+        ]
+      },
+      {
+        "name": "Constraint",
+        "count": 18,
+        "examples": [
+          {
+            "text": "The response should disclose assumptions around weekend availability or owner confirmation due to th",
+            "reasoning": "Mentions assumptions around availability due to a compressed timeline, which is a constraint."
+          },
+          {
+            "text": "The response should acknowledge that due to a tight timeline, task sequencing has minimal buffer and",
+            "reasoning": "Mentions a tight timeline and minimal buffer, which indicates a constraint or limitation."
+          },
+          {
+            "text": "The response should include observation or assumption statements acknowledging the tight 36-hour tim",
+            "reasoning": "Acknowledging a tight 36-hour timeline reflects a scheduling constraint."
+          }
+        ]
+      }
+    ]
+  }
+}

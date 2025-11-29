@@ -4,19 +4,19 @@
 **Date:** November 28, 2025  
 **Version:** 1.1
 
-**Purpose:** A comprehensive reference of all 25 WBP evaluation dimensions (S1-S19 + G1-G6), organized into Phase 1 (core) and Phase 2 (extended) evaluation frameworks.
+**Purpose:** A comprehensive reference of all 27 WBP evaluation dimensions (S1-S19 + G1-G8), organized into Phase 1 (core) and Phase 2 (extended) evaluation frameworks.
 
 ---
 
 ## Overview
 
-This document defines the complete set of **25 evaluation dimensions** for Workback Plan (WBP) assessment:
+This document defines the complete set of **27 evaluation dimensions** for Workback Plan (WBP) assessment:
 
 | Layer | Total | Phase 1 | Phase 2 |
 |-------|:-----:|:-------:|:-------:|
 | Structural (S1-S19) | 19 | 9 | 10 |
-| Grounding (G1-G6) | 6 | 6 | 0 |
-| **Total** | **25** | **15** | **10** |
+| Grounding (G1-G8) | 8 | 8 | 0 |
+| **Total** | **27** | **17** | **10** |
 
 **Phase Legend:**
 - ✅ **Phase 1** — Core dimensions for initial evaluation framework (14 dimensions)
@@ -68,11 +68,11 @@ Additional structural dimensions for comprehensive planning aspects.
 
 ---
 
-## Grounding Dimensions (G1-G6)
+## Grounding Dimensions (G1-G8)
 
-Grounding dimensions verify factual accuracy against source data. **All 6 are Phase 1** dimensions for the evaluation framework.
+Grounding dimensions verify factual accuracy against source data. **All 8 are Phase 1** dimensions for the evaluation framework.
 
-**Note:** G1 (Hallucination Check) is placed first as the **overall grounding recall check**. If G2-G6 all pass, G1 passes. G1 also catches entity types not covered by G2-G6.
+**Note:** G1 (Hallucination Check) is placed first as the **overall grounding recall check**. If G2-G8 all pass, G1 passes. G1 also catches entity types not covered by G2-G8.
 
 | ID | Dimension | Weight | Phase | Template | Definition |
 |----|-----------|:------:|:-----:|----------|------------|
@@ -82,6 +82,8 @@ Grounding dimensions verify factual accuracy against source data. **All 6 are Ph
 | **G4** | Artifact Grounding | 2 | ✅ P1 | "All files must exist in {source.ENTITIES where type=File}" | Files/decks referenced exist in source repository |
 | **G5** | Topic Grounding | 2 | ✅ P1 | "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}" | Agenda topics align with source (nouns/subjects) |
 | **G6** | Task Grounding | 3 | ✅ P1 | "All tasks/action items must exist in {source.ENTITIES}" | Tasks derived from source, not fabricated (verbs/to-dos) |
+| **G7** | Role Grounding | 2 | ✅ P1 | "All role assignments must match {source.ENTITIES} or context" | Roles/responsibilities accurate to source |
+| **G8** | Constraint Grounding | 2 | ✅ P1 | "All constraints must be derivable from {source}" | Constraints/limits traceable to source |
 
 ---
 
@@ -92,15 +94,15 @@ Grounding dimensions verify factual accuracy against source data. **All 6 are Ph
 | Layer | Phase 1 Dimensions | Count |
 |-------|---------------------|:-----:|
 | Structural | S1, S2, S3, S4, S6, S11, S18, S19 | 9 |
-| Grounding | G1, G2, G3, G4, G5, G6 | 6 |
-| **Total** | | **15** |
+| Grounding | G1, G2, G3, G4, G5, G6, G7, G8 | 8 |
+| **Total** | | **17** |
 
 ### By Weight
 
 | Weight | Level | Phase 1 Dimensions | Count |
 |:------:|-------|---------------------|:-----:|
 | 3 | Critical | S1, S2, S3, G1, G2, G3, G6 | 7 |
-| 2 | Moderate | S4, S6, S11, S19, G4, G5 | 6 |
+| 2 | Moderate | S4, S6, S11, S19, G4, G5, G7, G8 | 8 |
 | 1 | Light | S18 | 1 |
 
 **Note:** S19 weight was updated from 1 to 2 to reflect its importance for transparency.
@@ -115,7 +117,7 @@ Grounding dimensions verify factual accuracy against source data. **All 6 are Ph
 | **Risk** | S11 | Risk mitigation strategies |
 | **Post-Event** | S18 | Wrap-up and follow-through actions |
 | **Transparency** | S19 | Caveats, assumptions, and clarifications |
-| **Grounding** | G1-G6 | Factual accuracy verification |
+| **Grounding** | G1-G8 | Factual accuracy verification |
 
 ---
 

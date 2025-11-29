@@ -3,9 +3,9 @@
     "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
     "output_kening_enhanced": "docs/ChinYew/assertions_kening_enhanced.jsonl",
     "output_converted_full": "docs/ChinYew/assertions_converted_full.jsonl",
-    "timestamp": "2025-11-29T10:41:52.310827",
-    "num_meetings": 3,
-    "total_assertions": 81,
+    "timestamp": "2025-11-29T11:11:54.298774",
+    "num_meetings": 33,
+    "total_assertions": 1052,
     "conversion_method": "heuristic",
     "target_spec": "WBP_Selected_Dimensions.md"
   },
@@ -38,42 +38,46 @@
     }
   },
   "statistics": {
-    "total_assertions": 81,
+    "total_assertions": 1052,
     "dimension_distribution": {
-      "S1": 3,
-      "G2": 8,
-      "G3": 11,
-      "S19": 3,
-      "G5": 4,
-      "S6": 5,
-      "G6": 18,
-      "S3": 5,
-      "S4": 8,
-      "G4": 8,
-      "S2": 8
+      "S1": 41,
+      "G2": 103,
+      "G3": 103,
+      "S19": 42,
+      "G5": 59,
+      "G8": 156,
+      "S6": 48,
+      "G6": 178,
+      "S3": 62,
+      "G7": 62,
+      "S4": 65,
+      "G4": 65,
+      "S2": 60,
+      "S11": 6,
+      "S5": 2
     },
     "layer_distribution": {
-      "structural": 32,
-      "grounding": 49,
+      "structural": 326,
+      "grounding": 726,
       "unknown": 0
     },
     "level_distribution": {
-      "critical": 64,
-      "expected": 14,
-      "aspirational": 3
+      "critical": 903,
+      "expected": 118,
+      "aspirational": 31
     },
-    "well_formed_count": 81,
+    "well_formed_count": 1052,
     "well_formed_rate": 100.0,
-    "testable_count": 81,
+    "testable_count": 1052,
     "testable_rate": 100.0,
     "gpt5_converted": 0,
     "gpt5_rate": 0.0,
     "unmapped_count": 0,
     "unmapped_rate": 0.0,
-    "s_to_g_derived": 48,
-    "s_to_g_derived_rate": 59.3,
-    "structural_count": 32,
-    "grounding_count": 49
+    "s_to_g_derived": 715,
+    "s_to_g_derived_rate": 68.0,
+    "structural_count": 326,
+    "grounding_count": 726
   },
   "dimension_templates": {
     "S1": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
@@ -90,7 +94,9 @@
     "G3": "Meeting date must match {source.MEETING.StartTime}",
     "G4": "All files must exist in {source.ENTITIES where type=File}",
     "G5": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
-    "G6": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)"
+    "G6": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
+    "G7": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
+    "G8": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}"
   },
   "dimension_mapping_used": {
     "Meeting Objective": "S1",
@@ -340,6 +346,32 @@
           "derived_from": "S19"
         },
         {
+          "original_text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S19 (Caveat & Clarification) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S19→G8",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S19"
+        },
+        {
           "original_text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
           "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
           "dimension_id": "S6",
@@ -380,6 +412,32 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S6"
+        },
+        {
+          "original_text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S6 (Dependencies & Blockers) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S6→G8",
             "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
@@ -457,6 +515,32 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
+          "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
+          "dimension_id": "G7",
+          "dimension_name": "Role Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G7",
             "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
@@ -673,6 +757,32 @@
           "derived_from": "S2"
         },
         {
+          "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G8",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
           "original_text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
           "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
           "dimension_id": "S6",
@@ -713,6 +823,32 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S6"
+        },
+        {
+          "original_text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S6 (Dependencies & Blockers) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S6→G8",
             "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
@@ -851,7 +987,7 @@
           "conversion_method": "heuristic"
         }
       ],
-      "timestamp": "2025-11-29T10:41:45.403839"
+      "timestamp": "2025-11-29T11:10:47.056243"
     },
     {
       "index": 1,
@@ -1035,6 +1171,32 @@
           "derived_from": "S2"
         },
         {
+          "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G8",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
           "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
           "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
           "dimension_id": "S3",
@@ -1112,6 +1274,32 @@
           "derived_from": "S3"
         },
         {
+          "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
+          "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
+          "dimension_id": "G7",
+          "dimension_name": "Role Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G7",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
           "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
           "converted_text": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
           "dimension_id": "S3",
@@ -1178,6 +1366,32 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G6",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
+          "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
+          "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
+          "dimension_id": "G7",
+          "dimension_name": "Role Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G7",
             "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
@@ -1266,6 +1480,32 @@
           "derived_from": "S2"
         },
         {
+          "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G8",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
           "original_text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
           "converted_text": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
           "dimension_id": "S6",
@@ -1317,6 +1557,32 @@
           "derived_from": "S6"
         },
         {
+          "original_text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S6 (Dependencies & Blockers) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S6→G8",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S6"
+        },
+        {
           "original_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
           "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
           "dimension_id": "S19",
@@ -1357,6 +1623,32 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S19→G5",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S19"
+        },
+        {
+          "original_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S19 (Caveat & Clarification) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S19→G8",
             "value_removed": "N/A (grounding complement)"
           },
           "quality_assessment": {
@@ -1547,6 +1839,32 @@
           "derived_from": "S2"
         },
         {
+          "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G8",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
+        },
+        {
           "original_text": "The response should propose sending a pre-read at least 2 hours before T₀ including links to key security and compliance docs.",
           "converted_text": "The response should list [DELIVERABLES] with working links, version/format specified",
           "dimension_id": "S4",
@@ -1675,6 +1993,32 @@
           "derived_from": "S3"
         },
         {
+          "original_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
+          "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
+          "dimension_id": "G7",
+          "dimension_name": "Role Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S3→G7",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S3"
+        },
+        {
           "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
           "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
           "dimension_id": "S2",
@@ -1750,9 +2094,35 @@
           },
           "conversion_method": "heuristic_s_to_g",
           "derived_from": "S2"
+        },
+        {
+          "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
+          "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
+          "dimension_id": "G8",
+          "dimension_name": "Constraint Grounding",
+          "layer": "grounding",
+          "level": "critical",
+          "weight": 2,
+          "sourceID": null,
+          "placeholders_used": [],
+          "rationale": {
+            "mapping_reason": "Generated from S2 (Timeline Alignment) via S_TO_G_MAP",
+            "conversion_changes": [
+              "Applied grounding template for factual verification"
+            ],
+            "template_alignment": "S→G mapping: S2→G8",
+            "value_removed": "N/A (grounding complement)"
+          },
+          "quality_assessment": {
+            "is_well_formed": true,
+            "is_testable": true,
+            "issues": []
+          },
+          "conversion_method": "heuristic_s_to_g",
+          "derived_from": "S2"
         }
       ],
-      "timestamp": "2025-11-29T10:41:47.405039"
+      "timestamp": "2025-11-29T11:10:49.057137"
     }
   ]
 }
