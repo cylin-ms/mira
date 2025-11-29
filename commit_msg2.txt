@@ -1,0 +1,5 @@
+[Copilot] Repackaged assertion_analyzer v2.2 (118.8 KB)
+
+- Updated WBP_Evaluation_Complete_Dimension_Reference.md
+- Added assertion_dimension_complete_reference_WBP.md design doc
+- Fresh zip package with all v2.2 updates
