@@ -828,6 +828,90 @@ def convert_assertion_heuristic(assertion: Dict) -> Dict:
     }
 
 
+def enhance_gpt5_result_with_sg(gpt5_result: Dict, assertion_index: int, original_assertion: Dict) -> List[Dict]:
+    """
+    Enhance GPT-5 conversion result with assertion_id and generate grounding assertions.
+    
+    This ensures GPT-5 results follow the same schema as heuristic results:
+    - Add assertion_id to the primary (S) assertion
+    - Generate corresponding G assertions with parent_assertion_id linkage
+    - Keep S and G assertions adjacent in the output
+    
+    Args:
+        gpt5_result: The conversion result from GPT-5
+        assertion_index: Unique index for generating assertion IDs
+        original_assertion: Original assertion for reference
+        
+    Returns:
+        List of assertions: [S assertion, G1 assertion, G2 assertion, ...]
+    """
+    results = []
+    
+    # Get dimension info from GPT-5 result
+    dimension_id = gpt5_result.get('dimension_id', gpt5_result.get('dimension', 'UNMAPPED'))
+    original_text = original_assertion.get('text', '')
+    
+    # Generate unique ID for the primary assertion
+    primary_assertion_id = f"A{assertion_index:04d}_{dimension_id}"
+    
+    # Add assertion_id to the GPT-5 result
+    gpt5_result["assertion_id"] = primary_assertion_id
+    gpt5_result["parent_assertion_id"] = None  # Primary assertions have no parent
+    
+    # Ensure required fields exist
+    if "original_text" not in gpt5_result:
+        gpt5_result["original_text"] = original_text
+    if "sourceID" not in gpt5_result:
+        gpt5_result["sourceID"] = original_assertion.get('anchors', {}).get('sourceID', None)
+    
+    results.append(gpt5_result)
+    
+    # If mapped to a structural dimension, generate corresponding grounding assertions
+    if dimension_id.startswith("S") and dimension_id in S_TO_G_MAP:
+        g_dims = S_TO_G_MAP[dimension_id]
+        
+        for g_idx, g_dim in enumerate(g_dims):
+            g_spec = DIMENSION_SPEC.get(g_dim, {})
+            if not g_spec:
+                continue
+            
+            # Generate unique ID for this G assertion
+            g_assertion_id = f"A{assertion_index:04d}_{g_dim}_{g_idx}"
+            
+            # Create grounding assertion with parent linkage
+            g_assertion = {
+                "assertion_id": g_assertion_id,
+                "parent_assertion_id": primary_assertion_id,  # Links to source S assertion
+                "original_text": original_text,
+                "converted_text": g_spec.get('template', ''),
+                "dimension_id": g_dim,
+                "dimension_name": g_spec.get('name', 'Unknown'),
+                "layer": "grounding",
+                "level": "critical",  # Grounding is always critical
+                "weight": g_spec.get('weight', 3),
+                "sourceID": None,
+                "placeholders_used": [],
+                "rationale": {
+                    "mapping_reason": f"Generated from GPT-5 classified {dimension_id} via S_TO_G_MAP",
+                    "conversion_changes": ["Applied grounding template for factual verification"],
+                    "template_alignment": f"S→G mapping: {dimension_id}→{g_dim}",
+                    "value_removed": "N/A (grounding complement)",
+                    "parent_dimension": dimension_id,
+                    "parent_dimension_name": gpt5_result.get('dimension_name', 'Unknown')
+                },
+                "quality_assessment": {
+                    "is_well_formed": True,
+                    "is_testable": True,
+                    "issues": []
+                },
+                "conversion_method": "gpt5_s_to_g",
+                "derived_from": dimension_id
+            }
+            results.append(g_assertion)
+    
+    return results
+
+
 def convert_assertion_with_grounding(assertion: Dict, assertion_index: int = 0) -> List[Dict]:
     """
     Convert assertion to S+G pair(s).
@@ -1121,7 +1205,26 @@ def main():
             if use_gpt5:
                 try:
                     batch_results = convert_batch_gpt5(batch, response)
-                    meeting_conversions.extend(batch_results)
+                    
+                    # Enhance GPT-5 results with assertion IDs and grounding assertions
+                    if generate_grounding:
+                        for k, result in enumerate(batch_results):
+                            original_assertion = batch[k] if k < len(batch) else {}
+                            enhanced = enhance_gpt5_result_with_sg(result, assertion_counter, original_assertion)
+                            meeting_conversions.extend(enhanced)
+                            assertion_counter += 1
+                    else:
+                        # Even without grounding, add assertion IDs
+                        for k, result in enumerate(batch_results):
+                            original_assertion = batch[k] if k < len(batch) else {}
+                            dimension_id = result.get('dimension_id', result.get('dimension', 'UNMAPPED'))
+                            result["assertion_id"] = f"A{assertion_counter:04d}_{dimension_id}"
+                            result["parent_assertion_id"] = None
+                            if "sourceID" not in result:
+                                result["sourceID"] = original_assertion.get('anchors', {}).get('sourceID', None)
+                            meeting_conversions.append(result)
+                            assertion_counter += 1
+                    
                     # Self-throttling: wait between batches to avoid rate limits
                     time.sleep(DELAY_BETWEEN_BATCHES)
                 except Exception as e:
@@ -1138,7 +1241,9 @@ def main():
                         meeting_conversions.extend(convert_assertion_with_grounding(a, assertion_counter))
                         assertion_counter += 1
                     else:
-                        meeting_conversions.append(convert_assertion_heuristic(a))        # Store meeting result with both original assertions and conversions
+                        meeting_conversions.append(convert_assertion_heuristic(a))
+        
+        # Store meeting result with both original assertions and conversions
         all_results.append({
             "index": i,
             "utterance": item.get('utterance', ''),
