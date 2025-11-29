@@ -1030,15 +1030,22 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Use heuristic only (no GPT-5)")
     parser.add_argument("--batch-size", type=int, default=5, help="Assertions per GPT-5 call")
     parser.add_argument("--with-grounding", action="store_true", help="Generate S+G assertion pairs")
+    parser.add_argument("--output", type=str, default=None, help="Output file path (overrides default)")
+    parser.add_argument("--output-kening", type=str, default=None, help="Kening enhanced output file path")
     args = parser.parse_args()
+    
+    # Override output paths if specified
+    output_full = args.output if args.output else OUTPUT_CONVERTED_FULL
+    output_kening = args.output_kening if args.output_kening else OUTPUT_KENING_ENHANCED
     
     print("=" * 70)
     print("Convert Kening's Assertions to Chin-Yew's WBP Format")
     print("=" * 70)
     print(f"Input: {INPUT_FILE}")
-    print(f"Output 1 (Kening Enhanced): {OUTPUT_KENING_ENHANCED}")
-    print(f"Output 2 (Full Conversion): {OUTPUT_CONVERTED_FULL}")
+    print(f"Output 1 (Kening Enhanced): {output_kening}")
+    print(f"Output 2 (Full Conversion): {output_full}")
     print(f"Report: {REPORT_FILE}")
+    print(f"Mode: {'Heuristic (dry-run)' if args.dry_run else 'GPT-5 semantic'}")
     print()
     
     # Load data
@@ -1166,7 +1173,7 @@ def main():
     print()
     print("💾 Saving Output 1: Kening-enhanced format...")
     
-    with open(OUTPUT_KENING_ENHANCED, 'w', encoding='utf-8') as f:
+    with open(output_kening, 'w', encoding='utf-8') as f:
         for result in all_results:
             # Preserve Kening's original schema, add metadata
             output_item = {
@@ -1203,7 +1210,7 @@ def main():
             
             f.write(json.dumps(output_item, ensure_ascii=False) + "\n")
     
-    print(f"   ✅ Saved to: {OUTPUT_KENING_ENHANCED}")
+    print(f"   ✅ Saved to: {output_kening}")
     
     # =================================================================
     # OUTPUT 2: Full Conversion with Comprehensive Details
@@ -1223,7 +1230,7 @@ def main():
                     utterance_to_user[utt] = user
         print(f"   Loaded {len(utterance_to_user)} user mappings from Weiwei file")
     
-    with open(OUTPUT_CONVERTED_FULL, 'w', encoding='utf-8') as f:
+    with open(output_full, 'w', encoding='utf-8') as f:
         for result in all_results:
             # Get USER from Weiwei file mapping
             user_data = utterance_to_user.get(result["utterance"], {})
@@ -1276,7 +1283,7 @@ def main():
                 output_item["assertions"].append(assertion_output)
             f.write(json.dumps(output_item, ensure_ascii=False) + "\n")
     
-    print(f"   ✅ Saved to: {OUTPUT_CONVERTED_FULL}")
+    print(f"   ✅ Saved to: {output_full}")
     
     # =================================================================
     # Save Conversion Report
@@ -1287,8 +1294,8 @@ def main():
     report = {
         "metadata": {
             "input_file": INPUT_FILE,
-            "output_kening_enhanced": OUTPUT_KENING_ENHANCED,
-            "output_converted_full": OUTPUT_CONVERTED_FULL,
+            "output_kening_enhanced": output_kening,
+            "output_converted_full": output_full,
             "timestamp": datetime.now().isoformat(),
             "num_meetings": len(all_results),
             "total_assertions": stats.get("total_assertions", 0),
@@ -1360,8 +1367,8 @@ def main():
     print(f"🧪 Testable: {stats.get('testable_rate', 0)}%")
     print()
     print(f"📄 Output files:")
-    print(f"   - Kening Enhanced: {OUTPUT_KENING_ENHANCED}")
-    print(f"   - Full Conversion: {OUTPUT_CONVERTED_FULL}")
+    print(f"   - Kening Enhanced: {output_kening}")
+    print(f"   - Full Conversion: {output_full}")
     print(f"   - Conversion Report: {REPORT_FILE}")
 
 
