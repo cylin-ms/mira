@@ -202,6 +202,8 @@ When `--with-grounding` flag is set, each structural assertion generates corresp
 ### Output (WBP format)
 ```json
 {
+  "assertion_id": "A0000_S1",
+  "parent_assertion_id": null,
   "original_text": "The response should confirm the meeting is scheduled for July 26, 2025 at 14:00 PST",
   "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
   "dimension_id": "S1",
@@ -209,7 +211,7 @@ When `--with-grounding` flag is set, each structural assertion generates corresp
   "layer": "structural",
   "level": "critical",
   "weight": 3,
-  "sourceID": null,
+  "sourceID": "abc-123",
   "placeholders_used": ["[SUBJECT]", "[DATE/TIME]", "[TIMEZONE]", "[ATTENDEES]"],
   "rationale": {
     "mapping_reason": "Assertion verifies meeting metadata presence",
@@ -224,6 +226,40 @@ When `--with-grounding` flag is set, each structural assertion generates corresp
   }
 }
 ```
+
+**Derived Grounding Assertion (generated from S1):**
+```json
+{
+  "assertion_id": "A0000_G2_0",
+  "parent_assertion_id": "A0000_S1",
+  "original_text": "The response should confirm the meeting is scheduled for July 26, 2025 at 14:00 PST",
+  "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
+  "dimension_id": "G2",
+  "dimension_name": "Attendee Grounding",
+  "layer": "grounding",
+  "level": "critical",
+  "weight": 3,
+  "sourceID": "",
+  "placeholders_used": [],
+  "rationale": {
+    "mapping_reason": "Generated from S1 (Meeting Details) via S_TO_G_MAP",
+    "parent_dimension": "S1",
+    "parent_dimension_name": "Meeting Details",
+    "template_alignment": "S→G mapping: S1→G2"
+  },
+  "quality_assessment": {
+    "is_well_formed": true,
+    "is_testable": true,
+    "issues": []
+  },
+  "conversion_method": "heuristic_s_to_g"
+}
+```
+
+**S+G Linkage:**
+- `assertion_id`: Unique ID for each assertion (e.g., `A0000_S1`, `A0000_G2_0`)
+- `parent_assertion_id`: Links G assertions to their source S assertion (`null` for S assertions)
+- S and G assertions are kept **adjacent** in the output
 
 ---
 

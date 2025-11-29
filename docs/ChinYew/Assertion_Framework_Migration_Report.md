@@ -590,6 +590,8 @@ The conversion process produces three key JSONL files that document the migratio
   "response": "Here's your workback plan...",
   "assertions": [
     {
+      "assertion_id": "A0000_S3",
+      "parent_assertion_id": null,
       "text": "The plan must include explicit [person_name] assignment...",
       "level": "critical",
       "dimension": "S3",
@@ -598,12 +600,37 @@ The conversion process produces three key JSONL files that document the migratio
       "weight": 3,
       "sourceID": "entity-guid",
       "original_text": "The plan must include explicit owner assignment for...",
-      "rationale": "Maps to S3 because it evaluates task ownership clarity",
-      "quality_assessment": { ... },
-      "conversion_method": "gpt5"
+      "rationale": { "mapping_reason": "Maps to S3 because it evaluates task ownership clarity" },
+      "quality_assessment": { "is_well_formed": true, "is_testable": true },
+      "conversion_method": "heuristic"
+    },
+    {
+      "assertion_id": "A0000_G2_0",
+      "parent_assertion_id": "A0000_S3",
+      "text": "All people mentioned must exist in {source.ATTENDEES}",
+      "level": "critical",
+      "dimension": "G2",
+      "dimension_name": "Attendee Grounding",
+      "layer": "grounding",
+      "weight": 3,
+      "sourceID": "",
+      "original_text": "The plan must include explicit owner assignment for...",
+      "rationale": {
+        "mapping_reason": "Generated from S3 (Ownership Assignment) via S_TO_G_MAP",
+        "parent_dimension": "S3",
+        "parent_dimension_name": "Ownership Assignment"
+      },
+      "quality_assessment": { "is_well_formed": true, "is_testable": true },
+      "conversion_method": "heuristic_s_to_g"
     }
   ]
 }
+```
+
+**S+G Linkage Fields:**
+- `assertion_id`: Unique ID (e.g., `A0000_S3` for structural, `A0000_G2_0` for grounding)
+- `parent_assertion_id`: Links G assertions to their source S assertion (`null` for S assertions)
+- S and G assertions are kept **adjacent** in the output for easy traceability
 ```
 
 ### File Relationships

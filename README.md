@@ -459,11 +459,13 @@ This format is used by **Mira 2.0** for viewing WBP-framework assertions with di
   "response": "Here's your workback plan...",
   "assertions": [
     {
+      "assertion_id": "A0000_S1",
+      "parent_assertion_id": null,
       "text": "The response should state the meeting [SUBJECT], [DATE/TIME]...",
       "level": "critical|expected|aspirational",
       "dimension": "S1",
       "dimension_name": "Meeting Details",
-      "layer": "structural|grounding",
+      "layer": "structural",
       "weight": 3,
       "sourceID": "entity-uuid-reference",
       "original_text": "Original Kening assertion text...",
@@ -475,19 +477,42 @@ This format is used by **Mira 2.0** for viewing WBP-framework assertions with di
         "clarity": "high",
         "specificity": "high"
       },
-      "conversion_method": "gpt5|heuristic"
+      "conversion_method": "heuristic"
+    },
+    {
+      "assertion_id": "A0000_G2_0",
+      "parent_assertion_id": "A0000_S1",
+      "text": "All people mentioned must exist in {source.ATTENDEES}",
+      "level": "critical",
+      "dimension": "G2",
+      "dimension_name": "Attendee Grounding",
+      "layer": "grounding",
+      "weight": 3,
+      "sourceID": "",
+      "original_text": "Original Kening assertion text...",
+      "rationale": {
+        "mapping_reason": "Generated from S1 (Meeting Details) via S_TO_G_MAP",
+        "parent_dimension": "S1",
+        "parent_dimension_name": "Meeting Details"
+      },
+      "quality_assessment": { "is_well_formed": true, "is_testable": true },
+      "conversion_method": "heuristic_s_to_g"
     }
   ]
 }
 ```
 
 **Key fields:**
-- `dimension`: WBP dimension code (S1-S19, G1-G5)
+- `assertion_id`: Unique identifier for the assertion (e.g., `A0000_S1`, `A0000_G2_0`)
+- `parent_assertion_id`: Links G assertions to their source S assertion (`null` for S assertions)
+- `dimension`: WBP dimension code (S1-S19, G1-G8)
 - `dimension_name`: Human-readable dimension name
 - `layer`: "structural" or "grounding"
 - `weight`: Importance weight (1-3)
 - `original_text`: Kening's original assertion text
-- `conversion_method`: How the assertion was converted (gpt5 or heuristic)
+- `conversion_method`: How the assertion was converted (`gpt5`, `heuristic`, or `heuristic_s_to_g`)
+
+**S+G Adjacency:** Structural (S) assertions are immediately followed by their derived Grounding (G) assertions, keeping related assertions grouped together.
 
 ### Context File Format (LOD_1121.WithUserUrl.jsonl)
 
