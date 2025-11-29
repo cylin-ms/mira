@@ -147,26 +147,26 @@ Assertions with **parameterized references** that verify against source at runti
 │         "Does the plan HAVE the right shape?"               │
 ├─────────────────────────────────────────────────────────────┤
 │  S1-S10 (Core): Essential WBP elements                      │
-│    S1: Has meeting date/time?                  [✓/✗]       │
-│    S2: Has backward timeline?                  [✓/✗]       │
-│    S3: Has task owners?                        [✓/✗]       │
+│    S1: Has meeting date/time?              [pass/fail]      │
+│    S2: Has backward timeline?              [pass/fail]      │
+│    S3: Has task owners?                    [pass/fail]      │
 │    ...S4-S10                                                │
-│  S11-S18 (Extended): Advanced planning aspects              │
-│    S11: Has risk mitigation strategy?          [✓/✗]       │
-│    S12: Has milestone validation?              [✓/✗]       │
-│    ...S13-S18                                               │
+│  S11-S19 (Extended): Advanced planning aspects              │
+│    S11: Has risk mitigation strategy?      [pass/fail]      │
+│    S12: Has milestone validation?          [pass/fail]      │
+│    ...S13-S19                                               │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
 │              GROUNDING ASSERTIONS (G1-G6)                   │
 │        "Are those elements FACTUALLY CORRECT?"              │
 ├─────────────────────────────────────────────────────────────┤
-│  G1: Hallucination Check (overall recall)      [pass/fail]  │
-│  G2: People -> exist in source.ATTENDEES?      [pass/fail]  │
-│  G3: Dates -> derivable from source.MEETING?   [pass/fail]  │
-│  G4: Files -> exist in source.ENTITIES?        [pass/fail]  │
-│  G5: Topics -> align with source.UTTERANCE?    [pass/fail]  │
-│  G6: Tasks -> exist in source material?        [pass/fail]  │
+│  G1: Hallucination Check (overall)         [pass/fail]      │
+│  G2: People exist in source.ATTENDEES?    [pass/fail]      │
+│  G3: Dates derivable from source.MEETING? [pass/fail]      │
+│  G4: Files exist in source.ENTITIES?      [pass/fail]      │
+│  G5: Topics align with source.UTTERANCE?  [pass/fail]      │
+│  G6: Tasks exist in source material?      [pass/fail]      │
 └─────────────────────────────────────────────────────────────┘
 ```
 

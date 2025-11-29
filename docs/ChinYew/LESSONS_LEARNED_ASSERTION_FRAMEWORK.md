@@ -44,21 +44,21 @@ This document provides concrete before/after examples from our GPT-5 simulation 
 
 ```
 Step 1: STRUCTURAL CHECK (S1-S19)
-┌─────────────────────────────────────────────────┐
-│ Does the plan have a meeting date?     [pass/fail]  │
-│ Does the plan have task owners?        [pass/fail]  │
-│ Does the plan list artifacts?          [pass/fail]  │
-└─────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────┐
+│ Does the plan have a meeting date?          [pass/fail]   │
+│ Does the plan have task owners?             [pass/fail]   │
+│ Does the plan list artifacts?               [pass/fail]   │
+└───────────────────────────────────────────────────────────┘
                     ↓
 Step 2: GROUNDING CHECK (G1-G6)
-┌─────────────────────────────────────────────────┐
-│ G1: No hallucinated entities overall?  [pass/fail]  │
-│ G2: Do owners exist in ATTENDEES?      [pass/fail]  │
-│ G3: Is the date correct per source?    [pass/fail]  │
-│ G4: Do files exist in ENTITIES?        [pass/fail]  │
-│ G5: Do topics align with source?       [pass/fail]  │
-│ G6: Do tasks exist in source?          [pass/fail]  │
-└─────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────┐
+│ G1: No hallucinated entities overall?       [pass/fail]   │
+│ G2: Do owners exist in ATTENDEES?           [pass/fail]   │
+│ G3: Is the date correct per source?         [pass/fail]   │
+│ G4: Do files exist in ENTITIES?             [pass/fail]   │
+│ G5: Do topics align with source?            [pass/fail]   │
+│ G6: Do tasks exist in source?               [pass/fail]   │
+└───────────────────────────────────────────────────────────┘
 ```
 
 ---
