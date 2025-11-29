@@ -47,7 +47,7 @@ The original 10 structural dimensions covering essential WBP elements.
 | **S6** | Dependencies & Blockers | 2 | ✅ P1 | "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented" | Predecessors and risks identified; mitigation steps documented |
 | S7 | Source Traceability | 2 | ⬜ P2 | "The response should link [TASKS/ARTIFACTS] back to original source priorities/files" | Tasks/artifacts link back to original source |
 | S8 | Communication Channels | 1 | ⬜ P2 | "The response should specify [COMMUNICATION CHANNELS] (Teams, email, meeting cadence)" | Collaboration methods specified |
-| S9 | Grounding Meta-Check | 2 | ⬜ P2 | "The response should only reference [ENTITIES] verified against source (meta-grounding check)" | All Grounding assertions (G1-G6) pass |
+| S9 | Grounding Meta-Check | 2 | ⬜ P2 | "The response should only reference [ENTITIES] verified against source (meta-grounding check)" | All Grounding assertions (G1-G8) pass |
 | S10 | Priority Assignment | 2 | ⬜ P2 | "The response should rank [TASKS] by critical path/impact on meeting success" | Tasks ranked by critical path/impact |
 
 ### Extended Dimensions (S11-S19)
@@ -233,7 +233,7 @@ Based on conversion of 2,318 assertions from 224 meetings:
 
 ## Evaluation Priority Order
 
-1. **Grounding First (G1-G6)** — Factual accuracy is paramount
+1. **Grounding First (G1-G8)** — Factual accuracy is paramount
    - G1 (Hallucination Check) is the overall recall check
    - G2-G6 are specific entity type checks
 2. **Critical Structural (S1, S2, S3)** — Weight = 3
@@ -251,7 +251,7 @@ These dimensions are available for extended/comprehensive evaluation in Phase 2:
 | S5 | Task Dates | 2 | Overlaps significantly with S2 (Timeline Alignment) |
 | S7 | Source Traceability | 2 | Covered indirectly by G5 (Hallucination Check) |
 | S8 | Communication Channels | 1 | Low priority, optional |
-| S9 | Grounding Meta-Check | 2 | Redundant with G1-G6 |
+| S9 | Grounding Meta-Check | 2 | Redundant with G1-G8 |
 | S10 | Priority Assignment | 2 | Nice-to-have, not essential |
 | S12 | Milestone Validation | 2 | Advanced planning aspect |
 | S13 | Goal & Success Criteria | 2 | Advanced planning aspect |

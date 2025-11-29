@@ -29,9 +29,9 @@ We have successfully migrated **2,318 assertions** across **224 meetings** from 
 
 | Problem (Kening's Original) | Solution (WBP Framework) |
 |----------------------------|--------------------------|
-| 232 inconsistent dimension names | 25 well-defined dimensions with clear codes (S1-S19, G1-G6) |
+| 232 inconsistent dimension names | 27 well-defined dimensions with clear codes (S1-S19, G1-G8) |
 | Hardcoded dates and names | Template-based reusable assertions |
-| Only ~3% grounding checks | Dedicated Grounding layer (G1-G6) |
+| Only ~3% grounding checks | Dedicated Grounding layer (G1-G8) |
 | Inconsistent phrasing | Standardized evaluation criteria |
 
 ### Dimension Distribution
@@ -61,7 +61,7 @@ A dedicated viewer for WBP assertions with the following features:
 
 - **Color-coded dimension badges**
   - 🔵 **Blue** = Structural dimensions (S1-S19)
-  - 🟣 **Purple** = Grounding dimensions (G1-G6)
+  - 🟣 **Purple** = Grounding dimensions (G1-G8)
 
 - **Smart assertion sorting**
   - Structural assertions (S) displayed before Grounding (G)

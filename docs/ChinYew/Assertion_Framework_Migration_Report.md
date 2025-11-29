@@ -290,7 +290,7 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 ## 7. Grounding Layer Design Rationale
 
-### 7.1 Updated Grounding Dimensions (G1-G6)
+### 7.1 Updated Grounding Dimensions (G1-G8)
 
 The Grounding layer has been reorganized for clarity and extensibility:
 
@@ -302,14 +302,16 @@ The Grounding layer has been reorganized for clarity and extensibility:
 | G4 | Artifact Grounding | Files | Documents/files exist in source |
 | G5 | Topic Grounding | Nouns | Topics/subjects align with source |
 | G6 | Task Grounding | Verbs | Tasks/action items exist in source |
+| G7 | Role Grounding | Roles | Role/responsibility assignments accurate |
+| G8 | Constraint Grounding | Limits | Constraints/limits derivable from source |
 
 ### 7.2 Why G1 (Hallucination Check) is First
 
 **Design Decision:** G1 is placed first as the **overall grounding recall check**.
 
-**Relationship:** `G1 = G2 ∧ G3 ∧ G4 ∧ G5 ∧ G6 ∧ (uncategorized entities)`
+**Relationship:** `G1 = G2 ∧ G3 ∧ G4 ∧ G5 ∧ G6 ∧ G7 ∧ G8 ∧ (uncategorized entities)`
 
-If all specific checks (G2-G6) pass → G1 should pass.
+If all specific checks (G2-G8) pass → G1 should pass.
 If any specific check fails → G1 fails.
 
 ### 7.3 Why G1 is Valuable Beyond Being a "Catch-All"
@@ -358,7 +360,7 @@ The "production outage" is fabricated context.
 
 ### 7.4 Extensibility
 
-By placing G1 first, future grounding dimensions (G7, G8, etc.) can be added without burying the overall recall check:
+By placing G1 first, future grounding dimensions can be added without burying the overall recall check:
 
 ```
 G1  - Overall Hallucination Check (always first)
@@ -367,8 +369,10 @@ G3  - Date/Time Grounding
 G4  - Artifact Grounding
 G5  - Topic Grounding
 G6  - Task Grounding
-G7  - (Future: Quantitative Grounding - budgets, counts, percentages)
-G8  - (Future: Location Grounding - places, rooms, addresses)
+G7  - Role Grounding (NEW - roles/responsibilities)
+G8  - Constraint Grounding (NEW - limits/constraints)
+G9  - (Future: Quantitative Grounding - budgets, counts, percentages)
+G10 - (Future: Location Grounding - places, rooms, addresses)
 ...
 ```
 
@@ -382,7 +386,7 @@ G8  - (Future: Location Grounding - places, rooms, addresses)
 
 2. **Consider Consolidating S5 into S2** - The 16 S5 (Task Dates) assertions overlap conceptually with S2 (Timeline Alignment). Consider merging for simpler evaluation.
 
-3. **Add More Grounding Assertions** - Currently only 2.8% are grounding-layer (66 assertions). Consider generating more G1-G4 assertions for comprehensive source verification.
+3. **Add More Grounding Assertions** - Currently only 2.8% are grounding-layer (66 assertions). Consider generating more G1-G8 assertions for comprehensive source verification, especially G7 (Role) and G8 (Constraint).
 
 ### 8.2 For Future Assertion Generation
 

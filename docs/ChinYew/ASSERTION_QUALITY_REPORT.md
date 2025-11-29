@@ -33,7 +33,7 @@ The current assertion set demonstrates solid foundational coverage with signific
    - Layer 1: Structural Patterns (S1-S19) - "Does the plan have X?"
      - S1-S10 (Core): Original 10 structural dimensions for essential WBP elements
      - S11-S18 (Extended): Additional dimensions for advanced planning aspects
-   - Layer 2: Grounding Assertions (G1-G6) - "Is X factually correct?"
+   - Layer 2: Grounding Assertions (G1-G8) - "Is X factually correct?"
 
 2. **Prioritize Grounding Over Structure**
    - A plan with good structure but hallucinations is **WORSE** than one that is incomplete but accurate
@@ -158,7 +158,7 @@ Assertions with **parameterized references** that verify against source at runti
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│              GROUNDING ASSERTIONS (G1-G6)                   │
+│              GROUNDING ASSERTIONS (G1-G8)                   │
 │        "Are those elements FACTUALLY CORRECT?"              │
 ├─────────────────────────────────────────────────────────────┤
 │  G1: Hallucination Check (overall)         [pass/fail]      │
@@ -170,7 +170,7 @@ Assertions with **parameterized references** that verify against source at runti
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Grounding Assertions (G1-G6)
+### Grounding Assertions (G1-G8)
 
 | ID | Name | Template | Applies To |
 |----|------|----------|------------|
@@ -203,7 +203,7 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 
 ### Quality Score Matrix
 
-| Scenario | Structural (S1-S19) | Grounding (G1-G6) | Overall Quality |
+| Scenario | Structural (S1-S19) | Grounding (G1-G8) | Overall Quality |
 |----------|---------------------|-------------------|-----------------|
 | Complete & Accurate | ✅ Pass | ✅ Pass | **Excellent** |
 | Complete but Hallucinated | ✅ Pass | ❌ Fail | **Reject** |
@@ -215,7 +215,7 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 **CRITICAL:** A plan that passes structural checks but fails grounding is **worse** than one that is incomplete but accurate. Hallucinated plans with good structure can mislead users.
 
 **Priority Order (Revised):**
-1. **Grounding (G1-G6)** - Factual accuracy first
+1. **Grounding (G1-G8)** - Factual accuracy first
 2. **Critical Structural (S1, S2, S3, S9)** - Essential elements (weight=3)
 3. **Expected Structural (S4, S5, S6, S7, S8, S10)** - Standard quality (weight=2)
 4. **Extended Structural (S11-S18)** - Advanced planning aspects (weight=2)
@@ -395,7 +395,7 @@ DUPLICATES FOUND:
 
 **Objective:** Consolidate legacy 232 dimensions into S1-S19 canonical framework
 
-**New Taxonomy (S1-S19 + G1-G6):**
+**New Taxonomy (S1-S19 + G1-G8):**
 
 #### Core Structural Dimensions (S1–S10)
 
@@ -759,7 +759,7 @@ Target: >80% for Critical, >70% for Expected, >60% for Aspirational
 
 ### Appendix D: GPT-5 Simulation & Examples
 
-To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (S1-S19)** and **Grounding Assertions (G1-G6)**.
+To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (S1-S19)** and **Grounding Assertions (G1-G8)**.
 
 **What the simulation demonstrates:**
 - How structural assertions check if a plan "has the right shape"
@@ -782,7 +782,7 @@ To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation
 | **GPT-5 Simulation Script** | Python script to generate plans and evaluate with two-layer framework | [generate_plan_examples_gpt5.py](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples_gpt5.py) |
 | **Generated Report** | Full evaluation report with Perfect/Medium/Low plan examples | [PLAN_QUALITY_EXAMPLES_GPT5.md](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/PLAN_QUALITY_EXAMPLES_GPT5.md) |
 | **Raw JSON Data** | Structured data including plans, assertions, and evaluations | [plan_examples_gpt5.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/plan_examples_gpt5.json) |
-| **Assertion Patterns** | S1-S19 structural patterns with G1-G6 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/assertion_patterns.json) |
+| **Assertion Patterns** | S1-S19 structural patterns with G1-G8 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/assertion_patterns.json) |
 
 ---
 

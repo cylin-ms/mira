@@ -2,7 +2,7 @@
 
 > **Author:** Chin-Yew Lin  
 > **Date:** November 28, 2025  
-> **Purpose:** Real-world examples demonstrating common pitfalls in assertion design and how to avoid them using the Structural (S1-S19) + Grounding (G1-G6) framework.
+> **Purpose:** Real-world examples demonstrating common pitfalls in assertion design and how to avoid them using the Structural (S1-S19) + Grounding (G1-G8) framework.
 
 ---
 
@@ -38,7 +38,7 @@ This document provides concrete before/after examples from our GPT-5 simulation 
 | Layer | Question | What It Checks | Example Question |
 |-------|----------|----------------|------------------|
 | **Structural (S1-S19)** | "Does the plan **HAVE** X?" | Presence, Shape, Structure | "Is there a meeting date in the plan?" |
-| **Grounding (G1-G6)** | "Is X **CORRECT**?" | Factual Accuracy vs Source | "Does the date match source.MEETING.StartTime?" |
+| **Grounding (G1-G8)** | "Is X **CORRECT**?" | Factual Accuracy vs Source | "Does the date match source.MEETING.StartTime?" |
 
 ### The Two-Step Evaluation Process
 
@@ -50,7 +50,7 @@ Step 1: STRUCTURAL CHECK (S1-S19)
 │ Does the plan list artifacts?               [pass/fail]   │
 └───────────────────────────────────────────────────────────┘
                     ↓
-Step 2: GROUNDING CHECK (G1-G6)
+Step 2: GROUNDING CHECK (G1-G8)
 ┌───────────────────────────────────────────────────────────┐
 │ G1: No hallucinated entities overall?       [pass/fail]   │
 │ G2: Do owners exist in ATTENDEES?           [pass/fail]   │
@@ -194,7 +194,7 @@ not mentioned in the source context."
 "The workback plan does not introduce fabricated elements."
 
 **Implementation:** This structural pattern is verified by passing ALL 
-grounding assertions (G1-G6):
+grounding assertions (G1-G8):
 - G1: No hallucinated entities (overall) ✓
 - G2: People exist in source.ATTENDEES ✓
 - G3: Dates match source.MEETING.StartTime ✓
@@ -202,7 +202,7 @@ grounding assertions (G1-G6):
 - G5: Topics align with source.UTTERANCE ✓
 - G6: Tasks exist in source material ✓
 
-**Note:** S9 passes if and only if G1-G6 all pass.
+**Note:** S9 passes if and only if G1-G8 all pass.
 ```
 
 ### 📝 Rationale
@@ -210,13 +210,13 @@ grounding assertions (G1-G6):
 | Issue | Explanation |
 |-------|-------------|
 | **The Problem** | S9 looks like a structural assertion but is actually checking factual accuracy (which is grounding's job). |
-| **The Insight** | S9 is a "meta-pattern" - it's a structural requirement that the plan be grounded, but the actual verification is delegated to G1-G6. |
+| **The Insight** | S9 is a "meta-pattern" - it's a structural requirement that the plan be grounded, but the actual verification is delegated to G1-G8. |
 | **The Fix** | Define S9 as passing when all grounding assertions pass. This avoids duplicating grounding logic. |
 | **Architectural Clarity** | S1-S8, S10 check specific structural elements. S9 is special - it aggregates grounding results. |
 
 ### 🎯 Key Takeaway
 
-> **S9 (Grounding in Context) is not independently evaluated - it passes when G1-G6 all pass. Think of it as `S9 = G1 ∧ G2 ∧ G3 ∧ G4 ∧ G5 ∧ G6`.**
+> **S9 (Grounding in Context) is not independently evaluated - it passes when G1-G8 all pass. Think of it as `S9 = G1 ∧ G2 ∧ G3 ∧ G4 ∧ G5 ∧ G6 ∧ G7 ∧ G8`.**
 
 ---
 
