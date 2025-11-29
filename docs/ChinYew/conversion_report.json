@@ -3,9 +3,9 @@
     "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
     "output_kening_enhanced": "docs/ChinYew/assertions_kening_enhanced.jsonl",
     "output_converted_full": "docs/ChinYew/assertions_converted_full.jsonl",
-    "timestamp": "2025-11-29T11:11:54.298774",
-    "num_meetings": 33,
-    "total_assertions": 1052,
+    "timestamp": "2025-11-29T13:06:23.769181",
+    "num_meetings": 224,
+    "total_assertions": 7328,
     "conversion_method": "heuristic",
     "target_spec": "WBP_Selected_Dimensions.md"
   },
@@ -38,57 +38,58 @@
     }
   },
   "statistics": {
-    "total_assertions": 1052,
+    "total_assertions": 7328,
     "dimension_distribution": {
-      "S1": 41,
-      "G2": 103,
-      "G3": 103,
-      "S19": 42,
-      "G5": 59,
-      "G8": 156,
-      "S6": 48,
-      "G6": 178,
-      "S3": 62,
-      "G7": 62,
-      "S4": 65,
-      "G4": 65,
-      "S2": 60,
-      "S11": 6,
-      "S5": 2
+      "S1": 321,
+      "G2": 739,
+      "G3": 786,
+      "S19": 278,
+      "G5": 380,
+      "G8": 1091,
+      "S6": 322,
+      "G6": 1257,
+      "S3": 418,
+      "G7": 418,
+      "S4": 399,
+      "G4": 402,
+      "S2": 449,
+      "S11": 42,
+      "S5": 16,
+      "S18": 10
     },
     "layer_distribution": {
-      "structural": 326,
-      "grounding": 726,
+      "structural": 2255,
+      "grounding": 5073,
       "unknown": 0
     },
     "level_distribution": {
-      "critical": 903,
-      "expected": 118,
-      "aspirational": 31
+      "critical": 6298,
+      "expected": 843,
+      "aspirational": 187
     },
-    "well_formed_count": 1052,
+    "well_formed_count": 7328,
     "well_formed_rate": 100.0,
-    "testable_count": 1052,
+    "testable_count": 7328,
     "testable_rate": 100.0,
     "gpt5_converted": 0,
     "gpt5_rate": 0.0,
     "unmapped_count": 0,
     "unmapped_rate": 0.0,
-    "s_to_g_derived": 715,
-    "s_to_g_derived_rate": 68.0,
-    "structural_count": 326,
-    "grounding_count": 726
+    "s_to_g_derived": 5010,
+    "s_to_g_derived_rate": 68.4,
+    "structural_count": 2255,
+    "grounding_count": 5073
   },
   "dimension_templates": {
-    "S1": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
-    "S2": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+    "S1": "The response should describe a forward-looking plan and state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
+    "S2": "The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time",
     "S3": "The response should assign an owner for each [TASK] or specify role/skill placeholder if name unavailable",
     "S4": "The response should list [DELIVERABLES] with working links, version/format specified",
-    "S5": "The response should include due dates for every [TASK] aligned with timeline sequencing",
+    "S5": "The response should include due dates or date ranges for every [TASK] aligned with timeline sequencing",
     "S6": "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented",
     "S11": "The response should include concrete [RISK MITIGATION] strategies with owners",
-    "S18": "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting)",
-    "S19": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+    "S18": "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting) with owners and deadlines",
+    "S19": "The response should disclose [CAVEATS], [ASSUMPTIONS], [OPEN QUESTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
     "G1": "No entities introduced that don't exist in source",
     "G2": "All people mentioned must exist in {source.ATTENDEES}",
     "G3": "Meeting date must match {source.MEETING.StartTime}",
@@ -219,7 +220,7 @@
       "conversions": [
         {
           "original_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
-          "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
+          "converted_text": "The response should describe a forward-looking plan and state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
           "dimension_id": "S1",
           "dimension_name": "Meeting Details",
           "layer": "structural",
@@ -240,9 +241,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0000_S1",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0000_G2_0",
+          "parent_assertion_id": "A0000_S1",
           "original_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
           "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
           "dimension_id": "G2",
@@ -258,7 +263,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S1→G2",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S1",
+            "parent_dimension_name": "Meeting Details"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -269,6 +276,8 @@
           "derived_from": "S1"
         },
         {
+          "assertion_id": "A0000_G3_1",
+          "parent_assertion_id": "A0000_S1",
           "original_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
           "converted_text": "Meeting date must match {source.MEETING.StartTime}",
           "dimension_id": "G3",
@@ -284,7 +293,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S1→G3",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S1",
+            "parent_dimension_name": "Meeting Details"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -296,7 +307,7 @@
         },
         {
           "original_text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
-          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], [OPEN QUESTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
           "dimension_id": "S19",
           "dimension_name": "Caveat & Clarification",
           "layer": "structural",
@@ -317,9 +328,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0001_S19",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0001_G5_0",
+          "parent_assertion_id": "A0001_S19",
           "original_text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
           "converted_text": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
           "dimension_id": "G5",
@@ -335,7 +350,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S19→G5",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S19",
+            "parent_dimension_name": "Caveat & Clarification"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -346,6 +363,8 @@
           "derived_from": "S19"
         },
         {
+          "assertion_id": "A0001_G8_1",
+          "parent_assertion_id": "A0001_S19",
           "original_text": "The response should explicitly disclose that the timeline is very tight due to the current time being only ~16 hours before T₀.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -361,7 +380,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S19→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S19",
+            "parent_dimension_name": "Caveat & Clarification"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -394,9 +415,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0002_S6",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0002_G6_0",
+          "parent_assertion_id": "A0002_S6",
           "original_text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -412,7 +437,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S6",
+            "parent_dimension_name": "Dependencies & Blockers"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -423,6 +450,8 @@
           "derived_from": "S6"
         },
         {
+          "assertion_id": "A0002_G8_1",
+          "parent_assertion_id": "A0002_S6",
           "original_text": "The response should include tasks scheduled before T₀ that cover confirming agenda, sharing pre-read, and verifying artifact access.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -438,7 +467,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S6",
+            "parent_dimension_name": "Dependencies & Blockers"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -471,9 +502,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0003_S3",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0003_G2_0",
+          "parent_assertion_id": "A0003_S3",
           "original_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
           "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
           "dimension_id": "G2",
@@ -489,7 +524,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G2",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -500,6 +537,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0003_G6_1",
+          "parent_assertion_id": "A0003_S3",
           "original_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -515,7 +554,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -526,6 +567,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0003_G7_2",
+          "parent_assertion_id": "A0003_S3",
           "original_text": "The response should assign Tisa Odonoghue as the owner for tasks such as confirming agenda and distributing pre-reads.",
           "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
           "dimension_id": "G7",
@@ -541,7 +584,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G7",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -553,7 +598,7 @@
         },
         {
           "original_text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
-          "converted_text": "The response should state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
+          "converted_text": "The response should describe a forward-looking plan and state the meeting [SUBJECT], [DATE/TIME], [TIMEZONE], and [ATTENDEES] accurately",
           "dimension_id": "S1",
           "dimension_name": "Meeting Details",
           "layer": "structural",
@@ -574,9 +619,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0004_S1",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0004_G2_0",
+          "parent_assertion_id": "A0004_S1",
           "original_text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
           "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
           "dimension_id": "G2",
@@ -592,7 +641,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S1→G2",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S1",
+            "parent_dimension_name": "Meeting Details"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -603,6 +654,8 @@
           "derived_from": "S1"
         },
         {
+          "assertion_id": "A0004_G3_1",
+          "parent_assertion_id": "A0004_S1",
           "original_text": "The response should indicate an explicit assumption about the meeting’s purpose being to close out configuration standards items and align on pending action items.",
           "converted_text": "Meeting date must match {source.MEETING.StartTime}",
           "dimension_id": "G3",
@@ -618,7 +671,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S1→G3",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S1",
+            "parent_dimension_name": "Meeting Details"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -651,9 +706,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0005_S4",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0005_G4_0",
+          "parent_assertion_id": "A0005_S4",
           "original_text": "The response should include a task to share pre-reads that reference 'Config_Change_Log.xlsx', 'Secure_Defaults_and_Vault_Guide.docx', and 'Schema_Validation_Pipeline_Details.docx'.",
           "converted_text": "All files must exist in {source.ENTITIES where type=File}",
           "dimension_id": "G4",
@@ -669,7 +728,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S4→G4",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S4",
+            "parent_dimension_name": "Deliverables & Artifacts"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -681,7 +742,7 @@
         },
         {
           "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
@@ -702,9 +763,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0006_S2",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0006_G3_0",
+          "parent_assertion_id": "A0006_S2",
           "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
           "converted_text": "Meeting date must match {source.MEETING.StartTime}",
           "dimension_id": "G3",
@@ -720,7 +785,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G3",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -731,6 +798,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0006_G6_1",
+          "parent_assertion_id": "A0006_S2",
           "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -746,7 +815,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -757,6 +828,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0006_G8_2",
+          "parent_assertion_id": "A0006_S2",
           "original_text": "The response should schedule the sharing of pre-read materials no later than July 26, 00:15 PST, ensuring delivery before the meeting starts.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -772,7 +845,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -805,9 +880,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0007_S6",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0007_G6_0",
+          "parent_assertion_id": "A0007_S6",
           "original_text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -823,7 +902,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S6",
+            "parent_dimension_name": "Dependencies & Blockers"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -834,6 +915,8 @@
           "derived_from": "S6"
         },
         {
+          "assertion_id": "A0007_G8_1",
+          "parent_assertion_id": "A0007_S6",
           "original_text": "The response should detail that the 'Final check' for meeting logistics such as Teams link and AV setup is scheduled on July 26 at 12:30 PST.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -849,7 +932,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S6",
+            "parent_dimension_name": "Dependencies & Blockers"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -882,9 +967,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0008_S4",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0008_G4_0",
+          "parent_assertion_id": "A0008_S4",
           "original_text": "The response should include a step to draft the agenda outline by July 26, 00:00 PST with bullet points aligned to schema validation and vault updates.",
           "converted_text": "All files must exist in {source.ENTITIES where type=File}",
           "dimension_id": "G4",
@@ -900,7 +989,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S4→G4",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S4",
+            "parent_dimension_name": "Deliverables & Artifacts"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -933,9 +1024,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0009_S4",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0009_G4_0",
+          "parent_assertion_id": "A0009_S4",
           "original_text": "The response should identify that artifact permissions need verification and clearly schedule this task before midnight buffer (by July 26, 00:30 PST).",
           "converted_text": "All files must exist in {source.ENTITIES where type=File}",
           "dimension_id": "G4",
@@ -951,7 +1046,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S4→G4",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S4",
+            "parent_dimension_name": "Deliverables & Artifacts"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -984,10 +1081,12 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0010_G5",
+          "parent_assertion_id": null
         }
       ],
-      "timestamp": "2025-11-29T11:10:47.056243"
+      "timestamp": "2025-11-29T12:58:43.669256"
     },
     {
       "index": 1,
@@ -1095,7 +1194,7 @@
       "conversions": [
         {
           "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
@@ -1116,9 +1215,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0000_S2",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0000_G3_0",
+          "parent_assertion_id": "A0000_S2",
           "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
           "converted_text": "Meeting date must match {source.MEETING.StartTime}",
           "dimension_id": "G3",
@@ -1134,7 +1237,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G3",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1145,6 +1250,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0000_G6_1",
+          "parent_assertion_id": "A0000_S2",
           "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -1160,7 +1267,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1171,6 +1280,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0000_G8_2",
+          "parent_assertion_id": "A0000_S2",
           "original_text": "The response should state the meeting start time as July 26, 2025 at 14:00 PST, matching the scheduled Event.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -1186,7 +1297,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1219,9 +1332,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0001_S3",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0001_G2_0",
+          "parent_assertion_id": "A0001_S3",
           "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
           "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
           "dimension_id": "G2",
@@ -1237,7 +1354,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G2",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1248,6 +1367,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0001_G6_1",
+          "parent_assertion_id": "A0001_S3",
           "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -1263,7 +1384,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1274,6 +1397,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0001_G7_2",
+          "parent_assertion_id": "A0001_S3",
           "original_text": "The response should correctly identify Tisa Odonoghue as the meeting organizer and Nila Tanguma as the confirmed attendee.",
           "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
           "dimension_id": "G7",
@@ -1289,7 +1414,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G7",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1322,9 +1449,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0002_S3",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0002_G2_0",
+          "parent_assertion_id": "A0002_S3",
           "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
           "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
           "dimension_id": "G2",
@@ -1340,7 +1471,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G2",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1351,6 +1484,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0002_G6_1",
+          "parent_assertion_id": "A0002_S3",
           "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -1366,7 +1501,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1377,6 +1514,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0002_G7_2",
+          "parent_assertion_id": "A0002_S3",
           "original_text": "The response should specify at least five actionable tasks each with an explicit owner and due date before T₀.",
           "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
           "dimension_id": "G7",
@@ -1392,7 +1531,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G7",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1404,7 +1545,7 @@
         },
         {
           "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
@@ -1425,9 +1566,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0003_S2",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0003_G3_0",
+          "parent_assertion_id": "A0003_S2",
           "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
           "converted_text": "Meeting date must match {source.MEETING.StartTime}",
           "dimension_id": "G3",
@@ -1443,7 +1588,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G3",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1454,6 +1601,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0003_G6_1",
+          "parent_assertion_id": "A0003_S2",
           "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -1469,7 +1618,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1480,6 +1631,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0003_G8_2",
+          "parent_assertion_id": "A0003_S2",
           "original_text": "The response should schedule the task 'Confirm Meeting Objectives & Scope' with owner Tisa and due date on or before July 24 EOD PST.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -1495,7 +1648,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1528,9 +1683,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0004_S6",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0004_G6_0",
+          "parent_assertion_id": "A0004_S6",
           "original_text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -1546,7 +1705,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S6",
+            "parent_dimension_name": "Dependencies & Blockers"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1557,6 +1718,8 @@
           "derived_from": "S6"
         },
         {
+          "assertion_id": "A0004_G8_1",
+          "parent_assertion_id": "A0004_S6",
           "original_text": "The response should include a dependency stating that drafting the 1-pager occurs only after consolidating open items is complete.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -1572,7 +1735,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S6→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S6",
+            "parent_dimension_name": "Dependencies & Blockers"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1584,7 +1749,7 @@
         },
         {
           "original_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
-          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
+          "converted_text": "The response should disclose [CAVEATS], [ASSUMPTIONS], [OPEN QUESTIONS], and [CLARIFICATIONS] about information gaps or uncertainties",
           "dimension_id": "S19",
           "dimension_name": "Caveat & Clarification",
           "layer": "structural",
@@ -1605,9 +1770,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0005_S19",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0005_G5_0",
+          "parent_assertion_id": "A0005_S19",
           "original_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
           "converted_text": "Topics must align with {source.UTTERANCE} or {source.MEETING.Subject}",
           "dimension_id": "G5",
@@ -1623,7 +1792,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S19→G5",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S19",
+            "parent_dimension_name": "Caveat & Clarification"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1634,6 +1805,8 @@
           "derived_from": "S19"
         },
         {
+          "assertion_id": "A0005_G8_1",
+          "parent_assertion_id": "A0005_S19",
           "original_text": "The response should explicitly call out assumptions because the detailed meeting agenda beyond 'action items review' is inferred and not confirmed.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -1649,7 +1822,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S19→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S19",
+            "parent_dimension_name": "Caveat & Clarification"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1682,9 +1857,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0006_S4",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0006_G4_0",
+          "parent_assertion_id": "A0006_S4",
           "original_text": "The response should reference the file 'Vault_Secret_Management_Deep_Dive.pdf' as part of the preparation artifacts.",
           "converted_text": "All files must exist in {source.ENTITIES where type=File}",
           "dimension_id": "G4",
@@ -1700,7 +1879,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S4→G4",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S4",
+            "parent_dimension_name": "Deliverables & Artifacts"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1733,9 +1914,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0007_S4",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0007_G4_0",
+          "parent_assertion_id": "A0007_S4",
           "original_text": "The response should reference the file 'FeatureFlagRollout_ComplianceDeepDive.pptx' in the prep tasks or pre-read list.",
           "converted_text": "All files must exist in {source.ENTITIES where type=File}",
           "dimension_id": "G4",
@@ -1751,7 +1936,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S4→G4",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S4",
+            "parent_dimension_name": "Deliverables & Artifacts"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1763,7 +1950,7 @@
         },
         {
           "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
@@ -1784,9 +1971,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0008_S2",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0008_G3_0",
+          "parent_assertion_id": "A0008_S2",
           "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
           "converted_text": "Meeting date must match {source.MEETING.StartTime}",
           "dimension_id": "G3",
@@ -1802,7 +1993,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G3",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1813,6 +2006,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0008_G6_1",
+          "parent_assertion_id": "A0008_S2",
           "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -1828,7 +2023,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1839,6 +2036,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0008_G8_2",
+          "parent_assertion_id": "A0008_S2",
           "original_text": "The response should allocate a final review buffer on July 26 at least 5 hours before T₀.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -1854,7 +2053,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1887,9 +2088,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0009_S4",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0009_G4_0",
+          "parent_assertion_id": "A0009_S4",
           "original_text": "The response should propose sending a pre-read at least 2 hours before T₀ including links to key security and compliance docs.",
           "converted_text": "All files must exist in {source.ENTITIES where type=File}",
           "dimension_id": "G4",
@@ -1905,7 +2110,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S4→G4",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S4",
+            "parent_dimension_name": "Deliverables & Artifacts"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1938,9 +2145,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0010_S3",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0010_G2_0",
+          "parent_assertion_id": "A0010_S3",
           "original_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
           "converted_text": "All people mentioned must exist in {source.ATTENDEES}",
           "dimension_id": "G2",
@@ -1956,7 +2167,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G2",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1967,6 +2180,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0010_G6_1",
+          "parent_assertion_id": "A0010_S3",
           "original_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -1982,7 +2197,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -1993,6 +2210,8 @@
           "derived_from": "S3"
         },
         {
+          "assertion_id": "A0010_G7_2",
+          "parent_assertion_id": "A0010_S3",
           "original_text": "The response should not include attendees beyond Nila since only one attendee is confirmed in the Event.",
           "converted_text": "All role/responsibility assignments must match {source.ENTITIES} or be derivable from context",
           "dimension_id": "G7",
@@ -2008,7 +2227,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S3→G7",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S3",
+            "parent_dimension_name": "Ownership Assignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -2020,7 +2241,7 @@
         },
         {
           "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
-          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing",
+          "converted_text": "The response should include a backward timeline from T₀ with dependency-aware sequencing and buffer/contingency time",
           "dimension_id": "S2",
           "dimension_name": "Timeline Alignment",
           "layer": "structural",
@@ -2041,9 +2262,13 @@
             "is_testable": true,
             "issues": []
           },
-          "conversion_method": "heuristic"
+          "conversion_method": "heuristic",
+          "assertion_id": "A0011_S2",
+          "parent_assertion_id": null
         },
         {
+          "assertion_id": "A0011_G3_0",
+          "parent_assertion_id": "A0011_S2",
           "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
           "converted_text": "Meeting date must match {source.MEETING.StartTime}",
           "dimension_id": "G3",
@@ -2059,7 +2284,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G3",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -2070,6 +2297,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0011_G6_1",
+          "parent_assertion_id": "A0011_S2",
           "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
           "converted_text": "All tasks/action items must exist in {source.ENTITIES} (Email, Chat, CalendarEvent, or File)",
           "dimension_id": "G6",
@@ -2085,7 +2314,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G6",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -2096,6 +2327,8 @@
           "derived_from": "S2"
         },
         {
+          "assertion_id": "A0011_G8_2",
+          "parent_assertion_id": "A0011_S2",
           "original_text": "The response should acknowledge the tight timeline of approximately 2.5 days and reflect urgency in task scheduling.",
           "converted_text": "All constraints/limits must be derivable from {source.ENTITIES} or {source.UTTERANCE}",
           "dimension_id": "G8",
@@ -2111,7 +2344,9 @@
               "Applied grounding template for factual verification"
             ],
             "template_alignment": "S→G mapping: S2→G8",
-            "value_removed": "N/A (grounding complement)"
+            "value_removed": "N/A (grounding complement)",
+            "parent_dimension": "S2",
+            "parent_dimension_name": "Timeline Alignment"
           },
           "quality_assessment": {
             "is_well_formed": true,
@@ -2122,7 +2357,7 @@
           "derived_from": "S2"
         }
       ],
-      "timestamp": "2025-11-29T11:10:49.057137"
+      "timestamp": "2025-11-29T12:58:45.670204"
     }
   ]
 }
