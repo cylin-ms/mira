@@ -13,6 +13,7 @@ Output:
 """
 
 import sys
+import os
 import json
 import argparse
 
@@ -124,6 +125,82 @@ G_RATIONALE_FOR_S = {
 }
 
 # =============================================================================
+# SUCCESS EXAMPLES - What a successful evaluation looks like for each dimension
+# =============================================================================
+SUCCESS_EXAMPLES = {
+    # Structural Dimensions
+    "S1": "Plan includes 'Q4 Planning Review, Dec 5 2025 2pm PST, with Alice, Bob, Carol'",
+    "S2": "Draft slides (Dec 1) → Review slides (Dec 3) → Final presentation (Dec 5)",
+    "S3": "Each task shows owner: 'Alice: Draft slides', 'Bob: Review budget'",
+    "S4": "Links to shared docs: 'Budget v2.xlsx', 'Slides_Draft.pptx'",
+    "S5": "Task shows date range: 'Dec 1-3: Draft slides', 'Dec 4-5: Review'",
+    "S6": "'Blocked by: Legal approval needed' with mitigation: 'Escalate to VP if not received by Dec 2'",
+    "S7": "Expected outcome: 'Finalize Q4 budget allocation decisions'",
+    "S8": "'While Alice drafts slides, Bob can prepare budget analysis in parallel'",
+    "S9": "Checkpoint: 'Dec 3: Review draft progress with team'",
+    "S10": "'Requires 2 engineers + 1 designer for UI work'",
+    "S11": "'Risk: Vendor delay possible. Mitigation: Identify backup vendor by Dec 2'",
+    "S12": "'Daily standup on Teams, weekly email summary to stakeholders'",
+    "S13": "'If blocked >24hrs, escalate to Alice (PM), then to VP Bob'",
+    "S14": "'Collect feedback in shared doc, review in Wed standup'",
+    "S15": "'Track via Jira board, update status daily'",
+    "S16": "'Assumes: Budget approved by Dec 1, Team at full capacity'",
+    "S17": "'Sync with Marketing team on messaging by Dec 3'",
+    "S18": "'Post-meeting: Alice sends summary within 24hrs, Bob files ticket by EOD'",
+    "S19": "'Note: Timeline assumes no holiday delays; dates may shift if approvals delayed'",
+    
+    # Grounding Dimensions
+    "G1": "All facts verified against meeting transcript/email thread",
+    "G2": "'Alice' appears in attendee list: [Alice@company.com, Bob@company.com]",
+    "G3": "'Dec 5' is after meeting date 'Nov 29' and within reasonable timeframe",
+    "G4": "'Budget_v2.xlsx' exists in shared drive linked in meeting notes",
+    "G5": "'Q4 budget' topic matches agenda item #2 from meeting invite",
+    "G6": "'Draft slides' action traceable to discussion point at 14:23 in transcript",
+    "G7": "Response preserves user's request: 'focus on high-priority items only'",
+    "G8": "Output follows user instruction: 'use bullet points, max 5 items'",
+}
+
+# Success examples for specific S→G combinations (more contextual)
+G_SUCCESS_FOR_S = {
+    ("S2", "G3"): "'Dec 1 → Dec 3 → Dec 5' sequence is valid relative to meeting date Nov 29",
+    ("S2", "G6"): "'Draft slides before review' matches action items from meeting discussion",
+    ("S3", "G2"): "Owner 'Alice' is in attendee list [Alice, Bob, Carol]",
+    ("S3", "G6"): "'Alice owns draft slides' matches her commitment in meeting",
+    ("S1", "G2"): "Listed attendees [Alice, Bob] match actual meeting participants",
+    ("S1", "G3"): "Meeting date 'Dec 5' matches calendar invite",
+    ("S1", "G5"): "Subject 'Q4 Planning' matches meeting agenda",
+    ("S4", "G4"): "'Budget_v2.xlsx' link resolves to actual document",
+    ("S4", "G5"): "'Budget deliverable' relates to budget discussion topic",
+    ("S5", "G3"): "Task dates 'Dec 1-3' are realistic given meeting on Nov 29",
+    ("S6", "G5"): "'Legal approval blocker' was discussed in meeting",
+    ("S6", "G6"): "'Escalate to VP' action was agreed upon as mitigation",
+    ("S7", "G5"): "'Finalize budget' outcome aligns with agenda item",
+    ("S7", "G7"): "Outcome preserves context: user wanted 'actionable decisions'",
+    ("S8", "G6"): "Parallel tasks 'slides + budget' are distinct action items",
+    ("S9", "G3"): "Checkpoint 'Dec 3' is realistic midpoint in timeline",
+    ("S9", "G6"): "Checkpoint covers key action item 'draft review'",
+    ("S10", "G2"): "Resource 'Alice (engineer)' is known team member",
+    ("S11", "G5"): "'Vendor delay risk' was mentioned in discussion",
+    ("S11", "G6"): "'Backup vendor' mitigation was agreed action",
+    ("S12", "G2"): "Communication to 'stakeholders' matches attendee roles",
+    ("S12", "G5"): "'Weekly summary' relates to discussed coordination needs",
+    ("S13", "G2"): "Escalation contact 'VP Bob' is actual executive attendee",
+    ("S14", "G5"): "'Feedback on draft' relates to draft review topic",
+    ("S14", "G7"): "Feedback process preserves iterative intent from discussion",
+    ("S15", "G6"): "'Jira tracking' for action items discussed",
+    ("S16", "G5"): "'Budget approved' assumption relates to budget topic",
+    ("S16", "G7"): "Prerequisites preserve context from planning discussion",
+    ("S17", "G2"): "'Marketing team' mentioned as cross-team dependency",
+    ("S17", "G5"): "'Messaging sync' relates to launch coordination topic",
+    ("S18", "G2"): "'Alice sends summary' - Alice is actual attendee",
+    ("S18", "G3"): "'Within 24hrs' deadline is realistic post-meeting",
+    ("S18", "G6"): "'File ticket' action was agreed in meeting",
+    ("S19", "G5"): "'Holiday delays' caveat relates to timeline discussion",
+    ("S19", "G7"): "Caveat preserves uncertainty expressed in meeting",
+    ("S19", "G8"): "Clarification follows user's 'be explicit about risks' instruction",
+}
+
+# =============================================================================
 # DIMENSION SPECIFICATIONS
 # =============================================================================
 DIMENSION_SPEC = {
@@ -229,6 +306,278 @@ Classification guidelines:
 - Structural (S) dimensions verify plan structure; Grounding (G) dimensions verify factual accuracy
 '''
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# SCENARIO GENERATION - Create context where the assertion makes sense
+# ═══════════════════════════════════════════════════════════════════════════════
+
+SCENARIO_GENERATION_PROMPT = '''You are generating a realistic meeting SCENARIO that provides context for an assertion to be meaningful.
+
+## ASSERTION TO CONTEXTUALIZE
+"{assertion_text}"
+
+## TASK
+Generate a realistic meeting scenario where this assertion would naturally apply.
+The scenario should provide **ground truth** for grounding verification.
+
+## REQUIREMENTS
+1. Create a meeting that naturally involves the topics/tasks mentioned in the assertion
+2. Include realistic attendees, dates, and artifacts
+3. Include discussion points that justify the action items in the assertion
+4. All details must be consistent and realistic
+
+Return JSON with:
+{{
+  "scenario": {{
+    "title": "Meeting title",
+    "date": "Meeting date (e.g., 2025-12-05)",
+    "time": "Meeting time (e.g., 2:00 PM PST)",
+    "duration_minutes": 60,
+    "organizer": "Name of organizer",
+    "attendees": ["List of attendee names - these are the ONLY valid people"],
+    "context": "Background context for the meeting (2-3 sentences)",
+    "artifacts": ["List of available files/documents"],
+    "discussion_points": ["Key topics discussed that relate to the assertion"],
+    "action_items_discussed": ["Specific action items mentioned in the meeting"]
+  }}
+}}
+
+IMPORTANT: The scenario must provide ground truth that makes the assertion verifiable.
+For example, if the assertion mentions "draft slides before review slides", the discussion_points
+should include something like "Team agreed to draft slides first, then schedule review".
+
+Return ONLY valid JSON.
+'''
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WBP GENERATION - Generate WBP conditioned on scenario + assertions
+# ═══════════════════════════════════════════════════════════════════════════════
+
+WBP_GENERATION_PROMPT = '''You are generating a Workback Plan (WBP) based on a meeting scenario.
+
+## MEETING SCENARIO (Ground Truth)
+```json
+{scenario_json}
+```
+
+## ORIGINAL USER INPUT
+"{original_utterance}"
+
+## ASSERTIONS TO SATISFY
+### Structural Assertion (S)
+- {s_dimension_id} ({s_dimension_name}): {s_assertion_text}
+- Reason: {s_mapping_reason}
+
+### Grounding Assertions (G)
+{g_assertions_text}
+
+## TASK
+Generate a Workback Plan that:
+1. Is based on the meeting scenario above (use the exact attendees, dates, artifacts)
+2. Addresses the original user input
+3. Satisfies the structural assertion (correct structure/presence)
+4. Satisfies ALL grounding assertions (factually accurate against the scenario)
+
+## GROUNDING REQUIREMENTS
+- ONLY use names from the attendees list: {attendees}
+- ONLY reference dates consistent with meeting date: {meeting_date}
+- ONLY reference artifacts from: {artifacts}
+- Action items must trace to discussion_points: {discussion_points}
+
+Return JSON with:
+{{
+  "workback_plan": "The complete workback plan in markdown format"
+}}
+
+Return ONLY valid JSON.
+'''
+
+WBP_VERIFICATION_PROMPT = '''You are verifying a Workback Plan against a scenario and assertions.
+
+## MEETING SCENARIO (Ground Truth)
+```json
+{scenario_json}
+```
+
+## ASSERTIONS TO VERIFY
+{assertions_to_verify}
+
+## WORKBACK PLAN
+```
+{wbp_content}
+```
+
+## TASK
+For EACH assertion, verify if the WBP passes using the scenario as ground truth.
+
+For GROUNDING assertions, check:
+- G2 (Attendee): Are all names in the WBP from the scenario's attendees list?
+- G3 (Date/Time): Are all dates consistent with the scenario's meeting date?
+- G4 (Artifact): Are all referenced files from the scenario's artifacts list?
+- G5 (Topic): Are topics aligned with the scenario's discussion_points?
+- G6 (Action Item): Are action items traceable to the scenario's action_items_discussed?
+
+Return JSON with:
+{{
+  "overall_passes": true/false,
+  "assertion_results": [
+    {{
+      "assertion_id": "ID",
+      "dimension": "S2 or G3 etc",
+      "passes": true/false,
+      "evidence": "Specific evidence from WBP",
+      "ground_truth_check": "What scenario element was checked",
+      "reasoning": "Why it passes or fails"
+    }}
+  ]
+}}
+
+Return ONLY valid JSON.
+'''
+
+
+def generate_scenario_for_assertion(assertion_text: str) -> dict:
+    """
+    Generate a meeting scenario that provides context for the assertion.
+    
+    Args:
+        assertion_text: The original assertion/utterance
+        
+    Returns:
+        dict with scenario details (attendees, date, artifacts, etc.)
+    """
+    prompt = SCENARIO_GENERATION_PROMPT.format(assertion_text=assertion_text)
+    
+    result_text = call_gpt5_api(
+        prompt,
+        system_prompt="You generate realistic meeting scenarios for assertion testing.",
+        temperature=0.5
+    )
+    
+    try:
+        result = extract_json_from_response(result_text)
+        return result.get("scenario", {})
+    except:
+        import re
+        json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
+        if json_match:
+            try:
+                result = json.loads(json_match.group())
+                return result.get("scenario", result)
+            except:
+                pass
+        return {
+            "title": "Default Meeting",
+            "date": "2025-12-05",
+            "time": "2:00 PM PST",
+            "attendees": ["Alice", "Bob", "Carol"],
+            "artifacts": [],
+            "discussion_points": [],
+            "action_items_discussed": []
+        }
+
+
+def generate_wbp_with_scenario(scenario: dict, original_utterance: str, 
+                                s_assertion: dict, g_assertions: list) -> dict:
+    """
+    Generate a WBP conditioned on the scenario and assertions.
+    
+    Args:
+        scenario: The meeting scenario (ground truth)
+        original_utterance: The original user input
+        s_assertion: The structural assertion
+        g_assertions: List of grounding assertions
+        
+    Returns:
+        dict with workback_plan content
+    """
+    # Build G assertions text
+    if g_assertions:
+        g_text_parts = []
+        for i, g in enumerate(g_assertions):
+            g_text_parts.append(f"{i+1}. {g['dimension_id']} ({g['dimension_name']}): {g['text']}")
+            g_text_parts.append(f"   Why: {g['rationale']['mapping_reason']}")
+        g_assertions_text = "\n".join(g_text_parts)
+    else:
+        g_assertions_text = "(No grounding assertions)"
+    
+    prompt = WBP_GENERATION_PROMPT.format(
+        scenario_json=json.dumps(scenario, indent=2),
+        original_utterance=original_utterance,
+        s_dimension_id=s_assertion.get('dimension_id', ''),
+        s_dimension_name=s_assertion.get('dimension_name', ''),
+        s_assertion_text=s_assertion.get('text', ''),
+        s_mapping_reason=s_assertion.get('rationale', {}).get('mapping_reason', ''),
+        g_assertions_text=g_assertions_text,
+        attendees=scenario.get('attendees', []),
+        meeting_date=scenario.get('date', ''),
+        artifacts=scenario.get('artifacts', []),
+        discussion_points=scenario.get('discussion_points', [])
+    )
+    
+    result_text = call_gpt5_api(
+        prompt,
+        system_prompt="You generate workback plans based on meeting scenarios.",
+        temperature=0.4
+    )
+    
+    try:
+        result = extract_json_from_response(result_text)
+        return result.get("workback_plan", result_text)
+    except:
+        import re
+        json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
+        if json_match:
+            try:
+                result = json.loads(json_match.group())
+                return result.get("workback_plan", "")
+            except:
+                pass
+        return "Unable to generate WBP"
+
+
+def verify_wbp_against_scenario(scenario: dict, wbp_content: str, 
+                                 all_assertions: list) -> dict:
+    """
+    Verify the WBP against the scenario (ground truth) for all assertions.
+    
+    Args:
+        scenario: The meeting scenario (ground truth)
+        wbp_content: The generated workback plan
+        all_assertions: List of all assertions (S + G)
+        
+    Returns:
+        dict with verification results for each assertion
+    """
+    assertions_to_verify = "\n".join([
+        f"- [{a['assertion_id']}] {a['dimension_id']} ({a['layer']}): {a['text']}"
+        for a in all_assertions
+    ])
+    
+    prompt = WBP_VERIFICATION_PROMPT.format(
+        scenario_json=json.dumps(scenario, indent=2),
+        assertions_to_verify=assertions_to_verify,
+        wbp_content=wbp_content
+    )
+    
+    result_text = call_gpt5_api(
+        prompt,
+        system_prompt="You verify workback plans against scenarios and assertions.",
+        temperature=0.2
+    )
+    
+    try:
+        result = extract_json_from_response(result_text)
+        return result
+    except:
+        import re
+        json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
+        if json_match:
+            try:
+                return json.loads(json_match.group())
+            except:
+                pass
+        return {"overall_passes": False, "assertion_results": []}
+
 
 def analyze_assertion(assertion_text: str, context: str = None) -> dict:
     """
@@ -276,14 +625,16 @@ Return ONLY valid JSON, no other text.
     return result
 
 
-def generate_sg_assertions(gpt5_result: dict, assertion_text: str, assertion_index: int = 0) -> list:
+def generate_sg_assertions(gpt5_result: dict, assertion_text: str, assertion_index: int = 0, generate_examples: bool = True) -> list:
     """
     Generate the full S+G assertion set with proper linkage.
+    Generates ONE mock WBP that satisfies both S and all related G assertions together.
     
     Args:
         gpt5_result: Classification result from GPT-5
-        assertion_text: Original assertion text
+        assertion_text: Original assertion text (user input)
         assertion_index: Index for generating unique IDs
+        generate_examples: Whether to generate mock WBP via GPT-5
         
     Returns:
         List of assertions: [primary S/G assertion, generated G assertions...]
@@ -300,7 +651,7 @@ def generate_sg_assertions(gpt5_result: dict, assertion_text: str, assertion_ind
     # Generate primary assertion ID
     primary_assertion_id = f"A{assertion_index:04d}_{dimension_id}"
     
-    # Create primary assertion
+    # Create primary assertion (without success_example yet)
     primary = {
         "assertion_id": primary_assertion_id,
         "parent_assertion_id": None,
@@ -320,9 +671,9 @@ def generate_sg_assertions(gpt5_result: dict, assertion_text: str, assertion_ind
             "is_testable": True
         }
     }
-    results.append(primary)
     
-    # Generate grounding assertions if primary is structural
+    # Build grounding assertions list (for S dimensions only)
+    g_assertions = []
     if dimension_id.startswith("S") and dimension_id in S_TO_G_MAP:
         g_dims = S_TO_G_MAP[dimension_id]
         
@@ -360,7 +711,98 @@ def generate_sg_assertions(gpt5_result: dict, assertion_text: str, assertion_ind
                     "is_testable": True
                 }
             }
-            results.append(g_assertion)
+            g_assertions.append(g_assertion)
+    
+    # Generate scenario + WBP that satisfies S + all G assertions together
+    if generate_examples and dimension_id.startswith("S"):
+        # Step 1: Generate scenario (ground truth context)
+        print(f"   🎭 Generating scenario for assertion context...")
+        scenario = generate_scenario_for_assertion(assertion_text)
+        
+        # Step 2: Generate WBP conditioned on scenario
+        print(f"   🔄 Generating WBP for {dimension_id} + {len(g_assertions)} grounding assertions...")
+        wbp_content = generate_wbp_with_scenario(
+            scenario=scenario,
+            original_utterance=assertion_text,
+            s_assertion=primary,
+            g_assertions=g_assertions
+        )
+        
+        # Step 3: Verify WBP against scenario for all assertions
+        print(f"   ✅ Verifying WBP against scenario...")
+        all_assertions = [primary] + g_assertions
+        verification = verify_wbp_against_scenario(
+            scenario=scenario,
+            wbp_content=wbp_content,
+            all_assertions=all_assertions
+        )
+        
+        # Create shared success_example for all assertions
+        shared_success_example = {
+            "scenario": scenario,
+            "workback_plan": wbp_content,
+            "overall_verified": verification.get("overall_passes", False),
+            "assertion_results": verification.get("assertion_results", [])
+        }
+        
+        # Add success_example to primary assertion
+        primary["success_example"] = shared_success_example
+        
+        # Find verification result for each G assertion and add to it
+        assertion_results_map = {
+            r.get("assertion_id"): r 
+            for r in verification.get("assertion_results", [])
+        }
+        
+        for g_assertion in g_assertions:
+            g_id = g_assertion["assertion_id"]
+            g_verification = assertion_results_map.get(g_id, {})
+            g_assertion["success_example"] = {
+                "scenario": scenario,  # Same scenario (ground truth)
+                "workback_plan": wbp_content,  # Same WBP
+                "evidence": g_verification.get("evidence", ""),
+                "ground_truth_check": g_verification.get("ground_truth_check", ""),
+                "verification": g_verification.get("reasoning", ""),
+                "verified": g_verification.get("passes", False)
+            }
+    elif generate_examples and dimension_id.startswith("G"):
+        # For standalone G assertions (not derived from S)
+        print(f"   🎭 Generating scenario for standalone {dimension_id}...")
+        scenario = generate_scenario_for_assertion(assertion_text)
+        
+        print(f"   🔄 Generating WBP for standalone {dimension_id}...")
+        wbp_content = generate_wbp_with_scenario(
+            scenario=scenario,
+            original_utterance=assertion_text,
+            s_assertion=primary,
+            g_assertions=[]
+        )
+        
+        print(f"   ✅ Verifying WBP against scenario...")
+        verification = verify_wbp_against_scenario(
+            scenario=scenario,
+            wbp_content=wbp_content,
+            all_assertions=[primary]
+        )
+        
+        primary["success_example"] = {
+            "scenario": scenario,
+            "workback_plan": wbp_content,
+            "overall_verified": verification.get("overall_passes", False),
+            "assertion_results": verification.get("assertion_results", [])
+        }
+    else:
+        primary["success_example"] = {
+            "scenario": {}, "workback_plan": "", "overall_verified": False, "assertion_results": []
+        }
+        for g_assertion in g_assertions:
+            g_assertion["success_example"] = {
+                "scenario": {}, "workback_plan": "", "evidence": "", "ground_truth_check": "", "verification": "", "verified": False
+            }
+    
+    # Build final results list
+    results.append(primary)
+    results.extend(g_assertions)
     
     return results
 
@@ -393,6 +835,156 @@ def print_results(assertions: list):
     print(f"Total: {len(assertions)} assertions ({s_count} S + {g_count} G)")
 
 
+def generate_final_report(assertions: list, original_utterance: str, output_dir: str = None) -> dict:
+    """
+    Generate a final report with summary table and JSON file.
+    
+    Returns a dict with:
+    - summary_table: formatted table string
+    - json_file_path: path to saved JSON file
+    - report: full report dict
+    """
+    import datetime
+    
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Create output directory if specified
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        json_path = os.path.join(output_dir, f"assertion_analysis_{timestamp}.json")
+    else:
+        json_path = f"assertion_analysis_{timestamp}.json"
+    
+    # Build the full report
+    s_assertions = [a for a in assertions if a.get('dimension_id', '').startswith('S')]
+    g_assertions = [a for a in assertions if a.get('dimension_id', '').startswith('G')]
+    
+    # Get scenario and WBP from the first assertion's success_example
+    scenario = None
+    wbp = None
+    verification_results = []
+    
+    if assertions and 'success_example' in assertions[0]:
+        example = assertions[0]['success_example']
+        scenario = example.get('scenario')
+        wbp = example.get('workback_plan')
+        verification_results = example.get('assertion_results', [])
+    
+    report = {
+        "metadata": {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "original_utterance": original_utterance,
+            "total_assertions": len(assertions),
+            "structural_count": len(s_assertions),
+            "grounding_count": len(g_assertions)
+        },
+        "scenario": scenario,
+        "workback_plan": wbp,
+        "assertions": assertions,
+        "verification_summary": {
+            "total_verified": sum(1 for v in verification_results if v.get('passes')),
+            "total_failed": sum(1 for v in verification_results if not v.get('passes')),
+            "all_passed": all(v.get('passes', False) for v in verification_results) if verification_results else False,
+            "results": verification_results
+        }
+    }
+    
+    # Save JSON file
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, indent=2, ensure_ascii=False)
+    
+    # Build summary table
+    table_lines = []
+    table_lines.append("")
+    table_lines.append("=" * 120)
+    table_lines.append("ASSERTION ANALYSIS REPORT")
+    table_lines.append("=" * 120)
+    table_lines.append(f"Timestamp: {report['metadata']['timestamp']}")
+    table_lines.append(f"Input: \"{original_utterance}\"")
+    table_lines.append("")
+    
+    # Scenario summary
+    if scenario:
+        table_lines.append("-" * 120)
+        table_lines.append("SCENARIO CONTEXT (Ground Truth)")
+        table_lines.append("-" * 120)
+        table_lines.append(f"  Meeting: {scenario.get('title', 'N/A')}")
+        table_lines.append(f"  Date: {scenario.get('date', 'N/A')} at {scenario.get('time', 'N/A')}")
+        table_lines.append(f"  Organizer: {scenario.get('organizer', 'N/A')}")
+        table_lines.append(f"  Attendees: {', '.join(scenario.get('attendees', []))}")
+        if scenario.get('artifacts'):
+            table_lines.append(f"  Artifacts: {', '.join(scenario.get('artifacts', []))}")
+        table_lines.append("")
+    
+    # Assertions table
+    table_lines.append("-" * 120)
+    table_lines.append("ASSERTIONS SUMMARY TABLE")
+    table_lines.append("-" * 120)
+    
+    # Header
+    header = f"{'ID':<15} {'Dim':<5} {'Layer':<12} {'Level':<10} {'Verified':<10} {'Mapping Reason':<50}"
+    table_lines.append(header)
+    table_lines.append("-" * 120)
+    
+    # Rows
+    for a in assertions:
+        aid = a.get('assertion_id', 'N/A')
+        dim = a.get('dimension_id', 'N/A')
+        layer = a.get('layer', 'N/A')
+        level = a.get('level', 'N/A')
+        
+        # Find verification status
+        verified = "N/A"
+        for v in verification_results:
+            if v.get('assertion_id') == aid:
+                verified = "✅ PASS" if v.get('passes') else "❌ FAIL"
+                break
+        
+        # Get mapping reason (truncated)
+        reason = a.get('rationale', {}).get('mapping_reason', '')[:48]
+        if len(a.get('rationale', {}).get('mapping_reason', '')) > 48:
+            reason += ".."
+        
+        row = f"{aid:<15} {dim:<5} {layer:<12} {level:<10} {verified:<10} {reason:<50}"
+        table_lines.append(row)
+    
+    table_lines.append("-" * 120)
+    
+    # Verification summary
+    table_lines.append("")
+    table_lines.append("VERIFICATION SUMMARY")
+    table_lines.append("-" * 120)
+    vs = report['verification_summary']
+    status = "✅ ALL PASSED" if vs['all_passed'] else f"⚠️ {vs['total_failed']} FAILED"
+    table_lines.append(f"  Status: {status}")
+    table_lines.append(f"  Passed: {vs['total_verified']} / {vs['total_verified'] + vs['total_failed']}")
+    table_lines.append("")
+    
+    # Evidence details
+    if verification_results:
+        table_lines.append("VERIFICATION DETAILS")
+        table_lines.append("-" * 120)
+        for v in verification_results:
+            status_icon = "✅" if v.get('passes') else "❌"
+            table_lines.append(f"  {status_icon} [{v.get('assertion_id')}] {v.get('dimension')}")
+            table_lines.append(f"     Evidence: {v.get('evidence', 'N/A')[:100]}...")
+            table_lines.append(f"     Ground Truth: {v.get('ground_truth_check', 'N/A')[:100]}")
+            table_lines.append("")
+    
+    # File output
+    table_lines.append("=" * 120)
+    table_lines.append(f"📄 JSON Report saved to: {json_path}")
+    table_lines.append("=" * 120)
+    
+    summary_table = "\n".join(table_lines)
+    
+    return {
+        "summary_table": summary_table,
+        "json_file_path": json_path,
+        "report": report
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Analyze and convert a single assertion using GPT-5 and WBP framework"
@@ -419,6 +1011,17 @@ def main():
         type=int,
         default=0,
         help="Assertion index for ID generation (default: 0)"
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default=None,
+        help="Directory to save the JSON report (default: current directory)"
+    )
+    parser.add_argument(
+        "--no-report",
+        action="store_true",
+        help="Skip final report generation"
     )
     
     args = parser.parse_args()
@@ -450,6 +1053,10 @@ def main():
     # Step 3: Output results
     if args.json:
         print(json.dumps(assertions, indent=2, ensure_ascii=False))
+    elif not args.no_report:
+        # Generate final report
+        report_result = generate_final_report(assertions, args.assertion, args.output_dir)
+        print(report_result['summary_table'])
     else:
         print_results(assertions)
     
