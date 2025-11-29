@@ -2,7 +2,7 @@
   "meta": {
     "version": "2.0",
     "last_updated": "2025-11-28",
-    "description": "Assertion pattern framework with structural patterns (S1-S10) and grounding assertions (G1-G5)",
+    "description": "Assertion pattern framework with structural patterns (S1-S19) and grounding assertions (G1-G6)",
     "key_insight": "Structural patterns check SHAPE (does the plan have X?), grounding assertions verify FACTS (is X accurate to source?)"
   },
   "patterns": [
@@ -242,7 +242,7 @@
     }
   ],
   "grounding_assertions": {
-    "description": "Grounding assertions verify that claims in the response are FACTUALLY ACCURATE to the source context. Structural patterns (S1-S10) check if the plan HAS certain elements; grounding assertions (G1-G5) verify those elements are CORRECT.",
+    "description": "Grounding assertions verify that claims in the response are FACTUALLY ACCURATE to the source context. Structural patterns (S1-S19) check if the plan HAS certain elements; grounding assertions (G1-G6) verify those elements are CORRECT.",
     "key_distinction": {
       "structural_check": "Does the plan have a meeting date? (S1)",
       "grounding_check": "Is the meeting date CORRECT per source? (G2)"
@@ -250,49 +250,57 @@
     "assertions": [
       {
         "id": "G1",
+        "name": "Hallucination Check",
+        "template": "No novel entities should be introduced that don't exist in source context (overall recall)",
+        "verification": "Scan response for any entity not traceable to source → Flag as potential hallucination",
+        "failure_mode": "Any fabricated person, file, date, topic, task, or fact",
+        "applies_to_patterns": ["All"]
+      },
+      {
+        "id": "G2",
         "name": "People Grounding",
         "template": "All people mentioned must exist in {source.ATTENDEES} or {source.ENTITIES_TO_USE}",
         "verification": "Extract all person names from response → Check each exists in source attendees or entity list",
         "failure_mode": "Fabricated attendee or owner not in source context",
-        "applies_to_patterns": ["P1", "P3", "P8"]
+        "applies_to_patterns": ["S1", "S3", "S8"]
       },
       {
-        "id": "G2",
+        "id": "G3",
         "name": "Temporal Grounding",
         "template": "All dates/times must be derivable from {source.MEETING.StartTime} or {source.EMAIL timestamps}",
         "verification": "Extract all dates from response → Verify each is derivable from source meeting/email dates",
         "failure_mode": "Incorrect meeting date, fabricated deadlines not relative to T₀",
-        "applies_to_patterns": ["P1", "P2"]
+        "applies_to_patterns": ["S1", "S2"]
       },
       {
-        "id": "G3",
+        "id": "G4",
         "name": "Artifact Grounding",
         "template": "All files/documents must exist in {source.ENTITIES_TO_USE where type=File}",
         "verification": "Extract all file references from response → Check each exists in source entity list",
         "failure_mode": "Reference to non-existent files or fabricated document names",
-        "applies_to_patterns": ["P4", "P9"]
+        "applies_to_patterns": ["S4", "S9"]
       },
       {
-        "id": "G4",
+        "id": "G5",
         "name": "Topic Grounding",
         "template": "All topics/purposes must align with {source.UTTERANCE} intent or {source.MEETING.Subject}",
         "verification": "Extract stated purpose/topics → Verify alignment with user query and meeting subject",
         "failure_mode": "Invented meeting purpose unrelated to source context",
-        "applies_to_patterns": ["P5", "P6"]
+        "applies_to_patterns": ["S5", "S6"]
       },
       {
-        "id": "G5",
-        "name": "No Hallucination",
-        "template": "No novel entities should be introduced that don't exist in source context",
-        "verification": "Scan response for any entity not traceable to source → Flag as potential hallucination",
-        "failure_mode": "Any fabricated person, file, date, topic, or fact",
-        "applies_to_patterns": ["S7", "S9", "S10"]
+        "id": "G6",
+        "name": "Task Grounding",
+        "template": "All tasks/action items must exist in {source.ENTITIES} (verbs/to-dos from emails, chats, or calendar)",
+        "verification": "Extract all tasks from response → Check each is traceable to source material",
+        "failure_mode": "Fabricated tasks or action items not mentioned in source",
+        "applies_to_patterns": ["S3", "S6"]
       }
     ],
     "evaluation_approach": {
       "two_phase": {
-        "phase_1": "Structural Check (S1-S10): Does the plan HAVE the required elements?",
-        "phase_2": "Grounding Check (G1-G5): Are those elements ACCURATE to source?"
+        "phase_1": "Structural Check (S1-S19): Does the plan HAVE the required elements?",
+        "phase_2": "Grounding Check (G1-G6): Are those elements ACCURATE to source?"
       },
       "scoring": {
         "structural_only_pass": "Plan has good shape but may contain hallucinations",

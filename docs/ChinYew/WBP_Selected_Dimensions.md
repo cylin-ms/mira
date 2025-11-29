@@ -47,7 +47,7 @@ The original 10 structural dimensions covering essential WBP elements.
 | **S6** | Dependencies & Blockers | 2 | ✅ P1 | "The response should identify [DEPENDENCIES/BLOCKERS] with mitigation steps documented" | Predecessors and risks identified; mitigation steps documented |
 | S7 | Source Traceability | 2 | ⬜ P2 | "The response should link [TASKS/ARTIFACTS] back to original source priorities/files" | Tasks/artifacts link back to original source |
 | S8 | Communication Channels | 1 | ⬜ P2 | "The response should specify [COMMUNICATION CHANNELS] (Teams, email, meeting cadence)" | Collaboration methods specified |
-| S9 | Grounding Meta-Check | 2 | ⬜ P2 | "The response should only reference [ENTITIES] verified against source (meta-grounding check)" | All Grounding assertions (G1-G5) pass |
+| S9 | Grounding Meta-Check | 2 | ⬜ P2 | "The response should only reference [ENTITIES] verified against source (meta-grounding check)" | All Grounding assertions (G1-G6) pass |
 | S10 | Priority Assignment | 2 | ⬜ P2 | "The response should rank [TASKS] by critical path/impact on meeting success" | Tasks ranked by critical path/impact |
 
 ### Extended Dimensions (S11-S19)
@@ -115,7 +115,7 @@ Grounding dimensions verify factual accuracy against source data. **All 6 are Ph
 | **Risk** | S11 | Risk mitigation strategies |
 | **Post-Event** | S18 | Wrap-up and follow-through actions |
 | **Transparency** | S19 | Caveats, assumptions, and clarifications |
-| **Grounding** | G1-G5 | Factual accuracy verification |
+| **Grounding** | G1-G6 | Factual accuracy verification |
 
 ---
 
@@ -180,38 +180,38 @@ Based on conversion of 2,318 assertions from 224 meetings:
 ## Dimension Groups by Evaluation Scope
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    STRUCTURAL DIMENSIONS                        │
-├─────────────────────────────────────────────────────────────────┤
-│  CORE (S1-S10) — Essential WBP elements                         │
-│    ✅ P1: S1: Meeting Details                                   │
-│    ✅ P1: S2: Timeline Alignment                                │
-│    ✅ P1: S3: Ownership Assignment                              │
-│    ✅ P1: S4: Deliverables & Artifacts                          │
-│    ⬜ P2: S5: Task Dates (overlaps with S2)                     │
-│    ✅ P1: S6: Dependencies & Blockers                           │
-│    ⬜ P2: S7-S10: Source Traceability, Communication,           │
-│                   Meta-Check, Priority Assignment               │
-├─────────────────────────────────────────────────────────────────┤
-│  EXTENDED (S11-S19) — Advanced planning aspects                 │
-│    ✅ P1: S11: Risk Mitigation Strategy                         │
-│    ⬜ P2: S12-S17: Milestones, Goals, Resources, Compliance,    │
-│                    Review Loops, Escalation                     │
-│    ✅ P1: S18: Post-Event Actions                               │
-│    ✅ P1: S19: Caveat & Clarification                           │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────┐
+│                    STRUCTURAL DIMENSIONS                      │
+├───────────────────────────────────────────────────────────────┤
+│  CORE (S1-S10) — Essential WBP elements                       │
+│    [P1] S1: Meeting Details                                   │
+│    [P1] S2: Timeline Alignment                                │
+│    [P1] S3: Ownership Assignment                              │
+│    [P1] S4: Deliverables & Artifacts                          │
+│    [P2] S5: Task Dates (overlaps with S2)                     │
+│    [P1] S6: Dependencies & Blockers                           │
+│    [P2] S7-S10: Source Traceability, Communication,           │
+│                 Meta-Check, Priority Assignment               │
+├───────────────────────────────────────────────────────────────┤
+│  EXTENDED (S11-S19) — Advanced planning aspects               │
+│    [P1] S11: Risk Mitigation Strategy                         │
+│    [P2] S12-S17: Milestones, Goals, Resources, Compliance,    │
+│                  Review Loops, Escalation                     │
+│    [P1] S18: Post-Event Actions                               │
+│    [P1] S19: Caveat & Clarification                           │
+└───────────────────────────────────────────────────────────────┘
                               ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                    GROUNDING DIMENSIONS                         │
-│              "Are those elements FACTUALLY CORRECT?"            │
-├─────────────────────────────────────────────────────────────────┤
-│  ✅ P1: G1: Hallucination Check — Overall recall check (first)  │
-│  ✅ P1: G2: Attendee Grounding — People exist in source?        │
-│  ✅ P1: G3: Date/Time Grounding — Dates match source?           │
-│  ✅ P1: G4: Artifact Grounding — Files exist in source?         │
-│  ✅ P1: G5: Topic Grounding — Topics align with source? (nouns) │
-│  ✅ P1: G6: Task Grounding — Tasks exist in source? (verbs)     │
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────┐
+│                    GROUNDING DIMENSIONS                       │
+│            "Are those elements FACTUALLY CORRECT?"            │
+├───────────────────────────────────────────────────────────────┤
+│  [P1] G1: Hallucination Check — Overall recall (first)        │
+│  [P1] G2: Attendee Grounding — People exist in source?        │
+│  [P1] G3: Date/Time Grounding — Dates match source?           │
+│  [P1] G4: Artifact Grounding — Files exist in source?         │
+│  [P1] G5: Topic Grounding — Topics align with source? (nouns) │
+│  [P1] G6: Task Grounding — Tasks exist in source? (verbs)     │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -249,7 +249,7 @@ These dimensions are available for extended/comprehensive evaluation in Phase 2:
 | S5 | Task Dates | 2 | Overlaps significantly with S2 (Timeline Alignment) |
 | S7 | Source Traceability | 2 | Covered indirectly by G5 (Hallucination Check) |
 | S8 | Communication Channels | 1 | Low priority, optional |
-| S9 | Grounding Meta-Check | 2 | Redundant with G1-G5 |
+| S9 | Grounding Meta-Check | 2 | Redundant with G1-G6 |
 | S10 | Priority Assignment | 2 | Nice-to-have, not essential |
 | S12 | Milestone Validation | 2 | Advanced planning aspect |
 | S13 | Goal & Success Criteria | 2 | Advanced planning aspect |

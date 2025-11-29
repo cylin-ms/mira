@@ -30,10 +30,10 @@ The current assertion set demonstrates solid foundational coverage with signific
 ### Key Recommendations
 
 1. **Adopt Two-Layer Evaluation Framework**
-   - Layer 1: Structural Patterns (S1-S18) - "Does the plan have X?"
+   - Layer 1: Structural Patterns (S1-S19) - "Does the plan have X?"
      - S1-S10 (Core): Original 10 structural dimensions for essential WBP elements
      - S11-S18 (Extended): Additional dimensions for advanced planning aspects
-   - Layer 2: Grounding Assertions (G1-G5) - "Is X factually correct?"
+   - Layer 2: Grounding Assertions (G1-G6) - "Is X factually correct?"
 
 2. **Prioritize Grounding Over Structure**
    - A plan with good structure but hallucinations is **WORSE** than one that is incomplete but accurate
@@ -143,7 +143,7 @@ Assertions with **parameterized references** that verify against source at runti
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│              STRUCTURAL PATTERNS (S1-S18)                   │
+│              STRUCTURAL PATTERNS (S1-S19)                   │
 │         "Does the plan HAVE the right shape?"               │
 ├─────────────────────────────────────────────────────────────┤
 │  S1-S10 (Core): Essential WBP elements                      │
@@ -158,26 +158,28 @@ Assertions with **parameterized references** that verify against source at runti
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│              GROUNDING ASSERTIONS (G1-G5)                   │
+│              GROUNDING ASSERTIONS (G1-G6)                   │
 │        "Are those elements FACTUALLY CORRECT?"              │
 ├─────────────────────────────────────────────────────────────┤
-│  G1: People → exist in source.ATTENDEES?       [✓/✗]       │
-│  G2: Dates → derivable from source.MEETING?    [✓/✗]       │
-│  G3: Files → exist in source.ENTITIES?         [✓/✗]       │
-│  G4: Topics → align with source.UTTERANCE?     [✓/✗]       │
-│  G5: No hallucinated entities?                 [✓/✗]       │
+│  G1: Hallucination Check (overall recall)      [pass/fail]  │
+│  G2: People -> exist in source.ATTENDEES?      [pass/fail]  │
+│  G3: Dates -> derivable from source.MEETING?   [pass/fail]  │
+│  G4: Files -> exist in source.ENTITIES?        [pass/fail]  │
+│  G5: Topics -> align with source.UTTERANCE?    [pass/fail]  │
+│  G6: Tasks -> exist in source material?        [pass/fail]  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Grounding Assertions (G1-G5)
+### Grounding Assertions (G1-G6)
 
 | ID | Name | Template | Applies To |
 |----|------|----------|------------|
-| G1 | People Grounding | All people mentioned must exist in {source.ATTENDEES} | S1, S3, S8 |
-| G2 | Temporal Grounding | All dates must be derivable from {source.MEETING.StartTime} | S1, S2 |
-| G3 | Artifact Grounding | All files must exist in {source.ENTITIES where type=File} | S4, S9 |
-| G4 | Topic Grounding | Topics must align with {source.UTTERANCE} or {source.MEETING.Subject} | S5, S6 |
-| G5 | No Hallucination | No entities introduced that don't exist in source | S7, S9, S10 |
+| G1 | Hallucination Check | No entities introduced that don't exist in source (overall) | All |
+| G2 | People Grounding | All people mentioned must exist in {source.ATTENDEES} | S1, S3, S8 |
+| G3 | Temporal Grounding | All dates must be derivable from {source.MEETING.StartTime} | S1, S2 |
+| G4 | Artifact Grounding | All files must exist in {source.ENTITIES where type=File} | S4, S9 |
+| G5 | Topic Grounding | Topics must align with {source.UTTERANCE} or {source.MEETING.Subject} | S5, S6 |
+| G6 | Task Grounding | All tasks must exist in source material (verbs/to-dos) | S3, S6 |
 
 ### Evidence-Based Scoring
 
@@ -201,7 +203,7 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 
 ### Quality Score Matrix
 
-| Scenario | Structural (S1-S18) | Grounding (G1-G5) | Overall Quality |
+| Scenario | Structural (S1-S19) | Grounding (G1-G6) | Overall Quality |
 |----------|---------------------|-------------------|-----------------|
 | Complete & Accurate | ✅ Pass | ✅ Pass | **Excellent** |
 | Complete but Hallucinated | ✅ Pass | ❌ Fail | **Reject** |
@@ -213,7 +215,7 @@ Require evaluators to cite **supporting spans** for grounding assertions:
 **CRITICAL:** A plan that passes structural checks but fails grounding is **worse** than one that is incomplete but accurate. Hallucinated plans with good structure can mislead users.
 
 **Priority Order (Revised):**
-1. **Grounding (G1-G5)** - Factual accuracy first
+1. **Grounding (G1-G6)** - Factual accuracy first
 2. **Critical Structural (S1, S2, S3, S9)** - Essential elements (weight=3)
 3. **Expected Structural (S4, S5, S6, S7, S8, S10)** - Standard quality (weight=2)
 4. **Extended Structural (S11-S18)** - Advanced planning aspects (weight=2)
@@ -357,7 +359,7 @@ DUPLICATES FOUND:
 - Allow for reasonable time zone variations
 ```
 
-**Template Library (18 Structural Patterns — S1-S18):**
+**Template Library (19 Structural Patterns — S1-S19):**
 
 #### Core Patterns (S1–S10) — Original 10 structural dimensions
 
@@ -391,9 +393,9 @@ DUPLICATES FOUND:
 
 ### Strategy 2: Dimension Consolidation
 
-**Objective:** Consolidate legacy 232 dimensions into S1-S18 canonical framework
+**Objective:** Consolidate legacy 232 dimensions into S1-S19 canonical framework
 
-**New Taxonomy (S1-S18 + G1-G5):**
+**New Taxonomy (S1-S19 + G1-G6):**
 
 #### Core Structural Dimensions (S1–S10)
 
@@ -423,19 +425,20 @@ DUPLICATES FOUND:
 | S17 | **Escalation Path** | Escalation procedures, Contact chain | 1 |
 | S18 | **Post-Event Actions** | Wrap-up, Retrospectives | 1 |
 
-#### Grounding Dimensions (G1–G5)
+#### Grounding Dimensions (G1–G6)
 
 | ID | Dimension | Weight |
 |----|-----------|:------:|
-| G1 | **Attendee Grounding** | 3 |
-| G2 | **Date/Time Grounding** | 3 |
-| G3 | **Artifact Grounding** | 2 |
-| G4 | **Topic Grounding** | 2 |
-| G5 | **Hallucination Check** | 3 |
+| G1 | **Hallucination Check** (overall) | 3 |
+| G2 | **Attendee Grounding** | 3 |
+| G3 | **Date/Time Grounding** | 3 |
+| G4 | **Artifact Grounding** | 2 |
+| G5 | **Topic Grounding** | 2 |
+| G6 | **Task Grounding** | 3 |
 
 **Migration Script:**
 ```python
-# Maps legacy dimension names to S1-S18 canonical IDs
+# Maps legacy dimension names to S1-S19 canonical IDs
 DIMENSION_MAP = {
     # S1: Meeting Details
     "Meeting Objective & Scope": "S1",
@@ -756,7 +759,7 @@ Target: >80% for Critical, >70% for Expected, >60% for Aspirational
 
 ### Appendix D: GPT-5 Simulation & Examples
 
-To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (S1-S18)** and **Grounding Assertions (G1-G5)**.
+To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation that generates workback plans at three quality levels (Perfect, Medium, Low) and evaluates them against both **Structural Patterns (S1-S19)** and **Grounding Assertions (G1-G6)**.
 
 **What the simulation demonstrates:**
 - How structural assertions check if a plan "has the right shape"
@@ -779,7 +782,7 @@ To validate the two-layer evaluation framework, we created a GPT-5 JJ simulation
 | **GPT-5 Simulation Script** | Python script to generate plans and evaluate with two-layer framework | [generate_plan_examples_gpt5.py](https://github.com/cylin-ms/mira/blob/master/generate_plan_examples_gpt5.py) |
 | **Generated Report** | Full evaluation report with Perfect/Medium/Low plan examples | [PLAN_QUALITY_EXAMPLES_GPT5.md](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/PLAN_QUALITY_EXAMPLES_GPT5.md) |
 | **Raw JSON Data** | Structured data including plans, assertions, and evaluations | [plan_examples_gpt5.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/plan_examples_gpt5.json) |
-| **Assertion Patterns** | S1-S18 structural patterns with G1-G5 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/assertion_patterns.json) |
+| **Assertion Patterns** | S1-S19 structural patterns with G1-G6 grounding requirements | [assertion_patterns.json](https://github.com/cylin-ms/mira/blob/master/docs/ChinYew/assertion_patterns.json) |
 
 ---
 
