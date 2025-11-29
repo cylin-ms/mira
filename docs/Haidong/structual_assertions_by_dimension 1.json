@@ -1,0 +1,188 @@
+[
+  {
+    "dimension": "Meeting Details",
+    "assertions": 
+    [
+      {
+        "text": "The response describes a forward-looking plan that is explicitly anchored to an upcoming meeting relative to the request time (i.e., T0 is in the future)",
+        "level": "critical",
+        "layer": "structural",
+        "dimension": "Meeting Details"
+      },
+      {
+        "text": "The response clearly identifies the target meeting with information such as subject, date/time, and attendees",
+        "level": "critical",
+        "layer": "structural",
+        "dimension": "Meeting Details"
+      },
+      {
+        "text": "The response articulates the meeting's objective or desired outcomes to provide context for the workback plan",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Meeting Details"
+      }
+    ]
+  },
+  {
+    "dimension": "Timeline Alignment",
+    "assertions": 
+    [
+      {
+        "text": "The response lays out a reverse-chronological workback timeline from the meeting date to the present (or earliest required start date).",
+        "level": "critical",
+        "layer": "structural",
+        "dimension": "Timeline Alignment"
+      },
+      {
+        "text": "The response breaks down the timeline into discrete, manageable tasks or milestones that lead up to the meeting.",
+        "level": "critical",
+        "layer": "structural",
+        "dimension": "Timeline Alignment"
+      },
+      {
+        "text": "The response sequences tasks logically, ensuring that prerequisite activities are scheduled before dependent tasks.",
+        "level": "critical",
+        "layer": "structural",
+        "dimension": "Timeline Alignment"
+      },      
+      {
+        "text": "The response includes specific buffers or contingency time to accommodate potential delays or uncertainties.",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Timeline Alignment"
+      },
+      {
+        "text": "The response flags any tasks that are on the critical path and explains why.",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Timeline Alignment"
+      }
+    ]
+  },
+  {
+    "dimension": "Ownership Assignment",
+    "assertions": 
+    [
+      {
+        "text": "The response assigns each task to specific owner(s) or, if the owner is unknown, uses an explicit role/placeholder (e.g., 'Presenter', 'Analyst').",
+        "level": "critical",
+        "layer": "structural",
+        "dimension": "Ownership Assignment"
+      },
+      {
+        "text": "The response notes owner capability, availability, or known constraints that could affect task assignments and schedules.",
+        "level": "aspirational",
+        "layer": "structural",
+        "dimension": "Ownership Assignment"
+      }
+    ]
+  },
+  {
+    "dimension": "Deliverables & Artifacts",
+    "assertions": 
+    [
+      {
+        "text": "The response identifies key deliverable or artifacts, and when appropriate, specifies expected format, tools, or access location.",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Deliverables & Artifacts"
+      },
+      {
+        "text": "The response distinguishes between required deliverables from optional, nice-to-have items",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Deliverables & Artifacts"
+      },
+      {
+        "text": "The response includes quality criteria or acceptance standards for key deliverables (e.g., 'final deck approved by LT')",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Deliverables & Artifacts"
+      }
+    ]
+  },
+  {
+    "dimension": "Task Dates",
+    "assertions": 
+    [
+      {
+        "text": "The response provides due dates or date ranges for every task and aligns them logically within the meeting timeline.",
+        "level": "critical",
+        "layer": "structural",
+        "dimension": "Task Dates"
+      },
+      {
+        "text": "The response includes estimated task durations or effort levels to justify the scheduling of start and due dates.",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Task Dates"
+      },
+      {
+        "text": "The response explicitly notes tasks that can be completed in parallel versus those that must be done sequentially.",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Task Dates"
+      },
+      {
+        "text": "The response provides rationale for compression or acceleration when timelines are tight.",
+        "level": "aspirational",
+        "layer": "structural",
+        "dimension": "Task Dates"
+      }
+    ]
+  },
+  {
+    "dimension": "Dependencies & Blockers",
+    "assertions": 
+    [
+      {
+        "text": "The response identifies upstream dependencies, sequencing constraints, or known blockers for critical tasks, and specifies the required unblock action and responsible owner.",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Dependencies & Blockers"
+      },
+      {
+        "text": "The response specifies how delays in dependencies impact subsequent tasks or the meeting readiness.",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Dependencies & Blockers"
+      }
+    ]
+  },
+  {
+    "dimension": "Risk Mitigation Strategy",
+    "assertions": 
+    [
+      {
+        "text": "The response identifies the potiential risks and outlines mitigation steps with accountable owners",
+        "level": "expected",
+        "layer": "structural",
+        "dimension": "Risk Mitigation Strategy"
+      }
+    ]
+  },
+  {
+    "dimension": "Post-Event Actions",
+    "assertions": 
+    [
+      {
+        "text": "The response lists post-meeting actions (e.g., send notes, upload slides, track action items) with clear owners and deadlines",
+        "level": "aspirational",
+        "layer": "structural",
+        "dimension": "Post-Event Actions"
+      }
+    ]
+  },
+  {
+    "dimension": "Caveat & Clarification",
+    "assertions": 
+    [
+      {
+        "text": "The response explicitly lists assumptions, open questions, or missing information that may affect the accuracy or completeness of the workback plan",
+        "level": "aspirational",
+        "layer": "structural",
+        "dimension": "Caveat & Clarification"
+      }
+    ]
+  }
+]

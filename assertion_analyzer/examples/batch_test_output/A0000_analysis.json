@@ -1,0 +1,225 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T05:52:08.107926",
+    "original_utterance": "The response arranges the draft slides task before review slides task in the plan",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q1 Marketing Strategy Deck Planning",
+    "date": "2025-01-15",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Sarah Lopez",
+    "attendees": [
+      "Sarah Lopez - Marketing Manager",
+      "James Chen - Design Lead",
+      "Priya Patel - Content Strategist",
+      "David Kim - Product Marketing Specialist"
+    ],
+    "context": "The marketing team is preparing a presentation deck for the upcoming Q1 leadership review. The purpose of this meeting is to align on the structure of the deck, assign responsibilities, and set a timeline for drafting and reviewing slides before the executive meeting scheduled for February 5th.",
+    "artifacts": [
+      "Q1_Marketing_Deck_Outline.docx",
+      "Brand_Guidelines.pdf",
+      "Previous_Q4_Deck.pptx"
+    ],
+    "discussion_points": [
+      "Reviewed the outline for the Q1 marketing strategy deck",
+      "Discussed the timeline for creating draft slides and conducting internal reviews",
+      "Identified who will create initial content and who will review it for accuracy and branding"
+    ],
+    "action_items_discussed": [
+      "Create draft slides for the Q1 strategy deck",
+      "Conduct an internal review of the slides for accuracy and design consistency",
+      "Finalize the deck for leadership presentation"
+    ],
+    "known_constraints": [
+      "Final deck must be ready by February 3rd for leadership review",
+      "Design team has limited availability after January 25th",
+      "All content must align with updated brand guidelines"
+    ],
+    "stated_assumptions": [
+      "Draft slides will be ready before the review process starts",
+      "Content team will provide all necessary data by January 18th",
+      "No major changes in product roadmap before February"
+    ]
+  },
+  "workback_plan": "## Goal\nPrepare and finalize the Q1 Marketing Strategy Deck for leadership review by February 3, 2025, ensuring alignment with brand guidelines and timely internal reviews.\n\n---\n\n### Timeline Overview\n| T-n | Date   | Task                                                             | Owner                                                                                                | Deliverable                            | Status      |\n|-----|--------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------------------------|-------------|\n| T-0 | Feb 3  | Finalize deck for leadership presentation                        | Sarah Lopez - Marketing Manager                                                                      | Final Q1 Marketing Strategy Deck (PPT) | Not Started |\n| T-1 | Jan 29 | Conduct internal review of slides (accuracy, design consistency) | James Chen - Design Lead, Priya Patel - Content Strategist, David Kim - Product Marketing Specialist | Reviewed draft deck with comments      | Not Started |\n| T-2 | Jan 22 | Create draft slides for Q1 strategy deck                         | Priya Patel - Content Strategist, David Kim - Product Marketing Specialist                           | Draft Q1 Marketing Strategy Deck (PPT) | Not Started |\n| T-3 | Jan 18 | Provide all necessary data and content inputs                    | Priya Patel - Content Strategist                                                                     | Updated content and data for slides    | Not Started |\n| T-4 | Jan 15 | Align on deck structure and responsibilities (Meeting)           | Sarah Lopez - Marketing Manager                                                                      | Confirmed outline and task assignments | Completed   |\n\n**Artifacts Referenced:** Q1_Marketing_Deck_Outline.docx, Brand_Guidelines.pdf, Previous_Q4_Deck.pptx\n\n---\n\n### Blockers & Mitigations\n**Blocker:** Design team has limited availability after January 25th.\n- **Mitigation:** Complete design-heavy tasks (draft slides) by Jan 22 to allow sufficient review time.\n- **Owner:** James Chen - Design Lead\n\n---\n\n### Assumptions\n1. Draft slides will be ready before the review process starts. *(Impact: If delayed, review and finalization will be compressed, risking quality.)*\n2. Content team will provide all necessary data by January 18th. *(Impact: Delay would push back draft creation.)*\n3. No major changes in product roadmap before February. *(Impact: Changes would require slide revisions.)*\n\n---\n\n### Notes\n- Ensure all content aligns with updated brand guidelines.\n- Leadership review scheduled for February 5th; final deck must be ready by February 3rd.\n",
+  "assertions": [
+    {
+      "assertion_id": "A0000_S2",
+      "parent_assertion_id": null,
+      "text": "The plan ensures that [TASK] occurs before [TASK] to maintain proper chronological order.",
+      "original_text": "The response arranges the draft slides task before review slides task in the plan",
+      "dimension_id": "S2",
+      "dimension_name": "Timeline Alignment",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [
+        "G3",
+        "G6"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion checks whether tasks are arranged in a logical chronological order (draft before review), which directly relates to timeline alignment in the workback plan. Ensuring correct sequencing is essential for plan integrity, making this a critical structural requirement.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q1 Marketing Strategy Deck Planning",
+          "date": "2025-01-15",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Lopez",
+          "attendees": [
+            "Sarah Lopez - Marketing Manager",
+            "James Chen - Design Lead",
+            "Priya Patel - Content Strategist",
+            "David Kim - Product Marketing Specialist"
+          ],
+          "context": "The marketing team is preparing a presentation deck for the upcoming Q1 leadership review. The purpose of this meeting is to align on the structure of the deck, assign responsibilities, and set a timeline for drafting and reviewing slides before the executive meeting scheduled for February 5th.",
+          "artifacts": [
+            "Q1_Marketing_Deck_Outline.docx",
+            "Brand_Guidelines.pdf",
+            "Previous_Q4_Deck.pptx"
+          ],
+          "discussion_points": [
+            "Reviewed the outline for the Q1 marketing strategy deck",
+            "Discussed the timeline for creating draft slides and conducting internal reviews",
+            "Identified who will create initial content and who will review it for accuracy and branding"
+          ],
+          "action_items_discussed": [
+            "Create draft slides for the Q1 strategy deck",
+            "Conduct an internal review of the slides for accuracy and design consistency",
+            "Finalize the deck for leadership presentation"
+          ],
+          "known_constraints": [
+            "Final deck must be ready by February 3rd for leadership review",
+            "Design team has limited availability after January 25th",
+            "All content must align with updated brand guidelines"
+          ],
+          "stated_assumptions": [
+            "Draft slides will be ready before the review process starts",
+            "Content team will provide all necessary data by January 18th",
+            "No major changes in product roadmap before February"
+          ]
+        },
+        "workback_plan": "## Goal\nPrepare and finalize the Q1 Marketing Strategy Deck for leadership review by February 3, 2025, ensuring alignment with brand guidelines and timely internal reviews.\n\n---\n\n### Timeline Overview\n| T-n | Date   | Task                                                             | Owner                                                                                                | Deliverable                            | Status      |\n|-----|--------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------------------------|-------------|\n| T-0 | Feb 3  | Finalize deck for leadership presentation                        | Sarah Lopez - Marketing Manager                                                                      | Final Q1 Marketing Strategy Deck (PPT) | Not Started |\n| T-1 | Jan 29 | Conduct internal review of slides (accuracy, design consistency) | James Chen - Design Lead, Priya Patel - Content Strategist, David Kim - Product Marketing Specialist | Reviewed draft deck with comments      | Not Started |\n| T-2 | Jan 22 | Create draft slides for Q1 strategy deck                         | Priya Patel - Content Strategist, David Kim - Product Marketing Specialist                           | Draft Q1 Marketing Strategy Deck (PPT) | Not Started |\n| T-3 | Jan 18 | Provide all necessary data and content inputs                    | Priya Patel - Content Strategist                                                                     | Updated content and data for slides    | Not Started |\n| T-4 | Jan 15 | Align on deck structure and responsibilities (Meeting)           | Sarah Lopez - Marketing Manager                                                                      | Confirmed outline and task assignments | Completed   |\n\n**Artifacts Referenced:** Q1_Marketing_Deck_Outline.docx, Brand_Guidelines.pdf, Previous_Q4_Deck.pptx\n\n---\n\n### Blockers & Mitigations\n**Blocker:** Design team has limited availability after January 25th.\n- **Mitigation:** Complete design-heavy tasks (draft slides) by Jan 22 to allow sufficient review time.\n- **Owner:** James Chen - Design Lead\n\n---\n\n### Assumptions\n1. Draft slides will be ready before the review process starts. *(Impact: If delayed, review and finalization will be compressed, risking quality.)*\n2. Content team will provide all necessary data by January 18th. *(Impact: Delay would push back draft creation.)*\n3. No major changes in product roadmap before February. *(Impact: Changes would require slide revisions.)*\n\n---\n\n### Notes\n- Ensure all content aligns with updated brand guidelines.\n- Leadership review scheduled for February 5th; final deck must be ready by February 3rd.\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0000_S2",
+            "dimension": "S2",
+            "passes": true,
+            "evidence": "In the workback plan, 'Create draft slides for Q1 strategy deck' (T-2, Jan 22) occurs before 'Conduct internal review of slides' (T-1, Jan 29).",
+            "ground_truth_check": "Scenario discussion points and action items indicate draft slides should be created before internal review.",
+            "reasoning": "The chronological order in the WBP matches the expected sequence from the scenario: drafting slides precedes reviewing them."
+          },
+          {
+            "assertion_id": "A0000_G6_0",
+            "dimension": "G6",
+            "passes": true,
+            "evidence": "WBP includes 'Create draft slides for Q1 strategy deck' and 'Conduct internal review of slides (accuracy, design consistency)' as tasks, with draft creation scheduled before review.",
+            "ground_truth_check": "Scenario action_items_discussed: 'Create draft slides for the Q1 strategy deck' and 'Conduct an internal review of the slides for accuracy and design consistency'.",
+            "reasoning": "Both required tasks are present in the WBP and their sequence (draft before review) aligns with the scenario's intended order."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0000_G6_0",
+      "parent_assertion_id": "A0000_S2",
+      "text": "The plan should include 'draft slides' and 'review slides' tasks, and their sequence must match the assertion (draft before review).",
+      "original_text": "The response arranges the draft slides task before review slides task in the plan",
+      "dimension_id": "G6",
+      "dimension_name": "Action Item Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion checks the ordering of two specific tasks (draft slides and review slides), which are action items in the plan. Verifying this requires grounding to actual action items discussed in the meeting.",
+        "parent_dimension": "S2",
+        "parent_dimension_name": "Timeline Alignment",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q1 Marketing Strategy Deck Planning",
+          "date": "2025-01-15",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Lopez",
+          "attendees": [
+            "Sarah Lopez - Marketing Manager",
+            "James Chen - Design Lead",
+            "Priya Patel - Content Strategist",
+            "David Kim - Product Marketing Specialist"
+          ],
+          "context": "The marketing team is preparing a presentation deck for the upcoming Q1 leadership review. The purpose of this meeting is to align on the structure of the deck, assign responsibilities, and set a timeline for drafting and reviewing slides before the executive meeting scheduled for February 5th.",
+          "artifacts": [
+            "Q1_Marketing_Deck_Outline.docx",
+            "Brand_Guidelines.pdf",
+            "Previous_Q4_Deck.pptx"
+          ],
+          "discussion_points": [
+            "Reviewed the outline for the Q1 marketing strategy deck",
+            "Discussed the timeline for creating draft slides and conducting internal reviews",
+            "Identified who will create initial content and who will review it for accuracy and branding"
+          ],
+          "action_items_discussed": [
+            "Create draft slides for the Q1 strategy deck",
+            "Conduct an internal review of the slides for accuracy and design consistency",
+            "Finalize the deck for leadership presentation"
+          ],
+          "known_constraints": [
+            "Final deck must be ready by February 3rd for leadership review",
+            "Design team has limited availability after January 25th",
+            "All content must align with updated brand guidelines"
+          ],
+          "stated_assumptions": [
+            "Draft slides will be ready before the review process starts",
+            "Content team will provide all necessary data by January 18th",
+            "No major changes in product roadmap before February"
+          ]
+        },
+        "workback_plan": "## Goal\nPrepare and finalize the Q1 Marketing Strategy Deck for leadership review by February 3, 2025, ensuring alignment with brand guidelines and timely internal reviews.\n\n---\n\n### Timeline Overview\n| T-n | Date   | Task                                                             | Owner                                                                                                | Deliverable                            | Status      |\n|-----|--------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------------------------|-------------|\n| T-0 | Feb 3  | Finalize deck for leadership presentation                        | Sarah Lopez - Marketing Manager                                                                      | Final Q1 Marketing Strategy Deck (PPT) | Not Started |\n| T-1 | Jan 29 | Conduct internal review of slides (accuracy, design consistency) | James Chen - Design Lead, Priya Patel - Content Strategist, David Kim - Product Marketing Specialist | Reviewed draft deck with comments      | Not Started |\n| T-2 | Jan 22 | Create draft slides for Q1 strategy deck                         | Priya Patel - Content Strategist, David Kim - Product Marketing Specialist                           | Draft Q1 Marketing Strategy Deck (PPT) | Not Started |\n| T-3 | Jan 18 | Provide all necessary data and content inputs                    | Priya Patel - Content Strategist                                                                     | Updated content and data for slides    | Not Started |\n| T-4 | Jan 15 | Align on deck structure and responsibilities (Meeting)           | Sarah Lopez - Marketing Manager                                                                      | Confirmed outline and task assignments | Completed   |\n\n**Artifacts Referenced:** Q1_Marketing_Deck_Outline.docx, Brand_Guidelines.pdf, Previous_Q4_Deck.pptx\n\n---\n\n### Blockers & Mitigations\n**Blocker:** Design team has limited availability after January 25th.\n- **Mitigation:** Complete design-heavy tasks (draft slides) by Jan 22 to allow sufficient review time.\n- **Owner:** James Chen - Design Lead\n\n---\n\n### Assumptions\n1. Draft slides will be ready before the review process starts. *(Impact: If delayed, review and finalization will be compressed, risking quality.)*\n2. Content team will provide all necessary data by January 18th. *(Impact: Delay would push back draft creation.)*\n3. No major changes in product roadmap before February. *(Impact: Changes would require slide revisions.)*\n\n---\n\n### Notes\n- Ensure all content aligns with updated brand guidelines.\n- Leadership review scheduled for February 5th; final deck must be ready by February 3rd.\n",
+        "evidence": "WBP includes 'Create draft slides for Q1 strategy deck' and 'Conduct internal review of slides (accuracy, design consistency)' as tasks, with draft creation scheduled before review.",
+        "ground_truth_check": "Scenario action_items_discussed: 'Create draft slides for the Q1 strategy deck' and 'Conduct an internal review of the slides for accuracy and design consistency'.",
+        "verification": "Both required tasks are present in the WBP and their sequence (draft before review) aligns with the scenario's intended order.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0000_S2",
+        "dimension": "S2",
+        "passes": true,
+        "evidence": "In the workback plan, 'Create draft slides for Q1 strategy deck' (T-2, Jan 22) occurs before 'Conduct internal review of slides' (T-1, Jan 29).",
+        "ground_truth_check": "Scenario discussion points and action items indicate draft slides should be created before internal review.",
+        "reasoning": "The chronological order in the WBP matches the expected sequence from the scenario: drafting slides precedes reviewing them."
+      },
+      {
+        "assertion_id": "A0000_G6_0",
+        "dimension": "G6",
+        "passes": true,
+        "evidence": "WBP includes 'Create draft slides for Q1 strategy deck' and 'Conduct internal review of slides (accuracy, design consistency)' as tasks, with draft creation scheduled before review.",
+        "ground_truth_check": "Scenario action_items_discussed: 'Create draft slides for the Q1 strategy deck' and 'Conduct an internal review of the slides for accuracy and design consistency'.",
+        "reasoning": "Both required tasks are present in the WBP and their sequence (draft before review) aligns with the scenario's intended order."
+      }
+    ]
+  }
+}

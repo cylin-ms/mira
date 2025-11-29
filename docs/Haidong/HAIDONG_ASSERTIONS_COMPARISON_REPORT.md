@@ -3,7 +3,7 @@
 ## Analysis Report
 **Date:** November 29, 2025  
 **Source File:** `docs/Haidong/structural_assertions_by_dimension.json`  
-**Comparison Target:** `docs/ChinYew/WBP_Selected_Dimensions.md` (27 dimensions: S1-S19 + G1-G8)
+**Comparison Target:** `docs/ChinYew/WBP_Evaluation_Complete_Dimension_Reference.md` (28 dimensions: S1-S20 + G1-G8)
 
 ---
 
@@ -12,7 +12,7 @@
 | Metric | Count |
 |--------|-------|
 | Haidong's Dimensions | 9 |
-| Current WBP Structural Dimensions | 19 (S1-S19) |
+| Current WBP Structural Dimensions | 20 (S1-S20) |
 | Current WBP Grounding Dimensions | 8 (G1-G8) |
 | Direct Matches | **9 out of 9** |
 | New Dimensions to Add | 0 |

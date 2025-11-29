@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T05:52:57.786710",
+    "original_utterance": "The timeline shows clear dependencies between tasks",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q2 Product Launch Planning Meeting",
+    "date": "2025-03-12",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Sarah Lopez",
+    "attendees": [
+      "Sarah Lopez - Project Manager",
+      "James Carter - Engineering Lead",
+      "Priya Nair - UX Designer",
+      "Daniel Kim - Marketing Manager",
+      "Emily Wong - QA Lead"
+    ],
+    "context": "The team met to review the integrated project timeline for the upcoming Q2 product launch. The objective was to confirm task sequencing, identify dependencies, and ensure all teams understand the critical path before development begins.",
+    "artifacts": [
+      "Integrated_Project_Timeline.xlsx",
+      "Feature_Spec_Document.docx",
+      "Marketing_Launch_Plan.pdf"
+    ],
+    "discussion_points": [
+      "Reviewed the Gantt chart from Integrated_Project_Timeline.xlsx showing all major tasks and milestones",
+      "Highlighted dependencies between UX design completion and engineering development start",
+      "Discussed QA testing schedule and its reliance on code freeze date",
+      "Confirmed marketing content creation depends on finalized feature specs"
+    ],
+    "action_items_discussed": [
+      "Priya to finalize UX wireframes by March 20",
+      "James to schedule development kickoff for March 24 after UX sign-off",
+      "Emily to prepare QA test plan draft by April 5",
+      "Daniel to start drafting marketing copy once feature specs are confirmed by March 18"
+    ],
+    "known_constraints": [
+      "Engineering cannot start until UX assets are delivered",
+      "QA testing cannot begin until code freeze on April 15",
+      "Marketing launch materials require final feature list to avoid rework"
+    ],
+    "stated_assumptions": [
+      "UX design will not experience major revisions after sign-off",
+      "No additional features will be added after March 18",
+      "All dependencies outlined in the timeline will hold unless notified"
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q2 Product Launch\n\n## Goal\nEnsure all dependencies are managed and critical path tasks are completed on time for the Q2 product launch, per the integrated timeline reviewed on 2025-03-12.\n\n## Timeline Overview\n| T-n | Date       | Task                                                   | Owner        | Deliverable                     | Status   |\n|-----|------------|--------------------------------------------------------|--------------|---------------------------------|----------|\n| T-0 | 2025-03-12 | Q2 Product Launch Planning Meeting                     | Sarah Lopez  | Meeting Notes, Updated Timeline | Complete |\n| T-1 | 2025-03-18 | Confirm Feature Specs (per Feature_Spec_Document.docx) | Sarah Lopez  | Finalized Feature Spec Document | Pending  |\n| T-2 | 2025-03-20 | Finalize UX Wireframes                                 | Priya Nair   | UX Wireframes                   | Pending  |\n| T-3 | 2025-03-24 | Schedule Development Kickoff (after UX sign-off)       | James Carter | Kickoff Meeting Scheduled       | Pending  |\n| T-4 | 2025-04-05 | Draft QA Test Plan                                     | Emily Wong   | QA Test Plan Draft              | Pending  |\n| T-5 | 2025-04-15 | Code Freeze (enables QA Testing)                       | James Carter | Frozen Codebase                 | Pending  |\n| T-6 | TBD        | Draft Marketing Copy (after specs confirmed)           | Daniel Kim   | Marketing Copy Draft            | Pending  |\n\n### Dependencies\n- **T-2 (UX Wireframes)** must be completed before **T-3 (Development Kickoff)** can occur.\n- **T-1 (Feature Specs)** must be confirmed before **T-6 (Marketing Copy Draft)** begins.\n- **T-5 (Code Freeze)** is required before QA testing based on **T-4 (QA Test Plan)** can be executed.\n\nThese dependencies are grounded in the discussion points:\n- UX completion before engineering start\n- Marketing depends on finalized feature specs\n- QA schedule relies on code freeze date\n\n## Blockers & Mitigations\n- **Blocker:** Delay in UX wireframe finalization (T-2) would delay development kickoff (T-3).\n  - **Mitigation:** Priya to provide early drafts for engineering review by 2025-03-17 to reduce risk of rework.\n  - **Owner:** Priya Nair\n\n- **Blocker:** Feature spec confirmation (T-1) slips beyond 2025-03-18, delaying marketing copy (T-6).\n  - **Mitigation:** Sarah to schedule a spec review checkpoint on 2025-03-16.\n  - **Owner:** Sarah Lopez\n\n## Assumptions\n- UX design will not experience major revisions after sign-off (Impact if invalidated: Development start delayed).\n- No additional features will be added after 2025-03-18 (Impact if invalidated: Marketing and QA timelines shift).\n- All dependencies outlined in the timeline will hold unless notified (Impact if invalidated: Integrated schedule re-baselining required).\n\n## Referenced Artifacts\n- Integrated_Project_Timeline.xlsx\n- Feature_Spec_Document.docx\n- Marketing_Launch_Plan.pdf\n",
+  "assertions": [
+    {
+      "assertion_id": "A0003_S6",
+      "parent_assertion_id": null,
+      "text": "The workback plan includes clear dependencies between [TASK] items.",
+      "original_text": "The timeline shows clear dependencies between tasks",
+      "dimension_id": "S6",
+      "dimension_name": "Dependencies, Blockers & Mitigation",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [
+        "G2",
+        "G6",
+        "G7",
+        "G9"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion checks whether the plan explicitly shows dependencies between tasks, which is a core requirement under S6 for identifying dependencies and potential blockers.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Product Launch Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Lopez",
+          "attendees": [
+            "Sarah Lopez - Project Manager",
+            "James Carter - Engineering Lead",
+            "Priya Nair - UX Designer",
+            "Daniel Kim - Marketing Manager",
+            "Emily Wong - QA Lead"
+          ],
+          "context": "The team met to review the integrated project timeline for the upcoming Q2 product launch. The objective was to confirm task sequencing, identify dependencies, and ensure all teams understand the critical path before development begins.",
+          "artifacts": [
+            "Integrated_Project_Timeline.xlsx",
+            "Feature_Spec_Document.docx",
+            "Marketing_Launch_Plan.pdf"
+          ],
+          "discussion_points": [
+            "Reviewed the Gantt chart from Integrated_Project_Timeline.xlsx showing all major tasks and milestones",
+            "Highlighted dependencies between UX design completion and engineering development start",
+            "Discussed QA testing schedule and its reliance on code freeze date",
+            "Confirmed marketing content creation depends on finalized feature specs"
+          ],
+          "action_items_discussed": [
+            "Priya to finalize UX wireframes by March 20",
+            "James to schedule development kickoff for March 24 after UX sign-off",
+            "Emily to prepare QA test plan draft by April 5",
+            "Daniel to start drafting marketing copy once feature specs are confirmed by March 18"
+          ],
+          "known_constraints": [
+            "Engineering cannot start until UX assets are delivered",
+            "QA testing cannot begin until code freeze on April 15",
+            "Marketing launch materials require final feature list to avoid rework"
+          ],
+          "stated_assumptions": [
+            "UX design will not experience major revisions after sign-off",
+            "No additional features will be added after March 18",
+            "All dependencies outlined in the timeline will hold unless notified"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Product Launch\n\n## Goal\nEnsure all dependencies are managed and critical path tasks are completed on time for the Q2 product launch, per the integrated timeline reviewed on 2025-03-12.\n\n## Timeline Overview\n| T-n | Date       | Task                                                   | Owner        | Deliverable                     | Status   |\n|-----|------------|--------------------------------------------------------|--------------|---------------------------------|----------|\n| T-0 | 2025-03-12 | Q2 Product Launch Planning Meeting                     | Sarah Lopez  | Meeting Notes, Updated Timeline | Complete |\n| T-1 | 2025-03-18 | Confirm Feature Specs (per Feature_Spec_Document.docx) | Sarah Lopez  | Finalized Feature Spec Document | Pending  |\n| T-2 | 2025-03-20 | Finalize UX Wireframes                                 | Priya Nair   | UX Wireframes                   | Pending  |\n| T-3 | 2025-03-24 | Schedule Development Kickoff (after UX sign-off)       | James Carter | Kickoff Meeting Scheduled       | Pending  |\n| T-4 | 2025-04-05 | Draft QA Test Plan                                     | Emily Wong   | QA Test Plan Draft              | Pending  |\n| T-5 | 2025-04-15 | Code Freeze (enables QA Testing)                       | James Carter | Frozen Codebase                 | Pending  |\n| T-6 | TBD        | Draft Marketing Copy (after specs confirmed)           | Daniel Kim   | Marketing Copy Draft            | Pending  |\n\n### Dependencies\n- **T-2 (UX Wireframes)** must be completed before **T-3 (Development Kickoff)** can occur.\n- **T-1 (Feature Specs)** must be confirmed before **T-6 (Marketing Copy Draft)** begins.\n- **T-5 (Code Freeze)** is required before QA testing based on **T-4 (QA Test Plan)** can be executed.\n\nThese dependencies are grounded in the discussion points:\n- UX completion before engineering start\n- Marketing depends on finalized feature specs\n- QA schedule relies on code freeze date\n\n## Blockers & Mitigations\n- **Blocker:** Delay in UX wireframe finalization (T-2) would delay development kickoff (T-3).\n  - **Mitigation:** Priya to provide early drafts for engineering review by 2025-03-17 to reduce risk of rework.\n  - **Owner:** Priya Nair\n\n- **Blocker:** Feature spec confirmation (T-1) slips beyond 2025-03-18, delaying marketing copy (T-6).\n  - **Mitigation:** Sarah to schedule a spec review checkpoint on 2025-03-16.\n  - **Owner:** Sarah Lopez\n\n## Assumptions\n- UX design will not experience major revisions after sign-off (Impact if invalidated: Development start delayed).\n- No additional features will be added after 2025-03-18 (Impact if invalidated: Marketing and QA timelines shift).\n- All dependencies outlined in the timeline will hold unless notified (Impact if invalidated: Integrated schedule re-baselining required).\n\n## Referenced Artifacts\n- Integrated_Project_Timeline.xlsx\n- Feature_Spec_Document.docx\n- Marketing_Launch_Plan.pdf\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0003_S6",
+            "dimension": "S6",
+            "passes": true,
+            "evidence": "The 'Dependencies' section in the WBP explicitly states: 'T-2 (UX Wireframes) must be completed before T-3 (Development Kickoff)', 'T-1 (Feature Specs) must be confirmed before T-6 (Marketing Copy Draft)', and 'T-5 (Code Freeze) is required before QA testing based on T-4 (QA Test Plan) can be executed.'",
+            "ground_truth_check": "Scenario discussion points and known constraints mention dependencies: UX completion before engineering start, marketing depends on finalized feature specs, QA schedule relies on code freeze date.",
+            "reasoning": "The WBP clearly lists dependencies between tasks and these dependencies are structurally represented, satisfying the requirement for clear dependencies."
+          },
+          {
+            "assertion_id": "A0003_G6_0",
+            "dimension": "G6",
+            "passes": true,
+            "evidence": "Dependencies in WBP: (1) UX Wireframes before Development Kickoff, (2) Feature Specs before Marketing Copy, (3) Code Freeze before QA testing. These map to scenario action items: 'Priya to finalize UX wireframes by March 20', 'James to schedule development kickoff for March 24 after UX sign-off', 'Daniel to start drafting marketing copy once feature specs are confirmed by March 18', and QA testing depends on code freeze on April 15.",
+            "ground_truth_check": "Scenario action_items_discussed and discussion_points confirm these dependencies were discussed and agreed upon.",
+            "reasoning": "All dependencies in the WBP correspond to real action items and constraints from the scenario, so the grounding requirement is met."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0003_G6_0",
+      "parent_assertion_id": "A0003_S6",
+      "text": "Dependencies shown in the timeline must correspond to real action items or issues from the discussion.",
+      "original_text": "The timeline shows clear dependencies between tasks",
+      "dimension_id": "G6",
+      "dimension_name": "Action Item Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion checks that the timeline shows clear dependencies between tasks, which implies that these dependencies should be traceable and grounded in actual action items or issues discussed.",
+        "parent_dimension": "S6",
+        "parent_dimension_name": "Dependencies, Blockers & Mitigation",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Product Launch Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Lopez",
+          "attendees": [
+            "Sarah Lopez - Project Manager",
+            "James Carter - Engineering Lead",
+            "Priya Nair - UX Designer",
+            "Daniel Kim - Marketing Manager",
+            "Emily Wong - QA Lead"
+          ],
+          "context": "The team met to review the integrated project timeline for the upcoming Q2 product launch. The objective was to confirm task sequencing, identify dependencies, and ensure all teams understand the critical path before development begins.",
+          "artifacts": [
+            "Integrated_Project_Timeline.xlsx",
+            "Feature_Spec_Document.docx",
+            "Marketing_Launch_Plan.pdf"
+          ],
+          "discussion_points": [
+            "Reviewed the Gantt chart from Integrated_Project_Timeline.xlsx showing all major tasks and milestones",
+            "Highlighted dependencies between UX design completion and engineering development start",
+            "Discussed QA testing schedule and its reliance on code freeze date",
+            "Confirmed marketing content creation depends on finalized feature specs"
+          ],
+          "action_items_discussed": [
+            "Priya to finalize UX wireframes by March 20",
+            "James to schedule development kickoff for March 24 after UX sign-off",
+            "Emily to prepare QA test plan draft by April 5",
+            "Daniel to start drafting marketing copy once feature specs are confirmed by March 18"
+          ],
+          "known_constraints": [
+            "Engineering cannot start until UX assets are delivered",
+            "QA testing cannot begin until code freeze on April 15",
+            "Marketing launch materials require final feature list to avoid rework"
+          ],
+          "stated_assumptions": [
+            "UX design will not experience major revisions after sign-off",
+            "No additional features will be added after March 18",
+            "All dependencies outlined in the timeline will hold unless notified"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Product Launch\n\n## Goal\nEnsure all dependencies are managed and critical path tasks are completed on time for the Q2 product launch, per the integrated timeline reviewed on 2025-03-12.\n\n## Timeline Overview\n| T-n | Date       | Task                                                   | Owner        | Deliverable                     | Status   |\n|-----|------------|--------------------------------------------------------|--------------|---------------------------------|----------|\n| T-0 | 2025-03-12 | Q2 Product Launch Planning Meeting                     | Sarah Lopez  | Meeting Notes, Updated Timeline | Complete |\n| T-1 | 2025-03-18 | Confirm Feature Specs (per Feature_Spec_Document.docx) | Sarah Lopez  | Finalized Feature Spec Document | Pending  |\n| T-2 | 2025-03-20 | Finalize UX Wireframes                                 | Priya Nair   | UX Wireframes                   | Pending  |\n| T-3 | 2025-03-24 | Schedule Development Kickoff (after UX sign-off)       | James Carter | Kickoff Meeting Scheduled       | Pending  |\n| T-4 | 2025-04-05 | Draft QA Test Plan                                     | Emily Wong   | QA Test Plan Draft              | Pending  |\n| T-5 | 2025-04-15 | Code Freeze (enables QA Testing)                       | James Carter | Frozen Codebase                 | Pending  |\n| T-6 | TBD        | Draft Marketing Copy (after specs confirmed)           | Daniel Kim   | Marketing Copy Draft            | Pending  |\n\n### Dependencies\n- **T-2 (UX Wireframes)** must be completed before **T-3 (Development Kickoff)** can occur.\n- **T-1 (Feature Specs)** must be confirmed before **T-6 (Marketing Copy Draft)** begins.\n- **T-5 (Code Freeze)** is required before QA testing based on **T-4 (QA Test Plan)** can be executed.\n\nThese dependencies are grounded in the discussion points:\n- UX completion before engineering start\n- Marketing depends on finalized feature specs\n- QA schedule relies on code freeze date\n\n## Blockers & Mitigations\n- **Blocker:** Delay in UX wireframe finalization (T-2) would delay development kickoff (T-3).\n  - **Mitigation:** Priya to provide early drafts for engineering review by 2025-03-17 to reduce risk of rework.\n  - **Owner:** Priya Nair\n\n- **Blocker:** Feature spec confirmation (T-1) slips beyond 2025-03-18, delaying marketing copy (T-6).\n  - **Mitigation:** Sarah to schedule a spec review checkpoint on 2025-03-16.\n  - **Owner:** Sarah Lopez\n\n## Assumptions\n- UX design will not experience major revisions after sign-off (Impact if invalidated: Development start delayed).\n- No additional features will be added after 2025-03-18 (Impact if invalidated: Marketing and QA timelines shift).\n- All dependencies outlined in the timeline will hold unless notified (Impact if invalidated: Integrated schedule re-baselining required).\n\n## Referenced Artifacts\n- Integrated_Project_Timeline.xlsx\n- Feature_Spec_Document.docx\n- Marketing_Launch_Plan.pdf\n",
+        "evidence": "Dependencies in WBP: (1) UX Wireframes before Development Kickoff, (2) Feature Specs before Marketing Copy, (3) Code Freeze before QA testing. These map to scenario action items: 'Priya to finalize UX wireframes by March 20', 'James to schedule development kickoff for March 24 after UX sign-off', 'Daniel to start drafting marketing copy once feature specs are confirmed by March 18', and QA testing depends on code freeze on April 15.",
+        "ground_truth_check": "Scenario action_items_discussed and discussion_points confirm these dependencies were discussed and agreed upon.",
+        "verification": "All dependencies in the WBP correspond to real action items and constraints from the scenario, so the grounding requirement is met.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0003_S6",
+        "dimension": "S6",
+        "passes": true,
+        "evidence": "The 'Dependencies' section in the WBP explicitly states: 'T-2 (UX Wireframes) must be completed before T-3 (Development Kickoff)', 'T-1 (Feature Specs) must be confirmed before T-6 (Marketing Copy Draft)', and 'T-5 (Code Freeze) is required before QA testing based on T-4 (QA Test Plan) can be executed.'",
+        "ground_truth_check": "Scenario discussion points and known constraints mention dependencies: UX completion before engineering start, marketing depends on finalized feature specs, QA schedule relies on code freeze date.",
+        "reasoning": "The WBP clearly lists dependencies between tasks and these dependencies are structurally represented, satisfying the requirement for clear dependencies."
+      },
+      {
+        "assertion_id": "A0003_G6_0",
+        "dimension": "G6",
+        "passes": true,
+        "evidence": "Dependencies in WBP: (1) UX Wireframes before Development Kickoff, (2) Feature Specs before Marketing Copy, (3) Code Freeze before QA testing. These map to scenario action items: 'Priya to finalize UX wireframes by March 20', 'James to schedule development kickoff for March 24 after UX sign-off', 'Daniel to start drafting marketing copy once feature specs are confirmed by March 18', and QA testing depends on code freeze on April 15.",
+        "ground_truth_check": "Scenario action_items_discussed and discussion_points confirm these dependencies were discussed and agreed upon.",
+        "reasoning": "All dependencies in the WBP correspond to real action items and constraints from the scenario, so the grounding requirement is met."
+      }
+    ]
+  }
+}

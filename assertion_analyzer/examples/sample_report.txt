@@ -80,7 +80,14 @@ A0000_G6_1      G6    grounding    critical   Task ordering in the timeline must
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 VERIFICATION SUMMARY
---------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------| T-n  | Date       | Task                                     | Owner            | Deliverable                    |
+|------|------------|------------------------------------------|------------------|--------------------------------|
+| T-9  | Jan 16     | Distribute approved outline and timeline | Alice Johnson    | Launch_Deck_Outline.docx       |
+| T-8  | Jan 17     | Confirm draft structure and design       | Brian Lee        | Draft structure confirmation   |
+| T-3  | Jan 22     | Complete draft slides                   | Brian Lee        | Draft presentation deck        |
+| T-2  | Jan 23     | Schedule review meeting                 | Cynthia Ramirez  | Calendar invite                |
+| T-1  | Jan 24     | Conduct internal review session         | Alice Johnson    | Reviewed deck with notes       |
+| T-0  | Feb 01     | Finalize and submit launch deck         | Brian Lee        | Final presentation deck        |------------------------------------------------------------------------------------------------------------------
   Status: ALL PASSED
   Passed: 3 / 3
 

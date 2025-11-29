@@ -1,32 +1,43 @@
 {
-  "timestamp": "2025-11-30T04:08:23.368464",
+  "timestamp": "2025-11-30T05:33:59.354150",
   "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
   "output_file": "docs/ChinYew/assertions_sg_classified.jsonl",
   "meetings_processed": 1,
+  "num_stages": 1,
+  "stage_files": [
+    "docs/ChinYew/sg_stages\\stage_001.jsonl"
+  ],
   "statistics": {
     "total_input_assertions": 11,
-    "total_output_assertions": 21,
-    "s_assertions": 6,
-    "g_assertions_generated": 10,
-    "unknown": 0,
-    "by_dimension": {
-      "G3": 3,
-      "S2": 1,
-      "S5": 3,
+    "total_sg_units": 21,
+    "s_count": 20,
+    "g_count": 31,
+    "unknown": 1,
+    "by_s_dimension": {
+      "S1": 1,
+      "S5": 5,
+      "S2": 2,
+      "S8": 5,
       "S3": 1,
       "S16": 1,
-      "G4": 1,
-      "G2": 1
+      "S19": 2,
+      "S9": 1,
+      "S10": 1,
+      "S4": 1
     },
-    "by_layer": {
-      "structural": 6,
-      "grounding": 5,
-      "unknown": 0
+    "by_g_dimension": {
+      "G5": 4,
+      "G3": 7,
+      "G8": 3,
+      "G6": 11,
+      "G2": 2,
+      "G9": 1,
+      "G4": 3
     },
     "by_level": {
-      "critical": 5,
-      "expected": 5,
-      "aspirational": 1
+      "critical": 8,
+      "expected": 10,
+      "aspirational": 3
     }
   },
   "dry_run": false

@@ -170,6 +170,22 @@ Assertions with **parameterized references** that verify against source at runti
 └─────────────────────────────────────────────────────────────┘
 ```
 
+### Key Concept: G Assertions Are Instantiated Through S Assertions
+
+**G-level (grounding) assertions are never standalone.** They are always instantiated in the context of validating elements identified by S-level (structural) assertions:
+
+1. **S-level assertions** define **what** structural elements should exist
+2. **G-level assertions** define **grounding constraints** that validate those elements
+3. The `linked_g_dims` field in each S assertion specifies which G checks apply
+
+**Example:**
+```
+S2: "Each [TASK] must have a [DUE_DATE]..."
+    └── linked_g_dims: ["G3", "G6"]
+        ├── G3: Validate [DUE_DATE] consistency with meeting date
+        └── G6: Validate [TASK] traces to action_items_discussed
+```
+
 ### Grounding Assertions (G1-G8)
 
 | ID | Name | Template | Applies To |

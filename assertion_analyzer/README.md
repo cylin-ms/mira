@@ -3,8 +3,8 @@
 A self-contained Python package for WBP (Workback Plan) assertion analysis using GPT-5.
 
 **Authors:** Chin-Yew Lin, Haidong Zhang  
-**Version:** 2.1 (November 2025)  
-**Prompts:** v3.0 (with atomic decomposition support)
+**Version:** 2.2 (November 2025)  
+**Prompts:** v4.0 (with s_template, s_literal, sub_category format)
 
 > **⚠️ Windows Only**: This package requires Windows due to the MSAL broker authentication for GPT-5 API access. Linux and macOS are not supported.
 
@@ -633,7 +633,7 @@ assertion_analyzer/
 ├── config.py            # API configuration
 ├── dimensions.py        # Dimension definitions & S→G mapping
 ├── prompts.json         # Legacy GPT-5 prompts (v2.1)
-├── prompts/             # Optimized prompt files (v3.0)
+├── prompts/             # Optimized prompt files (v4.0)
 │   ├── classification_prompt.json      # Single assertion → dimension(s)
 │   ├── ie_slot_extraction_prompt.json  # Extract slot values for G dims
 │   └── decomposition_prompt.json       # Free-form → atomic S+G units
@@ -649,7 +649,7 @@ assertion_analyzer/
 └── README.md            # This file
 ```
 
-### Prompt Files (v3.0)
+### Prompt Files (v4.0)
 
 The `prompts/` directory contains optimized JSON prompt files designed through GPT-5 iteration:
 
@@ -657,7 +657,7 @@ The `prompts/` directory contains optimized JSON prompt files designed through G
 |------|---------|---------|
 | `classification_prompt.json` | Classify assertions into S/G dimensions with all definitions inline | 2.0 |
 | `ie_slot_extraction_prompt.json` | Extract slot values (names, dates, files) for G dimensions | 2.0 |
-| `decomposition_prompt.json` | Decompose free-form assertions into atomic S+G units | 3.0 |
+| `decomposition_prompt.json` | Decompose free-form assertions into atomic S+G units with s_template, s_literal, sub_category | 4.0 |
 
 Each prompt file contains:
 - `system_prompt`: Role and task description
@@ -670,3 +670,89 @@ Each prompt file contains:
 
 - `msal[broker]>=1.24.0` - Microsoft authentication (Windows only)
 - `requests>=2.28.0` - HTTP client
+
+---
+
+## Appendix A: Full Pipeline Process
+
+The assertion analyzer follows a **5-step pipeline** with 5 GPT-5 API calls per assertion:
+
+```
+Input: Free-form assertion text
+       "The response should state that the meeting '1:1 Review' is scheduled for July 26..."
+                                    |
+                                    v
++-----------------------------------------------------------------------------+
+| STEP 1: CLASSIFICATION (analyze_assertion)                                  |
+| GPT-5 classifies into S/G dimension                                         |
+| Output: {dimension_id: "S1", dimension_name: "Meeting Details",             |
+|          layer: "structural", level: "critical", rationale: "..."}          |
++-----------------------------------------------------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------------+
+| STEP 2: S+G ASSERTION GENERATION (generate_sg_assertions)                   |
+| 2a. Create PRIMARY S assertion from classification                          |
+| 2b. Call select_relevant_g_dimensions() - GPT-5 selects relevant G dims     |
+| 2c. Generate G assertions with grounding text                               |
+| Output: [S assertion] + [G1, G3, G5 assertions...]                          |
++-----------------------------------------------------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------------+
+| STEP 3: SCENARIO GENERATION (generate_scenario_for_assertion)               |
+| GPT-5 creates meeting scenario as GROUND TRUTH                              |
+| Output: {title, date, time, attendees, artifacts, discussion_points...}     |
++-----------------------------------------------------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------------+
+| STEP 4: WBP GENERATION (generate_wbp_with_scenario)                         |
+| GPT-5 generates workback plan that:                                         |
+| - Satisfies S assertion                                                     |
+| - Grounded by G assertions                                                  |
+| - Uses scenario facts (no hallucination)                                    |
+| Output: Markdown workback plan content                                      |
++-----------------------------------------------------------------------------+
+                                    |
+                                    v
++-----------------------------------------------------------------------------+
+| STEP 5: VERIFICATION (verify_wbp_against_scenario)                          |
+| GPT-5 verifies WBP against scenario for ALL assertions                      |
+| Output: {overall_passes: true/false,                                        |
+|          assertion_results: [{assertion_id, passes, explanation}...]}       |
++-----------------------------------------------------------------------------+
+                                    |
+                                    v
+                         Final Output (saved to JSON/MD)
+```
+
+### Key Functions
+
+| Step | Function | Location | GPT-5 Calls |
+|------|----------|----------|-------------|
+| 1 | `analyze_assertion()` | analyzer.py:632 | 1 call |
+| 2 | `generate_sg_assertions()` → `select_relevant_g_dimensions()` | analyzer.py:749, 387 | 1 call |
+| 3 | `generate_scenario_for_assertion()` | analyzer.py:479 | 1 call |
+| 4 | `generate_wbp_with_scenario()` | analyzer.py:520 | 1 call |
+| 5 | `verify_wbp_against_scenario()` | analyzer.py:585 | 1 call |
+
+**Total: 5 GPT-5 API calls per assertion**
+
+### Entry Point Call Graph
+
+```
+__main__.py: process_single_assertion()
+    |-- Step 1: analyze_assertion()
+    |-- Step 2-5: generate_sg_assertions(generate_examples=True)
+            |-- select_relevant_g_dimensions()  [Step 2b]
+            |-- generate_scenario_for_assertion()  [Step 3]
+            |-- generate_wbp_with_scenario()  [Step 4]
+            |-- verify_wbp_against_scenario()  [Step 5]
+```
+
+### Skip Options
+
+- `--no-examples`: Skip steps 3-5 (scenario, WBP, verification) - only 2 GPT-5 calls
+- Use `classify_assertion()` for lightweight classification only - 1 GPT-5 call
+

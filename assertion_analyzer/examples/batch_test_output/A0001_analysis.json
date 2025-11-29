@@ -1,0 +1,233 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T05:52:25.089454",
+    "original_utterance": "The plan includes specific deadlines for each task",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q2 Marketing Campaign Planning Meeting",
+    "date": "2025-03-10",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Samantha Lee (Marketing Manager)",
+    "attendees": [
+      "Samantha Lee (Marketing Manager)",
+      "David Chen (Content Lead)",
+      "Maria Gonzalez (Design Lead)",
+      "Liam Patel (Social Media Specialist)",
+      "Olivia Brooks (Project Coordinator)"
+    ],
+    "context": "The marketing team met to finalize the execution plan for the Q2 product launch campaign. The goal was to agree on deliverables, assign ownership, and define a timeline that aligns with the April 15th product release date.",
+    "artifacts": [
+      "Q2_Campaign_Strategy_Draft.docx",
+      "Campaign_Timeline_v1.xlsx",
+      "Brand_Guidelines.pdf"
+    ],
+    "discussion_points": [
+      "Review of campaign objectives and key audience segments",
+      "Breakdown of major tasks: content creation, design assets, social media scheduling",
+      "Alignment on critical deadlines to meet the April 15th launch date",
+      "Identification of dependencies between teams (e.g., design before social posts)"
+    ],
+    "action_items_discussed": [
+      "David to finalize blog content calendar by March 20",
+      "Maria to deliver final design assets by March 25",
+      "Liam to schedule social media posts by April 5",
+      "Olivia to consolidate all assets and upload to shared drive by April 8"
+    ],
+    "known_constraints": [
+      "Product release date is fixed on April 15",
+      "Design team has limited bandwidth due to concurrent branding project",
+      "Content approval requires at least 3 business days from legal team"
+    ],
+    "stated_assumptions": [
+      "All teams will have access to the updated brand guidelines by March 12",
+      "No major product feature changes will occur after March 18",
+      "Legal review process will not exceed the standard 3-day turnaround"
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q2 Marketing Campaign Execution\n\n**Goal:** Finalize and execute all deliverables for the Q2 product launch campaign in alignment with the April 15, 2025 product release date.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (March 10, 2025, 10:00 AM PST)\n\n**Artifacts Referenced:** Q2_Campaign_Strategy_Draft.docx, Campaign_Timeline_v1.xlsx, Brand_Guidelines.pdf\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                              | Owner                                | Deliverable                            | Status  |\n|-----|------------|---------------------------------------------------|--------------------------------------|----------------------------------------|---------|\n| T-1 | 2025-03-12 | Distribute updated Brand Guidelines to all teams  | Samantha Lee (Marketing Manager)     | Brand_Guidelines.pdf shared with team  | Planned |\n| T-2 | 2025-03-18 | Confirm no major product feature changes          | Samantha Lee (Marketing Manager)     | Product scope confirmation             | Planned |\n| T-3 | 2025-03-20 | Finalize blog content calendar                    | David Chen (Content Lead)            | Approved content calendar              | Planned |\n| T-4 | 2025-03-25 | Deliver final design assets                       | Maria Gonzalez (Design Lead)         | Complete design asset package          | Planned |\n| T-5 | 2025-04-05 | Schedule social media posts                       | Liam Patel (Social Media Specialist) | All posts scheduled in publishing tool | Planned |\n| T-6 | 2025-04-08 | Consolidate all assets and upload to shared drive | Olivia Brooks (Project Coordinator)  | Centralized campaign asset folder      | Planned |\n| T-7 | 2025-04-15 | Product Launch Day                                | Samantha Lee (Marketing Manager)     | Launch campaign live                   | Pending |\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Design team has limited bandwidth due to concurrent branding project  \n**Mitigation:** Prioritize Q2 campaign assets in weekly design sprint; escalate resource needs if delays arise  \n**Owner:** Maria Gonzalez (Design Lead)\n\n**Blocker:** Legal review requires 3 business days for content approval  \n**Mitigation:** Submit content for legal review immediately after finalization (by March 20)  \n**Owner:** David Chen (Content Lead)\n\n---\n\n## Assumptions & Impact\n1. **Assumption:** All teams will have access to updated Brand Guidelines by March 12  \n   **Impact if invalid:** Design and content may require rework, causing delays in asset delivery.\n\n2. **Assumption:** No major product feature changes after March 18  \n   **Impact if invalid:** Campaign messaging and assets may need urgent revisions.\n\n3. **Assumption:** Legal review process will not exceed standard 3-day turnaround  \n   **Impact if invalid:** Social media scheduling and content publishing could be delayed.\n\n---\n\n## Next Steps\n- Samantha to confirm guideline distribution and product scope deadlines.\n- David to prepare content for legal review immediately after finalization.\n- Maria to monitor design workload and flag any risk to March 25 deadline.\n- Liam to prepare draft social schedule in parallel to design completion.\n- Olivia to set up shared drive structure by March 15 for smooth consolidation.\n",
+  "assertions": [
+    {
+      "assertion_id": "A0001_S5",
+      "parent_assertion_id": null,
+      "text": "Each [TASK] in the plan has an associated [DUE_DATE].",
+      "original_text": "The plan includes specific deadlines for each task",
+      "dimension_id": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 2,
+      "linked_g_dims": [
+        "G3"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion checks whether each task in the plan has a specific deadline, which directly aligns with the requirement to include task-level dates in the workback plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning Meeting",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Samantha Lee (Marketing Manager)",
+          "attendees": [
+            "Samantha Lee (Marketing Manager)",
+            "David Chen (Content Lead)",
+            "Maria Gonzalez (Design Lead)",
+            "Liam Patel (Social Media Specialist)",
+            "Olivia Brooks (Project Coordinator)"
+          ],
+          "context": "The marketing team met to finalize the execution plan for the Q2 product launch campaign. The goal was to agree on deliverables, assign ownership, and define a timeline that aligns with the April 15th product release date.",
+          "artifacts": [
+            "Q2_Campaign_Strategy_Draft.docx",
+            "Campaign_Timeline_v1.xlsx",
+            "Brand_Guidelines.pdf"
+          ],
+          "discussion_points": [
+            "Review of campaign objectives and key audience segments",
+            "Breakdown of major tasks: content creation, design assets, social media scheduling",
+            "Alignment on critical deadlines to meet the April 15th launch date",
+            "Identification of dependencies between teams (e.g., design before social posts)"
+          ],
+          "action_items_discussed": [
+            "David to finalize blog content calendar by March 20",
+            "Maria to deliver final design assets by March 25",
+            "Liam to schedule social media posts by April 5",
+            "Olivia to consolidate all assets and upload to shared drive by April 8"
+          ],
+          "known_constraints": [
+            "Product release date is fixed on April 15",
+            "Design team has limited bandwidth due to concurrent branding project",
+            "Content approval requires at least 3 business days from legal team"
+          ],
+          "stated_assumptions": [
+            "All teams will have access to the updated brand guidelines by March 12",
+            "No major product feature changes will occur after March 18",
+            "Legal review process will not exceed the standard 3-day turnaround"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Marketing Campaign Execution\n\n**Goal:** Finalize and execute all deliverables for the Q2 product launch campaign in alignment with the April 15, 2025 product release date.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (March 10, 2025, 10:00 AM PST)\n\n**Artifacts Referenced:** Q2_Campaign_Strategy_Draft.docx, Campaign_Timeline_v1.xlsx, Brand_Guidelines.pdf\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                              | Owner                                | Deliverable                            | Status  |\n|-----|------------|---------------------------------------------------|--------------------------------------|----------------------------------------|---------|\n| T-1 | 2025-03-12 | Distribute updated Brand Guidelines to all teams  | Samantha Lee (Marketing Manager)     | Brand_Guidelines.pdf shared with team  | Planned |\n| T-2 | 2025-03-18 | Confirm no major product feature changes          | Samantha Lee (Marketing Manager)     | Product scope confirmation             | Planned |\n| T-3 | 2025-03-20 | Finalize blog content calendar                    | David Chen (Content Lead)            | Approved content calendar              | Planned |\n| T-4 | 2025-03-25 | Deliver final design assets                       | Maria Gonzalez (Design Lead)         | Complete design asset package          | Planned |\n| T-5 | 2025-04-05 | Schedule social media posts                       | Liam Patel (Social Media Specialist) | All posts scheduled in publishing tool | Planned |\n| T-6 | 2025-04-08 | Consolidate all assets and upload to shared drive | Olivia Brooks (Project Coordinator)  | Centralized campaign asset folder      | Planned |\n| T-7 | 2025-04-15 | Product Launch Day                                | Samantha Lee (Marketing Manager)     | Launch campaign live                   | Pending |\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Design team has limited bandwidth due to concurrent branding project  \n**Mitigation:** Prioritize Q2 campaign assets in weekly design sprint; escalate resource needs if delays arise  \n**Owner:** Maria Gonzalez (Design Lead)\n\n**Blocker:** Legal review requires 3 business days for content approval  \n**Mitigation:** Submit content for legal review immediately after finalization (by March 20)  \n**Owner:** David Chen (Content Lead)\n\n---\n\n## Assumptions & Impact\n1. **Assumption:** All teams will have access to updated Brand Guidelines by March 12  \n   **Impact if invalid:** Design and content may require rework, causing delays in asset delivery.\n\n2. **Assumption:** No major product feature changes after March 18  \n   **Impact if invalid:** Campaign messaging and assets may need urgent revisions.\n\n3. **Assumption:** Legal review process will not exceed standard 3-day turnaround  \n   **Impact if invalid:** Social media scheduling and content publishing could be delayed.\n\n---\n\n## Next Steps\n- Samantha to confirm guideline distribution and product scope deadlines.\n- David to prepare content for legal review immediately after finalization.\n- Maria to monitor design workload and flag any risk to March 25 deadline.\n- Liam to prepare draft social schedule in parallel to design completion.\n- Olivia to set up shared drive structure by March 15 for smooth consolidation.\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0001_S5",
+            "dimension": "S5",
+            "passes": true,
+            "evidence": "Each row in the timeline table includes a Date column (e.g., 2025-03-12 for 'Distribute updated Brand Guidelines', 2025-03-20 for 'Finalize blog content calendar', etc.).",
+            "ground_truth_check": "Checked that every task listed in the Workback Plan has an associated due date in the Date column.",
+            "reasoning": "All tasks (T-1 through T-7) have explicit due dates, satisfying the structural requirement that each task has a due date."
+          },
+          {
+            "assertion_id": "A0001_G3_0",
+            "dimension": "G3",
+            "passes": true,
+            "evidence": "Tasks have due dates: March 12, March 18, March 20, March 25, April 5, April 8, and April 15. These align with the meeting date (March 10) and the April 15 product launch constraint.",
+            "ground_truth_check": "Compared task deadlines against scenario constraints: meeting date (2025-03-10), product release date (2025-04-15), and discussed action item deadlines (March 20, March 25, April 5, April 8).",
+            "reasoning": "All deadlines occur after the meeting date and before or on the April 15 launch date. They match or are consistent with the action items discussed in the scenario, so the dates are realistic and grounded."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0001_G3_0",
+      "parent_assertion_id": "A0001_S5",
+      "text": "Each task's deadline must be checked for presence and consistency with the meeting context and realistic timeframes.",
+      "original_text": "The plan includes specific deadlines for each task",
+      "dimension_id": "G3",
+      "dimension_name": "Date/Time Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion explicitly states that the plan includes specific deadlines for each task, which requires verifying that these deadlines are present and logically consistent with the meeting date and overall timeline.",
+        "parent_dimension": "S5",
+        "parent_dimension_name": "Task Dates",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning Meeting",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Samantha Lee (Marketing Manager)",
+          "attendees": [
+            "Samantha Lee (Marketing Manager)",
+            "David Chen (Content Lead)",
+            "Maria Gonzalez (Design Lead)",
+            "Liam Patel (Social Media Specialist)",
+            "Olivia Brooks (Project Coordinator)"
+          ],
+          "context": "The marketing team met to finalize the execution plan for the Q2 product launch campaign. The goal was to agree on deliverables, assign ownership, and define a timeline that aligns with the April 15th product release date.",
+          "artifacts": [
+            "Q2_Campaign_Strategy_Draft.docx",
+            "Campaign_Timeline_v1.xlsx",
+            "Brand_Guidelines.pdf"
+          ],
+          "discussion_points": [
+            "Review of campaign objectives and key audience segments",
+            "Breakdown of major tasks: content creation, design assets, social media scheduling",
+            "Alignment on critical deadlines to meet the April 15th launch date",
+            "Identification of dependencies between teams (e.g., design before social posts)"
+          ],
+          "action_items_discussed": [
+            "David to finalize blog content calendar by March 20",
+            "Maria to deliver final design assets by March 25",
+            "Liam to schedule social media posts by April 5",
+            "Olivia to consolidate all assets and upload to shared drive by April 8"
+          ],
+          "known_constraints": [
+            "Product release date is fixed on April 15",
+            "Design team has limited bandwidth due to concurrent branding project",
+            "Content approval requires at least 3 business days from legal team"
+          ],
+          "stated_assumptions": [
+            "All teams will have access to the updated brand guidelines by March 12",
+            "No major product feature changes will occur after March 18",
+            "Legal review process will not exceed the standard 3-day turnaround"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Marketing Campaign Execution\n\n**Goal:** Finalize and execute all deliverables for the Q2 product launch campaign in alignment with the April 15, 2025 product release date.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (March 10, 2025, 10:00 AM PST)\n\n**Artifacts Referenced:** Q2_Campaign_Strategy_Draft.docx, Campaign_Timeline_v1.xlsx, Brand_Guidelines.pdf\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                              | Owner                                | Deliverable                            | Status  |\n|-----|------------|---------------------------------------------------|--------------------------------------|----------------------------------------|---------|\n| T-1 | 2025-03-12 | Distribute updated Brand Guidelines to all teams  | Samantha Lee (Marketing Manager)     | Brand_Guidelines.pdf shared with team  | Planned |\n| T-2 | 2025-03-18 | Confirm no major product feature changes          | Samantha Lee (Marketing Manager)     | Product scope confirmation             | Planned |\n| T-3 | 2025-03-20 | Finalize blog content calendar                    | David Chen (Content Lead)            | Approved content calendar              | Planned |\n| T-4 | 2025-03-25 | Deliver final design assets                       | Maria Gonzalez (Design Lead)         | Complete design asset package          | Planned |\n| T-5 | 2025-04-05 | Schedule social media posts                       | Liam Patel (Social Media Specialist) | All posts scheduled in publishing tool | Planned |\n| T-6 | 2025-04-08 | Consolidate all assets and upload to shared drive | Olivia Brooks (Project Coordinator)  | Centralized campaign asset folder      | Planned |\n| T-7 | 2025-04-15 | Product Launch Day                                | Samantha Lee (Marketing Manager)     | Launch campaign live                   | Pending |\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Design team has limited bandwidth due to concurrent branding project  \n**Mitigation:** Prioritize Q2 campaign assets in weekly design sprint; escalate resource needs if delays arise  \n**Owner:** Maria Gonzalez (Design Lead)\n\n**Blocker:** Legal review requires 3 business days for content approval  \n**Mitigation:** Submit content for legal review immediately after finalization (by March 20)  \n**Owner:** David Chen (Content Lead)\n\n---\n\n## Assumptions & Impact\n1. **Assumption:** All teams will have access to updated Brand Guidelines by March 12  \n   **Impact if invalid:** Design and content may require rework, causing delays in asset delivery.\n\n2. **Assumption:** No major product feature changes after March 18  \n   **Impact if invalid:** Campaign messaging and assets may need urgent revisions.\n\n3. **Assumption:** Legal review process will not exceed standard 3-day turnaround  \n   **Impact if invalid:** Social media scheduling and content publishing could be delayed.\n\n---\n\n## Next Steps\n- Samantha to confirm guideline distribution and product scope deadlines.\n- David to prepare content for legal review immediately after finalization.\n- Maria to monitor design workload and flag any risk to March 25 deadline.\n- Liam to prepare draft social schedule in parallel to design completion.\n- Olivia to set up shared drive structure by March 15 for smooth consolidation.\n",
+        "evidence": "Tasks have due dates: March 12, March 18, March 20, March 25, April 5, April 8, and April 15. These align with the meeting date (March 10) and the April 15 product launch constraint.",
+        "ground_truth_check": "Compared task deadlines against scenario constraints: meeting date (2025-03-10), product release date (2025-04-15), and discussed action item deadlines (March 20, March 25, April 5, April 8).",
+        "verification": "All deadlines occur after the meeting date and before or on the April 15 launch date. They match or are consistent with the action items discussed in the scenario, so the dates are realistic and grounded.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0001_S5",
+        "dimension": "S5",
+        "passes": true,
+        "evidence": "Each row in the timeline table includes a Date column (e.g., 2025-03-12 for 'Distribute updated Brand Guidelines', 2025-03-20 for 'Finalize blog content calendar', etc.).",
+        "ground_truth_check": "Checked that every task listed in the Workback Plan has an associated due date in the Date column.",
+        "reasoning": "All tasks (T-1 through T-7) have explicit due dates, satisfying the structural requirement that each task has a due date."
+      },
+      {
+        "assertion_id": "A0001_G3_0",
+        "dimension": "G3",
+        "passes": true,
+        "evidence": "Tasks have due dates: March 12, March 18, March 20, March 25, April 5, April 8, and April 15. These align with the meeting date (March 10) and the April 15 product launch constraint.",
+        "ground_truth_check": "Compared task deadlines against scenario constraints: meeting date (2025-03-10), product release date (2025-04-15), and discussed action item deadlines (March 20, March 25, April 5, April 8).",
+        "reasoning": "All deadlines occur after the meeting date and before or on the April 15 launch date. They match or are consistent with the action items discussed in the scenario, so the dates are realistic and grounded."
+      }
+    ]
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T05:52:40.763888",
+    "original_utterance": "Tasks are assigned to named individuals from the attendees list",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q3 Marketing Campaign Kick-off",
+    "date": "2025-07-10",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Laura Chen",
+    "attendees": [
+      "Laura Chen - Marketing Manager",
+      "David Kim - Content Strategist",
+      "Sofia Martinez - Social Media Lead",
+      "James Patel - Graphic Designer",
+      "Emma Rogers - Email Marketing Specialist"
+    ],
+    "context": "The marketing team met to plan the Q3 product launch campaign for the new mobile app feature. The goal was to align on campaign themes, content deliverables, and timelines to ensure a coordinated rollout across channels.",
+    "artifacts": [
+      "Q3_Campaign_Overview.pdf",
+      "Launch_Timeline.xlsx",
+      "Target_Audience_Insights.docx"
+    ],
+    "discussion_points": [
+      "Reviewed the Q3 campaign objectives and key messaging.",
+      "Discussed content calendar and deadlines for blog posts, social media, and email newsletters.",
+      "Identified design requirements for promotional graphics.",
+      "Outlined responsibilities for campaign execution across the team."
+    ],
+    "action_items_discussed": [
+      "Draft initial blog post introducing the new feature.",
+      "Create social media teaser graphics for Instagram and LinkedIn.",
+      "Prepare email newsletter content for pre-launch announcement.",
+      "Consolidate content calendar and share with the team."
+    ],
+    "known_constraints": [
+      "Campaign launch date is fixed for August 15, leaving only 5 weeks for preparation.",
+      "Graphic design resources are limited as the design team is also supporting another product launch."
+    ],
+    "stated_assumptions": [
+      "Assuming the development team will deliver final screenshots by July 25.",
+      "Assuming no major changes to the feature scope before launch."
+    ]
+  },
+  "workback_plan": "## Workback Plan: Q3 Marketing Campaign Kick-off\n\n**Goal:** Successfully prepare and execute the Q3 product launch campaign for the new mobile app feature by the fixed launch date of **August 15, 2025**.\n\n**Meeting Date:** July 10, 2025  \n**Organizer:** Laura Chen  \n**Reference Artifacts:** Q3_Campaign_Overview.pdf, Launch_Timeline.xlsx, Target_Audience_Insights.docx\n\n---\n\n### Timeline Overview\n| T-n  | Date       | Task                                                         | Owner                                    | Deliverable                     | Status      |\n|------|------------|--------------------------------------------------------------|------------------------------------------|---------------------------------|-------------|\n| T-30 | 2025-07-15 | Draft initial blog post introducing the new feature          | David Kim - Content Strategist           | Blog post draft                 | Not Started |\n| T-25 | 2025-07-20 | Create social media teaser graphics for Instagram & LinkedIn | James Patel - Graphic Designer           | Teaser graphics                 | Not Started |\n| T-20 | 2025-07-25 | Prepare email newsletter content for pre-launch announcement | Emma Rogers - Email Marketing Specialist | Email newsletter draft          | Not Started |\n| T-18 | 2025-07-27 | Consolidate content calendar and share with the team         | Laura Chen - Marketing Manager           | Finalized content calendar      | Not Started |\n| T-15 | 2025-07-30 | Review and approve all content drafts                        | Sofia Martinez - Social Media Lead       | Approved content for scheduling | Not Started |\n| T-0  | 2025-08-15 | Launch campaign across all channels                          | Laura Chen - Marketing Manager           | Live Q3 campaign                | Pending     |\n\n---\n\n### Blockers & Mitigations\n**Blocker:** Graphic design resources are limited as the design team is also supporting another product launch.  \n**Mitigation:** Prioritize teaser graphics for social media first; consider using pre-approved templates to reduce design time.  \n**Owner:** James Patel - Graphic Designer\n\n---\n\n### Assumptions\n1. **Final screenshots delivered by July 25** (from development team).  \n   *Impact if invalidated:* Delay in creating accurate visuals for blog and social media.\n2. **No major changes to feature scope before launch.**  \n   *Impact if invalidated:* Content and messaging revisions could cause timeline slippage.\n\n---\n\n### Notes\n- All tasks are assigned to attendees from the meeting: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers.\n- Timeline is aligned to the fixed launch date of August 15, 2025.\n",
+  "assertions": [
+    {
+      "assertion_id": "A0002_S3",
+      "parent_assertion_id": null,
+      "text": "Each [TASK] is assigned to a specific [OWNER] who is listed among the [ATTENDEE] group.",
+      "original_text": "Tasks are assigned to named individuals from the attendees list",
+      "dimension_id": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [
+        "G2",
+        "G6"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion checks that each task has a clearly assigned owner from the attendee list, which directly aligns with the requirement for ownership assignment in the workback plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q3 Marketing Campaign Kick-off",
+          "date": "2025-07-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Laura Chen",
+          "attendees": [
+            "Laura Chen - Marketing Manager",
+            "David Kim - Content Strategist",
+            "Sofia Martinez - Social Media Lead",
+            "James Patel - Graphic Designer",
+            "Emma Rogers - Email Marketing Specialist"
+          ],
+          "context": "The marketing team met to plan the Q3 product launch campaign for the new mobile app feature. The goal was to align on campaign themes, content deliverables, and timelines to ensure a coordinated rollout across channels.",
+          "artifacts": [
+            "Q3_Campaign_Overview.pdf",
+            "Launch_Timeline.xlsx",
+            "Target_Audience_Insights.docx"
+          ],
+          "discussion_points": [
+            "Reviewed the Q3 campaign objectives and key messaging.",
+            "Discussed content calendar and deadlines for blog posts, social media, and email newsletters.",
+            "Identified design requirements for promotional graphics.",
+            "Outlined responsibilities for campaign execution across the team."
+          ],
+          "action_items_discussed": [
+            "Draft initial blog post introducing the new feature.",
+            "Create social media teaser graphics for Instagram and LinkedIn.",
+            "Prepare email newsletter content for pre-launch announcement.",
+            "Consolidate content calendar and share with the team."
+          ],
+          "known_constraints": [
+            "Campaign launch date is fixed for August 15, leaving only 5 weeks for preparation.",
+            "Graphic design resources are limited as the design team is also supporting another product launch."
+          ],
+          "stated_assumptions": [
+            "Assuming the development team will deliver final screenshots by July 25.",
+            "Assuming no major changes to the feature scope before launch."
+          ]
+        },
+        "workback_plan": "## Workback Plan: Q3 Marketing Campaign Kick-off\n\n**Goal:** Successfully prepare and execute the Q3 product launch campaign for the new mobile app feature by the fixed launch date of **August 15, 2025**.\n\n**Meeting Date:** July 10, 2025  \n**Organizer:** Laura Chen  \n**Reference Artifacts:** Q3_Campaign_Overview.pdf, Launch_Timeline.xlsx, Target_Audience_Insights.docx\n\n---\n\n### Timeline Overview\n| T-n  | Date       | Task                                                         | Owner                                    | Deliverable                     | Status      |\n|------|------------|--------------------------------------------------------------|------------------------------------------|---------------------------------|-------------|\n| T-30 | 2025-07-15 | Draft initial blog post introducing the new feature          | David Kim - Content Strategist           | Blog post draft                 | Not Started |\n| T-25 | 2025-07-20 | Create social media teaser graphics for Instagram & LinkedIn | James Patel - Graphic Designer           | Teaser graphics                 | Not Started |\n| T-20 | 2025-07-25 | Prepare email newsletter content for pre-launch announcement | Emma Rogers - Email Marketing Specialist | Email newsletter draft          | Not Started |\n| T-18 | 2025-07-27 | Consolidate content calendar and share with the team         | Laura Chen - Marketing Manager           | Finalized content calendar      | Not Started |\n| T-15 | 2025-07-30 | Review and approve all content drafts                        | Sofia Martinez - Social Media Lead       | Approved content for scheduling | Not Started |\n| T-0  | 2025-08-15 | Launch campaign across all channels                          | Laura Chen - Marketing Manager           | Live Q3 campaign                | Pending     |\n\n---\n\n### Blockers & Mitigations\n**Blocker:** Graphic design resources are limited as the design team is also supporting another product launch.  \n**Mitigation:** Prioritize teaser graphics for social media first; consider using pre-approved templates to reduce design time.  \n**Owner:** James Patel - Graphic Designer\n\n---\n\n### Assumptions\n1. **Final screenshots delivered by July 25** (from development team).  \n   *Impact if invalidated:* Delay in creating accurate visuals for blog and social media.\n2. **No major changes to feature scope before launch.**  \n   *Impact if invalidated:* Content and messaging revisions could cause timeline slippage.\n\n---\n\n### Notes\n- All tasks are assigned to attendees from the meeting: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers.\n- Timeline is aligned to the fixed launch date of August 15, 2025.\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0002_S3",
+            "dimension": "S3",
+            "passes": true,
+            "evidence": "Each task in the Workback Plan table has an 'Owner' column populated with a specific name and role: e.g., 'Draft initial blog post introducing the new feature' -> 'David Kim - Content Strategist'; 'Create social media teaser graphics' -> 'James Patel - Graphic Designer'; etc.",
+            "ground_truth_check": "Attendees listed in the scenario: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers.",
+            "reasoning": "All tasks have a clearly assigned owner, and each owner is a named individual rather than a generic role. This satisfies the structural requirement that each task is assigned to a specific owner."
+          },
+          {
+            "assertion_id": "A0002_G2_0",
+            "dimension": "G2",
+            "passes": true,
+            "evidence": "Owners in the Workback Plan: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers. These match exactly the attendees from the scenario.",
+            "ground_truth_check": "Scenario attendees: Laura Chen - Marketing Manager, David Kim - Content Strategist, Sofia Martinez - Social Media Lead, James Patel - Graphic Designer, Emma Rogers - Email Marketing Specialist.",
+            "reasoning": "All task owners are actual attendees from the meeting, ensuring accountability and alignment with the scenario. No extraneous or missing names were introduced."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0002_G2_0",
+      "parent_assertion_id": "A0002_S3",
+      "text": "Task owners must be actual attendees who can be held accountable for the work",
+      "original_text": "Tasks are assigned to named individuals from the attendees list",
+      "dimension_id": "G2",
+      "dimension_name": "Attendee Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion explicitly states that tasks are assigned to named individuals from the attendees list, so we must verify that each assigned owner is indeed an attendee.",
+        "parent_dimension": "S3",
+        "parent_dimension_name": "Ownership Assignment",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q3 Marketing Campaign Kick-off",
+          "date": "2025-07-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Laura Chen",
+          "attendees": [
+            "Laura Chen - Marketing Manager",
+            "David Kim - Content Strategist",
+            "Sofia Martinez - Social Media Lead",
+            "James Patel - Graphic Designer",
+            "Emma Rogers - Email Marketing Specialist"
+          ],
+          "context": "The marketing team met to plan the Q3 product launch campaign for the new mobile app feature. The goal was to align on campaign themes, content deliverables, and timelines to ensure a coordinated rollout across channels.",
+          "artifacts": [
+            "Q3_Campaign_Overview.pdf",
+            "Launch_Timeline.xlsx",
+            "Target_Audience_Insights.docx"
+          ],
+          "discussion_points": [
+            "Reviewed the Q3 campaign objectives and key messaging.",
+            "Discussed content calendar and deadlines for blog posts, social media, and email newsletters.",
+            "Identified design requirements for promotional graphics.",
+            "Outlined responsibilities for campaign execution across the team."
+          ],
+          "action_items_discussed": [
+            "Draft initial blog post introducing the new feature.",
+            "Create social media teaser graphics for Instagram and LinkedIn.",
+            "Prepare email newsletter content for pre-launch announcement.",
+            "Consolidate content calendar and share with the team."
+          ],
+          "known_constraints": [
+            "Campaign launch date is fixed for August 15, leaving only 5 weeks for preparation.",
+            "Graphic design resources are limited as the design team is also supporting another product launch."
+          ],
+          "stated_assumptions": [
+            "Assuming the development team will deliver final screenshots by July 25.",
+            "Assuming no major changes to the feature scope before launch."
+          ]
+        },
+        "workback_plan": "## Workback Plan: Q3 Marketing Campaign Kick-off\n\n**Goal:** Successfully prepare and execute the Q3 product launch campaign for the new mobile app feature by the fixed launch date of **August 15, 2025**.\n\n**Meeting Date:** July 10, 2025  \n**Organizer:** Laura Chen  \n**Reference Artifacts:** Q3_Campaign_Overview.pdf, Launch_Timeline.xlsx, Target_Audience_Insights.docx\n\n---\n\n### Timeline Overview\n| T-n  | Date       | Task                                                         | Owner                                    | Deliverable                     | Status      |\n|------|------------|--------------------------------------------------------------|------------------------------------------|---------------------------------|-------------|\n| T-30 | 2025-07-15 | Draft initial blog post introducing the new feature          | David Kim - Content Strategist           | Blog post draft                 | Not Started |\n| T-25 | 2025-07-20 | Create social media teaser graphics for Instagram & LinkedIn | James Patel - Graphic Designer           | Teaser graphics                 | Not Started |\n| T-20 | 2025-07-25 | Prepare email newsletter content for pre-launch announcement | Emma Rogers - Email Marketing Specialist | Email newsletter draft          | Not Started |\n| T-18 | 2025-07-27 | Consolidate content calendar and share with the team         | Laura Chen - Marketing Manager           | Finalized content calendar      | Not Started |\n| T-15 | 2025-07-30 | Review and approve all content drafts                        | Sofia Martinez - Social Media Lead       | Approved content for scheduling | Not Started |\n| T-0  | 2025-08-15 | Launch campaign across all channels                          | Laura Chen - Marketing Manager           | Live Q3 campaign                | Pending     |\n\n---\n\n### Blockers & Mitigations\n**Blocker:** Graphic design resources are limited as the design team is also supporting another product launch.  \n**Mitigation:** Prioritize teaser graphics for social media first; consider using pre-approved templates to reduce design time.  \n**Owner:** James Patel - Graphic Designer\n\n---\n\n### Assumptions\n1. **Final screenshots delivered by July 25** (from development team).  \n   *Impact if invalidated:* Delay in creating accurate visuals for blog and social media.\n2. **No major changes to feature scope before launch.**  \n   *Impact if invalidated:* Content and messaging revisions could cause timeline slippage.\n\n---\n\n### Notes\n- All tasks are assigned to attendees from the meeting: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers.\n- Timeline is aligned to the fixed launch date of August 15, 2025.\n",
+        "evidence": "Owners in the Workback Plan: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers. These match exactly the attendees from the scenario.",
+        "ground_truth_check": "Scenario attendees: Laura Chen - Marketing Manager, David Kim - Content Strategist, Sofia Martinez - Social Media Lead, James Patel - Graphic Designer, Emma Rogers - Email Marketing Specialist.",
+        "verification": "All task owners are actual attendees from the meeting, ensuring accountability and alignment with the scenario. No extraneous or missing names were introduced.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0002_S3",
+        "dimension": "S3",
+        "passes": true,
+        "evidence": "Each task in the Workback Plan table has an 'Owner' column populated with a specific name and role: e.g., 'Draft initial blog post introducing the new feature' -> 'David Kim - Content Strategist'; 'Create social media teaser graphics' -> 'James Patel - Graphic Designer'; etc.",
+        "ground_truth_check": "Attendees listed in the scenario: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers.",
+        "reasoning": "All tasks have a clearly assigned owner, and each owner is a named individual rather than a generic role. This satisfies the structural requirement that each task is assigned to a specific owner."
+      },
+      {
+        "assertion_id": "A0002_G2_0",
+        "dimension": "G2",
+        "passes": true,
+        "evidence": "Owners in the Workback Plan: Laura Chen, David Kim, Sofia Martinez, James Patel, Emma Rogers. These match exactly the attendees from the scenario.",
+        "ground_truth_check": "Scenario attendees: Laura Chen - Marketing Manager, David Kim - Content Strategist, Sofia Martinez - Social Media Lead, James Patel - Graphic Designer, Emma Rogers - Email Marketing Specialist.",
+        "reasoning": "All task owners are actual attendees from the meeting, ensuring accountability and alignment with the scenario. No extraneous or missing names were introduced."
+      }
+    ]
+  }
+}

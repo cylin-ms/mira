@@ -1,0 +1,83 @@
+{
+  "test_name": "Full Pipeline Test",
+  "input_assertion": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
+  "classification": {
+    "dimension_id": "G3",
+    "dimension_name": "Date/Time Grounding",
+    "layer": "grounding",
+    "level": "critical",
+    "rationale": "The assertion checks that the meeting date and time ('July 26, 2025 at 14:00 PST') are correctly stated, which directly relates to verifying factual accuracy of temporal details in the plan.",
+    "converted_text": "The response should confirm that [MEETING_TITLE] is scheduled for [MEETING_DATE] at [TIMEZONE]."
+  },
+  "assertions": [
+    {
+      "assertion_id": "A0000_G3",
+      "parent_assertion_id": null,
+      "text": "The response should confirm that [MEETING_TITLE] is scheduled for [MEETING_DATE] at [TIMEZONE].",
+      "original_text": "The response should state that the meeting '1:1 Action Items Review' is scheduled for July 26, 2025 at 14:00 PST.",
+      "dimension_id": "G3",
+      "dimension_name": "Date/Time Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [],
+      "rationale": {
+        "mapping_reason": "The assertion checks that the meeting date and time ('July 26, 2025 at 14:00 PST') are correctly stated, which directly relates to verifying factual accuracy of temporal details in the plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "1:1 Action Items Review",
+          "date": "2025-07-26",
+          "time": "14:00 PST",
+          "duration_minutes": 60,
+          "organizer": "Jordan Lee",
+          "attendees": [
+            "Jordan Lee - Engineering Manager",
+            "Alex Martinez - Senior Software Engineer"
+          ],
+          "context": "Jordan Lee scheduled this 1:1 meeting with Alex Martinez to review progress on previously assigned action items related to the Q3 platform stability initiative. They aim to confirm completed tasks, identify blockers, and align on next steps before the upcoming product release freeze.",
+          "artifacts": [
+            "Q3_Stability_Initiative_ActionItems.xlsx",
+            "Sprint_32_Retrospective_Notes.docx"
+          ],
+          "discussion_points": [
+            "Status update on the database query optimization task assigned to Alex",
+            "Review of error logging improvements and whether they have been merged",
+            "Identification of any dependencies that could delay the next sprint deliverables",
+            "Clarification on ownership of the new CI/CD monitoring scripts"
+          ],
+          "action_items_discussed": [
+            "Alex to finalize the database query optimization by July 30, 2025",
+            "Jordan to schedule a follow-up with the DevOps team to confirm monitoring script deployment",
+            "Prepare a summary report of completed stability improvements for the leadership review"
+          ],
+          "known_constraints": [
+            "Production deployment freeze starting August 5, 2025",
+            "Limited QA resources available during the last week of July"
+          ],
+          "stated_assumptions": [
+            "All code reviews for stability tasks will be completed within 48 hours of submission",
+            "No major incidents will occur that divert engineering resources from the current sprint"
+          ]
+        },
+        "workback_plan": "# Workback Plan: 1:1 Action Items Review\n\n**Goal:** Ensure all Q3 platform stability action items are on track prior to the production freeze on August 5, 2025.\n\n**Meeting Confirmation:** The meeting **'1:1 Action Items Review'** is scheduled for **July 26, 2025 at 14:00 PST**.\n\n**Context:** Jordan Lee (Engineering Manager) and Alex Martinez (Senior Software Engineer) will review progress on stability tasks, confirm completed work, identify blockers, and align on next steps.\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                                                                                | Owner                      | Deliverable                                         | Status    |\n|-----|------------|---------------------------------------------------------------------------------------------------------------------|----------------------------|-----------------------------------------------------|-----------|\n| T-7 | 2025-07-19 | Review Q3_Stability_Initiative_ActionItems.xlsx and Sprint_32_Retrospective_Notes.docx to prepare discussion points | Jordan Lee                 | Prepared agenda and notes                           | Completed |\n| T-0 | 2025-07-26 | Conduct 1:1 Action Items Review meeting                                                                             | Jordan Lee & Alex Martinez | Meeting notes with updated action items             | Scheduled |\n| T+4 | 2025-07-30 | Finalize database query optimization                                                                                | Alex Martinez              | Optimized query code merged to main branch          | Pending   |\n| T+5 | 2025-07-31 | Schedule follow-up with DevOps team for CI/CD monitoring script deployment                                          | Jordan Lee                 | Calendar invite sent and confirmed                  | Pending   |\n| T+7 | 2025-08-02 | Prepare summary report of completed stability improvements for leadership review                                    | Jordan Lee                 | Summary report document ready for leadership review | Pending   |\n\n---\n\n## Blockers and Mitigations\n**Blocker:** Limited QA resources during the last week of July may delay validation of query optimization.\n- **Mitigation:** Prioritize QA scheduling for stability tasks immediately after July 26 meeting.\n- **Owner:** Jordan Lee\n\n**Blocker:** Dependencies on DevOps for CI/CD monitoring scripts could slip.\n- **Mitigation:** Confirm DevOps availability during follow-up meeting and escalate if needed.\n- **Owner:** Jordan Lee\n\n---\n\n## Assumptions\n1. **All code reviews for stability tasks will be completed within 48 hours of submission.**\n   - *Impact if invalidated:* Delays in merging optimized queries and error logging improvements.\n2. **No major incidents will occur that divert engineering resources from the current sprint.**\n   - *Impact if invalidated:* Action items may not be completed before the production freeze.\n\n---\n\n## Artifacts Referenced\n- Q3_Stability_Initiative_ActionItems.xlsx\n- Sprint_32_Retrospective_Notes.docx\n\n---\n\n## Next Steps Post-Meeting\n- Jordan Lee to schedule DevOps follow-up by July 31, 2025.\n- Alex Martinez to complete database query optimization by July 30, 2025.\n- Jordan Lee to prepare summary report by August 2, 2025.\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0000_G3",
+            "dimension": "G3",
+            "passes": true,
+            "evidence": "The Workback Plan states: 'The meeting **'1:1 Action Items Review'** is scheduled for **July 26, 2025 at 14:00 PST**.'",
+            "ground_truth_check": "Scenario specifies title: '1:1 Action Items Review', date: '2025-07-26', time: '14:00 PST'.",
+            "reasoning": "The WBP meeting title, date, and time exactly match the scenario details, satisfying the grounding requirement for G3."
+          }
+        ]
+      }
+    }
+  ]
+}

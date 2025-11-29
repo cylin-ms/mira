@@ -225,8 +225,17 @@ result = response.json()["choices"][0]["message"]["content"]
 [X] 16. Tested decomposition on 4 assertions - all correctly decomposed into atomic S+G units
 [X] 17. Created `assertion_analyzer/prompts/classification_prompt.json` v2.0 (optimized)
 [X] 18. Created `assertion_analyzer/prompts/ie_slot_extraction_prompt.json` v2.0 (optimized)
+[X] 19. Implemented staged processing (STAGE_SIZE=50) with token refresh between stages
+[X] 20. Updated output format to unified S+G units with nested g_slots
+[X] 21. Added separate S/G counting for independent success rate reporting
+[X] 22. Updated decomposition_prompt.json to v4.0 with s_template + s_literal forms
+[X] 23. Added sub_category field to output format for dimension specialization
+    - s_dimension_name: Canonical from DIMENSION_NAMES (e.g., "Meeting Details")
+    - sub_category: Specialized from GPT-5 (e.g., "Title") or null if same
 
 #### Plan:
-[ ] 1. Update convert_kening_assertions_v2.py to use decomposition prompt
-[ ] 2. Re-run conversion on full dataset with atomic decomposition
-[ ] 3. Validate output format and quality
+[X] 1. Update convert_kening_assertions_v2.py to use decomposition prompt - DONE
+[X] 2. Add staged processing with token refresh - DONE
+[X] 3. Add sub_category for dimension specialization - DONE
+[ ] 4. Run full conversion on all 224 meetings with --stage-size 50
+[ ] 5. Validate output format and quality

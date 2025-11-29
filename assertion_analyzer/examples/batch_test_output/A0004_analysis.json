@@ -1,0 +1,312 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T05:53:14.793709",
+    "original_utterance": "All deliverables are explicitly mentioned with expected formats",
+    "total_assertions": 3,
+    "structural_count": 1,
+    "grounding_count": 2
+  },
+  "scenario": {
+    "title": "Q1 Marketing Campaign Deliverables Review",
+    "date": "2025-01-15",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Emily Carter",
+    "attendees": [
+      "Emily Carter - Marketing Project Manager",
+      "James Lee - Creative Director",
+      "Sophia Nguyen - Content Strategist",
+      "Raj Patel - Digital Marketing Specialist",
+      "Laura Chen - Graphic Designer"
+    ],
+    "context": "The marketing team met to finalize the deliverables for the upcoming Q1 campaign launch scheduled for February. The purpose was to ensure that all deliverables are clearly defined, with agreed-upon formats and deadlines, to avoid ambiguity during production.",
+    "artifacts": [
+      "Q1_Campaign_Deliverables_Draft.docx",
+      "Brand_Guidelines.pdf",
+      "Social_Media_Content_Calendar.xlsx"
+    ],
+    "discussion_points": [
+      "Reviewed the draft list of deliverables for the Q1 campaign.",
+      "Confirmed that each deliverable includes an explicit format (e.g., PDF, MP4, PNG).",
+      "Discussed alignment with brand guidelines and social media platform requirements.",
+      "Validated timelines for content handoff to the digital team."
+    ],
+    "action_items_discussed": [
+      "Social media graphics: 10 Instagram posts in PNG format by Jan 28.",
+      "Campaign video: 30-second promotional video in MP4 format by Feb 3.",
+      "Email newsletter: HTML template by Jan 25.",
+      "Landing page copy: Word document (.docx) by Jan 22."
+    ],
+    "known_constraints": [
+      "Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.",
+      "Instagram posts must adhere to 1080x1080 resolution."
+    ],
+    "stated_assumptions": [
+      "All team members have access to the shared drive for uploading deliverables.",
+      "No major changes to brand guidelines will occur before campaign launch."
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q1 Marketing Campaign Deliverables\n\n## Goal\nEnsure all Q1 marketing campaign deliverables are finalized and produced with explicit formats and deadlines, aligned with brand guidelines, to meet the February campaign launch.\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                  | Owner                                    | Deliverable                           | Status      |\n|-----|------------|-------------------------------------------------------|------------------------------------------|---------------------------------------|-------------|\n| T-1 | 2025-01-18 | Finalize and submit video script to vendor            | Sophia Nguyen - Content Strategist       | Campaign video script (for MP4 video) | Not Started |\n| T-2 | 2025-01-22 | Complete landing page copy and upload to shared drive | Sophia Nguyen - Content Strategist       | Landing page copy (.docx)             | Not Started |\n| T-3 | 2025-01-25 | Deliver HTML email newsletter template                | Raj Patel - Digital Marketing Specialist | Email newsletter (HTML template)      | Not Started |\n| T-4 | 2025-01-28 | Finalize and upload 10 Instagram post graphics        | Laura Chen - Graphic Designer            | 10 Instagram posts (PNG, 1080x1080)   | Not Started |\n| T-5 | 2025-02-03 | Deliver 30-second promotional video in MP4 format     | James Lee - Creative Director            | Campaign video (MP4)                  | Not Started |\n\n---\n\n## Deliverables & Formats\n- **Landing page copy**: Word document (.docx) by Jan 22\n- **Email newsletter**: HTML template by Jan 25\n- **Social media graphics**: 10 Instagram posts in PNG format (1080x1080) by Jan 28\n- **Campaign video**: 30-second promotional video in MP4 format by Feb 3\n\nArtifacts referenced:\n- Q1_Campaign_Deliverables_Draft.docx\n- Brand_Guidelines.pdf\n- Social_Media_Content_Calendar.xlsx\n\n---\n\n## Blockers & Mitigations\n- **Blocker**: Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.\n  - **Mitigation**: Prioritize script finalization immediately after meeting; Sophia to confirm script approval with James by Jan 17.\n  - **Owner**: Sophia Nguyen\n\n---\n\n## Assumptions\n1. All team members have access to the shared drive for uploading deliverables.\n   - **Impact if invalidated**: Delays in handoff and missed deadlines.\n2. No major changes to brand guidelines will occur before campaign launch.\n   - **Impact if invalidated**: Rework of creative assets and potential timeline shifts.\n\n---\n\n## Open Questions\n- Are there any contingency plans if the video vendor experiences delays?\n- Will QA review be needed for the email template before Jan 25?\n",
+  "assertions": [
+    {
+      "assertion_id": "A0004_S4",
+      "parent_assertion_id": null,
+      "text": "All [DELIVERABLE] items are explicitly listed with their expected [ARTIFACT] formats.",
+      "original_text": "All deliverables are explicitly mentioned with expected formats",
+      "dimension_id": "S4",
+      "dimension_name": "Deliverables & Artifacts",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 2,
+      "linked_g_dims": [
+        "G4",
+        "G5"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion focuses on ensuring that all deliverables are explicitly listed along with their expected formats, which directly aligns with the requirement to specify deliverables and artifacts in the workback plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q1 Marketing Campaign Deliverables Review",
+          "date": "2025-01-15",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Emily Carter",
+          "attendees": [
+            "Emily Carter - Marketing Project Manager",
+            "James Lee - Creative Director",
+            "Sophia Nguyen - Content Strategist",
+            "Raj Patel - Digital Marketing Specialist",
+            "Laura Chen - Graphic Designer"
+          ],
+          "context": "The marketing team met to finalize the deliverables for the upcoming Q1 campaign launch scheduled for February. The purpose was to ensure that all deliverables are clearly defined, with agreed-upon formats and deadlines, to avoid ambiguity during production.",
+          "artifacts": [
+            "Q1_Campaign_Deliverables_Draft.docx",
+            "Brand_Guidelines.pdf",
+            "Social_Media_Content_Calendar.xlsx"
+          ],
+          "discussion_points": [
+            "Reviewed the draft list of deliverables for the Q1 campaign.",
+            "Confirmed that each deliverable includes an explicit format (e.g., PDF, MP4, PNG).",
+            "Discussed alignment with brand guidelines and social media platform requirements.",
+            "Validated timelines for content handoff to the digital team."
+          ],
+          "action_items_discussed": [
+            "Social media graphics: 10 Instagram posts in PNG format by Jan 28.",
+            "Campaign video: 30-second promotional video in MP4 format by Feb 3.",
+            "Email newsletter: HTML template by Jan 25.",
+            "Landing page copy: Word document (.docx) by Jan 22."
+          ],
+          "known_constraints": [
+            "Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.",
+            "Instagram posts must adhere to 1080x1080 resolution."
+          ],
+          "stated_assumptions": [
+            "All team members have access to the shared drive for uploading deliverables.",
+            "No major changes to brand guidelines will occur before campaign launch."
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q1 Marketing Campaign Deliverables\n\n## Goal\nEnsure all Q1 marketing campaign deliverables are finalized and produced with explicit formats and deadlines, aligned with brand guidelines, to meet the February campaign launch.\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                  | Owner                                    | Deliverable                           | Status      |\n|-----|------------|-------------------------------------------------------|------------------------------------------|---------------------------------------|-------------|\n| T-1 | 2025-01-18 | Finalize and submit video script to vendor            | Sophia Nguyen - Content Strategist       | Campaign video script (for MP4 video) | Not Started |\n| T-2 | 2025-01-22 | Complete landing page copy and upload to shared drive | Sophia Nguyen - Content Strategist       | Landing page copy (.docx)             | Not Started |\n| T-3 | 2025-01-25 | Deliver HTML email newsletter template                | Raj Patel - Digital Marketing Specialist | Email newsletter (HTML template)      | Not Started |\n| T-4 | 2025-01-28 | Finalize and upload 10 Instagram post graphics        | Laura Chen - Graphic Designer            | 10 Instagram posts (PNG, 1080x1080)   | Not Started |\n| T-5 | 2025-02-03 | Deliver 30-second promotional video in MP4 format     | James Lee - Creative Director            | Campaign video (MP4)                  | Not Started |\n\n---\n\n## Deliverables & Formats\n- **Landing page copy**: Word document (.docx) by Jan 22\n- **Email newsletter**: HTML template by Jan 25\n- **Social media graphics**: 10 Instagram posts in PNG format (1080x1080) by Jan 28\n- **Campaign video**: 30-second promotional video in MP4 format by Feb 3\n\nArtifacts referenced:\n- Q1_Campaign_Deliverables_Draft.docx\n- Brand_Guidelines.pdf\n- Social_Media_Content_Calendar.xlsx\n\n---\n\n## Blockers & Mitigations\n- **Blocker**: Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.\n  - **Mitigation**: Prioritize script finalization immediately after meeting; Sophia to confirm script approval with James by Jan 17.\n  - **Owner**: Sophia Nguyen\n\n---\n\n## Assumptions\n1. All team members have access to the shared drive for uploading deliverables.\n   - **Impact if invalidated**: Delays in handoff and missed deadlines.\n2. No major changes to brand guidelines will occur before campaign launch.\n   - **Impact if invalidated**: Rework of creative assets and potential timeline shifts.\n\n---\n\n## Open Questions\n- Are there any contingency plans if the video vendor experiences delays?\n- Will QA review be needed for the email template before Jan 25?\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0004_S4",
+            "dimension": "S4",
+            "passes": true,
+            "evidence": "Under 'Deliverables & Formats', the WBP lists: Landing page copy (.docx), Email newsletter (HTML template), Social media graphics (PNG, 1080x1080), Campaign video (MP4).",
+            "ground_truth_check": "Scenario action_items_discussed lists: Landing page copy (.docx), Email newsletter (HTML template), Social media graphics (PNG), Campaign video (MP4).",
+            "reasoning": "All deliverables are explicitly listed with their formats in the WBP, matching the scenario's requirement for explicit formats."
+          },
+          {
+            "assertion_id": "A0004_G4_0",
+            "dimension": "G4",
+            "passes": true,
+            "evidence": "WBP references artifacts: Q1_Campaign_Deliverables_Draft.docx, Brand_Guidelines.pdf, Social_Media_Content_Calendar.xlsx.",
+            "ground_truth_check": "Scenario artifacts list includes the same three files.",
+            "reasoning": "All referenced artifacts in the WBP correspond to real artifacts from the scenario; no extraneous or invented files are present."
+          },
+          {
+            "assertion_id": "A0004_G5_1",
+            "dimension": "G5",
+            "passes": true,
+            "evidence": "WBP deliverables: Landing page copy (.docx), Email newsletter (HTML template), Social media graphics (10 Instagram posts in PNG), Campaign video (MP4).",
+            "ground_truth_check": "Scenario discussion_points and action_items_discussed confirm these deliverables were discussed and are within scope.",
+            "reasoning": "The WBP deliverables align with the scenario's discussed scope and action items; no irrelevant or invented deliverables are included."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0004_G4_0",
+      "parent_assertion_id": "A0004_S4",
+      "text": "Check that each listed deliverable and its format correspond to real or creatable artifacts.",
+      "original_text": "All deliverables are explicitly mentioned with expected formats",
+      "dimension_id": "G4",
+      "dimension_name": "Artifact Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion requires that all deliverables are explicitly mentioned and their expected formats are specified, which implies verifying that these deliverables actually exist or can be created from available artifacts.",
+        "parent_dimension": "S4",
+        "parent_dimension_name": "Deliverables & Artifacts",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q1 Marketing Campaign Deliverables Review",
+          "date": "2025-01-15",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Emily Carter",
+          "attendees": [
+            "Emily Carter - Marketing Project Manager",
+            "James Lee - Creative Director",
+            "Sophia Nguyen - Content Strategist",
+            "Raj Patel - Digital Marketing Specialist",
+            "Laura Chen - Graphic Designer"
+          ],
+          "context": "The marketing team met to finalize the deliverables for the upcoming Q1 campaign launch scheduled for February. The purpose was to ensure that all deliverables are clearly defined, with agreed-upon formats and deadlines, to avoid ambiguity during production.",
+          "artifacts": [
+            "Q1_Campaign_Deliverables_Draft.docx",
+            "Brand_Guidelines.pdf",
+            "Social_Media_Content_Calendar.xlsx"
+          ],
+          "discussion_points": [
+            "Reviewed the draft list of deliverables for the Q1 campaign.",
+            "Confirmed that each deliverable includes an explicit format (e.g., PDF, MP4, PNG).",
+            "Discussed alignment with brand guidelines and social media platform requirements.",
+            "Validated timelines for content handoff to the digital team."
+          ],
+          "action_items_discussed": [
+            "Social media graphics: 10 Instagram posts in PNG format by Jan 28.",
+            "Campaign video: 30-second promotional video in MP4 format by Feb 3.",
+            "Email newsletter: HTML template by Jan 25.",
+            "Landing page copy: Word document (.docx) by Jan 22."
+          ],
+          "known_constraints": [
+            "Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.",
+            "Instagram posts must adhere to 1080x1080 resolution."
+          ],
+          "stated_assumptions": [
+            "All team members have access to the shared drive for uploading deliverables.",
+            "No major changes to brand guidelines will occur before campaign launch."
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q1 Marketing Campaign Deliverables\n\n## Goal\nEnsure all Q1 marketing campaign deliverables are finalized and produced with explicit formats and deadlines, aligned with brand guidelines, to meet the February campaign launch.\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                  | Owner                                    | Deliverable                           | Status      |\n|-----|------------|-------------------------------------------------------|------------------------------------------|---------------------------------------|-------------|\n| T-1 | 2025-01-18 | Finalize and submit video script to vendor            | Sophia Nguyen - Content Strategist       | Campaign video script (for MP4 video) | Not Started |\n| T-2 | 2025-01-22 | Complete landing page copy and upload to shared drive | Sophia Nguyen - Content Strategist       | Landing page copy (.docx)             | Not Started |\n| T-3 | 2025-01-25 | Deliver HTML email newsletter template                | Raj Patel - Digital Marketing Specialist | Email newsletter (HTML template)      | Not Started |\n| T-4 | 2025-01-28 | Finalize and upload 10 Instagram post graphics        | Laura Chen - Graphic Designer            | 10 Instagram posts (PNG, 1080x1080)   | Not Started |\n| T-5 | 2025-02-03 | Deliver 30-second promotional video in MP4 format     | James Lee - Creative Director            | Campaign video (MP4)                  | Not Started |\n\n---\n\n## Deliverables & Formats\n- **Landing page copy**: Word document (.docx) by Jan 22\n- **Email newsletter**: HTML template by Jan 25\n- **Social media graphics**: 10 Instagram posts in PNG format (1080x1080) by Jan 28\n- **Campaign video**: 30-second promotional video in MP4 format by Feb 3\n\nArtifacts referenced:\n- Q1_Campaign_Deliverables_Draft.docx\n- Brand_Guidelines.pdf\n- Social_Media_Content_Calendar.xlsx\n\n---\n\n## Blockers & Mitigations\n- **Blocker**: Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.\n  - **Mitigation**: Prioritize script finalization immediately after meeting; Sophia to confirm script approval with James by Jan 17.\n  - **Owner**: Sophia Nguyen\n\n---\n\n## Assumptions\n1. All team members have access to the shared drive for uploading deliverables.\n   - **Impact if invalidated**: Delays in handoff and missed deadlines.\n2. No major changes to brand guidelines will occur before campaign launch.\n   - **Impact if invalidated**: Rework of creative assets and potential timeline shifts.\n\n---\n\n## Open Questions\n- Are there any contingency plans if the video vendor experiences delays?\n- Will QA review be needed for the email template before Jan 25?\n",
+        "evidence": "WBP references artifacts: Q1_Campaign_Deliverables_Draft.docx, Brand_Guidelines.pdf, Social_Media_Content_Calendar.xlsx.",
+        "ground_truth_check": "Scenario artifacts list includes the same three files.",
+        "verification": "All referenced artifacts in the WBP correspond to real artifacts from the scenario; no extraneous or invented files are present.",
+        "verified": true
+      }
+    },
+    {
+      "assertion_id": "A0004_G5_1",
+      "parent_assertion_id": "A0004_S4",
+      "text": "Ensure that the deliverables listed are relevant to the discussed scope and not invented.",
+      "original_text": "All deliverables are explicitly mentioned with expected formats",
+      "dimension_id": "G5",
+      "dimension_name": "Topic Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 2,
+      "rationale": {
+        "mapping_reason": "The assertion states 'all deliverables,' which implies that the deliverables mentioned must align with the actual topics or requirements discussed, not fabricated ones.",
+        "parent_dimension": "S4",
+        "parent_dimension_name": "Deliverables & Artifacts",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q1 Marketing Campaign Deliverables Review",
+          "date": "2025-01-15",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Emily Carter",
+          "attendees": [
+            "Emily Carter - Marketing Project Manager",
+            "James Lee - Creative Director",
+            "Sophia Nguyen - Content Strategist",
+            "Raj Patel - Digital Marketing Specialist",
+            "Laura Chen - Graphic Designer"
+          ],
+          "context": "The marketing team met to finalize the deliverables for the upcoming Q1 campaign launch scheduled for February. The purpose was to ensure that all deliverables are clearly defined, with agreed-upon formats and deadlines, to avoid ambiguity during production.",
+          "artifacts": [
+            "Q1_Campaign_Deliverables_Draft.docx",
+            "Brand_Guidelines.pdf",
+            "Social_Media_Content_Calendar.xlsx"
+          ],
+          "discussion_points": [
+            "Reviewed the draft list of deliverables for the Q1 campaign.",
+            "Confirmed that each deliverable includes an explicit format (e.g., PDF, MP4, PNG).",
+            "Discussed alignment with brand guidelines and social media platform requirements.",
+            "Validated timelines for content handoff to the digital team."
+          ],
+          "action_items_discussed": [
+            "Social media graphics: 10 Instagram posts in PNG format by Jan 28.",
+            "Campaign video: 30-second promotional video in MP4 format by Feb 3.",
+            "Email newsletter: HTML template by Jan 25.",
+            "Landing page copy: Word document (.docx) by Jan 22."
+          ],
+          "known_constraints": [
+            "Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.",
+            "Instagram posts must adhere to 1080x1080 resolution."
+          ],
+          "stated_assumptions": [
+            "All team members have access to the shared drive for uploading deliverables.",
+            "No major changes to brand guidelines will occur before campaign launch."
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q1 Marketing Campaign Deliverables\n\n## Goal\nEnsure all Q1 marketing campaign deliverables are finalized and produced with explicit formats and deadlines, aligned with brand guidelines, to meet the February campaign launch.\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                  | Owner                                    | Deliverable                           | Status      |\n|-----|------------|-------------------------------------------------------|------------------------------------------|---------------------------------------|-------------|\n| T-1 | 2025-01-18 | Finalize and submit video script to vendor            | Sophia Nguyen - Content Strategist       | Campaign video script (for MP4 video) | Not Started |\n| T-2 | 2025-01-22 | Complete landing page copy and upload to shared drive | Sophia Nguyen - Content Strategist       | Landing page copy (.docx)             | Not Started |\n| T-3 | 2025-01-25 | Deliver HTML email newsletter template                | Raj Patel - Digital Marketing Specialist | Email newsletter (HTML template)      | Not Started |\n| T-4 | 2025-01-28 | Finalize and upload 10 Instagram post graphics        | Laura Chen - Graphic Designer            | 10 Instagram posts (PNG, 1080x1080)   | Not Started |\n| T-5 | 2025-02-03 | Deliver 30-second promotional video in MP4 format     | James Lee - Creative Director            | Campaign video (MP4)                  | Not Started |\n\n---\n\n## Deliverables & Formats\n- **Landing page copy**: Word document (.docx) by Jan 22\n- **Email newsletter**: HTML template by Jan 25\n- **Social media graphics**: 10 Instagram posts in PNG format (1080x1080) by Jan 28\n- **Campaign video**: 30-second promotional video in MP4 format by Feb 3\n\nArtifacts referenced:\n- Q1_Campaign_Deliverables_Draft.docx\n- Brand_Guidelines.pdf\n- Social_Media_Content_Calendar.xlsx\n\n---\n\n## Blockers & Mitigations\n- **Blocker**: Video production vendor requires final script by Jan 18 to meet Feb 3 deadline.\n  - **Mitigation**: Prioritize script finalization immediately after meeting; Sophia to confirm script approval with James by Jan 17.\n  - **Owner**: Sophia Nguyen\n\n---\n\n## Assumptions\n1. All team members have access to the shared drive for uploading deliverables.\n   - **Impact if invalidated**: Delays in handoff and missed deadlines.\n2. No major changes to brand guidelines will occur before campaign launch.\n   - **Impact if invalidated**: Rework of creative assets and potential timeline shifts.\n\n---\n\n## Open Questions\n- Are there any contingency plans if the video vendor experiences delays?\n- Will QA review be needed for the email template before Jan 25?\n",
+        "evidence": "WBP deliverables: Landing page copy (.docx), Email newsletter (HTML template), Social media graphics (10 Instagram posts in PNG), Campaign video (MP4).",
+        "ground_truth_check": "Scenario discussion_points and action_items_discussed confirm these deliverables were discussed and are within scope.",
+        "verification": "The WBP deliverables align with the scenario's discussed scope and action items; no irrelevant or invented deliverables are included.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 3,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0004_S4",
+        "dimension": "S4",
+        "passes": true,
+        "evidence": "Under 'Deliverables & Formats', the WBP lists: Landing page copy (.docx), Email newsletter (HTML template), Social media graphics (PNG, 1080x1080), Campaign video (MP4).",
+        "ground_truth_check": "Scenario action_items_discussed lists: Landing page copy (.docx), Email newsletter (HTML template), Social media graphics (PNG), Campaign video (MP4).",
+        "reasoning": "All deliverables are explicitly listed with their formats in the WBP, matching the scenario's requirement for explicit formats."
+      },
+      {
+        "assertion_id": "A0004_G4_0",
+        "dimension": "G4",
+        "passes": true,
+        "evidence": "WBP references artifacts: Q1_Campaign_Deliverables_Draft.docx, Brand_Guidelines.pdf, Social_Media_Content_Calendar.xlsx.",
+        "ground_truth_check": "Scenario artifacts list includes the same three files.",
+        "reasoning": "All referenced artifacts in the WBP correspond to real artifacts from the scenario; no extraneous or invented files are present."
+      },
+      {
+        "assertion_id": "A0004_G5_1",
+        "dimension": "G5",
+        "passes": true,
+        "evidence": "WBP deliverables: Landing page copy (.docx), Email newsletter (HTML template), Social media graphics (10 Instagram posts in PNG), Campaign video (MP4).",
+        "ground_truth_check": "Scenario discussion_points and action_items_discussed confirm these deliverables were discussed and are within scope.",
+        "reasoning": "The WBP deliverables align with the scenario's discussed scope and action items; no irrelevant or invented deliverables are included."
+      }
+    ]
+  }
+}

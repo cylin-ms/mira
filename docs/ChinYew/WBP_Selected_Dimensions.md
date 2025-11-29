@@ -1,25 +1,25 @@
 # WBP Evaluation — Complete Dimension Reference
 
 **Author:** Chin-Yew Lin  
-**Date:** November 28, 2025  
-**Version:** 1.1
+**Date:** November 29, 2025  
+**Version:** 1.2
 
-**Purpose:** A comprehensive reference of all 27 WBP evaluation dimensions (S1-S19 + G1-G8), organized into Phase 1 (core) and Phase 2 (extended) evaluation frameworks.
+**Purpose:** A comprehensive reference of all 28 WBP evaluation dimensions (S1-S20 + G1-G8), organized into Phase 1 (core) and Phase 2 (extended) evaluation frameworks.
 
 ---
 
 ## Overview
 
-This document defines the complete set of **27 evaluation dimensions** for Workback Plan (WBP) assessment:
+This document defines the complete set of **28 evaluation dimensions** for Workback Plan (WBP) assessment:
 
 | Layer | Total | Phase 1 | Phase 2 |
 |-------|:-----:|:-------:|:-------:|
-| Structural (S1-S19) | 19 | 9 | 10 |
+| Structural (S1-S20) | 20 | 10 | 10 |
 | Grounding (G1-G8) | 8 | 8 | 0 |
-| **Total** | **27** | **17** | **10** |
+| **Total** | **28** | **18** | **10** |
 
 **Phase Legend:**
-- ✅ **Phase 1** — Core dimensions for initial evaluation framework (14 dimensions)
+- ✅ **Phase 1** — Core dimensions for initial evaluation framework (18 dimensions)
 - ⬜ **Phase 2** — Extended dimensions for comprehensive evaluation (10 dimensions)
 
 ---
@@ -66,11 +66,50 @@ Additional structural dimensions for comprehensive planning aspects.
 | **S18** | Post-Event Actions | 1 | ✅ P1 | "The response should list [POST-EVENT ACTIONS] (wrap-up, retrospectives, reporting) with owners and deadlines" | Wrap-up tasks, retrospectives, and reporting with owners and deadlines |
 | **S19** | Caveat & Clarification | 2 | ✅ P1 | "The response should disclose [CAVEATS], [ASSUMPTIONS], [OPEN QUESTIONS], and [CLARIFICATIONS] about information gaps or uncertainties" | Assumptions, open questions, information gaps, uncertainties disclosed |
 
+### UX/Presentation Dimension (S20) — NEW
+
+| ID | Dimension | Weight | Phase | Definition |
+|----|-----------|:------:|:-----:|------------|
+| **S20** | Clarity & First Impression | 2 | ✅ P1 | WBP is instantly recognizable, intuitive to use, and professionally formatted |
+
+**S20 Assertions (All Objectively Testable):**
+
+| # | Assertion | Pass/Fail Criteria | Test Method |
+|---|-----------|---------------------|-------------|
+| S20_A1 | Required columns: Task, Owner, Deadline, Status | All four columns exist with correct headers | Automated |
+| S20_A2 | Goal statement in first 3 lines | "Goal/Objective/Purpose" keyword before task table | Automated |
+| S20_A3 | Task descriptions ≤12 words | No task description exceeds 12 words | Automated |
+| S20_A4 | Consistent date format (YYYY-MM-DD) | All deadlines match regex `\d{4}-\d{2}-\d{2}` | Automated |
+| S20_A5 | Chronological task order | Each deadline ≥ previous deadline | Automated |
+| S20_A6 | No empty required cells | All Task/Owner/Deadline/Status fields populated | Automated |
+| S20_A7 | Consistent owner spelling | No case/spelling variations for same person | Automated |
+| S20_A8 | Status legend if custom terms | Legend present if non-standard statuses used | Automated |
+
+**Note:** S20 has no `linked_g_dims` as it evaluates presentation quality, not factual grounding.
+
 ---
 
 ## Grounding Dimensions (G1-G8)
 
 Grounding dimensions verify factual accuracy against source data. **All 8 are Phase 1** dimensions for the evaluation framework.
+
+### Key Concept: G Assertions Are Instantiated Through S Assertions
+
+**G-level (grounding) assertions are never standalone.** They are always instantiated in the context of validating elements identified by S-level (structural) assertions:
+
+1. **S-level assertions** define **what** structural elements should exist (tasks, dates, owners, etc.)
+2. **G-level assertions** define **grounding constraints** that validate those elements against the source
+3. The `linked_g_dims` field in each S assertion specifies which G checks apply
+
+**Example flow:**
+```
+S2: "Each [TASK] must have a [DUE_DATE]..."
+    └── linked_g_dims: ["G3", "G6"]
+        ├── G3: Validate [DUE_DATE] consistency with meeting date
+        └── G6: Validate [TASK] traces to action_items_discussed
+```
+
+The G dimension definitions below serve as a **reference library** that S assertions link to.
 
 **Note:** G1 (Hallucination Check) is placed first as the **overall grounding recall check**. If G2-G8 all pass, G1 passes. G1 also catches entity types not covered by G2-G8.
 

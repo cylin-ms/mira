@@ -1,0 +1,103 @@
+[
+  {
+    "dimension": "Meeting Details",
+    "assertions": [
+      {
+        "text": "The response describes a forward-looking plan for an upcoming meeting relative to the request time",
+        "level": "critical",
+        "layer": "structural"
+      },
+      {
+        "text": "The response clearly identifies the target meeting with information such as subject, date/time, and attendees",
+        "level": "critical",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Timeline Alignment",
+    "assertions": [
+      {
+        "text": "The response lays out a backward workback timeline in reverse chronological order leading up to T0 of the meeting",
+        "level": "critical",
+        "layer": "structural"
+      },
+      {
+        "text": "The response includes specific buffers or contingency time in the planning timeline to accommodate potential delays or unexpected issues",
+        "level": "aspirational",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Ownership Assignment",
+    "assertions": [
+      {
+        "text": "The response assigns every task to named owner(s) or, if unknown, a specific role/skill placeholder",
+        "level": "critical",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Deliverables & Artifacts",
+    "assertions": [
+      {
+        "text": "The response enumerates each required deliverable or artifact along with its format and access location/link",
+        "level": "expected",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Task Dates",
+    "assertions": [
+      {
+        "text": "The response provides due dates or date ranges for every task and aligns them to the meeting timeline",
+        "level": "critical",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Dependencies & Blockers",
+    "assertions": [
+      {
+        "text": "The response highlights upstream dependencies or blockers for critical tasks and states the unblock action or owner",
+        "level": "expected",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Risk Mitigation Strategy",
+    "assertions": [
+      {
+        "text": "The response identifies the potiential risks and outlines mitigation steps with accountable owners",
+        "level": "expected",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Post-Event Actions",
+    "assertions": [
+      {
+        "text": "The response lists post-meeting follow-ups (send notes, log decisions, track action items) with owners and deadlines",
+        "level": "aspirational",
+        "layer": "structural"
+      }
+    ]
+  },
+  {
+    "dimension": "Caveat & Clarification",
+    "assertions": [
+      {
+        "text": "The response explicitly lists assumptions, open questions, or missing information that could change the plan",
+        "level": "aspirational",
+        "layer": "structural"
+      }
+    ]
+  }
+]
+ 

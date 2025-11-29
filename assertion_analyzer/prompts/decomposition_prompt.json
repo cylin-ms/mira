@@ -1,15 +1,15 @@
 {
   "name": "decomposition_prompt",
-  "version": "3.0",
-  "description": "Decompose free-form assertions into atomic S+G units",
-  "source": "GPT-5 optimization sessions 018-020 (2025-11-30)",
-  "system_prompt": "You are an expert in requirements decomposition for the WBP (Workback Plan) framework. Your task is to break down free-form assertions into atomic S+G units. Each unit tests exactly ONE structural requirement with its linked grounding checks. Return structured JSON only.",
-  "user_prompt_template": "Decompose this free-form assertion into ATOMIC S+G units.\n\n=== ASSERTION ===\n\"{assertion_text}\"\n\n=== S DIMENSIONS (Structural - what must exist) ===\nS1: Title - meeting/event title or name\nS2: Timeline Alignment - time constraints, tight timeline disclosure\nS3: Ownership Assignment - task owner assignment\nS4: Participant Identification - attendees, stakeholders\nS5: Task Dates - when tasks are scheduled (before/after T₀)\nS6: Risk Assessment - risks, mitigation, escalation\nS8: Task Descriptions - what tasks involve\nS9: Success Criteria - definition of done\nS10: Buffer Time - contingency or slack time\nS16: Assumptions & Prerequisites - stated assumptions\nS17: Dependencies - task dependencies\nS18: Milestones - key checkpoints\nS19: Communication Plan - sharing, notification actions\nS20: Review & Approval - review cycles, sign-offs\n\n=== G DIMENSIONS (Grounding - values must match source) ===\nG1: Hallucination Prevention - no invented details\nG2: Attendee Grounding - person names match source\nG3: Date/Time Grounding - dates/times match source\nG4: Artifact Grounding - files/documents match source\nG5: Topic Grounding - topics/subjects match source\nG6: Action Item Grounding - tasks match source\nG7: Role Grounding - roles match source\nG8: Constraint Grounding - limits match source\nG9: Planner-Generated Consistency - generated content consistent\n\n=== S→G MAPPINGS ===\nS1 → G5 (title is a topic)\nS3 → G2, G6 (owner name + task)\nS4 → G2, G7 (attendee names + roles)\nS5 → G3 (task dates)\nS16 → G5, G6, G9 (assumptions about topics/tasks)\nS19 → G2, G4, G6 (share with person, artifact, action)\n\n=== DECOMPOSITION RULES ===\n1. Split into ATOMIC units - each unit = ONE S dimension\n2. If assertion has multiple structural requirements → multiple units\n3. Extract slot_value for each G dimension from the assertion text\n4. If purely grounding (no structural requirement) → s_dimension: null\n5. Return ONLY JSON array, no extra text\n\n=== EXAMPLES ===\n\nExample 1 (Multi-S decomposition):\nInput: \"state that the meeting '1:1 Review' is scheduled for July 26 at 14:00 PST\"\nOutput:\n[\n  {\"s_dimension\": \"S1\", \"s_name\": \"Title\", \"s_assertion\": \"State the meeting title\",\n   \"linked_g\": [{\"g_dimension\": \"G5\", \"slot_value\": \"1:1 Review\"}]},\n  {\"s_dimension\": \"S5\", \"s_name\": \"Task Dates\", \"s_assertion\": \"State the meeting date/time\",\n   \"linked_g\": [{\"g_dimension\": \"G3\", \"slot_value\": \"July 26 at 14:00 PST\"}]}\n]\n\nExample 2 (Single S with multiple G):\nInput: \"assign Tisa Odonoghue as owner for confirming agenda and distributing pre-reads\"\nOutput:\n[\n  {\"s_dimension\": \"S3\", \"s_name\": \"Ownership Assignment\", \"s_assertion\": \"Assign task owner\",\n   \"linked_g\": [\n     {\"g_dimension\": \"G2\", \"slot_value\": \"Tisa Odonoghue\"},\n     {\"g_dimension\": \"G6\", \"slot_value\": [\"confirming agenda\", \"distributing pre-reads\"]}\n   ]}\n]\n\nExample 3 (Pure grounding - no S):\nInput: \"not introduce any attendee other than those in the source\"\nOutput:\n[\n  {\"s_dimension\": null, \"s_name\": null, \"s_assertion\": null,\n   \"linked_g\": [{\"g_dimension\": \"G2\", \"slot_value\": null, \"constraint\": \"no new attendees\"}]}\n]\n\nExample 4 (Communication with artifacts):\nInput: \"share pre-reads referencing 'Report.xlsx' and 'Guide.docx' by July 26, 00:15 PST\"\nOutput:\n[\n  {\"s_dimension\": \"S19\", \"s_name\": \"Communication Plan\", \"s_assertion\": \"Share pre-read materials\",\n   \"linked_g\": [\n     {\"g_dimension\": \"G4\", \"slot_value\": [\"Report.xlsx\", \"Guide.docx\"]},\n     {\"g_dimension\": \"G3\", \"slot_value\": \"July 26, 00:15 PST\"}\n   ]}\n]\n\n=== NOW DECOMPOSE ===\nReturn ONLY a JSON array of atomic units.",
+  "version": "4.0",
+  "description": "Decompose free-form assertions into atomic S+G units with template and literal forms",
+  "source": "GPT-5 optimization sessions 018-020 (2025-11-30), updated for template+literal format",
+  "system_prompt": "You are an expert in requirements decomposition for the WBP (Workback Plan) framework. Your task is to break down free-form assertions into atomic S+G units. Each S assertion has TWO forms: (1) template with [SLOT] placeholders, (2) literal with actual values for human readability. Return structured JSON only.",
+  "user_prompt_template": "Decompose this free-form assertion into ATOMIC S+G units.\n\n=== ASSERTION ===\n\"{assertion_text}\"\n\n=== S DIMENSIONS (Structural - what must exist) ===\nS1: Title - meeting/event title or name\nS2: Timeline Alignment - time constraints, tight timeline disclosure\nS3: Ownership Assignment - task owner assignment\nS4: Participant Identification - attendees, stakeholders\nS5: Task Dates - when tasks are scheduled (before/after T₀)\nS6: Risk Assessment - risks, mitigation, escalation\nS8: Task Descriptions - what tasks involve\nS9: Success Criteria - definition of done\nS10: Buffer Time - contingency or slack time\nS16: Assumptions & Prerequisites - stated assumptions\nS17: Dependencies - task dependencies\nS18: Milestones - key checkpoints\nS19: Communication Plan - sharing, notification actions\nS20: Review & Approval - review cycles, sign-offs\n\n=== G DIMENSIONS (Grounding - values must match source) ===\nG1: Hallucination Prevention - no invented details\nG2: Attendee Grounding - person names match source\nG3: Date/Time Grounding - dates/times match source\nG4: Artifact Grounding - files/documents match source\nG5: Topic Grounding - topics/subjects match source\nG6: Action Item Grounding - tasks match source\nG7: Role Grounding - roles match source\nG8: Constraint Grounding - limits match source\nG9: Planner-Generated Consistency - generated content consistent\n\n=== SLOT NAMES BY G DIMENSION ===\nG2: [OWNER], [ATTENDEE], [PERSON]\nG3: [DATE], [TIME], [DATETIME], [TIMEZONE], [DEADLINE]\nG4: [ARTIFACT], [FILE], [DOCUMENT]\nG5: [SUBJECT], [TOPIC], [PURPOSE]\nG6: [TASK], [ACTION], [ACTION_ITEM]\nG7: [ROLE]\nG8: [CONSTRAINT], [LIMIT]\nG9: [ASSUMPTION], [BLOCKER], [MITIGATION]\n\n=== S→G MAPPINGS ===\nS1 → G5 (title is a topic)\nS3 → G2, G6 (owner name + task)\nS4 → G2, G7 (attendee names + roles)\nS5 → G3 (task dates)\nS16 → G5, G6, G9 (assumptions about topics/tasks)\nS19 → G2, G4, G6 (share with person, artifact, action)\n\n=== OUTPUT FORMAT ===\nEach S assertion must have:\n- s_template: Template with [SLOT_NAME] placeholders (e.g., \"The response should state the meeting [SUBJECT] scheduled for [DATETIME]\")\n- s_literal: Literal form with actual values filled in (e.g., \"The response should state the meeting '1:1 Review' scheduled for July 26 at 14:00 PST\")\n- linked_g: Array of G dimensions with slot_name and slot_value\n\n=== DECOMPOSITION RULES ===\n1. Split into ATOMIC units - each unit = ONE S dimension\n2. If assertion has multiple structural requirements → multiple units\n3. Use descriptive [SLOT_NAME] in template that matches G dimension\n4. s_literal should be human-readable with quoted values\n5. Return ONLY JSON array, no extra text\n\n=== EXAMPLES ===\n\nExample 1 (Multi-S decomposition):\nInput: \"state that the meeting '1:1 Review' is scheduled for July 26 at 14:00 PST\"\nOutput:\n[\n  {\n    \"s_dimension\": \"S1\", \"s_name\": \"Title\",\n    \"s_template\": \"The response should state the meeting [SUBJECT]\",\n    \"s_literal\": \"The response should state the meeting '1:1 Review'\",\n    \"linked_g\": [{\"g_dimension\": \"G5\", \"slot_name\": \"SUBJECT\", \"slot_value\": \"1:1 Review\"}]\n  },\n  {\n    \"s_dimension\": \"S5\", \"s_name\": \"Task Dates\",\n    \"s_template\": \"The response should state the meeting is scheduled for [DATETIME]\",\n    \"s_literal\": \"The response should state the meeting is scheduled for July 26 at 14:00 PST\",\n    \"linked_g\": [{\"g_dimension\": \"G3\", \"slot_name\": \"DATETIME\", \"slot_value\": \"July 26 at 14:00 PST\"}]\n  }\n]\n\nExample 2 (Single S with multiple G):\nInput: \"assign Tisa Odonoghue as owner for confirming agenda and distributing pre-reads\"\nOutput:\n[\n  {\n    \"s_dimension\": \"S3\", \"s_name\": \"Ownership Assignment\",\n    \"s_template\": \"The response should assign [OWNER] as owner for [TASK]\",\n    \"s_literal\": \"The response should assign 'Tisa Odonoghue' as owner for 'confirming agenda' and 'distributing pre-reads'\",\n    \"linked_g\": [\n      {\"g_dimension\": \"G2\", \"slot_name\": \"OWNER\", \"slot_value\": \"Tisa Odonoghue\"},\n      {\"g_dimension\": \"G6\", \"slot_name\": \"TASK\", \"slot_value\": [\"confirming agenda\", \"distributing pre-reads\"]}\n    ]\n  }\n]\n\nExample 3 (Communication with artifacts and deadline):\nInput: \"share pre-reads referencing 'Report.xlsx' and 'Guide.docx' by July 26, 00:15 PST\"\nOutput:\n[\n  {\n    \"s_dimension\": \"S19\", \"s_name\": \"Communication Plan\",\n    \"s_template\": \"The response should include sharing pre-read materials [ARTIFACT] by [DEADLINE]\",\n    \"s_literal\": \"The response should include sharing pre-read materials 'Report.xlsx' and 'Guide.docx' by July 26, 00:15 PST\",\n    \"linked_g\": [\n      {\"g_dimension\": \"G4\", \"slot_name\": \"ARTIFACT\", \"slot_value\": [\"Report.xlsx\", \"Guide.docx\"]},\n      {\"g_dimension\": \"G3\", \"slot_name\": \"DEADLINE\", \"slot_value\": \"July 26, 00:15 PST\"}\n    ]\n  }\n]\n\nExample 4 (Pure grounding - no S):\nInput: \"not introduce any attendee other than those in the source\"\nOutput:\n[\n  {\n    \"s_dimension\": null, \"s_name\": null,\n    \"s_template\": null,\n    \"s_literal\": null,\n    \"linked_g\": [{\"g_dimension\": \"G1\", \"slot_name\": \"CONSTRAINT\", \"slot_value\": null, \"constraint\": \"no hallucinated attendees\"}]\n  }\n]\n\n=== NOW DECOMPOSE ===\nReturn ONLY a JSON array of atomic units with both s_template and s_literal forms.",
   "output_schema": {
     "type": "array",
     "items": {
       "type": "object",
-      "required": ["s_dimension", "s_name", "s_assertion", "linked_g"],
+      "required": ["s_dimension", "s_name", "s_template", "s_literal", "linked_g"],
       "properties": {
         "s_dimension": {
           "type": ["string", "null"],
@@ -19,9 +19,13 @@
           "type": ["string", "null"],
           "description": "S dimension name or null"
         },
-        "s_assertion": {
+        "s_template": {
           "type": ["string", "null"],
-          "description": "Atomic structural requirement description"
+          "description": "Template form with [SLOT_NAME] placeholders"
+        },
+        "s_literal": {
+          "type": ["string", "null"],
+          "description": "Literal form with actual values for human readability"
         },
         "linked_g": {
           "type": "array",
@@ -29,6 +33,7 @@
             "type": "object",
             "properties": {
               "g_dimension": {"type": "string"},
+              "slot_name": {"type": "string", "description": "Name of the slot (e.g., SUBJECT, DATETIME, OWNER)"},
               "slot_value": {"type": ["string", "array", "null"]},
               "constraint": {"type": "string", "description": "Optional constraint description for pure G"}
             }
@@ -39,11 +44,13 @@
   },
   "temperature": 0.2,
   "notes": [
-    "Version 3.0: Decomposition into atomic S+G units",
+    "Version 4.0: Added template + literal forms for S assertions",
+    "s_template: Template with [SLOT_NAME] placeholders for programmatic use",
+    "s_literal: Human-readable form with actual values filled in",
+    "linked_g now includes slot_name to match template placeholders",
     "Key insight: S+G are atomic, free-form assertions are not",
     "One assertion can decompose into multiple S units",
-    "Each S unit has linked G dimensions with extracted slot values",
     "Pure G assertions (no structural requirement) have s_dimension: null",
-    "Synthesized from GPT-5 sessions 018, 019, 020"
+    "Synthesized from GPT-5 sessions 018-020, updated 2025-11-30"
   ]
 }

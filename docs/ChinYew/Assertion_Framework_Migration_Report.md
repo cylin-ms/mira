@@ -32,11 +32,11 @@ This report analyzes the conversion of **2,318 assertions** from Kening's origin
 | Metric | Value |
 |--------|-------|
 | GPT-5 Conversion Rate | **99.6%** |
-| Phase 1 Alignment | **99.3%** (2,302 of 2,318 assertions) |
-| Phase 2 Assertions | 0.7% (16 assertions, all S5: Task Dates) |
-| Active Dimensions | 11 of 14 Phase 1 dimensions used |
+| Phase 1 Alignment | **100%** (2,318 of 2,318 assertions) |
+| Phase 2 Assertions | 0% (S5 Task Dates moved to Phase 1) |
+| Active Dimensions | 12 of 15 Phase 1 dimensions used |
 
-The conversion demonstrates **excellent alignment** with Chin-Yew's Phase 1 evaluation framework. Almost all assertions (99.3%) map directly to Phase 1 dimensions, with only 16 assertions (0.7%) mapping to S5 (Task Dates), a Phase 2 dimension that overlaps with S2 (Timeline Alignment).
+The conversion demonstrates **excellent alignment** with Chin-Yew's Phase 1 evaluation framework. All assertions (100%) map directly to Phase 1 dimensions after S5 (Task Dates) was promoted from Phase 2 to Phase 1.
 
 ---
 
@@ -108,7 +108,7 @@ The conversion consolidated 232 dimensions into Chin-Yew's 14 selected dimension
 | S19 | Caveat & Clarification | 279 | 12.0% | Phase 1 |
 | G5 | Hallucination Check | 60 | 2.6% | Phase 1 |
 | S11 | Risk Mitigation Strategy | 42 | 1.8% | Phase 1 |
-| S5 | Task Dates | 16 | 0.7% | Phase 2 |
+| S5 | Task Dates | 16 | 0.7% | Phase 1 |
 | S18 | Post-Event Actions | 10 | 0.4% | Phase 1 |
 | G1 | Attendee Grounding | 3 | 0.1% | Phase 1 |
 | G4 | Topic Grounding | 3 | 0.1% | Phase 1 |
@@ -128,14 +128,14 @@ The conversion consolidated 232 dimensions into Chin-Yew's 14 selected dimension
 
 ### Phase 1 vs Phase 2 Distribution
 
-Based on the 14 Phase 1 dimensions (9 structural + 5 grounding):
+Based on the 15 Phase 1 dimensions (10 structural + 5 grounding):
 
 | Phase | Assertions | Percentage |
 |-------|------------|------------|
-| **Phase 1** | 2,302 | **99.3%** |
-| Phase 2 | 16 | 0.7% |
+| **Phase 1** | 2,318 | **100%** |
+| Phase 2 | 0 | 0% |
 
-**Key Finding:** Almost all assertions (99.3%) map to Phase 1 dimensions, demonstrating excellent alignment with the core evaluation framework.
+**Key Finding:** All assertions (100%) map to Phase 1 dimensions after S5 (Task Dates) was promoted to Phase 1.
 
 ### Phase 1 Dimension Breakdown
 
@@ -149,20 +149,17 @@ Based on the 14 Phase 1 dimensions (9 structural + 5 grounding):
 | S19 | Caveat & Clarification | 279 | 12.0% |
 | G5 | Hallucination Check | 60 | 2.6% |
 | S11 | Risk Mitigation Strategy | 42 | 1.8% |
+| S5 | Task Dates | 16 | 0.7% |
 | S18 | Post-Event Actions | 10 | 0.4% |
 | G1 | Attendee Grounding | 3 | 0.1% |
 | G4 | Topic Grounding | 3 | 0.1% |
-| **Phase 1 Total** | | **2,302** | **99.3%** |
+| **Phase 1 Total** | | **2,318** | **100%** |
 
 ### Phase 2 Dimension Breakdown
 
-Only **16 assertions (0.7%)** mapped to Phase 2 dimensions:
+No assertions mapped to Phase 2 dimensions after S5 (Task Dates) was promoted to Phase 1.
 
-| Dimension | Name | Count | Notes |
-|-----------|------|-------|-------|
-| S5 | Task Dates | 16 | Overlaps with S2 (Timeline Alignment) |
-
-**Observation:** S5 (Task Dates) is the only Phase 2 dimension used. These assertions focus specifically on due dates, which conceptually overlaps with S2 (Timeline Alignment). For practical evaluation, S5 assertions could be consolidated into S2.
+**Note:** S5 was originally Phase 2 but has been promoted to Phase 1 as task dates are essential for WBP completeness.
 
 ---
 
@@ -290,7 +287,32 @@ The grounding layer (G5: Hallucination Check) is critical for:
 
 ## 7. Grounding Layer Design Rationale
 
-### 7.1 Updated Grounding Dimensions (G1-G8)
+### 7.1 Key Concept: G Assertions Are Instantiated Through S Assertions
+
+**G-level (grounding) assertions are never standalone.** They are always instantiated in the context of validating elements identified by S-level (structural) assertions.
+
+The relationship works as follows:
+
+1. **S-level assertions** define **what** structural elements should exist (tasks, dates, owners, deliverables, etc.)
+2. **G-level assertions** define **grounding constraints** that validate those elements against the source scenario
+3. The `linked_g_dims` field in each S assertion specifies which G checks apply
+
+**Example flow:**
+```
+S2: "Each [TASK] must have a [DUE_DATE]..."
+    └── linked_g_dims: ["G3", "G6"]
+        ├── G3: Validate [DUE_DATE] is consistent with meeting date
+        └── G6: Validate [TASK] traces to scenario's action_items
+```
+
+When evaluating an S assertion like "Task 'finalize slides' has due date March 10":
+- **S2** checks the structural requirement (task has a due date)
+- **G3** grounds the date (is March 10 valid relative to March 15 meeting?)
+- **G6** grounds the task (is "finalize slides" in the scenario's action items?)
+
+The standalone G assertion definitions serve as a **reference library** that S assertions link to. This is why Step 4 in the pipeline uses GPT-5 to intelligently select relevant G dimensions based on each S assertion's content, rather than applying all G checks blindly.
+
+### 7.2 Updated Grounding Dimensions (G1-G8)
 
 The Grounding layer has been reorganized for clarity and extensibility:
 
@@ -305,7 +327,7 @@ The Grounding layer has been reorganized for clarity and extensibility:
 | G7 | Role Grounding | Roles | Role/responsibility assignments accurate |
 | G8 | Constraint Grounding | Limits | Constraints/limits derivable from source |
 
-### 7.2 Why G1 (Hallucination Check) is First
+### 7.3 Why G1 (Hallucination Check) is First
 
 **Design Decision:** G1 is placed first as the **overall grounding recall check**.
 
@@ -314,7 +336,7 @@ The Grounding layer has been reorganized for clarity and extensibility:
 If all specific checks (G2-G8) pass → G1 should pass.
 If any specific check fails → G1 fails.
 
-### 7.3 Why G1 is Valuable Beyond Being a "Catch-All"
+### 7.4 Why G1 is Valuable Beyond Being a "Catch-All"
 
 G1 serves important purposes beyond just aggregating G2-G6:
 
@@ -358,7 +380,7 @@ No specific G2-G6 covers "decisions" or "outcomes".
 The "production outage" is fabricated context.
 **G1 catches this** as an entity/fact not in source.
 
-### 7.4 Extensibility
+### 7.5 Extensibility
 
 By placing G1 first, future grounding dimensions can be added without burying the overall recall check:
 
@@ -376,7 +398,7 @@ G10 - (Future: Location Grounding - places, rooms, addresses)
 ...
 ```
 
-### 7.5 How G7 and G8 Were Discovered (Data-Driven Analysis)
+### 7.6 How G7 and G8 Were Discovered (Data-Driven Analysis)
 
 G7 (Role Grounding) and G8 (Constraint Grounding) were identified through a **two-phase analysis** of 3,700 assertions from Kening's data.
 
