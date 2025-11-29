@@ -828,37 +828,52 @@ def convert_assertion_heuristic(assertion: Dict) -> Dict:
     }
 
 
-def convert_assertion_with_grounding(assertion: Dict) -> List[Dict]:
+def convert_assertion_with_grounding(assertion: Dict, assertion_index: int = 0) -> List[Dict]:
     """
     Convert assertion to S+G pair(s).
     
     For each original assertion:
-    1. Generate the primary S (structural) assertion
+    1. Generate the primary S (structural) assertion with unique assertion_id
     2. Generate corresponding G (grounding) assertions based on S_TO_G_MAP
+    3. G assertions include parent_assertion_id linking back to their source S
+    4. S and G assertions are returned adjacently in the list
     
-    Returns: List of converted assertions (1 S + 0-N G assertions)
+    Returns: List of converted assertions (1 S + 0-N G assertions, kept adjacent)
     """
+    import uuid
+    
     results = []
     original_dim = assertion.get('anchors', {}).get('Dim', 'unknown')
     mapped_dim = DIMENSION_MAP.get(original_dim, "UNMAPPED")
     original_text = assertion.get('text', '')
     level = assertion.get('level', 'expected')
     
+    # Generate unique ID for the primary assertion
+    primary_assertion_id = f"A{assertion_index:04d}_{mapped_dim}"
+    
     # Generate primary assertion (S or G)
     primary = convert_assertion_heuristic(assertion)
+    primary["assertion_id"] = primary_assertion_id
+    primary["parent_assertion_id"] = None  # Primary assertions have no parent
     results.append(primary)
     
     # If mapped to a structural dimension, add corresponding grounding assertions
+    # These are kept adjacent to their parent S assertion
     if mapped_dim.startswith("S") and mapped_dim in S_TO_G_MAP:
         g_dims = S_TO_G_MAP[mapped_dim]
         
-        for g_dim in g_dims:
+        for g_idx, g_dim in enumerate(g_dims):
             g_spec = DIMENSION_SPEC.get(g_dim, {})
             if not g_spec:
                 continue
             
-            # Create grounding assertion
+            # Generate unique ID for this G assertion
+            g_assertion_id = f"A{assertion_index:04d}_{g_dim}_{g_idx}"
+            
+            # Create grounding assertion with parent linkage
             g_assertion = {
+                "assertion_id": g_assertion_id,
+                "parent_assertion_id": primary_assertion_id,  # Links to source S assertion
                 "original_text": original_text,
                 "converted_text": g_spec.get('template', ''),
                 "dimension_id": g_dim,
@@ -872,7 +887,9 @@ def convert_assertion_with_grounding(assertion: Dict) -> List[Dict]:
                     "mapping_reason": f"Generated from {mapped_dim} ({primary['dimension_name']}) via S_TO_G_MAP",
                     "conversion_changes": ["Applied grounding template for factual verification"],
                     "template_alignment": f"S→G mapping: {mapped_dim}→{g_dim}",
-                    "value_removed": "N/A (grounding complement)"
+                    "value_removed": "N/A (grounding complement)",
+                    "parent_dimension": mapped_dim,
+                    "parent_dimension_name": primary['dimension_name']
                 },
                 "quality_assessment": {
                     "is_well_formed": True,
@@ -1087,6 +1104,7 @@ def main():
         print(f"[{i + 1}/{end_idx}] {utterance}... ({len(assertions)} assertions)")
         
         meeting_conversions = []
+        assertion_counter = 0  # Track assertion index for unique IDs
         
         # Process in batches
         batch_size = args.batch_size
@@ -1103,13 +1121,15 @@ def main():
                     print(f"    ⚠️ Batch error: {e}")
                     for a in batch:
                         if generate_grounding:
-                            meeting_conversions.extend(convert_assertion_with_grounding(a))
+                            meeting_conversions.extend(convert_assertion_with_grounding(a, assertion_counter))
+                            assertion_counter += 1
                         else:
                             meeting_conversions.append(convert_assertion_heuristic(a))
             else:
                 for a in batch:
                     if generate_grounding:
-                        meeting_conversions.extend(convert_assertion_with_grounding(a))
+                        meeting_conversions.extend(convert_assertion_with_grounding(a, assertion_counter))
+                        assertion_counter += 1
                     else:
                         meeting_conversions.append(convert_assertion_heuristic(a))        # Store meeting result with both original assertions and conversions
         all_results.append({
@@ -1219,25 +1239,41 @@ def main():
             # Get original assertions for preserving sourceID
             original_assertions = result.get("original_assertions", [])
             
+            # Track which original assertion index we're on for sourceID mapping
+            orig_assertion_idx = 0
+            
             for idx, conv in enumerate(result["conversions"]):
-                # Get original sourceID from original_assertions (not from conversion)
+                # Get original sourceID - only for primary assertions (not derived G)
                 orig_sourceID = ""
-                if idx < len(original_assertions):
-                    orig_sourceID = original_assertions[idx].get("anchors", {}).get("sourceID", "")
+                is_derived = conv.get("conversion_method") == "heuristic_s_to_g"
                 
-                output_item["assertions"].append({
+                if not is_derived and orig_assertion_idx < len(original_assertions):
+                    orig_sourceID = original_assertions[orig_assertion_idx].get("anchors", {}).get("sourceID", "")
+                    orig_assertion_idx += 1
+                elif is_derived:
+                    # For derived G assertions, use the parent's sourceID from rationale
+                    parent_id = conv.get("parent_assertion_id", "")
+                    # sourceID for G assertions can be empty or inherited
+                    orig_sourceID = ""
+                
+                # Build assertion output with S+G relationship fields
+                assertion_output = {
+                    "assertion_id": conv.get("assertion_id", ""),  # Unique ID for this assertion
+                    "parent_assertion_id": conv.get("parent_assertion_id"),  # Link to source S (null for S assertions)
                     "text": conv.get("converted_text", ""),
                     "level": conv.get("level", "expected"),
                     "dimension": conv.get("dimension_id", "UNMAPPED"),
                     "dimension_name": conv.get("dimension_name", ""),
                     "layer": conv.get("layer", ""),
                     "weight": conv.get("weight", 1),
-                    "sourceID": orig_sourceID,  # Use original sourceID, not converted template
+                    "sourceID": orig_sourceID,  # Use original sourceID for primary assertions
                     "original_text": conv.get("original_text", ""),
                     "rationale": conv.get("rationale", {}),
                     "quality_assessment": conv.get("quality_assessment", {}),
                     "conversion_method": conv.get("conversion_method", "unknown")
-                })
+                }
+                
+                output_item["assertions"].append(assertion_output)
             f.write(json.dumps(output_item, ensure_ascii=False) + "\n")
     
     print(f"   ✅ Saved to: {OUTPUT_CONVERTED_FULL}")
