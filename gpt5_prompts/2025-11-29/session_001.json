@@ -1,0 +1,12 @@
+{
+  "session_id": "session_001",
+  "created_at": "2025-11-29T21:55:22.489407",
+  "system_prompt": "You are a helpful AI assistant with expertise in software development, \ndata analysis, and technical documentation. Provide clear, accurate, and well-structured responses.",
+  "exchanges": [
+    {
+      "question": "What is the difference between structural (S) and grounding (G) assertions in a WBP evaluation framework? Answer in 2-3 sentences.",
+      "answer": "Error calling GPT-5: call_gpt5_api() got an unexpected keyword argument 'messages'",
+      "timestamp": "2025-11-29T21:55:22.489424"
+    }
+  ]
+}

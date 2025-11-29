@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T02:57:03.456445",
+    "original_utterance": "The plan identifies top risks and includes mitigation strategies with owners",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q3 Product Launch Risk Review",
+    "date": "2025-06-12",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Sarah Kim (Program Manager)",
+    "attendees": [
+      "Sarah Kim (Program Manager)",
+      "James Patel (Engineering Lead)",
+      "Linda Chen (Marketing Director)",
+      "Robert Alvarez (Operations Manager)",
+      "Emily Davis (Finance Analyst)"
+    ],
+    "context": "This meeting was scheduled to review the integrated launch plan for the Q3 product release and ensure all critical risks are identified and mitigation strategies are in place. The team needs to confirm ownership of risk actions before the executive review next week.",
+    "artifacts": [
+      "Q3_Product_Launch_Plan_v2.xlsx",
+      "Risk_Register_Draft.docx"
+    ],
+    "discussion_points": [
+      "Reviewed the top 5 risks from the draft risk register",
+      "Discussed mitigation strategies for supply chain delays and marketing content readiness",
+      "Confirmed risk owners for each mitigation action",
+      "Validated assumptions about vendor lead times and ad campaign approvals"
+    ],
+    "action_items_discussed": [
+      "James to finalize engineering contingency plan for component shortage by June 19",
+      "Linda to secure early creative approvals for ad campaign by June 20",
+      "Robert to confirm backup supplier availability by June 21"
+    ],
+    "known_constraints": [
+      "Primary supplier has a 6-week lead time and limited buffer stock",
+      "Marketing team has only two weeks to finalize creative assets",
+      "Budget cannot increase beyond current allocation"
+    ],
+    "stated_assumptions": [
+      "Assuming vendor will maintain current lead time without further delays",
+      "Assuming no additional compliance requirements for marketing materials",
+      "Assuming finance will approve contingency spend if required"
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q3 Product Launch Risk Review\n\n**Goal:** Ensure all critical risks for the Q3 product launch are identified, mitigation strategies are in place, and ownership is confirmed prior to the executive review.\n\n**Meeting Date:** 2025-06-12 10:00 AM PST  \n**Organizer:** Sarah Kim (Program Manager)  \n**Artifacts:** Q3_Product_Launch_Plan_v2.xlsx, Risk_Register_Draft.docx\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                         | Owner                               | Deliverable                                  | Status      |\n|-----|------------|--------------------------------------------------------------|-------------------------------------|----------------------------------------------|-------------|\n| T-7 | 2025-06-19 | Finalize engineering contingency plan for component shortage | James Patel (Engineering Lead)      | Updated contingency section in risk register | Not Started |\n| T-8 | 2025-06-20 | Secure early creative approvals for ad campaign              | Linda Chen (Marketing Director)     | Approved creative assets                     | Not Started |\n| T-9 | 2025-06-21 | Confirm backup supplier availability                         | Robert Alvarez (Operations Manager) | Supplier confirmation document               | Not Started |\n| T-0 | 2025-06-26 | Executive risk review preparation (compile mitigations)      | Sarah Kim (Program Manager)         | Final risk register and launch plan update   | Not Started |\n\n---\n\n## Blockers, Mitigation & Owners\n| Blocker                                               | Mitigation Action                                 | Owner                               |\n|-------------------------------------------------------|---------------------------------------------------|-------------------------------------|\n| Potential component shortage due to 6-week lead time  | Develop and finalize engineering contingency plan | James Patel (Engineering Lead)      |\n| Marketing content readiness under tight 2-week window | Secure early creative approvals for ad campaign   | Linda Chen (Marketing Director)     |\n| Limited buffer stock and supplier dependency          | Confirm backup supplier availability              | Robert Alvarez (Operations Manager) |\n\n---\n\n## Assumptions & Impact if Invalidated\n1. **Assumption:** Vendor will maintain current 6-week lead time without further delays  \n   **Impact if invalidated:** Launch schedule risk increases; contingency plan must be activated.\n\n2. **Assumption:** No additional compliance requirements for marketing materials  \n   **Impact if invalidated:** Creative approval process could be delayed, requiring timeline adjustments.\n\n3. **Assumption:** Finance will approve contingency spend if required  \n   **Impact if invalidated:** Limited ability to execute backup supplier or expedite options.\n\n---\n\n## Open Questions\n- Are there any emerging risks not captured in the current draft risk register?\n- Will finance confirm contingency budget availability before executive review?\n\n---\n\n**Next Steps:** Owners to complete assigned mitigation tasks by specified dates to ensure readiness for the executive review on 2025-06-26.\n",
+  "assertions": [
+    {
+      "assertion_id": "A0007_S6",
+      "parent_assertion_id": null,
+      "text": "The plan lists [BLOCKER] and specifies [MITIGATION] actions with assigned [OWNER].",
+      "original_text": "The plan identifies top risks and includes mitigation strategies with owners",
+      "dimension_id": "S6",
+      "dimension_name": "Dependencies, Blockers & Mitigation",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [
+        "G2",
+        "G6",
+        "G7",
+        "G9"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion focuses on identifying risks (blockers) and including mitigation strategies with assigned owners, which directly aligns with the requirement to document dependencies, blockers, and mitigation plans in the workback plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q3 Product Launch Risk Review",
+          "date": "2025-06-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Kim (Program Manager)",
+          "attendees": [
+            "Sarah Kim (Program Manager)",
+            "James Patel (Engineering Lead)",
+            "Linda Chen (Marketing Director)",
+            "Robert Alvarez (Operations Manager)",
+            "Emily Davis (Finance Analyst)"
+          ],
+          "context": "This meeting was scheduled to review the integrated launch plan for the Q3 product release and ensure all critical risks are identified and mitigation strategies are in place. The team needs to confirm ownership of risk actions before the executive review next week.",
+          "artifacts": [
+            "Q3_Product_Launch_Plan_v2.xlsx",
+            "Risk_Register_Draft.docx"
+          ],
+          "discussion_points": [
+            "Reviewed the top 5 risks from the draft risk register",
+            "Discussed mitigation strategies for supply chain delays and marketing content readiness",
+            "Confirmed risk owners for each mitigation action",
+            "Validated assumptions about vendor lead times and ad campaign approvals"
+          ],
+          "action_items_discussed": [
+            "James to finalize engineering contingency plan for component shortage by June 19",
+            "Linda to secure early creative approvals for ad campaign by June 20",
+            "Robert to confirm backup supplier availability by June 21"
+          ],
+          "known_constraints": [
+            "Primary supplier has a 6-week lead time and limited buffer stock",
+            "Marketing team has only two weeks to finalize creative assets",
+            "Budget cannot increase beyond current allocation"
+          ],
+          "stated_assumptions": [
+            "Assuming vendor will maintain current lead time without further delays",
+            "Assuming no additional compliance requirements for marketing materials",
+            "Assuming finance will approve contingency spend if required"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q3 Product Launch Risk Review\n\n**Goal:** Ensure all critical risks for the Q3 product launch are identified, mitigation strategies are in place, and ownership is confirmed prior to the executive review.\n\n**Meeting Date:** 2025-06-12 10:00 AM PST  \n**Organizer:** Sarah Kim (Program Manager)  \n**Artifacts:** Q3_Product_Launch_Plan_v2.xlsx, Risk_Register_Draft.docx\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                         | Owner                               | Deliverable                                  | Status      |\n|-----|------------|--------------------------------------------------------------|-------------------------------------|----------------------------------------------|-------------|\n| T-7 | 2025-06-19 | Finalize engineering contingency plan for component shortage | James Patel (Engineering Lead)      | Updated contingency section in risk register | Not Started |\n| T-8 | 2025-06-20 | Secure early creative approvals for ad campaign              | Linda Chen (Marketing Director)     | Approved creative assets                     | Not Started |\n| T-9 | 2025-06-21 | Confirm backup supplier availability                         | Robert Alvarez (Operations Manager) | Supplier confirmation document               | Not Started |\n| T-0 | 2025-06-26 | Executive risk review preparation (compile mitigations)      | Sarah Kim (Program Manager)         | Final risk register and launch plan update   | Not Started |\n\n---\n\n## Blockers, Mitigation & Owners\n| Blocker                                               | Mitigation Action                                 | Owner                               |\n|-------------------------------------------------------|---------------------------------------------------|-------------------------------------|\n| Potential component shortage due to 6-week lead time  | Develop and finalize engineering contingency plan | James Patel (Engineering Lead)      |\n| Marketing content readiness under tight 2-week window | Secure early creative approvals for ad campaign   | Linda Chen (Marketing Director)     |\n| Limited buffer stock and supplier dependency          | Confirm backup supplier availability              | Robert Alvarez (Operations Manager) |\n\n---\n\n## Assumptions & Impact if Invalidated\n1. **Assumption:** Vendor will maintain current 6-week lead time without further delays  \n   **Impact if invalidated:** Launch schedule risk increases; contingency plan must be activated.\n\n2. **Assumption:** No additional compliance requirements for marketing materials  \n   **Impact if invalidated:** Creative approval process could be delayed, requiring timeline adjustments.\n\n3. **Assumption:** Finance will approve contingency spend if required  \n   **Impact if invalidated:** Limited ability to execute backup supplier or expedite options.\n\n---\n\n## Open Questions\n- Are there any emerging risks not captured in the current draft risk register?\n- Will finance confirm contingency budget availability before executive review?\n\n---\n\n**Next Steps:** Owners to complete assigned mitigation tasks by specified dates to ensure readiness for the executive review on 2025-06-26.\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0007_S6",
+            "dimension": "S6",
+            "passes": true,
+            "evidence": "The 'Blockers, Mitigation & Owners' table lists three blockers (e.g., 'Potential component shortage due to 6-week lead time'), corresponding mitigation actions (e.g., 'Develop and finalize engineering contingency plan'), and assigned owners (James Patel, Linda Chen, Robert Alvarez).",
+            "ground_truth_check": "Scenario discussion_points and action_items_discussed mention risks like component shortage, marketing content readiness, and supplier availability, and confirm ownership for mitigation actions.",
+            "reasoning": "The WBP explicitly provides a structured list of blockers, their mitigation actions, and owners, which aligns with the scenario's discussion of these risks and assigned responsibilities."
+          },
+          {
+            "assertion_id": "A0007_G2_0",
+            "dimension": "G2",
+            "passes": true,
+            "evidence": "Owners in the WBP are James Patel (Engineering Lead), Linda Chen (Marketing Director), Robert Alvarez (Operations Manager), and Sarah Kim (Program Manager).",
+            "ground_truth_check": "Scenario attendees list includes Sarah Kim, James Patel, Linda Chen, Robert Alvarez, and Emily Davis.",
+            "reasoning": "All mitigation owners in the WBP correspond to actual attendees from the scenario; no extraneous names are introduced."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0007_G2_0",
+      "parent_assertion_id": "A0007_S6",
+      "text": "Mitigation owners mentioned in the plan must correspond to actual attendees in the meeting context.",
+      "original_text": "The plan identifies top risks and includes mitigation strategies with owners",
+      "dimension_id": "G2",
+      "dimension_name": "Attendee Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion states that mitigation strategies include owners, which implies verifying that these owners are actual attendees.",
+        "parent_dimension": "S6",
+        "parent_dimension_name": "Dependencies, Blockers & Mitigation",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q3 Product Launch Risk Review",
+          "date": "2025-06-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Kim (Program Manager)",
+          "attendees": [
+            "Sarah Kim (Program Manager)",
+            "James Patel (Engineering Lead)",
+            "Linda Chen (Marketing Director)",
+            "Robert Alvarez (Operations Manager)",
+            "Emily Davis (Finance Analyst)"
+          ],
+          "context": "This meeting was scheduled to review the integrated launch plan for the Q3 product release and ensure all critical risks are identified and mitigation strategies are in place. The team needs to confirm ownership of risk actions before the executive review next week.",
+          "artifacts": [
+            "Q3_Product_Launch_Plan_v2.xlsx",
+            "Risk_Register_Draft.docx"
+          ],
+          "discussion_points": [
+            "Reviewed the top 5 risks from the draft risk register",
+            "Discussed mitigation strategies for supply chain delays and marketing content readiness",
+            "Confirmed risk owners for each mitigation action",
+            "Validated assumptions about vendor lead times and ad campaign approvals"
+          ],
+          "action_items_discussed": [
+            "James to finalize engineering contingency plan for component shortage by June 19",
+            "Linda to secure early creative approvals for ad campaign by June 20",
+            "Robert to confirm backup supplier availability by June 21"
+          ],
+          "known_constraints": [
+            "Primary supplier has a 6-week lead time and limited buffer stock",
+            "Marketing team has only two weeks to finalize creative assets",
+            "Budget cannot increase beyond current allocation"
+          ],
+          "stated_assumptions": [
+            "Assuming vendor will maintain current lead time without further delays",
+            "Assuming no additional compliance requirements for marketing materials",
+            "Assuming finance will approve contingency spend if required"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q3 Product Launch Risk Review\n\n**Goal:** Ensure all critical risks for the Q3 product launch are identified, mitigation strategies are in place, and ownership is confirmed prior to the executive review.\n\n**Meeting Date:** 2025-06-12 10:00 AM PST  \n**Organizer:** Sarah Kim (Program Manager)  \n**Artifacts:** Q3_Product_Launch_Plan_v2.xlsx, Risk_Register_Draft.docx\n\n---\n\n## Timeline Overview\n| T-n | Date       | Task                                                         | Owner                               | Deliverable                                  | Status      |\n|-----|------------|--------------------------------------------------------------|-------------------------------------|----------------------------------------------|-------------|\n| T-7 | 2025-06-19 | Finalize engineering contingency plan for component shortage | James Patel (Engineering Lead)      | Updated contingency section in risk register | Not Started |\n| T-8 | 2025-06-20 | Secure early creative approvals for ad campaign              | Linda Chen (Marketing Director)     | Approved creative assets                     | Not Started |\n| T-9 | 2025-06-21 | Confirm backup supplier availability                         | Robert Alvarez (Operations Manager) | Supplier confirmation document               | Not Started |\n| T-0 | 2025-06-26 | Executive risk review preparation (compile mitigations)      | Sarah Kim (Program Manager)         | Final risk register and launch plan update   | Not Started |\n\n---\n\n## Blockers, Mitigation & Owners\n| Blocker                                               | Mitigation Action                                 | Owner                               |\n|-------------------------------------------------------|---------------------------------------------------|-------------------------------------|\n| Potential component shortage due to 6-week lead time  | Develop and finalize engineering contingency plan | James Patel (Engineering Lead)      |\n| Marketing content readiness under tight 2-week window | Secure early creative approvals for ad campaign   | Linda Chen (Marketing Director)     |\n| Limited buffer stock and supplier dependency          | Confirm backup supplier availability              | Robert Alvarez (Operations Manager) |\n\n---\n\n## Assumptions & Impact if Invalidated\n1. **Assumption:** Vendor will maintain current 6-week lead time without further delays  \n   **Impact if invalidated:** Launch schedule risk increases; contingency plan must be activated.\n\n2. **Assumption:** No additional compliance requirements for marketing materials  \n   **Impact if invalidated:** Creative approval process could be delayed, requiring timeline adjustments.\n\n3. **Assumption:** Finance will approve contingency spend if required  \n   **Impact if invalidated:** Limited ability to execute backup supplier or expedite options.\n\n---\n\n## Open Questions\n- Are there any emerging risks not captured in the current draft risk register?\n- Will finance confirm contingency budget availability before executive review?\n\n---\n\n**Next Steps:** Owners to complete assigned mitigation tasks by specified dates to ensure readiness for the executive review on 2025-06-26.\n",
+        "evidence": "Owners in the WBP are James Patel (Engineering Lead), Linda Chen (Marketing Director), Robert Alvarez (Operations Manager), and Sarah Kim (Program Manager).",
+        "ground_truth_check": "Scenario attendees list includes Sarah Kim, James Patel, Linda Chen, Robert Alvarez, and Emily Davis.",
+        "verification": "All mitigation owners in the WBP correspond to actual attendees from the scenario; no extraneous names are introduced.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0007_S6",
+        "dimension": "S6",
+        "passes": true,
+        "evidence": "The 'Blockers, Mitigation & Owners' table lists three blockers (e.g., 'Potential component shortage due to 6-week lead time'), corresponding mitigation actions (e.g., 'Develop and finalize engineering contingency plan'), and assigned owners (James Patel, Linda Chen, Robert Alvarez).",
+        "ground_truth_check": "Scenario discussion_points and action_items_discussed mention risks like component shortage, marketing content readiness, and supplier availability, and confirm ownership for mitigation actions.",
+        "reasoning": "The WBP explicitly provides a structured list of blockers, their mitigation actions, and owners, which aligns with the scenario's discussion of these risks and assigned responsibilities."
+      },
+      {
+        "assertion_id": "A0007_G2_0",
+        "dimension": "G2",
+        "passes": true,
+        "evidence": "Owners in the WBP are James Patel (Engineering Lead), Linda Chen (Marketing Director), Robert Alvarez (Operations Manager), and Sarah Kim (Program Manager).",
+        "ground_truth_check": "Scenario attendees list includes Sarah Kim, James Patel, Linda Chen, Robert Alvarez, and Emily Davis.",
+        "reasoning": "All mitigation owners in the WBP correspond to actual attendees from the scenario; no extraneous names are introduced."
+      }
+    ]
+  }
+}

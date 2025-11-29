@@ -1,0 +1,11 @@
+{
+  "input_file": "examples/sample_batch_input.txt",
+  "total": 5,
+  "assertions": {
+    "A0000": "The response arranges the draft slides task before review slides task in the plan",
+    "A0001": "The plan includes specific deadlines for each task",
+    "A0002": "Tasks are assigned to named individuals from the attendees list",
+    "A0003": "The timeline shows clear dependencies between tasks",
+    "A0004": "All deliverables are explicitly mentioned with expected formats"
+  }
+}

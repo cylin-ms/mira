@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T02:47:53.701841",
+    "original_utterance": "The workback plan identifies all blocking dependencies between tasks",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q3 Product Launch Workback Planning Meeting",
+    "date": "2025-03-12",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Sarah Kim (Program Manager)",
+    "attendees": [
+      "Sarah Kim (Program Manager)",
+      "James Lee (Engineering Lead)",
+      "Priya Patel (Marketing Manager)",
+      "Carlos Ramirez (Design Lead)",
+      "Emily Chen (QA Lead)"
+    ],
+    "context": "The team convened to finalize the workback plan for the Q3 product launch scheduled for July 15, 2025. The goal was to confirm timelines, identify dependencies, and ensure all critical path items are accounted for before execution.",
+    "artifacts": [
+      "Q3_Product_Launch_Workback_v2.xlsx",
+      "Launch_Readiness_Checklist.docx"
+    ],
+    "discussion_points": [
+      "Reviewed the draft workback plan with all tasks and milestones from design freeze to launch date.",
+      "Identified dependencies between design, engineering, QA, and marketing deliverables.",
+      "Discussed potential blockers such as delayed API integration and dependency on external vendor assets.",
+      "Validated that the critical path reflects realistic durations and sequencing."
+    ],
+    "action_items_discussed": [
+      "Update the workback plan to explicitly mark API integration as a blocking dependency for QA test plan development.",
+      "Add dependency notes for marketing campaign creative assets that rely on final UI designs.",
+      "Ensure all cross-functional dependencies are documented by end of week for leadership review."
+    ],
+    "known_constraints": [
+      "API integration with payment provider must be completed before QA can start end-to-end testing.",
+      "Marketing cannot finalize ad creatives until final UI assets are delivered by design.",
+      "Design team has a two-week buffer, but any slip will impact engineering handoff."
+    ],
+    "stated_assumptions": [
+      "External vendor assets will be delivered by April 15 as committed.",
+      "No additional compliance requirements will emerge after design freeze.",
+      "Resource allocation remains stable across engineering and QA teams."
+    ]
+  },
+  "workback_plan": "# Q3 Product Launch Workback Plan\n\n**Goal:** Finalize and execute the Q3 product launch workback plan ensuring all critical dependencies and blockers are identified and mitigated prior to the July 15, 2025 launch.\n\n**Meeting Reference:** Q3 Product Launch Workback Planning Meeting (2025-03-12, 10:00 AM PST)\n\n**Artifacts:** Q3_Product_Launch_Workback_v2.xlsx, Launch_Readiness_Checklist.docx\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                             | Owner                           | Deliverable                        | Status      |\n|------|------------|--------------------------------------------------|---------------------------------|------------------------------------|-------------|\n| T-18 | 2025-03-17 | Finalize updated workback plan with dependencies | Sarah Kim (Program Manager)     | Q3_Product_Launch_Workback_v2.xlsx | In Progress |\n| T-16 | 2025-03-31 | Design Freeze                                    | Carlos Ramirez (Design Lead)    | Final UI Design Assets             | Planned     |\n| T-14 | 2025-04-15 | Receive external vendor assets                   | Carlos Ramirez (Design Lead)    | Vendor Asset Package               | Planned     |\n| T-12 | 2025-04-28 | API Integration Complete                         | James Lee (Engineering Lead)    | Integrated Payment API             | Planned     |\n| T-10 | 2025-05-12 | QA Test Plan Development                         | Emily Chen (QA Lead)            | QA Test Plan                       | Pending     |\n| T-8  | 2025-05-26 | Marketing Campaign Creative Finalization         | Priya Patel (Marketing Manager) | Final Ad Creative Assets           | Pending     |\n| T-0  | 2025-07-15 | Product Launch                                   | Sarah Kim (Program Manager)     | Launch Execution                   | Planned     |\n\n---\n\n## Dependencies & Blockers\n\n### Dependencies\n1. **QA Test Plan Development** depends on **API Integration Complete** (Engineering → QA)\n2. **Marketing Campaign Creative Finalization** depends on **Final UI Design Assets** (Design → Marketing)\n3. **Design Freeze** must occur before **Engineering Handoff** (Design → Engineering)\n\n### Blockers and Mitigation\n| Blocker                                                                  | Mitigation Strategy                                                                    | Owner                        |\n|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------|------------------------------|\n| Delayed API integration could block QA test plan development             | Weekly sync between Engineering and QA; escalate delays to Program Manager immediately | James Lee (Engineering Lead) |\n| External vendor assets delay could impact design and marketing timelines | Confirm vendor delivery by April 15; have contingency placeholder assets ready         | Carlos Ramirez (Design Lead) |\n\n---\n\n## Assumptions\n1. **External vendor assets delivered by April 15** – If delayed, marketing and design timelines slip, requiring re-sequencing.\n2. **No new compliance requirements post-design freeze** – If invalidated, additional design and engineering cycles needed.\n3. **Stable resource allocation across engineering and QA** – If invalidated, critical path tasks risk delay.\n\n---\n\n## Traceability to Meeting Discussion\n- Dependencies and blockers above were explicitly discussed in the meeting:\n  - **API integration as a blocking dependency for QA** (Action Item)\n  - **Marketing creatives dependent on final UI designs** (Action Item)\n  - **External vendor assets as a potential blocker** (Discussion Point)\n\n---\n\n**Next Steps:**\n- Sarah Kim to update the workback plan by March 17 with all dependencies and blockers clearly marked.\n- All functional leads (Design, Engineering, QA, Marketing) to validate dependencies by end of week for leadership review.\n",
+  "assertions": [
+    {
+      "assertion_id": "A0003_S6",
+      "parent_assertion_id": null,
+      "text": "The workback plan includes all [BLOCKER] and [DEPENDENCY] relationships between [TASK]s.",
+      "original_text": "The workback plan identifies all blocking dependencies between tasks",
+      "dimension_id": "S6",
+      "dimension_name": "Dependencies, Blockers & Mitigation",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [
+        "G2",
+        "G6",
+        "G7",
+        "G9"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion focuses on identifying blocking dependencies between tasks, which directly aligns with S6 that requires capturing dependencies, blockers, and mitigation strategies in the workback plan. This is a core structural requirement for ensuring feasibility and sequencing of tasks.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q3 Product Launch Workback Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Kim (Program Manager)",
+          "attendees": [
+            "Sarah Kim (Program Manager)",
+            "James Lee (Engineering Lead)",
+            "Priya Patel (Marketing Manager)",
+            "Carlos Ramirez (Design Lead)",
+            "Emily Chen (QA Lead)"
+          ],
+          "context": "The team convened to finalize the workback plan for the Q3 product launch scheduled for July 15, 2025. The goal was to confirm timelines, identify dependencies, and ensure all critical path items are accounted for before execution.",
+          "artifacts": [
+            "Q3_Product_Launch_Workback_v2.xlsx",
+            "Launch_Readiness_Checklist.docx"
+          ],
+          "discussion_points": [
+            "Reviewed the draft workback plan with all tasks and milestones from design freeze to launch date.",
+            "Identified dependencies between design, engineering, QA, and marketing deliverables.",
+            "Discussed potential blockers such as delayed API integration and dependency on external vendor assets.",
+            "Validated that the critical path reflects realistic durations and sequencing."
+          ],
+          "action_items_discussed": [
+            "Update the workback plan to explicitly mark API integration as a blocking dependency for QA test plan development.",
+            "Add dependency notes for marketing campaign creative assets that rely on final UI designs.",
+            "Ensure all cross-functional dependencies are documented by end of week for leadership review."
+          ],
+          "known_constraints": [
+            "API integration with payment provider must be completed before QA can start end-to-end testing.",
+            "Marketing cannot finalize ad creatives until final UI assets are delivered by design.",
+            "Design team has a two-week buffer, but any slip will impact engineering handoff."
+          ],
+          "stated_assumptions": [
+            "External vendor assets will be delivered by April 15 as committed.",
+            "No additional compliance requirements will emerge after design freeze.",
+            "Resource allocation remains stable across engineering and QA teams."
+          ]
+        },
+        "workback_plan": "# Q3 Product Launch Workback Plan\n\n**Goal:** Finalize and execute the Q3 product launch workback plan ensuring all critical dependencies and blockers are identified and mitigated prior to the July 15, 2025 launch.\n\n**Meeting Reference:** Q3 Product Launch Workback Planning Meeting (2025-03-12, 10:00 AM PST)\n\n**Artifacts:** Q3_Product_Launch_Workback_v2.xlsx, Launch_Readiness_Checklist.docx\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                             | Owner                           | Deliverable                        | Status      |\n|------|------------|--------------------------------------------------|---------------------------------|------------------------------------|-------------|\n| T-18 | 2025-03-17 | Finalize updated workback plan with dependencies | Sarah Kim (Program Manager)     | Q3_Product_Launch_Workback_v2.xlsx | In Progress |\n| T-16 | 2025-03-31 | Design Freeze                                    | Carlos Ramirez (Design Lead)    | Final UI Design Assets             | Planned     |\n| T-14 | 2025-04-15 | Receive external vendor assets                   | Carlos Ramirez (Design Lead)    | Vendor Asset Package               | Planned     |\n| T-12 | 2025-04-28 | API Integration Complete                         | James Lee (Engineering Lead)    | Integrated Payment API             | Planned     |\n| T-10 | 2025-05-12 | QA Test Plan Development                         | Emily Chen (QA Lead)            | QA Test Plan                       | Pending     |\n| T-8  | 2025-05-26 | Marketing Campaign Creative Finalization         | Priya Patel (Marketing Manager) | Final Ad Creative Assets           | Pending     |\n| T-0  | 2025-07-15 | Product Launch                                   | Sarah Kim (Program Manager)     | Launch Execution                   | Planned     |\n\n---\n\n## Dependencies & Blockers\n\n### Dependencies\n1. **QA Test Plan Development** depends on **API Integration Complete** (Engineering → QA)\n2. **Marketing Campaign Creative Finalization** depends on **Final UI Design Assets** (Design → Marketing)\n3. **Design Freeze** must occur before **Engineering Handoff** (Design → Engineering)\n\n### Blockers and Mitigation\n| Blocker                                                                  | Mitigation Strategy                                                                    | Owner                        |\n|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------|------------------------------|\n| Delayed API integration could block QA test plan development             | Weekly sync between Engineering and QA; escalate delays to Program Manager immediately | James Lee (Engineering Lead) |\n| External vendor assets delay could impact design and marketing timelines | Confirm vendor delivery by April 15; have contingency placeholder assets ready         | Carlos Ramirez (Design Lead) |\n\n---\n\n## Assumptions\n1. **External vendor assets delivered by April 15** – If delayed, marketing and design timelines slip, requiring re-sequencing.\n2. **No new compliance requirements post-design freeze** – If invalidated, additional design and engineering cycles needed.\n3. **Stable resource allocation across engineering and QA** – If invalidated, critical path tasks risk delay.\n\n---\n\n## Traceability to Meeting Discussion\n- Dependencies and blockers above were explicitly discussed in the meeting:\n  - **API integration as a blocking dependency for QA** (Action Item)\n  - **Marketing creatives dependent on final UI designs** (Action Item)\n  - **External vendor assets as a potential blocker** (Discussion Point)\n\n---\n\n**Next Steps:**\n- Sarah Kim to update the workback plan by March 17 with all dependencies and blockers clearly marked.\n- All functional leads (Design, Engineering, QA, Marketing) to validate dependencies by end of week for leadership review.\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0003_S6",
+            "dimension": "S6",
+            "passes": true,
+            "evidence": "The 'Dependencies & Blockers' section lists: (1) QA Test Plan Development depends on API Integration Complete, (2) Marketing Campaign Creative Finalization depends on Final UI Design Assets, (3) Design Freeze before Engineering Handoff. Blockers include delayed API integration and external vendor asset delays.",
+            "ground_truth_check": "Scenario discussion points and known_constraints mention API integration as a blocker for QA, marketing dependency on UI design, and vendor asset timing. Action items also call for marking API integration as a blocking dependency and adding dependency notes for marketing creatives.",
+            "reasoning": "The workback plan explicitly includes all critical dependencies and blockers discussed in the meeting and reflected in the scenario. No missing or extraneous dependencies were found."
+          },
+          {
+            "assertion_id": "A0003_G6_0",
+            "dimension": "G6",
+            "passes": true,
+            "evidence": "The WBP states: 'Dependencies and blockers above were explicitly discussed in the meeting: API integration as a blocking dependency for QA (Action Item), Marketing creatives dependent on final UI designs (Action Item), External vendor assets as a potential blocker (Discussion Point)'.",
+            "ground_truth_check": "Scenario action_items_discussed include updating the plan to mark API integration as a blocking dependency and adding dependency notes for marketing creatives. Discussion points mention external vendor assets as a potential blocker.",
+            "reasoning": "All dependencies and blockers in the WBP can be traced back to action items or discussion points in the scenario, satisfying the grounding requirement."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0003_G6_0",
+      "parent_assertion_id": "A0003_S6",
+      "text": "Dependencies and blockers should be traceable to action items or issues raised in the discussion",
+      "original_text": "The workback plan identifies all blocking dependencies between tasks",
+      "dimension_id": "G6",
+      "dimension_name": "Action Item Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion requires that all blocking dependencies between tasks are identified, which implies these dependencies should be traceable to concrete action items or issues discussed in the meeting to confirm they are real and not fabricated.",
+        "parent_dimension": "S6",
+        "parent_dimension_name": "Dependencies, Blockers & Mitigation",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q3 Product Launch Workback Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Kim (Program Manager)",
+          "attendees": [
+            "Sarah Kim (Program Manager)",
+            "James Lee (Engineering Lead)",
+            "Priya Patel (Marketing Manager)",
+            "Carlos Ramirez (Design Lead)",
+            "Emily Chen (QA Lead)"
+          ],
+          "context": "The team convened to finalize the workback plan for the Q3 product launch scheduled for July 15, 2025. The goal was to confirm timelines, identify dependencies, and ensure all critical path items are accounted for before execution.",
+          "artifacts": [
+            "Q3_Product_Launch_Workback_v2.xlsx",
+            "Launch_Readiness_Checklist.docx"
+          ],
+          "discussion_points": [
+            "Reviewed the draft workback plan with all tasks and milestones from design freeze to launch date.",
+            "Identified dependencies between design, engineering, QA, and marketing deliverables.",
+            "Discussed potential blockers such as delayed API integration and dependency on external vendor assets.",
+            "Validated that the critical path reflects realistic durations and sequencing."
+          ],
+          "action_items_discussed": [
+            "Update the workback plan to explicitly mark API integration as a blocking dependency for QA test plan development.",
+            "Add dependency notes for marketing campaign creative assets that rely on final UI designs.",
+            "Ensure all cross-functional dependencies are documented by end of week for leadership review."
+          ],
+          "known_constraints": [
+            "API integration with payment provider must be completed before QA can start end-to-end testing.",
+            "Marketing cannot finalize ad creatives until final UI assets are delivered by design.",
+            "Design team has a two-week buffer, but any slip will impact engineering handoff."
+          ],
+          "stated_assumptions": [
+            "External vendor assets will be delivered by April 15 as committed.",
+            "No additional compliance requirements will emerge after design freeze.",
+            "Resource allocation remains stable across engineering and QA teams."
+          ]
+        },
+        "workback_plan": "# Q3 Product Launch Workback Plan\n\n**Goal:** Finalize and execute the Q3 product launch workback plan ensuring all critical dependencies and blockers are identified and mitigated prior to the July 15, 2025 launch.\n\n**Meeting Reference:** Q3 Product Launch Workback Planning Meeting (2025-03-12, 10:00 AM PST)\n\n**Artifacts:** Q3_Product_Launch_Workback_v2.xlsx, Launch_Readiness_Checklist.docx\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                             | Owner                           | Deliverable                        | Status      |\n|------|------------|--------------------------------------------------|---------------------------------|------------------------------------|-------------|\n| T-18 | 2025-03-17 | Finalize updated workback plan with dependencies | Sarah Kim (Program Manager)     | Q3_Product_Launch_Workback_v2.xlsx | In Progress |\n| T-16 | 2025-03-31 | Design Freeze                                    | Carlos Ramirez (Design Lead)    | Final UI Design Assets             | Planned     |\n| T-14 | 2025-04-15 | Receive external vendor assets                   | Carlos Ramirez (Design Lead)    | Vendor Asset Package               | Planned     |\n| T-12 | 2025-04-28 | API Integration Complete                         | James Lee (Engineering Lead)    | Integrated Payment API             | Planned     |\n| T-10 | 2025-05-12 | QA Test Plan Development                         | Emily Chen (QA Lead)            | QA Test Plan                       | Pending     |\n| T-8  | 2025-05-26 | Marketing Campaign Creative Finalization         | Priya Patel (Marketing Manager) | Final Ad Creative Assets           | Pending     |\n| T-0  | 2025-07-15 | Product Launch                                   | Sarah Kim (Program Manager)     | Launch Execution                   | Planned     |\n\n---\n\n## Dependencies & Blockers\n\n### Dependencies\n1. **QA Test Plan Development** depends on **API Integration Complete** (Engineering → QA)\n2. **Marketing Campaign Creative Finalization** depends on **Final UI Design Assets** (Design → Marketing)\n3. **Design Freeze** must occur before **Engineering Handoff** (Design → Engineering)\n\n### Blockers and Mitigation\n| Blocker                                                                  | Mitigation Strategy                                                                    | Owner                        |\n|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------|------------------------------|\n| Delayed API integration could block QA test plan development             | Weekly sync between Engineering and QA; escalate delays to Program Manager immediately | James Lee (Engineering Lead) |\n| External vendor assets delay could impact design and marketing timelines | Confirm vendor delivery by April 15; have contingency placeholder assets ready         | Carlos Ramirez (Design Lead) |\n\n---\n\n## Assumptions\n1. **External vendor assets delivered by April 15** – If delayed, marketing and design timelines slip, requiring re-sequencing.\n2. **No new compliance requirements post-design freeze** – If invalidated, additional design and engineering cycles needed.\n3. **Stable resource allocation across engineering and QA** – If invalidated, critical path tasks risk delay.\n\n---\n\n## Traceability to Meeting Discussion\n- Dependencies and blockers above were explicitly discussed in the meeting:\n  - **API integration as a blocking dependency for QA** (Action Item)\n  - **Marketing creatives dependent on final UI designs** (Action Item)\n  - **External vendor assets as a potential blocker** (Discussion Point)\n\n---\n\n**Next Steps:**\n- Sarah Kim to update the workback plan by March 17 with all dependencies and blockers clearly marked.\n- All functional leads (Design, Engineering, QA, Marketing) to validate dependencies by end of week for leadership review.\n",
+        "evidence": "The WBP states: 'Dependencies and blockers above were explicitly discussed in the meeting: API integration as a blocking dependency for QA (Action Item), Marketing creatives dependent on final UI designs (Action Item), External vendor assets as a potential blocker (Discussion Point)'.",
+        "ground_truth_check": "Scenario action_items_discussed include updating the plan to mark API integration as a blocking dependency and adding dependency notes for marketing creatives. Discussion points mention external vendor assets as a potential blocker.",
+        "verification": "All dependencies and blockers in the WBP can be traced back to action items or discussion points in the scenario, satisfying the grounding requirement.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0003_S6",
+        "dimension": "S6",
+        "passes": true,
+        "evidence": "The 'Dependencies & Blockers' section lists: (1) QA Test Plan Development depends on API Integration Complete, (2) Marketing Campaign Creative Finalization depends on Final UI Design Assets, (3) Design Freeze before Engineering Handoff. Blockers include delayed API integration and external vendor asset delays.",
+        "ground_truth_check": "Scenario discussion points and known_constraints mention API integration as a blocker for QA, marketing dependency on UI design, and vendor asset timing. Action items also call for marking API integration as a blocking dependency and adding dependency notes for marketing creatives.",
+        "reasoning": "The workback plan explicitly includes all critical dependencies and blockers discussed in the meeting and reflected in the scenario. No missing or extraneous dependencies were found."
+      },
+      {
+        "assertion_id": "A0003_G6_0",
+        "dimension": "G6",
+        "passes": true,
+        "evidence": "The WBP states: 'Dependencies and blockers above were explicitly discussed in the meeting: API integration as a blocking dependency for QA (Action Item), Marketing creatives dependent on final UI designs (Action Item), External vendor assets as a potential blocker (Discussion Point)'.",
+        "ground_truth_check": "Scenario action_items_discussed include updating the plan to mark API integration as a blocking dependency and adding dependency notes for marketing creatives. Discussion points mention external vendor assets as a potential blocker.",
+        "reasoning": "All dependencies and blockers in the WBP can be traced back to action items or discussion points in the scenario, satisfying the grounding requirement."
+      }
+    ]
+  }
+}

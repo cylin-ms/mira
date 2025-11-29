@@ -1,0 +1,234 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T02:58:17.144698",
+    "original_utterance": "Tasks are assigned to named individuals from the attendees list",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q2 Marketing Campaign Planning",
+    "date": "2025-03-12",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Laura Chen",
+    "attendees": [
+      "Laura Chen - Marketing Manager",
+      "David Kim - Content Strategist",
+      "Sophia Martinez - Social Media Lead",
+      "James O'Neill - Graphic Designer",
+      "Priya Singh - Data Analyst"
+    ],
+    "context": "The marketing team met to plan the upcoming Q2 product launch campaign for the new premium subscription service. The focus was on defining the campaign timeline, content requirements, and responsibilities to ensure a smooth rollout starting April 1st.",
+    "artifacts": [
+      "Q2_Campaign_Brief.pdf",
+      "Content_Calendar_Template.xlsx",
+      "Previous_Campaign_Performance_Report.pdf"
+    ],
+    "discussion_points": [
+      "Reviewed the Q2 campaign brief and target audience segments",
+      "Discussed key deliverables: landing page updates, social media posts, email newsletters",
+      "Agreed on the campaign launch date of April 1st and backward planning milestones",
+      "Identified need for performance tracking using analytics dashboards"
+    ],
+    "action_items_discussed": [
+      "Draft initial blog post and email copy for the campaign",
+      "Design social media graphics for Instagram and LinkedIn",
+      "Prepare analytics dashboard to monitor engagement KPIs",
+      "Finalize content calendar for March and April"
+    ],
+    "known_constraints": [
+      "Landing page updates must be finalized by March 25th to allow QA",
+      "Limited design bandwidth; only two major graphic revisions allowed",
+      "Data pull for analytics requires 48-hour lead time"
+    ],
+    "stated_assumptions": [
+      "All creative assets will be approved by March 20th",
+      "No additional product features will be introduced before the launch",
+      "Email platform will remain unchanged during the campaign period"
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q2 Marketing Campaign Planning\n\n## Goal\nEnsure all campaign deliverables for the Q2 product launch are completed and approved by March 25, 2025, to support the April 1 launch date.\n\n## Timeline Overview\n| T-n  | Date       | Task                                                  | Owner           | Deliverable                                                 | Status      |\n|------|------------|-------------------------------------------------------|-----------------|-------------------------------------------------------------|-------------|\n| T-15 | 2025-03-14 | Draft initial blog post and email copy                | David Kim       | Blog post draft and email copy                              | Not Started |\n| T-14 | 2025-03-15 | Finalize content calendar for March and April         | Laura Chen      | Completed Content Calendar (Content_Calendar_Template.xlsx) | Not Started |\n| T-12 | 2025-03-17 | Design social media graphics for Instagram & LinkedIn | James O'Neill   | Social media graphics package                               | Not Started |\n| T-10 | 2025-03-19 | Prepare analytics dashboard for engagement KPIs       | Priya Singh     | Analytics dashboard setup                                   | Not Started |\n| T-8  | 2025-03-20 | Review and approve all creative assets                | Laura Chen      | Approved creative assets                                    | Not Started |\n| T-5  | 2025-03-25 | Finalize landing page updates and QA                  | Sophia Martinez | Updated and QA’d landing page                               | Not Started |\n| T-0  | 2025-04-01 | Launch Q2 Marketing Campaign                          | Laura Chen      | Campaign live                                               | Pending     |\n\n## Blockers and Mitigations\n- **Blocker:** Limited design bandwidth; only two major graphic revisions allowed\n  - **Mitigation:** Prioritize early feedback and consolidate all changes before first revision\n  - **Owner:** James O'Neill\n\n- **Blocker:** Data pull for analytics requires 48-hour lead time\n  - **Mitigation:** Schedule data extraction tasks in advance and set reminders\n  - **Owner:** Priya Singh\n\n## Assumptions\n- All creative assets will be approved by March 20th. **Impact if invalidated:** Delayed landing page QA and potential launch delay.\n- No additional product features will be introduced before the launch. **Impact if invalidated:** Content and design revisions may increase workload.\n- Email platform will remain unchanged during the campaign period. **Impact if invalidated:** Email copy and scheduling may require updates.\n\n## Referenced Artifacts\n- Q2_Campaign_Brief.pdf\n- Content_Calendar_Template.xlsx\n- Previous_Campaign_Performance_Report.pdf\n",
+  "assertions": [
+    {
+      "assertion_id": "A0002_S3",
+      "parent_assertion_id": null,
+      "text": "Each [TASK] is assigned to a specific [OWNER] who is listed among the [ATTENDEE] group.",
+      "original_text": "Tasks are assigned to named individuals from the attendees list",
+      "dimension_id": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [
+        "G2",
+        "G6"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion checks that each task has a clearly assigned owner from the attendee list, which directly aligns with the requirement for ownership assignment in the workback plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Laura Chen",
+          "attendees": [
+            "Laura Chen - Marketing Manager",
+            "David Kim - Content Strategist",
+            "Sophia Martinez - Social Media Lead",
+            "James O'Neill - Graphic Designer",
+            "Priya Singh - Data Analyst"
+          ],
+          "context": "The marketing team met to plan the upcoming Q2 product launch campaign for the new premium subscription service. The focus was on defining the campaign timeline, content requirements, and responsibilities to ensure a smooth rollout starting April 1st.",
+          "artifacts": [
+            "Q2_Campaign_Brief.pdf",
+            "Content_Calendar_Template.xlsx",
+            "Previous_Campaign_Performance_Report.pdf"
+          ],
+          "discussion_points": [
+            "Reviewed the Q2 campaign brief and target audience segments",
+            "Discussed key deliverables: landing page updates, social media posts, email newsletters",
+            "Agreed on the campaign launch date of April 1st and backward planning milestones",
+            "Identified need for performance tracking using analytics dashboards"
+          ],
+          "action_items_discussed": [
+            "Draft initial blog post and email copy for the campaign",
+            "Design social media graphics for Instagram and LinkedIn",
+            "Prepare analytics dashboard to monitor engagement KPIs",
+            "Finalize content calendar for March and April"
+          ],
+          "known_constraints": [
+            "Landing page updates must be finalized by March 25th to allow QA",
+            "Limited design bandwidth; only two major graphic revisions allowed",
+            "Data pull for analytics requires 48-hour lead time"
+          ],
+          "stated_assumptions": [
+            "All creative assets will be approved by March 20th",
+            "No additional product features will be introduced before the launch",
+            "Email platform will remain unchanged during the campaign period"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Marketing Campaign Planning\n\n## Goal\nEnsure all campaign deliverables for the Q2 product launch are completed and approved by March 25, 2025, to support the April 1 launch date.\n\n## Timeline Overview\n| T-n  | Date       | Task                                                  | Owner           | Deliverable                                                 | Status      |\n|------|------------|-------------------------------------------------------|-----------------|-------------------------------------------------------------|-------------|\n| T-15 | 2025-03-14 | Draft initial blog post and email copy                | David Kim       | Blog post draft and email copy                              | Not Started |\n| T-14 | 2025-03-15 | Finalize content calendar for March and April         | Laura Chen      | Completed Content Calendar (Content_Calendar_Template.xlsx) | Not Started |\n| T-12 | 2025-03-17 | Design social media graphics for Instagram & LinkedIn | James O'Neill   | Social media graphics package                               | Not Started |\n| T-10 | 2025-03-19 | Prepare analytics dashboard for engagement KPIs       | Priya Singh     | Analytics dashboard setup                                   | Not Started |\n| T-8  | 2025-03-20 | Review and approve all creative assets                | Laura Chen      | Approved creative assets                                    | Not Started |\n| T-5  | 2025-03-25 | Finalize landing page updates and QA                  | Sophia Martinez | Updated and QA’d landing page                               | Not Started |\n| T-0  | 2025-04-01 | Launch Q2 Marketing Campaign                          | Laura Chen      | Campaign live                                               | Pending     |\n\n## Blockers and Mitigations\n- **Blocker:** Limited design bandwidth; only two major graphic revisions allowed\n  - **Mitigation:** Prioritize early feedback and consolidate all changes before first revision\n  - **Owner:** James O'Neill\n\n- **Blocker:** Data pull for analytics requires 48-hour lead time\n  - **Mitigation:** Schedule data extraction tasks in advance and set reminders\n  - **Owner:** Priya Singh\n\n## Assumptions\n- All creative assets will be approved by March 20th. **Impact if invalidated:** Delayed landing page QA and potential launch delay.\n- No additional product features will be introduced before the launch. **Impact if invalidated:** Content and design revisions may increase workload.\n- Email platform will remain unchanged during the campaign period. **Impact if invalidated:** Email copy and scheduling may require updates.\n\n## Referenced Artifacts\n- Q2_Campaign_Brief.pdf\n- Content_Calendar_Template.xlsx\n- Previous_Campaign_Performance_Report.pdf\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0002_S3",
+            "dimension": "S3",
+            "passes": true,
+            "evidence": "Each task in the Workback Plan has an Owner column populated: David Kim, Laura Chen, James O'Neill, Priya Singh, Sophia Martinez.",
+            "ground_truth_check": "Attendees listed in the scenario: Laura Chen, David Kim, Sophia Martinez, James O'Neill, Priya Singh.",
+            "reasoning": "All tasks have a specific owner, and each owner is among the attendees in the scenario."
+          },
+          {
+            "assertion_id": "A0002_G2_0",
+            "dimension": "G2",
+            "passes": true,
+            "evidence": "Owners in WBP: David Kim, Laura Chen, James O'Neill, Priya Singh, Sophia Martinez.",
+            "ground_truth_check": "Scenario attendees: Laura Chen - Marketing Manager, David Kim - Content Strategist, Sophia Martinez - Social Media Lead, James O'Neill - Graphic Designer, Priya Singh - Data Analyst.",
+            "reasoning": "All named task owners in the WBP match the attendee names from the scenario; no extraneous names are present."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0002_G2_0",
+      "parent_assertion_id": "A0002_S3",
+      "text": "Verify that the named task owners appear in the attendee list.",
+      "original_text": "Tasks are assigned to named individuals from the attendees list",
+      "dimension_id": "G2",
+      "dimension_name": "Attendee Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion explicitly states that tasks are assigned to named individuals from the attendees list, so we must verify that each assigned individual is indeed an attendee.",
+        "parent_dimension": "S3",
+        "parent_dimension_name": "Ownership Assignment",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Laura Chen",
+          "attendees": [
+            "Laura Chen - Marketing Manager",
+            "David Kim - Content Strategist",
+            "Sophia Martinez - Social Media Lead",
+            "James O'Neill - Graphic Designer",
+            "Priya Singh - Data Analyst"
+          ],
+          "context": "The marketing team met to plan the upcoming Q2 product launch campaign for the new premium subscription service. The focus was on defining the campaign timeline, content requirements, and responsibilities to ensure a smooth rollout starting April 1st.",
+          "artifacts": [
+            "Q2_Campaign_Brief.pdf",
+            "Content_Calendar_Template.xlsx",
+            "Previous_Campaign_Performance_Report.pdf"
+          ],
+          "discussion_points": [
+            "Reviewed the Q2 campaign brief and target audience segments",
+            "Discussed key deliverables: landing page updates, social media posts, email newsletters",
+            "Agreed on the campaign launch date of April 1st and backward planning milestones",
+            "Identified need for performance tracking using analytics dashboards"
+          ],
+          "action_items_discussed": [
+            "Draft initial blog post and email copy for the campaign",
+            "Design social media graphics for Instagram and LinkedIn",
+            "Prepare analytics dashboard to monitor engagement KPIs",
+            "Finalize content calendar for March and April"
+          ],
+          "known_constraints": [
+            "Landing page updates must be finalized by March 25th to allow QA",
+            "Limited design bandwidth; only two major graphic revisions allowed",
+            "Data pull for analytics requires 48-hour lead time"
+          ],
+          "stated_assumptions": [
+            "All creative assets will be approved by March 20th",
+            "No additional product features will be introduced before the launch",
+            "Email platform will remain unchanged during the campaign period"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Marketing Campaign Planning\n\n## Goal\nEnsure all campaign deliverables for the Q2 product launch are completed and approved by March 25, 2025, to support the April 1 launch date.\n\n## Timeline Overview\n| T-n  | Date       | Task                                                  | Owner           | Deliverable                                                 | Status      |\n|------|------------|-------------------------------------------------------|-----------------|-------------------------------------------------------------|-------------|\n| T-15 | 2025-03-14 | Draft initial blog post and email copy                | David Kim       | Blog post draft and email copy                              | Not Started |\n| T-14 | 2025-03-15 | Finalize content calendar for March and April         | Laura Chen      | Completed Content Calendar (Content_Calendar_Template.xlsx) | Not Started |\n| T-12 | 2025-03-17 | Design social media graphics for Instagram & LinkedIn | James O'Neill   | Social media graphics package                               | Not Started |\n| T-10 | 2025-03-19 | Prepare analytics dashboard for engagement KPIs       | Priya Singh     | Analytics dashboard setup                                   | Not Started |\n| T-8  | 2025-03-20 | Review and approve all creative assets                | Laura Chen      | Approved creative assets                                    | Not Started |\n| T-5  | 2025-03-25 | Finalize landing page updates and QA                  | Sophia Martinez | Updated and QA’d landing page                               | Not Started |\n| T-0  | 2025-04-01 | Launch Q2 Marketing Campaign                          | Laura Chen      | Campaign live                                               | Pending     |\n\n## Blockers and Mitigations\n- **Blocker:** Limited design bandwidth; only two major graphic revisions allowed\n  - **Mitigation:** Prioritize early feedback and consolidate all changes before first revision\n  - **Owner:** James O'Neill\n\n- **Blocker:** Data pull for analytics requires 48-hour lead time\n  - **Mitigation:** Schedule data extraction tasks in advance and set reminders\n  - **Owner:** Priya Singh\n\n## Assumptions\n- All creative assets will be approved by March 20th. **Impact if invalidated:** Delayed landing page QA and potential launch delay.\n- No additional product features will be introduced before the launch. **Impact if invalidated:** Content and design revisions may increase workload.\n- Email platform will remain unchanged during the campaign period. **Impact if invalidated:** Email copy and scheduling may require updates.\n\n## Referenced Artifacts\n- Q2_Campaign_Brief.pdf\n- Content_Calendar_Template.xlsx\n- Previous_Campaign_Performance_Report.pdf\n",
+        "evidence": "Owners in WBP: David Kim, Laura Chen, James O'Neill, Priya Singh, Sophia Martinez.",
+        "ground_truth_check": "Scenario attendees: Laura Chen - Marketing Manager, David Kim - Content Strategist, Sophia Martinez - Social Media Lead, James O'Neill - Graphic Designer, Priya Singh - Data Analyst.",
+        "verification": "All named task owners in the WBP match the attendee names from the scenario; no extraneous names are present.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0002_S3",
+        "dimension": "S3",
+        "passes": true,
+        "evidence": "Each task in the Workback Plan has an Owner column populated: David Kim, Laura Chen, James O'Neill, Priya Singh, Sophia Martinez.",
+        "ground_truth_check": "Attendees listed in the scenario: Laura Chen, David Kim, Sophia Martinez, James O'Neill, Priya Singh.",
+        "reasoning": "All tasks have a specific owner, and each owner is among the attendees in the scenario."
+      },
+      {
+        "assertion_id": "A0002_G2_0",
+        "dimension": "G2",
+        "passes": true,
+        "evidence": "Owners in WBP: David Kim, Laura Chen, James O'Neill, Priya Singh, Sophia Martinez.",
+        "ground_truth_check": "Scenario attendees: Laura Chen - Marketing Manager, David Kim - Content Strategist, Sophia Martinez - Social Media Lead, James O'Neill - Graphic Designer, Priya Singh - Data Analyst.",
+        "reasoning": "All named task owners in the WBP match the attendee names from the scenario; no extraneous names are present."
+      }
+    ]
+  }
+}

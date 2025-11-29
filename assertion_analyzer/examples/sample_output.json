@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-29T17:00:00.000000",
+    "original_utterance": "The response arranges the draft slides task before review slides task in the plan",
+    "total_assertions": 3,
+    "structural_count": 1,
+    "grounding_count": 2
+  },
+  "scenario": {
+    "title": "Q1 Marketing Strategy Presentation Planning",
+    "date": "2025-12-15",
+    "time": "2:00 PM PST",
+    "duration_minutes": 60,
+    "organizer": "Alice Chen",
+    "attendees": [
+      "Alice Chen",
+      "Bob Smith",
+      "Carol Davis",
+      "David Lee"
+    ],
+    "context": "The marketing team is preparing for the Q1 strategy presentation to leadership. The team needs to create slides, review them, and finalize the deck before the meeting.",
+    "artifacts": [
+      "Q1_marketing_strategy_draft.pptx",
+      "marketing_metrics_2024.xlsx",
+      "competitor_analysis.docx"
+    ],
+    "discussion_points": [
+      "Draft slides need to be completed before review can begin",
+      "Alice will create the initial draft",
+      "Bob and Carol will review and provide feedback",
+      "Final presentation to be delivered by David"
+    ],
+    "action_items_discussed": [
+      "Create draft slides by December 10",
+      "Complete review by December 12",
+      "Incorporate feedback by December 14",
+      "Final presentation ready by December 15"
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q1 Marketing Strategy Presentation\n\n## Meeting Details\n- **Subject**: Q1 Marketing Strategy Presentation Planning\n- **Date**: December 15, 2025\n- **Time**: 2:00 PM PST\n- **Attendees**: Alice Chen, Bob Smith, Carol Davis, David Lee\n\n## Timeline Overview\n\n| T-n  | Date       | Task                                     | Owner            | Deliverable                    |\n|------|------------|------------------------------------------|------------------|--------------------------------|\n| T-10 | Dec 05     | Gather marketing metrics and data        | Alice Chen       | Data compilation doc           |\n| T-8  | Dec 07     | Create draft slides                      | Alice Chen       | Q1_marketing_strategy_draft    |\n| T-5  | Dec 10     | Review draft slides                      | Bob Smith        | Review feedback document       |\n| T-4  | Dec 11     | Secondary review                         | Carol Davis      | Additional feedback            |\n| T-2  | Dec 13     | Incorporate feedback and finalize        | Alice Chen       | Final presentation deck        |\n| T-0  | Dec 15     | Deliver presentation                     | David Lee        | Completed presentation         |\n\n## Dependencies\n- Draft slides must be completed before review can begin\n- All reviews must be completed before finalization\n- Final deck must be ready before presentation date\n\n## Artifacts\n- Q1_marketing_strategy_draft.pptx\n- marketing_metrics_2024.xlsx\n- competitor_analysis.docx",
+  "assertions": [
+    {
+      "assertion_id": "A0000_S2",
+      "parent_assertion_id": null,
+      "text": "The response should include a backward timeline from T0 with dependency-aware sequencing that arranges draft slides before review slides",
+      "original_text": "The response arranges the draft slides task before review slides task in the plan",
+      "dimension_id": "S2",
+      "dimension_name": "Timeline Alignment",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion explicitly requires temporal sequencing of tasks (draft before review), which directly maps to S2 Timeline Alignment that checks for proper task ordering and dependency-aware scheduling.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": "See scenario field above",
+        "workback_plan": "See workback_plan field above",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0000_S2",
+            "dimension": "S2",
+            "passes": true,
+            "evidence": "Timeline shows 'Create draft slides' (T-8, Dec 07) before 'Review draft slides' (T-5, Dec 10)",
+            "ground_truth_check": "Checked task ordering in timeline table",
+            "reasoning": "The WBP correctly sequences draft creation before review, satisfying the timeline alignment requirement"
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0000_G3_0",
+      "parent_assertion_id": "A0000_S2",
+      "text": "Dates and times should be consistent with [MEETING_DATE] and [CURRENT_TIME]",
+      "original_text": "The response arranges the draft slides task before review slides task in the plan",
+      "dimension_id": "G3",
+      "dimension_name": "Date/Time Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "Timeline sequencing requires verifying that scheduled dates are consistent with the actual meeting date and don't conflict",
+        "parent_dimension": "S2",
+        "parent_dimension_name": "Timeline Alignment",
+        "conversion_method": "s_to_g_mapping"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": "See scenario field above",
+        "workback_plan": "See workback_plan field above",
+        "evidence": "All dates (Dec 05-15) are before or on the meeting date (Dec 15)",
+        "ground_truth_check": "Compared WBP dates against scenario.date (2025-12-15)",
+        "verification": "All task dates in the timeline are consistent with the December 15 meeting date",
+        "verified": true
+      }
+    },
+    {
+      "assertion_id": "A0000_G6_1",
+      "parent_assertion_id": "A0000_S2",
+      "text": "Action items should be traceable to [DISCUSSION_POINTS] or [PRIOR_COMMITMENTS]",
+      "original_text": "The response arranges the draft slides task before review slides task in the plan",
+      "dimension_id": "G6",
+      "dimension_name": "Action Item Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "Task ordering in the timeline must be traceable to actual action items discussed in the meeting",
+        "parent_dimension": "S2",
+        "parent_dimension_name": "Timeline Alignment",
+        "conversion_method": "s_to_g_mapping"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": "See scenario field above",
+        "workback_plan": "See workback_plan field above",
+        "evidence": "Tasks 'Create draft slides' and 'Review draft slides' trace to 'Create draft slides by December 10' and 'Complete review by December 12' in action_items_discussed",
+        "ground_truth_check": "Compared WBP tasks against scenario.action_items_discussed",
+        "verification": "The draft and review tasks in the WBP directly correspond to action items agreed upon in the meeting",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 3,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0000_S2",
+        "dimension": "S2",
+        "passes": true,
+        "evidence": "Timeline shows 'Create draft slides' (T-8, Dec 07) before 'Review draft slides' (T-5, Dec 10)",
+        "ground_truth_check": "Checked task ordering in timeline table",
+        "reasoning": "The WBP correctly sequences draft creation before review"
+      },
+      {
+        "assertion_id": "A0000_G3_0",
+        "dimension": "G3",
+        "passes": true,
+        "evidence": "All dates (Dec 05-15) are before or on the meeting date (Dec 15)",
+        "ground_truth_check": "Compared WBP dates against scenario.date",
+        "reasoning": "All task dates are consistent with the meeting timeline"
+      },
+      {
+        "assertion_id": "A0000_G6_1",
+        "dimension": "G6",
+        "passes": true,
+        "evidence": "Tasks trace to action_items_discussed in scenario",
+        "ground_truth_check": "Compared WBP tasks against scenario.action_items_discussed",
+        "reasoning": "Draft and review tasks correspond to agreed action items"
+      }
+    ]
+  }
+}

@@ -53,6 +53,24 @@ Each dimension is evaluated independently with its own definition, weight, and s
 ---
 ## Grounding Dimensions (G) — Sorted by Priority
 
+### Key Concept: G Assertions Are Instantiated Through S Assertions
+
+**G-level (grounding) assertions are never standalone.** They are always instantiated in the context of validating elements identified by S-level (structural) assertions.
+
+1. **S-level assertions** define **what** structural elements should exist (tasks, dates, owners, etc.)
+2. **G-level assertions** define **grounding constraints** that validate those elements against the source
+3. The `linked_g_dims` field in each S assertion specifies which G checks apply
+
+**Example:**
+```
+S2: "Each [TASK] must have a [DUE_DATE]..."
+    └── linked_g_dims: ["G3", "G6"]
+        ├── G3: Validate [DUE_DATE] consistency with meeting date
+        └── G6: Validate [TASK] traces to action_items_discussed
+```
+
+The G dimension definitions below serve as a **reference library** that S assertions link to.
+
 **Note:** G1 (Hallucination Check) is the **overall grounding recall check** placed first. If G2-G8 all pass, G1 passes. G1 also catches entity types not covered by G2-G8 (e.g., project names, budget figures, fabricated relationships).
 
 | ID  | Dimension              | Weight | Concise Definition                                        | Objective Evaluation Statement                                |

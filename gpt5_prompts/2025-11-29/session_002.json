@@ -1,0 +1,12 @@
+{
+  "session_id": "session_002",
+  "created_at": "2025-11-29T21:56:34.052435",
+  "system_prompt": "You are a helpful AI assistant with expertise in software development, \ndata analysis, and technical documentation. Provide clear, accurate, and well-structured responses.",
+  "exchanges": [
+    {
+      "question": "What is 2+2? Answer in one word.",
+      "answer": "Four",
+      "timestamp": "2025-11-29T21:56:34.052449"
+    }
+  ]
+}

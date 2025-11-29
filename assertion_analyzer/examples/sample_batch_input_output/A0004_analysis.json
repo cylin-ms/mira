@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T02:58:55.614862",
+    "original_utterance": "All deliverables are explicitly mentioned with expected formats",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q2 Marketing Campaign Deliverables Planning",
+    "date": "2025-03-10",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Maria Lopez",
+    "attendees": [
+      "Maria Lopez - Marketing Manager",
+      "James Carter - Content Lead",
+      "Sophie Nguyen - Graphic Designer",
+      "Daniel Kim - Social Media Strategist",
+      "Priya Patel - Project Coordinator"
+    ],
+    "context": "The marketing team is preparing for the Q2 product launch campaign. The purpose of the meeting is to finalize the list of deliverables, confirm their expected formats, and align on timelines before work begins.",
+    "artifacts": [
+      "Q2_Campaign_Brief_v2.pdf",
+      "Deliverables_Tracker.xlsx",
+      "Brand_Guidelines_2025.pdf"
+    ],
+    "discussion_points": [
+      "Reviewed the campaign brief and key messaging priorities",
+      "Discussed the full list of deliverables and their respective owners",
+      "Confirmed the expected formats for each deliverable (e.g., PDF, MP4, JPEG)",
+      "Aligned on deadlines and dependencies for design and content creation"
+    ],
+    "action_items_discussed": [
+      "James to draft three blog articles in Word format (.docx)",
+      "Sophie to create five social media graphics in JPEG format and one infographic in PNG format",
+      "Daniel to produce two short promotional videos in MP4 format",
+      "Priya to update Deliverables_Tracker.xlsx with all items and formats by end of day"
+    ],
+    "known_constraints": [
+      "Video production must adhere to the 60-second limit due to platform restrictions",
+      "All graphics must comply with the brand color palette from Brand_Guidelines_2025.pdf"
+    ],
+    "stated_assumptions": [
+      "Assuming product photography assets will be available by March 15",
+      "Assuming no additional deliverables will be added after this meeting to avoid timeline risks"
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q2 Marketing Campaign Deliverables\n\n**Goal:** Finalize and execute all Q2 marketing campaign deliverables with agreed formats, ensuring readiness for product launch.\n\n**Meeting Reference:** Q2 Marketing Campaign Deliverables Planning (2025-03-10, 10:00 AM PST)\n\n**Artifacts Referenced:** Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                                      | Owner                                | Deliverable                       | Status      |\n|------|------------|-----------------------------------------------------------|--------------------------------------|-----------------------------------|-------------|\n| T-15 | 2025-03-10 | Update Deliverables_Tracker.xlsx with all items & formats | Priya Patel - Project Coordinator    | Updated Deliverables_Tracker.xlsx | Completed   |\n| T-10 | 2025-03-15 | Confirm product photography assets availability           | Maria Lopez - Marketing Manager      | Asset readiness confirmation      | Pending     |\n| T-9  | 2025-03-16 | Draft three blog articles in Word format (.docx)          | James Carter - Content Lead          | 3 Blog Articles (.docx)           | Not Started |\n| T-8  | 2025-03-17 | Create five social media graphics (JPEG)                  | Sophie Nguyen - Graphic Designer     | 5 Social Media Graphics (.jpeg)   | Not Started |\n| T-8  | 2025-03-17 | Create one infographic (PNG)                              | Sophie Nguyen - Graphic Designer     | 1 Infographic (.png)              | Not Started |\n| T-7  | 2025-03-18 | Produce two short promotional videos (MP4, ≤60 sec)       | Daniel Kim - Social Media Strategist | 2 Promotional Videos (.mp4)       | Not Started |\n| T-1  | 2025-03-24 | Internal review of all deliverables                       | Maria Lopez - Marketing Manager      | Review Summary                    | Not Started |\n| T-0  | 2025-03-25 | Finalize and upload all deliverables                      | Respective Owners                    | Finalized Campaign Assets         | Not Started |\n\n---\n\n## Deliverables & Expected Formats\n- **Blog Articles:** 3 items, Word format (.docx) → Owner: James Carter\n- **Social Media Graphics:** 5 items, JPEG format (.jpeg) → Owner: Sophie Nguyen\n- **Infographic:** 1 item, PNG format (.png) → Owner: Sophie Nguyen\n- **Promotional Videos:** 2 items, MP4 format (.mp4), max 60 seconds → Owner: Daniel Kim\n- **Updated Deliverables Tracker:** Excel (.xlsx) → Owner: Priya Patel\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Product photography assets availability by March 15.\n- **Mitigation:** If delayed, use placeholder images from Brand_Guidelines_2025.pdf for mockups.\n- **Owner:** Maria Lopez\n\n---\n\n## Assumptions\n1. **Product photography assets available by March 15**\n   - *Impact if invalidated:* Delays in graphics and video production.\n2. **No additional deliverables will be added after this meeting**\n   - *Impact if invalidated:* Timeline risk and possible resource reallocation.\n\n---\n\n## Open Questions\n- Are there any platform-specific aspect ratio requirements for social media graphics beyond standard brand guidelines?\n\n---\n\n**Prepared by:** Based on meeting organized by Maria Lopez on 2025-03-10\n",
+  "assertions": [
+    {
+      "assertion_id": "A0004_S4",
+      "parent_assertion_id": null,
+      "text": "All [DELIVERABLE] items are explicitly listed with their expected [ARTIFACT] formats.",
+      "original_text": "All deliverables are explicitly mentioned with expected formats",
+      "dimension_id": "S4",
+      "dimension_name": "Deliverables & Artifacts",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 2,
+      "linked_g_dims": [
+        "G4",
+        "G5"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion focuses on ensuring that all deliverables are explicitly listed along with their expected formats, which directly relates to the completeness and clarity of deliverables and artifacts in the workback plan. This is a core structural requirement for WBP.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Deliverables Planning",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Maria Lopez",
+          "attendees": [
+            "Maria Lopez - Marketing Manager",
+            "James Carter - Content Lead",
+            "Sophie Nguyen - Graphic Designer",
+            "Daniel Kim - Social Media Strategist",
+            "Priya Patel - Project Coordinator"
+          ],
+          "context": "The marketing team is preparing for the Q2 product launch campaign. The purpose of the meeting is to finalize the list of deliverables, confirm their expected formats, and align on timelines before work begins.",
+          "artifacts": [
+            "Q2_Campaign_Brief_v2.pdf",
+            "Deliverables_Tracker.xlsx",
+            "Brand_Guidelines_2025.pdf"
+          ],
+          "discussion_points": [
+            "Reviewed the campaign brief and key messaging priorities",
+            "Discussed the full list of deliverables and their respective owners",
+            "Confirmed the expected formats for each deliverable (e.g., PDF, MP4, JPEG)",
+            "Aligned on deadlines and dependencies for design and content creation"
+          ],
+          "action_items_discussed": [
+            "James to draft three blog articles in Word format (.docx)",
+            "Sophie to create five social media graphics in JPEG format and one infographic in PNG format",
+            "Daniel to produce two short promotional videos in MP4 format",
+            "Priya to update Deliverables_Tracker.xlsx with all items and formats by end of day"
+          ],
+          "known_constraints": [
+            "Video production must adhere to the 60-second limit due to platform restrictions",
+            "All graphics must comply with the brand color palette from Brand_Guidelines_2025.pdf"
+          ],
+          "stated_assumptions": [
+            "Assuming product photography assets will be available by March 15",
+            "Assuming no additional deliverables will be added after this meeting to avoid timeline risks"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Marketing Campaign Deliverables\n\n**Goal:** Finalize and execute all Q2 marketing campaign deliverables with agreed formats, ensuring readiness for product launch.\n\n**Meeting Reference:** Q2 Marketing Campaign Deliverables Planning (2025-03-10, 10:00 AM PST)\n\n**Artifacts Referenced:** Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                                      | Owner                                | Deliverable                       | Status      |\n|------|------------|-----------------------------------------------------------|--------------------------------------|-----------------------------------|-------------|\n| T-15 | 2025-03-10 | Update Deliverables_Tracker.xlsx with all items & formats | Priya Patel - Project Coordinator    | Updated Deliverables_Tracker.xlsx | Completed   |\n| T-10 | 2025-03-15 | Confirm product photography assets availability           | Maria Lopez - Marketing Manager      | Asset readiness confirmation      | Pending     |\n| T-9  | 2025-03-16 | Draft three blog articles in Word format (.docx)          | James Carter - Content Lead          | 3 Blog Articles (.docx)           | Not Started |\n| T-8  | 2025-03-17 | Create five social media graphics (JPEG)                  | Sophie Nguyen - Graphic Designer     | 5 Social Media Graphics (.jpeg)   | Not Started |\n| T-8  | 2025-03-17 | Create one infographic (PNG)                              | Sophie Nguyen - Graphic Designer     | 1 Infographic (.png)              | Not Started |\n| T-7  | 2025-03-18 | Produce two short promotional videos (MP4, ≤60 sec)       | Daniel Kim - Social Media Strategist | 2 Promotional Videos (.mp4)       | Not Started |\n| T-1  | 2025-03-24 | Internal review of all deliverables                       | Maria Lopez - Marketing Manager      | Review Summary                    | Not Started |\n| T-0  | 2025-03-25 | Finalize and upload all deliverables                      | Respective Owners                    | Finalized Campaign Assets         | Not Started |\n\n---\n\n## Deliverables & Expected Formats\n- **Blog Articles:** 3 items, Word format (.docx) → Owner: James Carter\n- **Social Media Graphics:** 5 items, JPEG format (.jpeg) → Owner: Sophie Nguyen\n- **Infographic:** 1 item, PNG format (.png) → Owner: Sophie Nguyen\n- **Promotional Videos:** 2 items, MP4 format (.mp4), max 60 seconds → Owner: Daniel Kim\n- **Updated Deliverables Tracker:** Excel (.xlsx) → Owner: Priya Patel\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Product photography assets availability by March 15.\n- **Mitigation:** If delayed, use placeholder images from Brand_Guidelines_2025.pdf for mockups.\n- **Owner:** Maria Lopez\n\n---\n\n## Assumptions\n1. **Product photography assets available by March 15**\n   - *Impact if invalidated:* Delays in graphics and video production.\n2. **No additional deliverables will be added after this meeting**\n   - *Impact if invalidated:* Timeline risk and possible resource reallocation.\n\n---\n\n## Open Questions\n- Are there any platform-specific aspect ratio requirements for social media graphics beyond standard brand guidelines?\n\n---\n\n**Prepared by:** Based on meeting organized by Maria Lopez on 2025-03-10\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0004_S4",
+            "dimension": "S4",
+            "passes": true,
+            "evidence": "Under 'Deliverables & Expected Formats', the WBP lists: Blog Articles (3 items, .docx), Social Media Graphics (5 items, .jpeg), Infographic (1 item, .png), Promotional Videos (2 items, .mp4), and Updated Deliverables Tracker (.xlsx).",
+            "ground_truth_check": "Scenario action_items_discussed: James to draft three blog articles in Word format (.docx); Sophie to create five social media graphics in JPEG and one infographic in PNG; Daniel to produce two short promotional videos in MP4; Priya to update Deliverables_Tracker.xlsx.",
+            "reasoning": "All deliverables mentioned in the scenario are explicitly listed in the WBP with their expected formats, satisfying the structural requirement."
+          },
+          {
+            "assertion_id": "A0004_G4_0",
+            "dimension": "G4",
+            "passes": true,
+            "evidence": "WBP references artifacts: Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf, and deliverables correspond to scenario items (blog articles, social media graphics, infographic, promotional videos, updated tracker).",
+            "ground_truth_check": "Scenario artifacts: Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf; Scenario deliverables and formats match WBP deliverables.",
+            "reasoning": "All referenced files and deliverables in the WBP are present in the scenario's artifact list or are explicitly discussed deliverables, so there are no hallucinated artifacts and the formats align with the scenario."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0004_G4_0",
+      "parent_assertion_id": "A0004_S4",
+      "text": "The listed deliverables and their formats must correspond to real or creatable artifacts in the project context.",
+      "original_text": "All deliverables are explicitly mentioned with expected formats",
+      "dimension_id": "G4",
+      "dimension_name": "Artifact Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion requires that all deliverables are explicitly mentioned with their expected formats, which implies verifying that these deliverables actually exist or can be derived from available artifacts.",
+        "parent_dimension": "S4",
+        "parent_dimension_name": "Deliverables & Artifacts",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Deliverables Planning",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Maria Lopez",
+          "attendees": [
+            "Maria Lopez - Marketing Manager",
+            "James Carter - Content Lead",
+            "Sophie Nguyen - Graphic Designer",
+            "Daniel Kim - Social Media Strategist",
+            "Priya Patel - Project Coordinator"
+          ],
+          "context": "The marketing team is preparing for the Q2 product launch campaign. The purpose of the meeting is to finalize the list of deliverables, confirm their expected formats, and align on timelines before work begins.",
+          "artifacts": [
+            "Q2_Campaign_Brief_v2.pdf",
+            "Deliverables_Tracker.xlsx",
+            "Brand_Guidelines_2025.pdf"
+          ],
+          "discussion_points": [
+            "Reviewed the campaign brief and key messaging priorities",
+            "Discussed the full list of deliverables and their respective owners",
+            "Confirmed the expected formats for each deliverable (e.g., PDF, MP4, JPEG)",
+            "Aligned on deadlines and dependencies for design and content creation"
+          ],
+          "action_items_discussed": [
+            "James to draft three blog articles in Word format (.docx)",
+            "Sophie to create five social media graphics in JPEG format and one infographic in PNG format",
+            "Daniel to produce two short promotional videos in MP4 format",
+            "Priya to update Deliverables_Tracker.xlsx with all items and formats by end of day"
+          ],
+          "known_constraints": [
+            "Video production must adhere to the 60-second limit due to platform restrictions",
+            "All graphics must comply with the brand color palette from Brand_Guidelines_2025.pdf"
+          ],
+          "stated_assumptions": [
+            "Assuming product photography assets will be available by March 15",
+            "Assuming no additional deliverables will be added after this meeting to avoid timeline risks"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Marketing Campaign Deliverables\n\n**Goal:** Finalize and execute all Q2 marketing campaign deliverables with agreed formats, ensuring readiness for product launch.\n\n**Meeting Reference:** Q2 Marketing Campaign Deliverables Planning (2025-03-10, 10:00 AM PST)\n\n**Artifacts Referenced:** Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                                      | Owner                                | Deliverable                       | Status      |\n|------|------------|-----------------------------------------------------------|--------------------------------------|-----------------------------------|-------------|\n| T-15 | 2025-03-10 | Update Deliverables_Tracker.xlsx with all items & formats | Priya Patel - Project Coordinator    | Updated Deliverables_Tracker.xlsx | Completed   |\n| T-10 | 2025-03-15 | Confirm product photography assets availability           | Maria Lopez - Marketing Manager      | Asset readiness confirmation      | Pending     |\n| T-9  | 2025-03-16 | Draft three blog articles in Word format (.docx)          | James Carter - Content Lead          | 3 Blog Articles (.docx)           | Not Started |\n| T-8  | 2025-03-17 | Create five social media graphics (JPEG)                  | Sophie Nguyen - Graphic Designer     | 5 Social Media Graphics (.jpeg)   | Not Started |\n| T-8  | 2025-03-17 | Create one infographic (PNG)                              | Sophie Nguyen - Graphic Designer     | 1 Infographic (.png)              | Not Started |\n| T-7  | 2025-03-18 | Produce two short promotional videos (MP4, ≤60 sec)       | Daniel Kim - Social Media Strategist | 2 Promotional Videos (.mp4)       | Not Started |\n| T-1  | 2025-03-24 | Internal review of all deliverables                       | Maria Lopez - Marketing Manager      | Review Summary                    | Not Started |\n| T-0  | 2025-03-25 | Finalize and upload all deliverables                      | Respective Owners                    | Finalized Campaign Assets         | Not Started |\n\n---\n\n## Deliverables & Expected Formats\n- **Blog Articles:** 3 items, Word format (.docx) → Owner: James Carter\n- **Social Media Graphics:** 5 items, JPEG format (.jpeg) → Owner: Sophie Nguyen\n- **Infographic:** 1 item, PNG format (.png) → Owner: Sophie Nguyen\n- **Promotional Videos:** 2 items, MP4 format (.mp4), max 60 seconds → Owner: Daniel Kim\n- **Updated Deliverables Tracker:** Excel (.xlsx) → Owner: Priya Patel\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Product photography assets availability by March 15.\n- **Mitigation:** If delayed, use placeholder images from Brand_Guidelines_2025.pdf for mockups.\n- **Owner:** Maria Lopez\n\n---\n\n## Assumptions\n1. **Product photography assets available by March 15**\n   - *Impact if invalidated:* Delays in graphics and video production.\n2. **No additional deliverables will be added after this meeting**\n   - *Impact if invalidated:* Timeline risk and possible resource reallocation.\n\n---\n\n## Open Questions\n- Are there any platform-specific aspect ratio requirements for social media graphics beyond standard brand guidelines?\n\n---\n\n**Prepared by:** Based on meeting organized by Maria Lopez on 2025-03-10\n",
+        "evidence": "WBP references artifacts: Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf, and deliverables correspond to scenario items (blog articles, social media graphics, infographic, promotional videos, updated tracker).",
+        "ground_truth_check": "Scenario artifacts: Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf; Scenario deliverables and formats match WBP deliverables.",
+        "verification": "All referenced files and deliverables in the WBP are present in the scenario's artifact list or are explicitly discussed deliverables, so there are no hallucinated artifacts and the formats align with the scenario.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0004_S4",
+        "dimension": "S4",
+        "passes": true,
+        "evidence": "Under 'Deliverables & Expected Formats', the WBP lists: Blog Articles (3 items, .docx), Social Media Graphics (5 items, .jpeg), Infographic (1 item, .png), Promotional Videos (2 items, .mp4), and Updated Deliverables Tracker (.xlsx).",
+        "ground_truth_check": "Scenario action_items_discussed: James to draft three blog articles in Word format (.docx); Sophie to create five social media graphics in JPEG and one infographic in PNG; Daniel to produce two short promotional videos in MP4; Priya to update Deliverables_Tracker.xlsx.",
+        "reasoning": "All deliverables mentioned in the scenario are explicitly listed in the WBP with their expected formats, satisfying the structural requirement."
+      },
+      {
+        "assertion_id": "A0004_G4_0",
+        "dimension": "G4",
+        "passes": true,
+        "evidence": "WBP references artifacts: Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf, and deliverables correspond to scenario items (blog articles, social media graphics, infographic, promotional videos, updated tracker).",
+        "ground_truth_check": "Scenario artifacts: Q2_Campaign_Brief_v2.pdf, Deliverables_Tracker.xlsx, Brand_Guidelines_2025.pdf; Scenario deliverables and formats match WBP deliverables.",
+        "reasoning": "All referenced files and deliverables in the WBP are present in the scenario's artifact list or are explicitly discussed deliverables, so there are no hallucinated artifacts and the formats align with the scenario."
+      }
+    ]
+  }
+}

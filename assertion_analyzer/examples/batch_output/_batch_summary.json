@@ -1,0 +1,74 @@
+{
+  "input_file": "examples/sample_input.txt",
+  "output_dir": "./batch_test_output",
+  "total": 8,
+  "success": 8,
+  "failed": 0,
+  "time_seconds": 150.28,
+  "results": [
+    {
+      "assertion_id": "A0000",
+      "index": 0,
+      "assertion": "The response arranges the draft slides task before review slides task in the plan",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0000_analysis.json"
+    },
+    {
+      "assertion_id": "A0001",
+      "index": 1,
+      "assertion": "Each task in the plan should have a designated owner assigned",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0001_analysis.json"
+    },
+    {
+      "assertion_id": "A0002",
+      "index": 2,
+      "assertion": "The plan includes specific start and end dates for each deliverable",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0002_analysis.json"
+    },
+    {
+      "assertion_id": "A0003",
+      "index": 3,
+      "assertion": "The workback plan identifies all blocking dependencies between tasks",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0003_analysis.json"
+    },
+    {
+      "assertion_id": "A0004",
+      "index": 4,
+      "assertion": "The response includes the meeting subject, date, time, and full attendee list",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0004_analysis.json"
+    },
+    {
+      "assertion_id": "A0005",
+      "index": 5,
+      "assertion": "All artifacts and deliverables are clearly listed with expected formats",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0005_analysis.json"
+    },
+    {
+      "assertion_id": "A0006",
+      "index": 6,
+      "assertion": "The plan includes progress review checkpoints at regular intervals",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0006_analysis.json"
+    },
+    {
+      "assertion_id": "A0007",
+      "index": 7,
+      "assertion": "The plan identifies top risks and includes mitigation strategies with owners",
+      "success": true,
+      "error": null,
+      "file": "./batch_test_output\\A0007_analysis.json"
+    }
+  ]
+}

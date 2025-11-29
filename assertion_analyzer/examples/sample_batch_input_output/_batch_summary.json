@@ -1,0 +1,50 @@
+{
+  "input_file": "examples/sample_batch_input.txt",
+  "output_dir": "examples/sample_batch_input_output",
+  "total": 5,
+  "success": 5,
+  "failed": 0,
+  "time_seconds": 91.63,
+  "results": [
+    {
+      "assertion_id": "A0000",
+      "index": 0,
+      "assertion": "The response arranges the draft slides task before review slides task in the plan",
+      "success": true,
+      "error": null,
+      "file": "examples/sample_batch_input_output\\A0000_analysis.json"
+    },
+    {
+      "assertion_id": "A0001",
+      "index": 1,
+      "assertion": "The plan includes specific deadlines for each task",
+      "success": true,
+      "error": null,
+      "file": "examples/sample_batch_input_output\\A0001_analysis.json"
+    },
+    {
+      "assertion_id": "A0002",
+      "index": 2,
+      "assertion": "Tasks are assigned to named individuals from the attendees list",
+      "success": true,
+      "error": null,
+      "file": "examples/sample_batch_input_output\\A0002_analysis.json"
+    },
+    {
+      "assertion_id": "A0003",
+      "index": 3,
+      "assertion": "The timeline shows clear dependencies between tasks",
+      "success": true,
+      "error": null,
+      "file": "examples/sample_batch_input_output\\A0003_analysis.json"
+    },
+    {
+      "assertion_id": "A0004",
+      "index": 4,
+      "assertion": "All deliverables are explicitly mentioned with expected formats",
+      "success": true,
+      "error": null,
+      "file": "examples/sample_batch_input_output\\A0004_analysis.json"
+    }
+  ]
+}

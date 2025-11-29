@@ -1,0 +1,233 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T02:58:00.505086",
+    "original_utterance": "The plan includes specific deadlines for each task",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q2 Marketing Campaign Planning Meeting",
+    "date": "2025-03-10",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Sarah Mitchell",
+    "attendees": [
+      "Sarah Mitchell - Marketing Manager",
+      "James Lee - Content Strategist",
+      "Priya Nair - Social Media Lead",
+      "Carlos Ramirez - Graphic Designer",
+      "Linda Chen - Project Coordinator"
+    ],
+    "context": "The marketing team met to finalize the strategy and execution timeline for the upcoming Q2 product launch campaign. The goal was to align on deliverables, assign responsibilities, and ensure that all tasks have clear deadlines to meet the April 15 launch date.",
+    "artifacts": [
+      "Q2_Campaign_Strategy_Draft.docx",
+      "Campaign_Timeline.xlsx",
+      "Brand_Assets_Guidelines.pdf"
+    ],
+    "discussion_points": [
+      "Confirmed campaign launch date as April 15, 2025",
+      "Reviewed key deliverables: social media posts, blog articles, email newsletter, and graphics",
+      "Discussed content creation workflow and approval process",
+      "Assigned owners for each deliverable and agreed on deadlines"
+    ],
+    "action_items_discussed": [
+      "James to draft two blog posts by March 20",
+      "Priya to prepare social media calendar by March 18",
+      "Carlos to deliver final graphics by March 25",
+      "Linda to consolidate all assets and prepare email newsletter by March 28"
+    ],
+    "known_constraints": [
+      "Graphic design team has limited bandwidth due to another project",
+      "All assets must be finalized one week before launch for QA review",
+      "Budget for paid ads is capped at $5,000"
+    ],
+    "stated_assumptions": [
+      "Product launch date will not change from April 15",
+      "No additional design revisions beyond two rounds of feedback",
+      "All team members have access to the shared marketing drive"
+    ]
+  },
+  "workback_plan": "# Q2 Marketing Campaign Workback Plan\n\n**Goal:** Finalize and execute all Q2 marketing campaign deliverables in preparation for the April 15, 2025 product launch.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (March 10, 2025)\n\n**Key Artifacts:** Q2_Campaign_Strategy_Draft.docx, Campaign_Timeline.xlsx, Brand_Assets_Guidelines.pdf\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                    | Owner                              | Deliverable            | Status  |\n|------|------------|-----------------------------------------|------------------------------------|------------------------|---------|\n| T-22 | 2025-03-18 | Prepare social media calendar           | Priya Nair - Social Media Lead     | Social Media Calendar  | Planned |\n| T-20 | 2025-03-20 | Draft two blog posts                    | James Lee - Content Strategist     | Two Blog Post Drafts   | Planned |\n| T-15 | 2025-03-25 | Deliver final graphics                  | Carlos Ramirez - Graphic Designer  | Final Graphics Package | Planned |\n| T-12 | 2025-03-28 | Consolidate assets & prepare newsletter | Linda Chen - Project Coordinator   | Email Newsletter Draft | Planned |\n| T-7  | 2025-04-08 | QA review of all assets                 | Sarah Mitchell - Marketing Manager | QA Checklist Completed | Planned |\n| T-0  | 2025-04-15 | Campaign Launch                         | Sarah Mitchell - Marketing Manager | Launch Live            | Planned |\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Graphic design team has limited bandwidth due to another project  \n**Mitigation:** Prioritize critical graphics first and schedule early feedback rounds to avoid delays  \n**Owner:** Carlos Ramirez - Graphic Designer\n\n---\n\n## Assumptions\n1. **Product launch date remains April 15, 2025**  \n   *Impact if invalidated:* All deadlines and deliverables will need to be recalibrated.\n2. **No additional design revisions beyond two rounds of feedback**  \n   *Impact if invalidated:* Could delay final graphics delivery and downstream tasks.\n3. **All team members have access to the shared marketing drive**  \n   *Impact if invalidated:* Delays in content sharing and approvals.\n\n---\n\n## Notes\n- All assets must be finalized by April 8, 2025 (one week before launch) for QA review.\n- Budget for paid ads is capped at $5,000 (not directly tied to these deliverables but relevant for execution).\n",
+  "assertions": [
+    {
+      "assertion_id": "A0001_S5",
+      "parent_assertion_id": null,
+      "text": "Each [TASK] in the plan has an associated [DUE_DATE].",
+      "original_text": "The plan includes specific deadlines for each task",
+      "dimension_id": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 2,
+      "linked_g_dims": [
+        "G3"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion checks whether each task in the plan has a specific deadline, which directly aligns with the requirement to include task-level dates in the workback plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning Meeting",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Mitchell",
+          "attendees": [
+            "Sarah Mitchell - Marketing Manager",
+            "James Lee - Content Strategist",
+            "Priya Nair - Social Media Lead",
+            "Carlos Ramirez - Graphic Designer",
+            "Linda Chen - Project Coordinator"
+          ],
+          "context": "The marketing team met to finalize the strategy and execution timeline for the upcoming Q2 product launch campaign. The goal was to align on deliverables, assign responsibilities, and ensure that all tasks have clear deadlines to meet the April 15 launch date.",
+          "artifacts": [
+            "Q2_Campaign_Strategy_Draft.docx",
+            "Campaign_Timeline.xlsx",
+            "Brand_Assets_Guidelines.pdf"
+          ],
+          "discussion_points": [
+            "Confirmed campaign launch date as April 15, 2025",
+            "Reviewed key deliverables: social media posts, blog articles, email newsletter, and graphics",
+            "Discussed content creation workflow and approval process",
+            "Assigned owners for each deliverable and agreed on deadlines"
+          ],
+          "action_items_discussed": [
+            "James to draft two blog posts by March 20",
+            "Priya to prepare social media calendar by March 18",
+            "Carlos to deliver final graphics by March 25",
+            "Linda to consolidate all assets and prepare email newsletter by March 28"
+          ],
+          "known_constraints": [
+            "Graphic design team has limited bandwidth due to another project",
+            "All assets must be finalized one week before launch for QA review",
+            "Budget for paid ads is capped at $5,000"
+          ],
+          "stated_assumptions": [
+            "Product launch date will not change from April 15",
+            "No additional design revisions beyond two rounds of feedback",
+            "All team members have access to the shared marketing drive"
+          ]
+        },
+        "workback_plan": "# Q2 Marketing Campaign Workback Plan\n\n**Goal:** Finalize and execute all Q2 marketing campaign deliverables in preparation for the April 15, 2025 product launch.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (March 10, 2025)\n\n**Key Artifacts:** Q2_Campaign_Strategy_Draft.docx, Campaign_Timeline.xlsx, Brand_Assets_Guidelines.pdf\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                    | Owner                              | Deliverable            | Status  |\n|------|------------|-----------------------------------------|------------------------------------|------------------------|---------|\n| T-22 | 2025-03-18 | Prepare social media calendar           | Priya Nair - Social Media Lead     | Social Media Calendar  | Planned |\n| T-20 | 2025-03-20 | Draft two blog posts                    | James Lee - Content Strategist     | Two Blog Post Drafts   | Planned |\n| T-15 | 2025-03-25 | Deliver final graphics                  | Carlos Ramirez - Graphic Designer  | Final Graphics Package | Planned |\n| T-12 | 2025-03-28 | Consolidate assets & prepare newsletter | Linda Chen - Project Coordinator   | Email Newsletter Draft | Planned |\n| T-7  | 2025-04-08 | QA review of all assets                 | Sarah Mitchell - Marketing Manager | QA Checklist Completed | Planned |\n| T-0  | 2025-04-15 | Campaign Launch                         | Sarah Mitchell - Marketing Manager | Launch Live            | Planned |\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Graphic design team has limited bandwidth due to another project  \n**Mitigation:** Prioritize critical graphics first and schedule early feedback rounds to avoid delays  \n**Owner:** Carlos Ramirez - Graphic Designer\n\n---\n\n## Assumptions\n1. **Product launch date remains April 15, 2025**  \n   *Impact if invalidated:* All deadlines and deliverables will need to be recalibrated.\n2. **No additional design revisions beyond two rounds of feedback**  \n   *Impact if invalidated:* Could delay final graphics delivery and downstream tasks.\n3. **All team members have access to the shared marketing drive**  \n   *Impact if invalidated:* Delays in content sharing and approvals.\n\n---\n\n## Notes\n- All assets must be finalized by April 8, 2025 (one week before launch) for QA review.\n- Budget for paid ads is capped at $5,000 (not directly tied to these deliverables but relevant for execution).\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0001_S5",
+            "dimension": "S5",
+            "passes": true,
+            "evidence": "Each row in the Timeline Overview table includes a specific Date for the corresponding Task (e.g., 'Prepare social media calendar' on 2025-03-18, 'Draft two blog posts' on 2025-03-20, etc.).",
+            "ground_truth_check": "Scenario does not directly dictate structure, but the WBP clearly associates each task with a due date.",
+            "reasoning": "The structural requirement is met because every listed task in the WBP has an associated due date."
+          },
+          {
+            "assertion_id": "A0001_G3_0",
+            "dimension": "G3",
+            "passes": true,
+            "evidence": "WBP dates: 2025-03-18, 2025-03-20, 2025-03-25, 2025-03-28, 2025-04-08, 2025-04-15. Meeting date: 2025-03-10. Scenario launch date: April 15, 2025.",
+            "ground_truth_check": "Scenario states meeting date is March 10, 2025 and launch date is April 15, 2025. Action items discussed in scenario have deadlines: March 18, March 20, March 25, March 28.",
+            "reasoning": "All WBP task deadlines occur after the meeting date and before or on the launch date. The first four tasks match the scenario's discussed action items and their deadlines exactly. The QA review on April 8 aligns with the constraint that all assets must be finalized one week before launch. Therefore, dates are consistent and realistic."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0001_G3_0",
+      "parent_assertion_id": "A0001_S5",
+      "text": "Each task should have a specific deadline, and these dates must be consistent with the overall meeting date and realistic timeframes.",
+      "original_text": "The plan includes specific deadlines for each task",
+      "dimension_id": "G3",
+      "dimension_name": "Date/Time Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion explicitly states that the plan includes specific deadlines for each task, which requires verifying the presence and correctness of task-level dates.",
+        "parent_dimension": "S5",
+        "parent_dimension_name": "Task Dates",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning Meeting",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Mitchell",
+          "attendees": [
+            "Sarah Mitchell - Marketing Manager",
+            "James Lee - Content Strategist",
+            "Priya Nair - Social Media Lead",
+            "Carlos Ramirez - Graphic Designer",
+            "Linda Chen - Project Coordinator"
+          ],
+          "context": "The marketing team met to finalize the strategy and execution timeline for the upcoming Q2 product launch campaign. The goal was to align on deliverables, assign responsibilities, and ensure that all tasks have clear deadlines to meet the April 15 launch date.",
+          "artifacts": [
+            "Q2_Campaign_Strategy_Draft.docx",
+            "Campaign_Timeline.xlsx",
+            "Brand_Assets_Guidelines.pdf"
+          ],
+          "discussion_points": [
+            "Confirmed campaign launch date as April 15, 2025",
+            "Reviewed key deliverables: social media posts, blog articles, email newsletter, and graphics",
+            "Discussed content creation workflow and approval process",
+            "Assigned owners for each deliverable and agreed on deadlines"
+          ],
+          "action_items_discussed": [
+            "James to draft two blog posts by March 20",
+            "Priya to prepare social media calendar by March 18",
+            "Carlos to deliver final graphics by March 25",
+            "Linda to consolidate all assets and prepare email newsletter by March 28"
+          ],
+          "known_constraints": [
+            "Graphic design team has limited bandwidth due to another project",
+            "All assets must be finalized one week before launch for QA review",
+            "Budget for paid ads is capped at $5,000"
+          ],
+          "stated_assumptions": [
+            "Product launch date will not change from April 15",
+            "No additional design revisions beyond two rounds of feedback",
+            "All team members have access to the shared marketing drive"
+          ]
+        },
+        "workback_plan": "# Q2 Marketing Campaign Workback Plan\n\n**Goal:** Finalize and execute all Q2 marketing campaign deliverables in preparation for the April 15, 2025 product launch.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (March 10, 2025)\n\n**Key Artifacts:** Q2_Campaign_Strategy_Draft.docx, Campaign_Timeline.xlsx, Brand_Assets_Guidelines.pdf\n\n---\n\n## Timeline Overview\n| T-n  | Date       | Task                                    | Owner                              | Deliverable            | Status  |\n|------|------------|-----------------------------------------|------------------------------------|------------------------|---------|\n| T-22 | 2025-03-18 | Prepare social media calendar           | Priya Nair - Social Media Lead     | Social Media Calendar  | Planned |\n| T-20 | 2025-03-20 | Draft two blog posts                    | James Lee - Content Strategist     | Two Blog Post Drafts   | Planned |\n| T-15 | 2025-03-25 | Deliver final graphics                  | Carlos Ramirez - Graphic Designer  | Final Graphics Package | Planned |\n| T-12 | 2025-03-28 | Consolidate assets & prepare newsletter | Linda Chen - Project Coordinator   | Email Newsletter Draft | Planned |\n| T-7  | 2025-04-08 | QA review of all assets                 | Sarah Mitchell - Marketing Manager | QA Checklist Completed | Planned |\n| T-0  | 2025-04-15 | Campaign Launch                         | Sarah Mitchell - Marketing Manager | Launch Live            | Planned |\n\n---\n\n## Blockers & Mitigations\n**Blocker:** Graphic design team has limited bandwidth due to another project  \n**Mitigation:** Prioritize critical graphics first and schedule early feedback rounds to avoid delays  \n**Owner:** Carlos Ramirez - Graphic Designer\n\n---\n\n## Assumptions\n1. **Product launch date remains April 15, 2025**  \n   *Impact if invalidated:* All deadlines and deliverables will need to be recalibrated.\n2. **No additional design revisions beyond two rounds of feedback**  \n   *Impact if invalidated:* Could delay final graphics delivery and downstream tasks.\n3. **All team members have access to the shared marketing drive**  \n   *Impact if invalidated:* Delays in content sharing and approvals.\n\n---\n\n## Notes\n- All assets must be finalized by April 8, 2025 (one week before launch) for QA review.\n- Budget for paid ads is capped at $5,000 (not directly tied to these deliverables but relevant for execution).\n",
+        "evidence": "WBP dates: 2025-03-18, 2025-03-20, 2025-03-25, 2025-03-28, 2025-04-08, 2025-04-15. Meeting date: 2025-03-10. Scenario launch date: April 15, 2025.",
+        "ground_truth_check": "Scenario states meeting date is March 10, 2025 and launch date is April 15, 2025. Action items discussed in scenario have deadlines: March 18, March 20, March 25, March 28.",
+        "verification": "All WBP task deadlines occur after the meeting date and before or on the launch date. The first four tasks match the scenario's discussed action items and their deadlines exactly. The QA review on April 8 aligns with the constraint that all assets must be finalized one week before launch. Therefore, dates are consistent and realistic.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0001_S5",
+        "dimension": "S5",
+        "passes": true,
+        "evidence": "Each row in the Timeline Overview table includes a specific Date for the corresponding Task (e.g., 'Prepare social media calendar' on 2025-03-18, 'Draft two blog posts' on 2025-03-20, etc.).",
+        "ground_truth_check": "Scenario does not directly dictate structure, but the WBP clearly associates each task with a due date.",
+        "reasoning": "The structural requirement is met because every listed task in the WBP has an associated due date."
+      },
+      {
+        "assertion_id": "A0001_G3_0",
+        "dimension": "G3",
+        "passes": true,
+        "evidence": "WBP dates: 2025-03-18, 2025-03-20, 2025-03-25, 2025-03-28, 2025-04-08, 2025-04-15. Meeting date: 2025-03-10. Scenario launch date: April 15, 2025.",
+        "ground_truth_check": "Scenario states meeting date is March 10, 2025 and launch date is April 15, 2025. Action items discussed in scenario have deadlines: March 18, March 20, March 25, March 28.",
+        "reasoning": "All WBP task deadlines occur after the meeting date and before or on the launch date. The first four tasks match the scenario's discussed action items and their deadlines exactly. The QA review on April 8 aligns with the constraint that all assets must be finalized one week before launch. Therefore, dates are consistent and realistic."
+      }
+    ]
+  }
+}

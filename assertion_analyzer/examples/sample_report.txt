@@ -1,0 +1,103 @@
+============================================================================================================================================
+ASSERTION ANALYSIS REPORT
+============================================================================================================================================
+Timestamp: 2025-11-29T17:00:00.000000
+Input: "The response arranges the draft slides task before review slides task in the plan"
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+WORKFLOW EXECUTED
+--------------------------------------------------------------------------------------------------------------------------------------------
+  Step 1: INPUT ASSERTION
+          "The response arranges the draft slides task before review slides task in the plan"
+
+  Step 2: SCENARIO GENERATION (GPT-5)
+          Generated meeting context as ground truth for grounding assertions
+          -> Meeting: Q1 Marketing Strategy Presentation Planning
+          -> Attendees: 4 | Artifacts: 3
+
+  Step 3: ASSERTION ANALYSIS (GPT-5)
+          Classified as: S2 - Timeline Alignment
+          Layer: structural | Level: critical
+
+  Step 4: S+G ASSERTION CONVERSION
+          Generated 1 Structural + 2 Grounding assertions with linkage
+          -> S->G mapping: S2 -> G3, G6
+
+  Step 5: WBP GENERATION & VERIFICATION (GPT-5)
+          Generated WBP conditioned on scenario, verified against all S+G assertions
+          -> Result: 3 passed, 0 failed
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+SCENARIO CONTEXT (Ground Truth)
+--------------------------------------------------------------------------------------------------------------------------------------------
+  Meeting: Q1 Marketing Strategy Presentation Planning
+  Date: 2025-12-15 at 2:00 PM PST
+  Organizer: Alice Chen
+  Attendees: Alice Chen, Bob Smith, Carol Davis, David Lee
+  Artifacts: Q1_marketing_strategy_draft.pptx, marketing_metrics_2024.xlsx, competitor_analysis.docx
+  Action Items: 4 items discussed
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+GENERATED WORKBACK PLAN (WBP)
+--------------------------------------------------------------------------------------------------------------------------------------------
+  # Workback Plan: Q1 Marketing Strategy Presentation
+  
+  ## Meeting Details
+  - **Subject**: Q1 Marketing Strategy Presentation Planning
+  - **Date**: December 15, 2025
+  - **Time**: 2:00 PM PST
+  - **Attendees**: Alice Chen, Bob Smith, Carol Davis, David Lee
+  
+  ## Timeline Overview
+  
+  | T-n  | Date       | Task                                     | Owner            | Deliverable                    |
+  |------|------------|------------------------------------------|------------------|--------------------------------|
+  | T-10 | Dec 05     | Gather marketing metrics and data        | Alice Chen       | Data compilation doc           |
+  | T-8  | Dec 07     | Create draft slides                      | Alice Chen       | Q1_marketing_strategy_draft    |
+  | T-5  | Dec 10     | Review draft slides                      | Bob Smith        | Review feedback document       |
+  | T-4  | Dec 11     | Secondary review                         | Carol Davis      | Additional feedback            |
+  | T-2  | Dec 13     | Incorporate feedback and finalize        | Alice Chen       | Final presentation deck        |
+  | T-0  | Dec 15     | Deliver presentation                     | David Lee        | Completed presentation         |
+  
+  ## Dependencies
+  - Draft slides must be completed before review can begin
+  - All reviews must be completed before finalization
+  - Final deck must be ready before presentation date
+  
+  ## Artifacts
+  - Q1_marketing_strategy_draft.pptx
+  - marketing_metrics_2024.xlsx
+  - competitor_analysis.docx
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+ASSERTIONS SUMMARY TABLE
+--------------------------------------------------------------------------------------------------------------------------------------------
+ID              Dim   Layer        Level      Mapping Reason                                Success Example
+--------------------------------------------------------------------------------------------------------------------------------------------
+A0000_S2        S2    structural   critical   The assertion explicitly requires temporal .. Timeline shows 'Create draft slides' (T-8..
+A0000_G3_0      G3    grounding    critical   Timeline sequencing requires verifying that.. All dates (Dec 05-15) are before or on th..
+A0000_G6_1      G6    grounding    critical   Task ordering in the timeline must be trace.. Tasks trace to action_items_discussed in ..
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+VERIFICATION SUMMARY
+--------------------------------------------------------------------------------------------------------------------------------------------
+  Status: ALL PASSED
+  Passed: 3 / 3
+
+VERIFICATION DETAILS
+--------------------------------------------------------------------------------------------------------------------------------------------
+  [OK] [A0000_S2] S2
+     Evidence: Timeline shows 'Create draft slides' (T-8, Dec 07) before 'Review draft slides' (T-5, Dec 10)...
+     Ground Truth: Checked task ordering in timeline table
+
+  [OK] [A0000_G3_0] G3
+     Evidence: All dates (Dec 05-15) are before or on the meeting date (Dec 15)...
+     Ground Truth: Compared WBP dates against scenario.date
+
+  [OK] [A0000_G6_1] G6
+     Evidence: Tasks trace to action_items_discussed in scenario...
+     Ground Truth: Compared WBP tasks against scenario.action_items_discussed
+
+============================================================================================================================================
+JSON Report saved to: examples/sample_output.json
+============================================================================================================================================

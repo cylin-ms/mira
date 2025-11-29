@@ -28,11 +28,28 @@ We have successfully migrated **2,318 assertions** across **224 meetings** from 
 ### Key Improvements
 
 | Problem (Kening's Original) | Solution (WBP Framework) |
-|----------------------------|--------------------------|
+|----------------------------|--------------------------||
 | 232 inconsistent dimension names | 27 well-defined dimensions with clear codes (S1-S19, G1-G8) |
 | Hardcoded dates and names | Template-based reusable assertions |
 | Only ~3% grounding checks | Dedicated Grounding layer (G1-G8) |
 | Inconsistent phrasing | Standardized evaluation criteria |
+
+### Hybrid Assertion Format
+
+Assertions now use a **hybrid format** with templates and instantiated examples:
+
+```json
+{
+  "assertion_id": "S2_A1",
+  "template": "All [TASK] entries must use T-minus notation relative to [MEETING_DATE].",
+  "instantiated": "All task entries must use T-minus notation relative to March 15, 2025.",
+  "slot_types": ["TASK", "MEETING_DATE"],
+  "sub_aspect": "T-minus notation",
+  "linked_g_dims": ["G3"]
+}
+```
+
+**Key Concept:** G assertions are never standalone—they are instantiated through S assertions via `linked_g_dims`.
 
 ### Dimension Distribution
 

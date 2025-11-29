@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T02:43:00.857584",
+    "original_utterance": "The plan includes task deadlines",
+    "total_assertions": 2,
+    "structural_count": 1,
+    "grounding_count": 1
+  },
+  "scenario": {
+    "title": "Q2 Marketing Campaign Planning Meeting",
+    "date": "2025-03-10",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Sarah Mitchell",
+    "attendees": [
+      "Sarah Mitchell - Marketing Manager",
+      "James Lee - Content Strategist",
+      "Priya Desai - Social Media Lead",
+      "Carlos Ramirez - Graphic Designer",
+      "Emily Chen - Project Coordinator"
+    ],
+    "context": "The marketing team is planning the Q2 product launch campaign for the new analytics feature. The goal is to finalize the campaign components, assign tasks, and confirm timelines to ensure all deliverables are ready before the April launch.",
+    "artifacts": [
+      "Q2_Campaign_Draft_Plan.pdf",
+      "Content_Calendar_Template.xlsx",
+      "Launch_Timeline_Gantt_Chart.png"
+    ],
+    "discussion_points": [
+      "Reviewed the proposed campaign channels: email, social media, and blog posts.",
+      "Discussed the need for a finalized content calendar to align all deliverables.",
+      "Confirmed that graphic assets need to be ready two weeks before launch.",
+      "Agreed that task deadlines should be included in the final plan to track progress."
+    ],
+    "action_items_discussed": [
+      "James to draft three blog posts by March 20.",
+      "Priya to prepare social media schedule by March 18.",
+      "Carlos to design campaign graphics by March 15.",
+      "Emily to update the campaign plan with all task deadlines by end of day March 11."
+    ],
+    "known_constraints": [
+      "Launch date is fixed on April 1, no flexibility.",
+      "Design team has limited bandwidth due to other projects.",
+      "Legal review requires at least 3 business days for all content."
+    ],
+    "stated_assumptions": [
+      "All stakeholders will provide feedback within 24 hours of receiving drafts.",
+      "No major scope changes will be introduced after March 15."
+    ]
+  },
+  "workback_plan": "## Workback Plan: Q2 Marketing Campaign Planning\n\n**Goal:** Finalize and execute Q2 product launch marketing campaign components, ensuring all deliverables are ready before the April 1 launch date.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (2025-03-10, 10:00 AM PST)\n\n**Artifacts:** Q2_Campaign_Draft_Plan.pdf, Content_Calendar_Template.xlsx, Launch_Timeline_Gantt_Chart.png\n\n---\n\n### Timeline Overview\n| T-n | Date       | Task                                         | Owner                              | Deliverable                               | Status    |\n|-----|------------|----------------------------------------------|------------------------------------|-------------------------------------------|-----------|\n| T-1 | 2025-03-11 | Update campaign plan with all task deadlines | Emily Chen - Project Coordinator   | Updated campaign plan with deadlines      | Pending   |\n| T-2 | 2025-03-15 | Design campaign graphics                     | Carlos Ramirez - Graphic Designer  | Complete set of campaign graphic assets   | Pending   |\n| T-3 | 2025-03-18 | Prepare social media schedule                | Priya Desai - Social Media Lead    | Finalized social media posting schedule   | Pending   |\n| T-4 | 2025-03-20 | Draft three blog posts                       | James Lee - Content Strategist     | Three blog post drafts                    | Pending   |\n| T-5 | 2025-03-25 | Legal review of all content (min. 3 days)    | Sarah Mitchell - Marketing Manager | Approved content for launch               | Pending   |\n| T-6 | 2025-04-01 | Launch Q2 marketing campaign                 | Sarah Mitchell - Marketing Manager | Live campaign across all planned channels | Scheduled |\n\n---\n\n### Blockers and Mitigations\n- **Blocker:** Design team has limited bandwidth due to other projects.\n  - **Mitigation:** Prioritize Q2 campaign graphics and consider outsourcing non-critical design tasks if delays occur.\n  - **Owner:** Sarah Mitchell - Marketing Manager\n\n- **Blocker:** Legal review requires at least 3 business days for all content.\n  - **Mitigation:** Ensure all content is submitted for review by March 25 to avoid launch delays.\n  - **Owner:** Emily Chen - Project Coordinator\n\n---\n\n### Assumptions\n1. All stakeholders will provide feedback within 24 hours of receiving drafts.\n   - **Impact if invalidated:** Delays in content approval could push back legal review and jeopardize launch date.\n\n2. No major scope changes will be introduced after March 15.\n   - **Impact if invalidated:** Additional work could overload design and content teams, risking missed deadlines.\n\n---\n\n**Next Steps:**\n- Emily to circulate updated campaign plan by March 11.\n- All owners to confirm progress on their respective tasks during weekly check-ins.\n",
+  "assertions": [
+    {
+      "assertion_id": "A0000_S5",
+      "parent_assertion_id": null,
+      "text": "The plan specifies [TASK] with associated [DUE_DATE].",
+      "original_text": "The plan includes task deadlines",
+      "dimension_id": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 2,
+      "linked_g_dims": [
+        "G3"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion refers to the inclusion of deadlines for tasks, which directly aligns with the requirement to specify dates for each task in the workback plan. This is a core structural element and is mandatory for proper planning.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning Meeting",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Mitchell",
+          "attendees": [
+            "Sarah Mitchell - Marketing Manager",
+            "James Lee - Content Strategist",
+            "Priya Desai - Social Media Lead",
+            "Carlos Ramirez - Graphic Designer",
+            "Emily Chen - Project Coordinator"
+          ],
+          "context": "The marketing team is planning the Q2 product launch campaign for the new analytics feature. The goal is to finalize the campaign components, assign tasks, and confirm timelines to ensure all deliverables are ready before the April launch.",
+          "artifacts": [
+            "Q2_Campaign_Draft_Plan.pdf",
+            "Content_Calendar_Template.xlsx",
+            "Launch_Timeline_Gantt_Chart.png"
+          ],
+          "discussion_points": [
+            "Reviewed the proposed campaign channels: email, social media, and blog posts.",
+            "Discussed the need for a finalized content calendar to align all deliverables.",
+            "Confirmed that graphic assets need to be ready two weeks before launch.",
+            "Agreed that task deadlines should be included in the final plan to track progress."
+          ],
+          "action_items_discussed": [
+            "James to draft three blog posts by March 20.",
+            "Priya to prepare social media schedule by March 18.",
+            "Carlos to design campaign graphics by March 15.",
+            "Emily to update the campaign plan with all task deadlines by end of day March 11."
+          ],
+          "known_constraints": [
+            "Launch date is fixed on April 1, no flexibility.",
+            "Design team has limited bandwidth due to other projects.",
+            "Legal review requires at least 3 business days for all content."
+          ],
+          "stated_assumptions": [
+            "All stakeholders will provide feedback within 24 hours of receiving drafts.",
+            "No major scope changes will be introduced after March 15."
+          ]
+        },
+        "workback_plan": "## Workback Plan: Q2 Marketing Campaign Planning\n\n**Goal:** Finalize and execute Q2 product launch marketing campaign components, ensuring all deliverables are ready before the April 1 launch date.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (2025-03-10, 10:00 AM PST)\n\n**Artifacts:** Q2_Campaign_Draft_Plan.pdf, Content_Calendar_Template.xlsx, Launch_Timeline_Gantt_Chart.png\n\n---\n\n### Timeline Overview\n| T-n | Date       | Task                                         | Owner                              | Deliverable                               | Status    |\n|-----|------------|----------------------------------------------|------------------------------------|-------------------------------------------|-----------|\n| T-1 | 2025-03-11 | Update campaign plan with all task deadlines | Emily Chen - Project Coordinator   | Updated campaign plan with deadlines      | Pending   |\n| T-2 | 2025-03-15 | Design campaign graphics                     | Carlos Ramirez - Graphic Designer  | Complete set of campaign graphic assets   | Pending   |\n| T-3 | 2025-03-18 | Prepare social media schedule                | Priya Desai - Social Media Lead    | Finalized social media posting schedule   | Pending   |\n| T-4 | 2025-03-20 | Draft three blog posts                       | James Lee - Content Strategist     | Three blog post drafts                    | Pending   |\n| T-5 | 2025-03-25 | Legal review of all content (min. 3 days)    | Sarah Mitchell - Marketing Manager | Approved content for launch               | Pending   |\n| T-6 | 2025-04-01 | Launch Q2 marketing campaign                 | Sarah Mitchell - Marketing Manager | Live campaign across all planned channels | Scheduled |\n\n---\n\n### Blockers and Mitigations\n- **Blocker:** Design team has limited bandwidth due to other projects.\n  - **Mitigation:** Prioritize Q2 campaign graphics and consider outsourcing non-critical design tasks if delays occur.\n  - **Owner:** Sarah Mitchell - Marketing Manager\n\n- **Blocker:** Legal review requires at least 3 business days for all content.\n  - **Mitigation:** Ensure all content is submitted for review by March 25 to avoid launch delays.\n  - **Owner:** Emily Chen - Project Coordinator\n\n---\n\n### Assumptions\n1. All stakeholders will provide feedback within 24 hours of receiving drafts.\n   - **Impact if invalidated:** Delays in content approval could push back legal review and jeopardize launch date.\n\n2. No major scope changes will be introduced after March 15.\n   - **Impact if invalidated:** Additional work could overload design and content teams, risking missed deadlines.\n\n---\n\n**Next Steps:**\n- Emily to circulate updated campaign plan by March 11.\n- All owners to confirm progress on their respective tasks during weekly check-ins.\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0000_S5",
+            "dimension": "S5",
+            "passes": true,
+            "evidence": "The Workback Plan includes a timeline table with tasks and associated due dates, e.g., 'Update campaign plan with all task deadlines' due on 2025-03-11, 'Design campaign graphics' due on 2025-03-15, 'Prepare social media schedule' due on 2025-03-18, 'Draft three blog posts' due on 2025-03-20.",
+            "ground_truth_check": "Scenario action items specify similar tasks with deadlines: Emily to update plan by March 11, Carlos by March 15, Priya by March 18, James by March 20.",
+            "reasoning": "The WBP clearly specifies each task with an associated due date, matching the structural requirement."
+          },
+          {
+            "assertion_id": "A0000_G3_0",
+            "dimension": "G3",
+            "passes": true,
+            "evidence": "WBP dates: 2025-03-11, 2025-03-15, 2025-03-18, 2025-03-20, 2025-03-25, 2025-04-01. Meeting date: 2025-03-10. Launch date fixed: April 1.",
+            "ground_truth_check": "Scenario constraints: Launch date April 1, legal review needs 3 business days, action items due March 11, 15, 18, 20. WBP tasks align with these dates and constraints.",
+            "reasoning": "All WBP deadlines are after the meeting date and before the April 1 launch, with legal review scheduled for March 25 allowing at least 3 business days before launch. This aligns with scenario constraints and is realistic."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0000_G3_0",
+      "parent_assertion_id": "A0000_S5",
+      "text": "Task deadlines must be checked to ensure they are realistic and align with the overall meeting date and schedule.",
+      "original_text": "The plan includes task deadlines",
+      "dimension_id": "G3",
+      "dimension_name": "Date/Time Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion states that the plan includes task deadlines, which implies the presence of specific dates for tasks that need to be verified for correctness and consistency.",
+        "parent_dimension": "S5",
+        "parent_dimension_name": "Task Dates",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Marketing Campaign Planning Meeting",
+          "date": "2025-03-10",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Sarah Mitchell",
+          "attendees": [
+            "Sarah Mitchell - Marketing Manager",
+            "James Lee - Content Strategist",
+            "Priya Desai - Social Media Lead",
+            "Carlos Ramirez - Graphic Designer",
+            "Emily Chen - Project Coordinator"
+          ],
+          "context": "The marketing team is planning the Q2 product launch campaign for the new analytics feature. The goal is to finalize the campaign components, assign tasks, and confirm timelines to ensure all deliverables are ready before the April launch.",
+          "artifacts": [
+            "Q2_Campaign_Draft_Plan.pdf",
+            "Content_Calendar_Template.xlsx",
+            "Launch_Timeline_Gantt_Chart.png"
+          ],
+          "discussion_points": [
+            "Reviewed the proposed campaign channels: email, social media, and blog posts.",
+            "Discussed the need for a finalized content calendar to align all deliverables.",
+            "Confirmed that graphic assets need to be ready two weeks before launch.",
+            "Agreed that task deadlines should be included in the final plan to track progress."
+          ],
+          "action_items_discussed": [
+            "James to draft three blog posts by March 20.",
+            "Priya to prepare social media schedule by March 18.",
+            "Carlos to design campaign graphics by March 15.",
+            "Emily to update the campaign plan with all task deadlines by end of day March 11."
+          ],
+          "known_constraints": [
+            "Launch date is fixed on April 1, no flexibility.",
+            "Design team has limited bandwidth due to other projects.",
+            "Legal review requires at least 3 business days for all content."
+          ],
+          "stated_assumptions": [
+            "All stakeholders will provide feedback within 24 hours of receiving drafts.",
+            "No major scope changes will be introduced after March 15."
+          ]
+        },
+        "workback_plan": "## Workback Plan: Q2 Marketing Campaign Planning\n\n**Goal:** Finalize and execute Q2 product launch marketing campaign components, ensuring all deliverables are ready before the April 1 launch date.\n\n**Meeting Reference:** Q2 Marketing Campaign Planning Meeting (2025-03-10, 10:00 AM PST)\n\n**Artifacts:** Q2_Campaign_Draft_Plan.pdf, Content_Calendar_Template.xlsx, Launch_Timeline_Gantt_Chart.png\n\n---\n\n### Timeline Overview\n| T-n | Date       | Task                                         | Owner                              | Deliverable                               | Status    |\n|-----|------------|----------------------------------------------|------------------------------------|-------------------------------------------|-----------|\n| T-1 | 2025-03-11 | Update campaign plan with all task deadlines | Emily Chen - Project Coordinator   | Updated campaign plan with deadlines      | Pending   |\n| T-2 | 2025-03-15 | Design campaign graphics                     | Carlos Ramirez - Graphic Designer  | Complete set of campaign graphic assets   | Pending   |\n| T-3 | 2025-03-18 | Prepare social media schedule                | Priya Desai - Social Media Lead    | Finalized social media posting schedule   | Pending   |\n| T-4 | 2025-03-20 | Draft three blog posts                       | James Lee - Content Strategist     | Three blog post drafts                    | Pending   |\n| T-5 | 2025-03-25 | Legal review of all content (min. 3 days)    | Sarah Mitchell - Marketing Manager | Approved content for launch               | Pending   |\n| T-6 | 2025-04-01 | Launch Q2 marketing campaign                 | Sarah Mitchell - Marketing Manager | Live campaign across all planned channels | Scheduled |\n\n---\n\n### Blockers and Mitigations\n- **Blocker:** Design team has limited bandwidth due to other projects.\n  - **Mitigation:** Prioritize Q2 campaign graphics and consider outsourcing non-critical design tasks if delays occur.\n  - **Owner:** Sarah Mitchell - Marketing Manager\n\n- **Blocker:** Legal review requires at least 3 business days for all content.\n  - **Mitigation:** Ensure all content is submitted for review by March 25 to avoid launch delays.\n  - **Owner:** Emily Chen - Project Coordinator\n\n---\n\n### Assumptions\n1. All stakeholders will provide feedback within 24 hours of receiving drafts.\n   - **Impact if invalidated:** Delays in content approval could push back legal review and jeopardize launch date.\n\n2. No major scope changes will be introduced after March 15.\n   - **Impact if invalidated:** Additional work could overload design and content teams, risking missed deadlines.\n\n---\n\n**Next Steps:**\n- Emily to circulate updated campaign plan by March 11.\n- All owners to confirm progress on their respective tasks during weekly check-ins.\n",
+        "evidence": "WBP dates: 2025-03-11, 2025-03-15, 2025-03-18, 2025-03-20, 2025-03-25, 2025-04-01. Meeting date: 2025-03-10. Launch date fixed: April 1.",
+        "ground_truth_check": "Scenario constraints: Launch date April 1, legal review needs 3 business days, action items due March 11, 15, 18, 20. WBP tasks align with these dates and constraints.",
+        "verification": "All WBP deadlines are after the meeting date and before the April 1 launch, with legal review scheduled for March 25 allowing at least 3 business days before launch. This aligns with scenario constraints and is realistic.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 2,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0000_S5",
+        "dimension": "S5",
+        "passes": true,
+        "evidence": "The Workback Plan includes a timeline table with tasks and associated due dates, e.g., 'Update campaign plan with all task deadlines' due on 2025-03-11, 'Design campaign graphics' due on 2025-03-15, 'Prepare social media schedule' due on 2025-03-18, 'Draft three blog posts' due on 2025-03-20.",
+        "ground_truth_check": "Scenario action items specify similar tasks with deadlines: Emily to update plan by March 11, Carlos by March 15, Priya by March 18, James by March 20.",
+        "reasoning": "The WBP clearly specifies each task with an associated due date, matching the structural requirement."
+      },
+      {
+        "assertion_id": "A0000_G3_0",
+        "dimension": "G3",
+        "passes": true,
+        "evidence": "WBP dates: 2025-03-11, 2025-03-15, 2025-03-18, 2025-03-20, 2025-03-25, 2025-04-01. Meeting date: 2025-03-10. Launch date fixed: April 1.",
+        "ground_truth_check": "Scenario constraints: Launch date April 1, legal review needs 3 business days, action items due March 11, 15, 18, 20. WBP tasks align with these dates and constraints.",
+        "reasoning": "All WBP deadlines are after the meeting date and before the April 1 launch, with legal review scheduled for March 25 allowing at least 3 business days before launch. This aligns with scenario constraints and is realistic."
+      }
+    ]
+  }
+}

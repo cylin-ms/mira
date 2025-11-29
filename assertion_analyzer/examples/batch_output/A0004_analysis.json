@@ -1,0 +1,397 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-30T02:48:12.379023",
+    "original_utterance": "The response includes the meeting subject, date, time, and full attendee list",
+    "total_assertions": 4,
+    "structural_count": 1,
+    "grounding_count": 3
+  },
+  "scenario": {
+    "title": "Q2 Product Launch Planning Meeting",
+    "date": "2025-03-12",
+    "time": "10:00 AM PST",
+    "duration_minutes": 60,
+    "organizer": "Emily Chen",
+    "attendees": [
+      "Emily Chen - Product Manager",
+      "James Rodriguez - Marketing Lead",
+      "Sophia Patel - Engineering Manager",
+      "Liam Nguyen - UX Designer",
+      "Olivia Brown - Sales Director"
+    ],
+    "context": "The team met to finalize the timeline and responsibilities for the upcoming Q2 product launch. The discussion focused on aligning marketing materials, product readiness, and sales enablement to ensure a successful launch on schedule.",
+    "artifacts": [
+      "Q2 Launch Roadmap.pdf",
+      "Marketing Campaign Draft.pptx",
+      "Engineering Readiness Checklist.xlsx"
+    ],
+    "discussion_points": [
+      "Confirmed target launch date of May 15, 2025",
+      "Reviewed marketing campaign milestones and content approval deadlines",
+      "Discussed engineering readiness and final QA schedule",
+      "Outlined sales training requirements and timing"
+    ],
+    "action_items_discussed": [
+      "James to finalize marketing campaign assets by April 10",
+      "Sophia to confirm QA completion by April 30",
+      "Olivia to prepare sales training materials by May 1",
+      "Liam to deliver updated UX mockups by March 25"
+    ],
+    "known_constraints": [
+      "Engineering team has limited QA resources in April",
+      "Marketing budget capped at $50,000 for the campaign"
+    ],
+    "stated_assumptions": [
+      "Assuming no major technical issues arise during final QA",
+      "Assuming marketing approvals will not exceed two rounds of revisions"
+    ]
+  },
+  "workback_plan": "# Workback Plan: Q2 Product Launch Planning\n\n**Meeting Title:** Q2 Product Launch Planning Meeting  \n**Meeting Date:** March 12, 2025  \n**Meeting Time:** 10:00 AM PST  \n**Attendees:**  \n- Emily Chen - Product Manager  \n- James Rodriguez - Marketing Lead  \n- Sophia Patel - Engineering Manager  \n- Liam Nguyen - UX Designer  \n- Olivia Brown - Sales Director  \n\n---\n\n## Goal\nEnsure all deliverables for the Q2 product launch are completed on time for the confirmed launch date of **May 15, 2025**, aligning marketing, engineering, UX, and sales readiness.\n\n---\n\n## Timeline Overview\n| T-n  | Date   | Task                               | Owner                              | Deliverable                     | Status  |\n|------|--------|------------------------------------|------------------------------------|---------------------------------|---------|\n| T-60 | Mar 25 | Deliver updated UX mockups         | Liam Nguyen - UX Designer          | Updated UX mockups              | Planned |\n| T-35 | Apr 10 | Finalize marketing campaign assets | James Rodriguez - Marketing Lead   | Approved marketing assets       | Planned |\n| T-15 | Apr 30 | Confirm QA completion              | Sophia Patel - Engineering Manager | QA sign-off report              | Planned |\n| T-14 | May 1  | Prepare sales training materials   | Olivia Brown - Sales Director      | Sales training deck & materials | Planned |\n| T-0  | May 15 | Product Launch                     | Emily Chen - Product Manager       | Launch execution                | Planned |\n\n**Key Artifacts Referenced:**  \n- Q2 Launch Roadmap.pdf  \n- Marketing Campaign Draft.pptx  \n- Engineering Readiness Checklist.xlsx  \n\n---\n\n## Blockers & Mitigations\n**Blocker:** Limited QA resources in April  \n**Mitigation:** Prioritize critical test cases and schedule staggered QA cycles; consider temporary contractor support  \n**Owner:** Sophia Patel - Engineering Manager  \n\n**Blocker:** Marketing budget capped at $50,000  \n**Mitigation:** Optimize spend by focusing on highest ROI channels and repurpose existing creative assets  \n**Owner:** James Rodriguez - Marketing Lead  \n\n---\n\n## Assumptions\n1. **No major technical issues during final QA**  \n   *Impact if invalidated:* Launch date may slip beyond May 15, requiring contingency communication.\n\n2. **Marketing approvals will not exceed two rounds of revisions**  \n   *Impact if invalidated:* Delays in final asset delivery could compress pre-launch campaign window.\n\n---\n\n## Open Questions\n- Do we need an additional review checkpoint for sales enablement materials before May 1?\n- Should UX mockups be shared with the sales team for early feedback?\n",
+  "assertions": [
+    {
+      "assertion_id": "A0004_S1",
+      "parent_assertion_id": null,
+      "text": "The plan includes [MEETING_TITLE], [MEETING_DATE], [DATE]/[TIME], and a complete [ATTENDEE] list.",
+      "original_text": "The response includes the meeting subject, date, time, and full attendee list",
+      "dimension_id": "S1",
+      "dimension_name": "Meeting Details",
+      "layer": "structural",
+      "level": "critical",
+      "weight": 3,
+      "linked_g_dims": [
+        "G2",
+        "G3",
+        "G5"
+      ],
+      "rationale": {
+        "mapping_reason": "The assertion checks for inclusion of meeting subject, date, time, and attendee list, which are core components of meeting details required for a complete workback plan.",
+        "conversion_method": "gpt5"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Product Launch Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Emily Chen",
+          "attendees": [
+            "Emily Chen - Product Manager",
+            "James Rodriguez - Marketing Lead",
+            "Sophia Patel - Engineering Manager",
+            "Liam Nguyen - UX Designer",
+            "Olivia Brown - Sales Director"
+          ],
+          "context": "The team met to finalize the timeline and responsibilities for the upcoming Q2 product launch. The discussion focused on aligning marketing materials, product readiness, and sales enablement to ensure a successful launch on schedule.",
+          "artifacts": [
+            "Q2 Launch Roadmap.pdf",
+            "Marketing Campaign Draft.pptx",
+            "Engineering Readiness Checklist.xlsx"
+          ],
+          "discussion_points": [
+            "Confirmed target launch date of May 15, 2025",
+            "Reviewed marketing campaign milestones and content approval deadlines",
+            "Discussed engineering readiness and final QA schedule",
+            "Outlined sales training requirements and timing"
+          ],
+          "action_items_discussed": [
+            "James to finalize marketing campaign assets by April 10",
+            "Sophia to confirm QA completion by April 30",
+            "Olivia to prepare sales training materials by May 1",
+            "Liam to deliver updated UX mockups by March 25"
+          ],
+          "known_constraints": [
+            "Engineering team has limited QA resources in April",
+            "Marketing budget capped at $50,000 for the campaign"
+          ],
+          "stated_assumptions": [
+            "Assuming no major technical issues arise during final QA",
+            "Assuming marketing approvals will not exceed two rounds of revisions"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Product Launch Planning\n\n**Meeting Title:** Q2 Product Launch Planning Meeting  \n**Meeting Date:** March 12, 2025  \n**Meeting Time:** 10:00 AM PST  \n**Attendees:**  \n- Emily Chen - Product Manager  \n- James Rodriguez - Marketing Lead  \n- Sophia Patel - Engineering Manager  \n- Liam Nguyen - UX Designer  \n- Olivia Brown - Sales Director  \n\n---\n\n## Goal\nEnsure all deliverables for the Q2 product launch are completed on time for the confirmed launch date of **May 15, 2025**, aligning marketing, engineering, UX, and sales readiness.\n\n---\n\n## Timeline Overview\n| T-n  | Date   | Task                               | Owner                              | Deliverable                     | Status  |\n|------|--------|------------------------------------|------------------------------------|---------------------------------|---------|\n| T-60 | Mar 25 | Deliver updated UX mockups         | Liam Nguyen - UX Designer          | Updated UX mockups              | Planned |\n| T-35 | Apr 10 | Finalize marketing campaign assets | James Rodriguez - Marketing Lead   | Approved marketing assets       | Planned |\n| T-15 | Apr 30 | Confirm QA completion              | Sophia Patel - Engineering Manager | QA sign-off report              | Planned |\n| T-14 | May 1  | Prepare sales training materials   | Olivia Brown - Sales Director      | Sales training deck & materials | Planned |\n| T-0  | May 15 | Product Launch                     | Emily Chen - Product Manager       | Launch execution                | Planned |\n\n**Key Artifacts Referenced:**  \n- Q2 Launch Roadmap.pdf  \n- Marketing Campaign Draft.pptx  \n- Engineering Readiness Checklist.xlsx  \n\n---\n\n## Blockers & Mitigations\n**Blocker:** Limited QA resources in April  \n**Mitigation:** Prioritize critical test cases and schedule staggered QA cycles; consider temporary contractor support  \n**Owner:** Sophia Patel - Engineering Manager  \n\n**Blocker:** Marketing budget capped at $50,000  \n**Mitigation:** Optimize spend by focusing on highest ROI channels and repurpose existing creative assets  \n**Owner:** James Rodriguez - Marketing Lead  \n\n---\n\n## Assumptions\n1. **No major technical issues during final QA**  \n   *Impact if invalidated:* Launch date may slip beyond May 15, requiring contingency communication.\n\n2. **Marketing approvals will not exceed two rounds of revisions**  \n   *Impact if invalidated:* Delays in final asset delivery could compress pre-launch campaign window.\n\n---\n\n## Open Questions\n- Do we need an additional review checkpoint for sales enablement materials before May 1?\n- Should UX mockups be shared with the sales team for early feedback?\n",
+        "overall_verified": true,
+        "assertion_results": [
+          {
+            "assertion_id": "A0004_S1",
+            "dimension": "S1",
+            "passes": true,
+            "evidence": "WBP includes 'Meeting Title: Q2 Product Launch Planning Meeting', 'Meeting Date: March 12, 2025', 'Meeting Time: 10:00 AM PST', and a complete attendee list with five names.",
+            "ground_truth_check": "Scenario specifies title 'Q2 Product Launch Planning Meeting', date '2025-03-12', time '10:00 AM PST', and attendees Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+            "reasoning": "All required structural elements (title, date, time, full attendee list) are present and match the scenario."
+          },
+          {
+            "assertion_id": "A0004_G2_0",
+            "dimension": "G2",
+            "passes": true,
+            "evidence": "Attendees listed in WBP: Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+            "ground_truth_check": "Scenario attendees: Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+            "reasoning": "Every attendee in the WBP corresponds exactly to the scenario's attendee list; no extra or missing names."
+          },
+          {
+            "assertion_id": "A0004_G3_1",
+            "dimension": "G3",
+            "passes": true,
+            "evidence": "WBP states 'Meeting Date: March 12, 2025' and 'Meeting Time: 10:00 AM PST'.",
+            "ground_truth_check": "Scenario date and time: 2025-03-12 at 10:00 AM PST.",
+            "reasoning": "The date and time in the WBP match the scenario exactly."
+          },
+          {
+            "assertion_id": "A0004_G5_2",
+            "dimension": "G5",
+            "passes": true,
+            "evidence": "WBP title and goal reference 'Q2 Product Launch Planning' and ensuring deliverables for Q2 product launch.",
+            "ground_truth_check": "Scenario context: Meeting was to finalize timeline and responsibilities for Q2 product launch, aligning marketing, engineering, and sales.",
+            "reasoning": "The meeting subject in the WBP aligns with the scenario's topic of Q2 product launch planning."
+          }
+        ]
+      }
+    },
+    {
+      "assertion_id": "A0004_G2_0",
+      "parent_assertion_id": "A0004_S1",
+      "text": "The attendee names in the response must correspond to the actual attendees from the meeting context.",
+      "original_text": "The response includes the meeting subject, date, time, and full attendee list",
+      "dimension_id": "G2",
+      "dimension_name": "Attendee Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion explicitly requires the response to include the full attendee list, so verifying that these attendees match the actual meeting participants is necessary.",
+        "parent_dimension": "S1",
+        "parent_dimension_name": "Meeting Details",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Product Launch Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Emily Chen",
+          "attendees": [
+            "Emily Chen - Product Manager",
+            "James Rodriguez - Marketing Lead",
+            "Sophia Patel - Engineering Manager",
+            "Liam Nguyen - UX Designer",
+            "Olivia Brown - Sales Director"
+          ],
+          "context": "The team met to finalize the timeline and responsibilities for the upcoming Q2 product launch. The discussion focused on aligning marketing materials, product readiness, and sales enablement to ensure a successful launch on schedule.",
+          "artifacts": [
+            "Q2 Launch Roadmap.pdf",
+            "Marketing Campaign Draft.pptx",
+            "Engineering Readiness Checklist.xlsx"
+          ],
+          "discussion_points": [
+            "Confirmed target launch date of May 15, 2025",
+            "Reviewed marketing campaign milestones and content approval deadlines",
+            "Discussed engineering readiness and final QA schedule",
+            "Outlined sales training requirements and timing"
+          ],
+          "action_items_discussed": [
+            "James to finalize marketing campaign assets by April 10",
+            "Sophia to confirm QA completion by April 30",
+            "Olivia to prepare sales training materials by May 1",
+            "Liam to deliver updated UX mockups by March 25"
+          ],
+          "known_constraints": [
+            "Engineering team has limited QA resources in April",
+            "Marketing budget capped at $50,000 for the campaign"
+          ],
+          "stated_assumptions": [
+            "Assuming no major technical issues arise during final QA",
+            "Assuming marketing approvals will not exceed two rounds of revisions"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Product Launch Planning\n\n**Meeting Title:** Q2 Product Launch Planning Meeting  \n**Meeting Date:** March 12, 2025  \n**Meeting Time:** 10:00 AM PST  \n**Attendees:**  \n- Emily Chen - Product Manager  \n- James Rodriguez - Marketing Lead  \n- Sophia Patel - Engineering Manager  \n- Liam Nguyen - UX Designer  \n- Olivia Brown - Sales Director  \n\n---\n\n## Goal\nEnsure all deliverables for the Q2 product launch are completed on time for the confirmed launch date of **May 15, 2025**, aligning marketing, engineering, UX, and sales readiness.\n\n---\n\n## Timeline Overview\n| T-n  | Date   | Task                               | Owner                              | Deliverable                     | Status  |\n|------|--------|------------------------------------|------------------------------------|---------------------------------|---------|\n| T-60 | Mar 25 | Deliver updated UX mockups         | Liam Nguyen - UX Designer          | Updated UX mockups              | Planned |\n| T-35 | Apr 10 | Finalize marketing campaign assets | James Rodriguez - Marketing Lead   | Approved marketing assets       | Planned |\n| T-15 | Apr 30 | Confirm QA completion              | Sophia Patel - Engineering Manager | QA sign-off report              | Planned |\n| T-14 | May 1  | Prepare sales training materials   | Olivia Brown - Sales Director      | Sales training deck & materials | Planned |\n| T-0  | May 15 | Product Launch                     | Emily Chen - Product Manager       | Launch execution                | Planned |\n\n**Key Artifacts Referenced:**  \n- Q2 Launch Roadmap.pdf  \n- Marketing Campaign Draft.pptx  \n- Engineering Readiness Checklist.xlsx  \n\n---\n\n## Blockers & Mitigations\n**Blocker:** Limited QA resources in April  \n**Mitigation:** Prioritize critical test cases and schedule staggered QA cycles; consider temporary contractor support  \n**Owner:** Sophia Patel - Engineering Manager  \n\n**Blocker:** Marketing budget capped at $50,000  \n**Mitigation:** Optimize spend by focusing on highest ROI channels and repurpose existing creative assets  \n**Owner:** James Rodriguez - Marketing Lead  \n\n---\n\n## Assumptions\n1. **No major technical issues during final QA**  \n   *Impact if invalidated:* Launch date may slip beyond May 15, requiring contingency communication.\n\n2. **Marketing approvals will not exceed two rounds of revisions**  \n   *Impact if invalidated:* Delays in final asset delivery could compress pre-launch campaign window.\n\n---\n\n## Open Questions\n- Do we need an additional review checkpoint for sales enablement materials before May 1?\n- Should UX mockups be shared with the sales team for early feedback?\n",
+        "evidence": "Attendees listed in WBP: Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+        "ground_truth_check": "Scenario attendees: Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+        "verification": "Every attendee in the WBP corresponds exactly to the scenario's attendee list; no extra or missing names.",
+        "verified": true
+      }
+    },
+    {
+      "assertion_id": "A0004_G3_1",
+      "parent_assertion_id": "A0004_S1",
+      "text": "The date and time mentioned in the response must match the actual meeting date and time from the context.",
+      "original_text": "The response includes the meeting subject, date, time, and full attendee list",
+      "dimension_id": "G3",
+      "dimension_name": "Date/Time Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 3,
+      "rationale": {
+        "mapping_reason": "The assertion states that the response should include the meeting date and time, which must be checked against the actual meeting schedule.",
+        "parent_dimension": "S1",
+        "parent_dimension_name": "Meeting Details",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Product Launch Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Emily Chen",
+          "attendees": [
+            "Emily Chen - Product Manager",
+            "James Rodriguez - Marketing Lead",
+            "Sophia Patel - Engineering Manager",
+            "Liam Nguyen - UX Designer",
+            "Olivia Brown - Sales Director"
+          ],
+          "context": "The team met to finalize the timeline and responsibilities for the upcoming Q2 product launch. The discussion focused on aligning marketing materials, product readiness, and sales enablement to ensure a successful launch on schedule.",
+          "artifacts": [
+            "Q2 Launch Roadmap.pdf",
+            "Marketing Campaign Draft.pptx",
+            "Engineering Readiness Checklist.xlsx"
+          ],
+          "discussion_points": [
+            "Confirmed target launch date of May 15, 2025",
+            "Reviewed marketing campaign milestones and content approval deadlines",
+            "Discussed engineering readiness and final QA schedule",
+            "Outlined sales training requirements and timing"
+          ],
+          "action_items_discussed": [
+            "James to finalize marketing campaign assets by April 10",
+            "Sophia to confirm QA completion by April 30",
+            "Olivia to prepare sales training materials by May 1",
+            "Liam to deliver updated UX mockups by March 25"
+          ],
+          "known_constraints": [
+            "Engineering team has limited QA resources in April",
+            "Marketing budget capped at $50,000 for the campaign"
+          ],
+          "stated_assumptions": [
+            "Assuming no major technical issues arise during final QA",
+            "Assuming marketing approvals will not exceed two rounds of revisions"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Product Launch Planning\n\n**Meeting Title:** Q2 Product Launch Planning Meeting  \n**Meeting Date:** March 12, 2025  \n**Meeting Time:** 10:00 AM PST  \n**Attendees:**  \n- Emily Chen - Product Manager  \n- James Rodriguez - Marketing Lead  \n- Sophia Patel - Engineering Manager  \n- Liam Nguyen - UX Designer  \n- Olivia Brown - Sales Director  \n\n---\n\n## Goal\nEnsure all deliverables for the Q2 product launch are completed on time for the confirmed launch date of **May 15, 2025**, aligning marketing, engineering, UX, and sales readiness.\n\n---\n\n## Timeline Overview\n| T-n  | Date   | Task                               | Owner                              | Deliverable                     | Status  |\n|------|--------|------------------------------------|------------------------------------|---------------------------------|---------|\n| T-60 | Mar 25 | Deliver updated UX mockups         | Liam Nguyen - UX Designer          | Updated UX mockups              | Planned |\n| T-35 | Apr 10 | Finalize marketing campaign assets | James Rodriguez - Marketing Lead   | Approved marketing assets       | Planned |\n| T-15 | Apr 30 | Confirm QA completion              | Sophia Patel - Engineering Manager | QA sign-off report              | Planned |\n| T-14 | May 1  | Prepare sales training materials   | Olivia Brown - Sales Director      | Sales training deck & materials | Planned |\n| T-0  | May 15 | Product Launch                     | Emily Chen - Product Manager       | Launch execution                | Planned |\n\n**Key Artifacts Referenced:**  \n- Q2 Launch Roadmap.pdf  \n- Marketing Campaign Draft.pptx  \n- Engineering Readiness Checklist.xlsx  \n\n---\n\n## Blockers & Mitigations\n**Blocker:** Limited QA resources in April  \n**Mitigation:** Prioritize critical test cases and schedule staggered QA cycles; consider temporary contractor support  \n**Owner:** Sophia Patel - Engineering Manager  \n\n**Blocker:** Marketing budget capped at $50,000  \n**Mitigation:** Optimize spend by focusing on highest ROI channels and repurpose existing creative assets  \n**Owner:** James Rodriguez - Marketing Lead  \n\n---\n\n## Assumptions\n1. **No major technical issues during final QA**  \n   *Impact if invalidated:* Launch date may slip beyond May 15, requiring contingency communication.\n\n2. **Marketing approvals will not exceed two rounds of revisions**  \n   *Impact if invalidated:* Delays in final asset delivery could compress pre-launch campaign window.\n\n---\n\n## Open Questions\n- Do we need an additional review checkpoint for sales enablement materials before May 1?\n- Should UX mockups be shared with the sales team for early feedback?\n",
+        "evidence": "WBP states 'Meeting Date: March 12, 2025' and 'Meeting Time: 10:00 AM PST'.",
+        "ground_truth_check": "Scenario date and time: 2025-03-12 at 10:00 AM PST.",
+        "verification": "The date and time in the WBP match the scenario exactly.",
+        "verified": true
+      }
+    },
+    {
+      "assertion_id": "A0004_G5_2",
+      "parent_assertion_id": "A0004_S1",
+      "text": "The meeting subject in the response must align with the actual meeting topic from the context.",
+      "original_text": "The response includes the meeting subject, date, time, and full attendee list",
+      "dimension_id": "G5",
+      "dimension_name": "Topic Grounding",
+      "layer": "grounding",
+      "level": "critical",
+      "weight": 2,
+      "rationale": {
+        "mapping_reason": "The assertion requires inclusion of the meeting subject, which needs to be verified against the actual meeting topic or agenda.",
+        "parent_dimension": "S1",
+        "parent_dimension_name": "Meeting Details",
+        "conversion_method": "gpt5_g_selection"
+      },
+      "quality_assessment": {
+        "is_well_formed": true,
+        "is_testable": true
+      },
+      "success_example": {
+        "scenario": {
+          "title": "Q2 Product Launch Planning Meeting",
+          "date": "2025-03-12",
+          "time": "10:00 AM PST",
+          "duration_minutes": 60,
+          "organizer": "Emily Chen",
+          "attendees": [
+            "Emily Chen - Product Manager",
+            "James Rodriguez - Marketing Lead",
+            "Sophia Patel - Engineering Manager",
+            "Liam Nguyen - UX Designer",
+            "Olivia Brown - Sales Director"
+          ],
+          "context": "The team met to finalize the timeline and responsibilities for the upcoming Q2 product launch. The discussion focused on aligning marketing materials, product readiness, and sales enablement to ensure a successful launch on schedule.",
+          "artifacts": [
+            "Q2 Launch Roadmap.pdf",
+            "Marketing Campaign Draft.pptx",
+            "Engineering Readiness Checklist.xlsx"
+          ],
+          "discussion_points": [
+            "Confirmed target launch date of May 15, 2025",
+            "Reviewed marketing campaign milestones and content approval deadlines",
+            "Discussed engineering readiness and final QA schedule",
+            "Outlined sales training requirements and timing"
+          ],
+          "action_items_discussed": [
+            "James to finalize marketing campaign assets by April 10",
+            "Sophia to confirm QA completion by April 30",
+            "Olivia to prepare sales training materials by May 1",
+            "Liam to deliver updated UX mockups by March 25"
+          ],
+          "known_constraints": [
+            "Engineering team has limited QA resources in April",
+            "Marketing budget capped at $50,000 for the campaign"
+          ],
+          "stated_assumptions": [
+            "Assuming no major technical issues arise during final QA",
+            "Assuming marketing approvals will not exceed two rounds of revisions"
+          ]
+        },
+        "workback_plan": "# Workback Plan: Q2 Product Launch Planning\n\n**Meeting Title:** Q2 Product Launch Planning Meeting  \n**Meeting Date:** March 12, 2025  \n**Meeting Time:** 10:00 AM PST  \n**Attendees:**  \n- Emily Chen - Product Manager  \n- James Rodriguez - Marketing Lead  \n- Sophia Patel - Engineering Manager  \n- Liam Nguyen - UX Designer  \n- Olivia Brown - Sales Director  \n\n---\n\n## Goal\nEnsure all deliverables for the Q2 product launch are completed on time for the confirmed launch date of **May 15, 2025**, aligning marketing, engineering, UX, and sales readiness.\n\n---\n\n## Timeline Overview\n| T-n  | Date   | Task                               | Owner                              | Deliverable                     | Status  |\n|------|--------|------------------------------------|------------------------------------|---------------------------------|---------|\n| T-60 | Mar 25 | Deliver updated UX mockups         | Liam Nguyen - UX Designer          | Updated UX mockups              | Planned |\n| T-35 | Apr 10 | Finalize marketing campaign assets | James Rodriguez - Marketing Lead   | Approved marketing assets       | Planned |\n| T-15 | Apr 30 | Confirm QA completion              | Sophia Patel - Engineering Manager | QA sign-off report              | Planned |\n| T-14 | May 1  | Prepare sales training materials   | Olivia Brown - Sales Director      | Sales training deck & materials | Planned |\n| T-0  | May 15 | Product Launch                     | Emily Chen - Product Manager       | Launch execution                | Planned |\n\n**Key Artifacts Referenced:**  \n- Q2 Launch Roadmap.pdf  \n- Marketing Campaign Draft.pptx  \n- Engineering Readiness Checklist.xlsx  \n\n---\n\n## Blockers & Mitigations\n**Blocker:** Limited QA resources in April  \n**Mitigation:** Prioritize critical test cases and schedule staggered QA cycles; consider temporary contractor support  \n**Owner:** Sophia Patel - Engineering Manager  \n\n**Blocker:** Marketing budget capped at $50,000  \n**Mitigation:** Optimize spend by focusing on highest ROI channels and repurpose existing creative assets  \n**Owner:** James Rodriguez - Marketing Lead  \n\n---\n\n## Assumptions\n1. **No major technical issues during final QA**  \n   *Impact if invalidated:* Launch date may slip beyond May 15, requiring contingency communication.\n\n2. **Marketing approvals will not exceed two rounds of revisions**  \n   *Impact if invalidated:* Delays in final asset delivery could compress pre-launch campaign window.\n\n---\n\n## Open Questions\n- Do we need an additional review checkpoint for sales enablement materials before May 1?\n- Should UX mockups be shared with the sales team for early feedback?\n",
+        "evidence": "WBP title and goal reference 'Q2 Product Launch Planning' and ensuring deliverables for Q2 product launch.",
+        "ground_truth_check": "Scenario context: Meeting was to finalize timeline and responsibilities for Q2 product launch, aligning marketing, engineering, and sales.",
+        "verification": "The meeting subject in the WBP aligns with the scenario's topic of Q2 product launch planning.",
+        "verified": true
+      }
+    }
+  ],
+  "verification_summary": {
+    "total_verified": 4,
+    "total_failed": 0,
+    "all_passed": true,
+    "results": [
+      {
+        "assertion_id": "A0004_S1",
+        "dimension": "S1",
+        "passes": true,
+        "evidence": "WBP includes 'Meeting Title: Q2 Product Launch Planning Meeting', 'Meeting Date: March 12, 2025', 'Meeting Time: 10:00 AM PST', and a complete attendee list with five names.",
+        "ground_truth_check": "Scenario specifies title 'Q2 Product Launch Planning Meeting', date '2025-03-12', time '10:00 AM PST', and attendees Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+        "reasoning": "All required structural elements (title, date, time, full attendee list) are present and match the scenario."
+      },
+      {
+        "assertion_id": "A0004_G2_0",
+        "dimension": "G2",
+        "passes": true,
+        "evidence": "Attendees listed in WBP: Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+        "ground_truth_check": "Scenario attendees: Emily Chen, James Rodriguez, Sophia Patel, Liam Nguyen, Olivia Brown.",
+        "reasoning": "Every attendee in the WBP corresponds exactly to the scenario's attendee list; no extra or missing names."
+      },
+      {
+        "assertion_id": "A0004_G3_1",
+        "dimension": "G3",
+        "passes": true,
+        "evidence": "WBP states 'Meeting Date: March 12, 2025' and 'Meeting Time: 10:00 AM PST'.",
+        "ground_truth_check": "Scenario date and time: 2025-03-12 at 10:00 AM PST.",
+        "reasoning": "The date and time in the WBP match the scenario exactly."
+      },
+      {
+        "assertion_id": "A0004_G5_2",
+        "dimension": "G5",
+        "passes": true,
+        "evidence": "WBP title and goal reference 'Q2 Product Launch Planning' and ensuring deliverables for Q2 product launch.",
+        "ground_truth_check": "Scenario context: Meeting was to finalize timeline and responsibilities for Q2 product launch, aligning marketing, engineering, and sales.",
+        "reasoning": "The meeting subject in the WBP aligns with the scenario's topic of Q2 product launch planning."
+      }
+    ]
+  }
+}

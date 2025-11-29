@@ -1,0 +1,9 @@
+# Sample assertions for batch processing
+# Lines starting with # are comments and will be ignored
+# Empty lines are also ignored
+
+The response arranges the draft slides task before review slides task in the plan
+The plan includes specific deadlines for each task
+Tasks are assigned to named individuals from the attendees list
+The timeline shows clear dependencies between tasks
+All deliverables are explicitly mentioned with expected formats

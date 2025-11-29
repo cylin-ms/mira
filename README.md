@@ -19,17 +19,18 @@
 ## 📋 Table of Contents
 
 1. [Overview](#overview)
-2. [Quick Start](#quick-start)
-3. [Judge's Guide: Evaluating Assertions](#judges-guide-evaluating-assertions)
-4. [Using GPT-5 Results as Hints](#using-gpt-5-results-as-hints)
-5. [Meeting Context & Entity Cards](#meeting-context--entity-cards)
-6. [Optional: Response Annotations](#optional-response-annotations)
-7. [Entity Card Rendering](#entity-card-rendering)
-8. [Annotation Workflow](#annotation-workflow)
-9. [Data Formats](#data-formats)
-10. [Project Structure](#project-structure)
-11. [Scripts Reference](#scripts-reference)
-12. [Recent Changes](#recent-changes-november-2025)
+2. [Foundation Documents](#foundation-documents)
+3. [Quick Start](#quick-start)
+4. [Judge's Guide: Evaluating Assertions](#judges-guide-evaluating-assertions)
+5. [Using GPT-5 Results as Hints](#using-gpt-5-results-as-hints)
+6. [Meeting Context & Entity Cards](#meeting-context--entity-cards)
+7. [Optional: Response Annotations](#optional-response-annotations)
+8. [Entity Card Rendering](#entity-card-rendering)
+9. [Annotation Workflow](#annotation-workflow)
+10. [Data Formats](#data-formats)
+11. [Project Structure](#project-structure)
+12. [Scripts Reference](#scripts-reference)
+13. [Recent Changes](#recent-changes-november-2025)
 
 ---
 
@@ -71,6 +72,21 @@ The GPT-5 JJ evaluation was conducted as an **experiment** to:
 - **SourceID Navigation**: Click "🔗 View Entity" to jump to referenced entities
 - **Visual Highlighting**: Linked entities highlighted with green banner
 - **Azure Key Vault Integration**: Direct links to user credentials in Test Tenant
+
+---
+
+## Foundation Documents
+
+The following documents define the theoretical foundation for WBP quality evaluation. These are the **canonical references** for the evaluation framework.
+
+| Document | Version | Description |
+|----------|---------|-------------|
+| [WBP Evaluation Complete Dimension Reference](docs/ChinYew/WBP_Evaluation_Complete_Dimension_Reference.md) | v1.2 | Comprehensive reference of all 28 evaluation dimensions (S1-S20 + G1-G8) with slot types and grounding rules |
+| [WBP Framework Design Summary](assertion_analyzer/WBP_Framework_Design_Summary.md) | v1.0 | Design principles and decisions that shaped the evaluation framework |
+
+**Authors:** Chin-Yew Lin, Haidong Zhang
+
+> **Note:** When iterating on the evaluation framework, update these documents and increment the version number.
 
 ---
 
@@ -505,14 +521,16 @@ This format is used by **Mira 2.0** for viewing WBP-framework assertions with di
 **Key fields:**
 - `assertion_id`: Unique identifier for the assertion (e.g., `A0000_S1`, `A0000_G2_0`)
 - `parent_assertion_id`: Links G assertions to their source S assertion (`null` for S assertions)
-- `dimension`: WBP dimension code (S1-S19, G1-G8)
+- `dimension`: WBP dimension code (S1-S20, G1-G8)
 - `dimension_name`: Human-readable dimension name
 - `layer`: "structural" or "grounding"
 - `weight`: Importance weight (1-3)
 - `original_text`: Kening's original assertion text
 - `conversion_method`: How the assertion was converted (`gpt5`, `heuristic`, or `heuristic_s_to_g`)
 
-**S+G Adjacency:** Structural (S) assertions are immediately followed by their derived Grounding (G) assertions, keeping related assertions grouped together.
+**S+G Linkage:** Structural (S) assertions are immediately followed by their derived Grounding (G) assertions, keeping related assertions grouped together.
+
+> **Key Concept:** G-level (grounding) assertions are **never standalone**. They are always instantiated in the context of validating elements identified by S-level (structural) assertions. S assertions define WHAT structural elements should exist, and G assertions define the GROUNDING CONSTRAINTS that validate those elements against the source scenario. The `parent_assertion_id` field in each G assertion links it back to its source S assertion.
 
 ### Context File Format (LOD_1121.WithUserUrl.jsonl)
 
