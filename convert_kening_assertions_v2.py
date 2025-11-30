@@ -51,10 +51,10 @@ from assertion_analyzer.dimensions import G_RATIONALE_FOR_S
 # =============================================================================
 
 INPUT_FILE = "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl"
-OUTPUT_FILE = "docs/ChinYew/assertions_sg_classified.jsonl"
-OUTPUT_DIR = "docs/ChinYew/sg_stages"  # Directory for staged outputs
-CHECKPOINT_FILE = "docs/ChinYew/.sg_classification_checkpoint.json"
-REPORT_FILE = "docs/ChinYew/sg_classification_report.json"
+OUTPUT_FILE = "docs/ChinYew/assertions_sg_classified_v2.3.jsonl"
+OUTPUT_DIR = "docs/ChinYew/sg_stages_v2.3"  # Directory for staged outputs
+CHECKPOINT_FILE = "docs/ChinYew/.sg_classification_checkpoint_v2.3.json"
+REPORT_FILE = "docs/ChinYew/sg_classification_report_v2.3.json"
 
 # Rate limiting
 DELAY_BETWEEN_CALLS = 0.5  # seconds between GPT-5 calls
@@ -72,6 +72,7 @@ G_SLOT_DESCRIPTIONS = {
     "G7": "roles - role/responsibility assignments mentioned",
     "G8": "constraints - limits, requirements, conditions mentioned",
     "G9": "planner_generated - assumptions, blockers, mitigations mentioned",
+    "G10": "relations - DEPENDS_ON, OWNS, BLOCKS, PRODUCES relationships mentioned",
 }
 
 # =============================================================================

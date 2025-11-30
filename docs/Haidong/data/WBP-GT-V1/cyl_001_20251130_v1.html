@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WBP Ground Truth Corpus - Assertion Viewer (cyl_001)</title>
+    <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+    <style>
+        :root {
+            --colorNeutralBackground1: #ffffff;
+            --colorNeutralBackground2: #fafafa;
+            --colorNeutralBackground3: #f5f5f5;
+            --colorBrandBackground: #0078d4;
+            --colorBrandForeground1: #0078d4;
+            --colorNeutralForeground1: #242424;
+            --colorNeutralForeground2: #424242;
+            --colorNeutralForeground3: #616161;
+            --colorNeutralStroke1: #d1d1d1;
+            --colorPaletteGreenBackground2: #dff6dd;
+            --colorPaletteGreenForeground1: #107c10;
+            --colorPaletteYellowBackground2: #fff4ce;
+            --colorPaletteYellowForeground1: #835c00;
+            --colorPalettePurpleBackground2: #ede3fc;
+            --colorPalettePurpleForeground1: #5c2d91;
+            --shadow4: 0 2px 4px rgba(0,0,0,0.14);
+            --shadow8: 0 4px 8px rgba(0,0,0,0.14);
+            --shadow16: 0 8px 16px rgba(0,0,0,0.14);
+            --borderRadius: 8px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--colorNeutralForeground1);
+            line-height: 1.5;
+        }
+        
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        
+        /* Hero Header */
+        .hero {
+            text-align: center;
+            margin-bottom: 48px;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .hero .version-info {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .hero .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            backdrop-filter: blur(4px);
+        }
+        
+        /* Stats Overview */
+        .stats-overview {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-pill {
+            background: rgba(255,255,255,0.95);
+            padding: 16px 32px;
+            border-radius: 50px;
+            box-shadow: var(--shadow8);
+            text-align: center;
+        }
+        
+        .stat-pill .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--colorBrandForeground1);
+        }
+        
+        .stat-pill .label {
+            font-size: 12px;
+            color: var(--colorNeutralForeground3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* GT Cards Grid */
+        .gt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+        
+        .gt-card {
+            background: var(--colorNeutralBackground1);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gt-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow16);
+        }
+        
+        .gt-card-header {
+            padding: 24px;
+            color: white;
+            position: relative;
+        }
+        
+        .gt-card:nth-child(1) .gt-card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gt-card:nth-child(2) .gt-card-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .gt-card:nth-child(3) .gt-card-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .gt-card-header .gt-id {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .gt-card-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .gt-card-header .event-date {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .gt-card-body {
+            padding: 24px;
+        }
+        
+        /* Quick View Buttons */
+        .quick-view-btns {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .quick-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid var(--colorNeutralStroke1);
+            border-radius: 6px;
+            background: var(--colorNeutralBackground1);
+            color: var(--colorBrandForeground1);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .quick-btn:hover {
+            background: var(--colorNeutralBackground3);
+            border-color: var(--colorBrandForeground1);
+        }
+        
+        .quick-btn.active {
+            background: var(--colorBrandBackground);
+            color: white;
+            border-color: var(--colorBrandBackground);
+        }
+        
+        .quick-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Quick View Panel */
+        .quick-view-panel {
+            display: none;
+            margin-bottom: 16px;
+            background: var(--colorNeutralBackground3);
+            border-radius: var(--borderRadius);
+            padding: 16px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--colorNeutralStroke1);
+        }
+        
+        .quick-view-panel.show {
+            display: block;
+        }
+        
+        .quick-view-panel .panel-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--colorNeutralForeground3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .quick-view-panel .utterance-text {
+            font-size: 15px;
+            color: var(--colorNeutralForeground1);
+            font-style: italic;
+            padding: 12px;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid var(--colorBrandBackground);
+        }
+        
+        .quick-view-panel .wbp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .quick-view-panel .wbp-table th {
+            background: var(--colorNeutralBackground2);
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--colorNeutralForeground2);
+            border-bottom: 1px solid var(--colorNeutralStroke1);
+        }
+        
+        .quick-view-panel .wbp-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--colorNeutralStroke1);
+            color: var(--colorNeutralForeground1);
+        }
+        
+        .quick-view-panel .wbp-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .gt-card-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .gt-stat {
+            text-align: center;
+            padding: 12px;
+            background: var(--colorNeutralBackground2);
+            border-radius: var(--borderRadius);
+        }
+        
+        .gt-stat .value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--colorBrandForeground1);
+        }
+        
+        .gt-stat .label {
+            font-size: 11px;
+            color: var(--colorNeutralForeground3);
+            text-transform: uppercase;
+        }
+        
+        .gt-card-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--colorNeutralStroke1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .gt-card-footer .source {
+            font-size: 12px;
+            color: var(--colorNeutralForeground3);
+        }
+        
+        .view-assertions-btn {
+            background: var(--colorBrandBackground);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .view-assertions-btn:hover {
+            background: #106ebe;
+        }
+        
+        /* Framework Info */
+        .framework-info {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 48px;
+            box-shadow: var(--shadow8);
+        }
+        
+        .framework-info h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--colorNeutralForeground1);
+        }
+        
+        .layers {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .layer {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px;
+            border-radius: var(--borderRadius);
+        }
+        
+        .layer.structural {
+            background: var(--colorPaletteGreenBackground2);
+            border-left: 4px solid var(--colorPaletteGreenForeground1);
+        }
+        
+        .layer.grounding {
+            background: var(--colorPaletteYellowBackground2);
+            border-left: 4px solid var(--colorPaletteYellowForeground1);
+        }
+        
+        .layer.meta {
+            background: var(--colorPalettePurpleBackground2);
+            border-left: 4px solid var(--colorPalettePurpleForeground1);
+        }
+        
+        .layer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .layer p {
+            font-size: 13px;
+            color: var(--colorNeutralForeground2);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Scrollbar styling */
+        .quick-view-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .quick-view-panel::-webkit-scrollbar-track {
+            background: var(--colorNeutralBackground2);
+            border-radius: 3px;
+        }
+        
+        .quick-view-panel::-webkit-scrollbar-thumb {
+            background: var(--colorNeutralStroke1);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Hero Header -->
+        <div class="hero">
+            <h1>WBP Ground Truth Corpus</h1>
+            <p class="subtitle">Workback Planning Assertion Framework - Visualize and examine ground truth assertions using the S→G→M three-layer framework</p>
+            <div class="version-info">
+                <span class="version-badge">ID: cyl_001</span>
+                <span class="version-badge">Date: 2025-11-30</span>
+                <span class="version-badge">Version: 1.0</span>
+                <span class="version-badge">Author: Chin-Yew Lin</span>
+            </div>
+        </div>
+        
+        <!-- Stats Overview -->
+        <div class="stats-overview">
+            <div class="stat-pill">
+                <div class="value">3</div>
+                <div class="label">Ground Truth Examples</div>
+            </div>
+            <div class="stat-pill">
+                <div class="value">85</div>
+                <div class="label">Total Assertions</div>
+            </div>
+            <div class="stat-pill">
+                <div class="value">46</div>
+                <div class="label">GT Tasks</div>
+            </div>
+            <div class="stat-pill">
+                <div class="value">7</div>
+                <div class="label">S Dimensions</div>
+            </div>
+        </div>
+        
+        <!-- GT Cards Grid -->
+        <div class="gt-grid">
+            <!-- GT1: Strategic Initiatives Review -->
+            <div class="gt-card" data-gt="gt1">
+                <div class="gt-card-header">
+                    <div class="gt-id">GT1</div>
+                    <h2>Strategic Initiatives Review</h2>
+                    <div class="event-date">December 17, 2025</div>
+                </div>
+                <div class="gt-card-body">
+                    <div class="quick-view-btns">
+                        <button class="quick-btn" onclick="toggleQuickView('gt1', 'prompt')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            Query Prompt
+                        </button>
+                        <button class="quick-btn" onclick="toggleQuickView('gt1', 'wbp')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9"></path></svg>
+                            View WBP
+                        </button>
+                    </div>
+                    
+                    <div class="quick-view-panel" id="gt1-prompt">
+                        <div class="panel-title">Input Query / Prompt</div>
+                        <div class="utterance-text">"Create a workback plan for the upcoming CXA Strategic Initiatives Review meeting on Dec 17, 2025."</div>
+                    </div>
+                    
+                    <div class="quick-view-panel" id="gt1-wbp">
+                        <div class="panel-title">Ground Truth Workback Plan</div>
+                        <table class="wbp-table">
+                            <thead>
+                                <tr><th>Key Date</th><th>Accountable</th><th>Milestone Activity</th><th>T-Minus</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>11/26</td><td>Paulina</td><td>Create deck</td><td>T-21</td></tr>
+                                <tr><td>12/1</td><td>Nicolle</td><td>Planner Prep: Review Action tracker, portfolio trends, and KPI scorecard</td><td>T-19</td></tr>
+                                <tr><td>12/3</td><td>Kristie</td><td>Consult with Andy M., send feedback to Nicolle and Paulina</td><td>T-14</td></tr>
+                                <tr><td>12/5</td><td>Nicolle</td><td>Send out call for content/instructions to all teams</td><td>T-14</td></tr>
+                                <tr><td>12/9</td><td>Nicolle</td><td>Content due in deck by all teams. Guest invites due EOD</td><td>T-8</td></tr>
+                                <tr><td>12/10</td><td>Trio</td><td>Confirm speaker lineup, presenter order, agenda adjustments</td><td>T-7</td></tr>
+                                <tr><td>12/10</td><td>Nicolle</td><td>Complete QA review and sign off, lock guest invites</td><td>T-7</td></tr>
+                                <tr><td>12/15</td><td>Kristie</td><td>Send finalized agenda to participants</td><td>T-2</td></tr>
+                                <tr><td>12/17</td><td>-</td><td>Strategic Initiatives Review meeting</td><td>T-0</td></tr>
+                                <tr><td>12/19</td><td>Paulina</td><td>Publish and share meeting notes with stakeholders</td><td>T+2</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="gt-card-stats">
+                        <div class="gt-stat">
+                            <div class="value">23</div>
+                            <div class="label">Assertions</div>
+                        </div>
+                        <div class="gt-stat">
+                            <div class="value">10</div>
+                            <div class="label">GT Tasks</div>
+                        </div>
+                        <div class="gt-stat">
+                            <div class="value">6</div>
+                            <div class="label">Dimensions</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gt-card-footer">
+                    <span class="source">CXA Org</span>
+                    <a href="./CXA-StrategicInitiativesReview/cyl/index.html" class="view-assertions-btn">View Assertions →</a>
+                </div>
+            </div>
+            
+            <!-- GT2: Town Hall -->
+            <div class="gt-card" data-gt="gt2">
+                <div class="gt-card-header">
+                    <div class="gt-id">GT2</div>
+                    <h2>FY26 Q2 Town Hall</h2>
+                    <div class="event-date">December 10, 2025</div>
+                </div>
+                <div class="gt-card-body">
+                    <div class="quick-view-btns">
+                        <button class="quick-btn" onclick="toggleQuickView('gt2', 'prompt')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            Query Prompt
+                        </button>
+                        <button class="quick-btn" onclick="toggleQuickView('gt2', 'wbp')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9"></path></svg>
+                            View WBP
+                        </button>
+                    </div>
+                    
+                    <div class="quick-view-panel" id="gt2-prompt">
+                        <div class="panel-title">Input Query / Prompt</div>
+                        <div class="utterance-text">"Create a workback plan for FY26 Q2 CXA Town Hall meeting on Dec 10, 2025."</div>
+                    </div>
+                    
+                    <div class="quick-view-panel" id="gt2-wbp">
+                        <div class="panel-title">Ground Truth Workback Plan</div>
+                        <table class="wbp-table">
+                            <thead>
+                                <tr><th>Key Date</th><th>Accountable</th><th>Milestone Activity</th><th>T-Minus</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>11/19</td><td>Paulina</td><td>Create deck</td><td>T-21</td></tr>
+                                <tr><td>11/19</td><td>Karen</td><td>Confirm Town Hall date and venue</td><td>T-21</td></tr>
+                                <tr><td>11/21</td><td>Kristie</td><td>Finalize themes with Lead team</td><td>T-19</td></tr>
+                                <tr><td>11/24</td><td>Kristie/Karen</td><td>Complete content planning</td><td>T-16</td></tr>
+                                <tr><td>11/25</td><td>Kristie/Diane</td><td>Complete speaker outreach</td><td>T-15</td></tr>
+                                <tr><td>11/25</td><td>Karen</td><td>Complete venue prep</td><td>T-15</td></tr>
+                                <tr><td>12/2</td><td>Kristie</td><td>Complete content gathering and load to deck</td><td>T-8</td></tr>
+                                <tr><td>12/3</td><td>Kristie</td><td>Complete dry-runs with speakers</td><td>T-7</td></tr>
+                                <tr><td>12/5</td><td>Paulina</td><td>Complete slides and materials</td><td>T-5</td></tr>
+                                <tr><td>12/6</td><td>Paulina</td><td>Send slides to Lead team</td><td>T-4</td></tr>
+                                <tr><td>12/9</td><td>Karen</td><td>Send reminder to all attendees</td><td>T-1</td></tr>
+                                <tr><td>12/10</td><td>-</td><td>FY26 Q2 Town Hall</td><td>T-0</td></tr>
+                                <tr><td>12/12</td><td>Diane</td><td>Publish recording</td><td>T+2</td></tr>
+                                <tr><td>12/12</td><td>Karen</td><td>Send follow-up communication</td><td>T+2</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="gt-card-stats">
+                        <div class="gt-stat">
+                            <div class="value">34</div>
+                            <div class="label">Assertions</div>
+                        </div>
+                        <div class="gt-stat">
+                            <div class="value">14</div>
+                            <div class="label">GT Tasks</div>
+                        </div>
+                        <div class="gt-stat">
+                            <div class="value">6</div>
+                            <div class="label">Dimensions</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gt-card-footer">
+                    <span class="source">CXA Org</span>
+                    <a href="./CXA-TownHall/cyl/index.html" class="view-assertions-btn">View Assertions →</a>
+                </div>
+            </div>
+            
+            <!-- GT3: Workshop -->
+            <div class="gt-card" data-gt="gt3">
+                <div class="gt-card-header">
+                    <div class="gt-id">GT3</div>
+                    <h2>Knowledge Management Workshop</h2>
+                    <div class="event-date">July 15-17, 2025</div>
+                </div>
+                <div class="gt-card-body">
+                    <div class="quick-view-btns">
+                        <button class="quick-btn" onclick="toggleQuickView('gt3', 'prompt')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            Query Prompt
+                        </button>
+                        <button class="quick-btn" onclick="toggleQuickView('gt3', 'wbp')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9"></path></svg>
+                            View WBP
+                        </button>
+                    </div>
+                    
+                    <div class="quick-view-panel" id="gt3-prompt">
+                        <div class="panel-title">Input Query / Prompt</div>
+                        <div class="utterance-text">"Create a workback plan for the knowledge management workshop event July 15-17, 2025."</div>
+                    </div>
+                    
+                    <div class="quick-view-panel" id="gt3-wbp">
+                        <div class="panel-title">Ground Truth Workback Plan</div>
+                        <table class="wbp-table">
+                            <thead>
+                                <tr><th>Key Date</th><th>Accountable</th><th>Milestone Activity</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>6/19</td><td>Nicolle</td><td>Lock on agenda for 6/23 LT Planning or cancel meeting</td></tr>
+                                <tr><td>6/20</td><td>Nicolle</td><td>Send agenda for 6/23 LT Planning</td></tr>
+                                <tr><td>6/23 EOD</td><td>Nicolle/Diane</td><td>Lock on participants and update workshop invites</td></tr>
+                                <tr><td>6/23</td><td>Nicolle</td><td>LT Planning session</td></tr>
+                                <tr><td>Wk of 6/23</td><td>Nicolle/Diane</td><td>Plan all logistics for workshop</td></tr>
+                                <tr><td>Wk of 6/23</td><td>Diane</td><td>Schedule 8/4 LT Workshop Output Review</td></tr>
+                                <tr><td>7/7</td><td>Nicolle/Diane</td><td>Physically check conf room and equipment</td></tr>
+                                <tr><td>7/7</td><td>Nicolle</td><td>Send pre-workshop communication to participants</td></tr>
+                                <tr><td>7/14</td><td>Nicolle</td><td>LT Planning session</td></tr>
+                                <tr><td>7/14</td><td>Nicolle</td><td>Send final pre-workshop communication</td></tr>
+                                <tr><td>7/14</td><td>Nicolle, Maddie</td><td>Run-Dry with all facilitators</td></tr>
+                                <tr><td>7/15-7/17</td><td>Nicolle</td><td>KM Workshop Event</td></tr>
+                                <tr><td>7/21</td><td>Diane</td><td>Post recording and materials in CXA SharePoint</td></tr>
+                                <tr><td>7/21</td><td>Nicolle</td><td>Send Thank You communication</td></tr>
+                                <tr><td>7/21</td><td>Nicolle</td><td>Rough draft of Workshop Output ready</td></tr>
+                                <tr><td>7/22-7/25</td><td>Nicolle</td><td>V-team finalizes Workshop Output</td></tr>
+                                <tr><td>7/28</td><td>Nicolle</td><td>Agenda and pre-read for 8/4 LT Review</td></tr>
+                                <tr><td>8/4</td><td>Nicolle</td><td>LT Workshop Output Review Meeting</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="gt-card-stats">
+                        <div class="gt-stat">
+                            <div class="value">28</div>
+                            <div class="label">Assertions</div>
+                        </div>
+                        <div class="gt-stat">
+                            <div class="value">22</div>
+                            <div class="label">GT Tasks</div>
+                        </div>
+                        <div class="gt-stat">
+                            <div class="value">7</div>
+                            <div class="label">Dimensions</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gt-card-footer">
+                    <span class="source">CXP Org</span>
+                    <a href="./CXA-Workshop/cyl/index.html" class="view-assertions-btn">View Assertions →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Framework Info -->
+        <div class="framework-info">
+            <h3>S→G→M Three-Layer Assertion Framework</h3>
+            <div class="layers">
+                <div class="layer structural">
+                    <h4>S - Structural Layer (S1-S20)</h4>
+                    <p>Checks IF something exists in the response. Independent, check first.</p>
+                </div>
+                <div class="layer grounding">
+                    <h4>G - Grounding Layer (G2-G10)</h4>
+                    <p>Checks if VALUE matches source. Independent, each checks one value.</p>
+                </div>
+                <div class="layer meta">
+                    <h4>M - Meta Layer (M1)</h4>
+                    <p>No Hallucination check. Derived from all G results, computed last.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Ground Truth Corpus from <a href="https://github.com/gim-home/TimeBerry">TimeBerry</a> | Authors: Chin-Yew Lin, Haidong Zhang</p>
+        </div>
+    </div>
+    
+    <script>
+        function toggleQuickView(gtId, panelType) {
+            const promptPanel = document.getElementById(`${gtId}-prompt`);
+            const wbpPanel = document.getElementById(`${gtId}-wbp`);
+            const card = document.querySelector(`[data-gt="${gtId}"]`);
+            const buttons = card.querySelectorAll('.quick-btn');
+            
+            // Toggle logic
+            if (panelType === 'prompt') {
+                if (promptPanel.classList.contains('show')) {
+                    promptPanel.classList.remove('show');
+                    buttons[0].classList.remove('active');
+                } else {
+                    promptPanel.classList.add('show');
+                    wbpPanel.classList.remove('show');
+                    buttons[0].classList.add('active');
+                    buttons[1].classList.remove('active');
+                }
+            } else if (panelType === 'wbp') {
+                if (wbpPanel.classList.contains('show')) {
+                    wbpPanel.classList.remove('show');
+                    buttons[1].classList.remove('active');
+                } else {
+                    wbpPanel.classList.add('show');
+                    promptPanel.classList.remove('show');
+                    buttons[1].classList.add('active');
+                    buttons[0].classList.remove('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

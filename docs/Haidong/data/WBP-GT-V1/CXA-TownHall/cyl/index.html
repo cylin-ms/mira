@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT2: CXA Town Hall - Assertion Viewer</title>
+    <style>
+        :root {
+            --primary: #0078D4;
+            --primary-light: #50A0E0;
+            --success: #107C10;
+            --warning: #FFB900;
+            --danger: #D83B01;
+            --neutral-light: #F3F2F1;
+            --neutral-lighter: #FAF9F8;
+            --neutral-dark: #323130;
+            --neutral-secondary: #605E5C;
+            --card-shadow: 0 1.6px 3.6px rgba(0,0,0,.132), 0 0.3px 0.9px rgba(0,0,0,.108);
+            --card-shadow-hover: 0 6.4px 14.4px rgba(0,0,0,.132), 0 1.2px 3.6px rgba(0,0,0,.108);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--neutral-lighter);
+            color: var(--neutral-dark);
+            line-height: 1.5;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 32px 48px;
+            box-shadow: var(--card-shadow);
+        }
+        .header h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+        .header .subtitle { font-size: 14px; opacity: 0.9; }
+        .header .back-link { 
+            color: white; 
+            opacity: 0.8; 
+            text-decoration: none; 
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .header .back-link:hover { opacity: 1; text-decoration: underline; }
+        
+        .stats-bar {
+            background: white;
+            padding: 16px 48px;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--neutral-light);
+        }
+        .stat { display: flex; flex-direction: column; }
+        .stat-value { font-size: 24px; font-weight: 600; color: var(--primary); }
+        .stat-label { font-size: 12px; color: var(--neutral-secondary); text-transform: uppercase; }
+        
+        .main { padding: 24px 48px; max-width: 1600px; margin: 0 auto; }
+        
+        /* Query Prompt Section */
+        .prompt-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+        }
+        .prompt-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .prompt-text {
+            font-size: 18px;
+            color: var(--neutral-dark);
+            font-style: italic;
+            padding: 12px 16px;
+            background: var(--neutral-lighter);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 4px 4px 0;
+        }
+        
+        /* WBP Table Section */
+        .wbp-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+        }
+        .wbp-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .coverage-badge {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .coverage-full { background: #DFF6DD; color: var(--success); }
+        .coverage-partial { background: #FFF4CE; color: #8A6D00; }
+        .coverage-none { background: #FDE7E9; color: var(--danger); }
+        
+        .wbp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .wbp-table th {
+            background: var(--neutral-light);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--neutral-secondary);
+            border-bottom: 2px solid #E1DFDD;
+        }
+        .wbp-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--neutral-light);
+            vertical-align: top;
+        }
+        .wbp-table tr { transition: all 0.2s ease; }
+        .wbp-table tr.covered { background: #F0FFF0; }
+        .wbp-table tr.covered:hover { background: #DFF6DD; }
+        .wbp-table tr.not-covered { background: #FFF5F5; }
+        .wbp-table tr.not-covered:hover { background: #FDE7E9; }
+        .wbp-table tr.highlight { 
+            background: #FFF4CE !important; 
+            box-shadow: inset 0 0 0 2px var(--warning);
+        }
+        .task-index {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        .task-index.covered { background: var(--success); color: white; }
+        .task-index.not-covered { background: var(--danger); color: white; }
+        
+        .legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--neutral-light);
+            font-size: 12px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+        .legend-color.green { background: #DFF6DD; border: 1px solid var(--success); }
+        .legend-color.red { background: #FDE7E9; border: 1px solid var(--danger); }
+        .legend-color.yellow { background: #FFF4CE; border: 1px solid var(--warning); }
+        
+        /* Filters */
+        .filters {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            box-shadow: var(--card-shadow);
+        }
+        .filter-group { display: flex; align-items: center; gap: 8px; }
+        .filter-group label { font-size: 13px; color: var(--neutral-secondary); font-weight: 500; }
+        select, input[type="text"] {
+            padding: 8px 12px;
+            border: 1px solid #E1DFDD;
+            border-radius: 4px;
+            font-size: 13px;
+            background: white;
+            color: var(--neutral-dark);
+            min-width: 150px;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+        
+        /* Assertions Grid */
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--neutral-dark);
+            margin: 24px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+        }
+        .assertions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+            gap: 16px;
+        }
+        .assertion-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.2s ease;
+            border-left: 4px solid var(--primary);
+        }
+        .assertion-card:hover {
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-2px);
+        }
+        .assertion-card.level-critical { border-left-color: var(--danger); }
+        .assertion-card.level-expected { border-left-color: var(--warning); }
+        .assertion-card.level-optional { border-left-color: var(--success); }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .assertion-id {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--neutral-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .dimension-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--primary);
+            color: white;
+        }
+        .dimension-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .level-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+        }
+        .level-critical .level-badge { background: #FDE7E9; color: var(--danger); }
+        .level-expected .level-badge { background: #FFF4CE; color: #8A6D00; }
+        .level-optional .level-badge { background: #DFF6DD; color: var(--success); }
+        
+        .assertion-template {
+            font-size: 12px;
+            color: var(--neutral-secondary);
+            margin-bottom: 8px;
+            padding: 8px 10px;
+            background: var(--neutral-lighter);
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .assertion-text {
+            font-size: 14px;
+            color: var(--neutral-dark);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .task-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 4px 8px;
+            background: #EEF6FC;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+        .task-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .slots-section { margin-top: 12px; }
+        .slots-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--neutral-secondary);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slot-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .slot-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+        .slot-dim { font-weight: 600; }
+        .slot-type { opacity: 0.8; }
+        /* G-dimension specific colors */
+        .slot-tag.g2 { background: #E8F5E9; border: 1px solid #4CAF50; }
+        .slot-tag.g2 .slot-dim { color: #2E7D32; }
+        .slot-tag.g3 { background: #E3F2FD; border: 1px solid #2196F3; }
+        .slot-tag.g3 .slot-dim { color: #1565C0; }
+        .slot-tag.g5 { background: #FFF3E0; border: 1px solid #FF9800; }
+        .slot-tag.g5 .slot-dim { color: #E65100; }
+        .slot-tag.g6 { background: #F3E5F5; border: 1px solid #9C27B0; }
+        .slot-tag.g6 .slot-dim { color: #7B1FA2; }
+        .slot-tag.g7 { background: #FFEBEE; border: 1px solid #F44336; }
+        .slot-tag.g7 .slot-dim { color: #C62828; }
+        .slot-tag.g9 { background: #E0F7FA; border: 1px solid #00BCD4; }
+        .slot-tag.g9 .slot-dim { color: #00838F; }
+        .slot-tag.g10 { background: #FBE9E7; border: 1px solid #FF5722; }
+        .slot-tag.g10 .slot-dim { color: #D84315; }
+        .slot-value { 
+            color: var(--neutral-dark); 
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .g-dims {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--neutral-light);
+        }
+        .g-dims-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--neutral-secondary);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .g-dim-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #E8F4FD;
+            color: var(--primary);
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-right: 4px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 48px;
+            color: var(--neutral-secondary);
+        }
+        .empty-state svg { width: 64px; height: 64px; opacity: 0.5; margin-bottom: 16px; }
+        /* G-Legend */
+        .g-legend { background: white; border-radius: 8px; padding: 12px 24px; margin-bottom: 24px; box-shadow: var(--card-shadow); }
+        .g-legend h4 { font-size: 12px; font-weight: 600; color: var(--neutral-secondary); margin-bottom: 8px; text-transform: uppercase; }
+        .g-legend-items { display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px; }
+        .g-legend-item { display: flex; align-items: center; gap: 6px; }
+        .g-legend-color { width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+        .g-legend-color.g2 { background: #E8F5E9; border: 1px solid #4CAF50; color: #2E7D32; }
+        .g-legend-color.g3 { background: #E3F2FD; border: 1px solid #2196F3; color: #1565C0; }
+        .g-legend-color.g5 { background: #FFF3E0; border: 1px solid #FF9800; color: #E65100; }
+        .g-legend-color.g6 { background: #F3E5F5; border: 1px solid #9C27B0; color: #7B1FA2; }
+        .g-legend-color.g7 { background: #FFEBEE; border: 1px solid #F44336; color: #C62828; }
+        
+        @media (max-width: 768px) {
+            .header, .stats-bar, .main { padding-left: 24px; padding-right: 24px; }
+            .assertions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="../cyl_001_20251130_v1.html" class="back-link">← Back to All Ground Truths</a>
+        <h1>GT2: FY26 Q2 CXA Town Hall</h1>
+        <div class="subtitle">Ground Truth Assertions for Workback Plan Validation</div>
+    </div>
+    
+    <div class="stats-bar">
+        <div class="stat">
+            <span class="stat-value" id="total-count">30</span>
+            <span class="stat-label">Total Assertions</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value" id="critical-count">24</span>
+            <span class="stat-label">Critical</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value" id="expected-count">6</span>
+            <span class="stat-label">Expected</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value" id="task-coverage">14/14</span>
+            <span class="stat-label">Tasks Covered</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">6</span>
+            <span class="stat-label">Dimensions</span>
+        </div>
+    </div>
+    
+    <div class="main">
+        <!-- Query Prompt -->
+        <div class="prompt-section">
+            <h3>Query Prompt</h3>
+            <div class="prompt-text">"Create a workback plan for FY26 Q2 CXA Town Hall meeting on Dec 10, 2025."</div>
+        </div>
+        
+        <!-- WBP Table -->
+        <div class="wbp-section">
+            <h3>
+                Ground Truth Workback Plan
+                <span class="coverage-badge coverage-full" id="coverage-badge">100% Coverage</span>
+            </h3>
+            <table class="wbp-table" id="wbp-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th style="width: 80px;">Key Date</th>
+                        <th style="width: 80px;">T-Minus</th>
+                        <th style="width: 120px;">Accountable</th>
+                        <th>Milestone Activity</th>
+                    </tr>
+                </thead>
+                <tbody id="wbp-body"></tbody>
+            </table>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color green"></div><span>Covered by assertions</span></div>
+                <div class="legend-item"><div class="legend-color red"></div><span>No assertions</span></div>
+                <div class="legend-item"><div class="legend-color yellow"></div><span>Currently highlighted</span></div>
+            </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>Dimension:</label>
+                <select id="filter-dimension">
+                    <option value="">All Dimensions</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Level:</label>
+                <select id="filter-level">
+                    <option value="">All Levels</option>
+                    <option value="critical">Critical</option>
+                    <option value="expected">Expected</option>
+                    <option value="optional">Optional</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Search:</label>
+                <input type="text" id="filter-search" placeholder="Search assertions...">
+            </div>
+            <div class="filter-group">
+                <label>Task:</label>
+                <select id="filter-task">
+                    <option value="">All Tasks</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="g-legend">
+            <h4>Grounding Dimension Colors</h4>
+            <div class="g-legend-items">
+                <div class="g-legend-item"><span class="g-legend-color g2">G2</span> Entity (names)</div>
+                <div class="g-legend-item"><span class="g-legend-color g3">G3</span> Temporal (dates)</div>
+                <div class="g-legend-item"><span class="g-legend-color g5">G5</span> Title</div>
+                <div class="g-legend-item"><span class="g-legend-color g6">G6</span> Content (tasks)</div>
+                <div class="g-legend-item"><span class="g-legend-color g7">G7</span> Format</div>
+            </div>
+        </div>
+        
+        <div class="section-header">Assertions (<span id="visible-count">30</span>)</div>
+        <div class="assertions-grid" id="assertions-container"></div>
+        <div class="empty-state" id="empty-state" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </svg>
+            <div>No assertions match your filters</div>
+        </div>
+    </div>
+
+    <script>
+        // Ground Truth Tasks
+        const gtTasks = [
+            { key_date: "11/25", t_minus: "T-21", accountable: "Paulina", milestone_activity: "Create deck" },
+            { key_date: "11/25", t_minus: "T-21", accountable: "Karen/Kristie", milestone_activity: "Review draft agenda w/ Kristie and identify speakers" },
+            { key_date: "11/25", t_minus: "T-21", accountable: "Karen", milestone_activity: "Speaker(s) confirmation finalized" },
+            { key_date: "11/25", t_minus: "T-21", accountable: "Karen", milestone_activity: "Submit anonymous questionnaire to the org" },
+            { key_date: "12/1", t_minus: "T-9", accountable: "Karen", milestone_activity: "Talking Points – Locked (to be shared with LT once finalized)" },
+            { key_date: "12/2", t_minus: "T-8", accountable: "Kristie", milestone_activity: "Lock agenda with Andy during 1:1" },
+            { key_date: "12/5", t_minus: "T-3", accountable: "Kristie/Paulina", milestone_activity: "Final content due" },
+            { key_date: "12/9", t_minus: "T-1", accountable: "Paulina", milestone_activity: "Deck sweep for continuity" },
+            { key_date: "12/9", t_minus: "T-1", accountable: "Diane", milestone_activity: "Accessibility Check" },
+            { key_date: "12/9", t_minus: "T-1", accountable: "Karen", milestone_activity: "Create Speaker Team Chat" },
+            { key_date: "12/9", t_minus: "T-1", accountable: "Karen", milestone_activity: "Teams channel" },
+            { key_date: "12/10", t_minus: "T-0", accountable: "", milestone_activity: "FY26 Q2 CXA Town Hall" },
+            { key_date: "12/12", t_minus: "T+2", accountable: "Paulina", milestone_activity: "Send summary email and the post-event survey" },
+            { key_date: "12/12", t_minus: "T+2", accountable: "Diane/Karen", milestone_activity: "Upload the slide deck to the SharePoint site and send to Teams Channel" }
+        ];
+
+        // Assertions data
+        const assertions = [
+            {
+                assertion_id: "GT2_S1",
+                dimension: "S1",
+                dimension_name: "Meeting Details",
+                layer: "structural",
+                level: "critical",
+                template: "The plan should reference the meeting [MEETING_TITLE] scheduled for [MEETING_DATE].",
+                instantiated: "The plan should reference the meeting 'FY26 Q2 CXA Town Hall' scheduled for Dec 10, 2025.",
+                linked_g_dims: ["G3", "G5"],
+                g_slots: [
+                    { g_dim: "G5", slot_type: "MEETING_TITLE", value: "FY26 Q2 CXA Town Hall" },
+                    { g_dim: "G3", slot_type: "MEETING_DATE", value: "Dec 10, 2025" }
+                ],
+                task_indices: [11]
+            },
+            {
+                assertion_id: "GT2_S2",
+                dimension: "S2",
+                dimension_name: "Timeline Alignment",
+                layer: "structural",
+                level: "critical",
+                template: "The plan should use T-minus notation counting backward from [MEETING_DATE], with tasks ranging from [T_START] to [T_END].",
+                instantiated: "The plan should use T-minus notation counting backward from Dec 10, 2025, with tasks ranging from T-21 to T+2.",
+                linked_g_dims: ["G3"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "MEETING_DATE", value: "Dec 10, 2025" },
+                    { g_dim: "G3", slot_type: "T_START", value: "T-21" },
+                    { g_dim: "G3", slot_type: "T_END", value: "T+2" }
+                ],
+                task_indices: []
+            },
+            {
+                assertion_id: "GT2_S3_01",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Create deck' should be assigned to Paulina.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Paulina" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Create deck" }
+                ],
+                task_indices: [0]
+            },
+            {
+                assertion_id: "GT2_S3_02",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Review draft agenda and identify speakers' should be assigned to Karen/Kristie.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Karen/Kristie" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Review draft agenda w/ Kristie and identify speakers" }
+                ],
+                task_indices: [1]
+            },
+            {
+                assertion_id: "GT2_S3_03",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Speaker(s) confirmation finalized' should be assigned to Karen.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Karen" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Speaker(s) confirmation finalized" }
+                ],
+                task_indices: [2]
+            },
+            {
+                assertion_id: "GT2_S3_04",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Submit anonymous questionnaire' should be assigned to Karen.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Karen" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Submit anonymous questionnaire to the org" }
+                ],
+                task_indices: [3]
+            },
+            {
+                assertion_id: "GT2_S3_05",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Talking Points – Locked' should be assigned to Karen.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Karen" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Talking Points – Locked (to be shared with LT once finalized)" }
+                ],
+                task_indices: [4]
+            },
+            {
+                assertion_id: "GT2_S3_06",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Lock agenda with Andy' should be assigned to Kristie.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Kristie" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Lock agenda with Andy during 1:1" }
+                ],
+                task_indices: [5]
+            },
+            {
+                assertion_id: "GT2_S3_07",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Final content due' should be assigned to Kristie/Paulina.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Kristie/Paulina" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Final content due" }
+                ],
+                task_indices: [6]
+            },
+            {
+                assertion_id: "GT2_S3_08",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Deck sweep for continuity' should be assigned to Paulina.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Paulina" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Deck sweep for continuity" }
+                ],
+                task_indices: [7]
+            },
+            {
+                assertion_id: "GT2_S3_09",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Accessibility Check' should be assigned to Diane.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Diane" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Accessibility Check" }
+                ],
+                task_indices: [8]
+            },
+            {
+                assertion_id: "GT2_S3_10",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Create Speaker Team Chat' should be assigned to Karen.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Karen" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Create Speaker Team Chat" }
+                ],
+                task_indices: [9]
+            },
+            {
+                assertion_id: "GT2_S3_11",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Teams channel' should be assigned to Karen.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Karen" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Teams channel" }
+                ],
+                task_indices: [10]
+            },
+            {
+                assertion_id: "GT2_S3_12",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "expected",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Send summary email and post-event survey' should be assigned to Paulina.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Paulina" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Send summary email and the post-event survey" }
+                ],
+                task_indices: [12]
+            },
+            {
+                assertion_id: "GT2_S3_13",
+                dimension: "S3",
+                dimension_name: "Ownership Assignment",
+                layer: "structural",
+                level: "expected",
+                template: "Task [TASK] should be assigned to [OWNER].",
+                instantiated: "Task 'Upload slide deck to SharePoint' should be assigned to Diane/Karen.",
+                linked_g_dims: ["G2", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Diane/Karen" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Upload the slide deck to the SharePoint site and send to Teams Channel" }
+                ],
+                task_indices: [13]
+            },
+            {
+                assertion_id: "GT2_S5_01",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Create deck' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "11/25" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-21" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Create deck" }
+                ],
+                task_indices: [0]
+            },
+            {
+                assertion_id: "GT2_S5_02",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Review draft agenda' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "11/25" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-21" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Review draft agenda" }
+                ],
+                task_indices: [1]
+            },
+            {
+                assertion_id: "GT2_S5_03",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Speaker confirmation' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "11/25" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-21" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Speaker confirmation" }
+                ],
+                task_indices: [2]
+            },
+            {
+                assertion_id: "GT2_S5_04",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Submit questionnaire' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "11/25" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-21" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Submit questionnaire" }
+                ],
+                task_indices: [3]
+            },
+            {
+                assertion_id: "GT2_S5_05",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Talking Points Locked' should have due date 12/1 (T-9 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/1" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-9" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Talking Points Locked" }
+                ],
+                task_indices: [4]
+            },
+            {
+                assertion_id: "GT2_S5_06",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Lock agenda' should have due date 12/2 (T-8 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/2" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-8" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Lock agenda" }
+                ],
+                task_indices: [5]
+            },
+            {
+                assertion_id: "GT2_S5_07",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Final content due' should have due date 12/5 (T-3 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/5" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-3" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Final content due" }
+                ],
+                task_indices: [6]
+            },
+            {
+                assertion_id: "GT2_S5_08",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Deck sweep' should have due date 12/9 (T-1 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/9" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-1" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Deck sweep" }
+                ],
+                task_indices: [7]
+            },
+            {
+                assertion_id: "GT2_S5_09",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Accessibility Check' should have due date 12/9 (T-1 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/9" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-1" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Accessibility Check" }
+                ],
+                task_indices: [8]
+            },
+            {
+                assertion_id: "GT2_S5_10",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "critical",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Town Hall event' should have due date 12/10 (T-0 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/10" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T-0" },
+                    { g_dim: "G6", slot_type: "TASK", value: "FY26 Q2 CXA Town Hall" }
+                ],
+                task_indices: [11]
+            },
+            {
+                assertion_id: "GT2_S5_11",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "expected",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Send summary email' should have due date 12/12 (T+2 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/12" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T+2" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Send summary email" }
+                ],
+                task_indices: [12]
+            },
+            {
+                assertion_id: "GT2_S5_12",
+                dimension: "S5",
+                dimension_name: "Task Dates",
+                layer: "structural",
+                level: "expected",
+                template: "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+                instantiated: "Task 'Upload slide deck' should have due date 12/12 (T+2 relative to Dec 10, 2025).",
+                linked_g_dims: ["G3", "G6"],
+                g_slots: [
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/12" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T+2" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Upload slide deck" }
+                ],
+                task_indices: [13]
+            },
+            {
+                assertion_id: "GT2_S18_01",
+                dimension: "S18",
+                dimension_name: "Post-Event Actions",
+                layer: "structural",
+                level: "expected",
+                template: "The plan should include post-event task [TASK] assigned to [OWNER] at [T_MINUS] ([DUE_DATE]).",
+                instantiated: "The plan should include post-event task 'Send summary email and the post-event survey' assigned to Paulina at T+2 (12/12).",
+                linked_g_dims: ["G2", "G3", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Paulina" },
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/12" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T+2" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Send summary email and the post-event survey" }
+                ],
+                task_indices: [12]
+            },
+            {
+                assertion_id: "GT2_S18_02",
+                dimension: "S18",
+                dimension_name: "Post-Event Actions",
+                layer: "structural",
+                level: "expected",
+                template: "The plan should include post-event task [TASK] assigned to [OWNER] at [T_MINUS] ([DUE_DATE]).",
+                instantiated: "The plan should include post-event task 'Upload the slide deck to the SharePoint site' assigned to Diane/Karen at T+2 (12/12).",
+                linked_g_dims: ["G2", "G3", "G6"],
+                g_slots: [
+                    { g_dim: "G2", slot_type: "OWNER", value: "Diane/Karen" },
+                    { g_dim: "G3", slot_type: "DUE_DATE", value: "12/12" },
+                    { g_dim: "G3", slot_type: "T_MINUS", value: "T+2" },
+                    { g_dim: "G6", slot_type: "TASK", value: "Upload the slide deck to the SharePoint site and send to Teams Channel" }
+                ],
+                task_indices: [13]
+            },
+            {
+                assertion_id: "GT2_S20",
+                dimension: "S20",
+                dimension_name: "Clarity & First Impression",
+                layer: "structural",
+                level: "expected",
+                template: "The plan should be presented in a clear table format with columns: [COLUMNS].",
+                instantiated: "The plan should be presented in a clear table format with columns: Key Date, Accountable, Milestone Activity, T-Minus.",
+                linked_g_dims: ["G7"],
+                g_slots: [
+                    { g_dim: "G7", slot_type: "COLUMNS", value: "Key Date, Accountable, Milestone Activity, T-Minus" }
+                ],
+                task_indices: []
+            }
+        ];
+
+        // Build task coverage map
+        const taskCoverage = new Map();
+        assertions.forEach(a => {
+            if (a.task_indices) {
+                a.task_indices.forEach(idx => {
+                    if (!taskCoverage.has(idx)) {
+                        taskCoverage.set(idx, []);
+                    }
+                    taskCoverage.get(idx).push(a.assertion_id);
+                });
+            }
+        });
+
+        // Render WBP table
+        function renderWbpTable() {
+            const tbody = document.getElementById('wbp-body');
+            tbody.innerHTML = gtTasks.map((task, idx) => {
+                const isCovered = taskCoverage.has(idx);
+                const coverageClass = isCovered ? 'covered' : 'not-covered';
+                const indexClass = isCovered ? 'covered' : 'not-covered';
+                return `
+                    <tr id="task-row-${idx}" class="${coverageClass}">
+                        <td><span class="task-index ${indexClass}">${idx + 1}</span></td>
+                        <td>${task.key_date}</td>
+                        <td>${task.t_minus}</td>
+                        <td>${task.accountable || '-'}</td>
+                        <td>${task.milestone_activity}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Update coverage stats
+            const coveredCount = taskCoverage.size;
+            const totalTasks = gtTasks.length;
+            document.getElementById('task-coverage').textContent = `${coveredCount}/${totalTasks}`;
+            
+            const badge = document.getElementById('coverage-badge');
+            const pct = Math.round((coveredCount / totalTasks) * 100);
+            badge.textContent = `${pct}% Coverage`;
+            badge.className = 'coverage-badge ' + (pct === 100 ? 'coverage-full' : pct >= 80 ? 'coverage-partial' : 'coverage-none');
+
+            // Populate task filter
+            const taskFilter = document.getElementById('filter-task');
+            gtTasks.forEach((task, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = `${idx + 1}. ${task.milestone_activity.substring(0, 40)}...`;
+                taskFilter.appendChild(opt);
+            });
+        }
+
+        // Highlight task row
+        function highlightTask(taskIndex) {
+            document.querySelectorAll('.wbp-table tr').forEach(tr => tr.classList.remove('highlight'));
+            const row = document.getElementById(`task-row-${taskIndex}`);
+            if (row) {
+                row.classList.add('highlight');
+                row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Render assertions
+        function renderAssertions(filteredAssertions) {
+            const container = document.getElementById('assertions-container');
+            const emptyState = document.getElementById('empty-state');
+            
+            if (filteredAssertions.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                document.getElementById('visible-count').textContent = '0';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            document.getElementById('visible-count').textContent = filteredAssertions.length;
+            
+            container.innerHTML = filteredAssertions.map(a => `
+                <div class="assertion-card level-${a.level}">
+                    <div class="card-header">
+                        <div>
+                            <span class="assertion-id">${a.assertion_id}</span>
+                            <div class="dimension-name">${a.dimension_name}</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="dimension-badge">${a.dimension}</span>
+                            <span class="level-badge">${a.level}</span>
+                        </div>
+                    </div>
+                    <div class="assertion-template">${a.template}</div>
+                    <div class="assertion-text">${a.instantiated}</div>
+                    ${a.task_indices && a.task_indices.length > 0 ? `
+                        <div style="margin-bottom: 8px;">
+                            ${a.task_indices.map(idx => `
+                                <a href="#task-row-${idx}" class="task-link" onclick="highlightTask(${idx}); return false;">
+                                    View Task ${idx + 1} in WBP →
+                                </a>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    ${a.g_slots && a.g_slots.length > 0 ? `
+                        <div class="slots-section">
+                            <div class="slots-header">Grounding Slots</div>
+                            <div class="slot-tags">
+                                ${a.g_slots.map(s => `
+                                    <span class="slot-tag ${s.g_dim.toLowerCase()}">
+                                        <span class="slot-dim">${s.g_dim}</span>
+                                        <span class="slot-type">${s.slot_type}:</span>
+                                        <span class="slot-value" title="${s.value}">${s.value}</span>
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${a.linked_g_dims && a.linked_g_dims.length > 0 ? `
+                        <div class="g-dims">
+                            <div class="g-dims-label">Linked G Dimensions</div>
+                            ${a.linked_g_dims.map(g => `<span class="g-dim-tag">${g}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Setup filters
+        function setupFilters() {
+            const dimensions = [...new Set(assertions.map(a => a.dimension))].sort();
+            const dimFilter = document.getElementById('filter-dimension');
+            dimensions.forEach(dim => {
+                const name = assertions.find(a => a.dimension === dim)?.dimension_name || dim;
+                const opt = document.createElement('option');
+                opt.value = dim;
+                opt.textContent = `${dim} - ${name}`;
+                dimFilter.appendChild(opt);
+            });
+
+            // Filter handlers
+            const applyFilters = () => {
+                const dimVal = document.getElementById('filter-dimension').value;
+                const levelVal = document.getElementById('filter-level').value;
+                const searchVal = document.getElementById('filter-search').value.toLowerCase();
+                const taskVal = document.getElementById('filter-task').value;
+
+                let filtered = assertions.filter(a => {
+                    if (dimVal && a.dimension !== dimVal) return false;
+                    if (levelVal && a.level !== levelVal) return false;
+                    if (searchVal && !a.instantiated.toLowerCase().includes(searchVal) && !a.template.toLowerCase().includes(searchVal)) return false;
+                    if (taskVal !== '' && (!a.task_indices || !a.task_indices.includes(parseInt(taskVal)))) return false;
+                    return true;
+                });
+
+                renderAssertions(filtered);
+            };
+
+            document.getElementById('filter-dimension').addEventListener('change', applyFilters);
+            document.getElementById('filter-level').addEventListener('change', applyFilters);
+            document.getElementById('filter-search').addEventListener('input', applyFilters);
+            document.getElementById('filter-task').addEventListener('change', applyFilters);
+        }
+
+        // Initialize
+        renderWbpTable();
+        renderAssertions(assertions);
+        setupFilters();
+    </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT1: CXA Strategic Initiatives Review - Assertion Viewer</title>
+    <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+    <style>
+        :root {
+            --colorNeutralBackground1: #ffffff;
+            --colorNeutralBackground2: #fafafa;
+            --colorNeutralBackground3: #f5f5f5;
+            --colorBrandBackground: #0078d4;
+            --colorBrandForeground1: #0078d4;
+            --colorNeutralForeground1: #242424;
+            --colorNeutralForeground2: #424242;
+            --colorNeutralForeground3: #616161;
+            --colorNeutralStroke1: #d1d1d1;
+            --colorPaletteGreenBackground2: #dff6dd;
+            --colorPaletteGreenForeground1: #107c10;
+            --colorPaletteYellowBackground2: #fff4ce;
+            --colorPaletteYellowForeground1: #835c00;
+            --colorPaletteRedBackground2: #fde7e9;
+            --colorPaletteRedForeground1: #c42b1c;
+            --colorPaletteBlueBackground2: #cfe4fa;
+            --colorPaletteBlueForeground1: #0078d4;
+            --shadow4: 0 2px 4px rgba(0,0,0,0.14);
+            --shadow8: 0 4px 8px rgba(0,0,0,0.14);
+            --borderRadius: 8px;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--colorNeutralBackground2);
+            color: var(--colorNeutralForeground1);
+            line-height: 1.5;
+        }
+        
+        .app-container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+        
+        .header {
+            background: var(--colorNeutralBackground1);
+            border-radius: var(--borderRadius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow4);
+        }
+        .header h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+        .header .subtitle { font-size: 14px; color: var(--colorNeutralForeground3); }
+        .header .utterance {
+            background: var(--colorNeutralBackground3);
+            padding: 16px;
+            border-radius: var(--borderRadius);
+            margin-top: 16px;
+            border-left: 4px solid var(--colorBrandBackground);
+        }
+        .header .utterance-label {
+            font-size: 12px; font-weight: 600; color: var(--colorNeutralForeground3);
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
+        }
+        .header .utterance-text { font-size: 16px; font-style: italic; }
+        
+        .stats-bar { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+        .stat-card {
+            background: var(--colorNeutralBackground1);
+            border-radius: var(--borderRadius);
+            padding: 16px 24px;
+            box-shadow: var(--shadow4);
+            flex: 1; min-width: 120px;
+        }
+        .stat-card .stat-value { font-size: 32px; font-weight: 600; color: var(--colorBrandForeground1); }
+        .stat-card .stat-label { font-size: 12px; color: var(--colorNeutralForeground3); text-transform: uppercase; }
+        
+        .filters {
+            background: var(--colorNeutralBackground1);
+            border-radius: var(--borderRadius);
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow4);
+            display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+        }
+        .filter-group { display: flex; align-items: center; gap: 8px; }
+        .filter-label { font-size: 14px; font-weight: 600; color: var(--colorNeutralForeground2); }
+        .filter-select {
+            padding: 8px 12px;
+            border: 1px solid var(--colorNeutralStroke1);
+            border-radius: 4px; font-size: 14px;
+            background: var(--colorNeutralBackground1); cursor: pointer;
+        }
+        
+        /* Two-column layout */
+        .main-content { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 1200px) { .main-content { grid-template-columns: 1fr; } }
+        
+        /* WBP Section */
+        .wbp-section {
+            background: var(--colorNeutralBackground1);
+            border-radius: var(--borderRadius);
+            padding: 24px;
+            box-shadow: var(--shadow4);
+            position: sticky; top: 24px;
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+        }
+        .wbp-section h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+        
+        .tasks-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .tasks-table th {
+            background: var(--colorNeutralBackground3);
+            padding: 10px 8px; text-align: left; font-weight: 600;
+            color: var(--colorNeutralForeground2);
+            border-bottom: 2px solid var(--colorNeutralStroke1);
+            position: sticky; top: 0;
+        }
+        .tasks-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--colorNeutralStroke1);
+        }
+        .tasks-table tr { cursor: pointer; transition: all 0.2s ease; }
+        .tasks-table tr:hover { background: var(--colorNeutralBackground2); }
+        
+        /* Task coverage colors */
+        .tasks-table tr.coverage-full {
+            background: var(--colorPaletteGreenBackground2);
+            border-left: 4px solid var(--colorPaletteGreenForeground1);
+        }
+        .tasks-table tr.coverage-partial {
+            background: var(--colorPaletteYellowBackground2);
+            border-left: 4px solid var(--colorPaletteYellowForeground1);
+        }
+        .tasks-table tr.coverage-none {
+            background: var(--colorPaletteRedBackground2);
+            border-left: 4px solid var(--colorPaletteRedForeground1);
+        }
+        .tasks-table tr.highlighted {
+            background: var(--colorPaletteBlueBackground2) !important;
+            border-left: 4px solid var(--colorBrandBackground) !important;
+            box-shadow: 0 0 0 2px var(--colorBrandBackground);
+        }
+        
+        .coverage-badge {
+            display: inline-block;
+            font-size: 10px; font-weight: 600;
+            padding: 2px 6px; border-radius: 10px;
+            margin-left: 4px;
+        }
+        .coverage-badge.full { background: var(--colorPaletteGreenForeground1); color: white; }
+        .coverage-badge.partial { background: var(--colorPaletteYellowForeground1); color: white; }
+        .coverage-badge.none { background: var(--colorPaletteRedForeground1); color: white; }
+        
+        /* Legend */
+        .legend {
+            display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+            padding: 12px; background: var(--colorNeutralBackground3); border-radius: 4px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+        .legend-color {
+            width: 16px; height: 16px; border-radius: 3px;
+        }
+        .legend-color.full { background: var(--colorPaletteGreenBackground2); border-left: 3px solid var(--colorPaletteGreenForeground1); }
+        .legend-color.partial { background: var(--colorPaletteYellowBackground2); border-left: 3px solid var(--colorPaletteYellowForeground1); }
+        .legend-color.none { background: var(--colorPaletteRedBackground2); border-left: 3px solid var(--colorPaletteRedForeground1); }
+        
+        /* Assertions Section */
+        .assertions-section { display: flex; flex-direction: column; gap: 16px; }
+        
+        .assertion-card {
+            background: var(--colorNeutralBackground1);
+            border-radius: var(--borderRadius);
+            padding: 20px;
+            box-shadow: var(--shadow4);
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        .assertion-card:hover { box-shadow: var(--shadow8); }
+        .assertion-card.level-critical { border-left-color: var(--colorPaletteRedForeground1); }
+        .assertion-card.level-expected { border-left-color: var(--colorPaletteYellowForeground1); }
+        .assertion-card.highlighted {
+            box-shadow: 0 0 0 2px var(--colorBrandBackground), var(--shadow8);
+        }
+        
+        .assertion-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+        .assertion-id {
+            font-size: 12px; font-weight: 600; color: var(--colorBrandForeground1);
+            background: var(--colorNeutralBackground3); padding: 4px 8px; border-radius: 4px;
+        }
+        .badge {
+            font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .badge-critical { background: var(--colorPaletteRedBackground2); color: var(--colorPaletteRedForeground1); }
+        .badge-expected { background: var(--colorPaletteYellowBackground2); color: var(--colorPaletteYellowForeground1); }
+        
+        .dimension-name-title {
+            font-size: 16px; font-weight: 600; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .dimension-name-title .dim-code {
+            font-size: 11px; font-weight: 600;
+            background: var(--colorBrandBackground); color: white;
+            padding: 2px 6px; border-radius: 4px;
+        }
+        .assertion-dimension { font-size: 13px; color: var(--colorNeutralForeground3); margin-bottom: 8px; }
+        
+        /* Task link */
+        .task-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--colorPaletteBlueBackground2);
+            color: var(--colorBrandForeground1);
+            padding: 6px 12px; border-radius: 4px;
+            font-size: 12px; font-weight: 500;
+            cursor: pointer; margin-bottom: 12px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .task-link:hover {
+            background: var(--colorBrandBackground);
+            color: white;
+        }
+        .task-link svg { width: 14px; height: 14px; }
+        
+        .assertion-template {
+            font-size: 13px; color: var(--colorNeutralForeground3);
+            font-family: 'Consolas', monospace;
+            background: var(--colorNeutralBackground3);
+            padding: 8px 12px; border-radius: 4px; margin-bottom: 12px;
+        }
+        .assertion-template .slot { color: var(--colorBrandForeground1); font-weight: 600; }
+        
+        .assertion-instantiated {
+            font-size: 15px; padding: 12px;
+            background: var(--colorNeutralBackground2); border-radius: 4px; margin-bottom: 12px;
+        }
+        
+        .grounding-section { border-top: 1px solid var(--colorNeutralStroke1); padding-top: 12px; }
+        .grounding-title {
+            font-size: 12px; font-weight: 600; color: var(--colorNeutralForeground3);
+            text-transform: uppercase; margin-bottom: 8px;
+        }
+        .g-slots { display: flex; flex-wrap: wrap; gap: 8px; }
+        .g-slot {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 6px 10px; border-radius: 4px; font-size: 12px;
+        }
+        .g-slot .g-dim { font-weight: 600; }
+        .g-slot .slot-type { opacity: 0.8; }
+        .g-slot .slot-value { font-weight: 500; }
+        /* G-dimension specific colors */
+        .g-slot.g2 { background: #E8F5E9; border: 1px solid #4CAF50; }
+        .g-slot.g2 .g-dim { color: #2E7D32; }
+        .g-slot.g3 { background: #E3F2FD; border: 1px solid #2196F3; }
+        .g-slot.g3 .g-dim { color: #1565C0; }
+        .g-slot.g5 { background: #FFF3E0; border: 1px solid #FF9800; }
+        .g-slot.g5 .g-dim { color: #E65100; }
+        .g-slot.g6 { background: #F3E5F5; border: 1px solid #9C27B0; }
+        .g-slot.g6 .g-dim { color: #7B1FA2; }
+        .g-slot.g7 { background: #FFEBEE; border: 1px solid #F44336; }
+        .g-slot.g7 .g-dim { color: #C62828; }
+        .g-slot.g9 { background: #E0F7FA; border: 1px solid #00BCD4; }
+        .g-slot.g9 .g-dim { color: #00838F; }
+        .g-slot.g10 { background: #FBE9E7; border: 1px solid #FF5722; }
+        .g-slot.g10 .g-dim { color: #D84315; }
+        
+        .no-results { text-align: center; padding: 48px; color: var(--colorNeutralForeground3); }
+        .footer { margin-top: 24px; text-align: center; font-size: 12px; color: var(--colorNeutralForeground3); }
+        /* G-Legend */
+        .g-legend { background: var(--colorNeutralBackground1); border-radius: var(--borderRadius); padding: 12px 16px; margin-bottom: 16px; box-shadow: var(--shadow4); }
+        .g-legend h4 { font-size: 12px; font-weight: 600; color: var(--colorNeutralForeground3); margin-bottom: 8px; text-transform: uppercase; }
+        .g-legend-items { display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px; }
+        .g-legend-item { display: flex; align-items: center; gap: 6px; }
+        .g-legend-color { width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+        .g-legend-color.g2 { background: #E8F5E9; border: 1px solid #4CAF50; color: #2E7D32; }
+        .g-legend-color.g3 { background: #E3F2FD; border: 1px solid #2196F3; color: #1565C0; }
+        .g-legend-color.g5 { background: #FFF3E0; border: 1px solid #FF9800; color: #E65100; }
+        .g-legend-color.g6 { background: #F3E5F5; border: 1px solid #9C27B0; color: #7B1FA2; }
+        .g-legend-color.g7 { background: #FFEBEE; border: 1px solid #F44336; color: #C62828; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1 id="title">Loading...</h1>
+            <div class="subtitle" id="subtitle"></div>
+            <div class="utterance">
+                <div class="utterance-label">User Utterance</div>
+                <div class="utterance-text" id="utterance"></div>
+            </div>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value" id="total-assertions">-</div>
+                <div class="stat-label">Assertions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="critical-count">-</div>
+                <div class="stat-label">Critical</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="expected-count">-</div>
+                <div class="stat-label">Expected</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="tasks-count">-</div>
+                <div class="stat-label">GT Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="coverage-pct">-</div>
+                <div class="stat-label">Coverage</div>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <span class="filter-label">Dimension:</span>
+                <select class="filter-select" id="dimension-filter">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Level:</span>
+                <select class="filter-select" id="level-filter">
+                    <option value="all">All</option>
+                    <option value="critical">Critical</option>
+                    <option value="expected">Expected</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Search:</span>
+                <input type="text" class="filter-select" id="search-input" placeholder="Search..." style="width: 180px;">
+            </div>
+        </div>
+        
+        <div class="g-legend">
+            <h4>Grounding Dimension Colors</h4>
+            <div class="g-legend-items">
+                <div class="g-legend-item"><span class="g-legend-color g2">G2</span> Entity (names)</div>
+                <div class="g-legend-item"><span class="g-legend-color g3">G3</span> Temporal (dates)</div>
+                <div class="g-legend-item"><span class="g-legend-color g5">G5</span> Title</div>
+                <div class="g-legend-item"><span class="g-legend-color g6">G6</span> Content (tasks)</div>
+                <div class="g-legend-item"><span class="g-legend-color g7">G7</span> Format</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- WBP Section (Left) -->
+            <div class="wbp-section">
+                <h2>Ground Truth Workback Plan</h2>
+                <div class="legend">
+                    <div class="legend-item"><div class="legend-color full"></div>Full coverage (S3+S5)</div>
+                    <div class="legend-item"><div class="legend-color partial"></div>Partial coverage</div>
+                    <div class="legend-item"><div class="legend-color none"></div>No coverage</div>
+                </div>
+                <table class="tasks-table">
+                    <thead>
+                        <tr><th>#</th><th>Date</th><th>Owner</th><th>Task</th><th>Cov</th></tr>
+                    </thead>
+                    <tbody id="tasks-tbody"></tbody>
+                </table>
+            </div>
+            
+            <!-- Assertions Section (Right) -->
+            <div class="assertions-section" id="assertions-grid"></div>
+        </div>
+        
+        <div class="no-results" id="no-results" style="display: none;">No assertions match your filters.</div>
+        <div class="footer">S→G→M Assertion Framework | Ground Truth Corpus Viewer v1.1</div>
+    </div>
+    
+    <script>
+        let assertionsData = null;
+        let taskCoverage = {};
+        
+        async function loadData() {
+            try {
+                const response = await fetch('./assertions.json');
+                assertionsData = await response.json();
+                computeCoverage();
+                renderPage();
+            } catch (error) {
+                console.error('Error loading assertions:', error);
+                document.getElementById('title').textContent = 'Error loading data';
+            }
+        }
+        
+        function computeCoverage() {
+            taskCoverage = {};
+            assertionsData.ground_truth_tasks.forEach((task, idx) => {
+                taskCoverage[idx] = { assertions: [], hasOwner: false, hasDate: false };
+            });
+            
+            assertionsData.assertions.forEach(assertion => {
+                const gSlots = assertion.g_slots || [];
+                gSlots.forEach(gs => {
+                    if (gs.slot_type === 'TASK' || gs.slot_type === 'CHECKPOINT') {
+                        assertionsData.ground_truth_tasks.forEach((task, idx) => {
+                            const taskText = task.milestone_activity.toLowerCase();
+                            const slotValue = gs.value.toLowerCase();
+                            if (taskText.includes(slotValue) || slotValue.includes(taskText.substring(0, 20))) {
+                                if (!taskCoverage[idx].assertions.includes(assertion.assertion_id)) {
+                                    taskCoverage[idx].assertions.push(assertion.assertion_id);
+                                }
+                                if (assertion.dimension === 'S3') taskCoverage[idx].hasOwner = true;
+                                if (assertion.dimension === 'S5') taskCoverage[idx].hasDate = true;
+                            }
+                        });
+                    }
+                    if (gs.slot_type === 'OWNER') {
+                        assertionsData.ground_truth_tasks.forEach((task, idx) => {
+                            if (task.accountable && task.accountable.toLowerCase().includes(gs.value.toLowerCase())) {
+                                if (!taskCoverage[idx].assertions.includes(assertion.assertion_id)) {
+                                    taskCoverage[idx].assertions.push(assertion.assertion_id);
+                                }
+                                taskCoverage[idx].hasOwner = true;
+                            }
+                        });
+                    }
+                    if (gs.slot_type === 'DUE_DATE') {
+                        assertionsData.ground_truth_tasks.forEach((task, idx) => {
+                            if (task.key_date && task.key_date.includes(gs.value.replace(/\//g, '/'))) {
+                                if (!taskCoverage[idx].assertions.includes(assertion.assertion_id)) {
+                                    taskCoverage[idx].assertions.push(assertion.assertion_id);
+                                }
+                                taskCoverage[idx].hasDate = true;
+                            }
+                        });
+                    }
+                });
+            });
+        }
+        
+        function renderPage() {
+            document.getElementById('title').textContent = `GT: ${assertionsData.event_name}`;
+            document.getElementById('subtitle').textContent = `Event: ${assertionsData.event_date} | Source: ${assertionsData.provider}`;
+            document.getElementById('utterance').textContent = `"${assertionsData.utterance}"`;
+            
+            const summary = assertionsData.summary;
+            document.getElementById('total-assertions').textContent = summary.total_assertions;
+            document.getElementById('critical-count').textContent = summary.by_level.critical || 0;
+            document.getElementById('expected-count').textContent = summary.by_level.expected || 0;
+            document.getElementById('tasks-count').textContent = assertionsData.ground_truth_tasks.length;
+            
+            let fullCov = 0, partialCov = 0;
+            Object.values(taskCoverage).forEach(cov => {
+                if (cov.hasOwner && cov.hasDate) fullCov++;
+                else if (cov.assertions.length > 0) partialCov++;
+            });
+            const totalTasks = assertionsData.ground_truth_tasks.length;
+            const covPct = Math.round((fullCov + partialCov * 0.5) / totalTasks * 100);
+            document.getElementById('coverage-pct').textContent = covPct + '%';
+            
+            const dimensionFilter = document.getElementById('dimension-filter');
+            Object.keys(summary.by_dimension).sort().forEach(dim => {
+                const option = document.createElement('option');
+                option.value = dim;
+                option.textContent = `${dim} (${summary.by_dimension[dim]})`;
+                dimensionFilter.appendChild(option);
+            });
+            
+            renderTasks();
+            renderAssertions();
+            
+            document.getElementById('dimension-filter').addEventListener('change', renderAssertions);
+            document.getElementById('level-filter').addEventListener('change', renderAssertions);
+            document.getElementById('search-input').addEventListener('input', renderAssertions);
+        }
+        
+        function renderTasks() {
+            const tbody = document.getElementById('tasks-tbody');
+            tbody.innerHTML = '';
+            
+            assertionsData.ground_truth_tasks.forEach((task, idx) => {
+                const cov = taskCoverage[idx];
+                let coverageClass = 'coverage-none';
+                let coverageBadge = '<span class="coverage-badge none">0</span>';
+                
+                if (cov.hasOwner && cov.hasDate) {
+                    coverageClass = 'coverage-full';
+                    coverageBadge = `<span class="coverage-badge full">${cov.assertions.length}</span>`;
+                } else if (cov.assertions.length > 0) {
+                    coverageClass = 'coverage-partial';
+                    coverageBadge = `<span class="coverage-badge partial">${cov.assertions.length}</span>`;
+                }
+                
+                const tr = document.createElement('tr');
+                tr.className = coverageClass;
+                tr.id = `task-${idx}`;
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${task.key_date}</td>
+                    <td>${task.accountable || '-'}</td>
+                    <td>${task.milestone_activity.substring(0, 50)}${task.milestone_activity.length > 50 ? '...' : ''}</td>
+                    <td>${coverageBadge}</td>
+                `;
+                tr.onclick = () => highlightAssertionsForTask(idx);
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function highlightAssertionsForTask(taskIdx) {
+            document.querySelectorAll('.tasks-table tr').forEach(tr => tr.classList.remove('highlighted'));
+            document.querySelectorAll('.assertion-card').forEach(card => card.classList.remove('highlighted'));
+            
+            document.getElementById(`task-${taskIdx}`).classList.add('highlighted');
+            
+            const cov = taskCoverage[taskIdx];
+            cov.assertions.forEach(assertionId => {
+                const card = document.getElementById(`assertion-${assertionId}`);
+                if (card) {
+                    card.classList.add('highlighted');
+                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+        }
+        
+        function highlightTaskForAssertion(assertionId) {
+            document.querySelectorAll('.tasks-table tr').forEach(tr => tr.classList.remove('highlighted'));
+            document.querySelectorAll('.assertion-card').forEach(card => card.classList.remove('highlighted'));
+            
+            Object.entries(taskCoverage).forEach(([taskIdx, cov]) => {
+                if (cov.assertions.includes(assertionId)) {
+                    const taskRow = document.getElementById(`task-${taskIdx}`);
+                    if (taskRow) {
+                        taskRow.classList.add('highlighted');
+                        taskRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }
+            });
+            
+            document.getElementById(`assertion-${assertionId}`).classList.add('highlighted');
+        }
+        
+        function getLinkedTasks(assertionId) {
+            const linkedTasks = [];
+            Object.entries(taskCoverage).forEach(([taskIdx, cov]) => {
+                if (cov.assertions.includes(assertionId)) {
+                    linkedTasks.push(parseInt(taskIdx));
+                }
+            });
+            return linkedTasks;
+        }
+        
+        function renderAssertions() {
+            const grid = document.getElementById('assertions-grid');
+            const noResults = document.getElementById('no-results');
+            
+            const dimensionFilter = document.getElementById('dimension-filter').value;
+            const levelFilter = document.getElementById('level-filter').value;
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            
+            let filtered = assertionsData.assertions.filter(a => {
+                if (dimensionFilter !== 'all' && a.dimension !== dimensionFilter) return false;
+                if (levelFilter !== 'all' && a.level !== levelFilter) return false;
+                if (searchQuery) {
+                    const searchText = `${a.instantiated} ${a.template} ${a.assertion_id} ${a.dimension_name}`.toLowerCase();
+                    if (!searchText.includes(searchQuery)) return false;
+                }
+                return true;
+            });
+            
+            grid.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            noResults.style.display = 'none';
+            
+            filtered.forEach(assertion => {
+                const card = document.createElement('div');
+                card.className = `assertion-card level-${assertion.level}`;
+                card.id = `assertion-${assertion.assertion_id}`;
+                
+                const formattedTemplate = assertion.template.replace(/\[([A-Z_]+)\]/g, '<span class="slot">[$1]</span>');
+                
+                let gSlotsHtml = '';
+                if (assertion.g_slots && assertion.g_slots.length > 0) {
+                    gSlotsHtml = assertion.g_slots.map(gs => `
+                        <span class="g-slot ${gs.g_dim.toLowerCase()}">
+                            <span class="g-dim">${gs.g_dim}</span>
+                            <span class="slot-type">${gs.slot_type}:</span>
+                            <span class="slot-value">"${gs.value}"</span>
+                        </span>
+                    `).join('');
+                }
+                
+                const linkedTasks = getLinkedTasks(assertion.assertion_id);
+                let taskLinksHtml = '';
+                if (linkedTasks.length > 0) {
+                    taskLinksHtml = `<div class="task-link" onclick="highlightTaskForAssertion('${assertion.assertion_id}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        Linked to WBP Task${linkedTasks.length > 1 ? 's' : ''}: ${linkedTasks.map(t => '#' + (t+1)).join(', ')}
+                    </div>`;
+                }
+                
+                card.innerHTML = `
+                    <div class="assertion-header">
+                        <span class="assertion-id">${assertion.assertion_id}</span>
+                        <span class="badge badge-${assertion.level}">${assertion.level}</span>
+                    </div>
+                    <div class="dimension-name-title">
+                        <span class="dim-code">${assertion.dimension}</span>
+                        ${assertion.dimension_name}
+                    </div>
+                    <div class="assertion-dimension">Linked G-dims: ${assertion.linked_g_dims?.join(', ') || 'N/A'}</div>
+                    ${taskLinksHtml}
+                    <div class="assertion-template">${formattedTemplate}</div>
+                    <div class="assertion-instantiated">${assertion.instantiated}</div>
+                    ${gSlotsHtml ? `
+                        <div class="grounding-section">
+                            <div class="grounding-title">Grounding Slots</div>
+                            <div class="g-slots">${gSlotsHtml}</div>
+                        </div>
+                    ` : ''}
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        loadData();
+    </script>
+</body>
+</html>

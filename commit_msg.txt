@@ -1,27 +1,34 @@
-[Copilot] Add G10: Relation Grounding dimension
+[Copilot] Establish S->G->M three-layer framework (GPT-5 consensus)
 
-New Features:
-- Added G10 (Relation Grounding) as new dimension for verifying relationships
-  between entities (DEPENDS_ON, BLOCKS, OWNS, PRODUCES, REQUIRES_INPUT)
-- Updated S_TO_G_MAP: S2, S3, S6, S17 now include G10
-- Added RELATION_TYPES to dimensions.py with 5 relation types
-- Updated prompts.json to v2.3 with G10 guidance in all prompts
-- Added G9/G10 to analyzer.py DIMENSION_SPEC (was missing)
+FRAMEWORK DESIGN:
+- S (Structural, S1-S20): Check IF something exists - INDEPENDENT
+- G (Grounding, G2-G10): Check if VALUE matches source - INDEPENDENT
+- M (Meta, M1): No Hallucination - DERIVED from all G results
 
-Documentation:
-- Updated WBP_Evaluation_Complete_Dimension_Reference.md with G10 section
-- Added Relation Types Reference section with formal definitions
-- Updated G Dimension Interdependencies table with G10
+KEY CHANGES:
+1. dimensions.py:
+   - G1 deprecated ('DEPRECATED - See M1')
+   - M1 added ('No Hallucination')
+   - GROUNDING_PRIORITY_ORDER: removed G1, added G10
+   - META_LAYER_ORDER: ['M1'] (new)
+   - SLOT_TYPES: removed G1 references, ENTITY -> M1
+   - Added G Assertion Independence documentation
+   - Updated docstring with Three-Layer Framework section
 
-Testing:
-- Tested analyzer with dependency assertion - G10 now being selected!
-- Result: S2 + G6 + G10 (3 assertions, 3 passed)
+2. WBP_Evaluation_Complete_Dimension_Reference.md:
+   - Added Three-Layer Framework section with layer definitions
+   - Added Key Design Principles (4 principles)
+   - Added Evaluation Workflow diagram
 
-GPT-5 Consultation (sessions 021-023):
-- Asked GPT-5 3x whether to add G10 or fold into G6
-- Unanimous recommendation: Add G10 as separate dimension
-- Reasoning: Entity grounding != Relation grounding
+3. copilot-instructions.md:
+   - Added S->G->M Three-Layer Framework lesson
+   - Added 'Python is already installed' lesson
+   - Updated scratchpad with completed tasks
 
-Key Insight: Entity grounding (G1-G9) checks individual entities exist.
-Relation grounding (G10) checks RELATIONSHIPS between entities are grounded.
-A WBP can have valid tasks (G6 passes) but wrong dependencies (G10 fails).
+DESIGN RATIONALE (from GPT-5 consultation, 3 runs):
+- S and G assertions are INDEPENDENT (directly observable)
+- Hallucination checks ABSENCE of unsupported content
+- Hallucination requires ALL G results -> DERIVED property
+- G10 is INDEPENDENT (checks if relation exists, not if args correct)
+
+GPT-5 Consensus: Move G1 to separate Meta layer as M1

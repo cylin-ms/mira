@@ -1,0 +1,583 @@
+{
+  "gt_id": "CXP-TownHall",
+  "utterance": "Create a workback plan for FY26 Q2 CXA Town Hall meeting on Dec 10, 2025.",
+  "event_date": "2025-12-10",
+  "event_name": "FY26 Q2 CXA Town Hall",
+  "source": "Internal - Non T&P",
+  "provider": "CXP org",
+  "ground_truth_tasks": [
+    {
+      "key_date": "11/25",
+      "t_minus": "T-21",
+      "accountable": "Paulina",
+      "milestone_activity": "Create deck"
+    },
+    {
+      "key_date": "11/25",
+      "t_minus": "T-21",
+      "accountable": "Karen/Kristie",
+      "milestone_activity": "Review draft agenda w/ Kristie and identify speakers"
+    },
+    {
+      "key_date": "11/25",
+      "t_minus": "T-21",
+      "accountable": "Karen",
+      "milestone_activity": "Speaker(s) confirmation finalized"
+    },
+    {
+      "key_date": "11/25",
+      "t_minus": "T-21",
+      "accountable": "Karen",
+      "milestone_activity": "Submit anonymous questionnaire to the org"
+    },
+    {
+      "key_date": "12/1",
+      "t_minus": "T-9",
+      "accountable": "Karen",
+      "milestone_activity": "Talking Points – Locked (to be shared with LT once finalized)"
+    },
+    {
+      "key_date": "12/2",
+      "t_minus": "T-8",
+      "accountable": "Kristie",
+      "milestone_activity": "Lock agenda with Andy during 1:1"
+    },
+    {
+      "key_date": "12/5",
+      "t_minus": "T-3",
+      "accountable": "Kristie/Paulina",
+      "milestone_activity": "Final content due"
+    },
+    {
+      "key_date": "12/9",
+      "t_minus": "T-1",
+      "accountable": "Paulina",
+      "milestone_activity": "Deck sweep for continuity"
+    },
+    {
+      "key_date": "12/9",
+      "t_minus": "T-1",
+      "accountable": "Diane",
+      "milestone_activity": "Accessibility Check"
+    },
+    {
+      "key_date": "12/9",
+      "t_minus": "T-1",
+      "accountable": "Karen",
+      "milestone_activity": "Create Speaker Team Chat"
+    },
+    {
+      "key_date": "12/9",
+      "t_minus": "T-1",
+      "accountable": "Karen",
+      "milestone_activity": "Teams channel"
+    },
+    {
+      "key_date": "12/10",
+      "t_minus": "T-0",
+      "accountable": "",
+      "milestone_activity": "FY26 Q2 CXA Town Hall"
+    },
+    {
+      "key_date": "12/12",
+      "t_minus": "T+2",
+      "accountable": "Paulina",
+      "milestone_activity": "Send summary email and the post-event survey"
+    },
+    {
+      "key_date": "12/12",
+      "t_minus": "T+2",
+      "accountable": "Diane/Karen",
+      "milestone_activity": "Upload the slide deck to the SharePoint site and send to Teams Channel"
+    }
+  ],
+  "assertions": [
+    {
+      "assertion_id": "GT2_S1",
+      "dimension": "S1",
+      "dimension_name": "Meeting Details",
+      "layer": "structural",
+      "level": "critical",
+      "template": "The plan should reference the meeting [MEETING_TITLE] scheduled for [MEETING_DATE].",
+      "instantiated": "The plan should reference the meeting 'FY26 Q2 CXA Town Hall' scheduled for Dec 10, 2025.",
+      "slot_types": ["MEETING_TITLE", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G5"],
+      "g_slots": [
+        {"g_dim": "G5", "slot_type": "MEETING_TITLE", "value": "FY26 Q2 CXA Town Hall"},
+        {"g_dim": "G3", "slot_type": "MEETING_DATE", "value": "Dec 10, 2025"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S2",
+      "dimension": "S2",
+      "dimension_name": "Timeline Alignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "The plan should use T-minus notation counting backward from [MEETING_DATE], with tasks ranging from [T_START] to [T_END].",
+      "instantiated": "The plan should use T-minus notation counting backward from Dec 10, 2025, with tasks ranging from T-21 to T+2.",
+      "slot_types": ["MEETING_DATE", "T_START", "T_END"],
+      "linked_g_dims": ["G3"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "MEETING_DATE", "value": "Dec 10, 2025"},
+        {"g_dim": "G3", "slot_type": "T_START", "value": "T-21"},
+        {"g_dim": "G3", "slot_type": "T_END", "value": "T+2"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_01",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Create deck' should be assigned to Paulina.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Paulina"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Create deck"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_02",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Review draft agenda and identify speakers' should be assigned to Karen/Kristie.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Karen/Kristie"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Review draft agenda w/ Kristie and identify speakers"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_03",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Speaker(s) confirmation finalized' should be assigned to Karen.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Karen"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Speaker(s) confirmation finalized"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_04",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Submit anonymous questionnaire' should be assigned to Karen.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Karen"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Submit anonymous questionnaire to the org"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_05",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Talking Points – Locked' should be assigned to Karen.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Karen"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Talking Points – Locked (to be shared with LT once finalized)"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_06",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Lock agenda with Andy' should be assigned to Kristie.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Kristie"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Lock agenda with Andy during 1:1"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_07",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Final content due' should be assigned to Kristie/Paulina.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Kristie/Paulina"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Final content due"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_08",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Deck sweep for continuity' should be assigned to Paulina.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Paulina"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Deck sweep for continuity"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_09",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Accessibility Check' should be assigned to Diane.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Diane"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Accessibility Check"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_10",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Create Speaker Team Chat' should be assigned to Karen.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Karen"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Create Speaker Team Chat"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_11",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Teams channel' should be assigned to Karen.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Karen"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Teams channel"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_12",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "expected",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Send summary email and post-event survey' should be assigned to Paulina.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Paulina"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Send summary email and the post-event survey"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S3_13",
+      "dimension": "S3",
+      "dimension_name": "Ownership Assignment",
+      "layer": "structural",
+      "level": "expected",
+      "template": "Task [TASK] should be assigned to [OWNER].",
+      "instantiated": "Task 'Upload slide deck to SharePoint' should be assigned to Diane/Karen.",
+      "slot_types": ["TASK", "OWNER"],
+      "linked_g_dims": ["G2", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Diane/Karen"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Upload the slide deck to the SharePoint site and send to Teams Channel"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_01",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Create deck' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "11/25"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-21"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Create deck"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_02",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Review draft agenda' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "11/25"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-21"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Review draft agenda"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_03",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Speaker confirmation' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "11/25"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-21"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Speaker confirmation"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_04",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Submit questionnaire' should have due date 11/25 (T-21 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "11/25"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-21"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Submit questionnaire"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_05",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Talking Points Locked' should have due date 12/1 (T-9 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/1"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-9"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Talking Points Locked"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_06",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Lock agenda' should have due date 12/2 (T-8 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/2"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-8"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Lock agenda"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_07",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Final content due' should have due date 12/5 (T-3 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/5"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-3"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Final content due"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_08",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Deck sweep' should have due date 12/9 (T-1 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/9"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-1"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Deck sweep"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_09",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Accessibility Check' should have due date 12/9 (T-1 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/9"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-1"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Accessibility Check"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_10",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "critical",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Town Hall event' should have due date 12/10 (T-0 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/10"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T-0"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "FY26 Q2 CXA Town Hall"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_11",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "expected",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Send summary email' should have due date 12/12 (T+2 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/12"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T+2"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Send summary email"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S5_12",
+      "dimension": "S5",
+      "dimension_name": "Task Dates",
+      "layer": "structural",
+      "level": "expected",
+      "template": "Task [TASK] should have due date [DUE_DATE] ([T_MINUS] relative to [MEETING_DATE]).",
+      "instantiated": "Task 'Upload slide deck' should have due date 12/12 (T+2 relative to Dec 10, 2025).",
+      "slot_types": ["TASK", "DUE_DATE", "T_MINUS", "MEETING_DATE"],
+      "linked_g_dims": ["G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/12"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T+2"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Upload slide deck"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S18_01",
+      "dimension": "S18",
+      "dimension_name": "Post-Event Actions",
+      "layer": "structural",
+      "level": "expected",
+      "template": "The plan should include post-event task [TASK] assigned to [OWNER] at [T_MINUS] ([DUE_DATE]).",
+      "instantiated": "The plan should include post-event task 'Send summary email and the post-event survey' assigned to Paulina at T+2 (12/12).",
+      "slot_types": ["TASK", "OWNER", "T_MINUS", "DUE_DATE"],
+      "linked_g_dims": ["G2", "G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Paulina"},
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/12"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T+2"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Send summary email and the post-event survey"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S18_02",
+      "dimension": "S18",
+      "dimension_name": "Post-Event Actions",
+      "layer": "structural",
+      "level": "expected",
+      "template": "The plan should include post-event task [TASK] assigned to [OWNER] at [T_MINUS] ([DUE_DATE]).",
+      "instantiated": "The plan should include post-event task 'Upload the slide deck to the SharePoint site' assigned to Diane/Karen at T+2 (12/12).",
+      "slot_types": ["TASK", "OWNER", "T_MINUS", "DUE_DATE"],
+      "linked_g_dims": ["G2", "G3", "G6"],
+      "g_slots": [
+        {"g_dim": "G2", "slot_type": "OWNER", "value": "Diane/Karen"},
+        {"g_dim": "G3", "slot_type": "DUE_DATE", "value": "12/12"},
+        {"g_dim": "G3", "slot_type": "T_MINUS", "value": "T+2"},
+        {"g_dim": "G6", "slot_type": "TASK", "value": "Upload the slide deck to the SharePoint site and send to Teams Channel"}
+      ]
+    },
+    {
+      "assertion_id": "GT2_S20",
+      "dimension": "S20",
+      "dimension_name": "Clarity & First Impression",
+      "layer": "structural",
+      "level": "expected",
+      "template": "The plan should be presented in a clear table format with columns: [COLUMNS].",
+      "instantiated": "The plan should be presented in a clear table format with columns: Key Date, Accountable, Milestone Activity, T-Minus.",
+      "slot_types": ["COLUMNS"],
+      "linked_g_dims": ["G7"],
+      "g_slots": [
+        {"g_dim": "G7", "slot_type": "COLUMNS", "value": "Key Date, Accountable, Milestone Activity, T-Minus"}
+      ]
+    }
+  ],
+  "summary": {
+    "total_assertions": 30,
+    "by_dimension": {
+      "S1": 1,
+      "S2": 1,
+      "S3": 13,
+      "S5": 12,
+      "S18": 2,
+      "S20": 1
+    },
+    "by_level": {
+      "critical": 24,
+      "expected": 6
+    },
+    "unique_owners": ["Paulina", "Karen", "Kristie", "Diane", "Karen/Kristie", "Kristie/Paulina", "Diane/Karen"],
+    "date_range": {
+      "earliest": "11/25",
+      "latest": "12/12",
+      "t_minus_range": "T-21 to T+2"
+    }
+  }
+}

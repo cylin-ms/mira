@@ -289,5 +289,5 @@ M Layer: M1 (No Hallucination - derived from all G results, computed last)
 [X] 5. Commit and push G10 changes - DONE (commit c2be918)
 [X] 6. Run full conversion on all 224 meetings - DONE (v2.3, 5,600 S+G units)
 [X] 7. Establish S→G→M three-layer framework - DONE (GPT-5 consultation, design finalized)
-[ ] 8. Commit S→G→M framework documentation updates
+[X] 8. Commit S→G→M framework documentation updates - DONE (commit ec7de15)
 [ ] 9. Repackage assertion_analyzer_v2.4.zip (with S→G→M framework)

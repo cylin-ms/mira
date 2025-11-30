@@ -1,0 +1,13 @@
+{
+  "processed_count": 2318,
+  "last_meeting_idx": 223,
+  "last_assertion_idx": -1,
+  "completed": true,
+  "completed_stages": [
+    "docs/ChinYew/sg_stages_v2.3\\stage_001.jsonl",
+    "docs/ChinYew/sg_stages_v2.3\\stage_002.jsonl",
+    "docs/ChinYew/sg_stages_v2.3\\stage_003.jsonl",
+    "docs/ChinYew/sg_stages_v2.3\\stage_004.jsonl",
+    "docs/ChinYew/sg_stages_v2.3\\stage_005.jsonl"
+  ]
+}
