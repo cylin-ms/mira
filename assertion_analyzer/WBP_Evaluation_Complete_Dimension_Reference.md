@@ -33,7 +33,7 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S1_A1 | The meeting title must be explicitly stated as [MEETING_TITLE]. | The meeting title must be explicitly stated as Q1 Marketing Strategy Review. | MEETING_TITLE | Meeting title clarity | - |
+| S1_A1 | The meeting title must be explicitly stated as [MEETING_TITLE]. | The meeting title must be explicitly stated as Q1 Marketing Strategy Review. | MEETING_TITLE | Meeting title clarity | G5 |
 | S1_A2 | The meeting date must be clearly stated as [MEETING_DATE] at [MEETING_TIME] [TIMEZONE]. | The meeting date must be clearly stated as March 15, 2025 at 10:00 AM PST. | MEETING_DATE, MEETING_TIME, TIMEZONE | Meeting date, time, and timezone specification | G3 |
 | S1_A3 | The attendee list must include all required attendees: [ATTENDEE]+. | The attendee list must include all required attendees: Alice Chen (PM), Bob Smith (Designer), Carol Davis (Engineer), David Lee (Marketing Lead). | ATTENDEE | Attendee list completeness and accuracy | G2 |
 
@@ -46,7 +46,7 @@ The examples below use this reference scenario:
 |----|----------|--------------|------------|------------|----------|
 | S2_A1 | All [TASK] entries must be scheduled using T-minus notation relative to [MEETING_DATE]. | All task entries must be scheduled using T-minus notation relative to March 15, 2025. | TASK, MEETING_DATE | T-minus scheduling notation | G3 |
 | S2_A2 | Each [TASK] must have a [DUE_DATE] that occurs before [MEETING_DATE]. | Each task such as 'finalize slides' must have a due date that occurs before March 15, 2025. | TASK, DUE_DATE, MEETING_DATE | Task deadline alignment | G3, G6 |
-| S2_A3 | Tasks must be ordered by dependency, with prerequisite [TASK] scheduled before dependent [TASK]. | Tasks must be ordered by dependency, with 'finalize slides' scheduled before 'launch campaign'. | TASK | Dependency-aware sequencing | G6 |
+| S2_A3 | Tasks must be ordered by dependency, with prerequisite [TASK] scheduled before dependent [TASK]. | Tasks must be ordered by dependency, with 'finalize slides' scheduled before 'launch campaign'. | TASK | Dependency-aware sequencing | G6, G10 |
 | S2_A4 | The timeline must include buffer/contingency time between the last [TASK] and [MEETING_DATE]. | The timeline must include buffer/contingency time between the last task and March 15, 2025. | TASK, MEETING_DATE | Buffer time inclusion | G3, G6 |
 
 ---
@@ -56,8 +56,8 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S3_A1 | Each [TASK] must have a named [OWNER] assigned. | Each task such as 'finalize slides' must have a named owner like Alice Chen assigned. | TASK, OWNER | Owner assignment presence | G2, G6 |
-| S3_A2 | If a specific [OWNER] name is unavailable, a role/skill placeholder must be provided for [TASK]. | If a specific owner name is unavailable, a role/skill placeholder like 'Designer' must be provided for 'review slides'. | OWNER, TASK | Role/skill placeholder | G2, G6 |
+| S3_A1 | Each [TASK] must have a named [OWNER] assigned. | Each task such as 'finalize slides' must have a named owner like Alice Chen assigned. | TASK, OWNER | Owner assignment presence | G2, G6, G10 |
+| S3_A2 | If a specific [OWNER] name is unavailable, a role/skill placeholder must be provided for [TASK]. | If a specific owner name is unavailable, a role/skill placeholder like 'Designer' must be provided for 'review slides'. | OWNER, TASK | Role/skill placeholder | G2, G6, G10 |
 
 ---
 
@@ -66,7 +66,7 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S4_A1 | Every planned [DELIVERABLE] must specify its expected name, format, and storage location. | Every planned deliverable like 'final presentation deck' must specify its expected name (Q1_final_deck.pptx), format (PowerPoint), and storage location (SharePoint/Marketing). | DELIVERABLE | Planned deliverable specification | G4 |
+| S4_A1 | Every planned [DELIVERABLE] must specify its expected name, format, and storage location. | Every planned deliverable like 'final presentation deck' must specify its expected name (Q1_final_deck.pptx), format (PowerPoint), and storage location (SharePoint/Marketing). | DELIVERABLE | Planned deliverable specification | G4, G10 |
 | S4_A2 | Every referenced input [ARTIFACT] must have a valid link or file reference. | Every referenced input artifact must be accessible: Q1_slides.pptx, budget_2025.xlsx, marketing_plan.docx. | ARTIFACT | Input artifact validity | G4 |
 
 ---
@@ -76,7 +76,7 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S5_A1 | Every [TASK] must have a [DUE_DATE] explicitly specified. | Every task like 'review budget' must have a due date explicitly specified. | TASK, DUE_DATE | Due date presence | G3 |
+| S5_A1 | Every [TASK] must have a [DUE_DATE] explicitly specified. | Every task like 'review budget' must have a due date explicitly specified. | TASK, DUE_DATE | Due date presence | G3, G6 |
 | S5_A2 | All [DUE_DATE] values must be before or on [MEETING_DATE]. | All due dates must be before or on March 15, 2025. | DUE_DATE, MEETING_DATE | Date consistency | G3 |
 
 ---
@@ -92,7 +92,7 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S6_A1 | Each [TASK] with prerequisites must list its dependencies on other [TASK] items. | Each task with prerequisites must list its dependencies, e.g., 'launch campaign' depends on 'finalize slides'. | TASK | Dependency declaration | G6 |
+| S6_A1 | Each [TASK] with prerequisites must list its dependencies on other [TASK] items. | Each task with prerequisites must list its dependencies, e.g., 'launch campaign' depends on 'finalize slides'. | TASK | Dependency declaration | G6, G10 |
 | S6_A2 | Each [TASK] with an identified [BLOCKER] must have a documented [MITIGATION]. | Task 'finalize slides' with blocker 'designer unavailable' must have mitigation 'use backup designer Carol'. | TASK, BLOCKER, MITIGATION | Task-level blocker mitigation | G6, G9 |
 | S6_A3 | Each plan-level [BLOCKER] affecting [GOAL] must have a documented [MITIGATION]. | Plan-level blocker 'budget approval delayed' affecting goal 'Launch AI Search Feature' must have mitigation 'request emergency approval from VP'. | BLOCKER, GOAL, MITIGATION | Plan-level blocker mitigation | G7, G9 |
 | S6_A4 | Each [MITIGATION] must have an assigned [OWNER]. | Mitigation 'use backup designer Carol' must have an assigned owner like Carol Davis. | MITIGATION, OWNER | Mitigation ownership | G2, G6 |
@@ -113,8 +113,8 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S8_A1 | [TASK] items that can run in parallel must be identified with separate [OWNER] assignments. | Parallel tasks 'finalize slides' (Alice) and 'review budget' (Bob) must have separate owners. | TASK, OWNER | Parallel task identification | G2, G6 |
-| S8_A2 | If [TASK] items are marked as parallel, they must not have dependencies on each other. | If tasks 'finalize slides' and 'review budget' are marked parallel, they must not depend on each other. | TASK | Parallel task independence (aspirational) | G6 |
+| S8_A1 | [TASK] items that can run in parallel must be identified with separate [OWNER] assignments. | Parallel tasks 'finalize slides' (Alice) and 'review budget' (Bob) must have separate owners. | TASK, OWNER | Parallel task identification | G2, G6, G10 |
+| S8_A2 | If [TASK] items are marked as parallel, they must not have dependencies on each other. | If tasks 'finalize slides' and 'review budget' are marked parallel, they must not depend on each other. | TASK | Parallel task independence (aspirational) | G6, G10 |
 
 ---
 
@@ -125,7 +125,7 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S9_A1 | Verification [TASK] items should be included to check progress of dependent [TASK] items before T-0. | Verification task 'Review slides progress' (due April 15) should check progress of 'finalize slides' before T-0 (April 30). | TASK, DATE | Checkpoint task presence (aspirational) | G3, G6 |
+| S9_A1 | Verification [TASK] items should be included to check progress of dependent [TASK] items before T-0. | Verification task 'Review slides progress' (due April 15) should check progress of 'finalize slides' before T-0 (April 30). | TASK, DATE | Checkpoint task presence (aspirational) | G3, G6, G10 |
 | S9_A2 | Each verification [TASK] must have an [OWNER] and [DUE_DATE]. | Verification task 'Review slides progress' must have owner Alice Chen and due date April 15. | TASK, OWNER, DUE_DATE | Checkpoint task specification | G2, G3 |
 
 ---
@@ -139,9 +139,9 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S10_A1 | [TASK] requiring [SKILL] must be assigned to [OWNER] with that expertise. | Task 'design UI mockups' requiring 'design expertise' must be assigned to Bob Smith (Designer). | TASK, SKILL, OWNER | Right person for the job | G2, G6 |
+| S10_A1 | [TASK] requiring [SKILL] must be assigned to [OWNER] with that expertise. | Task 'design UI mockups' requiring 'design expertise' must be assigned to Bob Smith (Designer). | TASK, SKILL, OWNER | Right person for the job | G2, G6, G10 |
 | S10_A2 | [TASK] assigned to [OWNER] must have [DUE_DATE] outside [OWNER]'s [UNAVAILABLE_PERIOD]. | Task 'finalize slides' assigned to Alice must have due date outside Alice's unavailable period (April 20-25). | TASK, OWNER, DUE_DATE, UNAVAILABLE_PERIOD | Availability respected | G2, G3 |
-| S10_A3 | If [TASK] requires [RESOURCE] (e.g., budget, equipment), a prerequisite task for [RESOURCE] approval/acquisition must exist. | If task 'hire vendor' requires 'budget approval', a prerequisite task 'get VP budget approval' must exist. | TASK, RESOURCE | Resource dependency | G4, G6 |
+| S10_A3 | If [TASK] requires [RESOURCE] (e.g., budget, equipment), a prerequisite task for [RESOURCE] approval/acquisition must exist. | If task 'hire vendor' requires 'budget approval', a prerequisite task 'get VP budget approval' must exist. | TASK, RESOURCE | Resource dependency | G4, G6, G10 |
 | S10_A4 | [OWNER] with limited capacity should not be assigned [TASK] items exceeding their available bandwidth. | Owner Carol (new hire, 50% capacity) should not be assigned tasks totaling more than 20 hours/week. | OWNER, TASK | Capacity awareness | G2 |
 
 ---
@@ -204,7 +204,7 @@ The examples below use this reference scenario:
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
 | S17_A1 | For each cross-team dependency, the external team and contact [ATTENDEE] must be identified. | Cross-team dependency on 'Legal team' must identify contact 'Carol Davis (Engineer)' as liaison. | ATTENDEE | Cross-team contact | G2 |
-| S17_A2 | For each cross-team [TASK], handoff or dependency [DATE] must be specified. | Cross-team task 'legal review' must have explicit handoff date (April 18, 2025). | TASK, DATE | Handoff date specification | G3, G6 |
+| S17_A2 | For each cross-team [TASK], handoff or dependency [DATE] must be specified. | Cross-team task 'legal review' must have explicit handoff date (April 18, 2025). | TASK, DATE | Handoff date specification | G3, G6, G10 |
 
 ---
 
@@ -217,7 +217,7 @@ The examples below use this reference scenario:
 
 | ID | Template | Instantiated | Slot Types | Sub-aspect | Linked G |
 |----|----------|--------------|------------|------------|----------|
-| S18_A1 | Post-T-0 [TASK] items (e.g., retrospective, lessons learned) must have assigned [OWNER] and [DUE_DATE]. | Post-T-0 task 'conduct retrospective' must have assigned owner Alice Chen and due date May 7, 2025 (after T-0 April 30). | TASK, OWNER, DUE_DATE | Post-T-0 task specification (aspirational) | G2, G3 |
+| S18_A1 | Post-T-0 [TASK] items (e.g., retrospective, lessons learned) must have assigned [OWNER] and [DUE_DATE]. | Post-T-0 task 'conduct retrospective' must have assigned owner Alice Chen and due date May 7, 2025 (after T-0 April 30). | TASK, OWNER, DUE_DATE | Post-T-0 task specification (aspirational) | G2, G3, G6, G10 |
 | S18_A2 | Post-T-0 [TASK] items should be traceable to project closure best practices. | Post-T-0 task 'document lessons learned' should be traceable to project closure activities. | TASK | Post-T-0 traceability (aspirational) | G6 |
 
 ---
@@ -524,7 +524,7 @@ This linkage ensures both structural completeness AND factual accuracy are verif
 
 | Slot Type | Description | Example Values | Grounding | G Dim |
 |-----------|-------------|----------------|-----------|-------|
-| [MEETING_TITLE] | Title of the meeting | Q1 Marketing Strategy Review | GROUNDED | G7 |
+| [MEETING_TITLE] | Title of the meeting | Q1 Marketing Strategy Review | GROUNDED | G5 |
 | [MEETING_DATE] | Date of the meeting | March 15, 2025 | GROUNDED | G3, G7 |
 | [MEETING_TIME] | Time of the meeting | 10:00 AM | GROUNDED | G3 |
 | [TIMEZONE] | Timezone for the meeting | PST, EST, UTC | GROUNDED | G3 |
