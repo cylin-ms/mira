@@ -3,7 +3,7 @@ Dimension definitions for the Mira 2.0 WBP framework.
 
 29 Dimensions:
 - Structural (S1-S20): Verify plan structure, completeness, and presentation
-- Grounding (G1-G9): Verify factual accuracy against source data
+- Grounding (G1-G10): Verify factual accuracy against source data (G1-G6 entity, G7-G9 semantic, G10 relation)
 
 Dimension Status Classifications:
 - REQUIRED: Core structural elements, penalized if missing
@@ -75,11 +75,11 @@ The G definitions serve as a REFERENCE LIBRARY that S assertions link to.
 
 S_TO_G_MAP = {
     "S1": ["G2", "G3", "G5"],      # Meeting Details → Attendee, Date/Time, Topic (REQUIRED)
-    "S2": ["G3", "G6"],             # Timeline → Date/Time, Action Items (REQUIRED)
-    "S3": ["G2", "G6"],             # Ownership → Attendee, Action Items (REQUIRED)
+    "S2": ["G3", "G6", "G10"],     # Timeline → Date/Time, Action Items, Relations (REQUIRED) - G10 for dependency ordering
+    "S3": ["G2", "G6", "G10"],     # Ownership → Attendee, Action Items, Relations (REQUIRED) - G10 for OWNS relation
     "S4": ["G4", "G5"],             # Deliverables → Artifact, Topic (REQUIRED)
     "S5": ["G3"],                   # Task Dates → Date/Time (REQUIRED)
-    "S6": ["G2", "G6", "G7", "G9"], # Dependencies & Blockers → Attendee, Action Items, Context, Consistency (REQUIRED+ASPIRATIONAL)
+    "S6": ["G2", "G6", "G7", "G9", "G10"], # Dependencies & Blockers → Attendee, Action Items, Context, Consistency, Relations (REQUIRED+ASPIRATIONAL) - G10 for DEPENDS_ON, BLOCKS
     "S7": [],                        # Meeting Outcomes → N/A (not applicable to WBP)
     "S8": ["G2", "G6"],             # Parallel Workstreams → Attendee, Action Items (ASPIRATIONAL)
     "S9": ["G2", "G3", "G6"],       # Checkpoints → Attendee, Date/Time, Action Items (ASPIRATIONAL)
@@ -90,7 +90,7 @@ S_TO_G_MAP = {
     "S14": [],                       # Feedback Integration → N/A (operational)
     "S15": [],                       # Progress Tracking → N/A (operational)
     "S16": ["G5", "G6", "G9"],      # Assumptions → Topic, Action Items, Consistency (ASPIRATIONAL)
-    "S17": ["G2", "G3", "G6"],      # Cross-team Coordination → Attendee, Date/Time, Action Items (CONDITIONAL)
+    "S17": ["G2", "G3", "G6", "G10"], # Cross-team Coordination → Attendee, Date/Time, Action Items, Relations (CONDITIONAL) - G10 for cross-team dependencies
     "S18": ["G2", "G3", "G6"],      # Post-Event Actions → Attendee, Date/Time, Action Items (ASPIRATIONAL)
     "S19": ["G2", "G3", "G6", "G9"],# Open Questions → Attendee, Date/Time, Action Items, Consistency (ASPIRATIONAL)
     "S20": ["G2", "G3", "G5", "G7"],# Clarity → Attendee, Date/Time, Topic, Context (REQUIRED)
@@ -169,6 +169,7 @@ G_RATIONALE_FOR_S = {
     ("S17", "G2"): "Cross-team contacts must be actual attendees or verified stakeholders",
     ("S17", "G3"): "Cross-team handoff dates must be consistent with timeline",
     ("S17", "G6"): "Cross-team tasks must be traceable to discussed action items",
+    ("S17", "G10"): "Cross-team dependency relations must be grounded in scenario discussions",
     
     # S18: Post-Event Actions (ASPIRATIONAL)
     ("S18", "G2"): "Post-event task owners must be actual attendees",
@@ -186,6 +187,22 @@ G_RATIONALE_FOR_S = {
     ("S20", "G3"): "Date formats must be consistent and valid",
     ("S20", "G5"): "Goal statement must align with meeting topics",
     ("S20", "G7"): "Title and context must preserve original scenario meaning",
+    
+    # ═══════════════════════════════════════════════════════════════════════════════
+    # G10: Relation Grounding - rationales for each S dimension that uses G10
+    # ═══════════════════════════════════════════════════════════════════════════════
+    # G10 verifies that RELATIONSHIPS between entities are grounded in the scenario,
+    # not just that the entities themselves exist. Relation types:
+    #   DEPENDS_ON(TaskA, TaskB): TaskA depends on TaskB (prerequisite)
+    #   BLOCKS(Blocker, Task): Blocker prevents Task from proceeding
+    #   OWNS(Attendee, Task): Person is responsible for Task
+    #   PRODUCES(Task, Deliverable): Task produces Deliverable
+    #   REQUIRES_INPUT(Task, Artifact): Task needs Artifact as input
+    
+    ("S2", "G10"): "Dependency ordering (prerequisite before dependent) must be grounded in scenario-stated or logically-derived DEPENDS_ON relations",
+    ("S3", "G10"): "Ownership assignments must be grounded in scenario-stated or role-derived OWNS relations",
+    ("S6", "G10"): "Dependencies and blockers must be grounded in scenario-stated DEPENDS_ON and BLOCKS relations",
+    ("S17", "G10"): "Cross-team dependencies must be grounded in scenario-stated DEPENDS_ON relations across teams",
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -214,7 +231,7 @@ DIMENSION_NAMES = {
     "S18": "Post-Event Actions",                  # ASPIRATIONAL
     "S19": "Open Questions & Decision Points",   # ASPIRATIONAL (renamed from Caveat)
     "S20": "Clarity & First Impression",          # REQUIRED
-    # Grounding (G1-G9)
+    # Grounding (G1-G10)
     "G1": "Hallucination Check",
     "G2": "Attendee Grounding",
     "G3": "Date/Time Grounding",
@@ -223,7 +240,8 @@ DIMENSION_NAMES = {
     "G6": "Action Item Grounding",
     "G7": "Context Preservation",
     "G8": "Instruction Adherence",
-    "G9": "Planner-Generated Consistency",        # NEW: checks assumptions, blockers, mitigations, open questions
+    "G9": "Planner-Generated Consistency",        # checks assumptions, blockers, mitigations, open questions
+    "G10": "Relation Grounding",                  # NEW: verifies relationships between entities (DEPENDS_ON, OWNS, etc.)
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -270,6 +288,95 @@ SLOT_TYPES = {
     "HEADER_ROW": "Table column headers (Task, Owner, Deadline, Status)",                # N/A
     "MEETING_TIME": "Time of the meeting",                                               # GROUNDED → G3
     "TIMEZONE": "Timezone for the meeting",                                              # GROUNDED → G3
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RELATION TYPES (for dependency/prerequisite grounding)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Relations are binary predicates between entities. They must be grounded from
+# the scenario - either explicitly stated or logically derivable.
+#
+# Format: RELATION(entity1, entity2) = True if the relation holds
+#
+# Grounding Types for Relations:
+#   EXPLICIT: Directly stated in scenario (e.g., "Alice needs the slides before she can present")
+#   DERIVED: Logically implied by scenario context (e.g., "review" implies reading before feedback)
+#   TEMPORAL: Implied by time constraints (e.g., T-3 task must precede T-1 task)
+
+RELATION_TYPES = {
+    # Dependency Relations (GROUNDED or DERIVED)
+    "DEPENDS_ON": {
+        "description": "Task A depends on Task B (B is prerequisite for A)",
+        "signature": "(TASK, TASK)",
+        "grounding": "EXPLICIT or DERIVED",
+        "examples": [
+            "DEPENDS_ON('launch campaign', 'finalize slides') - campaign needs slides",
+            "DEPENDS_ON('QA testing', 'development complete') - can't test unbuilt code",
+            "DEPENDS_ON('present demo', 'prepare demo') - can't present unprepared demo",
+        ],
+        "detection_signals": [
+            "Explicit: 'X depends on Y', 'X requires Y', 'X needs Y first', 'X blocked by Y'",
+            "Derived: 'X after Y', 'Y before X', 'once Y is done, X can start'",
+            "Temporal: Task X scheduled after Task Y with logical connection",
+        ],
+        "linked_g": ["G6"],  # Action Item Grounding verifies the tasks exist
+    },
+    "BLOCKS": {
+        "description": "Blocker B prevents Task T from proceeding",
+        "signature": "(BLOCKER, TASK)",
+        "grounding": "EXPLICIT or PLANNER-GEN",
+        "examples": [
+            "BLOCKS('designer unavailable', 'create mockups') - no designer, no mockups",
+            "BLOCKS('budget not approved', 'hire vendor') - need budget to hire",
+        ],
+        "detection_signals": [
+            "Explicit: 'X is blocking Y', 'can't do Y until X resolved'",
+            "Planner-Gen: Reasonable blocker inferred from task requirements",
+        ],
+        "linked_g": ["G6", "G9"],  # G6 verifies task, G9 checks blocker consistency
+    },
+    "OWNS": {
+        "description": "Person P is responsible for Task T",
+        "signature": "(ATTENDEE, TASK)",
+        "grounding": "EXPLICIT or DERIVED",
+        "examples": [
+            "OWNS('Alice Chen', 'finalize slides') - Alice assigned to slides",
+            "OWNS('Bob Smith', 'design review') - Bob doing design work",
+        ],
+        "detection_signals": [
+            "Explicit: 'Alice will do X', 'X assigned to Alice', 'Alice owns X'",
+            "Derived: Role implies ownership (designer owns design tasks)",
+        ],
+        "linked_g": ["G2", "G6"],  # G2 verifies attendee, G6 verifies task
+    },
+    "PRODUCES": {
+        "description": "Task T produces Deliverable D",
+        "signature": "(TASK, DELIVERABLE)",
+        "grounding": "EXPLICIT or DERIVED",
+        "examples": [
+            "PRODUCES('finalize slides', 'Q1_slides.pptx') - task creates artifact",
+            "PRODUCES('write report', 'status_report.docx') - writing produces doc",
+        ],
+        "detection_signals": [
+            "Explicit: 'Task X will produce Y', 'output of X is Y'",
+            "Derived: Task name implies output (e.g., 'create slides' → slides)",
+        ],
+        "linked_g": ["G4", "G6"],  # G4 verifies artifact, G6 verifies task
+    },
+    "REQUIRES_INPUT": {
+        "description": "Task T requires Artifact A as input",
+        "signature": "(TASK, ARTIFACT)",
+        "grounding": "EXPLICIT or DERIVED",
+        "examples": [
+            "REQUIRES_INPUT('review budget', 'budget_2025.xlsx') - need file to review",
+            "REQUIRES_INPUT('present slides', 'Q1_slides.pptx') - need slides to present",
+        ],
+        "detection_signals": [
+            "Explicit: 'Task X needs Y', 'X requires access to Y'",
+            "Derived: Task implies input (e.g., 'review X' requires X)",
+        ],
+        "linked_g": ["G4", "G6"],  # G4 verifies artifact, G6 verifies task
+    },
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════

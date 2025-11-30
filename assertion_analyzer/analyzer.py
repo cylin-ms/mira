@@ -112,6 +112,10 @@ DIMENSION_SPEC = {
            "template": "Response should preserve key context from [USER_QUERY] and [CONVERSATION_HISTORY]"},
     "G8": {"name": "Instruction Adherence", "layer": "grounding", "weight": 3,
            "template": "Response should follow [USER_INSTRUCTIONS] and [SPECIFIED_CONSTRAINTS]"},
+    "G9": {"name": "Planner-Generated Consistency", "layer": "grounding", "weight": 3,
+           "template": "Planner-generated content ([ASSUMPTION], [BLOCKER], [MITIGATION], [OPEN_QUESTION]) should not contradict [SCENARIO_FACTS]"},
+    "G10": {"name": "Relation Grounding", "layer": "grounding", "weight": 3,
+            "template": "Relations (DEPENDS_ON, OWNS, BLOCKS, PRODUCES, REQUIRES_INPUT) should be grounded in [SCENARIO_STATED_DEPENDENCIES]"},
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -120,7 +124,7 @@ DIMENSION_SPEC = {
 
 DEFAULT_SYSTEM_PROMPT = '''You are an expert at classifying assertions according to the Mira 2.0 WBP (Workback Plan) framework.
 
-The framework has 28 dimensions:
+The framework has 30 dimensions:
 
 STRUCTURAL (S1-S20) - Verify plan structure and completeness:
 - S1: Meeting Details (forward-looking, actionable)
@@ -143,7 +147,7 @@ STRUCTURAL (S1-S20) - Verify plan structure and completeness:
 - S18: Post-Event Actions (with owners and deadlines)
 - S19: Caveat & Clarification (open questions, decision points)
 
-GROUNDING (G1-G8) - Verify factual accuracy against source data:
+GROUNDING (G1-G10) - Verify factual accuracy against source data:
 - G1: Hallucination Check
 - G2: Attendee Grounding
 - G3: Date/Time Grounding
@@ -152,6 +156,8 @@ GROUNDING (G1-G8) - Verify factual accuracy against source data:
 - G6: Action Item Grounding
 - G7: Context Preservation
 - G8: Instruction Adherence
+- G9: Planner-Generated Consistency
+- G10: Relation Grounding (DEPENDS_ON, OWNS, BLOCKS, PRODUCES, REQUIRES_INPUT)
 
 Classification guidelines:
 - Choose the MOST SPECIFIC dimension that fits

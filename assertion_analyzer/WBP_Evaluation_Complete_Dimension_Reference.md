@@ -269,11 +269,16 @@ The examples below use this reference scenario:
 
 ---
 
-## Grounding Dimensions (G1-G9)
+## Grounding Dimensions (G1-G10)
 
 > **Grounding Design Principle**: Grounding prevents HALLUCINATION (inventing false facts about the scenario). However, planners adding reasonable blockers, assumptions, or mitigations is GOOD PLANNING, not hallucination. We distinguish:
 > - **Hallucination (BAD)**: Inventing attendees, dates, artifacts not in scenario
 > - **Good Planning (GOOD)**: Identifying reasonable blockers, assumptions, mitigations that don't contradict scenario
+>
+> **Grounding Categories**:
+> - **G1-G6**: Entity Grounding (individual entities exist in scenario)
+> - **G7-G9**: Semantic Grounding (context, instructions, consistency)
+> - **G10**: Relation Grounding (relationships between entities are grounded)
 >
 > Slot types are classified as:
 > - **GROUNDED**: Must come from scenario (hard requirement)
@@ -406,6 +411,36 @@ The examples below use this reference scenario:
 
 ---
 
+### G10: Relation Grounding (Weight: 2) - NEW
+
+> **Design Note - Entity vs. Relation Grounding**: G1-G6 check **entity grounding** (do individual entities like tasks, people, dates exist in the scenario?). G10 checks **relation grounding** (are the RELATIONSHIPS between entities grounded in the scenario?). This is a distinct semantic layer: both TaskA and TaskB may exist (G6 passes), but the relationship DEPENDS_ON(TaskA, TaskB) may be fabricated (G10 fails). Relations can be EXPLICIT (directly stated), DERIVED (logically implied), or TEMPORAL (implied by scheduling).
+
+**Definition**: Verify that relationships between entities in the WBP are consistent with and grounded in the source scenario.
+**Verification**: Check that stated dependencies, ownership, input/output flows match scenario evidence.
+**Relation Types**: DEPENDS_ON, BLOCKS, OWNS, PRODUCES, REQUIRES_INPUT
+
+| ID | Template | Instantiated | Relation Type | Sub-aspect |
+|----|----------|--------------|---------------|------------|
+| G10_A1 | If WBP states DEPENDS_ON([TASK_A], [TASK_B]), the dependency must be EXPLICIT, DERIVED, or TEMPORAL from scenario. | If WBP states 'launch campaign' depends on 'finalize slides', this must be explicit ("can't launch without slides"), derived (campaign needs slides as input), or temporal (slides scheduled first with logical connection). | DEPENDS_ON | Dependency grounding |
+| G10_A2 | If scenario states DEPENDS_ON([TASK_A], [TASK_B]), WBP must schedule [TASK_B] before [TASK_A]. | If scenario states 'QA testing depends on development complete', WBP must schedule 'development complete' before 'QA testing'. | DEPENDS_ON | Dependency ordering |
+| G10_A3 | No fabricated DEPENDS_ON relations: if WBP claims dependency not in scenario, G10 fails. | If WBP claims 'budget approval' depends on 'design review' but scenario never mentions this, G10 fails. | DEPENDS_ON | No fabricated dependencies |
+| G10_A4 | If WBP states OWNS([ATTENDEE], [TASK]), the ownership must be EXPLICIT or DERIVED from scenario. | If WBP states 'Alice Chen owns finalize slides', this must be explicit ("Alice will finalize slides") or derived (PM typically owns deliverable tasks). | OWNS | Ownership grounding |
+| G10_A5 | If WBP states PRODUCES([TASK], [DELIVERABLE]), the production relationship must be grounded. | If WBP states 'finalize slides' produces 'Q1_slides.pptx', this must be evident from scenario discussion. | PRODUCES | Production grounding |
+| G10_A6 | If WBP states REQUIRES_INPUT([TASK], [ARTIFACT]), the input requirement must be grounded. | If WBP states 'review budget' requires 'budget_2025.xlsx', this must be evident from scenario. | REQUIRES_INPUT | Input requirement grounding |
+| G10_A7 | If WBP states BLOCKS([BLOCKER], [TASK]), the blocking relationship must be explicit or planner-generated consistent with G9. | If WBP states 'designer unavailable' blocks 'create mockups', this must be scenario-stated or consistent with scenario (G9 checks consistency). | BLOCKS | Blocker relation grounding |
+
+**Detection Signals for Relation Grounding**:
+
+| Relation | EXPLICIT Signals | DERIVED Signals | TEMPORAL Signals |
+|----------|------------------|-----------------|------------------|
+| DEPENDS_ON | "X depends on Y", "X requires Y", "X needs Y first" | "X after Y", "once Y is done", input-output chain | Task X scheduled after Y with logical connection |
+| OWNS | "Alice will do X", "X assigned to Alice" | Role implies ownership (designer → design tasks) | - |
+| PRODUCES | "Task X will produce Y", "output of X is Y" | Task name implies output (create slides → slides) | - |
+| REQUIRES_INPUT | "Task X needs Y", "X requires access to Y" | Task implies input (review X → needs X) | - |
+| BLOCKS | "X is blocking Y", "can't do Y until X resolved" | Task requirements imply blocker | - |
+
+---
+
 ## Key Insight: Artifact Verification Timeline
 
 In a Work-Back Plan (WBP), artifacts have different verification timelines based on when they exist:
@@ -440,18 +475,23 @@ In a Work-Back Plan (WBP), artifacts have different verification timelines based
 The G (Grounding) dimensions work together with clear separation of concerns:
 
 ```
-+------------------+----------------------------------------+-----------------------------+
-| G Dimension      | What It Checks                         | Depends On                  |
-+------------------+----------------------------------------+-----------------------------+
-| G2 (Entity)      | Names exist in scenario                | -                           |
-| G3 (Temporal)    | Dates are valid, due dates < T-0       | -                           |
-| G4 (Artifact)    | Files exist or have specifications     | G3 (for task due dates)     |
-| G5 (Topic)       | Topics match scenario                  | -                           |
-| G6 (Logical)     | Relationships are coherent             | G2, G3, G4 (entities exist) |
-| G7 (Context)     | Original context preserved             | G2, G4, G5                  |
-| G8 (Instruction) | Instructions followed                  | G2, G4, G6                  |
-+------------------+----------------------------------------+-----------------------------+
++-------------------+----------------------------------------+-----------------------------+
+| G Dimension       | What It Checks                         | Depends On                  |
++-------------------+----------------------------------------+-----------------------------+
+| G1-G6 (Entity)    | Individual entities exist in scenario  | -                           |
+| G2 (Attendee)     | Names exist in scenario                | -                           |
+| G3 (Temporal)     | Dates are valid, due dates < T-0       | -                           |
+| G4 (Artifact)     | Files exist or have specifications     | G3 (for task due dates)     |
+| G5 (Topic)        | Topics match scenario                  | -                           |
+| G6 (Action Item)  | Tasks traceable to action items        | -                           |
+| G7 (Context)      | Original context preserved             | G2, G4, G5                  |
+| G8 (Instruction)  | Instructions followed                  | G2, G4, G6                  |
+| G9 (Consistency)  | Planner content doesn't contradict     | -                           |
+| G10 (Relation)    | RELATIONSHIPS between entities ground  | G2, G3, G4, G6 (entities)   |
++-------------------+----------------------------------------+-----------------------------+
 ```
+
+**Key Insight**: G10 depends on entity grounding (G2, G6) because you can only verify a relationship if the entities in the relationship exist first. For example, to verify DEPENDS_ON(TaskA, TaskB), both TaskA and TaskB must first pass G6.
 
 ### Example: Verifying a Task-Deliverable Relationship
 
@@ -518,3 +558,94 @@ This linkage ensures both structural completeness AND factual accuracy are verif
 - **CONDITIONAL**: Only grounded if scenario provides the information
 - **PLANNER-GEN**: Planner can create reasonable values (checked by G9 for consistency, not grounded)
 - **N/A**: Structural element, no grounding needed
+
+---
+
+## Relation Types Reference
+
+> **Design Note - Entity vs. Relation Grounding**: Our original framework only defined **entity slot types** (TASK, OWNER, DATE, etc.) which capture individual values. However, assertions like "prerequisite tasks must be scheduled before dependent tasks" require **relation grounding** - verifying that the *relationship between entities* is grounded in the scenario. This section introduces **Relation Types** as binary predicates between entities. Relations can be EXPLICIT (directly stated), DERIVED (logically implied), or TEMPORAL (implied by scheduling). This distinction is crucial: an entity like "finalize slides" may be grounded, but the relation DEPENDS_ON('launch campaign', 'finalize slides') is a separate grounding check.
+
+Relations are **binary predicates** between entities that must be grounded from the scenario. Unlike slot types (which are entity values), relation types capture **dependencies and connections** between entities.
+
+### DEPENDS_ON (Task, Task)
+**Description**: Task A depends on Task B (B is prerequisite for A)
+
+| Grounding | Detection Signals | Examples |
+|-----------|-------------------|----------|
+| EXPLICIT | "X depends on Y", "X requires Y", "X needs Y first", "X blocked by Y" | DEPENDS_ON('launch campaign', 'finalize slides') |
+| DERIVED | "X after Y", "Y before X", "once Y is done, X can start" | DEPENDS_ON('QA testing', 'development complete') |
+| TEMPORAL | Task X scheduled after Task Y with logical connection | DEPENDS_ON('present demo', 'prepare demo') |
+
+**Linked G**: G6 (Action Item Grounding) - verifies both tasks exist in scenario
+
+### BLOCKS (Blocker, Task)
+**Description**: Blocker B prevents Task T from proceeding
+
+| Grounding | Detection Signals | Examples |
+|-----------|-------------------|----------|
+| EXPLICIT | "X is blocking Y", "can't do Y until X resolved" | BLOCKS('designer unavailable', 'create mockups') |
+| PLANNER-GEN | Reasonable blocker inferred from task requirements | BLOCKS('budget not approved', 'hire vendor') |
+
+**Linked G**: G6 (verifies task), G9 (checks blocker consistency)
+
+### OWNS (Attendee, Task)
+**Description**: Person P is responsible for Task T
+
+| Grounding | Detection Signals | Examples |
+|-----------|-------------------|----------|
+| EXPLICIT | "Alice will do X", "X assigned to Alice", "Alice owns X" | OWNS('Alice Chen', 'finalize slides') |
+| DERIVED | Role implies ownership (designer owns design tasks) | OWNS('Bob Smith', 'design review') |
+
+**Linked G**: G2 (verifies attendee), G6 (verifies task)
+
+### PRODUCES (Task, Deliverable)
+**Description**: Task T produces Deliverable D
+
+| Grounding | Detection Signals | Examples |
+|-----------|-------------------|----------|
+| EXPLICIT | "Task X will produce Y", "output of X is Y" | PRODUCES('finalize slides', 'Q1_slides.pptx') |
+| DERIVED | Task name implies output (e.g., 'create slides' → slides) | PRODUCES('write report', 'status_report.docx') |
+
+**Linked G**: G4 (verifies artifact), G6 (verifies task)
+
+### REQUIRES_INPUT (Task, Artifact)
+**Description**: Task T requires Artifact A as input
+
+| Grounding | Detection Signals | Examples |
+|-----------|-------------------|----------|
+| EXPLICIT | "Task X needs Y", "X requires access to Y" | REQUIRES_INPUT('review budget', 'budget_2025.xlsx') |
+| DERIVED | Task implies input (e.g., 'review X' requires X) | REQUIRES_INPUT('present slides', 'Q1_slides.pptx') |
+
+**Linked G**: G4 (verifies artifact), G6 (verifies task)
+
+---
+
+### What is a Prerequisite?
+
+A **prerequisite** (or dependency) is defined by the **DEPENDS_ON** relation:
+
+```
+DEPENDS_ON(Task_A, Task_B) = True
+```
+
+Means: **Task_B is a prerequisite for Task_A** (Task_A depends on Task_B)
+
+**How to detect prerequisites from scenario:**
+
+1. **Explicit statements**: "Before we can X, we need to Y" → DEPENDS_ON(X, Y)
+2. **Logical ordering**: Review → Approve → Execute → Report
+3. **Input-output chains**: If Task A PRODUCES artifact Z, and Task B REQUIRES_INPUT Z, then DEPENDS_ON(B, A)
+4. **Temporal constraints**: T-5 task referencing output of T-10 task
+5. **Blocker relationships**: If BLOCKS(B, T), and Task T2 resolves B, then DEPENDS_ON(T, T2)
+
+**Example prerequisite chain from scenario:**
+```
+Scenario: "Alice needs to finalize the slides (T-5), Bob will review them (T-3), 
+           then David can launch the campaign (T-1)"
+
+Relations extracted:
+  DEPENDS_ON('review slides', 'finalize slides')     -- Bob can't review unfinished slides
+  DEPENDS_ON('launch campaign', 'review slides')     -- Can't launch without review
+  PRODUCES('finalize slides', 'Q1_slides.pptx')      -- Slides task produces artifact
+  REQUIRES_INPUT('review slides', 'Q1_slides.pptx')  -- Review needs slides as input
+```

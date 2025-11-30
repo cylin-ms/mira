@@ -237,5 +237,14 @@ result = response.json()["choices"][0]["message"]["content"]
 [X] 1. Update convert_kening_assertions_v2.py to use decomposition prompt - DONE
 [X] 2. Add staged processing with token refresh - DONE
 [X] 3. Add sub_category for dimension specialization - DONE
-[ ] 4. Run full conversion on all 224 meetings with --stage-size 50
-[ ] 5. Validate output format and quality
+[X] 4. Added G10 (Relation Grounding) dimension - DONE
+    - Added RELATION_TYPES to dimensions.py
+    - Added G10 to DIMENSION_NAMES, S_TO_G_MAP, G_RATIONALE_FOR_S
+    - Updated WBP_Evaluation_Complete_Dimension_Reference.md with G10 section
+    - Updated prompts.json to v2.3 with G10 guidance
+    - Added G9/G10 to analyzer.py DIMENSION_SPEC
+    - Tested: G10 now being selected for dependency assertions!
+[ ] 5. Run full conversion on all 224 meetings with --stage-size 50
+[ ] 6. Validate output format and quality
+[ ] 7. Commit and push G10 changes
+[ ] 8. Repackage assertion_analyzer_v2.3.zip

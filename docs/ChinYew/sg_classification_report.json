@@ -1,43 +1,54 @@
 {
-  "timestamp": "2025-11-30T05:33:59.354150",
+  "timestamp": "2025-11-30T08:43:46.544556",
   "input_file": "docs/ChinYew/Assertions_genv2_for_LOD1126part1.jsonl",
   "output_file": "docs/ChinYew/assertions_sg_classified.jsonl",
-  "meetings_processed": 1,
-  "num_stages": 1,
+  "meetings_processed": 223,
+  "num_stages": 5,
   "stage_files": [
-    "docs/ChinYew/sg_stages\\stage_001.jsonl"
+    "docs/ChinYew/sg_stages\\stage_001.jsonl",
+    "docs/ChinYew/sg_stages\\stage_002.jsonl",
+    "docs/ChinYew/sg_stages\\stage_003.jsonl",
+    "docs/ChinYew/sg_stages\\stage_004.jsonl",
+    "docs/ChinYew/sg_stages\\stage_005.jsonl",
+    "docs/ChinYew/sg_stages\\stage_006.jsonl"
   ],
   "statistics": {
-    "total_input_assertions": 11,
-    "total_sg_units": 21,
-    "s_count": 20,
-    "g_count": 31,
-    "unknown": 1,
+    "total_input_assertions": 2307,
+    "total_sg_units": 5238,
+    "s_count": 5001,
+    "g_count": 7313,
+    "unknown": 237,
     "by_s_dimension": {
-      "S1": 1,
-      "S5": 5,
-      "S2": 2,
-      "S8": 5,
-      "S3": 1,
-      "S16": 1,
-      "S19": 2,
-      "S9": 1,
-      "S10": 1,
-      "S4": 1
+      "S5": 1153,
+      "S2": 205,
+      "S4": 201,
+      "S8": 1302,
+      "S3": 517,
+      "S17": 336,
+      "S16": 465,
+      "S19": 262,
+      "S10": 165,
+      "S6": 105,
+      "S1": 184,
+      "S18": 41,
+      "S9": 58,
+      "S20": 7
     },
     "by_g_dimension": {
-      "G5": 4,
-      "G3": 7,
-      "G8": 3,
-      "G6": 11,
-      "G2": 2,
-      "G9": 1,
-      "G4": 3
+      "G3": 1373,
+      "G5": 799,
+      "G2": 812,
+      "G7": 102,
+      "G6": 2608,
+      "G8": 579,
+      "G9": 442,
+      "G4": 596,
+      "G1": 2
     },
     "by_level": {
-      "critical": 8,
-      "expected": 10,
-      "aspirational": 3
+      "critical": 2928,
+      "expected": 1903,
+      "aspirational": 407
     }
   },
   "dry_run": false

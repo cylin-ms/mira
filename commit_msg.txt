@@ -1,22 +1,27 @@
-[Copilot] assertion_analyzer v2.2 - Full pipeline tested and verified
+[Copilot] Add G10: Relation Grounding dimension
 
-Changes:
-- Added g_selection_prompt to prompts.json (was missing)
-- Updated prompts.json to v2.2 with all 5 pipeline prompts
-- Added Appendix A: Full Pipeline Process to README.md
-- Updated test_compound_decomposition.py for v4.0 format (s_template, s_literal, sub_category)
-- Added test_full_pipeline.py for full 5-step pipeline testing
-- Added sub_category field to convert_kening_assertions_v2.py output
-- Cleaned up examples/ directory (removed obsolete outputs)
-- Added fresh batch_test_output/ with 5/5 passing tests
+New Features:
+- Added G10 (Relation Grounding) as new dimension for verifying relationships
+  between entities (DEPENDS_ON, BLOCKS, OWNS, PRODUCES, REQUIRES_INPUT)
+- Updated S_TO_G_MAP: S2, S3, S6, S17 now include G10
+- Added RELATION_TYPES to dimensions.py with 5 relation types
+- Updated prompts.json to v2.3 with G10 guidance in all prompts
+- Added G9/G10 to analyzer.py DIMENSION_SPEC (was missing)
 
-Full Pipeline (5 steps, 5 GPT-5 calls):
-1. Classification (analyze_assertion)
-2. S+G Generation (generate_sg_assertions + select_relevant_g_dimensions)
-3. Scenario Generation (generate_scenario_for_assertion)
-4. WBP Generation (generate_wbp_with_scenario)
-5. Verification (verify_wbp_against_scenario)
+Documentation:
+- Updated WBP_Evaluation_Complete_Dimension_Reference.md with G10 section
+- Added Relation Types Reference section with formal definitions
+- Updated G Dimension Interdependencies table with G10
 
-Test Results:
-- Single assertion: PASS
-- Batch (5 assertions): 5/5 PASS (100%)
+Testing:
+- Tested analyzer with dependency assertion - G10 now being selected!
+- Result: S2 + G6 + G10 (3 assertions, 3 passed)
+
+GPT-5 Consultation (sessions 021-023):
+- Asked GPT-5 3x whether to add G10 or fold into G6
+- Unanimous recommendation: Add G10 as separate dimension
+- Reasoning: Entity grounding != Relation grounding
+
+Key Insight: Entity grounding (G1-G9) checks individual entities exist.
+Relation grounding (G10) checks RELATIONSHIPS between entities are grounded.
+A WBP can have valid tasks (G6 passes) but wrong dependencies (G10 fails).
