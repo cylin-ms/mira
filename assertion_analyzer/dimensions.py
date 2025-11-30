@@ -1,9 +1,16 @@
 """
 Dimension definitions for the Mira 2.0 WBP framework.
 
-29 Dimensions:
-- Structural (S1-S20): Verify plan structure, completeness, and presentation
-- Grounding (G1-G10): Verify factual accuracy against source data (G1-G6 entity, G7-G9 semantic, G10 relation)
+Three-Layer Framework: S → G → M
+================================
+- S (Structural, S1-S20): Check IF something exists (have/have not) - INDEPENDENT
+- G (Grounding, G2-G10): Check if VALUE matches source - INDEPENDENT  
+- M (Meta, M1): Check for unsupported facts (hallucination) - DEPENDENT on all Gs
+
+Key Design Insight (2025-11-30):
+- S and G assertions are INDEPENDENT - each can be verified on its own
+- M1 (Hallucination) is DERIVED - cannot be computed without ALL G results
+- G1 was REMOVED - hallucination prevention moved to M layer (M1)
 
 Dimension Status Classifications:
 - REQUIRED: Core structural elements, penalized if missing
@@ -24,6 +31,13 @@ Relationship:
 2. G-level assertions define GROUNDING CONSTRAINTS that validate those
    elements against the source scenario
 3. The S_TO_G_MAP below specifies which G checks apply to each S dimension
+
+G Assertion Independence:
+========================
+Each G assertion is SELF-CONTAINED. For example:
+- G10 checks if RELATION(X, Y) exists in source
+- It does NOT depend on whether X or Y are correct (that's G2/G6's job)
+- If arguments are wrong, that's a separate error counted by other G assertions
 
 Assertion Format (Hybrid):
 ==========================
@@ -231,8 +245,10 @@ DIMENSION_NAMES = {
     "S18": "Post-Event Actions",                  # ASPIRATIONAL
     "S19": "Open Questions & Decision Points",   # ASPIRATIONAL (renamed from Caveat)
     "S20": "Clarity & First Impression",          # REQUIRED
-    # Grounding (G1-G10)
-    "G1": "Hallucination Check",
+    # Grounding (G2-G10) - G1 moved to M layer as M1
+    # NOTE: G1 (Hallucination Check) was REMOVED from G layer.
+    # Hallucination is now M1 in Meta layer because it's DERIVED from all G results.
+    "G1": "DEPRECATED - See M1",                  # MOVED to M layer (was Hallucination Check)
     "G2": "Attendee Grounding",
     "G3": "Date/Time Grounding",
     "G4": "Artifact Grounding",
@@ -241,7 +257,9 @@ DIMENSION_NAMES = {
     "G7": "Context Preservation",
     "G8": "Instruction Adherence",
     "G9": "Planner-Generated Consistency",        # checks assumptions, blockers, mitigations, open questions
-    "G10": "Relation Grounding",                  # NEW: verifies relationships between entities (DEPENDS_ON, OWNS, etc.)
+    "G10": "Relation Grounding",                  # verifies relationships between entities (DEPENDS_ON, OWNS, etc.)
+    # Meta Layer (M1) - DEPENDENT on all G results
+    "M1": "No Hallucination",                     # DERIVED from all G2-G10 results
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -257,18 +275,18 @@ DIMENSION_NAMES = {
 
 SLOT_TYPES = {
     # GROUNDED slot types (must match scenario)
-    "ATTENDEE": "Person from the attendee list (e.g., Alice Chen, Bob Smith)",           # GROUNDED → G1, G2
+    "ATTENDEE": "Person from the attendee list (e.g., Alice Chen, Bob Smith)",           # GROUNDED → G2
     "OWNER": "A task owner (subset of attendees)",                                       # GROUNDED → G2
     "DATE": "An absolute date (e.g., March 15, 2025)",                                   # GROUNDED → G3
     "MEETING_DATE": "The meeting date from the scenario",                                # GROUNDED → G3, G7
     "DUE_DATE": "A task due date",                                                       # GROUNDED → G3
-    "ARTIFACT": "A file or document reference (input, exists now)",                      # GROUNDED → G1, G4
+    "ARTIFACT": "A file or document reference (input, exists now)",                      # GROUNDED → G4
     "DELIVERABLE": "Planned output of a task (future)",                                  # GROUNDED → G4
     "TOPIC": "An agenda topic (e.g., budget allocation)",                                # GROUNDED → G5
     "ACTION_ITEM": "An action item from the scenario (e.g., finalize slides)",           # GROUNDED → G6, G8
     "TASK": "A task name or description",                                                # GROUNDED → G6
-    "MEETING_TITLE": "The title of the meeting",                                         # GROUNDED → G7
-    "ENTITY": "Any named entity (person, file, date, topic) that could be hallucinated",# GROUNDED → G1
+    "MEETING_TITLE": "The title of the meeting",                                         # GROUNDED → G5 (topic)
+    "ENTITY": "Any named entity (person, file, date, topic) that could be hallucinated",# GROUNDED → M1 (meta)
     # DERIVED slot types (inferable from scenario)
     "GOAL_STATEMENT": "Meeting objective summary",                                       # DERIVED → G5, G7
     "SKILL": "Expertise/capability required for a task",                                 # DERIVED → G2
@@ -1180,7 +1198,13 @@ GROUNDING_DIMENSIONS = {
 STRUCTURAL_CORE_ORDER = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10"]
 STRUCTURAL_EXTENDED_ORDER = ["S11", "S12", "S13", "S14", "S15", "S16", "S17", "S18", "S19", "S20"]
 STRUCTURAL_PRIORITY_ORDER = STRUCTURAL_CORE_ORDER + STRUCTURAL_EXTENDED_ORDER
-GROUNDING_PRIORITY_ORDER = ["G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9"]
+
+# G1 removed from grounding layer - it's now M1 in meta layer
+GROUNDING_PRIORITY_ORDER = ["G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10"]
+
+# Meta layer - computed AFTER all G assertions are evaluated
+# M1 (No Hallucination) is DERIVED from the aggregate of all G2-G10 results
+META_LAYER_ORDER = ["M1"]
 
 
 def get_dimension_weight(dim_id: str) -> int:

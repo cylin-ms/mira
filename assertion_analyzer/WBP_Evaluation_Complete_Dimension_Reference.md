@@ -1,7 +1,7 @@
 # WBP Dimension Assertion Examples
 
 **Author**: Chin-Yew Lin and Haidong Zhang  
-**Date**: November 29, 2025  
+**Date**: November 30, 2025  
 **Format**: GPT-5 Generated Hybrid Assertions (Template + Instantiated)
 
 This document shows examples of the GPT-5 generated hybrid assertion format used in `dimensions.py`. Each assertion has:
@@ -10,6 +10,43 @@ This document shows examples of the GPT-5 generated hybrid assertion format used
 - **slot_types**: List of slot types used
 - **sub_aspect**: Specific aspect being checked
 - **linked_g_dims**: G dimensions that apply when evaluating this S assertion
+
+---
+
+## Three-Layer Framework: S → G → M
+
+The WBP assertion framework uses three layers with different properties:
+
+| Layer | Name | What it Checks | Dependencies | Verification Method |
+|-------|------|----------------|--------------|---------------------|
+| **S** | Structural | Does X exist? (have/have not) | Independent | LLM reads response, answers yes/no |
+| **G** | Grounding | If X exists, is the value correct? | Independent | Compare response value to source |
+| **M** | Meta | Are there any unsupported facts? | DEPENDENT on all Gs | Aggregates all G results |
+
+### Key Design Principles
+
+1. **S and G assertions are INDEPENDENT**: Each can be verified on its own without knowing other assertions' results.
+
+2. **G assertions are self-contained**: G10 (Relation Grounding) checks if RELATION(X, Y) exists in source. It does NOT depend on whether X or Y are correct (that's G2/G6's job). If arguments are wrong, that's a separate error.
+
+3. **M1 (Hallucination) is DERIVED**: Cannot be computed without running all G checks first. It's the only assertion type that depends on other assertions' results.
+
+4. **G1 was removed**: Hallucination prevention was incorrectly placed in G layer. It's now M1 in the Meta layer because:
+   - S assertions: Check presence (directly observable)
+   - G assertions: Check one value matches source (directly observable)  
+   - Hallucination: Checks ABSENCE of unsupported content - requires ALL G dimensions
+
+### Evaluation Workflow
+
+```
+Step 1: Check S assertions (independent, parallel)
+    |
+    v
+Step 2: Check G assertions (independent, parallel)
+    |
+    v
+Step 3: Compute M1 (derived from all G results)
+```
 
 ---
 

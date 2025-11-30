@@ -73,6 +73,7 @@ Search the web.
 
 ### User Specified Lessons
 - You have a python venv in `./venv`. Use it.
+- **Python is already installed** - do NOT run `python --version` or check if Python exists. Just use it directly.
 - Include info useful for debugging in the program output.
 - Read the file before you try to edit it.
 - When using `git` and `gh` for multiline messages, write to a file first, then use `git commit -F <filename>`. Include "[Copilot] " in the commit message.
@@ -174,6 +175,32 @@ result = response.json()["choices"][0]["message"]["content"]
 - **Multi-label Classification**: Use `decomposition_prompt.json` to break down free-form assertions. One assertion can trigger multiple S dimensions, each with linked G dimensions and extracted slot values.
 - **Optimized Prompts via GPT-5**: When designing prompts for classification/IE tasks, run GPT-5 3 times and synthesize. Store optimized prompts in `assertion_analyzer/prompts/` as JSON files with version, system_prompt, user_prompt_template, output_schema, temperature, and notes.
 
+### S→G→M Three-Layer Framework (2025-11-30 Design Discussion)
+
+**Key Insight**: Hallucination prevention is fundamentally different from S and G assertions.
+
+**Layer Definitions**:
+| Layer | What it checks | Dependencies | Verification |
+|-------|----------------|--------------|--------------|
+| **S (Structural)** | Does X exist? (have/have not) | Independent | LLM reads response, answers yes/no |
+| **G (Grounding)** | If X exists, is the value correct? | Independent (each G checks one thing) | Compare response value to source |
+| **M (Meta)** | Are there any unsupported facts? | DEPENDENT on ALL Gs | Aggregates all G results |
+
+**Why G1 (Hallucination Prevention) was removed**:
+- S assertions: Check presence of specific elements (directly observable)
+- G assertions (G2-G10): Check one value matches source (directly observable)
+- Hallucination: Checks ABSENCE of unsupported content - requires exhaustively checking ALL G dimensions
+- Hallucination is a **derived property** (M1), not a directly observable assertion
+
+**G10 Independence**: G10 (Relation Grounding) checks if RELATION(X, Y) exists in source. It does NOT depend on whether X or Y are correct (that's G2/G6's job). Each G assertion is self-contained - it only verifies its own claim given the arguments. If arguments are wrong, that's a separate error counted by other G assertions.
+
+**Final Framework**:
+```
+S Layer: S1-S20 (Existence checks - independent, check first)
+G Layer: G2-G10 (Grounding checks - independent, each checks one value)
+M Layer: M1 (No Hallucination - derived from all G results, computed last)
+```
+
 ## 5. Scratchpad
 
 ### Current Task: Completed - assertion_analyzer v2.1 packaged and pushed
@@ -232,6 +259,21 @@ result = response.json()["choices"][0]["message"]["content"]
 [X] 23. Added sub_category field to output format for dimension specialization
     - s_dimension_name: Canonical from DIMENSION_NAMES (e.g., "Meeting Details")
     - sub_category: Specialized from GPT-5 (e.g., "Title") or null if same
+[X] 24. Ran full Kening conversion v2.3 with G10 support (2,318 input → 5,600 S+G units)
+[X] 25. Investigated anomalies: 253 "Unknown" (pure G), 2 G18 (hallucinated dimension)
+[X] 26. GPT-5 consultation (3 runs) on hallucination placement - consensus: M layer
+[X] 27. Established S→G→M three-layer framework design:
+    - S (Structural, S1-S20): Check IF something exists - INDEPENDENT
+    - G (Grounding, G2-G10): Check if VALUE matches source - INDEPENDENT
+    - M (Meta, M1): No Hallucination - DERIVED from all G results
+[X] 28. Updated decomposition_prompt.json to v6.0 (every G must have S parent)
+[X] 29. Updated dimensions.py with S→G→M framework documentation
+    - G1 deprecated ("DEPRECATED - See M1")
+    - M1 added ("No Hallucination")
+    - GROUNDING_PRIORITY_ORDER updated (G1 removed, G10 added)
+    - META_LAYER_ORDER added ["M1"]
+    - SLOT_TYPES updated (G1 references → M1)
+[X] 30. Updated copilot-instructions.md with S→G→M framework lesson
 
 #### Plan:
 [X] 1. Update convert_kening_assertions_v2.py to use decomposition prompt - DONE
@@ -244,7 +286,8 @@ result = response.json()["choices"][0]["message"]["content"]
     - Updated prompts.json to v2.3 with G10 guidance
     - Added G9/G10 to analyzer.py DIMENSION_SPEC
     - Tested: G10 now being selected for dependency assertions!
-[ ] 5. Run full conversion on all 224 meetings with --stage-size 50
-[ ] 6. Validate output format and quality
-[ ] 7. Commit and push G10 changes
-[ ] 8. Repackage assertion_analyzer_v2.3.zip
+[X] 5. Commit and push G10 changes - DONE (commit c2be918)
+[X] 6. Run full conversion on all 224 meetings - DONE (v2.3, 5,600 S+G units)
+[X] 7. Establish S→G→M three-layer framework - DONE (GPT-5 consultation, design finalized)
+[ ] 8. Commit S→G→M framework documentation updates
+[ ] 9. Repackage assertion_analyzer_v2.4.zip (with S→G→M framework)
